@@ -96,36 +96,6 @@
       color: rgba(245, 248, 255, 0.8);
     }
 
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 0.5rem;
-    }
-
-    .button {
-      padding: 0.85rem 1.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 600;
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 12px 30px rgba(7, 18, 36, 0.45);
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-
-    .button:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .button.primary {
-      background: linear-gradient(120deg, rgba(109, 255, 210, 0.85), rgba(79, 180, 255, 0.8));
-      color: #05221f;
-      border: none;
-    }
-
     .scene {
       position: relative;
       width: clamp(260px, 45vw, 380px);
@@ -277,16 +247,18 @@
         text-align: center;
       }
 
-      .actions {
-        justify-content: center;
+      .hero {
+        align-items: center;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+      .tree,
+      .canopy,
+      .leaf,
+      .particles,
+      body::after {
+        animation: none !important;
       }
     }
   </style>
@@ -294,17 +266,13 @@
 <body>
   <main class="cover">
     <section class="hero">
-      <p class="eyebrow">Edison GT</p>
+      <p class="eyebrow">Edison Home</p>
       <h1>Life Tree Cover</h1>
       <p class="subtitle">
         A living canopy of light, rooted in curiosity and growing toward new ideas.
         This pure HTML + CSS cover blends organic shapes with gentle motion for a
         fancier, animated landing experience.
       </p>
-      <div class="actions">
-        <a class="button primary" href="#">Explore the canopy</a>
-        <a class="button" href="#">See the roots</a>
-      </div>
     </section>
 
     <section class="scene" aria-hidden="true">
