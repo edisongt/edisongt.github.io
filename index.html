@@ -1,36 +1,327 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>EdisonHome</title>
-    <style>
-        .container {
-            width: 750px;
-            margin: auto;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Edison Home | Life Tree</title>
+  <style>
+    :root {
+      --night: #060b1d;
+      --sky: #0e1b3b;
+      --dawn: #1b3f5c;
+      --glow: #6dffd2;
+      --leaf: #46d27c;
+      --leaf-dark: #1f7a4f;
+      --bark: #7a4c2d;
+      --bark-dark: #4d2c18;
+      --text: #f5f8ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(160deg, var(--night), var(--sky) 45%, var(--dawn));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(109, 255, 210, 0.25), transparent 55%),
+        radial-gradient(circle at 85% 25%, rgba(120, 170, 255, 0.15), transparent 60%),
+        radial-gradient(circle at 70% 80%, rgba(150, 100, 255, 0.2), transparent 55%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -20% -10% -10% -10%;
+      background: radial-gradient(circle, rgba(109, 255, 210, 0.18), transparent 65%);
+      filter: blur(10px);
+      animation: pulse 10s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    .cover {
+      width: min(1120px, 92vw);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: clamp(1.5rem, 4vw, 4rem);
+      align-items: center;
+      padding: clamp(2rem, 5vw, 4.5rem);
+      background: rgba(6, 11, 29, 0.6);
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 35px 80px rgba(2, 6, 18, 0.65);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-size: 0.75rem;
+      color: rgba(245, 248, 255, 0.7);
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      margin: 0;
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      line-height: 1.7;
+      margin: 0;
+      color: rgba(245, 248, 255, 0.8);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .button {
+      padding: 0.85rem 1.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 30px rgba(7, 18, 36, 0.45);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .button.primary {
+      background: linear-gradient(120deg, rgba(109, 255, 210, 0.85), rgba(79, 180, 255, 0.8));
+      color: #05221f;
+      border: none;
+    }
+
+    .scene {
+      position: relative;
+      width: clamp(260px, 45vw, 380px);
+      aspect-ratio: 1 / 1.1;
+      margin: 0 auto;
+    }
+
+    .tree {
+      position: absolute;
+      inset: 0;
+      animation: sway 7s ease-in-out infinite;
+      transform-origin: 50% 85%;
+    }
+
+    .trunk {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(34px, 6vw, 58px);
+      height: 50%;
+      background: linear-gradient(180deg, var(--bark), var(--bark-dark));
+      border-radius: 40px;
+      box-shadow: inset -8px 0 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .trunk::before {
+      content: "";
+      position: absolute;
+      top: 20%;
+      left: 65%;
+      width: 60%;
+      height: 18%;
+      background: linear-gradient(180deg, var(--bark), var(--bark-dark));
+      border-radius: 40px;
+      transform: rotate(25deg);
+    }
+
+    .trunk::after {
+      content: "";
+      position: absolute;
+      bottom: -12%;
+      left: 50%;
+      width: 140%;
+      height: 25%;
+      background: radial-gradient(circle, rgba(90, 60, 40, 0.6), transparent 70%);
+      transform: translateX(-50%);
+    }
+
+    .canopy {
+      position: absolute;
+      bottom: 35%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 60%;
+      background: radial-gradient(circle at 30% 30%, #baffea, var(--leaf) 45%, var(--leaf-dark) 70%);
+      border-radius: 50% 50% 45% 45%;
+      box-shadow: 0 0 40px rgba(109, 255, 210, 0.35);
+      animation: glow 6s ease-in-out infinite;
+    }
+
+    .canopy::before,
+    .canopy::after {
+      content: "";
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #baffea, var(--leaf) 50%, var(--leaf-dark) 75%);
+    }
+
+    .canopy::before {
+      top: -15%;
+      left: -10%;
+    }
+
+    .canopy::after {
+      top: -10%;
+      right: -12%;
+    }
+
+    .leaf {
+      position: absolute;
+      width: clamp(24px, 6vw, 46px);
+      height: clamp(18px, 5vw, 38px);
+      background: radial-gradient(circle at 30% 30%, #d2ffe9, #58d985 55%, #1b6f46 80%);
+      border-radius: 55% 45% 55% 45%;
+      opacity: 0.9;
+      animation: leafFloat 5.5s ease-in-out infinite;
+    }
+
+    .leaf--1 { top: 10%; left: 18%; animation-delay: -1s; }
+    .leaf--2 { top: 5%; right: 20%; animation-delay: -2s; }
+    .leaf--3 { top: 35%; left: 5%; animation-delay: -3s; }
+    .leaf--4 { top: 30%; right: 6%; animation-delay: -4s; }
+    .leaf--5 { top: 52%; left: 18%; animation-delay: -1.5s; }
+    .leaf--6 { top: 50%; right: 18%; animation-delay: -2.5s; }
+
+    .ground {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 100%;
+      height: 30%;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse at center, rgba(61, 153, 97, 0.45), transparent 70%);
+      filter: blur(1px);
+    }
+
+    .particles {
+      position: absolute;
+      inset: -10% 0 0 0;
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.4) 0 1px, transparent 2px) 0 0 / 60px 60px,
+        radial-gradient(circle, rgba(109, 255, 210, 0.45) 0 1px, transparent 2px) 30px 30px / 90px 90px;
+      animation: drift 18s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(2deg); }
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 35px rgba(109, 255, 210, 0.3); }
+      50% { box-shadow: 0 0 55px rgba(109, 255, 210, 0.55); }
+    }
+
+    @keyframes leafFloat {
+      0%, 100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-10px) rotate(4deg); }
+    }
+
+    @keyframes drift {
+      0% { transform: translateY(0); opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { transform: translateY(30px); opacity: 0.7; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    @media (max-width: 720px) {
+      .cover {
+        text-align: center;
+      }
+
+      .actions {
+        justify-content: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <table>
-            <tr>
-                <td>==================</td>
-                <td>
-                    <h2>Here is The Jumpsheep Zone</h2>
-                </td>
-                <td>==================</td>
-            </tr>
-            <tr>
-                <td>D</td>
-                <td>D</td>
-                <td>D</td>
-            </tr>
-        </table>
-    </div>
-</body>
+  <main class="cover">
+    <section class="hero">
+      <p class="eyebrow">Edison GT</p>
+      <h1>Life Tree Cover</h1>
+      <p class="subtitle">
+        A living canopy of light, rooted in curiosity and growing toward new ideas.
+        This pure HTML + CSS cover blends organic shapes with gentle motion for a
+        fancier, animated landing experience.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="#">Explore the canopy</a>
+        <a class="button" href="#">See the roots</a>
+      </div>
+    </section>
 
+    <section class="scene" aria-hidden="true">
+      <div class="particles"></div>
+      <div class="tree">
+        <div class="canopy">
+          <span class="leaf leaf--1"></span>
+          <span class="leaf leaf--2"></span>
+          <span class="leaf leaf--3"></span>
+          <span class="leaf leaf--4"></span>
+          <span class="leaf leaf--5"></span>
+          <span class="leaf leaf--6"></span>
+        </div>
+        <div class="trunk"></div>
+        <div class="ground"></div>
+      </div>
+    </section>
+  </main>
+</body>
 </html>
