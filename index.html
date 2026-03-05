@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Edison Home | 伊甸園</title>
+  <title>Edison Home | Garden of Eden</title>
   <style>
     /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -62,15 +62,40 @@
     /* ── Tree labels ── */
     .tree-label {
       display: block; text-align: center;
-      font-size: clamp(.7rem, 1.6vw, 1rem); font-weight: 700;
+      font-size: clamp(0.95rem, 2vw, 1.3rem); font-weight: 700;
       letter-spacing: .12em; margin-top: 5px;
       text-shadow: 0 1px 14px rgba(0,0,0,.9);
     }
     .life-color  { color: rgba(109,255,210,.95); }
     .know-color  { color: rgba(210,100,255,.95); }
 
+    /* ── People label ── */
+    #people-label {
+      display: block; text-align: center;
+      font-size: clamp(0.85rem, 1.8vw, 1.15rem); font-weight: 600;
+      color: rgba(255,228,180,.92); letter-spacing: .12em; margin-top: 6px;
+      text-shadow: 0 1px 14px rgba(0,0,0,.9);
+    }
+
+    /* ── Adam & Eve wrap ── */
+    #people-wrap {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 4; pointer-events: none;
+    }
+    #people-wrap svg { height: clamp(160px,32vh,300px); width: auto; display: block; }
+    #river-label {
+      position: absolute; bottom: 23%; left: 50%; transform: translateX(-50%);
+      z-index: 3; color: rgba(180,225,255,.88);
+      font-size: clamp(0.78rem, 1.6vw, 1.05rem);
+      font-style: italic; letter-spacing: .18em;
+      text-shadow: 0 1px 8px rgba(0,0,0,.8), 0 0 24px rgba(80,160,255,.55);
+      pointer-events: none; white-space: nowrap;
+    }
+
     /* ── Ground / River SVG ── */
     #ground-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 38%; z-index: 2; }
+    @keyframes riverShimmer { 0%,100%{opacity:.82} 50%{opacity:.95} }
+    #river-main { animation: riverShimmer 5s ease-in-out infinite; }
 
     /* ── Fireflies ── */
     .ff {
@@ -128,21 +153,21 @@
     }
     #overlay .eyebrow {
       text-transform: uppercase; letter-spacing: .35em;
-      font-size: .72rem; opacity: .65;
+      font-size: clamp(0.85rem, 1.5vw, 1rem); opacity: .65;
     }
     #overlay h1 {
-      font-size: clamp(2rem,5vw,3.6rem); line-height: 1.05;
+      font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05;
       text-shadow: 0 2px 32px rgba(0,0,0,.9), 0 0 60px rgba(109,255,210,.25);
     }
     #overlay .tag {
-      font-size: clamp(.82rem,1.9vw,1.1rem); opacity: .78;
-      text-shadow: 0 1px 16px rgba(0,0,0,.8); max-width: 520px;
+      font-size: clamp(1rem, 2.2vw, 1.4rem); opacity: .78;
+      text-shadow: 0 1px 16px rgba(0,0,0,.8); max-width: 560px;
     }
 
     /* ── Hint ── */
     #hint {
       position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
-      color: rgba(255,255,255,.5); font-size: .76rem; z-index: 20;
+      color: rgba(255,255,255,.5); font-size: clamp(0.85rem, 1.5vw, 1rem); z-index: 20;
       pointer-events: none; text-align: center; white-space: nowrap;
       animation: hintPulse 3s ease-in-out infinite;
     }
@@ -161,6 +186,9 @@
 
 <!-- 2. Stars canvas -->
 <canvas id="stars"></canvas>
+
+<!-- 2b. Breeze particles canvas (daytime) -->
+<canvas id="breeze" style="position:fixed;inset:0;z-index:2;pointer-events:none;"></canvas>
 
 <!-- 3. Sun & Moon -->
 <div id="sun"></div>
@@ -190,7 +218,7 @@
   <!-- ══════════════════════════════════════════════
        LIFE TREE  生命樹  (left)
   ══════════════════════════════════════════════ -->
-  <div class="tree-wrap" id="life-wrap" role="img" aria-label="生命樹">
+  <div class="tree-wrap" id="life-wrap" role="img" aria-label="Tree of Life">
     <svg viewBox="0 0 220 420" xmlns="http://www.w3.org/2000/svg" class="sway-l">
       <defs>
         <radialGradient id="lg1" cx="32%" cy="28%">
@@ -238,11 +266,13 @@
       <path d="M108 414 C100 408,88 410,80 418"   stroke="#5a3820" stroke-width="6"  fill="none" stroke-linecap="round" opacity=".6"/>
       <path d="M112 414 C120 408,132 410,140 418"  stroke="#5a3820" stroke-width="6"  fill="none" stroke-linecap="round" opacity=".6"/>
 
-      <!-- Trunk (two overlapping paths for depth) -->
-      <path d="M102 415 C97 360,93 318,97 272 C91 242,87 202,96 162 C100 143,106 123,110 106"
-            stroke="url(#ltk1)" stroke-width="22" fill="none" stroke-linecap="round"/>
-      <path d="M118 415 C123 360,127 318,123 272 C129 242,133 202,124 162 C120 143,114 123,110 106"
-            stroke="url(#ltk2)" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <!-- Single trunk (filled closed shape for one-trunk appearance) -->
+      <path d="M102 415 C97 360,93 318,97 272 C91 242,87 202,96 162 C100 143,106 123,110 106
+               C114 123,120 143,124 162 C133 202,129 242,123 272 C127 318,123 360,118 415 Z"
+            fill="url(#ltk1)"/>
+      <!-- Highlight strip for depth -->
+      <path d="M110 415 C108 358,107 316,109 270 C107 240,107 200,109 162 C110 143,110 123,110 106"
+            stroke="url(#ltk2)" stroke-width="7" fill="none" stroke-linecap="round" opacity=".55"/>
 
       <!-- Lower branches -->
       <path d="M99 258 C78 242,56 230,36 210"   stroke="#7a4c2d" stroke-width="12" fill="none" stroke-linecap="round"/>
@@ -281,13 +311,13 @@
       <circle cx="92"  cy="152" r="6" fill="url(#lgFruit)" opacity=".85"/>
       <circle cx="136" cy="166" r="5" fill="url(#lgFruit)" opacity=".8"/>
     </svg>
-    <span class="tree-label life-color">生命樹</span>
+    <span class="tree-label life-color">Tree of Life</span>
   </div>
 
   <!-- ══════════════════════════════════════════════
        KNOWLEDGE TREE  善惡知識樹  (right)
   ══════════════════════════════════════════════ -->
-  <div class="tree-wrap" id="know-wrap" role="img" aria-label="善惡知識樹">
+  <div class="tree-wrap" id="know-wrap" role="img" aria-label="Tree of Knowledge">
     <svg viewBox="0 0 220 420" xmlns="http://www.w3.org/2000/svg" class="sway-r">
       <defs>
         <radialGradient id="kg1" cx="32%" cy="28%">
@@ -331,11 +361,13 @@
       <path d="M107 414 C99 408,87 410,78 418"    stroke="#3a1c10" stroke-width="7"  fill="none" stroke-linecap="round" opacity=".7"/>
       <path d="M113 414 C121 408,133 410,142 418"  stroke="#3a1c10" stroke-width="7"  fill="none" stroke-linecap="round" opacity=".7"/>
 
-      <!-- Twisted trunk -->
-      <path d="M100 415 C88 358,82 316,90 270 C84 238,79 198,88 158 C92 138,98 118,106 104"
-            stroke="url(#ktk1)" stroke-width="22" fill="none" stroke-linecap="round"/>
-      <path d="M120 415 C132 358,138 316,130 270 C136 238,141 198,132 158 C128 138,122 118,114 104"
-            stroke="url(#ktk2)" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <!-- Single twisted trunk (filled closed shape) -->
+      <path d="M100 415 C88 358,82 316,90 270 C84 238,79 198,88 158 C92 138,98 118,106 104
+               C113 118,119 138,131 158 C140 198,135 238,129 270 C137 316,131 358,120 415 Z"
+            fill="url(#ktk1)"/>
+      <!-- Highlight strip for depth -->
+      <path d="M110 415 C107 358,104 316,107 270 C104 240,103 200,107 158 C109 138,109 118,110 104"
+            stroke="url(#ktk2)" stroke-width="6" fill="none" stroke-linecap="round" opacity=".5"/>
       <!-- Twist scar detail -->
       <path d="M107 304 C101 288,116 272,110 258" stroke="#7a3c24" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/>
 
@@ -398,7 +430,7 @@
       <circle cx="131" cy="220" r="1.8" fill="#ff3333" opacity=".85"/>
       <circle cx="127" cy="220" r="1.8" fill="#ff3333" opacity=".85"/>
     </svg>
-    <span class="tree-label know-color">善惡知識樹</span>
+    <span class="tree-label know-color">Tree of Knowledge</span>
   </div>
 
   <!-- Ground + River SVG -->
@@ -419,9 +451,18 @@
              Q600 58,720 78 Q840 98,960 72 Q1080 48,1200 88
              Q1320 128,1440 98 L1440 400 Z"
           fill="url(#gg)"/>
-    <!-- River of Eden -->
-    <ellipse cx="720" cy="172" rx="165" ry="38" fill="url(#rg)" opacity=".72"/>
-    <ellipse cx="720" cy="168" rx="110" ry="24" fill="rgba(120,190,255,.4)"/>
+    <!-- River of Living Water (enhanced) -->
+    <path id="river-main"
+          d="M0 168 Q360 150,720 163 Q1080 176,1440 160
+             L1440 208 Q1080 222,720 210 Q360 198,0 212 Z"
+          fill="url(#rg)" opacity=".82"/>
+    <!-- River shimmer highlight -->
+    <path d="M0 176 Q360 162,720 172 Q1080 182,1440 168"
+          stroke="rgba(200,240,255,.55)" stroke-width="3.5" fill="none"/>
+    <!-- Ripple highlights -->
+    <ellipse cx="360"  cy="185" rx="75" ry="7"  fill="rgba(210,240,255,.30)"/>
+    <ellipse cx="720"  cy="183" rx="80" ry="8"  fill="rgba(210,240,255,.35)"/>
+    <ellipse cx="1080" cy="180" rx="70" ry="7"  fill="rgba(210,240,255,.28)"/>
     <!-- Grass tufts -->
     <path d="M198 116 Q200 106,204 116" stroke="#4aaa5a" stroke-width="3" fill="none"/>
     <path d="M207 114 Q210 104,213 114" stroke="#4aaa5a" stroke-width="3" fill="none"/>
@@ -433,6 +474,76 @@
   <!-- Fireflies container -->
   <div id="fireflies" style="position:absolute;inset:0;pointer-events:none;z-index:5;"></div>
 
+  <!-- River of Living Water label -->
+  <div id="river-label">~ River of Living Water ~</div>
+
+  <!-- Adam & Eve standing between the two trees -->
+  <div id="people-wrap">
+    <svg viewBox="0 0 200 270" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="skinA" cx="40%" cy="35%">
+          <stop offset="0%" stop-color="#f5d5a8"/>
+          <stop offset="100%" stop-color="#c8824a"/>
+        </radialGradient>
+        <radialGradient id="skinE" cx="40%" cy="35%">
+          <stop offset="0%" stop-color="#f8dfbf"/>
+          <stop offset="100%" stop-color="#d49460"/>
+        </radialGradient>
+      </defs>
+
+      <!-- ── ADAM (left, x-center≈62) ── -->
+      <ellipse cx="62" cy="258" rx="18" ry="5" fill="rgba(0,0,0,.28)"/>
+      <!-- Legs -->
+      <path d="M52 185 Q47 215,44 258" stroke="#c8824a" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <path d="M72 185 Q77 215,80 258" stroke="#c8824a" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <!-- Body -->
+      <path d="M40 95 C36 130,37 162,40 185 Q47 197,62 198 Q77 197,84 185 C87 162,88 130,84 95
+               Q76 86,62 84 Q48 86,40 95 Z" fill="url(#skinA)"/>
+      <!-- Left arm -->
+      <path d="M41 108 Q24 135,18 165" stroke="#c8824a" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <!-- Right arm -->
+      <path d="M83 108 Q100 135,106 165" stroke="#c8824a" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <!-- Neck -->
+      <path d="M56 68 Q56 84,57 85 L67 85 Q68 84,68 68 Z" fill="#d4905c"/>
+      <!-- Head -->
+      <circle cx="62" cy="50" r="22" fill="url(#skinA)"/>
+      <!-- Facial highlight -->
+      <ellipse cx="57" cy="46" rx="9" ry="10" fill="rgba(255,220,175,.3)"/>
+      <!-- Hair (short dark) -->
+      <path d="M40 44 Q42 27,62 23 Q82 27,84 44 Q74 35,62 33 Q50 35,40 44 Z" fill="#2a1205"/>
+      <path d="M40 44 Q38 51,40 58" stroke="#2a1205" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M84 44 Q86 51,84 58" stroke="#2a1205" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+      <!-- ── EVE (right, x-center≈138) ── -->
+      <ellipse cx="138" cy="258" rx="17" ry="5" fill="rgba(0,0,0,.28)"/>
+      <!-- Legs -->
+      <path d="M128 185 Q123 215,120 258" stroke="#d49460" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <path d="M148 185 Q153 215,156 258" stroke="#d49460" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <!-- Body (slightly curvier) -->
+      <path d="M116 95 C112 130,113 162,116 185 Q123 198,138 199 Q153 198,160 185 C163 162,164 130,160 95
+               Q152 86,138 84 Q124 86,116 95 Z" fill="url(#skinE)"/>
+      <!-- Left arm -->
+      <path d="M117 108 Q98 133,90 162" stroke="#d49460" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <!-- Right arm -->
+      <path d="M159 108 Q178 133,186 162" stroke="#d49460" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <!-- Neck -->
+      <path d="M132 68 Q132 84,133 85 L143 85 Q144 84,144 68 Z" fill="#dca870"/>
+      <!-- Head -->
+      <circle cx="138" cy="50" r="22" fill="url(#skinE)"/>
+      <!-- Facial highlight -->
+      <ellipse cx="133" cy="46" rx="9" ry="10" fill="rgba(255,230,190,.3)"/>
+      <!-- Hair top -->
+      <path d="M116 44 Q118 27,138 23 Q158 27,160 44 Q150 35,138 33 Q126 35,116 44 Z" fill="#2a1205"/>
+      <!-- Long hair flowing down left -->
+      <path d="M116 44 Q108 75,110 115 Q111 142,114 165" stroke="#2a1205" stroke-width="10" fill="none" stroke-linecap="round" opacity=".95"/>
+      <!-- Long hair flowing down right -->
+      <path d="M160 44 Q168 75,166 115 Q165 142,162 165" stroke="#2a1205" stroke-width="10" fill="none" stroke-linecap="round" opacity=".95"/>
+      <!-- Hair highlight -->
+      <path d="M160 44 Q166 68,163 98" stroke="#4a2510" stroke-width="4.5" fill="none" stroke-linecap="round" opacity=".55"/>
+    </svg>
+    <span id="people-label">Adam &amp; Eve</span>
+  </div>
+
   <!-- Leaf / apple particle container -->
   <div id="particles" style="position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden;"></div>
 
@@ -441,12 +552,12 @@
 <!-- Text overlay -->
 <div id="overlay">
   <p class="eyebrow">Edison Home</p>
-  <h1>伊甸園</h1>
-  <p class="tag">生命之源，善惡之境 ── 光與暗的永恆循環</p>
+  <h1>Garden of Eden</h1>
+  <p class="tag">The Source of Life, the Realm of Good &amp; Evil — An Eternal Cycle of Light and Dark</p>
 </div>
 
 <!-- Interaction hint -->
-<div id="hint">🌿 點擊生命樹或善惡知識樹以與之互動 🍎</div>
+<div id="hint">🌿 Click the Tree of Life or the Tree of Knowledge to interact 🍎</div>
 
 <script>
 /* ============================================================
@@ -462,6 +573,8 @@ const sunEl    = document.getElementById('sun');
 const moonEl   = document.getElementById('moon');
 const starsCv  = document.getElementById('stars');
 const starsCtx = starsCv.getContext('2d');
+const breezeCv  = document.getElementById('breeze');
+const breezeCtx = breezeCv.getContext('2d');
 
 /* ── Stars ── */
 let starList = [];
@@ -487,6 +600,46 @@ function drawStars(alpha) {
     starsCtx.arc(s.x * starsCv.width, s.y * starsCv.height, s.r, 0, Math.PI * 2);
     starsCtx.fillStyle = `rgba(255,255,220,${a})`;
     starsCtx.fill();
+  });
+}
+
+/* ── Breeze particles (daytime) ── */
+let breezeList = [];
+function resizeBreeze() {
+  breezeCv.width  = window.innerWidth;
+  breezeCv.height = window.innerHeight;
+}
+function initBreeze(count = 70) {
+  breezeList = Array.from({length: count}, () => ({
+    x:   Math.random(),
+    y:   Math.random(),
+    r:   Math.random() * 2.2 + 0.5,
+    vx:  (Math.random() * 0.5 + 0.15) * 0.00018,
+    vy: -(Math.random() * 0.4 + 0.12) * 0.00028,
+    wo:  Math.random() * Math.PI * 2,
+    ws:  Math.random() * 1.2 + 0.3,
+    hue: 85 + Math.floor(Math.random() * 55),
+    sat: 28 + Math.floor(Math.random() * 30),
+    lit: 74 + Math.floor(Math.random() * 22),
+    base: Math.random() * 0.32 + 0.07
+  }));
+}
+function drawBreeze(alpha) {
+  const W = breezeCv.width, H = breezeCv.height;
+  breezeCtx.clearRect(0, 0, W, H);
+  if (alpha < 0.01) return;
+  const now = Date.now() / 1000;
+  breezeList.forEach(p => {
+    const wobble = Math.sin(now * p.ws + p.wo) * 0.00007;
+    p.x += p.vx + wobble;
+    p.y += p.vy;
+    if (p.y < -0.05) { p.y = 1.05; p.x = Math.random(); }
+    if (p.x >  1.05) { p.x = -0.05; }
+    const a = alpha * p.base * (0.55 + 0.45 * Math.sin(now * p.ws * 0.7 + p.wo));
+    breezeCtx.beginPath();
+    breezeCtx.arc(p.x * W, p.y * H, p.r, 0, Math.PI * 2);
+    breezeCtx.fillStyle = `hsla(${p.hue},${p.sat}%,${p.lit}%,${a})`;
+    breezeCtx.fill();
   });
 }
 
@@ -556,13 +709,20 @@ function tick() {
   skyEl.style.background =
     `linear-gradient(180deg, ${rgb(sc.top)} 0%, ${rgb(sc.mid)} 55%, ${rgb(sc.bot)} 100%)`;
 
-  /* Stars */
+  /* Stars — only at night */
   let starA = 0;
   if      (t < 0.20)               starA = 1;
   else if (t < 0.30)               starA = 1 - (t - 0.20) / 0.10;
   else if (t >= 0.70 && t < 0.80)  starA = (t - 0.70) / 0.10;
   else if (t >= 0.80)              starA = 1;
   drawStars(clamp01(starA));
+
+  /* Breeze particles — only during the day */
+  let breezeA = 0;
+  if      (t >= 0.30 && t < 0.35)  breezeA = (t - 0.30) / 0.05;
+  else if (t >= 0.35 && t < 0.65)  breezeA = 1;
+  else if (t >= 0.65 && t < 0.70)  breezeA = 1 - (t - 0.65) / 0.05;
+  drawBreeze(clamp01(breezeA));
 
   /* Sun */
   const sp = celestialPos(t, DAWN_T, 1 - DAWN_T);
@@ -604,9 +764,11 @@ function tick() {
   requestAnimationFrame(tick);
 }
 
-window.addEventListener('resize', () => { resizeStars(); initStars(); });
+window.addEventListener('resize', () => { resizeStars(); resizeBreeze(); initStars(); });
 resizeStars();
+resizeBreeze();
 initStars();
+initBreeze();
 tick();
 
 /* ============================================================
