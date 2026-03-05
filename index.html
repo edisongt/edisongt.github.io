@@ -1,295 +1,694 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Edison Home | Life Tree</title>
+  <title>Edison Home | 伊甸園</title>
   <style>
-    :root {
-      --night: #060b1d;
-      --sky: #0e1b3b;
-      --dawn: #1b3f5c;
-      --glow: #6dffd2;
-      --leaf: #46d27c;
-      --leaf-dark: #1f7a4f;
-      --bark: #7a4c2d;
-      --bark-dark: #4d2c18;
-      --text: #f5f8ff;
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; user-select: none;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+
+    /* ── Sky ── */
+    #sky { position: fixed; inset: 0; z-index: 0; }
+
+    /* ── Stars canvas ── */
+    #stars { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+
+    /* ── Sun ── */
+    #sun {
+      position: fixed; z-index: 4; pointer-events: none;
+      transform: translate(-50%, -50%); border-radius: 50%;
+      width: clamp(46px, 6.5vw, 84px); height: clamp(46px, 6.5vw, 84px);
     }
 
-    * {
-      box-sizing: border-box;
+    /* ── Moon ── */
+    #moon {
+      position: fixed; z-index: 4; pointer-events: none;
+      transform: translate(-50%, -50%); border-radius: 50%;
+      width: clamp(34px, 5vw, 64px); height: clamp(34px, 5vw, 64px);
     }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      color: var(--text);
-      background: linear-gradient(160deg, var(--night), var(--sky) 45%, var(--dawn));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+    /* ── Scene container ── */
+    #scene { position: fixed; inset: 0; z-index: 10; }
+
+    /* ── Background mountains ── */
+    #mountains { position: absolute; bottom: 0; left: 0; width: 100%; height: 45%; z-index: 1; }
+
+    /* ── Tree wrappers ── */
+    .tree-wrap {
+      position: absolute; bottom: 20%;
+      height: clamp(260px, 54vh, 500px);
+      z-index: 3; cursor: pointer;
+    }
+    .tree-wrap svg { height: 100%; width: auto; display: block; }
+
+    #life-wrap {
+      left: 3%;
+      filter: drop-shadow(0 0 22px rgba(109,255,210,.5));
+      transition: filter .4s;
+    }
+    #life-wrap:hover  { filter: drop-shadow(0 0 46px rgba(109,255,210,.95)); }
+
+    #know-wrap {
+      right: 3%;
+      filter: drop-shadow(0 0 22px rgba(160,60,220,.5));
+      transition: filter .4s;
+    }
+    #know-wrap:hover  { filter: drop-shadow(0 0 46px rgba(210,80,255,.95)); }
+
+    /* ── Tree labels ── */
+    .tree-label {
+      display: block; text-align: center;
+      font-size: clamp(.7rem, 1.6vw, 1rem); font-weight: 700;
+      letter-spacing: .12em; margin-top: 5px;
+      text-shadow: 0 1px 14px rgba(0,0,0,.9);
+    }
+    .life-color  { color: rgba(109,255,210,.95); }
+    .know-color  { color: rgba(210,100,255,.95); }
+
+    /* ── Ground / River SVG ── */
+    #ground-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 38%; z-index: 2; }
+
+    /* ── Fireflies ── */
+    .ff {
+      position: absolute; width: 5px; height: 5px;
+      border-radius: 50%; background: rgba(255,255,195,.9);
+      pointer-events: none; z-index: 5;
+    }
+    @keyframes ffMove {
+      0%   { transform: translate(0,0); }
+      25%  { transform: translate(var(--a),var(--b)); }
+      60%  { transform: translate(var(--c),var(--d)); }
+      100% { transform: translate(var(--e),var(--f)); }
+    }
+    @keyframes ffGlow {
+      0%,100% { opacity:.08; box-shadow: 0 0 3px 1px rgba(255,255,180,.15); }
+      50%      { opacity:1;   box-shadow: 0 0 9px 5px rgba(255,255,180,.9); }
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 15% 20%, rgba(109, 255, 210, 0.25), transparent 55%),
-        radial-gradient(circle at 85% 25%, rgba(120, 170, 255, 0.15), transparent 60%),
-        radial-gradient(circle at 70% 80%, rgba(150, 100, 255, 0.2), transparent 55%);
-      z-index: -2;
+    /* ── Leaf / Apple particles ── */
+    .leaf-p {
+      position: absolute; border-radius: 55% 10% 55% 10%;
+      pointer-events: none; z-index: 6; opacity: 0;
+      animation: leafFall var(--dur,5s) ease-in forwards;
+    }
+    .apple-p {
+      position: absolute; border-radius: 50% 50% 55% 45%;
+      pointer-events: none; z-index: 6;
+      width: 14px; height: 15px;
+      background: radial-gradient(circle at 32% 28%, #ff9999, #dc2626, #7f1d1d);
+      animation: appleFall var(--dur,3.5s) cubic-bezier(.25,0,1,1) forwards;
+    }
+    @keyframes leafFall {
+      0%   { transform: translate(0,0) rotate(0deg) scale(1); opacity: 0; }
+      12%  { opacity: 1; }
+      85%  { opacity: .7; }
+      100% { transform: translate(var(--dx,50px),var(--dy,110px)) rotate(var(--rot,380deg)) scale(.35); opacity: 0; }
+    }
+    @keyframes appleFall {
+      0%   { transform: translateX(var(--dx,0)) translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateX(var(--dx,0)) translateY(var(--dy,160px)) rotate(var(--rot,210deg)); opacity: 0; }
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: -20% -10% -10% -10%;
-      background: radial-gradient(circle, rgba(109, 255, 210, 0.18), transparent 65%);
-      filter: blur(10px);
-      animation: pulse 10s ease-in-out infinite;
-      z-index: -1;
+    /* ── Tree sway ── */
+    .sway-l { animation: swayL 7s ease-in-out infinite; transform-origin: 50% 96%; }
+    .sway-r { animation: swayR 9s ease-in-out infinite; transform-origin: 50% 96%; }
+    @keyframes swayL { 0%,100%{transform:rotate(-1.8deg)} 50%{transform:rotate(1.8deg)} }
+    @keyframes swayR { 0%,100%{transform:rotate( 1.8deg)} 50%{transform:rotate(-1.8deg)} }
+
+    /* ── Overlay ── */
+    #overlay {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+      pointer-events: none; display: flex; flex-direction: column;
+      align-items: center; gap: .3rem; text-align: center; color: #fff;
+      padding: clamp(1.2rem,3.5vh,2.5rem) 1rem;
+    }
+    #overlay .eyebrow {
+      text-transform: uppercase; letter-spacing: .35em;
+      font-size: .72rem; opacity: .65;
+    }
+    #overlay h1 {
+      font-size: clamp(2rem,5vw,3.6rem); line-height: 1.05;
+      text-shadow: 0 2px 32px rgba(0,0,0,.9), 0 0 60px rgba(109,255,210,.25);
+    }
+    #overlay .tag {
+      font-size: clamp(.82rem,1.9vw,1.1rem); opacity: .78;
+      text-shadow: 0 1px 16px rgba(0,0,0,.8); max-width: 520px;
     }
 
-    .cover {
-      width: min(1120px, 92vw);
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: clamp(1.5rem, 4vw, 4rem);
-      align-items: center;
-      padding: clamp(2rem, 5vw, 4.5rem);
-      background: rgba(6, 11, 29, 0.6);
-      border-radius: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 35px 80px rgba(2, 6, 18, 0.65);
-      backdrop-filter: blur(12px);
+    /* ── Hint ── */
+    #hint {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,.5); font-size: .76rem; z-index: 20;
+      pointer-events: none; text-align: center; white-space: nowrap;
+      animation: hintPulse 3s ease-in-out infinite;
     }
+    @keyframes hintPulse { 0%,100%{opacity:.3} 50%{opacity:.75} }
 
-    .hero {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.3em;
-      font-size: 0.75rem;
-      color: rgba(245, 248, 255, 0.7);
-      margin: 0;
-    }
-
-    h1 {
-      font-size: clamp(2.6rem, 5vw, 4.2rem);
-      margin: 0;
-      line-height: 1.05;
-    }
-
-    .subtitle {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      line-height: 1.7;
-      margin: 0;
-      color: rgba(245, 248, 255, 0.8);
-    }
-
-    .scene {
-      position: relative;
-      width: clamp(260px, 45vw, 380px);
-      aspect-ratio: 1 / 1.1;
-      margin: 0 auto;
-    }
-
-    .tree {
-      position: absolute;
-      inset: 0;
-      animation: sway 7s ease-in-out infinite;
-      transform-origin: 50% 85%;
-    }
-
-    .trunk {
-      position: absolute;
-      bottom: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: clamp(34px, 6vw, 58px);
-      height: 50%;
-      background: linear-gradient(180deg, var(--bark), var(--bark-dark));
-      border-radius: 40px;
-      box-shadow: inset -8px 0 18px rgba(0, 0, 0, 0.3);
-    }
-
-    .trunk::before {
-      content: "";
-      position: absolute;
-      top: 20%;
-      left: 65%;
-      width: 60%;
-      height: 18%;
-      background: linear-gradient(180deg, var(--bark), var(--bark-dark));
-      border-radius: 40px;
-      transform: rotate(25deg);
-    }
-
-    .trunk::after {
-      content: "";
-      position: absolute;
-      bottom: -12%;
-      left: 50%;
-      width: 140%;
-      height: 25%;
-      background: radial-gradient(circle, rgba(90, 60, 40, 0.6), transparent 70%);
-      transform: translateX(-50%);
-    }
-
-    .canopy {
-      position: absolute;
-      bottom: 35%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      height: 60%;
-      background: radial-gradient(circle at 30% 30%, #baffea, var(--leaf) 45%, var(--leaf-dark) 70%);
-      border-radius: 50% 50% 45% 45%;
-      box-shadow: 0 0 40px rgba(109, 255, 210, 0.35);
-      animation: glow 6s ease-in-out infinite;
-    }
-
-    .canopy::before,
-    .canopy::after {
-      content: "";
-      position: absolute;
-      width: 60%;
-      height: 60%;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #baffea, var(--leaf) 50%, var(--leaf-dark) 75%);
-    }
-
-    .canopy::before {
-      top: -15%;
-      left: -10%;
-    }
-
-    .canopy::after {
-      top: -10%;
-      right: -12%;
-    }
-
-    .leaf {
-      position: absolute;
-      width: clamp(24px, 6vw, 46px);
-      height: clamp(18px, 5vw, 38px);
-      background: radial-gradient(circle at 30% 30%, #d2ffe9, #58d985 55%, #1b6f46 80%);
-      border-radius: 55% 45% 55% 45%;
-      opacity: 0.9;
-      animation: leafFloat 5.5s ease-in-out infinite;
-    }
-
-    .leaf--1 { top: 10%; left: 18%; animation-delay: -1s; }
-    .leaf--2 { top: 5%; right: 20%; animation-delay: -2s; }
-    .leaf--3 { top: 35%; left: 5%; animation-delay: -3s; }
-    .leaf--4 { top: 30%; right: 6%; animation-delay: -4s; }
-    .leaf--5 { top: 52%; left: 18%; animation-delay: -1.5s; }
-    .leaf--6 { top: 50%; right: 18%; animation-delay: -2.5s; }
-
-    .ground {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 100%;
-      height: 30%;
-      transform: translateX(-50%);
-      background: radial-gradient(ellipse at center, rgba(61, 153, 97, 0.45), transparent 70%);
-      filter: blur(1px);
-    }
-
-    .particles {
-      position: absolute;
-      inset: -10% 0 0 0;
-      background:
-        radial-gradient(circle, rgba(255, 255, 255, 0.4) 0 1px, transparent 2px) 0 0 / 60px 60px,
-        radial-gradient(circle, rgba(109, 255, 210, 0.45) 0 1px, transparent 2px) 30px 30px / 90px 90px;
-      animation: drift 18s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes sway {
-      0%, 100% { transform: rotate(-2deg); }
-      50% { transform: rotate(2deg); }
-    }
-
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 35px rgba(109, 255, 210, 0.3); }
-      50% { box-shadow: 0 0 55px rgba(109, 255, 210, 0.55); }
-    }
-
-    @keyframes leafFloat {
-      0%, 100% { transform: translateY(0) rotate(-4deg); }
-      50% { transform: translateY(-10px) rotate(4deg); }
-    }
-
-    @keyframes drift {
-      0% { transform: translateY(0); opacity: 0.7; }
-      50% { opacity: 1; }
-      100% { transform: translateY(30px); opacity: 0.7; }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
-    }
-
-    @media (max-width: 720px) {
-      .cover {
-        text-align: center;
-      }
-
-      .hero {
-        align-items: center;
-      }
-    }
-
+    /* ── Reduced motion ── */
     @media (prefers-reduced-motion: reduce) {
-      .tree,
-      .canopy,
-      .leaf,
-      .particles,
-      body::after {
-        animation: none !important;
-      }
+      .sway-l, .sway-r, .ff { animation: none !important; }
     }
   </style>
 </head>
 <body>
-  <main class="cover">
-    <section class="hero">
-      <p class="eyebrow">Edison Home</p>
-      <h1>Life Tree Cover</h1>
-      <p class="subtitle">
-        A living canopy of light, rooted in curiosity and growing toward new ideas.
-        This pure HTML + CSS cover blends organic shapes with gentle motion for a
-        fancier, animated landing experience.
-      </p>
-    </section>
 
-    <section class="scene" aria-hidden="true">
-      <div class="particles"></div>
-      <div class="tree">
-        <div class="canopy">
-          <span class="leaf leaf--1"></span>
-          <span class="leaf leaf--2"></span>
-          <span class="leaf leaf--3"></span>
-          <span class="leaf leaf--4"></span>
-          <span class="leaf leaf--5"></span>
-          <span class="leaf leaf--6"></span>
-        </div>
-        <div class="trunk"></div>
-        <div class="ground"></div>
-      </div>
-    </section>
-  </main>
+<!-- 1. Sky gradient (JS-animated) -->
+<div id="sky"></div>
+
+<!-- 2. Stars canvas -->
+<canvas id="stars"></canvas>
+
+<!-- 3. Sun & Moon -->
+<div id="sun"></div>
+<div id="moon"></div>
+
+<!-- 4. Scene -->
+<div id="scene">
+
+  <!-- Background mountains -->
+  <svg id="mountains" viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="mg1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#183a22"/><stop offset="100%" stop-color="#0a2215"/>
+      </linearGradient>
+      <linearGradient id="mg2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#265c32"/><stop offset="100%" stop-color="#0d3018"/>
+      </linearGradient>
+    </defs>
+    <path d="M0 400 L0 260 Q150 145,300 195 Q450 245,600 155 Q750 65,900 145
+             Q1050 225,1200 155 Q1320 95,1440 185 L1440 400 Z"
+          fill="url(#mg1)" opacity=".65"/>
+    <path d="M0 400 L0 320 Q200 248,380 285 Q560 322,720 268
+             Q880 214,1060 268 Q1240 322,1440 285 L1440 400 Z"
+          fill="url(#mg2)" opacity=".78"/>
+  </svg>
+
+  <!-- ══════════════════════════════════════════════
+       LIFE TREE  生命樹  (left)
+  ══════════════════════════════════════════════ -->
+  <div class="tree-wrap" id="life-wrap" role="img" aria-label="生命樹">
+    <svg viewBox="0 0 220 420" xmlns="http://www.w3.org/2000/svg" class="sway-l">
+      <defs>
+        <radialGradient id="lg1" cx="32%" cy="28%">
+          <stop offset="0%"   stop-color="#d4fff2"/>
+          <stop offset="38%"  stop-color="#6dffd2"/>
+          <stop offset="72%"  stop-color="#2db87c"/>
+          <stop offset="100%" stop-color="#0d5c36"/>
+        </radialGradient>
+        <radialGradient id="lg2" cx="30%" cy="25%">
+          <stop offset="0%"   stop-color="#baffea"/>
+          <stop offset="45%"  stop-color="#46d27c"/>
+          <stop offset="85%"  stop-color="#1b6f46"/>
+        </radialGradient>
+        <radialGradient id="lgGlow" cx="50%" cy="50%">
+          <stop offset="0%"   stop-color="#6dffd2" stop-opacity=".55"/>
+          <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="lgRoot" cx="50%" cy="40%">
+          <stop offset="0%"   stop-color="#ffd700" stop-opacity=".6"/>
+          <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="lgFruit" cx="30%" cy="28%">
+          <stop offset="0%"   stop-color="#fffde7"/>
+          <stop offset="50%"  stop-color="#ffd700"/>
+          <stop offset="100%" stop-color="#ff9800"/>
+        </radialGradient>
+        <linearGradient id="ltk1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#9b6040"/>
+          <stop offset="60%"  stop-color="#7a4c2d"/>
+          <stop offset="100%" stop-color="#5a3820"/>
+        </linearGradient>
+        <linearGradient id="ltk2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#c88060"/>
+          <stop offset="100%" stop-color="#9b6040"/>
+        </linearGradient>
+        <filter id="lgBlur"><feGaussianBlur stdDeviation="4"/></filter>
+      </defs>
+
+      <!-- Root glow -->
+      <ellipse cx="110" cy="412" rx="72" ry="16" fill="url(#lgRoot)" filter="url(#lgBlur)"/>
+
+      <!-- Surface roots -->
+      <path d="M103 408 C88 400,66 398,50 406"  stroke="#5a3820" stroke-width="8"  fill="none" stroke-linecap="round" opacity=".8"/>
+      <path d="M117 408 C132 400,154 398,170 406" stroke="#5a3820" stroke-width="8"  fill="none" stroke-linecap="round" opacity=".8"/>
+      <path d="M108 414 C100 408,88 410,80 418"   stroke="#5a3820" stroke-width="6"  fill="none" stroke-linecap="round" opacity=".6"/>
+      <path d="M112 414 C120 408,132 410,140 418"  stroke="#5a3820" stroke-width="6"  fill="none" stroke-linecap="round" opacity=".6"/>
+
+      <!-- Trunk (two overlapping paths for depth) -->
+      <path d="M102 415 C97 360,93 318,97 272 C91 242,87 202,96 162 C100 143,106 123,110 106"
+            stroke="url(#ltk1)" stroke-width="22" fill="none" stroke-linecap="round"/>
+      <path d="M118 415 C123 360,127 318,123 272 C129 242,133 202,124 162 C120 143,114 123,110 106"
+            stroke="url(#ltk2)" stroke-width="14" fill="none" stroke-linecap="round"/>
+
+      <!-- Lower branches -->
+      <path d="M99 258 C78 242,56 230,36 210"   stroke="#7a4c2d" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <path d="M121 258 C142 242,164 230,184 210" stroke="#7a4c2d" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <!-- Upper branches -->
+      <path d="M97 200 C76 180,56 160,40 132"   stroke="#7a4c2d" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M123 200 C144 180,164 160,180 132" stroke="#7a4c2d" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <!-- Slender top branches -->
+      <path d="M103 155 C90 134,80 112,76 90"   stroke="#8a5c3d" stroke-width="7"  fill="none" stroke-linecap="round"/>
+      <path d="M117 155 C130 134,140 112,144 90"  stroke="#8a5c3d" stroke-width="7"  fill="none" stroke-linecap="round"/>
+
+      <!-- Glow aura (behind canopy) -->
+      <ellipse cx="110" cy="140" rx="95" ry="108" fill="url(#lgGlow)" filter="url(#lgBlur)"/>
+
+      <!-- Canopy — outer (low opacity) -->
+      <circle cx="36"  cy="206" r="40" fill="url(#lg2)" opacity=".68"/>
+      <circle cx="184" cy="206" r="40" fill="url(#lg2)" opacity=".68"/>
+      <circle cx="40"  cy="126" r="32" fill="url(#lg2)" opacity=".64"/>
+      <circle cx="180" cy="126" r="32" fill="url(#lg2)" opacity=".64"/>
+      <!-- Canopy — mid -->
+      <ellipse cx="110" cy="206" rx="78" ry="68" fill="url(#lg1)" opacity=".86"/>
+      <circle cx="70"  cy="160" r="50" fill="url(#lg1)" opacity=".82"/>
+      <circle cx="150" cy="160" r="50" fill="url(#lg1)" opacity=".82"/>
+      <!-- Canopy — upper -->
+      <ellipse cx="110" cy="108" rx="67" ry="63" fill="url(#lg1)" opacity=".92"/>
+      <circle cx="75"  cy="88"  r="40" fill="url(#lg1)" opacity=".86"/>
+      <circle cx="145" cy="88"  r="40" fill="url(#lg1)" opacity=".86"/>
+      <!-- Crown -->
+      <ellipse cx="110" cy="50" rx="44" ry="42" fill="url(#lg1)" opacity=".9"/>
+
+      <!-- Golden fruits of life -->
+      <circle cx="82"  cy="102" r="8" fill="url(#lgFruit)"/>
+      <circle cx="138" cy="92"  r="7" fill="url(#lgFruit)"/>
+      <circle cx="107" cy="62"  r="7" fill="url(#lgFruit)"/>
+      <circle cx="127" cy="133" r="6" fill="url(#lgFruit)" opacity=".9"/>
+      <circle cx="92"  cy="152" r="6" fill="url(#lgFruit)" opacity=".85"/>
+      <circle cx="136" cy="166" r="5" fill="url(#lgFruit)" opacity=".8"/>
+    </svg>
+    <span class="tree-label life-color">生命樹</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       KNOWLEDGE TREE  善惡知識樹  (right)
+  ══════════════════════════════════════════════ -->
+  <div class="tree-wrap" id="know-wrap" role="img" aria-label="善惡知識樹">
+    <svg viewBox="0 0 220 420" xmlns="http://www.w3.org/2000/svg" class="sway-r">
+      <defs>
+        <radialGradient id="kg1" cx="32%" cy="28%">
+          <stop offset="0%"   stop-color="#7a3090"/>
+          <stop offset="40%"  stop-color="#4a1860"/>
+          <stop offset="75%"  stop-color="#2a0840"/>
+          <stop offset="100%" stop-color="#150428"/>
+        </radialGradient>
+        <radialGradient id="kg2" cx="30%" cy="25%">
+          <stop offset="0%"   stop-color="#6b4080"/>
+          <stop offset="45%"  stop-color="#3d1f5c"/>
+          <stop offset="85%"  stop-color="#1a0a2e"/>
+        </radialGradient>
+        <radialGradient id="kgGlow" cx="50%" cy="50%">
+          <stop offset="0%"   stop-color="#b060e0" stop-opacity=".5"/>
+          <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="kgApple" cx="32%" cy="26%">
+          <stop offset="0%"   stop-color="#ff9999"/>
+          <stop offset="50%"  stop-color="#dc2626"/>
+          <stop offset="90%"  stop-color="#7f1d1d"/>
+        </radialGradient>
+        <linearGradient id="ktk1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#3a1c10"/>
+          <stop offset="60%"  stop-color="#2a1008"/>
+          <stop offset="100%" stop-color="#1a0804"/>
+        </linearGradient>
+        <linearGradient id="ktk2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#6b3c28"/>
+          <stop offset="100%" stop-color="#4a2c18"/>
+        </linearGradient>
+        <filter id="kgBlur"><feGaussianBlur stdDeviation="4"/></filter>
+      </defs>
+
+      <!-- Root shadow -->
+      <ellipse cx="110" cy="412" rx="68" ry="15" fill="rgba(0,0,0,.55)" filter="url(#kgBlur)"/>
+
+      <!-- Gnarled roots -->
+      <path d="M100 408 C85 400,63 398,46 406"   stroke="#3a1c10" stroke-width="9"  fill="none" stroke-linecap="round" opacity=".9"/>
+      <path d="M120 408 C135 400,157 398,174 406"  stroke="#3a1c10" stroke-width="9"  fill="none" stroke-linecap="round" opacity=".9"/>
+      <path d="M107 414 C99 408,87 410,78 418"    stroke="#3a1c10" stroke-width="7"  fill="none" stroke-linecap="round" opacity=".7"/>
+      <path d="M113 414 C121 408,133 410,142 418"  stroke="#3a1c10" stroke-width="7"  fill="none" stroke-linecap="round" opacity=".7"/>
+
+      <!-- Twisted trunk -->
+      <path d="M100 415 C88 358,82 316,90 270 C84 238,79 198,88 158 C92 138,98 118,106 104"
+            stroke="url(#ktk1)" stroke-width="22" fill="none" stroke-linecap="round"/>
+      <path d="M120 415 C132 358,138 316,130 270 C136 238,141 198,132 158 C128 138,122 118,114 104"
+            stroke="url(#ktk2)" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <!-- Twist scar detail -->
+      <path d="M107 304 C101 288,116 272,110 258" stroke="#7a3c24" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/>
+
+      <!-- Lower gnarled branches -->
+      <path d="M97 265 C76 247,53 234,32 212"    stroke="#3a1c10" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <path d="M123 265 C144 247,167 234,188 212"  stroke="#3a1c10" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <!-- Upper branches -->
+      <path d="M94 200 C73 180,52 158,36 130"    stroke="#3a1c10" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M126 200 C147 180,168 158,184 130"  stroke="#3a1c10" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <!-- Twigs -->
+      <path d="M32 212 C22 198,18 183,24 173"    stroke="#3a1c10" stroke-width="6"  fill="none" stroke-linecap="round"/>
+      <path d="M32 212 C28 197,35 184,30 169"    stroke="#3a1c10" stroke-width="5"  fill="none" stroke-linecap="round"/>
+      <path d="M188 212 C198 198,202 183,196 173"  stroke="#3a1c10" stroke-width="6"  fill="none" stroke-linecap="round"/>
+      <path d="M36 130 C28 117,30 102,38 93"     stroke="#3a1c10" stroke-width="6"  fill="none" stroke-linecap="round"/>
+      <path d="M184 130 C192 117,190 102,182 93"   stroke="#3a1c10" stroke-width="6"  fill="none" stroke-linecap="round"/>
+
+      <!-- Purple glow aura -->
+      <ellipse cx="110" cy="132" rx="92" ry="102" fill="url(#kgGlow)" filter="url(#kgBlur)"/>
+
+      <!-- Canopy — outer -->
+      <circle cx="32"  cy="208" r="37" fill="url(#kg2)" opacity=".65"/>
+      <circle cx="188" cy="208" r="37" fill="url(#kg2)" opacity=".65"/>
+      <circle cx="36"  cy="124" r="30" fill="url(#kg2)" opacity=".62"/>
+      <circle cx="184" cy="124" r="30" fill="url(#kg2)" opacity=".62"/>
+      <!-- Canopy — mid -->
+      <ellipse cx="110" cy="204" rx="74" ry="64" fill="url(#kg1)" opacity=".84"/>
+      <circle cx="70"  cy="158" r="48" fill="url(#kg1)" opacity=".80"/>
+      <circle cx="150" cy="158" r="48" fill="url(#kg1)" opacity=".80"/>
+      <!-- Canopy — upper -->
+      <ellipse cx="110" cy="106" rx="64" ry="60" fill="url(#kg1)" opacity=".90"/>
+      <circle cx="75"  cy="86"  r="38" fill="url(#kg1)" opacity=".84"/>
+      <circle cx="145" cy="86"  r="38" fill="url(#kg1)" opacity=".84"/>
+      <!-- Crown -->
+      <ellipse cx="110" cy="50" rx="42" ry="40" fill="url(#kg1)" opacity=".88"/>
+
+      <!-- Forbidden apples (with stems & leaf) -->
+      <circle cx="78"  cy="104" r="9"  fill="url(#kgApple)"/>
+      <line x1="78" y1="95"  x2="80" y2="89"  stroke="#2d4a1d" stroke-width="2" stroke-linecap="round"/>
+      <path d="M80 89 Q83 85,86 87"  stroke="#2d4a1d" stroke-width="1.5" fill="none"/>
+
+      <circle cx="140" cy="92"  r="8"  fill="url(#kgApple)"/>
+      <line x1="140" y1="84" x2="142" y2="78"  stroke="#2d4a1d" stroke-width="2" stroke-linecap="round"/>
+      <path d="M142 78 Q145 74,148 76"  stroke="#2d4a1d" stroke-width="1.5" fill="none"/>
+
+      <circle cx="106" cy="66"  r="8"  fill="url(#kgApple)"/>
+      <line x1="106" y1="58"  x2="108" y2="52"  stroke="#2d4a1d" stroke-width="2" stroke-linecap="round"/>
+
+      <circle cx="130" cy="132" r="7"  fill="url(#kgApple)" opacity=".92"/>
+      <line x1="130" y1="125" x2="132" y2="119"  stroke="#2d4a1d" stroke-width="1.5" stroke-linecap="round"/>
+
+      <circle cx="88"  cy="150" r="7"  fill="url(#kgApple)" opacity=".88"/>
+      <circle cx="158" cy="150" r="6"  fill="url(#kgApple)" opacity=".85"/>
+      <circle cx="60"  cy="112" r="7"  fill="url(#kgApple)" opacity=".82"/>
+      <circle cx="165" cy="114" r="6"  fill="url(#kgApple)" opacity=".80"/>
+
+      <!-- Serpent on trunk -->
+      <path d="M118 290 Q134 268,126 252 Q118 238,128 224"
+            stroke="#1a3a0a" stroke-width="6" fill="none" stroke-linecap="round" opacity=".65"/>
+      <ellipse cx="129" cy="221" rx="6" ry="4" fill="#1a3a0a" opacity=".65"/>
+      <circle cx="131" cy="220" r="1.8" fill="#ff3333" opacity=".85"/>
+      <circle cx="127" cy="220" r="1.8" fill="#ff3333" opacity=".85"/>
+    </svg>
+    <span class="tree-label know-color">善惡知識樹</span>
+  </div>
+
+  <!-- Ground + River SVG -->
+  <svg id="ground-svg" viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#2a7a3a"/>
+        <stop offset="30%"  stop-color="#1a5a2a"/>
+        <stop offset="100%" stop-color="#0a2a10"/>
+      </linearGradient>
+      <linearGradient id="rg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#60b0ff" stop-opacity=".75"/>
+        <stop offset="100%" stop-color="#2060b0" stop-opacity=".5"/>
+      </linearGradient>
+    </defs>
+    <!-- Main ground -->
+    <path d="M0 400 L0 118 Q120 78,240 98 Q360 118,480 88
+             Q600 58,720 78 Q840 98,960 72 Q1080 48,1200 88
+             Q1320 128,1440 98 L1440 400 Z"
+          fill="url(#gg)"/>
+    <!-- River of Eden -->
+    <ellipse cx="720" cy="172" rx="165" ry="38" fill="url(#rg)" opacity=".72"/>
+    <ellipse cx="720" cy="168" rx="110" ry="24" fill="rgba(120,190,255,.4)"/>
+    <!-- Grass tufts -->
+    <path d="M198 116 Q200 106,204 116" stroke="#4aaa5a" stroke-width="3" fill="none"/>
+    <path d="M207 114 Q210 104,213 114" stroke="#4aaa5a" stroke-width="3" fill="none"/>
+    <path d="M596 72  Q598 62, 602 72"  stroke="#4aaa5a" stroke-width="3" fill="none"/>
+    <path d="M848 80  Q850 70, 854 80"  stroke="#4aaa5a" stroke-width="3" fill="none"/>
+    <path d="M1098 94 Q1100 84,1104 94" stroke="#4aaa5a" stroke-width="3" fill="none"/>
+  </svg>
+
+  <!-- Fireflies container -->
+  <div id="fireflies" style="position:absolute;inset:0;pointer-events:none;z-index:5;"></div>
+
+  <!-- Leaf / apple particle container -->
+  <div id="particles" style="position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden;"></div>
+
+</div><!-- /#scene -->
+
+<!-- Text overlay -->
+<div id="overlay">
+  <p class="eyebrow">Edison Home</p>
+  <h1>伊甸園</h1>
+  <p class="tag">生命之源，善惡之境 ── 光與暗的永恆循環</p>
+</div>
+
+<!-- Interaction hint -->
+<div id="hint">🌿 點擊生命樹或善惡知識樹以與之互動 🍎</div>
+
+<script>
+/* ============================================================
+   DAY / NIGHT CYCLE
+   t = 0.00 → midnight  |  t = 0.25 → sunrise  |  t = 0.50 → noon
+   t = 0.75 → sunset    |  t = 1.00 → midnight
+   Sun visible: t ∈ [0.24, 0.76]   Moon visible: opposite half
+============================================================ */
+const DAY_NIGHT_CYCLE_MS = 90000; // milliseconds for one full day/night cycle
+
+const skyEl    = document.getElementById('sky');
+const sunEl    = document.getElementById('sun');
+const moonEl   = document.getElementById('moon');
+const starsCv  = document.getElementById('stars');
+const starsCtx = starsCv.getContext('2d');
+
+/* ── Stars ── */
+let starList = [];
+function resizeStars() {
+  starsCv.width  = window.innerWidth;
+  starsCv.height = window.innerHeight;
+}
+function initStars(count = 220) {
+  starList = Array.from({length: count}, () => ({
+    x:  Math.random(),
+    y:  Math.random() * 0.65,
+    r:  Math.random() * 1.4 + 0.3,
+    tw: Math.random() * Math.PI * 2
+  }));
+}
+function drawStars(alpha) {
+  starsCtx.clearRect(0, 0, starsCv.width, starsCv.height);
+  if (alpha < 0.01) return;
+  const now = Date.now() / 1000;
+  starList.forEach(s => {
+    const a = alpha * (0.5 + 0.5 * Math.sin(now + s.tw));
+    starsCtx.beginPath();
+    starsCtx.arc(s.x * starsCv.width, s.y * starsCv.height, s.r, 0, Math.PI * 2);
+    starsCtx.fillStyle = `rgba(255,255,220,${a})`;
+    starsCtx.fill();
+  });
+}
+
+/* ── Colour helpers ── */
+function lerp(a, b, t) { return a + (b - a) * t; }
+function clamp01(v)     { return Math.max(0, Math.min(1, v)); }
+function lerpC(c1, c2, t) {
+  return [
+    Math.round(lerp(c1[0], c2[0], t)),
+    Math.round(lerp(c1[1], c2[1], t)),
+    Math.round(lerp(c1[2], c2[2], t))
+  ];
+}
+function rgb(c) { return `rgb(${c[0]},${c[1]},${c[2]})`; }
+
+/* Sky gradient keyframes: [t, topRGB, midRGB, botRGB] */
+const SKY_KF = [
+  [0.00, [4,4,16],     [8,8,28],      [5,6,22]      ], // midnight
+  [0.20, [8,6,35],     [25,15,55],    [55,25,25]     ], // pre-dawn
+  [0.27, [28,38,78],   [170,75,28],   [210,120,45]   ], // dawn
+  [0.35, [75,130,215], [130,180,235], [190,215,235]  ], // morning
+  [0.50, [25,95,215],  [65,145,225],  [120,195,235]  ], // noon
+  [0.65, [55,115,195], [125,175,225], [195,215,235]  ], // afternoon
+  [0.73, [35,45,95],   [195,75,28],   [225,115,28]   ], // dusk
+  [0.80, [18,12,52],   [55,22,65],    [38,18,48]     ], // evening
+  [1.00, [4,4,16],     [8,8,28],      [5,6,22]       ], // midnight (wrap)
+];
+
+function getSkyColors(t) {
+  let i = 0;
+  while (i < SKY_KF.length - 1 && SKY_KF[i + 1][0] <= t) i++;
+  const a = SKY_KF[i], b = SKY_KF[i + 1];
+  const lt = (t - a[0]) / (b[0] - a[0]);
+  return {
+    top: lerpC(a[1], b[1], lt),
+    mid: lerpC(a[2], b[2], lt),
+    bot: lerpC(a[3], b[3], lt)
+  };
+}
+
+/* Sun & moon cross the horizon at t = DAWN_T (sunrise) and t = 1 - DAWN_T (sunset). */
+const DAWN_T = 0.24; // fraction of the day cycle at which the sun rises / moon sets
+
+/* Celestial body arc position.
+   riseT / setT are the t-values at which it crosses the horizon. */
+function celestialPos(t, riseT, setT) {
+  if (t < riseT || t > setT) return null;
+  const norm = (t - riseT) / (setT - riseT);            // 0 → 1
+  const vx   = window.innerWidth  * (0.03 + norm * 0.94);
+  const vy   = window.innerHeight * (0.88 - 0.75 * Math.sin(norm * Math.PI));
+  return { x: vx, y: vy, norm };
+}
+
+function moonPos(t) {
+  const mt = (t + 0.5) % 1;
+  return celestialPos(mt, DAWN_T, 1 - DAWN_T);
+}
+
+/* Start the cycle at dawn so the page always opens with a sunrise. */
+const startTime = Date.now() - DAY_NIGHT_CYCLE_MS * DAWN_T;
+
+function tick() {
+  const t  = ((Date.now() - startTime) % DAY_NIGHT_CYCLE_MS) / DAY_NIGHT_CYCLE_MS;
+  const sc = getSkyColors(t);
+
+  /* Sky */
+  skyEl.style.background =
+    `linear-gradient(180deg, ${rgb(sc.top)} 0%, ${rgb(sc.mid)} 55%, ${rgb(sc.bot)} 100%)`;
+
+  /* Stars */
+  let starA = 0;
+  if      (t < 0.20)               starA = 1;
+  else if (t < 0.30)               starA = 1 - (t - 0.20) / 0.10;
+  else if (t >= 0.70 && t < 0.80)  starA = (t - 0.70) / 0.10;
+  else if (t >= 0.80)              starA = 1;
+  drawStars(clamp01(starA));
+
+  /* Sun */
+  const sp = celestialPos(t, DAWN_T, 1 - DAWN_T);
+  if (sp) {
+    sunEl.style.display = 'block';
+    sunEl.style.left    = sp.x + 'px';
+    sunEl.style.top     = sp.y + 'px';
+    const low   = sp.norm < 0.13 || sp.norm > 0.87;
+    const hue   = low ? 22 : 45;
+    const inner = low ? '#ffe0b2' : '#fffde7';
+    sunEl.style.background  =
+      `radial-gradient(circle, ${inner} 15%, hsl(${hue},100%,62%) 50%, hsl(${hue - 10},90%,50%) 78%, transparent)`;
+    sunEl.style.boxShadow   = low
+      ? '0 0 45px 18px rgba(255,155,55,.75)'
+      : '0 0 65px 28px rgba(255,210,0,.65)';
+  } else {
+    sunEl.style.display = 'none';
+  }
+
+  /* Moon */
+  const mp = moonPos(t);
+  if (mp) {
+    moonEl.style.display    = 'block';
+    moonEl.style.left       = mp.x + 'px';
+    moonEl.style.top        = mp.y + 'px';
+    moonEl.style.background = 'radial-gradient(circle at 42% 38%, #fffde7 42%, #d4d8e8 78%, #8888a8)';
+    moonEl.style.boxShadow  = '0 0 32px 10px rgba(200,215,255,.38)';
+  } else {
+    moonEl.style.display = 'none';
+  }
+
+  /* Life-tree glow strengthens during the day */
+  const dayness = (t > DAWN_T && t < 1 - DAWN_T)
+    ? Math.sin((t - DAWN_T) / (1 - 2 * DAWN_T) * Math.PI)
+    : 0;
+  document.getElementById('life-wrap').style.filter =
+    `drop-shadow(0 0 ${22 + dayness * 20}px rgba(109,255,210,${0.38 + dayness * 0.22}))`;
+
+  requestAnimationFrame(tick);
+}
+
+window.addEventListener('resize', () => { resizeStars(); initStars(); });
+resizeStars();
+initStars();
+tick();
+
+/* ============================================================
+   FIREFLIES
+============================================================ */
+const ffBox = document.getElementById('fireflies');
+function rand(a, b) { return +(a + Math.random() * (b - a)).toFixed(1); }
+
+for (let i = 0; i < 30; i++) {
+  const ff = document.createElement('div');
+  ff.className = 'ff';
+  ff.style.cssText = `
+    left:${rand(5,92)}%; bottom:${rand(18,65)}%;
+    animation:
+      ffMove ${rand(7,15)}s ease-in-out ${rand(-12,0)}s infinite,
+      ffGlow ${rand(1.4,3)}s ease-in-out ${rand(-3,0)}s infinite;
+    --a:${rand(-30,30)}px; --b:${rand(-45,5)}px;
+    --c:${rand(-45,45)}px; --d:${rand(-65,-8)}px;
+    --e:${rand(-20,55)}px; --f:${rand(-50,-5)}px;
+  `;
+  ffBox.appendChild(ff);
+}
+
+/* ============================================================
+   INTERACTIVE TREE BURSTS
+============================================================ */
+const particlesEl = document.getElementById('particles');
+
+const LIFE_COLORS = ['#d4fff2','#6dffd2','#2db87c','#baffea','#46d27c','#a8ffd8'];
+const KNOW_COLORS = ['#7a3090','#4a1860','#9b50c0','#5c3570','#c070f0','#3d1040'];
+
+function spawnLeaves(cx, cy, colors, count) {
+  for (let i = 0; i < count; i++) {
+    const el  = document.createElement('div');
+    el.className = 'leaf-p';
+    const dur = rand(3.5, 6.5);
+    el.style.cssText = `
+      width:${rand(9,15)}px; height:${rand(6,10)}px;
+      background:${colors[Math.floor(Math.random() * colors.length)]};
+      left:${cx}px; top:${cy}px;
+      --dx:${rand(-90,90)}px;
+      --dy:${rand(70,170)}px;
+      --rot:${rand(-540,540)}deg;
+      --dur:${dur}s;
+      animation-delay:${rand(0,0.5)}s;
+    `;
+    particlesEl.appendChild(el);
+    setTimeout(() => el.remove(), (dur + 1) * 1000);
+  }
+}
+
+function spawnApples(cx, cy, count) {
+  for (let i = 0; i < count; i++) {
+    const el  = document.createElement('div');
+    el.className = 'apple-p';
+    const dur = rand(2.5, 4.5);
+    el.style.cssText = `
+      left:${cx + rand(-30,30)}px; top:${cy + rand(0,30)}px;
+      --dx:${rand(-50,50)}px;
+      --dy:${rand(120,200)}px;
+      --rot:${rand(-240,240)}deg;
+      --dur:${dur}s;
+    `;
+    particlesEl.appendChild(el);
+    setTimeout(() => el.remove(), (dur + 1) * 1000);
+  }
+}
+
+document.getElementById('life-wrap').addEventListener('click', function () {
+  const r  = this.getBoundingClientRect();
+  const pr = particlesEl.getBoundingClientRect();
+  spawnLeaves(r.left + r.width * 0.5 - pr.left, r.top + r.height * 0.28 - pr.top, LIFE_COLORS, 22);
+});
+
+document.getElementById('know-wrap').addEventListener('click', function () {
+  const r  = this.getBoundingClientRect();
+  const pr = particlesEl.getBoundingClientRect();
+  const cx = r.left + r.width  * 0.5 - pr.left;
+  const cy = r.top  + r.height * 0.28 - pr.top;
+  spawnLeaves(cx, cy, KNOW_COLORS, 16);
+  spawnApples(cx, cy, 7);
+});
+</script>
 </body>
 </html>
