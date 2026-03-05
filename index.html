@@ -77,7 +77,7 @@
       text-shadow: 0 1px 14px rgba(0,0,0,.9);
     }
 
-    /* ── Adam & Eve wrap ── */
+    /* ── Octocats wrap ── */
     #people-wrap {
       position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
       z-index: 4; pointer-events: none;
@@ -477,71 +477,109 @@
   <!-- River of Living Water label -->
   <div id="river-label">~ River of Living Water ~</div>
 
-  <!-- Adam & Eve standing between the two trees -->
+  <!-- Three Octocats standing between the two trees -->
   <div id="people-wrap">
-    <svg viewBox="0 0 200 270" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="skinA" cx="40%" cy="35%">
-          <stop offset="0%" stop-color="#f5d5a8"/>
-          <stop offset="100%" stop-color="#c8824a"/>
-        </radialGradient>
-        <radialGradient id="skinE" cx="40%" cy="35%">
-          <stop offset="0%" stop-color="#f8dfbf"/>
-          <stop offset="100%" stop-color="#d49460"/>
-        </radialGradient>
-      </defs>
+    <svg viewBox="0 0 300 270" xmlns="http://www.w3.org/2000/svg">
 
-      <!-- ── ADAM (left, x-center≈62) ── -->
-      <ellipse cx="62" cy="258" rx="18" ry="5" fill="rgba(0,0,0,.28)"/>
-      <!-- Legs -->
-      <path d="M52 185 Q47 215,44 258" stroke="#c8824a" stroke-width="13" fill="none" stroke-linecap="round"/>
-      <path d="M72 185 Q77 215,80 258" stroke="#c8824a" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <!-- ── BLACK OCTOCAT (center x=50) ── -->
+      <ellipse cx="50" cy="260" rx="24" ry="6" fill="rgba(0,0,0,.3)"/>
+      <!-- Tentacle legs -->
+      <path d="M28 192 Q20 216,18 252" stroke="#1a1a1a" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M38 198 Q34 222,33 254" stroke="#1a1a1a" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M50 200 Q50 224,50 256" stroke="#1a1a1a" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M62 198 Q66 222,67 254" stroke="#1a1a1a" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M72 192 Q80 216,82 252" stroke="#1a1a1a" stroke-width="10" fill="none" stroke-linecap="round"/>
       <!-- Body -->
-      <path d="M40 95 C36 130,37 162,40 185 Q47 197,62 198 Q77 197,84 185 C87 162,88 130,84 95
-               Q76 86,62 84 Q48 86,40 95 Z" fill="url(#skinA)"/>
-      <!-- Left arm -->
-      <path d="M41 108 Q24 135,18 165" stroke="#c8824a" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <!-- Right arm -->
-      <path d="M83 108 Q100 135,106 165" stroke="#c8824a" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <!-- Neck -->
-      <path d="M56 68 Q56 84,57 85 L67 85 Q68 84,68 68 Z" fill="#d4905c"/>
+      <ellipse cx="50" cy="158" rx="28" ry="36" fill="#1a1a1a"/>
+      <!-- Arms -->
+      <path d="M24 152 Q10 144,6 132 Q2 122,8 116" stroke="#1a1a1a" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <path d="M76 152 Q90 144,94 132 Q98 122,92 116" stroke="#1a1a1a" stroke-width="12" fill="none" stroke-linecap="round"/>
       <!-- Head -->
-      <circle cx="62" cy="50" r="22" fill="url(#skinA)"/>
-      <!-- Facial highlight -->
-      <ellipse cx="57" cy="46" rx="9" ry="10" fill="rgba(255,220,175,.3)"/>
-      <!-- Hair (short dark) -->
-      <path d="M40 44 Q42 27,62 23 Q82 27,84 44 Q74 35,62 33 Q50 35,40 44 Z" fill="#2a1205"/>
-      <path d="M40 44 Q38 51,40 58" stroke="#2a1205" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <path d="M84 44 Q86 51,84 58" stroke="#2a1205" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <circle cx="50" cy="93" r="30" fill="#1a1a1a"/>
+      <!-- Ears -->
+      <polygon points="24,76 17,54 38,70" fill="#1a1a1a"/>
+      <polygon points="76,76 83,54 62,70" fill="#1a1a1a"/>
+      <!-- Inner ears -->
+      <polygon points="26,74 22,60 36,69" fill="#3a1a1a" opacity="0.9"/>
+      <polygon points="74,74 78,60 64,69" fill="#3a1a1a" opacity="0.9"/>
+      <!-- Eyes -->
+      <circle cx="38" cy="91" r="11" fill="white"/>
+      <circle cx="62" cy="91" r="11" fill="white"/>
+      <circle cx="39" cy="92" r="7" fill="#111"/>
+      <circle cx="63" cy="92" r="7" fill="#111"/>
+      <circle cx="41" cy="89" r="3" fill="white"/>
+      <circle cx="65" cy="89" r="3" fill="white"/>
+      <!-- Nose -->
+      <ellipse cx="50" cy="104" rx="5" ry="3.5" fill="#333"/>
+      <!-- Smile -->
+      <path d="M44 110 Q50 116,56 110" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
-      <!-- ── EVE (right, x-center≈138) ── -->
-      <ellipse cx="138" cy="258" rx="17" ry="5" fill="rgba(0,0,0,.28)"/>
-      <!-- Legs -->
-      <path d="M128 185 Q123 215,120 258" stroke="#d49460" stroke-width="12" fill="none" stroke-linecap="round"/>
-      <path d="M148 185 Q153 215,156 258" stroke="#d49460" stroke-width="12" fill="none" stroke-linecap="round"/>
-      <!-- Body (slightly curvier) -->
-      <path d="M116 95 C112 130,113 162,116 185 Q123 198,138 199 Q153 198,160 185 C163 162,164 130,160 95
-               Q152 86,138 84 Q124 86,116 95 Z" fill="url(#skinE)"/>
-      <!-- Left arm -->
-      <path d="M117 108 Q98 133,90 162" stroke="#d49460" stroke-width="10" fill="none" stroke-linecap="round"/>
-      <!-- Right arm -->
-      <path d="M159 108 Q178 133,186 162" stroke="#d49460" stroke-width="10" fill="none" stroke-linecap="round"/>
-      <!-- Neck -->
-      <path d="M132 68 Q132 84,133 85 L143 85 Q144 84,144 68 Z" fill="#dca870"/>
+      <!-- ── WHITE OCTOCAT (center x=150) ── -->
+      <ellipse cx="150" cy="260" rx="24" ry="6" fill="rgba(0,0,0,.2)"/>
+      <!-- Tentacle legs -->
+      <path d="M128 192 Q120 216,118 252" stroke="#e0e0e0" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M138 198 Q134 222,133 254" stroke="#e0e0e0" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M150 200 Q150 224,150 256" stroke="#e0e0e0" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M162 198 Q166 222,167 254" stroke="#e0e0e0" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M172 192 Q180 216,182 252" stroke="#e0e0e0" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <!-- Body -->
+      <ellipse cx="150" cy="158" rx="28" ry="36" fill="#f2f2f2" stroke="#c8c8c8" stroke-width="1.5"/>
+      <!-- Arms -->
+      <path d="M124 152 Q110 144,106 132 Q102 122,108 116" stroke="#e0e0e0" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <path d="M176 152 Q190 144,194 132 Q198 122,192 116" stroke="#e0e0e0" stroke-width="12" fill="none" stroke-linecap="round"/>
       <!-- Head -->
-      <circle cx="138" cy="50" r="22" fill="url(#skinE)"/>
-      <!-- Facial highlight -->
-      <ellipse cx="133" cy="46" rx="9" ry="10" fill="rgba(255,230,190,.3)"/>
-      <!-- Hair top -->
-      <path d="M116 44 Q118 27,138 23 Q158 27,160 44 Q150 35,138 33 Q126 35,116 44 Z" fill="#2a1205"/>
-      <!-- Long hair flowing down left -->
-      <path d="M116 44 Q108 75,110 115 Q111 142,114 165" stroke="#2a1205" stroke-width="10" fill="none" stroke-linecap="round" opacity=".95"/>
-      <!-- Long hair flowing down right -->
-      <path d="M160 44 Q168 75,166 115 Q165 142,162 165" stroke="#2a1205" stroke-width="10" fill="none" stroke-linecap="round" opacity=".95"/>
-      <!-- Hair highlight -->
-      <path d="M160 44 Q166 68,163 98" stroke="#4a2510" stroke-width="4.5" fill="none" stroke-linecap="round" opacity=".55"/>
+      <circle cx="150" cy="93" r="30" fill="#f2f2f2" stroke="#c8c8c8" stroke-width="1.5"/>
+      <!-- Ears -->
+      <polygon points="124,76 117,54 138,70" fill="#f2f2f2" stroke="#c8c8c8" stroke-width="1.5" stroke-linejoin="round"/>
+      <polygon points="176,76 183,54 162,70" fill="#f2f2f2" stroke="#c8c8c8" stroke-width="1.5" stroke-linejoin="round"/>
+      <!-- Inner ears -->
+      <polygon points="126,74 122,60 136,69" fill="#ffcccc" opacity="0.9"/>
+      <polygon points="174,74 178,60 164,69" fill="#ffcccc" opacity="0.9"/>
+      <!-- Eyes -->
+      <circle cx="138" cy="91" r="11" fill="white" stroke="#c8c8c8" stroke-width="1"/>
+      <circle cx="162" cy="91" r="11" fill="white" stroke="#c8c8c8" stroke-width="1"/>
+      <circle cx="139" cy="92" r="7" fill="#333"/>
+      <circle cx="163" cy="92" r="7" fill="#333"/>
+      <circle cx="141" cy="89" r="3" fill="white"/>
+      <circle cx="165" cy="89" r="3" fill="white"/>
+      <!-- Nose -->
+      <ellipse cx="150" cy="104" rx="5" ry="3.5" fill="#aaa"/>
+      <!-- Smile -->
+      <path d="M144 110 Q150 116,156 110" stroke="#aaa" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+      <!-- ── GRAY OCTOCAT (center x=250) ── -->
+      <ellipse cx="250" cy="260" rx="24" ry="6" fill="rgba(0,0,0,.25)"/>
+      <!-- Tentacle legs -->
+      <path d="M228 192 Q220 216,218 252" stroke="#777" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M238 198 Q234 222,233 254" stroke="#777" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M250 200 Q250 224,250 256" stroke="#777" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M262 198 Q266 222,267 254" stroke="#777" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M272 192 Q280 216,282 252" stroke="#777" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <!-- Body -->
+      <ellipse cx="250" cy="158" rx="28" ry="36" fill="#888"/>
+      <!-- Arms -->
+      <path d="M224 152 Q210 144,206 132 Q202 122,208 116" stroke="#888" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <path d="M276 152 Q290 144,294 132 Q298 122,292 116" stroke="#888" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <!-- Head -->
+      <circle cx="250" cy="93" r="30" fill="#888"/>
+      <!-- Ears -->
+      <polygon points="224,76 217,54 238,70" fill="#888"/>
+      <polygon points="276,76 283,54 262,70" fill="#888"/>
+      <!-- Inner ears -->
+      <polygon points="226,74 222,60 236,69" fill="#aa7777" opacity="0.9"/>
+      <polygon points="274,74 278,60 264,69" fill="#aa7777" opacity="0.9"/>
+      <!-- Eyes -->
+      <circle cx="238" cy="91" r="11" fill="white"/>
+      <circle cx="262" cy="91" r="11" fill="white"/>
+      <circle cx="239" cy="92" r="7" fill="#444"/>
+      <circle cx="263" cy="92" r="7" fill="#444"/>
+      <circle cx="241" cy="89" r="3" fill="white"/>
+      <circle cx="265" cy="89" r="3" fill="white"/>
+      <!-- Nose -->
+      <ellipse cx="250" cy="104" rx="5" ry="3.5" fill="#555"/>
+      <!-- Smile -->
+      <path d="M244 110 Q250 116,256 110" stroke="#555" stroke-width="2.5" fill="none" stroke-linecap="round"/>
     </svg>
-    <span id="people-label">Adam &amp; Eve</span>
   </div>
 
   <!-- Leaf / apple particle container -->
