@@ -237,9 +237,29 @@
     }
     @keyframes hintPulse { 0%,100%{opacity:.3} 50%{opacity:.75} }
 
+    /* ── Rainbow ── */
+    #rainbow-svg {
+      position: absolute; top: 2%; left: 0; width: 100%; height: 52%;
+      z-index: 2; pointer-events: none;
+    }
+
+    /* ── Animals & Flower on the grass ── */
+    .animal-wrap {
+      position: absolute; z-index: 3; pointer-events: none;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,.52));
+    }
+    #flower-wrap   { bottom: 21%; left: 33%; width: clamp(22px, 3vw,   42px);  animation: deerBob  4s   ease-in-out infinite; }
+    #lamb-wrap     { bottom: 20%; left: 39%; width: clamp(44px, 6vw,   80px);  animation: deerBob  5.5s ease-in-out -1s    infinite; }
+    #cow-wrap      { bottom: 20%; left: 45%; width: clamp(60px, 9vw,  116px);  animation: deerBob  6s   ease-in-out -2s    infinite; }
+    #chicken-wrap  { bottom: 21%; left: 52%; width: clamp(30px, 4vw,   54px);  animation: deerBob  3.5s ease-in-out -0.5s  infinite; }
+    #cat-wrap      { bottom: 20%; left: 58%; width: clamp(38px, 5.5vw, 74px);  animation: deerBob  4.5s ease-in-out -1.5s  infinite; }
+    #dog-wrap      { bottom: 20%; left: 64%; width: clamp(46px, 7vw,   92px);  animation: deerBob  5s   ease-in-out -3s    infinite; }
+    #elephant-wrap { bottom: 20%; left: 70%; width: clamp(62px, 9vw,  118px);  animation: deerBob  7s   ease-in-out -2s    infinite; }
+    #lion-wrap     { bottom: 20%; left: 77%; width: clamp(54px, 8vw,  106px);  animation: deerBob  6.5s ease-in-out -1s    infinite; }
+
     /* ── Reduced motion ── */
     @media (prefers-reduced-motion: reduce) {
-      .sway-l, .sway-r, .ff { animation: none !important; }
+      .sway-l, .sway-r, .ff, .animal-wrap { animation: none !important; }
     }
   </style>
 </head>
@@ -296,6 +316,22 @@
       <!-- Name label -->
       <text x="0" y="-34" text-anchor="middle" font-family="sans-serif" font-size="11"
             font-weight="bold" fill="#ffffff" stroke="#000" stroke-width="0.5">Lili</text>
+    </g>
+  </svg>
+
+  <!-- Rainbow in the sky -->
+  <svg id="rainbow-svg" viewBox="0 0 1440 560" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="rbBlur"><feGaussianBlur stdDeviation="3.5"/></filter>
+    </defs>
+    <g filter="url(#rbBlur)" opacity="0.72">
+      <path d="M0 560 Q720 -80 1440 560" fill="none" stroke="hsl(0,82%,56%)"    stroke-width="30"/>
+      <path d="M30 560 Q720 -52 1410 560"  fill="none" stroke="hsl(28,90%,58%)"  stroke-width="25"/>
+      <path d="M60 560 Q720 -26 1380 560"  fill="none" stroke="hsl(55,92%,60%)"  stroke-width="25"/>
+      <path d="M90 560 Q720  -4 1350 560"  fill="none" stroke="hsl(110,74%,48%)" stroke-width="23"/>
+      <path d="M120 560 Q720  16 1320 560" fill="none" stroke="hsl(215,80%,58%)" stroke-width="23"/>
+      <path d="M150 560 Q720  34 1290 560" fill="none" stroke="hsl(248,75%,60%)" stroke-width="22"/>
+      <path d="M180 560 Q720  50 1260 560" fill="none" stroke="hsl(290,70%,62%)" stroke-width="21"/>
     </g>
   </svg>
 
@@ -632,6 +668,268 @@
       <!-- Tail feathers -->
       <path d="M36 40 Q18 50, 11 47 Q22 42, 36 40 Z" fill="white"/>
       <path d="M36 40 Q15 54, 7 51 Q18 46, 36 40 Z" fill="rgba(230,238,255,0.82)"/>
+    </svg>
+  </div>
+
+  <!-- ── Flower on the grass ── -->
+  <div id="flower-wrap" class="animal-wrap">
+    <svg viewBox="0 0 50 70" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <!-- Stem -->
+      <line x1="25" y1="38" x2="25" y2="68" stroke="#3a8a3a" stroke-width="3" stroke-linecap="round"/>
+      <!-- Leaves -->
+      <path d="M25 54 Q15 48 13 40" stroke="#3a8a3a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M25 48 Q35 42 37 34" stroke="#3a8a3a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- Petals -->
+      <g transform="translate(25,25)">
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(45)"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(90)"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(135)"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(225)"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(270)"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(315)"/>
+        <!-- Centre -->
+        <circle cx="0" cy="0" r="8" fill="#ffcc00"/>
+        <circle cx="0" cy="0" r="5" fill="#ff9900"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- ── Lamb on the grass ── -->
+  <div id="lamb-wrap" class="animal-wrap">
+    <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <!-- Woolly body -->
+      <circle cx="52" cy="48" r="22" fill="white"/>
+      <circle cx="35" cy="40" r="14" fill="white"/>
+      <circle cx="69" cy="40" r="14" fill="white"/>
+      <circle cx="52" cy="31" r="16" fill="white"/>
+      <!-- Head -->
+      <ellipse cx="24" cy="37" rx="13" ry="10" fill="#f5f0e8"/>
+      <!-- Ear -->
+      <ellipse cx="15" cy="28" rx="5" ry="8" fill="#f0cfc0" transform="rotate(-15,15,28)"/>
+      <!-- Eye -->
+      <circle cx="21" cy="36" r="2.2" fill="#1a0e00"/>
+      <circle cx="20.5" cy="35.5" r="0.8" fill="rgba(255,255,255,0.6)"/>
+      <!-- Muzzle -->
+      <ellipse cx="13" cy="41" rx="5" ry="3.5" fill="#e8c5aa"/>
+      <!-- Legs -->
+      <line x1="38" y1="67" x2="36" y2="86" stroke="#c8b898" stroke-width="6" stroke-linecap="round"/>
+      <line x1="49" y1="69" x2="48" y2="86" stroke="#c8b898" stroke-width="6" stroke-linecap="round"/>
+      <line x1="59" y1="69" x2="59" y2="86" stroke="#c8b898" stroke-width="6" stroke-linecap="round"/>
+      <line x1="70" y1="67" x2="72" y2="86" stroke="#c8b898" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- ── Cow on the grass ── -->
+  <div id="cow-wrap" class="animal-wrap">
+    <svg viewBox="0 0 130 95" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <!-- Body -->
+      <ellipse cx="70" cy="55" rx="38" ry="24" fill="white"/>
+      <!-- Black patches -->
+      <ellipse cx="60" cy="45" rx="18" ry="14" fill="#1a1a1a" opacity="0.82"/>
+      <ellipse cx="88" cy="60" rx="13" ry="10" fill="#1a1a1a" opacity="0.72"/>
+      <!-- Udder -->
+      <ellipse cx="70" cy="76" rx="14" ry="8" fill="#f0bfb0"/>
+      <!-- Neck -->
+      <path d="M38 52 Q27 46 22 42" stroke="white" stroke-width="16" fill="none" stroke-linecap="round"/>
+      <!-- Head -->
+      <ellipse cx="15" cy="37" rx="16" ry="12" fill="white"/>
+      <!-- Ear -->
+      <ellipse cx="5" cy="27" rx="6" ry="9" fill="#f0d8c0"/>
+      <!-- Horns -->
+      <path d="M12 27 Q8 19 5 17"  stroke="#c8a070" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M22 27 Q26 19 28 17" stroke="#c8a070" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- Muzzle -->
+      <ellipse cx="7" cy="43" rx="9" ry="7" fill="#e8c0a0"/>
+      <circle cx="5"  cy="44" r="2" fill="#c07060"/>
+      <circle cx="9"  cy="44" r="2" fill="#c07060"/>
+      <!-- Eye -->
+      <circle cx="18" cy="33" r="2.5" fill="#1a0e00"/>
+      <circle cx="17.5" cy="32.5" r="0.9" fill="rgba(255,255,255,0.6)"/>
+      <!-- Legs -->
+      <line x1="44" y1="76" x2="42" y2="90" stroke="#c8b898" stroke-width="7" stroke-linecap="round"/>
+      <line x1="58" y1="78" x2="57" y2="90" stroke="#c8b898" stroke-width="7" stroke-linecap="round"/>
+      <line x1="82" y1="78" x2="82" y2="90" stroke="#c8b898" stroke-width="7" stroke-linecap="round"/>
+      <line x1="96" y1="76" x2="98" y2="90" stroke="#c8b898" stroke-width="7" stroke-linecap="round"/>
+      <!-- Tail -->
+      <path d="M106 50 Q118 42 114 32" stroke="#c8b898" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="114" cy="30" rx="5" ry="7" fill="#c8b898"/>
+    </svg>
+  </div>
+
+  <!-- ── Chicken on the grass ── -->
+  <div id="chicken-wrap" class="animal-wrap">
+    <svg viewBox="0 0 65 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <!-- Body -->
+      <ellipse cx="33" cy="52" rx="20" ry="16" fill="white"/>
+      <!-- Wing shading -->
+      <path d="M22 50 Q20 44 27 40" stroke="rgba(190,190,190,0.65)" stroke-width="2" fill="none"/>
+      <!-- Tail feathers -->
+      <path d="M51 46 Q62 36 60 26" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M51 46 Q64 40 63 29" stroke="rgba(220,220,220,0.78)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Neck -->
+      <path d="M19 44 Q16 37 17 31" stroke="white" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <!-- Head -->
+      <circle cx="17" cy="25" r="12" fill="white"/>
+      <!-- Comb -->
+      <path d="M12 15 Q14 7 17 15 Q20 7 23 15" fill="#dd2222"/>
+      <!-- Wattle -->
+      <ellipse cx="10" cy="31" rx="4" ry="5" fill="#dd2222"/>
+      <!-- Beak -->
+      <path d="M8 25 L1 27 L8 30 Z" fill="#ffaa00"/>
+      <!-- Eye -->
+      <circle cx="20" cy="23" r="3" fill="#1a0e00"/>
+      <circle cx="19.5" cy="22.5" r="1" fill="rgba(255,255,255,0.65)"/>
+      <!-- Legs -->
+      <line x1="27" y1="67" x2="23" y2="77" stroke="#ffaa00" stroke-width="4" stroke-linecap="round"/>
+      <line x1="39" y1="67" x2="43" y2="77" stroke="#ffaa00" stroke-width="4" stroke-linecap="round"/>
+      <!-- Feet -->
+      <path d="M23 77 L19 79 M23 77 L23 81 M23 77 L27 79" stroke="#ffaa00" stroke-width="2" stroke-linecap="round"/>
+      <path d="M43 77 L39 79 M43 77 L43 81 M43 77 L47 79" stroke="#ffaa00" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- ── Cat on the grass ── -->
+  <div id="cat-wrap" class="animal-wrap">
+    <svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <!-- Body -->
+      <ellipse cx="40" cy="62" rx="22" ry="20" fill="#d4a060"/>
+      <!-- Tail -->
+      <path d="M60 68 Q80 55 78 40 Q76 28 68 30" stroke="#d4a060" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <!-- Neck -->
+      <rect x="32" y="36" width="16" height="16" rx="4" fill="#d4a060"/>
+      <!-- Head -->
+      <circle cx="40" cy="28" r="18" fill="#d4a060"/>
+      <!-- Ears (pointed) -->
+      <path d="M26 17 L22 4  L35 14 Z" fill="#d4a060"/>
+      <path d="M28 17 L26 7  L34 14 Z" fill="#e8b878" opacity="0.7"/>
+      <path d="M54 17 L58 4  L45 14 Z" fill="#d4a060"/>
+      <path d="M52 17 L54 7  L46 14 Z" fill="#e8b878" opacity="0.7"/>
+      <!-- Eyes -->
+      <ellipse cx="32" cy="26" rx="5"  ry="4"   fill="#66aa44"/>
+      <ellipse cx="32" cy="26" rx="2"  ry="3.5" fill="#1a0e00"/>
+      <circle  cx="31" cy="25" r="1.2" fill="rgba(255,255,255,0.65)"/>
+      <ellipse cx="48" cy="26" rx="5"  ry="4"   fill="#66aa44"/>
+      <ellipse cx="48" cy="26" rx="2"  ry="3.5" fill="#1a0e00"/>
+      <circle  cx="47" cy="25" r="1.2" fill="rgba(255,255,255,0.65)"/>
+      <!-- Nose -->
+      <path d="M37 32 L40 35 L43 32 Q40 30 37 32 Z" fill="#e07080"/>
+      <!-- Whiskers -->
+      <line x1="16" y1="32" x2="33" y2="34" stroke="rgba(255,255,255,0.68)" stroke-width="1.2"/>
+      <line x1="16" y1="35" x2="33" y2="35" stroke="rgba(255,255,255,0.68)" stroke-width="1.2"/>
+      <line x1="47" y1="34" x2="64" y2="32" stroke="rgba(255,255,255,0.68)" stroke-width="1.2"/>
+      <line x1="47" y1="35" x2="64" y2="35" stroke="rgba(255,255,255,0.68)" stroke-width="1.2"/>
+      <!-- Legs -->
+      <line x1="28" y1="79" x2="26" y2="88" stroke="#c8903a" stroke-width="7" stroke-linecap="round"/>
+      <line x1="36" y1="81" x2="35" y2="88" stroke="#c8903a" stroke-width="7" stroke-linecap="round"/>
+      <line x1="46" y1="81" x2="46" y2="88" stroke="#c8903a" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="79" x2="56" y2="88" stroke="#c8903a" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- ── Dog on the grass ── -->
+  <div id="dog-wrap" class="animal-wrap">
+    <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <!-- Body -->
+      <ellipse cx="54" cy="58" rx="30" ry="20" fill="#c8a060"/>
+      <!-- Tail (wagging up) -->
+      <path d="M82 54 Q96 40 91 28" stroke="#c8a060" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <!-- Neck -->
+      <path d="M30 50 Q24 42 24 34" stroke="#c8a060" stroke-width="15" fill="none" stroke-linecap="round"/>
+      <!-- Head -->
+      <circle cx="22" cy="26" r="16" fill="#c8a060"/>
+      <!-- Floppy ears -->
+      <path d="M12 20 Q4 30 8 42 Q14 35 16 24 Z" fill="#b08848"/>
+      <path d="M32 20 Q40 30 36 42 Q30 35 28 24 Z" fill="#b08848"/>
+      <!-- Muzzle -->
+      <ellipse cx="18" cy="32" rx="9" ry="7" fill="#d4b070"/>
+      <!-- Nose -->
+      <ellipse cx="18" cy="29" rx="5" ry="3.5" fill="#2a1a10"/>
+      <circle  cx="16.5" cy="28.5" r="1" fill="rgba(255,255,255,0.5)"/>
+      <!-- Eye -->
+      <circle cx="28" cy="22" r="3"   fill="#3a2a00"/>
+      <circle cx="27.5" cy="21.5" r="1" fill="rgba(255,255,255,0.65)"/>
+      <!-- Tongue -->
+      <ellipse cx="18" cy="37" rx="4" ry="3" fill="#e05060"/>
+      <!-- Legs -->
+      <line x1="34" y1="74" x2="32" y2="87" stroke="#b09050" stroke-width="7" stroke-linecap="round"/>
+      <line x1="46" y1="76" x2="45" y2="87" stroke="#b09050" stroke-width="7" stroke-linecap="round"/>
+      <line x1="64" y1="76" x2="64" y2="87" stroke="#b09050" stroke-width="7" stroke-linecap="round"/>
+      <line x1="76" y1="74" x2="78" y2="87" stroke="#b09050" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- ── Elephant on the grass ── -->
+  <div id="elephant-wrap" class="animal-wrap">
+    <svg viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <!-- Body -->
+      <ellipse cx="78" cy="58" rx="46" ry="30" fill="#a0a0b8"/>
+      <!-- Head -->
+      <circle cx="30" cy="50" r="27" fill="#a0a0b8"/>
+      <!-- Big ear -->
+      <ellipse cx="10" cy="47" rx="18" ry="26" fill="#909090" opacity="0.80"/>
+      <ellipse cx="12" cy="47" rx="13" ry="20" fill="#b8aab0" opacity="0.55"/>
+      <!-- Trunk -->
+      <path d="M14 62 Q2 72 6 86 Q10 96 20 94" stroke="#a0a0b8" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <!-- Trunk tip -->
+      <ellipse cx="20" cy="94" rx="8" ry="5" fill="#909090"/>
+      <!-- Tusk -->
+      <path d="M19 64 Q9 70 5 78" stroke="#fffff0" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.9"/>
+      <!-- Eye -->
+      <circle cx="28" cy="42" r="4"   fill="#1a1a2a"/>
+      <circle cx="27"  cy="41" r="1.5" fill="rgba(255,255,255,0.65)"/>
+      <!-- Tail -->
+      <path d="M122 56 Q134 48 130 36" stroke="#909090" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="130" cy="34" rx="4" ry="6" fill="#888888"/>
+      <!-- Legs -->
+      <rect x="44" y="83" width="16" height="14" rx="6" fill="#909090"/>
+      <rect x="64" y="85" width="16" height="12" rx="6" fill="#909090"/>
+      <rect x="92" y="85" width="16" height="12" rx="6" fill="#909090"/>
+      <rect x="112" y="83" width="16" height="14" rx="6" fill="#909090"/>
+    </svg>
+  </div>
+
+  <!-- ── Lion on the grass ── -->
+  <div id="lion-wrap" class="animal-wrap">
+    <svg viewBox="0 0 120 95" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <!-- Body -->
+      <ellipse cx="70" cy="62" rx="38" ry="22" fill="#d4a040"/>
+      <!-- Tail with tuft -->
+      <path d="M106 58 Q120 44 115 32" stroke="#d4a040" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <ellipse cx="115" cy="30" rx="8" ry="10" fill="#c09030"/>
+      <!-- Mane (outer) -->
+      <circle cx="32" cy="48" r="27" fill="#c09030" opacity="0.85"/>
+      <!-- Mane (inner dark) -->
+      <circle cx="32" cy="48" r="21" fill="#a07020"/>
+      <!-- Face -->
+      <circle cx="32" cy="48" r="16" fill="#d4a050"/>
+      <!-- Ears -->
+      <circle cx="18" cy="33" r="7" fill="#c09030"/>
+      <circle cx="18" cy="33" r="4" fill="#d4a050"/>
+      <circle cx="46" cy="33" r="7" fill="#c09030"/>
+      <circle cx="46" cy="33" r="4" fill="#d4a050"/>
+      <!-- Eyes -->
+      <ellipse cx="24" cy="44" rx="5"   ry="4.5" fill="#c8a020"/>
+      <ellipse cx="24" cy="44" rx="2.5" ry="4"   fill="#1a1000"/>
+      <circle  cx="23" cy="43" r="1.2" fill="rgba(255,255,255,0.65)"/>
+      <ellipse cx="40" cy="44" rx="5"   ry="4.5" fill="#c8a020"/>
+      <ellipse cx="40" cy="44" rx="2.5" ry="4"   fill="#1a1000"/>
+      <circle  cx="39" cy="43" r="1.2" fill="rgba(255,255,255,0.65)"/>
+      <!-- Nose -->
+      <path d="M28 52 L32 55 L36 52 Q32 49 28 52 Z" fill="#c06080"/>
+      <!-- Mouth -->
+      <path d="M26 56 Q32 60 38 56" stroke="#c06080" stroke-width="1.5" fill="none"/>
+      <!-- Whiskers -->
+      <line x1="9"  y1="52" x2="24" y2="53" stroke="rgba(255,255,255,0.60)" stroke-width="1.2"/>
+      <line x1="9"  y1="55" x2="24" y2="54" stroke="rgba(255,255,255,0.60)" stroke-width="1.2"/>
+      <line x1="40" y1="53" x2="55" y2="52" stroke="rgba(255,255,255,0.60)" stroke-width="1.2"/>
+      <line x1="40" y1="54" x2="55" y2="55" stroke="rgba(255,255,255,0.60)" stroke-width="1.2"/>
+      <!-- Legs -->
+      <line x1="48" y1="80" x2="46" y2="92" stroke="#c09030" stroke-width="8" stroke-linecap="round"/>
+      <line x1="60" y1="82" x2="59" y2="92" stroke="#c09030" stroke-width="8" stroke-linecap="round"/>
+      <line x1="82" y1="82" x2="82" y2="92" stroke="#c09030" stroke-width="8" stroke-linecap="round"/>
+      <line x1="94" y1="80" x2="96" y2="92" stroke="#c09030" stroke-width="8" stroke-linecap="round"/>
     </svg>
   </div>
 
