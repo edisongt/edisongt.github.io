@@ -69,37 +69,35 @@
     .life-color  { color: rgba(109,255,210,.95); }
     .know-color  { color: rgba(210,100,255,.95); }
 
-    /* ── People label ── */
-    /* ── Floating 3×3 rotating cubes ── */
+    /* ── Large single black rotating cube ── */
     #people-wrap {
-      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
       z-index: 4; pointer-events: none;
       display: flex; flex-direction: column; align-items: center;
     }
     .cube-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(5px, 1vw, 10px);
       animation: cubeFloat 4s ease-in-out infinite;
+      display: flex; align-items: center; justify-content: center;
     }
     @keyframes cubeFloat {
       0%,100% { transform: translateY(0px); }
-      50%      { transform: translateY(-18px); }
+      50%      { transform: translateY(-20px); }
     }
     .cube-wrap {
-      --sz: clamp(28px, 4.5vw, 50px);
+      --sz: clamp(100px, 14vw, 180px);
       width: var(--sz); height: var(--sz);
-      perspective: 400px;
+      perspective: 1200px;
     }
     .cube-3d {
       width: 100%; height: 100%;
       position: relative; transform-style: preserve-3d;
+      animation: spinAll 10s linear infinite;
     }
     .cube-3d .face {
       position: absolute; width: 100%; height: 100%;
-      background: rgba(8, 8, 18, 0.96);
-      border: 1px solid rgba(90, 100, 130, 0.55);
-      box-shadow: inset 0 0 6px rgba(60,80,140,.25);
+      background: rgba(5, 5, 12, 0.97);
+      border: 2px solid rgba(80, 100, 160, 0.60);
+      box-shadow: inset 0 0 18px rgba(50,70,160,.35), 0 0 8px rgba(60,80,180,.20);
       backface-visibility: visible;
     }
     .cube-3d .front  { transform: translateZ(calc(var(--sz)/2)); }
@@ -108,19 +106,47 @@
     .cube-3d .right  { transform: rotateY(90deg)  translateZ(calc(var(--sz)/2)); }
     .cube-3d .top    { transform: rotateX(90deg)  translateZ(calc(var(--sz)/2)); }
     .cube-3d .bottom { transform: rotateX(-90deg) translateZ(calc(var(--sz)/2)); }
-    /* Each cube spins at its own speed / axis */
-    .cube-3d.c0 { animation: spinXY 5.0s linear infinite; }
-    .cube-3d.c1 { animation: spinYZ 6.5s linear infinite; }
-    .cube-3d.c2 { animation: spinXZ 4.5s linear infinite; }
-    .cube-3d.c3 { animation: spinYZ 5.8s linear infinite; }
-    .cube-3d.c4 { animation: spinXY 4.0s linear infinite; }
-    .cube-3d.c5 { animation: spinXZ 7.0s linear infinite; }
-    .cube-3d.c6 { animation: spinXZ 5.5s linear infinite; }
-    .cube-3d.c7 { animation: spinXY 6.0s linear infinite; }
-    .cube-3d.c8 { animation: spinYZ 4.8s linear infinite; }
-    @keyframes spinXY { from{transform:rotateX(0)   rotateY(0)}   to{transform:rotateX(360deg) rotateY(360deg)} }
-    @keyframes spinYZ { from{transform:rotateY(0)   rotateZ(0)}   to{transform:rotateY(360deg) rotateZ(360deg)} }
-    @keyframes spinXZ { from{transform:rotateX(0)   rotateZ(0)}   to{transform:rotateX(360deg) rotateZ(360deg)} }
+    @keyframes spinAll {
+      0%   { transform: rotateX(0deg)   rotateY(0deg)   rotateZ(0deg); }
+      100% { transform: rotateX(360deg) rotateY(540deg) rotateZ(180deg); }
+    }
+
+    /* ── Deer by the river ── */
+    #deer-wrap {
+      position: absolute; bottom: 19%; left: 22%;
+      z-index: 3; pointer-events: none;
+      width: clamp(70px, 10vw, 130px);
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,.65));
+      animation: deerBob 5s ease-in-out infinite;
+    }
+    @keyframes deerBob {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-4px); }
+    }
+
+    /* ── White dove flying ── */
+    #dove-wrap {
+      position: absolute; top: 10%; left: 0;
+      z-index: 4; pointer-events: none;
+      width: clamp(44px, 6.5vw, 88px);
+      animation: doveFly 26s linear infinite;
+    }
+    #dove-svg {
+      width: 100%; height: auto;
+      filter: drop-shadow(0 2px 8px rgba(180,210,255,.60));
+      animation: doveFlap 0.55s ease-in-out infinite;
+    }
+    @keyframes doveFly {
+      0%    { transform: translateX(-10vw) translateY(0)     scaleX(1); }
+      47%   { transform: translateX(108vw) translateY(-6vh)  scaleX(1); }
+      50%   { transform: translateX(108vw) translateY(-6vh)  scaleX(-1); }
+      97%   { transform: translateX(-10vw) translateY(0)     scaleX(-1); }
+      100%  { transform: translateX(-10vw) translateY(0)     scaleX(1); }
+    }
+    @keyframes doveFlap {
+      0%,100% { transform: scaleY(1)    rotate(-2deg); }
+      50%     { transform: scaleY(0.82) rotate(2deg); }
+    }
     #river-label {
       position: absolute; bottom: 23%; left: 50%; transform: translateX(-50%);
       z-index: 3; color: rgba(180,225,255,.88);
@@ -523,6 +549,72 @@
   <!-- Leaf / apple particle container -->
   <div id="particles" style="position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden;"></div>
 
+  <!-- Deer drinking by the River of Living Water -->
+  <div id="deer-wrap">
+    <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <!-- Body -->
+      <ellipse cx="70" cy="58" rx="28" ry="17" fill="#8B6B2A"/>
+      <!-- Belly highlight -->
+      <ellipse cx="70" cy="68" rx="22" ry="7" fill="#c49540" opacity="0.35"/>
+      <!-- Neck bent down toward water -->
+      <path d="M48 54 Q36 62, 27 76" stroke="#8B6B2A" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <!-- Head tilted down to drink -->
+      <ellipse cx="23" cy="80" rx="13" ry="10" fill="#8B6B2A" transform="rotate(-25,23,80)"/>
+      <!-- Muzzle -->
+      <ellipse cx="14" cy="86" rx="8" ry="5" fill="#9B7B3A"/>
+      <!-- Nostrils -->
+      <ellipse cx="11" cy="88" rx="3.5" ry="2" fill="#5a3015"/>
+      <!-- Eye -->
+      <circle cx="27" cy="76" r="2.8" fill="#1a0e00"/>
+      <circle cx="26.5" cy="75.5" r="0.9" fill="rgba(255,255,255,0.55)"/>
+      <!-- Ear -->
+      <path d="M31 70 Q25 58, 30 51" stroke="#8B6B2A" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M31 70 Q27 60, 31 53" stroke="#c49040" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <!-- Antlers -->
+      <path d="M36 64 Q31 52, 25 43" stroke="#5a3010" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M25 43 Q20 36, 15 30" stroke="#5a3010" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M25 43 Q18 40, 15 43" stroke="#5a3010" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M36 64 Q43 53, 49 47" stroke="#5a3010" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M49 47 Q53 41, 51 35" stroke="#5a3010" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- Front legs -->
+      <path d="M52 72 L50 95" stroke="#7a5a1a" stroke-width="7" stroke-linecap="round"/>
+      <path d="M64 75 L63 96" stroke="#7a5a1a" stroke-width="7" stroke-linecap="round"/>
+      <!-- Back legs -->
+      <path d="M82 74 L84 96" stroke="#7a5a1a" stroke-width="7" stroke-linecap="round"/>
+      <path d="M93 71 L96 93" stroke="#7a5a1a" stroke-width="7" stroke-linecap="round"/>
+      <!-- Tail -->
+      <ellipse cx="96" cy="50" rx="9" ry="7" fill="#d4b060" transform="rotate(15,96,50)"/>
+      <!-- Water ripples from drinking -->
+      <ellipse cx="14" cy="94" rx="11" ry="3" fill="none" stroke="rgba(140,200,255,0.7)" stroke-width="1.5"/>
+      <ellipse cx="14" cy="94" rx="18" ry="5" fill="none" stroke="rgba(140,200,255,0.38)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- White dove flying in the sky -->
+  <div id="dove-wrap">
+    <svg id="dove-svg" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left wing -->
+      <path d="M50 32 Q28 7, 2 16 Q23 26, 50 32 Z" fill="white" opacity="0.95"/>
+      <!-- Right wing -->
+      <path d="M50 32 Q72 7, 98 16 Q77 26, 50 32 Z" fill="white" opacity="0.95"/>
+      <!-- Wing highlight lines -->
+      <path d="M50 32 Q32 17, 12 20" stroke="rgba(200,215,255,0.50)" stroke-width="1" fill="none"/>
+      <path d="M50 32 Q68 17, 88 20" stroke="rgba(200,215,255,0.50)" stroke-width="1" fill="none"/>
+      <!-- Body -->
+      <ellipse cx="52" cy="38" rx="18" ry="8" fill="white"/>
+      <!-- Head -->
+      <circle cx="66" cy="29" r="7" fill="white"/>
+      <!-- Beak -->
+      <path d="M72 28 L82 30 L72 33 Z" fill="#e8c040"/>
+      <!-- Eye -->
+      <circle cx="68" cy="27" r="2" fill="#2a1a2a"/>
+      <circle cx="67.5" cy="26.5" r="0.7" fill="rgba(255,255,255,0.65)"/>
+      <!-- Tail feathers -->
+      <path d="M36 40 Q18 50, 11 47 Q22 42, 36 40 Z" fill="white"/>
+      <path d="M36 40 Q15 54, 7 51 Q18 46, 36 40 Z" fill="rgba(230,238,255,0.82)"/>
+    </svg>
+  </div>
+
 </div><!-- /#scene -->
 
 <!-- Text overlay -->
@@ -536,23 +628,21 @@
 <div id="hint">🌿 Click the Tree of Life or the Tree of Knowledge to interact 🍎</div>
 
 <script>
-/* ── Build floating 3×3 cube grid ── */
+/* ── Build single large black rotating cube ── */
 (function () {
-  const grid = document.getElementById('cube-grid');
+  const grid  = document.getElementById('cube-grid');
   const faces = ['front','back','left','right','top','bottom'];
-  for (let i = 0; i < 9; i++) {
-    const wrap = document.createElement('div');
-    wrap.className = 'cube-wrap';
-    const cube = document.createElement('div');
-    cube.className = 'cube-3d c' + i;
-    faces.forEach(function (f) {
-      const face = document.createElement('div');
-      face.className = 'face ' + f;
-      cube.appendChild(face);
-    });
-    wrap.appendChild(cube);
-    grid.appendChild(wrap);
-  }
+  const wrap  = document.createElement('div');
+  wrap.className = 'cube-wrap';
+  const cube  = document.createElement('div');
+  cube.className = 'cube-3d';
+  faces.forEach(function (f) {
+    const face = document.createElement('div');
+    face.className = 'face ' + f;
+    cube.appendChild(face);
+  });
+  wrap.appendChild(cube);
+  grid.appendChild(wrap);
 })();
 
 /* ============================================================
