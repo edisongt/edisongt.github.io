@@ -54,10 +54,10 @@
 
     #know-wrap {
       right: 3%;
-      filter: drop-shadow(0 0 22px rgba(160,60,220,.5));
+      filter: drop-shadow(0 0 22px rgba(200,160,0,.5));
       transition: filter .4s;
     }
-    #know-wrap:hover  { filter: drop-shadow(0 0 46px rgba(210,80,255,.95)); }
+    #know-wrap:hover  { filter: drop-shadow(0 0 46px rgba(255,215,0,.95)); }
 
     /* ── Tree labels ── */
     .tree-label {
@@ -67,9 +67,9 @@
       text-shadow: 0 1px 14px rgba(0,0,0,.9);
     }
     .life-color  { color: rgba(109,255,210,.95); }
-    .know-color  { color: rgba(210,100,255,.95); }
+    .know-color  { color: rgba(255,215,0,.95); }
 
-    /* ── Large single black rotating cube ── */
+    /* ── Large single ivory rotating cube ── */
     #people-wrap {
       position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
       z-index: 4; pointer-events: none;
@@ -95,9 +95,9 @@
     }
     .cube-3d .face {
       position: absolute; width: 100%; height: 100%;
-      background: rgba(5, 5, 12, 0.97);
-      border: 2px solid rgba(80, 100, 160, 0.60);
-      box-shadow: inset 0 0 18px rgba(50,70,160,.35), 0 0 8px rgba(60,80,180,.20);
+      background: rgba(255, 255, 240, 0.97);
+      border: 2px solid rgba(200, 190, 140, 0.70);
+      box-shadow: inset 0 0 18px rgba(220,210,160,.35), 0 0 8px rgba(200,190,130,.30);
       backface-visibility: visible;
     }
     .cube-3d .front  { transform: translateZ(calc(var(--sz)/2)); }
@@ -277,6 +277,26 @@
     <path d="M0 400 L0 320 Q200 248,380 285 Q560 322,720 268
              Q880 214,1060 268 Q1240 322,1440 285 L1440 400 Z"
           fill="url(#mg2)" opacity=".78"/>
+    <!-- Lili on the mountain peak -->
+    <g id="lili" role="img" aria-label="Lili standing on the mountain peak" transform="translate(750,55)">
+      <title>Lili</title>
+      <desc>A figure named Lili standing on the highest mountain peak</desc>
+      <!-- Head -->
+      <circle cx="0" cy="-22" r="7" fill="#f5c5a0"/>
+      <!-- Hair -->
+      <ellipse cx="0" cy="-26" rx="7.5" ry="5" fill="#4a2200"/>
+      <!-- Body -->
+      <line x1="0" y1="-15" x2="0" y2="5" stroke="#c0392b" stroke-width="4" stroke-linecap="round"/>
+      <!-- Arms -->
+      <line x1="0" y1="-10" x2="-9" y2="-2" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+      <line x1="0" y1="-10" x2="9" y2="-4" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+      <!-- Legs -->
+      <line x1="0" y1="5" x2="-6" y2="16" stroke="#3a2a7a" stroke-width="3" stroke-linecap="round"/>
+      <line x1="0" y1="5" x2="6" y2="16" stroke="#3a2a7a" stroke-width="3" stroke-linecap="round"/>
+      <!-- Name label -->
+      <text x="0" y="-34" text-anchor="middle" font-family="sans-serif" font-size="11"
+            font-weight="bold" fill="#ffffff" stroke="#000" stroke-width="0.5">Lili</text>
+    </g>
   </svg>
 
   <!-- ══════════════════════════════════════════════
@@ -385,18 +405,18 @@
     <svg viewBox="0 0 220 420" xmlns="http://www.w3.org/2000/svg" class="sway-r">
       <defs>
         <radialGradient id="kg1" cx="32%" cy="28%">
-          <stop offset="0%"   stop-color="#7a3090"/>
-          <stop offset="40%"  stop-color="#4a1860"/>
-          <stop offset="75%"  stop-color="#2a0840"/>
-          <stop offset="100%" stop-color="#150428"/>
+          <stop offset="0%"   stop-color="#fff0a0"/>
+          <stop offset="40%"  stop-color="#ffd700"/>
+          <stop offset="75%"  stop-color="#b8860b"/>
+          <stop offset="100%" stop-color="#6b4c00"/>
         </radialGradient>
         <radialGradient id="kg2" cx="30%" cy="25%">
-          <stop offset="0%"   stop-color="#6b4080"/>
-          <stop offset="45%"  stop-color="#3d1f5c"/>
-          <stop offset="85%"  stop-color="#1a0a2e"/>
+          <stop offset="0%"   stop-color="#ffe566"/>
+          <stop offset="45%"  stop-color="#cfa000"/>
+          <stop offset="85%"  stop-color="#7a5c00"/>
         </radialGradient>
         <radialGradient id="kgGlow" cx="50%" cy="50%">
-          <stop offset="0%"   stop-color="#b060e0" stop-opacity=".5"/>
+          <stop offset="0%"   stop-color="#ffd700" stop-opacity=".6"/>
           <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
         </radialGradient>
         <radialGradient id="kgApple" cx="32%" cy="26%">
@@ -448,7 +468,7 @@
       <path d="M36 130 C28 117,30 102,38 93"     stroke="#3a1c10" stroke-width="6"  fill="none" stroke-linecap="round"/>
       <path d="M184 130 C192 117,190 102,182 93"   stroke="#3a1c10" stroke-width="6"  fill="none" stroke-linecap="round"/>
 
-      <!-- Purple glow aura -->
+      <!-- Gold glow aura -->
       <ellipse cx="110" cy="132" rx="92" ry="102" fill="url(#kgGlow)" filter="url(#kgBlur)"/>
 
       <!-- Canopy — outer -->
@@ -628,7 +648,7 @@
 <div id="hint">🌿 Click the Tree of Life or the Tree of Knowledge to interact 🍎</div>
 
 <script>
-/* ── Build single large black rotating cube ── */
+/* ── Build single large ivory rotating cube ── */
 (function () {
   const grid  = document.getElementById('cube-grid');
   const faces = ['front','back','left','right','top','bottom'];
