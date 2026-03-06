@@ -71,7 +71,7 @@
 
     /* ── Large single ivory rotating cube ── */
     #people-wrap {
-      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
       z-index: 4; pointer-events: none;
       display: flex; flex-direction: column; align-items: center;
     }
@@ -84,7 +84,7 @@
       50%      { transform: translateY(-20px); }
     }
     .cube-wrap {
-      --sz: clamp(100px, 14vw, 180px);
+      --sz: clamp(80px, 11.2vw, 144px);
       width: var(--sz); height: var(--sz);
       perspective: 1200px;
     }
@@ -146,6 +146,30 @@
     @keyframes doveFlap {
       0%,100% { transform: scaleY(1)    rotate(-2deg); }
       50%     { transform: scaleY(0.82) rotate(2deg); }
+    }
+
+    /* ── Eagle soaring in the sky ── */
+    #eagle-wrap {
+      position: absolute; top: 8%; left: 0;
+      z-index: 4; pointer-events: none;
+      width: clamp(70px, 10vw, 130px);
+      animation: eagleFly 42s linear infinite;
+    }
+    #eagle-svg {
+      width: 100%; height: auto;
+      filter: drop-shadow(0 3px 10px rgba(0,0,0,.45));
+      animation: eagleFlap 0.9s ease-in-out infinite;
+    }
+    @keyframes eagleFly {
+      0%    { transform: translateX(110vw) translateY(0)     scaleX(-1); }
+      47%   { transform: translateX(-15vw) translateY(7vh)   scaleX(-1); }
+      50%   { transform: translateX(-15vw) translateY(7vh)   scaleX(1); }
+      97%   { transform: translateX(110vw) translateY(0)     scaleX(1); }
+      100%  { transform: translateX(110vw) translateY(0)     scaleX(-1); }
+    }
+    @keyframes eagleFlap {
+      0%,100% { transform: scaleY(1)    rotate(-4deg); }
+      50%     { transform: scaleY(0.70) rotate(4deg); }
     }
     #river-label {
       position: absolute; bottom: 23%; left: 50%; transform: translateX(-50%);
@@ -210,21 +234,21 @@
 
     /* ── Overlay ── */
     #overlay {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+      position: fixed; bottom: 3.5rem; left: 0; right: 0; z-index: 20;
       pointer-events: none; display: flex; flex-direction: column;
-      align-items: center; gap: .3rem; text-align: center; color: #fff;
-      padding: clamp(1.2rem,3.5vh,2.5rem) 1rem;
+      align-items: center; gap: .15rem; text-align: center; color: #fff;
+      padding: 0.3rem 1rem;
     }
     #overlay .eyebrow {
       text-transform: uppercase; letter-spacing: .35em;
-      font-size: clamp(0.85rem, 1.5vw, 1rem); opacity: .65;
+      font-size: clamp(0.55rem, 0.9vw, 0.72rem); opacity: .65;
     }
     #overlay h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05;
+      font-size: clamp(1.2rem, 2.5vw, 2rem); line-height: 1.05;
       text-shadow: 0 2px 32px rgba(0,0,0,.9), 0 0 60px rgba(109,255,210,.25);
     }
     #overlay .tag {
-      font-size: clamp(1rem, 2.2vw, 1.4rem); opacity: .78;
+      font-size: clamp(0.6rem, 1.1vw, 0.82rem); opacity: .78;
       text-shadow: 0 1px 16px rgba(0,0,0,.8); max-width: 560px;
     }
 
@@ -259,7 +283,7 @@
 
     /* ── Reduced motion ── */
     @media (prefers-reduced-motion: reduce) {
-      .sway-l, .sway-r, .ff, .animal-wrap { animation: none !important; }
+      .sway-l, .sway-r, .ff, .animal-wrap, #eagle-wrap, #dove-wrap { animation: none !important; }
     }
   </style>
 </head>
@@ -668,6 +692,31 @@
       <!-- Tail feathers -->
       <path d="M36 40 Q18 50, 11 47 Q22 42, 36 40 Z" fill="white"/>
       <path d="M36 40 Q15 54, 7 51 Q18 46, 36 40 Z" fill="rgba(230,238,255,0.82)"/>
+    </svg>
+  </div>
+
+  <!-- Eagle soaring in the sky -->
+  <div id="eagle-wrap" role="img" aria-label="Eagle soaring in the sky">
+    <svg id="eagle-svg" viewBox="0 0 160 80" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left wing (broad, with primary feather tips) -->
+      <path d="M80 40 Q55 5, 10 14 Q22 22, 35 20 Q16 30, 0 42 Q18 37, 38 34 Q20 46, 4 56 Q26 46, 80 40 Z" fill="#6b4218"/>
+      <!-- Right wing (mirror) -->
+      <path d="M80 40 Q105 5, 150 14 Q138 22, 125 20 Q144 30, 160 42 Q142 37, 122 34 Q140 46, 156 56 Q134 46, 80 40 Z" fill="#6b4218"/>
+      <!-- Wing covert highlights -->
+      <path d="M80 40 Q58 18, 22 18" stroke="rgba(140,90,35,0.45)" stroke-width="2" fill="none"/>
+      <path d="M80 40 Q102 18, 138 18" stroke="rgba(140,90,35,0.45)" stroke-width="2" fill="none"/>
+      <!-- Body -->
+      <ellipse cx="82" cy="48" rx="22" ry="10" fill="#6b4218"/>
+      <!-- White head (bald eagle) -->
+      <circle cx="100" cy="36" r="10" fill="#f8f8f0"/>
+      <!-- Hooked yellow beak -->
+      <path d="M109 34 Q119 33 118 38 Q114 42 109 40 Z" fill="#dda020"/>
+      <!-- Eye -->
+      <circle cx="104" cy="33" r="2.8" fill="#1a0800"/>
+      <circle cx="103.5" cy="32.5" r="0.9" fill="rgba(255,255,255,0.70)"/>
+      <!-- White tail feathers -->
+      <path d="M62 52 Q42 62, 35 68 Q48 58, 62 52 Z" fill="#f0f0e8" opacity="0.9"/>
+      <path d="M62 52 Q38 65, 30 72 Q44 62, 62 52 Z" fill="rgba(220,225,240,0.75)"/>
     </svg>
   </div>
 
