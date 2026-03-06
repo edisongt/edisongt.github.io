@@ -70,19 +70,57 @@
     .know-color  { color: rgba(210,100,255,.95); }
 
     /* ── People label ── */
-    #people-label {
-      display: block; text-align: center;
-      font-size: clamp(0.85rem, 1.8vw, 1.15rem); font-weight: 600;
-      color: rgba(255,228,180,.92); letter-spacing: .12em; margin-top: 6px;
-      text-shadow: 0 1px 14px rgba(0,0,0,.9);
-    }
-
-    /* ── Adam & Eve wrap ── */
+    /* ── Floating 3×3 rotating cubes ── */
     #people-wrap {
-      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
       z-index: 4; pointer-events: none;
+      display: flex; flex-direction: column; align-items: center;
     }
-    #people-wrap svg { height: clamp(160px,32vh,300px); width: auto; display: block; }
+    .cube-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(5px, 1vw, 10px);
+      animation: cubeFloat 4s ease-in-out infinite;
+    }
+    @keyframes cubeFloat {
+      0%,100% { transform: translateY(0px); }
+      50%      { transform: translateY(-18px); }
+    }
+    .cube-wrap {
+      --sz: clamp(28px, 4.5vw, 50px);
+      width: var(--sz); height: var(--sz);
+      perspective: 400px;
+    }
+    .cube-3d {
+      width: 100%; height: 100%;
+      position: relative; transform-style: preserve-3d;
+    }
+    .cube-3d .face {
+      position: absolute; width: 100%; height: 100%;
+      background: rgba(8, 8, 18, 0.96);
+      border: 1px solid rgba(90, 100, 130, 0.55);
+      box-shadow: inset 0 0 6px rgba(60,80,140,.25);
+      backface-visibility: visible;
+    }
+    .cube-3d .front  { transform: translateZ(calc(var(--sz)/2)); }
+    .cube-3d .back   { transform: rotateY(180deg) translateZ(calc(var(--sz)/2)); }
+    .cube-3d .left   { transform: rotateY(-90deg) translateZ(calc(var(--sz)/2)); }
+    .cube-3d .right  { transform: rotateY(90deg)  translateZ(calc(var(--sz)/2)); }
+    .cube-3d .top    { transform: rotateX(90deg)  translateZ(calc(var(--sz)/2)); }
+    .cube-3d .bottom { transform: rotateX(-90deg) translateZ(calc(var(--sz)/2)); }
+    /* Each cube spins at its own speed / axis */
+    .cube-3d.c0 { animation: spinXY 5.0s linear infinite; }
+    .cube-3d.c1 { animation: spinYZ 6.5s linear infinite; }
+    .cube-3d.c2 { animation: spinXZ 4.5s linear infinite; }
+    .cube-3d.c3 { animation: spinYZ 5.8s linear infinite; }
+    .cube-3d.c4 { animation: spinXY 4.0s linear infinite; }
+    .cube-3d.c5 { animation: spinXZ 7.0s linear infinite; }
+    .cube-3d.c6 { animation: spinXZ 5.5s linear infinite; }
+    .cube-3d.c7 { animation: spinXY 6.0s linear infinite; }
+    .cube-3d.c8 { animation: spinYZ 4.8s linear infinite; }
+    @keyframes spinXY { from{transform:rotateX(0)   rotateY(0)}   to{transform:rotateX(360deg) rotateY(360deg)} }
+    @keyframes spinYZ { from{transform:rotateY(0)   rotateZ(0)}   to{transform:rotateY(360deg) rotateZ(360deg)} }
+    @keyframes spinXZ { from{transform:rotateX(0)   rotateZ(0)}   to{transform:rotateX(360deg) rotateZ(360deg)} }
     #river-label {
       position: absolute; bottom: 23%; left: 50%; transform: translateX(-50%);
       z-index: 3; color: rgba(180,225,255,.88);
@@ -477,71 +515,9 @@
   <!-- River of Living Water label -->
   <div id="river-label">~ River of Living Water ~</div>
 
-  <!-- Adam & Eve standing between the two trees -->
+  <!-- Floating auto-rotating 3×3 black cubes -->
   <div id="people-wrap">
-    <svg viewBox="0 0 200 270" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="skinA" cx="40%" cy="35%">
-          <stop offset="0%" stop-color="#f5d5a8"/>
-          <stop offset="100%" stop-color="#c8824a"/>
-        </radialGradient>
-        <radialGradient id="skinE" cx="40%" cy="35%">
-          <stop offset="0%" stop-color="#f8dfbf"/>
-          <stop offset="100%" stop-color="#d49460"/>
-        </radialGradient>
-      </defs>
-
-      <!-- ── ADAM (left, x-center≈62) ── -->
-      <ellipse cx="62" cy="258" rx="18" ry="5" fill="rgba(0,0,0,.28)"/>
-      <!-- Legs -->
-      <path d="M52 185 Q47 215,44 258" stroke="#c8824a" stroke-width="13" fill="none" stroke-linecap="round"/>
-      <path d="M72 185 Q77 215,80 258" stroke="#c8824a" stroke-width="13" fill="none" stroke-linecap="round"/>
-      <!-- Body -->
-      <path d="M40 95 C36 130,37 162,40 185 Q47 197,62 198 Q77 197,84 185 C87 162,88 130,84 95
-               Q76 86,62 84 Q48 86,40 95 Z" fill="url(#skinA)"/>
-      <!-- Left arm -->
-      <path d="M41 108 Q24 135,18 165" stroke="#c8824a" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <!-- Right arm -->
-      <path d="M83 108 Q100 135,106 165" stroke="#c8824a" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <!-- Neck -->
-      <path d="M56 68 Q56 84,57 85 L67 85 Q68 84,68 68 Z" fill="#d4905c"/>
-      <!-- Head -->
-      <circle cx="62" cy="50" r="22" fill="url(#skinA)"/>
-      <!-- Facial highlight -->
-      <ellipse cx="57" cy="46" rx="9" ry="10" fill="rgba(255,220,175,.3)"/>
-      <!-- Hair (short dark) -->
-      <path d="M40 44 Q42 27,62 23 Q82 27,84 44 Q74 35,62 33 Q50 35,40 44 Z" fill="#2a1205"/>
-      <path d="M40 44 Q38 51,40 58" stroke="#2a1205" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <path d="M84 44 Q86 51,84 58" stroke="#2a1205" stroke-width="5" fill="none" stroke-linecap="round"/>
-
-      <!-- ── EVE (right, x-center≈138) ── -->
-      <ellipse cx="138" cy="258" rx="17" ry="5" fill="rgba(0,0,0,.28)"/>
-      <!-- Legs -->
-      <path d="M128 185 Q123 215,120 258" stroke="#d49460" stroke-width="12" fill="none" stroke-linecap="round"/>
-      <path d="M148 185 Q153 215,156 258" stroke="#d49460" stroke-width="12" fill="none" stroke-linecap="round"/>
-      <!-- Body (slightly curvier) -->
-      <path d="M116 95 C112 130,113 162,116 185 Q123 198,138 199 Q153 198,160 185 C163 162,164 130,160 95
-               Q152 86,138 84 Q124 86,116 95 Z" fill="url(#skinE)"/>
-      <!-- Left arm -->
-      <path d="M117 108 Q98 133,90 162" stroke="#d49460" stroke-width="10" fill="none" stroke-linecap="round"/>
-      <!-- Right arm -->
-      <path d="M159 108 Q178 133,186 162" stroke="#d49460" stroke-width="10" fill="none" stroke-linecap="round"/>
-      <!-- Neck -->
-      <path d="M132 68 Q132 84,133 85 L143 85 Q144 84,144 68 Z" fill="#dca870"/>
-      <!-- Head -->
-      <circle cx="138" cy="50" r="22" fill="url(#skinE)"/>
-      <!-- Facial highlight -->
-      <ellipse cx="133" cy="46" rx="9" ry="10" fill="rgba(255,230,190,.3)"/>
-      <!-- Hair top -->
-      <path d="M116 44 Q118 27,138 23 Q158 27,160 44 Q150 35,138 33 Q126 35,116 44 Z" fill="#2a1205"/>
-      <!-- Long hair flowing down left -->
-      <path d="M116 44 Q108 75,110 115 Q111 142,114 165" stroke="#2a1205" stroke-width="10" fill="none" stroke-linecap="round" opacity=".95"/>
-      <!-- Long hair flowing down right -->
-      <path d="M160 44 Q168 75,166 115 Q165 142,162 165" stroke="#2a1205" stroke-width="10" fill="none" stroke-linecap="round" opacity=".95"/>
-      <!-- Hair highlight -->
-      <path d="M160 44 Q166 68,163 98" stroke="#4a2510" stroke-width="4.5" fill="none" stroke-linecap="round" opacity=".55"/>
-    </svg>
-    <span id="people-label">Adam &amp; Eve</span>
+    <div class="cube-grid" id="cube-grid"></div>
   </div>
 
   <!-- Leaf / apple particle container -->
@@ -560,6 +536,25 @@
 <div id="hint">🌿 Click the Tree of Life or the Tree of Knowledge to interact 🍎</div>
 
 <script>
+/* ── Build floating 3×3 cube grid ── */
+(function () {
+  const grid = document.getElementById('cube-grid');
+  const faces = ['front','back','left','right','top','bottom'];
+  for (let i = 0; i < 9; i++) {
+    const wrap = document.createElement('div');
+    wrap.className = 'cube-wrap';
+    const cube = document.createElement('div');
+    cube.className = 'cube-3d c' + i;
+    faces.forEach(function (f) {
+      const face = document.createElement('div');
+      face.className = 'face ' + f;
+      cube.appendChild(face);
+    });
+    wrap.appendChild(cube);
+    grid.appendChild(wrap);
+  }
+})();
+
 /* ============================================================
    DAY / NIGHT CYCLE
    t = 0.00 → midnight  |  t = 0.25 → sunrise  |  t = 0.50 → noon
