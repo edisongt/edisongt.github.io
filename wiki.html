@@ -169,7 +169,15 @@
     }
 
     /* ── About section ── */
-    #about .section-title { --accent: linear-gradient(180deg,#6dffd2,#4dd0a8); }
+    #about {
+      background: #ffffff;
+      color: #1a1a2e;
+    }
+    #about .section-title { --accent: linear-gradient(180deg,#6dffd2,#4dd0a8); color: #1a1a2e; }
+    #about .glass-card {
+      background: rgba(0,0,0,0.03);
+      border-color: rgba(0,0,0,0.10);
+    }
     .about-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -177,12 +185,12 @@
     }
     .about-card h3 {
       font-size: 1rem; font-weight: 700;
-      color: #6dffd2; margin-bottom: .8rem;
+      color: #0a7a5c; margin-bottom: .8rem;
       letter-spacing: .08em; text-transform: uppercase;
     }
     .about-card p {
       font-size: clamp(.85rem, 1.5vw, .96rem);
-      color: rgba(220,235,255,0.80);
+      color: #444;
       line-height: 1.75;
     }
     .info-list {
@@ -192,11 +200,11 @@
     .info-list li {
       display: flex; align-items: baseline; gap: .65rem;
       font-size: clamp(.82rem, 1.4vw, .93rem);
-      color: rgba(210,230,255,0.78);
+      color: #444;
     }
     .info-list .label {
       font-size: .72rem; font-weight: 700; letter-spacing: .12em;
-      text-transform: uppercase; color: rgba(109,255,210,0.75);
+      text-transform: uppercase; color: #0a7a5c;
       min-width: 72px;
     }
 
@@ -525,14 +533,14 @@
     <div class="section-wrap">
       <h2 class="section-title">
         <span class="icon" aria-hidden="true">🌿</span>
-        關於我 &nbsp;<small style="font-weight:400;font-size:.65em;color:rgba(200,230,255,.5);letter-spacing:.2em">ABOUT ME</small>
+        關於我 &nbsp;<small style="font-weight:400;font-size:.65em;color:rgba(60,80,120,.5);letter-spacing:.2em">ABOUT ME</small>
       </h2>
       <div class="about-grid">
 
         <div class="glass-card about-card">
           <h3>📖 專業摘要</h3>
           <p>
-            資深 .NET 架構師與 Tech Lead，擁有 12 年全端開發與系統架構經驗。現任主任工程師，於 <strong style="color:#ffd700">2025 年度績效評核獲得 A 等級</strong>。
+            資深 .NET 架構師與 Tech Lead，擁有 12 年全端開發與系統架構經驗。現任主任工程師，於 <strong style="color:#b07800">2025 年度績效評核獲得 A 等級</strong>。
           </p>
           <br>
           <p>
