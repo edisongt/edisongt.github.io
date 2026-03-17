@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>出埃及記 · Exodus</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #04040e;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+    @keyframes fishSwim {
+      0%,100% { transform: translateX(0)    translateY(0);   }
+      25%      { transform: translateX(8px)  translateY(-5px); }
+      75%      { transform: translateX(-8px) translateY(5px);  }
+    }
+    @keyframes waveRipple {
+      from { transform: translateX(0);   }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.31), 564px 126px rgba(255,255,255,.41),
+        210px 347px rgba(255,255,255,.67), 1117px 45px rgba(255,255,255,.6),
+        66px 16px rgba(255,255,255,.35),  477px 259px rgba(255,255,255,.6),
+        1150px 102px rgba(255,255,255,.66), 1437px 280px rgba(255,255,255,.51),
+        920px 302px rgba(255,255,255,.44), 14px 389px rgba(255,255,255,.7),
+        1430px 217px rgba(255,255,255,.47), 319px 111px rgba(255,255,255,.78),
+        690px 53px rgba(255,255,255,.35),  199px 184px rgba(255,255,255,.72),
+        1237px 136px rgba(255,255,255,.7), 941px 275px rgba(255,255,255,.36),
+        776px 41px rgba(255,255,255,.58),  1288px 317px rgba(255,255,255,.74),
+        741px 296px rgba(255,255,255,.4),  143px 24px rgba(255,255,255,.63),
+        593px 41px rgba(255,255,255,.73),  207px 195px rgba(255,255,255,.44),
+        1302px 428px rgba(255,255,255,.48), 759px 182px rgba(255,255,255,.4),
+        547px 360px rgba(255,255,255,.77), 1328px 37px rgba(255,255,255,.6),
+        351px 274px rgba(255,255,255,.66), 335px 237px rgba(255,255,255,.49),
+        1311px 353px rgba(255,255,255,.58), 1403px 167px rgba(255,255,255,.72),
+        115px 118px rgba(255,255,255,.71), 647px 206px rgba(255,255,255,.43),
+        433px 468px rgba(255,255,255,.77), 645px 109px rgba(255,255,255,.63),
+        811px 453px rgba(255,255,255,.76), 940px 74px rgba(255,255,255,.43),
+        506px 382px rgba(255,255,255,.58), 539px 383px rgba(255,255,255,.59),
+        1196px 205px rgba(255,255,255,.48), 284px 261px rgba(255,255,255,.55),
+        97px 441px rgba(255,255,255,.35),  1286px 82px rgba(255,255,255,.7),
+        865px 306px rgba(255,255,255,.33), 782px 306px rgba(255,255,255,.8),
+        1084px 129px rgba(255,255,255,.79), 24px 349px rgba(255,255,255,.66),
+        1397px 454px rgba(255,255,255,.57), 547px 394px rgba(255,255,255,.62),
+        229px 151px rgba(255,255,255,.52), 930px 2px rgba(255,255,255,.78),
+        540px 498px rgba(255,255,255,.55), 366px 260px rgba(255,255,255,.76),
+        1281px 153px rgba(255,255,255,.72), 1040px 312px rgba(255,255,255,.4),
+        766px 391px rgba(255,255,255,.38), 1087px 471px rgba(255,255,255,.3),
+        664px 251px rgba(255,255,255,.31), 744px 450px rgba(255,255,255,.79),
+        630px 123px rgba(255,255,255,.33), 1162px 485px rgba(255,255,255,.34),
+        996px 418px rgba(255,255,255,.33), 1091px 393px rgba(255,255,255,.36),
+        1352px 244px rgba(255,255,255,.77), 339px 136px rgba(255,255,255,.56),
+        1243px 217px rgba(255,255,255,.78), 1105px 387px rgba(255,255,255,.66),
+        412px 366px rgba(255,255,255,.46), 1376px 333px rgba(255,255,255,.49),
+        1060px 232px rgba(255,255,255,.36), 461px 33px rgba(255,255,255,.47),
+        1205px 284px rgba(255,255,255,.42), 452px 4px rgba(255,255,255,.34),
+        1293px 31px rgba(255,255,255,.41), 65px 441px rgba(255,255,255,.47),
+        1053px 122px rgba(255,255,255,.44), 995px 110px rgba(255,255,255,.57),
+        1170px 296px rgba(255,255,255,.54), 969px 414px rgba(255,255,255,.5),
+        194px 50px rgba(255,255,255,.63),  726px 217px rgba(255,255,255,.51);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.9),  1324px 51px rgba(255,255,255,.72),
+        695px 410px rgba(255,255,255,.96), 510px 99px rgba(255,255,255,.76),
+        919px 72px rgba(255,255,255,.83),  571px 237px rgba(255,255,255,.77),
+        155px 227px rgba(255,255,255,.94), 1128px 51px rgba(255,255,255,.72),
+        1108px 429px rgba(255,255,255,.7), 192px 475px rgba(255,255,255,.93),
+        485px 86px rgba(255,255,255,.82),  986px 110px rgba(255,255,255,.96),
+        121px 85px rgba(255,255,255,.81),  800px 136px rgba(255,255,255,.98),
+        932px 147px rgba(255,255,255,.83), 1139px 339px rgba(255,255,255,.92),
+        318px 98px rgba(255,255,255,.79),  120px 297px rgba(255,255,255,.92),
+        125px 383px rgba(255,255,255,.79), 103px 300px rgba(255,255,255,.84),
+        1088px 81px rgba(255,255,255,.72), 1041px 42px rgba(255,255,255,.96),
+        141px 305px rgba(255,255,255,.72), 482px 207px rgba(255,255,255,.74),
+        1167px 127px rgba(255,255,255,.87), 82px 318px rgba(255,255,255,.72),
+        1347px 299px rgba(255,255,255,.87), 648px 479px rgba(255,255,255,.78),
+        1372px 367px rgba(255,255,255,.79), 544px 203px rgba(255,255,255,.74);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,235,255,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(255,200,80,.15);
+      border-color: rgba(255,200,80,.5);
+      color: #ffd700;
+      box-shadow: 0 0 20px rgba(255,200,80,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #02020c 0%, #0d1020 55%, #1e1200 100%);
+    }
+    #intro-moon {
+      position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
+      width: clamp(50px,8vw,100px); height: clamp(50px,8vw,100px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fffae0, #ffd700 45%, #c08800);
+      box-shadow: 0 0 45px rgba(255,215,0,.6), 0 0 90px rgba(255,215,0,.22);
+      z-index: 4;
+      animation: moonGlow 4s ease-in-out infinite;
+    }
+    @keyframes moonGlow {
+      0%,100% { box-shadow: 0 0 45px rgba(255,215,0,.6), 0 0 90px rgba(255,215,0,.22); }
+      50%      { box-shadow: 0 0 65px rgba(255,215,0,.9), 0 0 130px rgba(255,215,0,.38); }
+    }
+    #intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#ffd700 0%,#fff4b0 45%,#ff9f1c 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(255,240,180,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(220,200,140,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-pyramids { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — BURNING BUSH  火焚荊棘
+    ══════════════════════════════════════════════ */
+    #scene-bush {
+      background: linear-gradient(180deg, #090408 0%, #1a0d00 55%, #2d1800 100%);
+    }
+    #bush-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 33%;
+      background: linear-gradient(180deg,#3d2200 0%,#261400 55%,#100a00 100%);
+      z-index: 5;
+    }
+    /* Sand dunes on ground */
+    #bush-ground::before {
+      content: '';
+      position: absolute; top: -20%; left: 0; width: 100%; height: 35%;
+      background: radial-gradient(ellipse 30% 40% at 20% 80%, #4a2e08 0%, transparent 70%),
+                  radial-gradient(ellipse 25% 35% at 60% 70%, #3d2600 0%, transparent 65%),
+                  radial-gradient(ellipse 20% 30% at 85% 90%, #4a2e08 0%, transparent 60%);
+    }
+    #fire-glow {
+      position: absolute; bottom: 26%; left: 50%; transform: translateX(-50%);
+      width: 38vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,140,0,.38) 0%, rgba(255,80,0,.12) 50%, transparent 72%);
+      z-index: 6;
+      animation: fireGlowPulse 1.4s ease-in-out infinite;
+    }
+    @keyframes fireGlowPulse {
+      0%,100% { opacity: .7; transform: translateX(-50%) scale(1);    }
+      50%      { opacity: 1;  transform: translateX(-50%) scale(1.18); }
+    }
+    #bush-svg {
+      position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(80px,12vw,160px);
+    }
+    /* Flame keyframes for SVG elements */
+    @keyframes flicker {
+      0%    { transform: translateX(-50%) scaleX(1)    scaleY(1)    rotate(-2deg); opacity: 1;    }
+      25%   { transform: translateX(-50%) scaleX(.9)   scaleY(1.1)  rotate(1deg);              }
+      50%   { transform: translateX(-50%) scaleX(1.05) scaleY(.92)  rotate(-1deg); opacity: .93; }
+      75%   { transform: translateX(-50%) scaleX(.92)  scaleY(1.06) rotate(2deg);              }
+      100%  { transform: translateX(-50%) scaleX(1.03) scaleY(1.1)  rotate(-3deg); opacity: .88; }
+    }
+    #moses-bush {
+      position: absolute; bottom: 28%; left: 28%; z-index: 9;
+      width: clamp(50px,7vw,90px);
+      animation: mosesAwe 5s ease-in-out infinite;
+    }
+    @keyframes mosesAwe {
+      0%,100% { transform: rotate(-3deg) translateY(0);   }
+      50%      { transform: rotate(0deg)  translateY(-4px); }
+    }
+    #voice-text {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 20; white-space: nowrap;
+      animation: voicePulse 3.5s ease-in-out infinite;
+    }
+    @keyframes voicePulse {
+      0%,100% { opacity: .45; letter-spacing: .1em;  }
+      50%      { opacity: 1;   letter-spacing: .2em; }
+    }
+    #voice-text p {
+      font-size: clamp(.9rem,2vw,1.3rem); color: rgba(255,240,100,.9);
+      text-shadow: 0 0 22px rgba(255,200,0,.85), 0 0 50px rgba(255,140,0,.45);
+    }
+    #voice-text small {
+      display: block; margin-top: .3rem;
+      font-size: clamp(.7rem,1.3vw,.88rem); color: rgba(255,230,160,.55);
+      letter-spacing: .1em; text-shadow: none;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — TEN PLAGUES  十災
+    ══════════════════════════════════════════════ */
+    #scene-plagues {
+      background: linear-gradient(180deg,#0c0008 0%,#180010 45%,#060012 100%);
+    }
+    #plague-pyramids { position: absolute; bottom: 0; left: 0; width: 100%; height: 42%; z-index: 4; }
+    #darkness-wave {
+      position: absolute; top: 0; left: -10%; width: 120%; height: 48%;
+      background: radial-gradient(ellipse 80% 65% at 50% 0%, rgba(28,0,55,.92) 0%, transparent 80%);
+      z-index: 6;
+      animation: darknessRoll 5s ease-in-out infinite alternate;
+    }
+    @keyframes darknessRoll {
+      0%   { transform: scaleX(1)   translateX(-5%); opacity: .75; }
+      100% { transform: scaleX(1.1) translateX(0%);  opacity: 1;   }
+    }
+    #nile {
+      position: absolute; bottom: 14%; left: 0; width: 100%; height: 10%; z-index: 5; overflow: hidden;
+    }
+    #nile-water {
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg,#7b0000,#cc1100,#ff2200,#cc1100,#7b0000);
+      background-size: 200% 100%;
+      animation: nileFlow 3s linear infinite, nileBlood 2s ease-in-out infinite alternate;
+    }
+    @keyframes nileFlow  { from{background-position:0% 50%} to{background-position:200% 50%} }
+    @keyframes nileBlood {
+      0%   { filter: brightness(.8) saturate(1.2); }
+      100% { filter: brightness(1.3) saturate(1.9); }
+    }
+    /* Hail drops */
+    .hail {
+      position: absolute; border-radius: 50%; z-index: 9;
+      width: clamp(3px,.5vw,7px); height: clamp(3px,.5vw,7px);
+      background: rgba(200,230,255,.88);
+      animation: hailFall var(--spd,1.5s) linear var(--delay,0s) infinite;
+    }
+    @keyframes hailFall {
+      0%   { transform: translateY(-80px); opacity: 0;   }
+      10%  { opacity: 1; }
+      100% { transform: translateY(100vh); opacity: .25; }
+    }
+    /* Locusts */
+    .locust {
+      position: absolute; z-index: 8;
+      width: clamp(6px,1vw,14px); height: clamp(3px,.5vw,7px);
+      background: #2d1a00; border-radius: 40% 40% 30% 30%;
+      animation: locustFly var(--spd,4.5s) linear var(--delay,0s) infinite;
+    }
+    @keyframes locustFly {
+      0%   { transform: translate(var(--sx,-10vw), var(--sy,0)) rotate(var(--r,0deg)); opacity:0; }
+      8%   { opacity: 1; }
+      92%  { opacity: 1; }
+      100% { transform: translate(var(--ex,110vw), var(--ey,0)) rotate(var(--r,0deg)); opacity:0; }
+    }
+    /* Frogs */
+    .frog { position: absolute; bottom: 24%; z-index: 7; animation: frogJump var(--spd,2.2s) ease-in-out var(--delay,0s) infinite; }
+    @keyframes frogJump {
+      0%,100% { transform: translateY(0)    scaleX(1);    }
+      30%      { transform: translateY(-28px) scaleX(.88); }
+      50%      { transform: translateY(0)    scaleX(1.1);  }
+      70%      { transform: translateY(-14px) scaleX(.94); }
+    }
+    /* Plagues title */
+    #plagues-heading h2 {
+      color: #cc0000;
+      text-shadow: 0 0 30px rgba(200,0,0,.8), 0 0 65px rgba(140,0,0,.5);
+      animation: plaguePulse 2s ease-in-out infinite;
+    }
+    @keyframes plaguePulse {
+      0%,100% { text-shadow: 0 0 30px rgba(200,0,0,.8), 0 0 65px rgba(140,0,0,.5); }
+      50%      { text-shadow: 0 0 55px rgba(255,40,0,1), 0 0 110px rgba(200,0,0,.7); }
+    }
+    #plague-list {
+      position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 20; text-align: center; pointer-events: none;
+      font-size: clamp(.68rem,1.2vw,.88rem); color: rgba(255,120,60,.62);
+      letter-spacing: .08em; line-height: 1.7;
+      animation: fadeUpIn 2s ease-out .6s both;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — PASSOVER NIGHT  逾越節之夜
+    ══════════════════════════════════════════════ */
+    #scene-passover {
+      background: linear-gradient(180deg,#000008 0%,#030010 55%,#0a0818 100%);
+    }
+    #dark-mist {
+      position: absolute; inset: 0; z-index: 7;
+      background: radial-gradient(ellipse 65% 45% at 68% 30%, rgba(22,0,44,.65) 0%, transparent 72%);
+      animation: mistDrift 7s ease-in-out infinite alternate;
+    }
+    @keyframes mistDrift {
+      0%   { transform: translateX(0)    scale(1);    }
+      100% { transform: translateX(-6%)  scale(1.06); }
+    }
+    #angel-death {
+      position: absolute; top: 4%; right: 8%; z-index: 8;
+      width: clamp(80px,14vw,180px);
+      animation: angelSweep 9s ease-in-out infinite;
+    }
+    @keyframes angelSweep {
+      0%   { transform: translateX(0)     translateY(0);   filter: brightness(.8);  }
+      30%  { transform: translateX(-5vw)  translateY(6vh); filter: brightness(1.2); }
+      65%  { transform: translateX(-14vw) translateY(2vh); filter: brightness(.9);  }
+      100% { transform: translateX(0)     translateY(0);   filter: brightness(.8);  }
+    }
+    .house { position: absolute; bottom: 16%; z-index: 6; }
+    #passover-heading h2 { color: rgba(200,180,255,.9); text-shadow: 0 0 32px rgba(175,100,255,.55); }
+    #passover-heading p  { color: rgba(200,180,255,.5); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — PARTING THE RED SEA  分開紅海
+    ══════════════════════════════════════════════ */
+    #scene-redsea {
+      background: linear-gradient(180deg,#000820 0%,#001840 50%,#002255 100%);
+    }
+    #sea-floor {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 24%;
+      background: linear-gradient(180deg,#8b7355 0%,#5c4a28 50%,#3d2e14 100%);
+      z-index: 5;
+    }
+    #sea-floor::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 28%;
+      background: linear-gradient(180deg, rgba(140,200,255,.2) 0%, transparent 100%);
+    }
+    .water-wall {
+      position: absolute; bottom: 24%; width: 28%; height: 66%;
+      z-index: 6; overflow: hidden;
+    }
+    #wall-left  { left: 0;  border-radius: 0 70% 55% 0 / 0 32% 28% 0; animation: wallSway 4.5s ease-in-out infinite alternate; }
+    #wall-right { right: 0; border-radius: 70% 0 0 55% / 32% 0 0 28%; animation: wallSway 4.5s ease-in-out 0.5s infinite alternate-reverse; }
+    @keyframes wallSway {
+      0%   { transform: scaleX(.96); }
+      100% { transform: scaleX(1.04); }
+    }
+    .water-wall-inner {
+      width: 100%; height: 100%;
+      background: linear-gradient(180deg,
+        rgba(35,135,255,.95) 0%, rgba(18,95,200,.9) 30%,
+        rgba(0,55,150,.95) 68%, rgba(0,28,100,1) 100%);
+      position: relative; overflow: hidden;
+    }
+    .water-wave-row {
+      position: absolute; width: 200%; height: 55px;
+      background: repeating-linear-gradient(90deg,
+        transparent, transparent 28px,
+        rgba(110,210,255,.28) 28px, rgba(110,210,255,.28) 56px);
+      animation: waveRipple 2s linear var(--wd,0s) infinite;
+    }
+    #people-crossing {
+      position: absolute; bottom: 24%; left: 50%; transform: translateX(-50%);
+      z-index: 8; display: flex; gap: clamp(3px,.8vw,10px); align-items: flex-end;
+    }
+    .person {
+      width: clamp(7px,1.1vw,15px);
+      background: #190700; border-radius: 38% 38% 0 0;
+      position: relative;
+      animation: personWalk var(--spd,.9s) ease-in-out var(--delay,0s) infinite;
+    }
+    .person::before {
+      content: ''; position: absolute; top: -38%; left: 50%; transform: translateX(-50%);
+      width: 58%; height: 42%; background: #190700; border-radius: 50%;
+    }
+    @keyframes personWalk {
+      0%,100% { transform: translateY(0)   scaleX(1);    }
+      25%      { transform: translateY(-3px) scaleX(1.05); }
+      75%      { transform: translateY(-3px) scaleX(.95); }
+    }
+    #pillar-fire-wrap {
+      position: absolute; bottom: 24%; right: 34%; z-index: 9;
+      width: clamp(18px,2.8vw,42px);
+    }
+    #cloud-pillar {
+      position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
+      z-index: 3; width: clamp(90px,16vw,210px);
+      animation: cloudDrift 6.5s ease-in-out infinite alternate;
+    }
+    @keyframes cloudDrift {
+      0%   { transform: translateX(-56%) scale(1);    }
+      100% { transform: translateX(-44%) scale(1.06); }
+    }
+    #redsea-heading h2 {
+      background: linear-gradient(120deg,#00cfff 0%,#80eaff 50%,#00cfff 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #redsea-heading p { color: rgba(100,220,255,.6); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — MOUNT SINAI  西奈山·十誡
+    ══════════════════════════════════════════════ */
+    #scene-sinai {
+      background: linear-gradient(180deg,#040010 0%,#0d0520 50%,#16112e 100%);
+    }
+    #sinai-mountain { position: absolute; bottom: 0; left: 0; width: 100%; height: 72%; z-index: 3; }
+    #divine-light {
+      position: absolute; top: 6%; left: 50%; transform: translateX(-50%);
+      width: clamp(22px,5vw,64px); height: 52%;
+      background: linear-gradient(180deg,rgba(255,255,200,0) 0%,rgba(255,255,180,.55) 28%,rgba(255,215,0,.82) 68%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: divinePulse 2.2s ease-in-out infinite;
+    }
+    @keyframes divinePulse {
+      0%,100% { opacity: .55; height: 46%; }
+      50%      { opacity: 1;   height: 56%; }
+    }
+    #sinai-cloud {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(160px,32vw,400px);
+      animation: sinaiCloudPulse 4.5s ease-in-out infinite;
+    }
+    @keyframes sinaiCloudPulse {
+      0%,100% { opacity: .8; transform: translateX(-50%) scale(1);    }
+      50%      { opacity: 1;  transform: translateX(-50%) scale(1.05); }
+    }
+    /* Lightning */
+    .lightning {
+      position: absolute; z-index: 10; border-radius: 2px;
+      background: linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(210,190,255,.92) 22%,rgba(110,90,255,.85) 72%,rgba(255,255,255,0) 100%);
+      transform-origin: top center;
+      animation: lightningStrike var(--spd,3.5s) ease-in-out var(--delay,0s) infinite;
+    }
+    @keyframes lightningStrike {
+      0%,68%,100% { opacity: 0; transform: scaleY(.15) rotate(var(--rot,0deg)); }
+      70%  { opacity: 1;   transform: scaleY(1)   rotate(var(--rot,0deg)); }
+      72%  { opacity: .3;  transform: scaleY(.92) rotate(var(--rot,0deg)); }
+      74%  { opacity: 1;   transform: scaleY(1)   rotate(var(--rot,0deg)); }
+      80%  { opacity: 0;   transform: scaleY(1)   rotate(var(--rot,0deg)); }
+    }
+    #moses-sinai {
+      position: absolute; bottom: 36%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(30px,4.5vw,58px);
+    }
+    #tablets-wrap {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      z-index: 11; display: flex; gap: .6rem;
+      animation: tabletsReveal 2.5s ease-out both, tabletsFloat 5s ease-in-out 2.5s infinite;
+    }
+    @keyframes tabletsReveal {
+      0%   { opacity: 0; transform: translate(-50%,-30%) scale(.5); }
+      100% { opacity: 1; transform: translate(-50%,-50%) scale(1);  }
+    }
+    @keyframes tabletsFloat {
+      0%,100% { transform: translate(-50%,-50%) translateY(0);     }
+      50%      { transform: translate(-50%,-50%) translateY(-12px); }
+    }
+    .tablet {
+      width: clamp(48px,7vw,90px); height: clamp(68px,10vw,126px);
+      background: linear-gradient(135deg,#ede0c0,#d4c890,#bea855);
+      border-radius: 42% 42% 0 0;
+      border: 2px solid rgba(200,175,95,.8);
+      box-shadow: 0 0 22px rgba(255,215,0,.45), 0 5px 22px rgba(0,0,0,.7);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 4px; padding: 10px 5px;
+    }
+    .tablet-line {
+      width: 62%; height: 2px;
+      background: rgba(75,55,0,.55); border-radius: 1px;
+    }
+    #sinai-heading h2 {
+      background: linear-gradient(120deg,#ffd700 0%,#fff4b0 50%,#ffa500 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    #sinai-heading p { color: rgba(255,220,100,.6); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"    aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-bush"     aria-label="火焚荊棘"></a>
+  <a class="nav-dot" href="#scene-plagues"  aria-label="十災"></a>
+  <a class="nav-dot" href="#scene-passover" aria-label="逾越節"></a>
+  <a class="nav-dot" href="#scene-redsea"   aria-label="分開紅海"></a>
+  <a class="nav-dot" href="#scene-sinai"    aria-label="西奈山"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="出埃及記 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="intro-moon" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>出埃及記</h1>
+    <p>Book of Exodus</p>
+    <span class="sub">摩西 · 十災 · 分紅海 · 十誡</span>
+  </div>
+
+  <!-- Egyptian pyramids silhouette -->
+  <svg id="intro-pyramids" viewBox="0 0 1440 420" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="pyg1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a3800"/>
+        <stop offset="100%" stop-color="#1a1200"/>
+      </linearGradient>
+      <linearGradient id="pyg2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3d2e00"/>
+        <stop offset="100%" stop-color="#130e00"/>
+      </linearGradient>
+      <linearGradient id="sandG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a2600"/>
+        <stop offset="100%" stop-color="#0c0800"/>
+      </linearGradient>
+    </defs>
+    <!-- Sand -->
+    <rect x="0" y="285" width="1440" height="135" fill="url(#sandG)"/>
+    <!-- Main pyramid -->
+    <polygon points="720,78 985,285 455,285" fill="url(#pyg1)"/>
+    <!-- Shadow on pyramid -->
+    <polygon points="720,78 985,285 720,285" fill="rgba(0,0,0,.18)"/>
+    <!-- Right pyramid -->
+    <polygon points="1110,148 1268,285 952,285" fill="url(#pyg2)"/>
+    <!-- Left pyramid -->
+    <polygon points="285,188 424,285 146,285" fill="url(#pyg2)"/>
+    <!-- Sphinx (simple silhouette) -->
+    <path d="M510 285 Q528 264 550 268 Q566 260 582 272 L606 272 L606 285 Z" fill="#1a1200"/>
+    <!-- Palm left -->
+    <line x1="108" y1="285" x2="104" y2="210" stroke="#2c1800" stroke-width="5"/>
+    <ellipse cx="96"  cy="209" rx="24" ry="10" fill="#183800" transform="rotate(-22 96 209)"/>
+    <ellipse cx="112" cy="202" rx="22" ry="9"  fill="#122e00" transform="rotate(12 112 202)"/>
+    <!-- Palm right -->
+    <line x1="1332" y1="285" x2="1336" y2="210" stroke="#2c1800" stroke-width="5"/>
+    <ellipse cx="1344" cy="209" rx="24" ry="10" fill="#183800" transform="rotate(22 1344 209)"/>
+    <ellipse cx="1328" cy="202" rx="22" ry="9"  fill="#122e00" transform="rotate(-12 1328 202)"/>
+  </svg>
+
+  <div class="scroll-hint">↓ 向下滾動探索 · Scroll to explore</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — BURNING BUSH  火焚荊棘
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-bush" aria-label="火焚荊棘 — 神向摩西顯現">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Divine voice -->
+  <div id="voice-text" aria-hidden="true">
+    <p>「我是自有永有的」</p>
+    <small>I AM WHO I AM  ·  出埃及記 3:14</small>
+  </div>
+
+  <!-- Desert floor -->
+  <div id="bush-ground" aria-hidden="true"></div>
+
+  <!-- Fire glow on ground -->
+  <div id="fire-glow" aria-hidden="true"></div>
+
+  <!-- Burning Bush SVG -->
+  <svg id="bush-svg" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="火焚荊棘 — Burning Bush">
+    <title>燃燒的荊棘 — Burning Bush</title>
+    <!-- Bush branches -->
+    <line x1="50" y1="108" x2="28" y2="65"  stroke="#2d1800" stroke-width="3.5"/>
+    <line x1="50" y1="108" x2="50" y2="55"  stroke="#2d1800" stroke-width="3.5"/>
+    <line x1="50" y1="108" x2="72" y2="60"  stroke="#2d1800" stroke-width="3.5"/>
+    <line x1="50" y1="88"  x2="22" y2="54"  stroke="#2d1800" stroke-width="2.5"/>
+    <line x1="50" y1="88"  x2="78" y2="50"  stroke="#2d1800" stroke-width="2.5"/>
+    <line x1="50" y1="98"  x2="15" y2="72"  stroke="#2d1800" stroke-width="2"/>
+    <line x1="50" y1="98"  x2="85" y2="68"  stroke="#2d1800" stroke-width="2"/>
+    <!-- Roots -->
+    <path d="M32,108 Q50,118 68,108 Q62,122 50,126 Q38,122 32,108 Z" fill="#1a0d00"/>
+    <!-- Outer flame (deep orange) -->
+    <ellipse cx="50" cy="42" rx="32" ry="44"
+      style="fill:rgba(255,100,0,.88); transform-origin:50px 86px; animation:flicker 1.35s ease-in-out infinite alternate;"/>
+    <!-- Mid flame (amber) -->
+    <ellipse cx="50" cy="44" rx="22" ry="33"
+      style="fill:rgba(255,195,0,.92); transform-origin:50px 86px; animation:flicker 1.05s ease-in-out .18s infinite alternate;"/>
+    <!-- Inner flame (white-hot) -->
+    <ellipse cx="50" cy="52" rx="11" ry="20"
+      style="fill:rgba(255,255,210,.96); transform-origin:50px 86px; animation:flicker .82s ease-in-out .06s infinite alternate;"/>
+  </svg>
+
+  <!-- Moses kneeling -->
+  <svg id="moses-bush" viewBox="0 0 62 105" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="摩西跪拜 — Moses before the burning bush">
+    <title>摩西跪拜 — Moses kneeling before the burning bush</title>
+    <!-- Head -->
+    <circle cx="31" cy="14" r="11" fill="#8b6914"/>
+    <!-- Head covering -->
+    <path d="M20,13 Q31,2 42,13 L42,20 Q31,15 20,20 Z" fill="#5c3d00"/>
+    <!-- Beard -->
+    <path d="M24,22 Q31,32 38,22 Q35,37 31,38 Q27,37 24,22 Z" fill="#6b5030" opacity=".82"/>
+    <!-- Robe (kneeling position) -->
+    <path d="M22,26 Q17,48 14,58 Q20,61 24,58 Q27,52 31,46 Q35,52 38,58 Q42,61 48,58 Q45,48 40,26 Z"
+          fill="#8b7355"/>
+    <!-- Arms raised in awe -->
+    <path d="M22,32 Q10,24 6,14" stroke="#8b6914" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <path d="M40,32 Q52,24 56,14" stroke="#8b6914" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Kneeling legs -->
+    <path d="M26,58 Q22,72 20,78 L32,78 Q30,68 31,58 Z" fill="#6b5540"/>
+    <path d="M36,58 Q40,72 42,78 L32,78 Q34,68 31,58 Z" fill="#6b5540"/>
+    <!-- Staff -->
+    <line x1="50" y1="78" x2="56" y2="24" stroke="#3d2200" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+
+  <div class="scene-heading" aria-hidden="true">
+    <h2 style="color:#ff9f1c; text-shadow:0 0 22px rgba(255,145,0,.75);">🔥 火焚荊棘</h2>
+    <p>God appears to Moses in the burning bush — Exodus 3</p>
+  </div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — TEN PLAGUES  十災
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-plagues" aria-label="埃及十災 — The Ten Plagues of Egypt">
+
+  <!-- Pyramid silhouettes -->
+  <svg id="plague-pyramids" viewBox="0 0 1440 400" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="darkPyg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#190a00"/>
+        <stop offset="100%" stop-color="#040200"/>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="305" width="1440" height="95" fill="#030200"/>
+    <polygon points="720,95 1015,305 425,305" fill="url(#darkPyg)"/>
+    <polygon points="1155,158 1310,305 1000,305" fill="#0c0600"/>
+    <polygon points="230,168 398,305 62,305"    fill="#0c0600"/>
+  </svg>
+
+  <!-- Darkness from above -->
+  <div id="darkness-wave" aria-hidden="true"></div>
+
+  <!-- Blood Nile -->
+  <div id="nile" role="img" aria-label="尼羅河變血紅 — Nile turned to blood">
+    <div id="nile-water"></div>
+  </div>
+
+  <!-- Hail -->
+  <div class="hail" style="--spd:1.2s;--delay:0s;   left:5%;  top:0;"></div>
+  <div class="hail" style="--spd:1.5s;--delay:.3s;  left:12%; top:0;"></div>
+  <div class="hail" style="--spd:1.1s;--delay:.65s; left:20%; top:0;"></div>
+  <div class="hail" style="--spd:1.8s;--delay:.1s;  left:28%; top:0;"></div>
+  <div class="hail" style="--spd:1.3s;--delay:.9s;  left:36%; top:0;"></div>
+  <div class="hail" style="--spd:1.6s;--delay:.4s;  left:44%; top:0;"></div>
+  <div class="hail" style="--spd:1.0s;--delay:.75s; left:52%; top:0;"></div>
+  <div class="hail" style="--spd:1.4s;--delay:.2s;  left:60%; top:0;"></div>
+  <div class="hail" style="--spd:1.7s;--delay:.55s; left:68%; top:0;"></div>
+  <div class="hail" style="--spd:1.2s;--delay:.85s; left:76%; top:0;"></div>
+  <div class="hail" style="--spd:1.5s;--delay:.05s; left:84%; top:0;"></div>
+  <div class="hail" style="--spd:1.1s;--delay:1.1s; left:92%; top:0;"></div>
+  <div class="hail" style="--spd:1.9s;--delay:.35s; left:97%; top:0;"></div>
+
+  <!-- Locusts swarm -->
+  <div class="locust" style="--spd:5s;  --delay:0s;   top:36%; --sx:-10vw; --ex:112vw; --sy:0px; --ey:12px;  --r:6deg;"></div>
+  <div class="locust" style="--spd:4s;  --delay:.5s;  top:43%; --sx:-10vw; --ex:112vw; --sy:0px; --ey:-9px;  --r:-3deg;"></div>
+  <div class="locust" style="--spd:6s;  --delay:1s;   top:39%; --sx:-10vw; --ex:112vw; --sy:0px; --ey:5px;   --r:8deg;"></div>
+  <div class="locust" style="--spd:4.5s;--delay:1.5s; top:50%; --sx:-10vw; --ex:112vw; --sy:0px; --ey:-13px; --r:-5deg;"></div>
+  <div class="locust" style="--spd:5.5s;--delay:.35s; top:46%; --sx:-10vw; --ex:112vw; --sy:0px; --ey:16px;  --r:4deg;"></div>
+  <div class="locust" style="--spd:3.8s;--delay:.8s;  top:56%; --sx:-10vw; --ex:112vw; --sy:0px; --ey:-6px;  --r:-7deg;"></div>
+  <div class="locust" style="--spd:5.2s;--delay:1.2s; top:31%; --sx:-10vw; --ex:112vw; --sy:0px; --ey:22px;  --r:3deg;"></div>
+  <div class="locust" style="--spd:4.8s;--delay:1.8s; top:61%; --sx:-10vw; --ex:112vw; --sy:0px; --ey:-16px; --r:-6deg;"></div>
+  <div class="locust" style="--spd:6.2s;--delay:.12s; top:41%; --sx:-10vw; --ex:112vw; --sy:0px; --ey:9px;   --r:2deg;"></div>
+  <div class="locust" style="--spd:4.2s;--delay:.65s; top:48%; --sx:-10vw; --ex:112vw; --sy:0px; --ey:-11px; --r:-4deg;"></div>
+
+  <!-- Frogs -->
+  <div class="frog" style="--spd:2.2s;--delay:0s;  left:18%;">
+    <svg viewBox="0 0 32 24" width="clamp(20px,3vw,38px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="16" cy="16" rx="13" ry="8" fill="#2d5a1e"/>
+      <circle cx="8"  cy="9" r="5.5" fill="#2d5a1e"/><circle cx="24" cy="9" r="5.5" fill="#2d5a1e"/>
+      <circle cx="8"  cy="9" r="2.2" fill="#000"/>   <circle cx="24" cy="9" r="2.2" fill="#000"/>
+      <circle cx="9"  cy="8" r=".9" fill="#fff"/>     <circle cx="25" cy="8" r=".9" fill="#fff"/>
+      <path d="M5,20 Q2,24 0,24" stroke="#2d5a1e" stroke-width="2.2" fill="none"/>
+      <path d="M27,20 Q30,24 32,24" stroke="#2d5a1e" stroke-width="2.2" fill="none"/>
+    </svg>
+  </div>
+  <div class="frog" style="--spd:1.9s;--delay:.7s; left:54%;">
+    <svg viewBox="0 0 32 24" width="clamp(18px,2.6vw,32px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="16" cy="16" rx="13" ry="8" fill="#3d6e2a"/>
+      <circle cx="8"  cy="9" r="5.5" fill="#3d6e2a"/><circle cx="24" cy="9" r="5.5" fill="#3d6e2a"/>
+      <circle cx="8"  cy="9" r="2.2" fill="#000"/>   <circle cx="24" cy="9" r="2.2" fill="#000"/>
+      <circle cx="9"  cy="8" r=".9" fill="#fff"/>     <circle cx="25" cy="8" r=".9" fill="#fff"/>
+      <path d="M5,20 Q2,24 0,24" stroke="#3d6e2a" stroke-width="2.2" fill="none"/>
+      <path d="M27,20 Q30,24 32,24" stroke="#3d6e2a" stroke-width="2.2" fill="none"/>
+    </svg>
+  </div>
+  <div class="frog" style="--spd:2.6s;--delay:1.3s;left:76%;">
+    <svg viewBox="0 0 32 24" width="clamp(19px,2.8vw,35px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="16" cy="16" rx="13" ry="8" fill="#254d18"/>
+      <circle cx="8"  cy="9" r="5.5" fill="#254d18"/><circle cx="24" cy="9" r="5.5" fill="#254d18"/>
+      <circle cx="8"  cy="9" r="2.2" fill="#000"/>   <circle cx="24" cy="9" r="2.2" fill="#000"/>
+      <circle cx="9"  cy="8" r=".9" fill="#fff"/>     <circle cx="25" cy="8" r=".9" fill="#fff"/>
+      <path d="M5,20 Q2,24 0,24" stroke="#254d18" stroke-width="2.2" fill="none"/>
+      <path d="M27,20 Q30,24 32,24" stroke="#254d18" stroke-width="2.2" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="scene-heading" id="plagues-heading" aria-hidden="true">
+    <h2>⚠ 埃及十災</h2>
+    <p>The Ten Plagues of Egypt — Exodus 7–12</p>
+  </div>
+  <p id="plague-list" aria-hidden="true">
+    血 · 蛙 · 虱 · 蠅 · 畜疫 · 癤 · 雹 · 蝗 · 黑暗 · 長子之死
+  </p>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — PASSOVER NIGHT  逾越節之夜
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-passover" aria-label="逾越節之夜 — The Passover Night">
+  <div class="starfield" aria-hidden="true"></div>
+  <div id="dark-mist" aria-hidden="true"></div>
+
+  <!-- Angel of Death -->
+  <svg id="angel-death" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg"
+       width="clamp(80px,14vw,180px)"
+       role="img" aria-label="死亡天使 — Angel of Death">
+    <title>死亡天使 — Angel of Death passing over Egypt</title>
+    <!-- Wings -->
+    <path d="M100,100 Q38,58 0,80  Q22,122 62,132 Z" fill="rgba(75,35,115,.75)"/>
+    <path d="M100,100 Q162,58 200,80 Q178,122 138,132 Z" fill="rgba(75,35,115,.75)"/>
+    <path d="M100,100 Q54,68 18,84  Q40,116 72,124 Z" fill="rgba(115,75,195,.38)"/>
+    <path d="M100,100 Q146,68 182,84 Q160,116 128,124 Z" fill="rgba(115,75,195,.38)"/>
+    <!-- Body -->
+    <path d="M85,102 Q80,152 82,202 Q91,212 100,210 Q109,212 118,202 Q120,152 115,102 Z"
+          fill="rgba(28,8,55,.92)"/>
+    <!-- Head/hood -->
+    <ellipse cx="100" cy="80" rx="18" ry="22" fill="rgba(18,4,38,.96)"/>
+    <path d="M82,72 Q100,54 118,72 Q118,92 100,94 Q82,92 82,72 Z" fill="rgba(48,18,76,.82)"/>
+    <!-- Scythe -->
+    <line x1="116" y1="96" x2="126" y2="222" stroke="rgba(95,75,135,.8)" stroke-width="3.5"/>
+    <path d="M126,102 Q160,80 154,118 Q137,128 126,116 Z" fill="rgba(148,115,195,.72)"/>
+    <!-- Aura -->
+    <ellipse cx="100" cy="152" rx="62" ry="82" fill="none"
+             stroke="rgba(115,55,195,.2)" stroke-width="16"/>
+  </svg>
+
+  <!-- Protected Israelite house -->
+  <svg class="house" style="left:18%;" viewBox="0 0 110 130"
+       width="clamp(65px,9vw,115px)" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="以色列人受保護的家 — Protected Israelite home">
+    <title>受保護的以色列人家 — Israelite home protected by the blood</title>
+    <rect x="12" y="58" width="86" height="72" fill="#2a1800" rx="3"/>
+    <polygon points="6,58 55,14 104,58" fill="#3d2200"/>
+    <rect x="38" y="90" width="34" height="40" fill="#1a0c00" rx="3"/>
+    <!-- Blood on doorpost & lintel -->
+    <rect x="37" y="88" width="36" height="5"  fill="#cc0000" rx="2"
+          style="filter:drop-shadow(0 0 8px rgba(200,0,0,.9));"/>
+    <rect x="37" y="88" width="5"  height="42" fill="#cc0000" rx="2"
+          style="filter:drop-shadow(0 0 8px rgba(200,0,0,.9));"/>
+    <!-- Window with candlelight -->
+    <rect x="64" y="68" width="24" height="20" fill="#0a0500" rx="2"/>
+    <ellipse cx="76" cy="78" rx="9" ry="7" fill="rgba(255,195,45,.28)"/>
+  </svg>
+
+  <!-- Unprotected Egyptian house -->
+  <svg class="house" style="right:18%;" viewBox="0 0 110 130"
+       width="clamp(65px,9vw,115px)" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="埃及人無保護的家 — Unprotected Egyptian home">
+    <title>無保護的埃及人家 — Unprotected Egyptian home</title>
+    <rect x="12" y="58" width="86" height="72" fill="#1a1000" rx="2"/>
+    <!-- Flat Egyptian roof with crenellations -->
+    <rect x="6"  y="50" width="98" height="11" fill="#2a1a00" rx="2"/>
+    <rect x="9"  y="42" width="14" height="10" fill="#2a1a00"/>
+    <rect x="31" y="42" width="14" height="10" fill="#2a1a00"/>
+    <rect x="53" y="42" width="14" height="10" fill="#2a1a00"/>
+    <rect x="75" y="42" width="14" height="10" fill="#2a1a00"/>
+    <rect x="38" y="90" width="34" height="40" fill="#0d0800" rx="3"/>
+    <!-- Dark window -->
+    <rect x="64" y="65" width="24" height="20" fill="#040300" rx="2"/>
+  </svg>
+
+  <div class="scene-heading" id="passover-heading" aria-hidden="true">
+    <h2>🌑 逾越節之夜</h2>
+    <p>The Passover Night — Exodus 12</p>
+  </div>
+  <div class="scene-verse">「我看見血，就越過你們」— 出埃及記 12:13</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — PARTING THE RED SEA  分開紅海
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-redsea" aria-label="分開紅海 — Parting of the Red Sea">
+
+  <!-- Night sky with moon -->
+  <svg style="position:absolute;inset:0;width:100%;height:40%;z-index:1;"
+       viewBox="0 0 1440 400" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="seaSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#000820"/>
+        <stop offset="65%" stop-color="#001840"/>
+        <stop offset="100%" stop-color="#002a5a"/>
+      </linearGradient>
+    </defs>
+    <rect width="1440" height="400" fill="url(#seaSky)"/>
+    <circle cx="720" cy="75" r="36"
+            fill="rgba(205,232,255,.88)"
+            style="filter:drop-shadow(0 0 22px rgba(180,220,255,.85));"/>
+    <!-- Moonbeam path on water below -->
+    <path d="M710,111 Q720,200 704,400" stroke="rgba(200,232,255,.18)" stroke-width="22" fill="none"/>
+    <path d="M720,111 Q720,200 720,400" stroke="rgba(200,232,255,.12)" stroke-width="9"  fill="none"/>
+  </svg>
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Dry sea floor -->
+  <div id="sea-floor" aria-hidden="true"></div>
+
+  <!-- Left water wall -->
+  <div class="water-wall" id="wall-left" role="img" aria-label="左側水牆 — Left wall of water">
+    <div class="water-wall-inner">
+      <div class="water-wave-row" style="top:8%;  --wd:0s;"></div>
+      <div class="water-wave-row" style="top:26%; --wd:-.5s; animation-direction:reverse;"></div>
+      <div class="water-wave-row" style="top:44%; --wd:-1s;"></div>
+      <div class="water-wave-row" style="top:62%; --wd:-1.6s; animation-direction:reverse;"></div>
+      <div class="water-wave-row" style="top:80%; --wd:-.8s;"></div>
+      <!-- Fish -->
+      <svg viewBox="0 0 60 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+           style="position:absolute;top:38%;left:28%;width:clamp(28px,4vw,52px);
+                  opacity:.42;animation:fishSwim 4.5s ease-in-out infinite;">
+        <path d="M10,14 Q26,4 46,14 Q26,24 10,14 Z" fill="rgba(100,210,255,.65)"/>
+        <path d="M8,14 Q0,7 0,14 Q0,21 8,14 Z"      fill="rgba(100,210,255,.55)"/>
+        <circle cx="40" cy="13" r="2.2" fill="rgba(0,0,0,.4)"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Right water wall -->
+  <div class="water-wall" id="wall-right" role="img" aria-label="右側水牆 — Right wall of water">
+    <div class="water-wall-inner">
+      <div class="water-wave-row" style="top:14%; --wd:0s;   animation-direction:reverse;"></div>
+      <div class="water-wave-row" style="top:32%; --wd:-.7s;"></div>
+      <div class="water-wave-row" style="top:50%; --wd:-1.2s; animation-direction:reverse;"></div>
+      <div class="water-wave-row" style="top:68%; --wd:-1.8s;"></div>
+      <div class="water-wave-row" style="top:86%; --wd:-.4s;  animation-direction:reverse;"></div>
+      <!-- Fish (facing left) -->
+      <svg viewBox="0 0 60 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+           style="position:absolute;top:52%;left:18%;width:clamp(24px,3.5vw,46px);
+                  opacity:.42;transform:scaleX(-1);animation:fishSwim 5.2s ease-in-out 1.1s infinite;">
+        <path d="M10,14 Q26,4 46,14 Q26,24 10,14 Z" fill="rgba(100,210,255,.65)"/>
+        <path d="M8,14 Q0,7 0,14 Q0,21 8,14 Z"      fill="rgba(100,210,255,.55)"/>
+        <circle cx="40" cy="13" r="2.2" fill="rgba(0,0,0,.4)"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Pillar of fire (right side, leading) -->
+  <svg id="pillar-fire-wrap" viewBox="0 0 40 200" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="火柱 — Pillar of fire">
+    <title>火柱 — Pillar of fire guiding the Israelites</title>
+    <defs>
+      <radialGradient id="pillarG" cx="50%" cy="75%">
+        <stop offset="0%"   stop-color="rgba(255,255,200,.92)"/>
+        <stop offset="42%"  stop-color="rgba(255,148,0,.8)"/>
+        <stop offset="100%" stop-color="rgba(255,60,0,0)"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="20" cy="148" rx="20" ry="52" fill="url(#pillarG)"
+      style="animation:fireGlowPulse 1.6s ease-in-out infinite;"/>
+    <ellipse cx="20" cy="100" rx="13" ry="55" fill="rgba(255,175,0,.72)"
+      style="animation:fireGlowPulse 1.2s ease-in-out .3s infinite;"/>
+    <ellipse cx="20" cy="58"  rx="8" ry="44" fill="rgba(255,240,185,.94)"
+      style="animation:fireGlowPulse 1s ease-in-out .1s infinite;"/>
+  </svg>
+
+  <!-- Cloud pillar above -->
+  <svg id="cloud-pillar" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="cloudG" cx="50%" cy="55%">
+        <stop offset="0%"   stop-color="rgba(218,232,255,.92)"/>
+        <stop offset="58%"  stop-color="rgba(158,180,225,.7)"/>
+        <stop offset="100%" stop-color="rgba(96,118,182,0)"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="100" cy="72" rx="92" ry="50" fill="url(#cloudG)"/>
+    <ellipse cx="68"  cy="56" rx="58" ry="42" fill="rgba(198,218,255,.58)"/>
+    <ellipse cx="132" cy="56" rx="58" ry="42" fill="rgba(198,218,255,.58)"/>
+    <ellipse cx="100" cy="46" rx="52" ry="38" fill="rgba(232,242,255,.78)"/>
+  </svg>
+
+  <!-- People crossing -->
+  <div id="people-crossing"
+       role="img" aria-label="以色列人過紅海 — Israelites crossing the Red Sea on dry ground">
+    <div class="person" style="height:clamp(18px,2.5vw,32px);--spd:.9s; --delay:0s;"></div>
+    <div class="person" style="height:clamp(20px,2.8vw,36px);--spd:.86s;--delay:.1s;"></div>
+    <div class="person" style="height:clamp(16px,2.2vw,28px);--spd:1.0s;--delay:.22s;"></div>
+    <div class="person" style="height:clamp(22px,3vw,38px);  --spd:.95s;--delay:.15s;"></div>
+    <div class="person" style="height:clamp(18px,2.5vw,32px);--spd:.88s;--delay:.3s;"></div>
+    <div class="person" style="height:clamp(20px,2.8vw,36px);--spd:.92s;--delay:.05s;"></div>
+    <div class="person" style="height:clamp(17px,2.3vw,30px);--spd:1.1s;--delay:.26s;"></div>
+    <div class="person" style="height:clamp(21px,2.9vw,37px);--spd:.87s;--delay:.38s;"></div>
+    <div class="person" style="height:clamp(19px,2.6vw,33px);--spd:.93s;--delay:.18s;"></div>
+    <div class="person" style="height:clamp(20px,2.8vw,36px);--spd:.9s; --delay:.42s;"></div>
+    <div class="person" style="height:clamp(16px,2.2vw,28px);--spd:1.0s;--delay:.08s;"></div>
+    <div class="person" style="height:clamp(22px,3vw,38px);  --spd:.85s;--delay:.22s;"></div>
+  </div>
+
+  <div class="scene-heading" id="redsea-heading" aria-hidden="true">
+    <h2>🌊 分開紅海</h2>
+    <p>The Parting of the Red Sea — Exodus 14</p>
+  </div>
+  <div class="scene-verse">「摩西向海伸杖，耶和華便用大東風使海退去」— 出埃及記 14:21</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — MOUNT SINAI  西奈山·十誡
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-sinai" aria-label="西奈山十誡 — Mount Sinai and the Ten Commandments">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Mountain -->
+  <svg id="sinai-mountain" viewBox="0 0 1440 600" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="mtnGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#2a1840"/>
+        <stop offset="52%"  stop-color="#190c28"/>
+        <stop offset="100%" stop-color="#0d0818"/>
+      </linearGradient>
+      <linearGradient id="mtnFog" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="rgba(255,255,255,.07)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </linearGradient>
+      <filter id="mtnGlow">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <!-- Distant mountains -->
+    <path d="M0 600 L0 395 Q310 248 620 318 Q930 388 1220 275 Q1360 222 1440 298 L1440 600 Z"
+          fill="#0c0816" opacity=".58"/>
+    <!-- Main Sinai peak -->
+    <path d="M0 600 L195 600 Q500 395 720 98 Q940 395 1245 600 L1440 600 Z"
+          fill="url(#mtnGrad)" filter="url(#mtnGlow)"/>
+    <!-- Snow / mist cap -->
+    <path d="M682,130 Q720,78 758,130 Q748,162 720,168 Q692,162 682,130 Z"
+          fill="url(#mtnFog)" opacity=".65"/>
+    <!-- Rock strata lines -->
+    <path d="M495 452 Q618 382 720 352 Q822 382 945 452"
+          stroke="rgba(55,28,76,.42)" stroke-width="2" fill="none"/>
+    <path d="M415 530 Q578 462 720 432 Q862 462 1025 530"
+          stroke="rgba(55,28,76,.32)" stroke-width="1.5" fill="none"/>
+  </svg>
+
+  <!-- Divine light beam from peak -->
+  <div id="divine-light" aria-hidden="true"></div>
+
+  <!-- Cloud & smoke on summit -->
+  <svg id="sinai-cloud" viewBox="0 0 400 185" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="sinaiCG" cx="50%" cy="62%">
+        <stop offset="0%"   stop-color="rgba(255,225,115,.42)"/>
+        <stop offset="42%"  stop-color="rgba(178,148,255,.32)"/>
+        <stop offset="100%" stop-color="rgba(75,38,118,0)"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="200" cy="115" rx="175" ry="70" fill="url(#sinaiCG)"/>
+    <ellipse cx="135" cy="92"  rx="105" ry="62" fill="rgba(198,178,255,.2)"/>
+    <ellipse cx="265" cy="92"  rx="105" ry="62" fill="rgba(198,178,255,.2)"/>
+    <ellipse cx="200" cy="72"  rx="125" ry="60" fill="rgba(238,222,255,.24)"/>
+    <!-- Inner lightning glow -->
+    <ellipse cx="200" cy="82" rx="62" ry="42" fill="rgba(255,228,78,.16)"
+             style="animation:divinePulse 2.2s ease-in-out infinite;"/>
+  </svg>
+
+  <!-- Lightning bolts -->
+  <div class="lightning" style="--spd:3.6s;--delay:0s;   --rot:-5deg;  left:47%; top:11%; height:34vh; width:3px;"></div>
+  <div class="lightning" style="--spd:4.2s;--delay:1.2s; --rot:8deg;   left:53%; top:9%;  height:38vh; width:4px;"></div>
+  <div class="lightning" style="--spd:3.1s;--delay:.85s; --rot:-13deg; left:44%; top:13%; height:30vh; width:3px;"></div>
+  <div class="lightning" style="--spd:5.2s;--delay:2.1s; --rot:16deg;  left:56%; top:10%; height:32vh; width:3px;"></div>
+
+  <!-- Moses on the mountain -->
+  <svg id="moses-sinai" viewBox="0 0 58 105" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="摩西在西奈山上 — Moses on Mount Sinai">
+    <title>摩西在西奈山 — Moses receiving the Ten Commandments</title>
+    <!-- Robe -->
+    <path d="M21,32 Q15,58 12,87 Q18,90 22,87 Q25,72 28,58 Q31,72 34,87 Q38,90 44,87 Q41,58 37,32 Z"
+          fill="#8b7355"/>
+    <!-- Head -->
+    <circle cx="28" cy="16" r="12" fill="#8b6914"/>
+    <!-- Head covering -->
+    <path d="M16,15 Q28,3 40,15 L40,22 Q28,17 16,22 Z" fill="#6b5030"/>
+    <!-- Beard -->
+    <path d="M21,24 Q28,35 35,24 Q32,40 28,42 Q24,40 21,24 Z" fill="#7a6040" opacity=".85"/>
+    <!-- Arms raised to heaven -->
+    <path d="M21,36 Q8,28 4,16"  stroke="#8b6914" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M35,36 Q48,28 52,16" stroke="#8b6914" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- Divine glow aura -->
+    <ellipse cx="28" cy="52" rx="24" ry="46" fill="none"
+             stroke="rgba(255,218,78,.14)" stroke-width="12"/>
+  </svg>
+
+  <!-- Ten Commandments Tablets -->
+  <div id="tablets-wrap" role="img" aria-label="十誡石板 — Ten Commandments tablets">
+    <div class="tablet">
+      <div class="tablet-line"></div><div class="tablet-line"></div>
+      <div class="tablet-line"></div><div class="tablet-line"></div>
+      <div class="tablet-line"></div>
+    </div>
+    <div class="tablet">
+      <div class="tablet-line"></div><div class="tablet-line"></div>
+      <div class="tablet-line"></div><div class="tablet-line"></div>
+      <div class="tablet-line"></div>
+    </div>
+  </div>
+
+  <div class="scene-heading" id="sinai-heading" aria-hidden="true">
+    <h2>⚡ 西奈山 · 十誡</h2>
+    <p>Mount Sinai — The Ten Commandments — Exodus 19–20</p>
+  </div>
+  <div class="scene-verse">「你們要向我作祭司的國度，為聖潔的國民」— 出埃及記 19:6</div>
+</section>
+
+</body>
+</html>
