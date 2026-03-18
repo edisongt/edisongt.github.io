@@ -261,9 +261,9 @@
     }
     @keyframes hintPulse { 0%,100%{opacity:.3} 50%{opacity:.75} }
 
-    /* ── Wiki link button ── */
-    #wiki-link {
-      position: fixed; top: 1.2rem; right: 1.5rem; z-index: 30;
+    /* ── Nav link buttons (wiki & exodus) ── */
+    .nav-link {
+      position: fixed; right: 1.5rem; z-index: 30;
       display: inline-flex; align-items: center; gap: .45rem;
       padding: .42rem 1rem;
       border-radius: 999px;
@@ -277,12 +277,20 @@
       transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
       animation: hintPulse 4s ease-in-out infinite;
     }
+    #wiki-link   { top: 1.2rem; }
+    #exodus-link { top: 3.4rem; }
+    .nav-link:hover { animation: none; }
     #wiki-link:hover {
       background: rgba(109,255,210,0.13);
       border-color: rgba(109,255,210,0.45);
       color: #6dffd2;
       box-shadow: 0 0 20px rgba(109,255,210,0.18);
-      animation: none;
+    }
+    #exodus-link:hover {
+      background: rgba(255,200,80,0.13);
+      border-color: rgba(255,200,80,0.45);
+      color: #ffd700;
+      box-shadow: 0 0 20px rgba(255,200,80,0.18);
     }
 
     /* ── Rainbow ── */
@@ -997,7 +1005,10 @@
 <div id="hint">🌿 Click the Tree of Life or the Tree of Knowledge to interact 🍎</div>
 
 <!-- Wiki / About link -->
-<a id="wiki-link" href="wiki.html">🌱 關於我 · About</a>
+<a id="wiki-link" class="nav-link" href="wiki.html">🌱 關於我 · About</a>
+
+<!-- Exodus animation link -->
+<a id="exodus-link" class="nav-link" href="exodus.html">📜 出埃及記 · Exodus</a>
 
 <script>
 /* ── Build single large ivory rotating cube ── */
