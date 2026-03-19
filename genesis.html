@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>創世記 · Genesis</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #04040e;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.31), 564px 126px rgba(255,255,255,.41),
+        210px 347px rgba(255,255,255,.67), 1117px 45px rgba(255,255,255,.6),
+        66px 16px rgba(255,255,255,.35),  477px 259px rgba(255,255,255,.6),
+        1150px 102px rgba(255,255,255,.66), 1437px 280px rgba(255,255,255,.51),
+        920px 302px rgba(255,255,255,.44), 14px 389px rgba(255,255,255,.7),
+        1430px 217px rgba(255,255,255,.47), 319px 111px rgba(255,255,255,.78),
+        690px 53px rgba(255,255,255,.35),  199px 184px rgba(255,255,255,.72),
+        1237px 136px rgba(255,255,255,.7), 941px 275px rgba(255,255,255,.36),
+        776px 41px rgba(255,255,255,.58),  1288px 317px rgba(255,255,255,.74),
+        741px 296px rgba(255,255,255,.4),  143px 24px rgba(255,255,255,.63),
+        593px 41px rgba(255,255,255,.73),  207px 195px rgba(255,255,255,.44),
+        1302px 428px rgba(255,255,255,.48), 759px 182px rgba(255,255,255,.4),
+        547px 360px rgba(255,255,255,.77), 1328px 37px rgba(255,255,255,.6),
+        351px 274px rgba(255,255,255,.66), 335px 237px rgba(255,255,255,.49),
+        1311px 353px rgba(255,255,255,.58), 1403px 167px rgba(255,255,255,.72),
+        115px 118px rgba(255,255,255,.71), 647px 206px rgba(255,255,255,.43),
+        433px 468px rgba(255,255,255,.77), 645px 109px rgba(255,255,255,.63),
+        811px 453px rgba(255,255,255,.76), 940px 74px rgba(255,255,255,.43),
+        506px 382px rgba(255,255,255,.58), 539px 383px rgba(255,255,255,.59),
+        1196px 205px rgba(255,255,255,.48), 284px 261px rgba(255,255,255,.55),
+        97px 441px rgba(255,255,255,.35),  1286px 82px rgba(255,255,255,.7),
+        865px 306px rgba(255,255,255,.33), 782px 306px rgba(255,255,255,.8),
+        1084px 129px rgba(255,255,255,.79), 24px 349px rgba(255,255,255,.66),
+        1397px 454px rgba(255,255,255,.57), 547px 394px rgba(255,255,255,.62),
+        229px 151px rgba(255,255,255,.52), 930px 2px rgba(255,255,255,.78),
+        540px 498px rgba(255,255,255,.55), 366px 260px rgba(255,255,255,.76),
+        1281px 153px rgba(255,255,255,.72), 1040px 312px rgba(255,255,255,.4),
+        766px 391px rgba(255,255,255,.38), 1087px 471px rgba(255,255,255,.3),
+        664px 251px rgba(255,255,255,.31), 744px 450px rgba(255,255,255,.79),
+        630px 123px rgba(255,255,255,.33), 1162px 485px rgba(255,255,255,.34),
+        996px 418px rgba(255,255,255,.33), 1091px 393px rgba(255,255,255,.36),
+        1352px 244px rgba(255,255,255,.77), 339px 136px rgba(255,255,255,.56),
+        1243px 217px rgba(255,255,255,.78), 1105px 387px rgba(255,255,255,.66),
+        412px 366px rgba(255,255,255,.46), 1376px 333px rgba(255,255,255,.49),
+        1060px 232px rgba(255,255,255,.36), 461px 33px rgba(255,255,255,.47),
+        1205px 284px rgba(255,255,255,.42), 452px 4px rgba(255,255,255,.34),
+        1293px 31px rgba(255,255,255,.41), 65px 441px rgba(255,255,255,.47),
+        1053px 122px rgba(255,255,255,.44), 995px 110px rgba(255,255,255,.57),
+        1170px 296px rgba(255,255,255,.54), 969px 414px rgba(255,255,255,.5),
+        194px 50px rgba(255,255,255,.63),  726px 217px rgba(255,255,255,.51);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.9),  1324px 51px rgba(255,255,255,.72),
+        695px 410px rgba(255,255,255,.96), 510px 99px rgba(255,255,255,.76),
+        919px 72px rgba(255,255,255,.83),  571px 237px rgba(255,255,255,.77),
+        155px 227px rgba(255,255,255,.94), 1128px 51px rgba(255,255,255,.72),
+        1108px 429px rgba(255,255,255,.7), 192px 475px rgba(255,255,255,.93),
+        485px 86px rgba(255,255,255,.82),  986px 110px rgba(255,255,255,.96),
+        121px 85px rgba(255,255,255,.81),  800px 136px rgba(255,255,255,.98),
+        932px 147px rgba(255,255,255,.83), 1139px 339px rgba(255,255,255,.92),
+        318px 98px rgba(255,255,255,.79),  120px 297px rgba(255,255,255,.92),
+        125px 383px rgba(255,255,255,.79), 103px 300px rgba(255,255,255,.84),
+        1088px 81px rgba(255,255,255,.72), 1041px 42px rgba(255,255,255,.96),
+        141px 305px rgba(255,255,255,.72), 482px 207px rgba(255,255,255,.74),
+        1167px 127px rgba(255,255,255,.87), 82px 318px rgba(255,255,255,.72),
+        1347px 299px rgba(255,255,255,.87), 648px 479px rgba(255,255,255,.78),
+        1372px 367px rgba(255,255,255,.79), 544px 203px rgba(255,255,255,.74);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,235,255,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(255,200,80,.15);
+      border-color: rgba(255,200,80,.5);
+      color: #ffd700;
+      box-shadow: 0 0 20px rgba(255,200,80,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #000005 0%, #06081a 40%, #0a0820 100%);
+    }
+    #intro-orb {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,130px); height: clamp(60px,10vw,130px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fffef0, #ffe580 35%, #ffc800 65%, #c89800);
+      box-shadow: 0 0 60px rgba(255,225,100,.7), 0 0 140px rgba(255,200,50,.3), 0 0 250px rgba(255,180,0,.12);
+      z-index: 4;
+      animation: orbGlow 4s ease-in-out infinite;
+    }
+    @keyframes orbGlow {
+      0%,100% { box-shadow: 0 0 60px rgba(255,225,100,.7), 0 0 140px rgba(255,200,50,.3), 0 0 250px rgba(255,180,0,.12); }
+      50%      { box-shadow: 0 0 90px rgba(255,225,100,1), 0 0 200px rgba(255,200,50,.5), 0 0 350px rgba(255,180,0,.22); }
+    }
+    #intro-rays {
+      position: absolute; top: 0; left: 0; width: 100%; height: 65%; z-index: 3;
+      background: radial-gradient(ellipse 35% 55% at 50% 35%, rgba(255,240,180,.12) 0%, transparent 70%);
+      animation: glowPulse 5s ease-in-out infinite;
+    }
+    #intro-title {
+      position: absolute; top: 42%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#ffd700 0%,#fff4b0 45%,#ff9f1c 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(255,240,180,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(220,200,140,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-void {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 38%; z-index: 2;
+      background: linear-gradient(180deg, transparent 0%, rgba(5,5,20,.95) 60%, #02020a 100%);
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — SEVEN DAYS OF CREATION  七日創造
+    ══════════════════════════════════════════════ */
+    #scene-creation {
+      background: linear-gradient(180deg, #020218 0%, #0a1538 35%, #102850 60%, #183060 80%, #0c1a30 100%);
+    }
+    #creation-sky { position: absolute; inset: 0; z-index: 2; }
+    #creation-sun {
+      position: absolute; top: 16%; right: 22%;
+      width: clamp(50px,8vw,100px); height: clamp(50px,8vw,100px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fffbe8, #ffd54f 50%, #ff9800);
+      box-shadow: 0 0 50px rgba(255,200,50,.7), 0 0 120px rgba(255,165,0,.3);
+      z-index: 6;
+      animation: sunPulse 5s ease-in-out infinite;
+    }
+    @keyframes sunPulse {
+      0%,100% { box-shadow: 0 0 50px rgba(255,200,50,.7), 0 0 120px rgba(255,165,0,.3); }
+      50%      { box-shadow: 0 0 80px rgba(255,200,50,1), 0 0 180px rgba(255,165,0,.5); }
+    }
+    #creation-moon {
+      position: absolute; top: 20%; left: 18%;
+      width: clamp(30px,5vw,60px); height: clamp(30px,5vw,60px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 55% 40%, #e8e8f0, #c0c0d8 60%, #8888aa);
+      box-shadow: 0 0 28px rgba(200,210,240,.6), 0 0 60px rgba(180,190,220,.2);
+      z-index: 6;
+    }
+    /* Crescent shadow */
+    #creation-moon::after {
+      content: '';
+      position: absolute; top: 12%; left: 28%;
+      width: 65%; height: 72%;
+      border-radius: 50%;
+      background: #0a1538;
+    }
+    #creation-waters {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg, rgba(20,60,120,.9) 0%, rgba(8,30,70,.95) 50%, #020c1e 100%);
+      z-index: 5;
+    }
+    #creation-waters::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 200%; height: 8px;
+      background: repeating-linear-gradient(90deg,
+        transparent, transparent 32px,
+        rgba(100,180,255,.2) 32px, rgba(100,180,255,.2) 64px);
+      animation: waveRipple 3s linear infinite;
+    }
+    @keyframes waveRipple {
+      from { transform: translateX(0);   }
+      to   { transform: translateX(-50%); }
+    }
+    #creation-land {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 18%; z-index: 6;
+    }
+    #creation-heading h2 {
+      background: linear-gradient(120deg,#ffd700 0%,#80d0ff 50%,#4caf50 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #creation-heading p { color: rgba(180,220,255,.6); }
+    /* Birds */
+    .bird {
+      position: absolute; z-index: 8;
+      animation: birdFly var(--spd,6s) ease-in-out var(--delay,0s) infinite;
+    }
+    @keyframes birdFly {
+      0%   { transform: translate(0,0); }
+      25%  { transform: translate(4vw,-1vh); }
+      50%  { transform: translate(8vw,0); }
+      75%  { transform: translate(4vw,1vh); }
+      100% { transform: translate(0,0); }
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — GARDEN OF EDEN  伊甸園
+    ══════════════════════════════════════════════ */
+    #scene-eden {
+      background: linear-gradient(180deg, #041808 0%, #0a2e10 40%, #0d3818 70%, #082210 100%);
+    }
+    #eden-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 32%;
+      background: linear-gradient(180deg, #1a5c28 0%, #124a1e 40%, #0a3214 100%);
+      z-index: 5;
+    }
+    #eden-ground::before {
+      content: '';
+      position: absolute; top: -6px; left: 0; width: 100%; height: 12px;
+      background: radial-gradient(ellipse 15% 100% at 15% 50%, #2a8838 0%, transparent 70%),
+                  radial-gradient(ellipse 10% 100% at 40% 50%, #248830 0%, transparent 65%),
+                  radial-gradient(ellipse 12% 100% at 65% 50%, #2a9038 0%, transparent 60%),
+                  radial-gradient(ellipse 10% 100% at 88% 50%, #228530 0%, transparent 70%);
+    }
+    #eden-river {
+      position: absolute; bottom: 12%; left: 0; width: 100%; height: 8%; z-index: 7; overflow: hidden;
+    }
+    #eden-river-water {
+      width: 200%; height: 100%;
+      background: linear-gradient(90deg,
+        rgba(60,160,220,.7), rgba(100,200,240,.8), rgba(40,140,210,.7),
+        rgba(80,190,235,.8), rgba(60,160,220,.7));
+      background-size: 50% 100%;
+      animation: riverFlow 4s linear infinite;
+    }
+    @keyframes riverFlow { from{background-position:0% 50%} to{background-position:100% 50%} }
+    #eden-river::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(90deg, transparent,rgba(180,230,255,.3),transparent,rgba(180,230,255,.2),transparent);
+      z-index: 1;
+    }
+    #eden-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 8; }
+    /* Flowers */
+    .eden-flower {
+      position: absolute; z-index: 9;
+      animation: floatY 4s ease-in-out var(--delay,0s) infinite;
+    }
+    #eden-heading h2 {
+      color: #4caf50;
+      text-shadow: 0 0 25px rgba(76,175,80,.7), 0 0 55px rgba(40,120,40,.4);
+    }
+    #eden-heading p { color: rgba(140,220,150,.6); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — THE FALL  犯罪墮落
+    ══════════════════════════════════════════════ */
+    #scene-fall {
+      background: linear-gradient(180deg, #080208 0%, #140810 45%, #1a0a12 70%, #0a0408 100%);
+    }
+    #fall-darkness {
+      position: absolute; inset: 0; z-index: 2;
+      background: radial-gradient(ellipse 70% 55% at 50% 40%, transparent 0%, rgba(0,0,0,.65) 100%);
+    }
+    #fall-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 28%;
+      background: linear-gradient(180deg, #1a1008 0%, #0d0804 50%, #060302 100%);
+      z-index: 5;
+    }
+    #fall-tree-svg {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,16vw,220px);
+    }
+    #fruit-glow {
+      position: absolute; bottom: 42%; left: 50%; transform: translateX(-50%);
+      width: 18vw; height: 12vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,40,40,.3) 0%, rgba(200,0,0,.1) 50%, transparent 72%);
+      z-index: 7;
+      animation: fruitGlowPulse 2s ease-in-out infinite;
+    }
+    @keyframes fruitGlowPulse {
+      0%,100% { opacity: .6; transform: translateX(-50%) scale(1);    }
+      50%      { opacity: 1;  transform: translateX(-50%) scale(1.15); }
+    }
+    #fall-heading h2 {
+      color: #cc2200;
+      text-shadow: 0 0 30px rgba(200,30,0,.8), 0 0 65px rgba(140,0,0,.5);
+      animation: fallPulse 2s ease-in-out infinite;
+    }
+    @keyframes fallPulse {
+      0%,100% { text-shadow: 0 0 30px rgba(200,30,0,.8), 0 0 65px rgba(140,0,0,.5); }
+      50%      { text-shadow: 0 0 55px rgba(255,50,0,1), 0 0 110px rgba(200,0,0,.7); }
+    }
+    #fall-heading p { color: rgba(255,140,120,.55); }
+    /* Snake animation */
+    @keyframes snakeSlither {
+      0%,100% { transform: translateX(-50%) rotate(-1deg); }
+      50%      { transform: translateX(-50%) rotate(1deg);  }
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — NOAH'S ARK  挪亞方舟
+    ══════════════════════════════════════════════ */
+    #scene-noah {
+      background: linear-gradient(180deg, #0a0a14 0%, #1a1a2e 35%, #222240 65%, #141428 100%);
+    }
+    #noah-stormsky {
+      position: absolute; top: 0; left: 0; width: 100%; height: 55%;
+      background: radial-gradient(ellipse 80% 60% at 50% 20%, rgba(40,40,65,.9) 0%, transparent 80%);
+      z-index: 2;
+    }
+    #noah-water {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 38%;
+      background: linear-gradient(180deg, rgba(25,50,90,.95) 0%, rgba(15,30,65,.98) 50%, #080818 100%);
+      z-index: 5; overflow: hidden;
+    }
+    #noah-water::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 200%; height: 10px;
+      background: repeating-linear-gradient(90deg,
+        transparent, transparent 36px,
+        rgba(120,180,255,.18) 36px, rgba(120,180,255,.18) 72px);
+      animation: waveRipple 3.5s linear infinite;
+    }
+    #ark-svg {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(140px,26vw,340px);
+      animation: arkBob 5s ease-in-out infinite;
+    }
+    @keyframes arkBob {
+      0%,100% { transform: translateX(-50%) translateY(0)    rotate(-.5deg); }
+      50%      { transform: translateX(-50%) translateY(-8px) rotate(.5deg);  }
+    }
+    /* Rain */
+    .raindrop {
+      position: absolute; z-index: 4;
+      width: 1.5px;
+      background: linear-gradient(180deg, transparent, rgba(160,200,255,.5));
+      animation: rainFall var(--spd,1s) linear var(--delay,0s) infinite;
+    }
+    @keyframes rainFall {
+      0%   { transform: translateY(-20px); opacity: 0; }
+      10%  { opacity: 1; }
+      100% { transform: translateY(100vh); opacity: .15; }
+    }
+    #rainbow-svg {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 10; width: clamp(180px,40vw,500px);
+      opacity: .65;
+      animation: rainbowFade 6s ease-in-out infinite;
+    }
+    @keyframes rainbowFade {
+      0%,100% { opacity: .5; }
+      50%      { opacity: .8; }
+    }
+    #dove-svg {
+      position: absolute; top: 22%; right: 18%;
+      z-index: 11; width: clamp(32px,5vw,65px);
+      animation: doveFloat 5s ease-in-out infinite;
+    }
+    @keyframes doveFloat {
+      0%,100% { transform: translateY(0) translateX(0);    }
+      30%      { transform: translateY(-10px) translateX(8px); }
+      70%      { transform: translateY(-5px) translateX(-5px); }
+    }
+    #noah-heading h2 {
+      background: linear-gradient(120deg,#6ea8fe 0%,#a0cfff 50%,#6ea8fe 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #noah-heading p { color: rgba(130,180,240,.6); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — TOWER OF BABEL  巴別塔
+    ══════════════════════════════════════════════ */
+    #scene-babel {
+      background: linear-gradient(180deg, #080412 0%, #140e22 45%, #1e1430 70%, #0c0818 100%);
+    }
+    #babel-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 22%;
+      background: linear-gradient(180deg, #3a2a18 0%, #241808 50%, #120c04 100%);
+      z-index: 5;
+    }
+    #babel-divine-light {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(30px,6vw,80px); height: 48%;
+      background: linear-gradient(180deg,rgba(255,255,220,.55) 0%,rgba(255,240,160,.3) 40%,rgba(255,215,0,.15) 70%,transparent 100%);
+      z-index: 9; filter: blur(12px);
+      animation: babelLightPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes babelLightPulse {
+      0%,100% { opacity: .45; width: clamp(30px,5.5vw,75px); }
+      50%      { opacity: .9;  width: clamp(38px,7vw,95px); }
+    }
+    #tower-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,18vw,260px);
+    }
+    /* People scattering */
+    .babel-person {
+      position: absolute; bottom: 18%; z-index: 7;
+      animation: scatter var(--spd,4s) ease-in-out var(--delay,0s) infinite alternate;
+    }
+    @keyframes scatter {
+      0%   { transform: translateX(0) translateY(0); opacity: .75; }
+      100% { transform: translateX(var(--dx,30px)) translateY(var(--dy,0px)); opacity: .4; }
+    }
+    #babel-heading h2 {
+      background: linear-gradient(120deg,#ffd700 0%,#ff9f1c 50%,#ffd700 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    #babel-heading p { color: rgba(255,210,120,.55); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"    aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-creation" aria-label="七日創造"></a>
+  <a class="nav-dot" href="#scene-eden"     aria-label="伊甸園"></a>
+  <a class="nav-dot" href="#scene-fall"     aria-label="犯罪墮落"></a>
+  <a class="nav-dot" href="#scene-noah"     aria-label="挪亞方舟"></a>
+  <a class="nav-dot" href="#scene-babel"    aria-label="巴別塔"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="創世記 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Glowing orb — "Let there be light" -->
+  <div id="intro-orb" aria-hidden="true"></div>
+  <div id="intro-rays" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>創世記</h1>
+    <p>Book of Genesis</p>
+    <span class="sub">太初 · 創造 · 伊甸 · 方舟 · 巴別</span>
+  </div>
+
+  <!-- Dark void at bottom -->
+  <div id="intro-void" aria-hidden="true"></div>
+
+  <div class="scroll-hint">↓ 向下滾動探索 · Scroll to explore</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — SEVEN DAYS OF CREATION  七日創造
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-creation" aria-label="七日創造 — The Seven Days of Creation">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Sun -->
+  <div id="creation-sun" aria-hidden="true"></div>
+  <!-- Moon -->
+  <div id="creation-moon" aria-hidden="true"></div>
+
+  <!-- Land and waters SVG -->
+  <svg id="creation-land" viewBox="0 0 1440 200" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="landG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2d5a1e"/>
+        <stop offset="100%" stop-color="#0a1e08"/>
+      </linearGradient>
+    </defs>
+    <!-- Rolling hills -->
+    <path d="M0 200 L0 120 Q120 55 280 90 Q440 125 580 70 Q720 15 860 65 Q1000 115 1160 60 Q1320 8 1440 80 L1440 200 Z"
+          fill="url(#landG)"/>
+    <!-- Greenery tufts -->
+    <ellipse cx="180" cy="85"  rx="22" ry="14" fill="#1a6e28" opacity=".7"/>
+    <ellipse cx="420" cy="95"  rx="18" ry="12" fill="#228032" opacity=".6"/>
+    <ellipse cx="680" cy="50"  rx="25" ry="15" fill="#1a7028" opacity=".7"/>
+    <ellipse cx="960" cy="80"  rx="20" ry="13" fill="#1e7a2e" opacity=".65"/>
+    <ellipse cx="1220" cy="55" rx="24" ry="14" fill="#1a6e28" opacity=".7"/>
+    <!-- Small trees -->
+    <line x1="300" y1="82" x2="300" y2="52" stroke="#2d1800" stroke-width="3"/>
+    <ellipse cx="300" cy="48" rx="14" ry="11" fill="#1a5e22"/>
+    <line x1="800" y1="58" x2="800" y2="30" stroke="#2d1800" stroke-width="3"/>
+    <ellipse cx="800" cy="26" rx="12" ry="10" fill="#1e6628"/>
+    <line x1="1100" y1="68" x2="1100" y2="42" stroke="#2d1800" stroke-width="3"/>
+    <ellipse cx="1100" cy="38" rx="13" ry="10" fill="#1a5a20"/>
+  </svg>
+
+  <!-- Waters -->
+  <div id="creation-waters" aria-hidden="true"></div>
+
+  <!-- Birds in sky -->
+  <div class="bird" style="top:28%; left:30%; --spd:7s; --delay:0s;">
+    <svg viewBox="0 0 40 16" width="clamp(18px,2.5vw,32px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,10 Q10,0 20,8 Q30,0 40,10" stroke="rgba(255,255,255,.4)" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+  <div class="bird" style="top:24%; left:55%; --spd:8s; --delay:1s;">
+    <svg viewBox="0 0 40 16" width="clamp(14px,2vw,26px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,10 Q10,0 20,8 Q30,0 40,10" stroke="rgba(255,255,255,.35)" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+  <div class="bird" style="top:32%; left:72%; --spd:6.5s; --delay:.5s;">
+    <svg viewBox="0 0 40 16" width="clamp(16px,2.2vw,28px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,10 Q10,0 20,8 Q30,0 40,10" stroke="rgba(255,255,255,.3)" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+  <div class="bird" style="top:20%; left:44%; --spd:9s; --delay:2s;">
+    <svg viewBox="0 0 40 16" width="clamp(12px,1.8vw,22px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,10 Q10,0 20,8 Q30,0 40,10" stroke="rgba(255,255,255,.28)" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="scene-heading" id="creation-heading" aria-hidden="true">
+    <h2>✨ 七日創造</h2>
+    <p>The Seven Days of Creation — Genesis 1</p>
+  </div>
+  <div class="scene-verse">「起初，神創造天地」— 創世記 1:1</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — GARDEN OF EDEN  伊甸園
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-eden" aria-label="伊甸園 — The Garden of Eden">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Ground -->
+  <div id="eden-ground" aria-hidden="true"></div>
+
+  <!-- River -->
+  <div id="eden-river" role="img" aria-label="伊甸園的河流 — River flowing through Eden">
+    <div id="eden-river-water"></div>
+  </div>
+
+  <!-- Trees & Garden SVG -->
+  <svg id="eden-svg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax meet"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="伊甸園的兩棵樹 — The Two Trees of Eden">
+    <title>生命樹與分辨善惡的樹 — Tree of Life and Tree of Knowledge</title>
+    <defs>
+      <radialGradient id="lifeGlow" cx="50%" cy="40%">
+        <stop offset="0%"   stop-color="rgba(80,255,120,.5)"/>
+        <stop offset="55%"  stop-color="rgba(40,200,60,.2)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <radialGradient id="knowGlow" cx="50%" cy="40%">
+        <stop offset="0%"   stop-color="rgba(255,200,60,.45)"/>
+        <stop offset="55%"  stop-color="rgba(220,160,20,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <filter id="treeGlow">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- Tree of Life (left) — green glow -->
+    <ellipse cx="480" cy="260" rx="110" ry="120" fill="url(#lifeGlow)" style="animation:glowPulse 4.5s ease-in-out infinite;"/>
+    <line x1="480" y1="420" x2="480" y2="260" stroke="#3d2200" stroke-width="14" stroke-linecap="round"/>
+    <!-- Branches -->
+    <line x1="480" y1="320" x2="420" y2="265" stroke="#3d2200" stroke-width="7" stroke-linecap="round"/>
+    <line x1="480" y1="310" x2="540" y2="250" stroke="#3d2200" stroke-width="7" stroke-linecap="round"/>
+    <line x1="480" y1="350" x2="400" y2="310" stroke="#3d2200" stroke-width="5" stroke-linecap="round"/>
+    <line x1="480" y1="345" x2="555" y2="298" stroke="#3d2200" stroke-width="5" stroke-linecap="round"/>
+    <!-- Canopy -->
+    <ellipse cx="480" cy="245" rx="95" ry="72" fill="#1a8028" filter="url(#treeGlow)"/>
+    <ellipse cx="450" cy="235" rx="60" ry="52" fill="#22a038" opacity=".7"/>
+    <ellipse cx="515" cy="238" rx="55" ry="48" fill="#1e9432" opacity=".65"/>
+    <ellipse cx="480" cy="220" rx="48" ry="40" fill="#28b842" opacity=".5"/>
+    <!-- Glowing fruits on life tree -->
+    <circle cx="445" cy="270" r="7" fill="#60ff90" style="animation:shimmer 2.5s ease-in-out infinite;"/>
+    <circle cx="510" cy="260" r="6" fill="#50ee80" style="animation:shimmer 3s ease-in-out .5s infinite;"/>
+    <circle cx="475" cy="228" r="5" fill="#70ffaa" style="animation:shimmer 2.8s ease-in-out 1s infinite;"/>
+    <!-- Roots -->
+    <path d="M465,420 Q450,440 430,445" stroke="#2d1600" stroke-width="6" fill="none"/>
+    <path d="M495,420 Q510,440 530,445" stroke="#2d1600" stroke-width="6" fill="none"/>
+
+    <!-- Tree of Knowledge (right) — gold/amber glow -->
+    <ellipse cx="960" cy="260" rx="110" ry="120" fill="url(#knowGlow)" style="animation:glowPulse 4s ease-in-out 1s infinite;"/>
+    <line x1="960" y1="420" x2="960" y2="260" stroke="#4a2800" stroke-width="14" stroke-linecap="round"/>
+    <!-- Branches -->
+    <line x1="960" y1="320" x2="900" y2="268" stroke="#4a2800" stroke-width="7" stroke-linecap="round"/>
+    <line x1="960" y1="310" x2="1020" y2="255" stroke="#4a2800" stroke-width="7" stroke-linecap="round"/>
+    <line x1="960" y1="348" x2="885" y2="308" stroke="#4a2800" stroke-width="5" stroke-linecap="round"/>
+    <line x1="960" y1="342" x2="1035" y2="295" stroke="#4a2800" stroke-width="5" stroke-linecap="round"/>
+    <!-- Canopy -->
+    <ellipse cx="960" cy="248" rx="92" ry="70" fill="#5a7a20" filter="url(#treeGlow)"/>
+    <ellipse cx="930" cy="238" rx="58" ry="50" fill="#6a8a28" opacity=".7"/>
+    <ellipse cx="995" cy="240" rx="54" ry="46" fill="#5e8022" opacity=".65"/>
+    <ellipse cx="960" cy="222" rx="46" ry="38" fill="#7a9a30" opacity=".5"/>
+    <!-- Golden fruits on knowledge tree -->
+    <circle cx="930" cy="268" r="8" fill="#ffb820" style="animation:shimmer 2.2s ease-in-out infinite;"/>
+    <circle cx="990" cy="258" r="7" fill="#ffc840" style="animation:shimmer 2.8s ease-in-out .7s infinite;"/>
+    <circle cx="958" cy="232" r="6" fill="#ffd050" style="animation:shimmer 3.2s ease-in-out 1.2s infinite;"/>
+    <!-- Roots -->
+    <path d="M945,420 Q930,440 910,445" stroke="#3a1c00" stroke-width="6" fill="none"/>
+    <path d="M975,420 Q990,440 1010,445" stroke="#3a1c00" stroke-width="6" fill="none"/>
+
+    <!-- Background bushes -->
+    <ellipse cx="200" cy="420" rx="60" ry="35" fill="#145218"/>
+    <ellipse cx="280" cy="415" rx="45" ry="28" fill="#186020"/>
+    <ellipse cx="1200" cy="418" rx="55" ry="32" fill="#145218"/>
+    <ellipse cx="1280" cy="412" rx="40" ry="25" fill="#186020"/>
+    <!-- Flowers on ground -->
+    <circle cx="340" cy="430" r="5" fill="#ff6b8a" opacity=".7"/>
+    <circle cx="345" cy="425" r="4" fill="#ff8fa5" opacity=".6"/>
+    <circle cx="700" cy="435" r="5" fill="#ffd740" opacity=".7"/>
+    <circle cx="705" cy="430" r="4" fill="#ffe166" opacity=".6"/>
+    <circle cx="1120" cy="432" r="5" fill="#c875ff" opacity=".7"/>
+    <circle cx="1125" cy="427" r="4" fill="#d8a0ff" opacity=".6"/>
+  </svg>
+
+  <!-- Floating flowers -->
+  <div class="eden-flower" style="bottom:34%; left:12%; --delay:0s;">
+    <svg viewBox="0 0 20 20" width="clamp(12px,2vw,22px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="10" cy="10" r="4" fill="#ff6b8a"/><circle cx="10" cy="5" r="3" fill="#ff8fa5"/>
+      <circle cx="14" cy="8" r="3" fill="#ff8fa5"/><circle cx="14" cy="13" r="3" fill="#ff8fa5"/>
+      <circle cx="10" cy="15" r="3" fill="#ff8fa5"/><circle cx="6" cy="13" r="3" fill="#ff8fa5"/>
+      <circle cx="6" cy="8" r="3" fill="#ff8fa5"/>
+    </svg>
+  </div>
+  <div class="eden-flower" style="bottom:36%; right:15%; --delay:.8s;">
+    <svg viewBox="0 0 20 20" width="clamp(10px,1.8vw,18px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="10" cy="10" r="4" fill="#ffd740"/><circle cx="10" cy="5" r="3" fill="#ffe166"/>
+      <circle cx="14" cy="8" r="3" fill="#ffe166"/><circle cx="14" cy="13" r="3" fill="#ffe166"/>
+      <circle cx="10" cy="15" r="3" fill="#ffe166"/><circle cx="6" cy="13" r="3" fill="#ffe166"/>
+      <circle cx="6" cy="8" r="3" fill="#ffe166"/>
+    </svg>
+  </div>
+  <div class="eden-flower" style="bottom:32%; left:42%; --delay:1.5s;">
+    <svg viewBox="0 0 20 20" width="clamp(11px,1.9vw,20px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="10" cy="10" r="4" fill="#c875ff"/><circle cx="10" cy="5" r="3" fill="#d8a0ff"/>
+      <circle cx="14" cy="8" r="3" fill="#d8a0ff"/><circle cx="14" cy="13" r="3" fill="#d8a0ff"/>
+      <circle cx="10" cy="15" r="3" fill="#d8a0ff"/><circle cx="6" cy="13" r="3" fill="#d8a0ff"/>
+      <circle cx="6" cy="8" r="3" fill="#d8a0ff"/>
+    </svg>
+  </div>
+
+  <div class="scene-heading" id="eden-heading" aria-hidden="true">
+    <h2>🌿 伊甸園</h2>
+    <p>The Garden of Eden — Genesis 2</p>
+  </div>
+  <div class="scene-verse">「耶和華神將那人安置在伊甸園」— 創世記 2:15</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — THE FALL  犯罪墮落
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-fall" aria-label="犯罪墮落 — The Fall of Man">
+  <div class="starfield" aria-hidden="true"></div>
+  <div id="fall-darkness" aria-hidden="true"></div>
+
+  <!-- Ground -->
+  <div id="fall-ground" aria-hidden="true"></div>
+
+  <!-- Fruit glow -->
+  <div id="fruit-glow" aria-hidden="true"></div>
+
+  <!-- Tree with serpent and forbidden fruit -->
+  <svg id="fall-tree-svg" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="蛇纏繞在善惡樹上 — Serpent wrapped around the Tree of Knowledge">
+    <title>蛇與禁果 — The Serpent and the Forbidden Fruit</title>
+    <defs>
+      <radialGradient id="fruitG" cx="50%" cy="40%">
+        <stop offset="0%"   stop-color="#ff4444"/>
+        <stop offset="60%"  stop-color="#cc1100"/>
+        <stop offset="100%" stop-color="#880000"/>
+      </radialGradient>
+      <filter id="fruitGlowF">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="darkAura" cx="50%" cy="50%">
+        <stop offset="0%"   stop-color="rgba(80,0,0,.2)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Dark aura around tree -->
+    <ellipse cx="100" cy="140" rx="95" ry="130" fill="url(#darkAura)"/>
+
+    <!-- Tree trunk -->
+    <line x1="100" y1="260" x2="100" y2="110" stroke="#2a1400" stroke-width="14" stroke-linecap="round"/>
+    <!-- Branches -->
+    <line x1="100" y1="170" x2="55" y2="120" stroke="#2a1400" stroke-width="7" stroke-linecap="round"/>
+    <line x1="100" y1="165" x2="148" y2="115" stroke="#2a1400" stroke-width="7" stroke-linecap="round"/>
+    <line x1="100" y1="195" x2="42" y2="155" stroke="#2a1400" stroke-width="5" stroke-linecap="round"/>
+    <line x1="100" y1="190" x2="158" y2="148" stroke="#2a1400" stroke-width="5" stroke-linecap="round"/>
+    <line x1="100" y1="140" x2="78" y2="95"  stroke="#2a1400" stroke-width="5" stroke-linecap="round"/>
+    <line x1="100" y1="135" x2="125" y2="88" stroke="#2a1400" stroke-width="5" stroke-linecap="round"/>
+    <!-- Roots -->
+    <path d="M85,260 Q65,275 50,278" stroke="#1e0e00" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M115,260 Q135,275 150,278" stroke="#1e0e00" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+    <!-- Dark foliage -->
+    <ellipse cx="100" cy="105" rx="72" ry="55" fill="#2a4a10" opacity=".9"/>
+    <ellipse cx="72" cy="98"  rx="44" ry="38" fill="#1e3a0c" opacity=".8"/>
+    <ellipse cx="130" cy="100" rx="42" ry="36" fill="#1e3a0c" opacity=".8"/>
+    <ellipse cx="100" cy="85"  rx="38" ry="30" fill="#345518" opacity=".6"/>
+
+    <!-- Serpent winding up trunk -->
+    <path d="M115,240 Q85,225 115,210 Q140,198 115,185 Q82,172 112,158 Q140,145 118,132 Q96,122 108,110"
+          stroke="#3a6e28" stroke-width="6" fill="none" stroke-linecap="round"
+          style="animation:snakeSlither 3s ease-in-out infinite;"/>
+    <!-- Serpent scales pattern -->
+    <path d="M115,240 Q85,225 115,210 Q140,198 115,185 Q82,172 112,158 Q140,145 118,132 Q96,122 108,110"
+          stroke="rgba(80,140,50,.3)" stroke-width="9" fill="none" stroke-linecap="round" stroke-dasharray="3 6"
+          style="animation:snakeSlither 3s ease-in-out infinite;"/>
+    <!-- Serpent head -->
+    <ellipse cx="108" cy="106" rx="8" ry="6" fill="#3a6e28"
+             style="animation:snakeSlither 3s ease-in-out infinite;"/>
+    <!-- Serpent eyes -->
+    <circle cx="105" cy="104" r="1.8" fill="#ffcc00"/>
+    <circle cx="112" cy="104" r="1.8" fill="#ffcc00"/>
+    <circle cx="105" cy="104" r=".8" fill="#000"/>
+    <circle cx="112" cy="104" r=".8" fill="#000"/>
+    <!-- Forked tongue -->
+    <path d="M100,106 L95,108 M100,106 L95,103" stroke="#cc2200" stroke-width="1" fill="none"/>
+
+    <!-- Forbidden fruit (glowing red apple) -->
+    <circle cx="130" cy="122" r="12" fill="url(#fruitG)" filter="url(#fruitGlowF)"
+            style="animation:shimmer 2s ease-in-out infinite;"/>
+    <!-- Fruit stem -->
+    <path d="M130,110 Q132,106 136,104" stroke="#2a1400" stroke-width="2" fill="none"/>
+    <!-- Fruit leaf -->
+    <ellipse cx="137" cy="105" rx="6" ry="3" fill="#2a5a10" transform="rotate(-20 137 105)"/>
+    <!-- Fruit highlight -->
+    <circle cx="126" cy="118" r="3" fill="rgba(255,255,255,.22)"/>
+  </svg>
+
+  <div class="scene-heading" id="fall-heading" aria-hidden="true">
+    <h2>🍎 犯罪墮落</h2>
+    <p>The Fall of Man — Genesis 3</p>
+  </div>
+  <div class="scene-verse">「你們便如神能知道善惡」— 創世記 3:5</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — NOAH'S ARK  挪亞方舟
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-noah" aria-label="挪亞方舟 — Noah's Ark">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Storm sky -->
+  <div id="noah-stormsky" aria-hidden="true"></div>
+
+  <!-- Rain -->
+  <div class="raindrop" style="--spd:.8s;  --delay:0s;    left:4%;  top:0; height:18px;"></div>
+  <div class="raindrop" style="--spd:1.1s; --delay:.15s;  left:10%; top:0; height:22px;"></div>
+  <div class="raindrop" style="--spd:.9s;  --delay:.35s;  left:16%; top:0; height:16px;"></div>
+  <div class="raindrop" style="--spd:1.3s; --delay:.05s;  left:22%; top:0; height:20px;"></div>
+  <div class="raindrop" style="--spd:.85s; --delay:.55s;  left:28%; top:0; height:18px;"></div>
+  <div class="raindrop" style="--spd:1.0s; --delay:.25s;  left:34%; top:0; height:22px;"></div>
+  <div class="raindrop" style="--spd:1.2s; --delay:.7s;   left:40%; top:0; height:16px;"></div>
+  <div class="raindrop" style="--spd:.75s; --delay:.1s;   left:46%; top:0; height:20px;"></div>
+  <div class="raindrop" style="--spd:1.05s;--delay:.45s;  left:52%; top:0; height:18px;"></div>
+  <div class="raindrop" style="--spd:.95s; --delay:.8s;   left:58%; top:0; height:22px;"></div>
+  <div class="raindrop" style="--spd:1.15s;--delay:.2s;   left:64%; top:0; height:16px;"></div>
+  <div class="raindrop" style="--spd:.88s; --delay:.6s;   left:70%; top:0; height:20px;"></div>
+  <div class="raindrop" style="--spd:1.0s; --delay:.3s;   left:76%; top:0; height:18px;"></div>
+  <div class="raindrop" style="--spd:.78s; --delay:.9s;   left:82%; top:0; height:22px;"></div>
+  <div class="raindrop" style="--spd:1.1s; --delay:.4s;   left:88%; top:0; height:16px;"></div>
+  <div class="raindrop" style="--spd:.92s; --delay:.65s;  left:94%; top:0; height:20px;"></div>
+
+  <!-- Rainbow -->
+  <svg id="rainbow-svg" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="彩虹 — Rainbow of God's covenant">
+    <title>彩虹 — Rainbow, sign of God's covenant</title>
+    <defs>
+      <filter id="rainbowBlur">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+      </filter>
+    </defs>
+    <path d="M30,190 Q250,-40 470,190" stroke="#ff0000" stroke-width="8" fill="none" opacity=".6" filter="url(#rainbowBlur)"/>
+    <path d="M42,190 Q250,-28 458,190" stroke="#ff8800" stroke-width="7" fill="none" opacity=".55" filter="url(#rainbowBlur)"/>
+    <path d="M54,190 Q250,-16 446,190" stroke="#ffdd00" stroke-width="7" fill="none" opacity=".5" filter="url(#rainbowBlur)"/>
+    <path d="M66,190 Q250,-4 434,190"  stroke="#44dd00" stroke-width="6" fill="none" opacity=".5" filter="url(#rainbowBlur)"/>
+    <path d="M78,190 Q250,8 422,190"   stroke="#0088ff" stroke-width="6" fill="none" opacity=".5" filter="url(#rainbowBlur)"/>
+    <path d="M90,190 Q250,20 410,190"  stroke="#4400cc" stroke-width="6" fill="none" opacity=".45" filter="url(#rainbowBlur)"/>
+    <path d="M102,190 Q250,32 398,190" stroke="#8800aa" stroke-width="5" fill="none" opacity=".4" filter="url(#rainbowBlur)"/>
+  </svg>
+
+  <!-- Dove with olive branch -->
+  <svg id="dove-svg" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="鴿子銜橄欖枝 — Dove with olive branch">
+    <title>鴿子銜橄欖枝 — Dove carrying an olive branch</title>
+    <!-- Body -->
+    <ellipse cx="40" cy="35" rx="18" ry="12" fill="rgba(240,245,255,.92)"/>
+    <!-- Head -->
+    <circle cx="56" cy="28" r="8" fill="rgba(240,245,255,.95)"/>
+    <!-- Eye -->
+    <circle cx="59" cy="27" r="1.5" fill="#222"/>
+    <!-- Beak -->
+    <polygon points="64,28 70,30 64,31" fill="#e8a020"/>
+    <!-- Wings -->
+    <path d="M38,30 Q20,8 10,18 Q18,24 30,30 Z" fill="rgba(220,230,245,.85)"/>
+    <path d="M38,30 Q15,14 8,24 Q16,28 28,32 Z" fill="rgba(200,215,238,.65)"/>
+    <!-- Tail -->
+    <path d="M22,35 Q14,32 10,40 Q16,38 22,40 Z" fill="rgba(220,228,240,.8)"/>
+    <!-- Olive branch in beak -->
+    <path d="M68,30 Q72,36 78,34" stroke="#5a8a30" stroke-width="1.5" fill="none"/>
+    <ellipse cx="76" cy="32" rx="4" ry="2.2" fill="#6aaa38" transform="rotate(-15 76 32)"/>
+    <ellipse cx="72" cy="35" rx="3.5" ry="2" fill="#5a9a30" transform="rotate(10 72 35)"/>
+  </svg>
+
+  <!-- Water -->
+  <div id="noah-water" aria-hidden="true"></div>
+
+  <!-- Noah's Ark -->
+  <svg id="ark-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="挪亞方舟 — Noah's Ark">
+    <title>挪亞方舟 — Noah's Ark floating on the flood waters</title>
+    <defs>
+      <linearGradient id="arkHull" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#6b4a2a"/>
+        <stop offset="100%" stop-color="#3d2410"/>
+      </linearGradient>
+      <linearGradient id="arkCabin" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#5a3e22"/>
+        <stop offset="100%" stop-color="#3a2010"/>
+      </linearGradient>
+      <linearGradient id="arkRoof" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#4a3018"/>
+        <stop offset="100%" stop-color="#2a1808"/>
+      </linearGradient>
+    </defs>
+    <!-- Hull -->
+    <path d="M40,155 Q50,195 200,200 Q350,195 360,155 L340,130 Q200,120 60,130 Z"
+          fill="url(#arkHull)" stroke="#2a1608" stroke-width="2"/>
+    <!-- Hull planks -->
+    <line x1="70"  y1="140" x2="330" y2="140" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+    <line x1="60"  y1="155" x2="340" y2="155" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+    <line x1="55"  y1="170" x2="345" y2="170" stroke="rgba(0,0,0,.12)" stroke-width="1"/>
+    <!-- Lower cabin -->
+    <rect x="80" y="95" width="240" height="38" fill="url(#arkCabin)" rx="3"/>
+    <!-- Windows -->
+    <rect x="100" y="102" width="16" height="12" fill="#1a0e04" rx="2"/>
+    <rect x="130" y="102" width="16" height="12" fill="#1a0e04" rx="2"/>
+    <rect x="160" y="102" width="16" height="12" fill="#1a0e04" rx="2"/>
+    <rect x="190" y="102" width="16" height="12" fill="#1a0e04" rx="2"/>
+    <rect x="220" y="102" width="16" height="12" fill="#1a0e04" rx="2"/>
+    <rect x="250" y="102" width="16" height="12" fill="#1a0e04" rx="2"/>
+    <rect x="280" y="102" width="16" height="12" fill="#1a0e04" rx="2"/>
+    <!-- Upper cabin -->
+    <rect x="110" y="62" width="180" height="36" fill="url(#arkCabin)" rx="3"/>
+    <!-- Upper windows -->
+    <rect x="128" y="68" width="14" height="10" fill="#1a0e04" rx="2"/>
+    <rect x="155" y="68" width="14" height="10" fill="#1a0e04" rx="2"/>
+    <rect x="182" y="68" width="14" height="10" fill="#1a0e04" rx="2"/>
+    <rect x="209" y="68" width="14" height="10" fill="#1a0e04" rx="2"/>
+    <rect x="236" y="68" width="14" height="10" fill="#1a0e04" rx="2"/>
+    <rect x="263" y="68" width="14" height="10" fill="#1a0e04" rx="2"/>
+    <!-- Roof -->
+    <path d="M105,62 L200,28 L295,62 Z" fill="url(#arkRoof)" stroke="#1e0e04" stroke-width="1.5"/>
+    <!-- Roof ridge -->
+    <line x1="200" y1="28" x2="200" y2="62" stroke="rgba(0,0,0,.12)" stroke-width="1"/>
+    <!-- Bow ornament -->
+    <path d="M358,150 Q370,140 372,125" stroke="#4a3018" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Stern -->
+    <path d="M42,150 Q32,140 28,128" stroke="#4a3018" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Water reflection -->
+    <ellipse cx="200" cy="198" rx="160" ry="6" fill="rgba(60,120,180,.15)"/>
+  </svg>
+
+  <div class="scene-heading" id="noah-heading" aria-hidden="true">
+    <h2>🕊 挪亞方舟</h2>
+    <p>Noah's Ark — Genesis 6–9</p>
+  </div>
+  <div class="scene-verse">「我要使洪水氾濫在地上」— 創世記 6:17</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — TOWER OF BABEL  巴別塔
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-babel" aria-label="巴別塔 — The Tower of Babel">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Ground -->
+  <div id="babel-ground" aria-hidden="true"></div>
+
+  <!-- Divine light from above -->
+  <div id="babel-divine-light" aria-hidden="true"></div>
+
+  <!-- Tower of Babel (Ziggurat) -->
+  <svg id="tower-svg" viewBox="0 0 300 420" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="巴別塔 — The Tower of Babel">
+    <title>巴別塔 — The Tower of Babel reaching toward the heavens</title>
+    <defs>
+      <linearGradient id="zigG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#8a7050"/>
+        <stop offset="100%" stop-color="#5a4428"/>
+      </linearGradient>
+      <linearGradient id="zigG2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#7a6240"/>
+        <stop offset="100%" stop-color="#4a3820"/>
+      </linearGradient>
+      <linearGradient id="zigG3" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#6a5438"/>
+        <stop offset="100%" stop-color="#3a2c18"/>
+      </linearGradient>
+      <linearGradient id="zigG4" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#5a4630"/>
+        <stop offset="100%" stop-color="#2e2010"/>
+      </linearGradient>
+      <linearGradient id="zigG5" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#4a3a28"/>
+        <stop offset="100%" stop-color="#221808"/>
+      </linearGradient>
+      <filter id="towerGlow">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- Level 1 (base) — widest -->
+    <rect x="20" y="340" width="260" height="60" fill="url(#zigG1)" rx="2"/>
+    <line x1="20" y1="365" x2="280" y2="365" stroke="rgba(0,0,0,.12)" stroke-width="1"/>
+    <!-- Arched entrance -->
+    <path d="M135,400 Q150,370 165,400" fill="#1a0e04"/>
+    <!-- Columns -->
+    <rect x="50"  y="345" width="8" height="55" fill="rgba(0,0,0,.1)" rx="1"/>
+    <rect x="100" y="345" width="8" height="55" fill="rgba(0,0,0,.1)" rx="1"/>
+    <rect x="192" y="345" width="8" height="55" fill="rgba(0,0,0,.1)" rx="1"/>
+    <rect x="242" y="345" width="8" height="55" fill="rgba(0,0,0,.1)" rx="1"/>
+
+    <!-- Level 2 -->
+    <rect x="42" y="275" width="216" height="65" fill="url(#zigG2)" rx="2"/>
+    <line x1="42" y1="305" x2="258" y2="305" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
+    <rect x="72"  y="282" width="6" height="58" fill="rgba(0,0,0,.08)" rx="1"/>
+    <rect x="140" y="282" width="6" height="58" fill="rgba(0,0,0,.08)" rx="1"/>
+    <rect x="222" y="282" width="6" height="58" fill="rgba(0,0,0,.08)" rx="1"/>
+
+    <!-- Level 3 -->
+    <rect x="65" y="215" width="170" height="60" fill="url(#zigG3)" rx="2"/>
+    <line x1="65" y1="242" x2="235" y2="242" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
+    <rect x="90"  y="220" width="5" height="55" fill="rgba(0,0,0,.08)" rx="1"/>
+    <rect x="147" y="220" width="5" height="55" fill="rgba(0,0,0,.08)" rx="1"/>
+    <rect x="205" y="220" width="5" height="55" fill="rgba(0,0,0,.08)" rx="1"/>
+
+    <!-- Level 4 -->
+    <rect x="88" y="160" width="124" height="55" fill="url(#zigG4)" rx="2"/>
+    <line x1="88" y1="185" x2="212" y2="185" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
+    <rect x="108" y="164" width="5" height="51" fill="rgba(0,0,0,.08)" rx="1"/>
+    <rect x="147" y="164" width="5" height="51" fill="rgba(0,0,0,.08)" rx="1"/>
+    <rect x="188" y="164" width="5" height="51" fill="rgba(0,0,0,.08)" rx="1"/>
+
+    <!-- Level 5 -->
+    <rect x="110" y="108" width="80" height="52" fill="url(#zigG5)" rx="2"/>
+    <line x1="110" y1="132" x2="190" y2="132" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
+    <rect x="125" y="112" width="4" height="48" fill="rgba(0,0,0,.08)" rx="1"/>
+    <rect x="170" y="112" width="4" height="48" fill="rgba(0,0,0,.08)" rx="1"/>
+
+    <!-- Crown / top spire -->
+    <rect x="132" y="68" width="36" height="40" fill="#3a2a18" rx="2"/>
+    <polygon points="150,28 170,68 130,68" fill="#2a1c10"/>
+    <!-- Top fire/beacon -->
+    <ellipse cx="150" cy="35" rx="10" ry="14" fill="rgba(255,200,60,.5)"
+             style="animation:shimmer 2s ease-in-out infinite;"/>
+    <ellipse cx="150" cy="32" rx="6" ry="9" fill="rgba(255,240,180,.7)"
+             style="animation:shimmer 1.5s ease-in-out .3s infinite;"/>
+
+    <!-- Spiral ramp (suggesting ascent) -->
+    <path d="M20,395 Q10,340 42,340 Q70,340 65,275" stroke="rgba(160,130,90,.25)" stroke-width="8" fill="none"/>
+    <path d="M258,340 Q280,310 235,275" stroke="rgba(160,130,90,.2)" stroke-width="8" fill="none"/>
+
+    <!-- Shadow side -->
+    <rect x="165" y="340" width="115" height="60" fill="rgba(0,0,0,.12)" rx="2"/>
+    <rect x="159" y="275" width="99"  height="65" fill="rgba(0,0,0,.1)" rx="2"/>
+    <rect x="153" y="215" width="82"  height="60" fill="rgba(0,0,0,.1)" rx="2"/>
+    <rect x="153" y="160" width="59"  height="55" fill="rgba(0,0,0,.08)" rx="2"/>
+    <rect x="148" y="108" width="42"  height="52" fill="rgba(0,0,0,.08)" rx="2"/>
+  </svg>
+
+  <!-- Scattered people at base -->
+  <div class="babel-person" style="left:14%; --spd:5s; --delay:0s; --dx:-35px; --dy:4px;">
+    <svg viewBox="0 0 16 30" width="clamp(8px,1.3vw,16px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="8" cy="5" r="4" fill="#8b6914"/><rect x="4" y="10" width="8" height="14" fill="#5a3d18" rx="2"/>
+      <line x1="5" y1="24" x2="4" y2="30" stroke="#5a3d18" stroke-width="2"/><line x1="11" y1="24" x2="12" y2="30" stroke="#5a3d18" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="babel-person" style="left:24%; --spd:4.5s; --delay:.5s; --dx:-22px; --dy:-2px;">
+    <svg viewBox="0 0 16 30" width="clamp(7px,1.1vw,14px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="8" cy="5" r="4" fill="#a07828"/><rect x="4" y="10" width="8" height="14" fill="#6b4a22" rx="2"/>
+      <line x1="5" y1="24" x2="4" y2="30" stroke="#6b4a22" stroke-width="2"/><line x1="11" y1="24" x2="12" y2="30" stroke="#6b4a22" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="babel-person" style="left:36%; --spd:5.5s; --delay:1s; --dx:-12px; --dy:6px;">
+    <svg viewBox="0 0 16 30" width="clamp(7px,1.2vw,15px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="8" cy="5" r="4" fill="#8b7030"/><rect x="4" y="10" width="8" height="14" fill="#4a3218" rx="2"/>
+      <line x1="5" y1="24" x2="4" y2="30" stroke="#4a3218" stroke-width="2"/><line x1="11" y1="24" x2="12" y2="30" stroke="#4a3218" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="babel-person" style="right:36%; --spd:4.8s; --delay:.3s; --dx:14px; --dy:5px;">
+    <svg viewBox="0 0 16 30" width="clamp(7px,1.2vw,15px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="8" cy="5" r="4" fill="#9a7020"/><rect x="4" y="10" width="8" height="14" fill="#5a3e20" rx="2"/>
+      <line x1="5" y1="24" x2="4" y2="30" stroke="#5a3e20" stroke-width="2"/><line x1="11" y1="24" x2="12" y2="30" stroke="#5a3e20" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="babel-person" style="right:24%; --spd:5.2s; --delay:.8s; --dx:25px; --dy:-3px;">
+    <svg viewBox="0 0 16 30" width="clamp(8px,1.3vw,16px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="8" cy="5" r="4" fill="#8b6018"/><rect x="4" y="10" width="8" height="14" fill="#503820" rx="2"/>
+      <line x1="5" y1="24" x2="4" y2="30" stroke="#503820" stroke-width="2"/><line x1="11" y1="24" x2="12" y2="30" stroke="#503820" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="babel-person" style="right:14%; --spd:4.2s; --delay:1.3s; --dx:38px; --dy:3px;">
+    <svg viewBox="0 0 16 30" width="clamp(7px,1.1vw,14px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="8" cy="5" r="4" fill="#a08028"/><rect x="4" y="10" width="8" height="14" fill="#6a4e28" rx="2"/>
+      <line x1="5" y1="24" x2="4" y2="30" stroke="#6a4e28" stroke-width="2"/><line x1="11" y1="24" x2="12" y2="30" stroke="#6a4e28" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <div class="scene-heading" id="babel-heading" aria-hidden="true">
+    <h2>🏗 巴別塔</h2>
+    <p>The Tower of Babel — Genesis 11</p>
+  </div>
+  <div class="scene-verse">「耶和華在那裡變亂天下人的言語」— 創世記 11:9</div>
+</section>
+
+</body>
+</html>
