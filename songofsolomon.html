@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>雅歌 · Song of Solomon</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #1c1c62;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+    @keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+    @keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.31), 564px 126px rgba(255,255,255,.41),
+        210px 347px rgba(255,255,255,.67), 1117px 45px rgba(255,255,255,.6),
+        66px 16px rgba(255,255,255,.35),  477px 259px rgba(255,255,255,.6),
+        1150px 102px rgba(255,255,255,.66), 1437px 280px rgba(255,255,255,.51),
+        920px 302px rgba(255,255,255,.44), 14px 389px rgba(255,255,255,.7),
+        1430px 217px rgba(255,255,255,.47), 319px 111px rgba(255,255,255,.78),
+        690px 53px rgba(255,255,255,.35),  199px 184px rgba(255,255,255,.72),
+        1237px 136px rgba(255,255,255,.7), 941px 275px rgba(255,255,255,.36),
+        776px 41px rgba(255,255,255,.58),  1288px 317px rgba(255,255,255,.74),
+        741px 296px rgba(255,255,255,.4),  143px 24px rgba(255,255,255,.63),
+        593px 41px rgba(255,255,255,.73),  207px 195px rgba(255,255,255,.44),
+        1302px 428px rgba(255,255,255,.48), 759px 182px rgba(255,255,255,.4),
+        547px 360px rgba(255,255,255,.77), 1328px 37px rgba(255,255,255,.6),
+        351px 274px rgba(255,255,255,.66), 335px 237px rgba(255,255,255,.49),
+        1311px 353px rgba(255,255,255,.58), 1403px 167px rgba(255,255,255,.72),
+        115px 118px rgba(255,255,255,.71), 647px 206px rgba(255,255,255,.43),
+        433px 468px rgba(255,255,255,.77), 645px 109px rgba(255,255,255,.63),
+        811px 453px rgba(255,255,255,.76), 940px 74px rgba(255,255,255,.43),
+        506px 382px rgba(255,255,255,.58), 539px 383px rgba(255,255,255,.59),
+        1196px 205px rgba(255,255,255,.48), 284px 261px rgba(255,255,255,.55),
+        97px 441px rgba(255,255,255,.35),  1286px 82px rgba(255,255,255,.7),
+        865px 306px rgba(255,255,255,.33), 782px 306px rgba(255,255,255,.8),
+        1084px 129px rgba(255,255,255,.79), 24px 349px rgba(255,255,255,.66),
+        1397px 454px rgba(255,255,255,.57), 547px 394px rgba(255,255,255,.62),
+        229px 151px rgba(255,255,255,.52), 930px 2px rgba(255,255,255,.78),
+        540px 498px rgba(255,255,255,.55), 366px 260px rgba(255,255,255,.76),
+        1281px 153px rgba(255,255,255,.72), 1040px 312px rgba(255,255,255,.4),
+        766px 391px rgba(255,255,255,.38), 1087px 471px rgba(255,255,255,.3),
+        664px 251px rgba(255,255,255,.31), 744px 450px rgba(255,255,255,.79),
+        630px 123px rgba(255,255,255,.33), 1162px 485px rgba(255,255,255,.34),
+        996px 418px rgba(255,255,255,.33), 1091px 393px rgba(255,255,255,.36),
+        1352px 244px rgba(255,255,255,.77), 339px 136px rgba(255,255,255,.56),
+        1243px 217px rgba(255,255,255,.78), 1105px 387px rgba(255,255,255,.66),
+        412px 366px rgba(255,255,255,.46), 1376px 333px rgba(255,255,255,.49),
+        1060px 232px rgba(255,255,255,.36), 461px 33px rgba(255,255,255,.47),
+        1205px 284px rgba(255,255,255,.42), 452px 4px rgba(255,255,255,.34),
+        1293px 31px rgba(255,255,255,.41), 65px 441px rgba(255,255,255,.47),
+        1053px 122px rgba(255,255,255,.44), 995px 110px rgba(255,255,255,.57),
+        1170px 296px rgba(255,255,255,.54), 969px 414px rgba(255,255,255,.5),
+        194px 50px rgba(255,255,255,.63),  726px 217px rgba(255,255,255,.51);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.9),  1324px 51px rgba(255,255,255,.72),
+        695px 410px rgba(255,255,255,.96), 510px 99px rgba(255,255,255,.76),
+        919px 72px rgba(255,255,255,.83),  571px 237px rgba(255,255,255,.77),
+        155px 227px rgba(255,255,255,.94), 1128px 51px rgba(255,255,255,.72),
+        1108px 429px rgba(255,255,255,.7), 192px 475px rgba(255,255,255,.93),
+        485px 86px rgba(255,255,255,.82),  986px 110px rgba(255,255,255,.96),
+        121px 85px rgba(255,255,255,.81),  800px 136px rgba(255,255,255,.98),
+        932px 147px rgba(255,255,255,.83), 1139px 339px rgba(255,255,255,.92),
+        318px 98px rgba(255,255,255,.79),  120px 297px rgba(255,255,255,.92),
+        125px 383px rgba(255,255,255,.79), 103px 300px rgba(255,255,255,.84),
+        1088px 81px rgba(255,255,255,.72), 1041px 42px rgba(255,255,255,.96),
+        141px 305px rgba(255,255,255,.72), 482px 207px rgba(255,255,255,.74),
+        1167px 127px rgba(255,255,255,.87), 82px 318px rgba(255,255,255,.72),
+        1347px 299px rgba(255,255,255,.87), 648px 479px rgba(255,255,255,.78),
+        1372px 367px rgba(255,255,255,.79), 544px 203px rgba(255,255,255,.74);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,235,255,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(232,140,165,.15);
+      border-color: rgba(232,140,165,.5);
+      color: #e88ca5;
+      box-shadow: 0 0 20px rgba(232,140,165,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #c87898 0%, #d8a0b0 40%, #e8c8b0 100%);
+    }
+    #intro-orb {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 38%, #ffe8f0, #f0a0b8 40%, #e07898 75%, #c85878);
+      box-shadow: 0 0 60px rgba(232,140,165,.7), 0 0 120px rgba(220,100,140,.3);
+      z-index: 4;
+      animation: roseGlow 4s ease-in-out infinite;
+    }
+    @keyframes roseGlow {
+      0%,100% { box-shadow: 0 0 60px rgba(232,140,165,.6), 0 0 120px rgba(220,100,140,.25); }
+      50%      { box-shadow: 0 0 90px rgba(240,160,185,.85), 0 0 170px rgba(232,140,165,.4); }
+    }
+    #intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#e88ca5 0%,#fff0f4 45%,#d4607a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(180,60,90,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(160,50,80,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+    #intro-figures {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(80px,12vw,150px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — THE BELOVED  良人的愛慕
+    ══════════════════════════════════════════════ */
+    #scene-beloved {
+      background: linear-gradient(180deg, #e0a8b8 0%, #c8d8a0 45%, #f0d890 100%);
+    }
+    #beloved-garden-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; z-index: 4;
+    }
+    #beloved-bride {
+      position: absolute; bottom: 30%; left: 42%; z-index: 9;
+      width: clamp(50px,7vw,90px);
+      animation: gentleSway 5s ease-in-out infinite;
+    }
+    #beloved-deer {
+      position: absolute; bottom: 34%; right: 18%; z-index: 7;
+      width: clamp(40px,5vw,70px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    #beloved-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: 45vw; height: 35vh;
+      background: radial-gradient(ellipse, rgba(240,200,140,.2) 0%, rgba(255,220,180,.08) 50%, transparent 72%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #beloved-heading h2 {
+      color: #b03860;
+      text-shadow: 0 0 22px rgba(180,60,100,.5);
+    }
+    #beloved-heading p { color: rgba(140,40,70,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — GARDEN OF LOVE  愛的花園
+    ══════════════════════════════════════════════ */
+    #scene-garden {
+      background: linear-gradient(180deg, #88c888 0%, #e0a0c0 45%, #f0d880 100%);
+    }
+    #garden-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 62%; z-index: 4;
+    }
+    #garden-fountain {
+      position: absolute; bottom: 32%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(60px,9vw,110px);
+      animation: floatY 4s ease-in-out infinite;
+    }
+    #garden-glow {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: 35vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(200,240,200,.18) 0%, rgba(220,180,220,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+    #garden-heading h2 {
+      background: linear-gradient(120deg,#c06888 0%,#fff0f4 50%,#88a840 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #garden-heading p { color: rgba(100,60,80,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — SEEKING THE BELOVED  尋找良人
+    ══════════════════════════════════════════════ */
+    #scene-seeking {
+      background: linear-gradient(180deg, #a888c0 0%, #7898c8 45%, #d8b080 100%);
+    }
+    #seeking-city-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 58%; z-index: 4;
+    }
+    #seeking-woman {
+      position: absolute; bottom: 28%; left: 35%; z-index: 9;
+      width: clamp(40px,6vw,75px);
+      animation: gentleSway 5.5s ease-in-out infinite;
+    }
+    #seeking-moon {
+      position: absolute; top: 10%; right: 18%;
+      width: clamp(40px,6vw,75px); height: clamp(40px,6vw,75px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 55% 35%, #fffef0, #f0e8c0 50%, #d8c890);
+      box-shadow: 0 0 50px rgba(240,230,180,.6), 0 0 100px rgba(220,210,160,.25);
+      z-index: 4;
+      animation: roseGlow 5s ease-in-out infinite;
+    }
+    #seeking-moonbeam {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,400px); height: 100%;
+      background: radial-gradient(ellipse 50% 60% at 65% 18%, rgba(240,230,180,.1) 0%, rgba(220,210,160,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #seeking-heading h2 {
+      background: linear-gradient(120deg,#c8a0d0 0%,#fff8f0 50%,#d8b080 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #seeking-heading p { color: rgba(100,70,120,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — THE WEDDING  婚禮盛典
+    ══════════════════════════════════════════════ */
+    #scene-wedding {
+      background: linear-gradient(180deg, #e8c070 0%, #e0a0b0 45%, #f8f0e0 100%);
+    }
+    #wedding-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; z-index: 4;
+    }
+    #wedding-couple {
+      position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(80px,12vw,160px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    #wedding-glow {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(240,200,100,.2) 0%, rgba(240,180,160,.08) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #wedding-heading h2 {
+      background: linear-gradient(120deg,#c08030 0%,#fff4e0 50%,#e88ca5 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #wedding-heading p { color: rgba(160,100,60,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — ETERNAL LOVE  堅貞的愛
+    ══════════════════════════════════════════════ */
+    #scene-eternal {
+      background: linear-gradient(180deg, #e8c078 0%, #e0a0b0 40%, #a0c8e0 100%);
+    }
+    #eternal-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 4;
+    }
+    #eternal-couple {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(90px,14vw,180px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+    #eternal-flame {
+      position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
+      z-index: 6; width: clamp(40px,6vw,80px);
+      animation: flameDance 2s ease-in-out infinite;
+    }
+    @keyframes flameDance {
+      0%,100% { transform: translateX(-50%) scaleY(1) scaleX(1); }
+      25%      { transform: translateX(-50%) scaleY(1.08) scaleX(.95); }
+      50%      { transform: translateX(-50%) scaleY(1.15) scaleX(.92); }
+      75%      { transform: translateX(-50%) scaleY(1.05) scaleX(.97); }
+    }
+    #eternal-glow {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 45vh;
+      background: radial-gradient(ellipse, rgba(240,180,100,.18) 0%, rgba(232,140,165,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+    #eternal-heading h2 {
+      background: linear-gradient(120deg,#e88ca5 0%,#fff0f0 50%,#e8c070 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #eternal-heading p { color: rgba(180,80,100,.55); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"    aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-beloved"  aria-label="良人的愛慕"></a>
+  <a class="nav-dot" href="#scene-garden"   aria-label="愛的花園"></a>
+  <a class="nav-dot" href="#scene-seeking"  aria-label="尋找良人"></a>
+  <a class="nav-dot" href="#scene-wedding"  aria-label="婚禮盛典"></a>
+  <a class="nav-dot" href="#scene-eternal"  aria-label="堅貞的愛"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="雅歌 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="intro-orb" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>雅歌</h1>
+    <p>Song of Solomon</p>
+    <span class="sub">愛情 · 良人 · 佳偶 · 花園 · 盟約</span>
+  </div>
+
+  <!-- Rose garden landscape -->
+  <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="introSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e8b8c8"/>
+        <stop offset="50%" stop-color="#d0a0a8"/>
+        <stop offset="100%" stop-color="#c89098"/>
+      </linearGradient>
+      <linearGradient id="introHillG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#b88898"/>
+        <stop offset="100%" stop-color="#987080"/>
+      </linearGradient>
+      <linearGradient id="introHillG2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#a08070"/>
+        <stop offset="100%" stop-color="#907868"/>
+      </linearGradient>
+      <linearGradient id="introFieldG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#88a870"/>
+        <stop offset="50%" stop-color="#709060"/>
+        <stop offset="100%" stop-color="#607850"/>
+      </linearGradient>
+      <linearGradient id="roseRedG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e85070"/>
+        <stop offset="100%" stop-color="#c03050"/>
+      </linearGradient>
+      <linearGradient id="roseWhiteG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#fff8f8"/>
+        <stop offset="100%" stop-color="#f0d8e0"/>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="1440" height="420" fill="url(#introSkyG)"/>
+    <!-- Distant rolling hills -->
+    <path d="M0 300 Q180 250 360 275 Q540 230 720 260 Q900 220 1080 270 Q1260 245 1440 290 L1440 420 L0 420 Z"
+          fill="url(#introHillG2)" opacity=".5"/>
+    <!-- Nearer hills -->
+    <path d="M0 330 Q200 270 400 310 Q600 265 800 300 Q1000 255 1200 295 Q1350 275 1440 320 L1440 420 L0 420 Z"
+          fill="url(#introHillG1)" opacity=".7"/>
+    <!-- Green garden ground -->
+    <rect x="0" y="340" width="1440" height="80" fill="url(#introFieldG)"/>
+    <!-- Rose bushes across the field -->
+    <g opacity=".7">
+      <!-- Red roses -->
+      <circle cx="120" cy="330" r="8" fill="#e06080"/><circle cx="115" cy="325" r="5" fill="#c84060"/>
+      <circle cx="128" cy="322" r="4" fill="#d05070"/>
+      <circle cx="300" cy="335" r="9" fill="#d85070"/><circle cx="308" cy="328" r="5" fill="#c03858"/>
+      <circle cx="293" cy="326" r="4" fill="#e06880"/>
+      <circle cx="520" cy="332" r="8" fill="#e06080"/><circle cx="514" cy="325" r="5" fill="#c84060"/>
+      <circle cx="527" cy="324" r="4" fill="#d85878"/>
+      <circle cx="750" cy="328" r="9" fill="#d85070"/><circle cx="758" cy="320" r="5" fill="#c04060"/>
+      <circle cx="743" cy="322" r="4" fill="#e06880"/>
+      <circle cx="960" cy="334" r="8" fill="#e06080"/><circle cx="967" cy="326" r="5" fill="#c84060"/>
+      <circle cx="953" cy="328" r="4" fill="#d85878"/>
+      <circle cx="1150" cy="330" r="9" fill="#d85070"/><circle cx="1158" cy="323" r="5" fill="#c03858"/>
+      <circle cx="1143" cy="324" r="4" fill="#e06880"/>
+      <circle cx="1340" cy="336" r="8" fill="#e06080"/><circle cx="1333" cy="329" r="5" fill="#c84060"/>
+      <!-- White roses -->
+      <circle cx="200" cy="333" r="7" fill="#fff0f0"/><circle cx="206" cy="327" r="4" fill="#f0d8e0"/>
+      <circle cx="440" cy="336" r="7" fill="#fff0f0"/><circle cx="434" cy="329" r="4" fill="#f0d8e0"/>
+      <circle cx="650" cy="331" r="7" fill="#fff0f0"/><circle cx="657" cy="325" r="4" fill="#f0d8e0"/>
+      <circle cx="870" cy="334" r="7" fill="#fff0f0"/><circle cx="877" cy="327" r="4" fill="#f0d8e0"/>
+      <circle cx="1060" cy="332" r="7" fill="#fff0f0"/><circle cx="1053" cy="325" r="4" fill="#f0d8e0"/>
+      <circle cx="1250" cy="335" r="7" fill="#fff0f0"/><circle cx="1257" cy="328" r="4" fill="#f0d8e0"/>
+    </g>
+    <!-- Rose stems/leaves -->
+    <g stroke="#4a7a3a" stroke-width="1.5" stroke-linecap="round" opacity=".4">
+      <line x1="120" y1="340" x2="118" y2="318"/><line x1="300" y1="345" x2="298" y2="320"/>
+      <line x1="520" y1="342" x2="518" y2="318"/><line x1="750" y1="340" x2="748" y2="314"/>
+      <line x1="960" y1="344" x2="958" y2="320"/><line x1="1150" y1="342" x2="1148" y2="316"/>
+      <line x1="1340" y1="346" x2="1338" y2="322"/>
+      <line x1="200" y1="343" x2="198" y2="322"/><line x1="440" y1="346" x2="438" y2="324"/>
+      <line x1="650" y1="341" x2="648" y2="320"/><line x1="870" y1="344" x2="868" y2="322"/>
+      <line x1="1060" y1="342" x2="1058" y2="320"/><line x1="1250" y1="345" x2="1248" y2="324"/>
+    </g>
+    <!-- Warm glow on horizon -->
+    <ellipse cx="720" cy="280" rx="500" ry="60" fill="rgba(240,180,180,.12)"/>
+  </svg>
+
+  <!-- Intertwined roses SVG -->
+  <svg style="position:absolute;top:18%;left:50%;transform:translateX(-50%);z-index:6;width:clamp(50px,7vw,90px);opacity:.7"
+       viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Red rose -->
+    <circle cx="28" cy="25" r="12" fill="#e06080"/>
+    <circle cx="24" cy="20" r="7" fill="#c84060"/>
+    <circle cx="33" cy="20" r="6" fill="#d05070"/>
+    <circle cx="28" cy="18" r="4" fill="#b83050"/>
+    <path d="M28,37 Q26,50 24,65" stroke="#4a8a3a" stroke-width="2" fill="none"/>
+    <ellipse cx="20" cy="48" rx="5" ry="3" fill="#5a9a4a" opacity=".7" transform="rotate(-20,20,48)"/>
+    <!-- White rose -->
+    <circle cx="52" cy="28" r="11" fill="#fff0f4"/>
+    <circle cx="48" cy="23" r="6" fill="#f0d8e0"/>
+    <circle cx="56" cy="23" r="5" fill="#ffe8f0"/>
+    <circle cx="52" cy="21" r="3.5" fill="#e8c8d0"/>
+    <path d="M52,39 Q54,52 56,65" stroke="#4a8a3a" stroke-width="2" fill="none"/>
+    <ellipse cx="58" cy="50" rx="5" ry="3" fill="#5a9a4a" opacity=".7" transform="rotate(20,58,50)"/>
+    <!-- Intertwining stems -->
+    <path d="M28,42 Q40,48 52,44" stroke="#3a7a2a" stroke-width="1.5" fill="none" opacity=".5"/>
+  </svg>
+
+  <!-- Couple silhouette holding hands -->
+  <svg id="intro-figures" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="一對佳偶牽手 — Couple holding hands">
+    <title>佳偶同行 — Beloved couple together</title>
+    <!-- Groom (left) -->
+    <circle cx="38" cy="18" r="10" fill="#8a6850"/>
+    <path d="M28,14 Q38,5 48,14 L48,20 Q38,16 28,20 Z" fill="#6a4830"/>
+    <path d="M31,28 Q25,55 23,90 Q29,93 35,90 Q37,70 38,58 Q39,70 41,90 Q47,93 53,90 Q51,55 45,28 Z"
+          fill="#5a6a8a"/>
+    <ellipse cx="33" cy="92" rx="6" ry="2.5" fill="#4a3020"/>
+    <ellipse cx="43" cy="92" rx="6" ry="2.5" fill="#4a3020"/>
+    <!-- Bride (right) -->
+    <circle cx="80" cy="16" r="10" fill="#c8a088"/>
+    <path d="M70,14 Q80,4 90,14 L92,28 Q86,20 74,20 Z" fill="#e0d0c0"/>
+    <!-- Veil -->
+    <path d="M90,14 Q96,24 94,45 Q88,35 84,26" fill="#f0e8e0" opacity=".5"/>
+    <path d="M73,28 Q67,55 65,90 Q71,93 77,90 Q79,70 80,58 Q81,70 83,90 Q89,93 95,90 Q93,55 87,28 Z"
+          fill="#e8d0d8"/>
+    <ellipse cx="75" cy="92" rx="6" ry="2.5" fill="#4a3020"/>
+    <ellipse cx="85" cy="92" rx="6" ry="2.5" fill="#4a3020"/>
+    <!-- Clasped hands between them -->
+    <ellipse cx="59" cy="55" rx="6" ry="3.5" fill="#c8a088" opacity=".7"/>
+    <!-- Heart above -->
+    <path d="M59,40 C55,34 48,36 48,42 C48,47 59,54 59,54 C59,54 70,47 70,42 C70,36 63,34 59,40 Z"
+          fill="#e88ca5" opacity=".4"/>
+  </svg>
+
+  <div class="scroll-hint">↓ 向下滾動探索 · Scroll to explore</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — THE BELOVED  良人的愛慕
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-beloved" aria-label="良人的愛慕 — The Beloved">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="beloved-glow" aria-hidden="true"></div>
+
+  <!-- Spring garden landscape -->
+  <svg id="beloved-garden-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="belGardenG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#90c878"/>
+        <stop offset="50%" stop-color="#78a860"/>
+        <stop offset="100%" stop-color="#608848"/>
+      </linearGradient>
+      <linearGradient id="belTreeG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5a8a40"/>
+        <stop offset="100%" stop-color="#3a6a28"/>
+      </linearGradient>
+    </defs>
+    <!-- Green meadow -->
+    <path d="M0 280 Q200 240 400 260 Q600 220 800 250 Q1000 230 1200 260 Q1350 245 1440 270 L1440 500 L0 500 Z"
+          fill="url(#belGardenG)"/>
+    <!-- Flowers in the meadow — roses -->
+    <g opacity=".8">
+      <circle cx="100" cy="290" r="6" fill="#e06080"/><circle cx="95" cy="285" r="3.5" fill="#c84060"/>
+      <circle cx="250" cy="275" r="7" fill="#e07090"/><circle cx="257" cy="269" r="4" fill="#d05070"/>
+      <circle cx="420" cy="282" r="6" fill="#e06080"/><circle cx="415" cy="277" r="3.5" fill="#c84060"/>
+      <circle cx="600" cy="268" r="7" fill="#d85070"/><circle cx="607" cy="262" r="4" fill="#c03858"/>
+      <circle cx="780" cy="275" r="6" fill="#e07090"/><circle cx="774" cy="269" r="3.5" fill="#c84060"/>
+      <circle cx="950" cy="280" r="7" fill="#e06080"/><circle cx="957" cy="274" r="4" fill="#d05070"/>
+      <circle cx="1120" cy="272" r="6" fill="#d85070"/><circle cx="1126" cy="266" r="3.5" fill="#c03858"/>
+      <circle cx="1300" cy="278" r="7" fill="#e07090"/><circle cx="1307" cy="272" r="4" fill="#c84060"/>
+    </g>
+    <!-- Lilies (white) -->
+    <g opacity=".7">
+      <ellipse cx="180" cy="288" rx="5" ry="8" fill="#fff8f0"/><ellipse cx="174" cy="285" rx="4" ry="6" fill="#f8f0e8"/>
+      <ellipse cx="370" cy="280" rx="5" ry="8" fill="#fff8f0"/><ellipse cx="376" cy="277" rx="4" ry="6" fill="#f8f0e8"/>
+      <ellipse cx="550" cy="272" rx="5" ry="8" fill="#fff8f0"/><ellipse cx="556" cy="269" rx="4" ry="6" fill="#f8f0e8"/>
+      <ellipse cx="720" cy="278" rx="5" ry="8" fill="#fff8f0"/><ellipse cx="714" cy="275" rx="4" ry="6" fill="#f8f0e8"/>
+      <ellipse cx="900" cy="282" rx="5" ry="8" fill="#fff8f0"/><ellipse cx="906" cy="279" rx="4" ry="6" fill="#f8f0e8"/>
+      <ellipse cx="1080" cy="274" rx="5" ry="8" fill="#fff8f0"/><ellipse cx="1074" cy="271" rx="4" ry="6" fill="#f8f0e8"/>
+      <ellipse cx="1240" cy="280" rx="5" ry="8" fill="#fff8f0"/><ellipse cx="1246" cy="277" rx="4" ry="6" fill="#f8f0e8"/>
+    </g>
+    <!-- Flowering trees -->
+    <g opacity=".6">
+      <!-- Left tree -->
+      <rect x="195" y="200" width="10" height="80" fill="#6a5030" rx="3"/>
+      <circle cx="200" cy="180" r="30" fill="#90c070"/>
+      <circle cx="185" cy="170" r="5" fill="#f8c8d0"/><circle cx="210" cy="168" r="4" fill="#f0b8c0"/>
+      <circle cx="200" cy="160" r="4.5" fill="#f8c8d0"/><circle cx="195" cy="185" r="3.5" fill="#f0b8c0"/>
+      <circle cx="215" cy="182" r="4" fill="#f8c8d0"/>
+      <!-- Right tree -->
+      <rect x="1195" y="195" width="10" height="85" fill="#6a5030" rx="3"/>
+      <circle cx="1200" cy="175" r="32" fill="#88b868"/>
+      <circle cx="1185" cy="165" r="5" fill="#f8c8d0"/><circle cx="1210" cy="162" r="4.5" fill="#f0b8c0"/>
+      <circle cx="1200" cy="155" r="4" fill="#f8c8d0"/><circle cx="1190" cy="180" r="3.5" fill="#f0b8c0"/>
+      <circle cx="1215" cy="178" r="4" fill="#f8c8d0"/>
+    </g>
+    <!-- Grass blades -->
+    <g stroke="#5a9a3a" stroke-width="1.5" stroke-linecap="round" opacity=".3">
+      <line x1="80" y1="300" x2="76" y2="282"/><line x1="160" y1="295" x2="162" y2="278"/>
+      <line x1="340" y1="290" x2="337" y2="272"/><line x1="500" y1="285" x2="503" y2="268"/>
+      <line x1="680" y1="282" x2="677" y2="264"/><line x1="850" y1="288" x2="852" y2="270"/>
+      <line x1="1020" y1="282" x2="1017" y2="264"/><line x1="1180" y1="286" x2="1183" y2="268"/>
+      <line x1="1360" y1="290" x2="1357" y2="272"/>
+    </g>
+  </svg>
+
+  <!-- Bride among flowers -->
+  <svg id="beloved-bride" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="新婦在花叢中 — Bride among flowers">
+    <title>佳偶在花園中 — The beloved in the garden</title>
+    <!-- Flowers at feet -->
+    <circle cx="15" cy="105" r="5" fill="#e06080" opacity=".6"/>
+    <circle cx="65" cy="108" r="4" fill="#e07890" opacity=".6"/>
+    <circle cx="35" cy="112" r="4.5" fill="#fff0f0" opacity=".5"/>
+    <!-- Bride figure -->
+    <circle cx="40" cy="22" r="12" fill="#c8a088"/>
+    <path d="M28,18 Q40,6 52,18 L54,35 Q47,25 33,25 Z" fill="#4a3020"/>
+    <!-- Long flowing hair -->
+    <path d="M28,18 Q22,30 25,55" stroke="#4a3020" stroke-width="3" fill="none" opacity=".5"/>
+    <path d="M52,18 Q58,30 55,55" stroke="#4a3020" stroke-width="3" fill="none" opacity=".5"/>
+    <!-- Dress -->
+    <path d="M33,35 Q25,60 18,100 Q30,105 40,102 Q50,105 62,100 Q55,60 47,35 Z"
+          fill="#e8c0d0"/>
+    <!-- Arms holding flower -->
+    <path d="M33,45 Q28,50 22,52" stroke="#c8a088" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="20" cy="52" r="4" fill="#e06080"/>
+    <circle cx="18" cy="49" r="2.5" fill="#c84060"/>
+    <ellipse cx="40" cy="104" rx="8" ry="3" fill="#8a6850"/>
+  </svg>
+
+  <!-- Deer/gazelle in the distance -->
+  <svg id="beloved-deer" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="遠處的小鹿 — Gazelle in the distance">
+    <title>跳躍的小鹿 — Leaping gazelle</title>
+    <!-- Deer body -->
+    <ellipse cx="40" cy="40" rx="22" ry="12" fill="#c8a070"/>
+    <!-- Head -->
+    <circle cx="60" cy="28" r="8" fill="#c8a070"/>
+    <circle cx="63" cy="26" r="1.5" fill="#4a3020"/>
+    <!-- Neck -->
+    <path d="M52,35 Q56,30 60,32" fill="#c8a070"/>
+    <!-- Antlers -->
+    <path d="M58,22 Q55,14 50,10" stroke="#8a6840" stroke-width="1.5" fill="none"/>
+    <path d="M60,21 Q62,13 66,10" stroke="#8a6840" stroke-width="1.5" fill="none"/>
+    <path d="M52,12 Q48,8 46,10" stroke="#8a6840" stroke-width="1" fill="none"/>
+    <path d="M64,12 Q68,8 70,10" stroke="#8a6840" stroke-width="1" fill="none"/>
+    <!-- Legs -->
+    <line x1="28" y1="50" x2="24" y2="70" stroke="#a88858" stroke-width="2.5"/>
+    <line x1="35" y1="50" x2="32" y2="70" stroke="#a88858" stroke-width="2.5"/>
+    <line x1="48" y1="50" x2="52" y2="70" stroke="#a88858" stroke-width="2.5"/>
+    <line x1="52" y1="48" x2="58" y2="68" stroke="#a88858" stroke-width="2.5"/>
+    <!-- Tail -->
+    <path d="M18,38 Q12,34 14,30" stroke="#c8a070" stroke-width="2" fill="none"/>
+    <!-- White belly -->
+    <ellipse cx="40" cy="44" rx="16" ry="6" fill="#e8d8c0" opacity=".4"/>
+  </svg>
+
+  <div class="scene-heading" id="beloved-heading" aria-hidden="true">
+    <h2>🌹 良人的愛慕</h2>
+    <p>The Beloved — Song of Solomon 2:1-4</p>
+  </div>
+  <div class="scene-verse">「我是沙崙的玫瑰花，是谷中的百合花」— 雅歌 2:1</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — GARDEN OF LOVE  愛的花園
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-garden" aria-label="愛的花園 — Garden of Love">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="garden-glow" aria-hidden="true"></div>
+
+  <!-- Enclosed garden landscape -->
+  <svg id="garden-scene-svg" viewBox="0 0 1440 520" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="gardenGroundG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#78b060"/>
+        <stop offset="50%" stop-color="#609848"/>
+        <stop offset="100%" stop-color="#508038"/>
+      </linearGradient>
+      <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d8c8a0"/>
+        <stop offset="100%" stop-color="#b8a880"/>
+      </linearGradient>
+      <linearGradient id="gateG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8a6a40"/>
+        <stop offset="100%" stop-color="#6a4a28"/>
+      </linearGradient>
+    </defs>
+    <!-- Garden ground -->
+    <path d="M0 300 Q360 260 720 280 Q1080 255 1440 290 L1440 520 L0 520 Z"
+          fill="url(#gardenGroundG)"/>
+    <!-- Garden walls (left and right) -->
+    <rect x="60" y="200" width="25" height="200" fill="url(#wallG)" rx="3"/>
+    <rect x="1355" y="200" width="25" height="200" fill="url(#wallG)" rx="3"/>
+    <!-- Wall top stones -->
+    <rect x="50" y="195" width="45" height="12" fill="#c8b890" rx="3"/>
+    <rect x="1345" y="195" width="45" height="12" fill="#c8b890" rx="3"/>
+    <!-- Connecting low wall segments -->
+    <rect x="85" y="280" width="180" height="18" fill="url(#wallG)" opacity=".6" rx="2"/>
+    <rect x="1175" y="280" width="180" height="18" fill="url(#wallG)" opacity=".6" rx="2"/>
+    <!-- Garden gate (center) -->
+    <rect x="690" y="220" width="60" height="90" fill="url(#gateG)" rx="5"/>
+    <path d="M690,220 Q720,195 750,220" fill="#7a5a30"/>
+    <circle cx="740" cy="265" r="3" fill="#c8a040"/>
+    <!-- Pomegranate trees -->
+    <g opacity=".7">
+      <rect x="300" y="230" width="8" height="70" fill="#6a5030" rx="2"/>
+      <circle cx="304" cy="215" r="25" fill="#5a9040"/>
+      <circle cx="295" cy="208" r="5" fill="#c83040"/><circle cx="312" cy="205" r="4.5" fill="#d84050"/>
+      <circle cx="304" cy="198" r="4" fill="#c83040"/>
+      <rect x="1100" y="225" width="8" height="75" fill="#6a5030" rx="2"/>
+      <circle cx="1104" cy="210" r="27" fill="#5a9040"/>
+      <circle cx="1095" cy="202" r="5" fill="#c83040"/><circle cx="1112" cy="200" r="4.5" fill="#d84050"/>
+      <circle cx="1104" cy="192" r="4" fill="#c83040"/>
+    </g>
+    <!-- Grape vines along walls -->
+    <g opacity=".5">
+      <path d="M85,260 Q120,250 160,258 Q200,248 240,255" stroke="#4a7a2a" stroke-width="2" fill="none"/>
+      <circle cx="120" cy="253" r="3" fill="#6a3090"/><circle cx="125" cy="256" r="2.5" fill="#5a2880"/>
+      <circle cx="180" cy="250" r="3" fill="#6a3090"/><circle cx="185" cy="253" r="2.5" fill="#5a2880"/>
+      <path d="M1200,258 Q1240,248 1280,255 Q1320,246 1355,252" stroke="#4a7a2a" stroke-width="2" fill="none"/>
+      <circle cx="1240" cy="250" r="3" fill="#6a3090"/><circle cx="1245" cy="253" r="2.5" fill="#5a2880"/>
+      <circle cx="1300" cy="248" r="3" fill="#6a3090"/><circle cx="1305" cy="251" r="2.5" fill="#5a2880"/>
+    </g>
+    <!-- Fig trees -->
+    <g opacity=".6">
+      <rect x="480" y="245" width="7" height="55" fill="#5a4028" rx="2"/>
+      <circle cx="483" cy="230" r="22" fill="#4a8838"/>
+      <circle cx="475" cy="240" r="4" fill="#5a8040"/><circle cx="490" cy="238" r="3.5" fill="#688848"/>
+      <rect x="920" y="240" width="7" height="60" fill="#5a4028" rx="2"/>
+      <circle cx="923" cy="225" r="22" fill="#4a8838"/>
+      <circle cx="915" cy="235" r="4" fill="#5a8040"/><circle cx="930" cy="233" r="3.5" fill="#688848"/>
+    </g>
+    <!-- Spice plants and fragrant flowers -->
+    <g opacity=".6">
+      <ellipse cx="400" cy="305" rx="8" ry="5" fill="#c8a0d0"/>
+      <ellipse cx="560" cy="298" rx="7" ry="4.5" fill="#d8b0e0"/>
+      <ellipse cx="840" cy="296" rx="8" ry="5" fill="#c8a0d0"/>
+      <ellipse cx="1020" cy="302" rx="7" ry="4.5" fill="#d8b0e0"/>
+      <circle cx="450" cy="302" r="4" fill="#e08898"/><circle cx="620" cy="295" r="3.5" fill="#e08898"/>
+      <circle cx="780" cy="298" r="4" fill="#e08898"/><circle cx="1060" cy="300" r="3.5" fill="#e08898"/>
+    </g>
+  </svg>
+
+  <!-- Fountain in center -->
+  <svg id="garden-fountain" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="花園中的噴泉 — Fountain in the garden">
+    <title>活水噴泉 — Living water fountain</title>
+    <defs>
+      <linearGradient id="fountainG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c8b898"/>
+        <stop offset="100%" stop-color="#a89878"/>
+      </linearGradient>
+    </defs>
+    <!-- Base -->
+    <ellipse cx="50" cy="105" rx="40" ry="10" fill="url(#fountainG)"/>
+    <rect x="15" y="90" width="70" height="15" fill="url(#fountainG)" rx="3"/>
+    <!-- Middle pillar -->
+    <rect x="40" y="55" width="20" height="40" fill="#b8a888" rx="4"/>
+    <!-- Upper basin -->
+    <ellipse cx="50" cy="55" rx="28" ry="8" fill="#c8b898"/>
+    <ellipse cx="50" cy="55" rx="22" ry="5" fill="#88c8e0" opacity=".5"/>
+    <!-- Water spout -->
+    <rect x="47" y="30" width="6" height="25" fill="#b8a888" rx="2"/>
+    <!-- Water streams -->
+    <path d="M50,30 Q45,20 35,35" stroke="#88c8e0" stroke-width="1.5" fill="none" opacity=".6"/>
+    <path d="M50,30 Q55,20 65,35" stroke="#88c8e0" stroke-width="1.5" fill="none" opacity=".6"/>
+    <path d="M50,30 Q50,15 50,22" stroke="#88c8e0" stroke-width="2" fill="none" opacity=".7"/>
+    <!-- Water droplets -->
+    <circle cx="38" cy="38" r="1.5" fill="#88c8e0" opacity=".5"/>
+    <circle cx="62" cy="36" r="1.5" fill="#88c8e0" opacity=".5"/>
+    <circle cx="50" cy="18" r="1.5" fill="#a0d8f0" opacity=".6"/>
+    <!-- Water pool at base -->
+    <ellipse cx="50" cy="95" rx="30" ry="6" fill="#78b8d0" opacity=".3"/>
+  </svg>
+
+  <div class="scene-heading" id="garden-heading" aria-hidden="true">
+    <h2>🌺 愛的花園</h2>
+    <p>Garden of Love — Song of Solomon 4:12-16</p>
+  </div>
+  <div class="scene-verse">「我妹子，我新婦，乃是關鎖的園」— 雅歌 4:12</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — SEEKING THE BELOVED  尋找良人
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-seeking" aria-label="尋找良人 — Seeking the Beloved">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="seeking-moonbeam" aria-hidden="true"></div>
+  <div id="seeking-moon" aria-hidden="true"></div>
+
+  <!-- Twilight city scene -->
+  <svg id="seeking-city-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="cityGroundG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#a0908a"/>
+        <stop offset="100%" stop-color="#887870"/>
+      </linearGradient>
+      <linearGradient id="buildingG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#b8a898"/>
+        <stop offset="100%" stop-color="#988878"/>
+      </linearGradient>
+      <linearGradient id="buildingG2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c8b8a0"/>
+        <stop offset="100%" stop-color="#a89880"/>
+      </linearGradient>
+    </defs>
+    <!-- City ground / streets -->
+    <rect x="0" y="350" width="1440" height="150" fill="url(#cityGroundG)"/>
+    <!-- Buildings (left cluster) -->
+    <rect x="80" y="180" width="100" height="170" fill="url(#buildingG1)" rx="3"/>
+    <rect x="75" y="175" width="110" height="10" fill="#c8b8a0" rx="2"/>
+    <rect x="200" y="220" width="80" height="130" fill="url(#buildingG2)" rx="3"/>
+    <rect x="195" y="215" width="90" height="10" fill="#d0c0a8" rx="2"/>
+    <rect x="300" y="200" width="90" height="150" fill="url(#buildingG1)" rx="3"/>
+    <rect x="295" y="195" width="100" height="10" fill="#c8b8a0" rx="2"/>
+    <!-- Windows (left buildings) -->
+    <g fill="rgba(240,220,140,.4)">
+      <rect x="100" y="200" width="12" height="16" rx="1"/><rect x="125" y="200" width="12" height="16" rx="1"/><rect x="150" y="200" width="12" height="16" rx="1"/>
+      <rect x="100" y="230" width="12" height="16" rx="1"/><rect x="125" y="230" width="12" height="16" rx="1"/><rect x="150" y="230" width="12" height="16" rx="1"/>
+      <rect x="100" y="260" width="12" height="16" rx="1"/><rect x="125" y="260" width="12" height="16" rx="1"/>
+      <rect x="220" y="240" width="10" height="14" rx="1"/><rect x="245" y="240" width="10" height="14" rx="1"/>
+      <rect x="220" y="270" width="10" height="14" rx="1"/><rect x="245" y="270" width="10" height="14" rx="1"/>
+      <rect x="320" y="220" width="12" height="16" rx="1"/><rect x="345" y="220" width="12" height="16" rx="1"/><rect x="370" y="220" width="12" height="16" rx="1"/>
+      <rect x="320" y="250" width="12" height="16" rx="1"/><rect x="345" y="250" width="12" height="16" rx="1"/>
+    </g>
+    <!-- Buildings (right cluster) -->
+    <rect x="1050" y="190" width="110" height="160" fill="url(#buildingG2)" rx="3"/>
+    <rect x="1045" y="185" width="120" height="10" fill="#d0c0a8" rx="2"/>
+    <rect x="1180" y="230" width="85" height="120" fill="url(#buildingG1)" rx="3"/>
+    <rect x="1175" y="225" width="95" height="10" fill="#c8b8a0" rx="2"/>
+    <rect x="1285" y="210" width="95" height="140" fill="url(#buildingG2)" rx="3"/>
+    <rect x="1280" y="205" width="105" height="10" fill="#d0c0a8" rx="2"/>
+    <!-- Windows (right buildings) -->
+    <g fill="rgba(240,220,140,.35)">
+      <rect x="1070" y="210" width="12" height="16" rx="1"/><rect x="1095" y="210" width="12" height="16" rx="1"/><rect x="1120" y="210" width="12" height="16" rx="1"/>
+      <rect x="1070" y="240" width="12" height="16" rx="1"/><rect x="1095" y="240" width="12" height="16" rx="1"/><rect x="1120" y="240" width="12" height="16" rx="1"/>
+      <rect x="1200" y="250" width="10" height="14" rx="1"/><rect x="1225" y="250" width="10" height="14" rx="1"/>
+      <rect x="1200" y="278" width="10" height="14" rx="1"/><rect x="1225" y="278" width="10" height="14" rx="1"/>
+      <rect x="1305" y="230" width="12" height="16" rx="1"/><rect x="1330" y="230" width="12" height="16" rx="1"/><rect x="1355" y="230" width="12" height="16" rx="1"/>
+      <rect x="1305" y="260" width="12" height="16" rx="1"/><rect x="1330" y="260" width="12" height="16" rx="1"/>
+    </g>
+    <!-- Street path -->
+    <rect x="440" y="350" width="560" height="150" fill="#9a8a7a" opacity=".4"/>
+    <!-- Moonlight pool on street -->
+    <ellipse cx="720" cy="400" rx="200" ry="40" fill="rgba(240,235,210,.08)"/>
+    <!-- Night watchmen (two figures in the distance) -->
+    <g opacity=".45">
+      <!-- Watchman 1 -->
+      <circle cx="900" cy="318" r="7" fill="#887060"/>
+      <path d="M894,325 Q890,345 888,365 Q894,367 900,365 Q906,367 912,365 Q910,345 906,325 Z" fill="#706050"/>
+      <!-- Spear -->
+      <line x1="914" y1="365" x2="916" y2="300" stroke="#888" stroke-width="2"/>
+      <!-- Watchman 2 -->
+      <circle cx="940" cy="320" r="7" fill="#887060"/>
+      <path d="M934,327 Q930,347 928,367 Q934,369 940,367 Q946,369 952,367 Q950,347 946,327 Z" fill="#706050"/>
+      <line x1="954" y1="367" x2="956" y2="302" stroke="#888" stroke-width="2"/>
+    </g>
+  </svg>
+
+  <!-- Woman searching through the streets -->
+  <svg id="seeking-woman" viewBox="0 0 70 120" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="尋找良人的女子 — Woman seeking her beloved">
+    <title>新婦在街上尋找 — The bride searching the streets</title>
+    <!-- Head -->
+    <circle cx="35" cy="20" r="11" fill="#c8a088"/>
+    <!-- Hair flowing -->
+    <path d="M24,16 Q35,5 46,16 L48,32 Q42,22 28,22 Z" fill="#4a3020"/>
+    <path d="M24,16 Q18,28 22,48" stroke="#4a3020" stroke-width="2.5" fill="none" opacity=".5"/>
+    <!-- Dress -->
+    <path d="M28,32 Q20,60 15,105 Q25,110 35,107 Q45,110 55,105 Q50,60 42,32 Z"
+          fill="#c8a0c0"/>
+    <!-- Reaching arm forward -->
+    <path d="M42,45 Q52,42 60,38" stroke="#c8a088" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="62" cy="37" r="3" fill="#c8a088"/>
+    <!-- Other arm at side -->
+    <path d="M28,45 Q22,52 18,58" stroke="#c8a088" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Feet -->
+    <ellipse cx="30" cy="109" rx="7" ry="3" fill="#6a5040"/>
+    <ellipse cx="42" cy="109" rx="7" ry="3" fill="#6a5040"/>
+    <!-- Lantern glow -->
+    <ellipse cx="62" cy="37" rx="12" ry="10" fill="rgba(240,220,140,.15)"/>
+  </svg>
+
+  <div class="scene-heading" id="seeking-heading" aria-hidden="true">
+    <h2>🔍 尋找良人</h2>
+    <p>Seeking the Beloved — Song of Solomon 3:1-4</p>
+  </div>
+  <div class="scene-verse">「我夜間躺臥在床上，尋找我心所愛的」— 雅歌 3:1</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — THE WEDDING  婚禮盛典
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-wedding" aria-label="婚禮盛典 — The Wedding">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="wedding-glow" aria-hidden="true"></div>
+
+  <!-- Wedding celebration scene -->
+  <svg id="wedding-scene-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="wedGroundG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d8c8a0"/>
+        <stop offset="100%" stop-color="#c8b890"/>
+      </linearGradient>
+      <linearGradient id="palanquinG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8048a0"/>
+        <stop offset="100%" stop-color="#604080"/>
+      </linearGradient>
+      <linearGradient id="goldTrimG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#daa520"/>
+        <stop offset="50%" stop-color="#f0d870"/>
+        <stop offset="100%" stop-color="#c89018"/>
+      </linearGradient>
+    </defs>
+    <!-- Ground -->
+    <rect x="0" y="340" width="1440" height="160" fill="url(#wedGroundG)"/>
+    <!-- Decorative path -->
+    <rect x="200" y="340" width="1040" height="160" fill="#d0c090" opacity=".3"/>
+    <!-- Solomon's palanquin (center) -->
+    <g transform="translate(520,180)">
+      <!-- Carrying poles -->
+      <rect x="-60" y="110" width="520" height="8" fill="#8a6a30" rx="3"/>
+      <!-- Palanquin body -->
+      <rect x="40" y="20" width="320" height="100" fill="url(#palanquinG)" rx="8"/>
+      <!-- Gold trim top -->
+      <rect x="35" y="15" width="330" height="10" fill="url(#goldTrimG)" rx="4"/>
+      <!-- Gold trim bottom -->
+      <rect x="35" y="115" width="330" height="8" fill="url(#goldTrimG)" rx="3"/>
+      <!-- Curtain details -->
+      <path d="M60,25 L60,115" stroke="rgba(255,215,0,.3)" stroke-width="1.5"/>
+      <path d="M340,25 L340,115" stroke="rgba(255,215,0,.3)" stroke-width="1.5"/>
+      <path d="M200,20 L200,120" stroke="rgba(255,215,0,.2)" stroke-width="1"/>
+      <!-- Roof ornament -->
+      <path d="M180,15 Q200,0 220,15" fill="#daa520"/>
+      <circle cx="200" cy="4" r="5" fill="#f0d870"/>
+    </g>
+    <!-- Garlands left -->
+    <g opacity=".5">
+      <path d="M100,300 Q200,280 300,290 Q400,275 500,285" stroke="#4a8a3a" stroke-width="3" fill="none"/>
+      <circle cx="150" cy="290" r="5" fill="#e08090"/><circle cx="250" cy="282" r="4" fill="#f0a0b0"/>
+      <circle cx="350" cy="278" r="5" fill="#e08090"/><circle cx="450" cy="280" r="4" fill="#f0a0b0"/>
+    </g>
+    <!-- Garlands right -->
+    <g opacity=".5">
+      <path d="M940,285 Q1040,275 1140,288 Q1240,278 1340,290" stroke="#4a8a3a" stroke-width="3" fill="none"/>
+      <circle cx="990" cy="280" r="5" fill="#e08090"/><circle cx="1090" cy="278" r="4" fill="#f0a0b0"/>
+      <circle cx="1190" cy="280" r="5" fill="#e08090"/><circle cx="1290" cy="285" r="4" fill="#f0a0b0"/>
+    </g>
+    <!-- Attendants (left group) -->
+    <g opacity=".5">
+      <circle cx="200" cy="310" r="6" fill="#b89878"/><path d="M195,316 Q192,335 190,360 Q195,362 200,360 Q205,362 210,360 Q208,335 205,316 Z" fill="#c8a888"/>
+      <circle cx="250" cy="315" r="6" fill="#b89878"/><path d="M245,321 Q242,340 240,362 Q245,364 250,362 Q255,364 260,362 Q258,340 255,321 Z" fill="#b89070"/>
+      <circle cx="150" cy="312" r="6" fill="#b89878"/><path d="M145,318 Q142,337 140,360 Q145,362 150,360 Q155,362 160,360 Q158,337 155,318 Z" fill="#c8a888"/>
+    </g>
+    <!-- Attendants (right group) -->
+    <g opacity=".5">
+      <circle cx="1200" cy="312" r="6" fill="#b89878"/><path d="M1195,318 Q1192,337 1190,360 Q1195,362 1200,360 Q1205,362 1210,360 Q1208,337 1205,318 Z" fill="#c8a888"/>
+      <circle cx="1250" cy="315" r="6" fill="#b89878"/><path d="M1245,321 Q1242,340 1240,362 Q1245,364 1250,362 Q1255,364 1260,362 Q1258,340 1255,321 Z" fill="#b89070"/>
+      <circle cx="1300" cy="310" r="6" fill="#b89878"/><path d="M1295,316 Q1292,335 1290,360 Q1295,362 1300,360 Q1305,362 1310,360 Q1308,335 1305,316 Z" fill="#c8a888"/>
+    </g>
+    <!-- Scattered flower petals -->
+    <g opacity=".4">
+      <circle cx="400" cy="355" r="3" fill="#f0a0b0"/><circle cx="600" cy="360" r="2.5" fill="#e88ca5"/>
+      <circle cx="800" cy="352" r="3" fill="#f0a0b0"/><circle cx="1000" cy="358" r="2.5" fill="#e88ca5"/>
+      <circle cx="500" cy="365" r="2" fill="#f0c0d0"/><circle cx="700" cy="368" r="2.5" fill="#f0a0b0"/>
+      <circle cx="900" cy="362" r="2" fill="#f0c0d0"/><circle cx="1100" cy="365" r="2.5" fill="#e88ca5"/>
+    </g>
+  </svg>
+
+  <!-- Wedding couple -->
+  <svg id="wedding-couple" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="婚禮中的新郎新婦 — Bride and groom at the wedding">
+    <title>所羅門的婚禮 — Solomon's wedding</title>
+    <!-- Groom (left, with crown) -->
+    <circle cx="55" cy="28" r="13" fill="#a08068"/>
+    <!-- Crown -->
+    <path d="M42,20 L45,10 L50,18 L55,8 L60,18 L65,10 L68,20" fill="#daa520" stroke="#c89018" stroke-width="1"/>
+    <circle cx="55" cy="12" r="2" fill="#f0d870"/>
+    <!-- Groom hair -->
+    <path d="M42,24 Q55,14 68,24 L68,30 Q55,22 42,30 Z" fill="#4a3020"/>
+    <!-- Groom robe -->
+    <path d="M46,42 Q38,70 34,120 Q44,125 55,122 Q66,125 76,120 Q72,70 64,42 Z"
+          fill="#6048a0"/>
+    <!-- Gold sash -->
+    <rect x="44" y="60" width="22" height="5" fill="#daa520" rx="2"/>
+    <ellipse cx="50" cy="124" rx="8" ry="3" fill="#4a3020"/>
+    <ellipse cx="62" cy="124" rx="8" ry="3" fill="#4a3020"/>
+
+    <!-- Bride (right, with veil) -->
+    <circle cx="108" cy="26" r="13" fill="#d0b098"/>
+    <!-- Veil -->
+    <path d="M95,20 Q108,8 121,20 L125,50 Q115,35 101,35 Z" fill="#f8f0f0" opacity=".7"/>
+    <path d="M121,20 Q130,35 128,65 Q122,50 118,40" fill="#f0e8e8" opacity=".4"/>
+    <!-- Bride hair -->
+    <path d="M95,22 Q108,12 121,22" fill="#5a3828" opacity=".6"/>
+    <!-- Bride dress (white) -->
+    <path d="M99,40 Q88,70 82,120 Q95,128 108,124 Q121,128 134,120 Q128,70 117,40 Z"
+          fill="#f0e8e8"/>
+    <!-- Rose bouquet in hand -->
+    <circle cx="90" cy="72" r="5" fill="#e06080"/><circle cx="86" cy="68" r="3.5" fill="#c84060"/>
+    <circle cx="94" cy="68" r="3" fill="#d05070"/>
+    <path d="M90,77 L88,84" stroke="#4a8a3a" stroke-width="1.5"/>
+    <ellipse cx="102" cy="126" rx="8" ry="3" fill="#d0b898"/>
+    <ellipse cx="114" cy="126" rx="8" ry="3" fill="#d0b898"/>
+
+    <!-- Heart between them -->
+    <path d="M82,50 C78,44 71,46 71,52 C71,57 82,64 82,64 C82,64 93,57 93,52 C93,46 86,44 82,50 Z"
+          fill="#e88ca5" opacity=".35"/>
+  </svg>
+
+  <div class="scene-heading" id="wedding-heading" aria-hidden="true">
+    <h2>💒 婚禮盛典</h2>
+    <p>The Wedding — Song of Solomon 3:6-11</p>
+  </div>
+  <div class="scene-verse">「他用愛，為耶路撒冷的眾女子所鋪設的」— 雅歌 3:10</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — ETERNAL LOVE  堅貞的愛
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-eternal" aria-label="堅貞的愛 — Eternal Love">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="eternal-glow" aria-hidden="true"></div>
+
+  <!-- Eternal flame -->
+  <svg id="eternal-flame" viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="flameG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#e88ca5"/>
+        <stop offset="40%" stop-color="#f0a040"/>
+        <stop offset="80%" stop-color="#f8d040"/>
+        <stop offset="100%" stop-color="#fff8e0"/>
+      </linearGradient>
+    </defs>
+    <!-- Outer flame -->
+    <path d="M30,5 Q15,30 12,50 Q10,65 18,75 Q24,82 30,82 Q36,82 42,75 Q50,65 48,50 Q45,30 30,5 Z"
+          fill="url(#flameG)" opacity=".7"/>
+    <!-- Inner flame -->
+    <path d="M30,20 Q22,38 20,52 Q18,62 24,70 Q27,74 30,74 Q33,74 36,70 Q42,62 40,52 Q38,38 30,20 Z"
+          fill="#fff8e0" opacity=".5"/>
+    <!-- Glow -->
+    <ellipse cx="30" cy="50" rx="25" ry="30" fill="rgba(240,180,100,.15)"/>
+  </svg>
+
+  <!-- Sunrise over waters landscape -->
+  <svg id="eternal-scene-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="eternalWaterG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#88b8d0"/>
+        <stop offset="50%" stop-color="#70a0c0"/>
+        <stop offset="100%" stop-color="#5888a8"/>
+      </linearGradient>
+      <linearGradient id="sunriseG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="rgba(240,200,100,.3)"/>
+        <stop offset="100%" stop-color="rgba(240,200,100,0)"/>
+      </linearGradient>
+    </defs>
+    <!-- Waters -->
+    <rect x="0" y="280" width="1440" height="220" fill="url(#eternalWaterG)"/>
+    <!-- Water surface waves -->
+    <g opacity=".25">
+      <path d="M0 310 Q180 300 360 308 Q540 296 720 305 Q900 295 1080 304 Q1260 296 1440 308" stroke="#a0d0e8" stroke-width="1.5" fill="none"/>
+      <path d="M0 340 Q200 330 400 338 Q600 326 800 335 Q1000 326 1200 334 Q1350 328 1440 336" stroke="#a0d0e8" stroke-width="1.5" fill="none"/>
+      <path d="M0 370 Q180 362 360 368 Q540 358 720 366 Q900 358 1080 366 Q1260 360 1440 368" stroke="#a0d0e8" stroke-width="1.5" fill="none"/>
+      <path d="M0 400 Q200 392 400 398 Q600 388 800 396 Q1000 390 1200 398 Q1350 392 1440 400" stroke="#a0d0e8" stroke-width="1.5" fill="none"/>
+    </g>
+    <!-- Sunrise golden reflection on water -->
+    <ellipse cx="720" cy="310" rx="300" ry="40" fill="rgba(240,200,100,.12)"/>
+    <ellipse cx="720" cy="340" rx="200" ry="20" fill="rgba(240,200,100,.08)"/>
+    <ellipse cx="720" cy="370" rx="120" ry="12" fill="rgba(240,200,100,.06)"/>
+    <!-- Distant shore/hills -->
+    <path d="M0 290 Q200 265 400 278 Q600 258 800 272 Q1000 260 1200 275 Q1350 268 1440 282 L1440 320 L0 320 Z"
+          fill="#90a8a0" opacity=".4"/>
+    <!-- Shore with rocks -->
+    <g opacity=".5">
+      <ellipse cx="200" cy="285" rx="20" ry="8" fill="#8a9888"/>
+      <ellipse cx="600" cy="275" rx="15" ry="6" fill="#8a9888"/>
+      <ellipse cx="1000" cy="278" rx="18" ry="7" fill="#8a9888"/>
+      <ellipse cx="1300" cy="280" rx="14" ry="6" fill="#8a9888"/>
+    </g>
+    <!-- Sunrise glow pillar -->
+    <rect x="660" y="200" width="120" height="100" fill="url(#sunriseG)" opacity=".5"/>
+  </svg>
+
+  <!-- Seal/signet and couple facing sunrise -->
+  <svg id="eternal-couple" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="面向日出的佳偶與心中的印記 — Couple facing sunrise with seal on heart">
+    <title>堅貞的愛 — Love as strong as death</title>
+    <!-- Seal / signet symbol above -->
+    <g transform="translate(100,15)">
+      <!-- Heart-shaped seal -->
+      <path d="M0,-12 C-4,-18 -14,-16 -14,-8 C-14,-2 0,8 0,8 C0,8 14,-2 14,-8 C14,-16 4,-18 0,-12 Z"
+            fill="none" stroke="#daa520" stroke-width="2"/>
+      <!-- Inner seal mark -->
+      <circle cx="0" cy="-4" r="3" fill="#daa520" opacity=".5"/>
+      <text x="0" y="-2" fill="#daa520" font-size="4" text-anchor="middle" font-weight="700">印</text>
+    </g>
+
+    <!-- Groom (left) -->
+    <circle cx="75" cy="55" r="12" fill="#a08068"/>
+    <path d="M63,50 Q75,40 87,50 L87,58 Q75,52 63,58 Z" fill="#5a4030"/>
+    <path d="M67,68 Q60,90 56,140 Q66,145 75,142 Q84,145 94,140 Q90,90 83,68 Z"
+          fill="#6a7a9a"/>
+    <ellipse cx="70" cy="144" rx="7" ry="2.5" fill="#4a3828"/>
+    <ellipse cx="82" cy="144" rx="7" ry="2.5" fill="#4a3828"/>
+
+    <!-- Bride (right) -->
+    <circle cx="125" cy="53" r="12" fill="#d0b098"/>
+    <path d="M113,48 Q125,38 137,48 L139,62 Q131,52 117,52 Z" fill="#5a3828"/>
+    <path d="M115,66 Q108,90 104,140 Q114,145 125,142 Q136,145 146,140 Q140,90 133,66 Z"
+          fill="#e8d0d8"/>
+    <ellipse cx="118" cy="144" rx="7" ry="2.5" fill="#c0a090"/>
+    <ellipse cx="132" cy="144" rx="7" ry="2.5" fill="#c0a090"/>
+
+    <!-- Clasped hands -->
+    <ellipse cx="100" cy="90" rx="7" ry="4" fill="#c0a080" opacity=".6"/>
+
+    <!-- Sunrise glow behind them -->
+    <ellipse cx="100" cy="100" rx="80" ry="50" fill="rgba(240,200,100,.1)"/>
+
+    <!-- Many waters below (stylized) -->
+    <g opacity=".3">
+      <path d="M20,150 Q50,145 80,148 Q110,143 140,147 Q170,142 200,146" stroke="#78b0d0" stroke-width="1.5" fill="none"/>
+      <path d="M10,156 Q40,151 70,154 Q100,149 130,153 Q160,148 190,152" stroke="#78b0d0" stroke-width="1" fill="none"/>
+    </g>
+  </svg>
+
+  <div class="scene-heading" id="eternal-heading" aria-hidden="true">
+    <h2>💕 堅貞的愛</h2>
+    <p>Eternal Love — Song of Solomon 8:6-7</p>
+  </div>
+  <div class="scene-verse">「求你將我放在你心上如印記，帶在你臂上如戳記；因為愛情如死之堅強」— 雅歌 8:6</div>
+</section>
+
+</body>
+</html>
