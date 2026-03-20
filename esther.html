@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>以斯帖記 · Esther</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #2a1828;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+    @keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+    @keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.31), 564px 126px rgba(255,255,255,.41),
+        210px 347px rgba(255,255,255,.67), 1117px 45px rgba(255,255,255,.6),
+        66px 16px rgba(255,255,255,.35),  477px 259px rgba(255,255,255,.6),
+        1150px 102px rgba(255,255,255,.66), 1437px 280px rgba(255,255,255,.51),
+        920px 302px rgba(255,255,255,.44), 14px 389px rgba(255,255,255,.7),
+        1430px 217px rgba(255,255,255,.47), 319px 111px rgba(255,255,255,.78),
+        690px 53px rgba(255,255,255,.35),  199px 184px rgba(255,255,255,.72),
+        1237px 136px rgba(255,255,255,.7), 941px 275px rgba(255,255,255,.36),
+        776px 41px rgba(255,255,255,.58),  1288px 317px rgba(255,255,255,.74),
+        741px 296px rgba(255,255,255,.4),  143px 24px rgba(255,255,255,.63),
+        593px 41px rgba(255,255,255,.73),  207px 195px rgba(255,255,255,.44),
+        1302px 428px rgba(255,255,255,.48), 759px 182px rgba(255,255,255,.4),
+        547px 360px rgba(255,255,255,.77), 1328px 37px rgba(255,255,255,.6),
+        351px 274px rgba(255,255,255,.66), 335px 237px rgba(255,255,255,.49),
+        1311px 353px rgba(255,255,255,.58), 1403px 167px rgba(255,255,255,.72),
+        115px 118px rgba(255,255,255,.71), 647px 206px rgba(255,255,255,.43),
+        433px 468px rgba(255,255,255,.77), 645px 109px rgba(255,255,255,.63),
+        811px 453px rgba(255,255,255,.76), 940px 74px rgba(255,255,255,.43),
+        506px 382px rgba(255,255,255,.58), 539px 383px rgba(255,255,255,.59),
+        1196px 205px rgba(255,255,255,.48), 284px 261px rgba(255,255,255,.55),
+        97px 441px rgba(255,255,255,.35),  1286px 82px rgba(255,255,255,.7),
+        865px 306px rgba(255,255,255,.33), 782px 306px rgba(255,255,255,.8),
+        1084px 129px rgba(255,255,255,.79), 24px 349px rgba(255,255,255,.66),
+        1397px 454px rgba(255,255,255,.57), 547px 394px rgba(255,255,255,.62),
+        229px 151px rgba(255,255,255,.52), 930px 2px rgba(255,255,255,.78),
+        540px 498px rgba(255,255,255,.55), 366px 260px rgba(255,255,255,.76),
+        1281px 153px rgba(255,255,255,.72), 1040px 312px rgba(255,255,255,.4),
+        766px 391px rgba(255,255,255,.38), 1087px 471px rgba(255,255,255,.3),
+        664px 251px rgba(255,255,255,.31), 744px 450px rgba(255,255,255,.79),
+        630px 123px rgba(255,255,255,.33), 1162px 485px rgba(255,255,255,.34),
+        996px 418px rgba(255,255,255,.33), 1091px 393px rgba(255,255,255,.36),
+        1352px 244px rgba(255,255,255,.77), 339px 136px rgba(255,255,255,.56),
+        1243px 217px rgba(255,255,255,.78), 1105px 387px rgba(255,255,255,.66),
+        412px 366px rgba(255,255,255,.46), 1376px 333px rgba(255,255,255,.49),
+        1060px 232px rgba(255,255,255,.36), 461px 33px rgba(255,255,255,.47),
+        1205px 284px rgba(255,255,255,.42), 452px 4px rgba(255,255,255,.34),
+        1293px 31px rgba(255,255,255,.41), 65px 441px rgba(255,255,255,.47),
+        1053px 122px rgba(255,255,255,.44), 995px 110px rgba(255,255,255,.57),
+        1170px 296px rgba(255,255,255,.54), 969px 414px rgba(255,255,255,.5),
+        194px 50px rgba(255,255,255,.63),  726px 217px rgba(255,255,255,.51);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.9),  1324px 51px rgba(255,255,255,.72),
+        695px 410px rgba(255,255,255,.96), 510px 99px rgba(255,255,255,.76),
+        919px 72px rgba(255,255,255,.83),  571px 237px rgba(255,255,255,.77),
+        155px 227px rgba(255,255,255,.94), 1128px 51px rgba(255,255,255,.72),
+        1108px 429px rgba(255,255,255,.7), 192px 475px rgba(255,255,255,.93),
+        485px 86px rgba(255,255,255,.82),  986px 110px rgba(255,255,255,.96),
+        121px 85px rgba(255,255,255,.81),  800px 136px rgba(255,255,255,.98),
+        932px 147px rgba(255,255,255,.83), 1139px 339px rgba(255,255,255,.92),
+        318px 98px rgba(255,255,255,.79),  120px 297px rgba(255,255,255,.92),
+        125px 383px rgba(255,255,255,.79), 103px 300px rgba(255,255,255,.84),
+        1088px 81px rgba(255,255,255,.72), 1041px 42px rgba(255,255,255,.96),
+        141px 305px rgba(255,255,255,.72), 482px 207px rgba(255,255,255,.74),
+        1167px 127px rgba(255,255,255,.87), 82px 318px rgba(255,255,255,.72),
+        1347px 299px rgba(255,255,255,.87), 648px 479px rgba(255,255,255,.78),
+        1372px 367px rgba(255,255,255,.79), 544px 203px rgba(255,255,255,.74);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,235,255,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(199,125,186,.2);
+      border-color: rgba(199,125,186,.5);
+      color: #c77dba;
+      box-shadow: 0 0 20px rgba(199,125,186,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ── Scene-specific keyframes ── */
+    @keyframes introGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(199,125,186,.6), 0 0 110px rgba(138,64,128,.3); }
+      50%      { box-shadow: 0 0 80px rgba(220,150,210,.85), 0 0 160px rgba(180,100,170,.5); }
+    }
+    @keyframes scepterGlow {
+      0%,100% { filter: drop-shadow(0 0 6px rgba(255,215,0,.4)); }
+      50%      { filter: drop-shadow(0 0 14px rgba(255,215,0,.8)); }
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #2a1828 0%, #3e2844 30%, #543060 65%, #6a407a 100%);
+    }
+    #intro-orb {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fff0f8, #e8a0d0 40%, #a05090 75%, #6a3060);
+      box-shadow: 0 0 55px rgba(199,125,186,.6), 0 0 110px rgba(138,64,128,.3);
+      z-index: 4;
+      animation: introGlow 4s ease-in-out infinite;
+    }
+    #intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#c77dba 0%,#f0c0e8 45%,#8a4080 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(220,160,210,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(190,130,180,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+    #intro-esther {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — ESTHER BECOMES QUEEN  以斯帖被立為后
+    ══════════════════════════════════════════════ */
+    #scene-queen {
+      background: linear-gradient(180deg, #3e1840 0%, #5a2860 40%, #7a3888 70%, #6a3070 100%);
+    }
+    #queen-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 35%;
+      background: linear-gradient(180deg,#2a1028 0%,#18081a 55%,#0a040c 100%);
+      z-index: 5;
+    }
+    #queen-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,215,0,.2) 0%, rgba(200,170,40,.08) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    #queen-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 7;
+    }
+    #queen-heading h2 {
+      color: #e8b840;
+      text-shadow: 0 0 22px rgba(232,184,64,.6);
+    }
+    #queen-heading p { color: rgba(220,180,140,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — HAMAN'S PLOT  哈曼的陰謀
+    ══════════════════════════════════════════════ */
+    #scene-plot {
+      background: linear-gradient(180deg, #1a0a10 0%, #30101a 40%, #4a1820 65%, #2a0a14 100%);
+    }
+    #plot-shadow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,50vw,600px); height: 40vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(180,40,40,.12) 0%, rgba(120,20,20,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3s ease-in-out infinite;
+    }
+    #plot-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 5;
+    }
+    #plot-heading h2 {
+      background: linear-gradient(120deg,#cc3030 0%,#ff8080 50%,#aa2020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #plot-heading p { color: rgba(220,140,140,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — ESTHER'S COURAGE  以斯帖的勇氣
+    ══════════════════════════════════════════════ */
+    #scene-courage {
+      background: linear-gradient(180deg, #1a1020 0%, #2e1840 35%, #4a2860 65%, #6a5020 100%);
+    }
+    #courage-glow {
+      position: absolute; bottom: 35%; left: 55%; transform: translateX(-50%);
+      width: clamp(120px,25vw,300px); height: 30vh;
+      background: radial-gradient(ellipse, rgba(255,215,0,.18) 0%, rgba(200,170,40,.06) 50%, transparent 70%);
+      z-index: 4;
+      animation: breathe 3s ease-in-out infinite;
+    }
+    #courage-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 5;
+    }
+    #courage-heading h2 {
+      background: linear-gradient(120deg,#c77dba 0%,#ffd700 50%,#c77dba 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #courage-heading p { color: rgba(220,180,200,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — THE REVERSAL  命運逆轉
+    ══════════════════════════════════════════════ */
+    #scene-reversal {
+      background: linear-gradient(180deg, #1a1020 0%, #2e1838 40%, #4a2050 70%, #3e1840 100%);
+    }
+    #reversal-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 45vw; height: 20vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(199,125,186,.15) 0%, rgba(138,64,128,.06) 50%, transparent 72%);
+      z-index: 4;
+      animation: glowPulse 3.5s ease-in-out infinite;
+    }
+    #reversal-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 5;
+    }
+    #reversal-heading h2 {
+      background: linear-gradient(120deg,#c77dba 0%,#f0c0e8 50%,#8a4080 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #reversal-heading p { color: rgba(200,160,190,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — PURIM  普珥節
+    ══════════════════════════════════════════════ */
+    #scene-purim {
+      background: linear-gradient(180deg, #3e2040 0%, #6a3870 35%, #8a5040 65%, #a06830 100%);
+    }
+    #purim-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#2a1828 0%,#1a0c18 55%,#0c040a 100%);
+      z-index: 5;
+    }
+    #purim-glow {
+      position: absolute; bottom: 32%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 16vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,200,80,.2) 0%, rgba(220,160,40,.08) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    #purim-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 7;
+    }
+    #purim-heading h2 {
+      background: linear-gradient(120deg,#ffd700 0%,#ffe880 50%,#c77dba 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #purim-heading p { color: rgba(230,200,160,.55); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"    aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-queen"    aria-label="以斯帖被立為后"></a>
+  <a class="nav-dot" href="#scene-plot"     aria-label="哈曼的陰謀"></a>
+  <a class="nav-dot" href="#scene-courage"  aria-label="以斯帖的勇氣"></a>
+  <a class="nav-dot" href="#scene-reversal" aria-label="命運逆轉"></a>
+  <a class="nav-dot" href="#scene-purim"    aria-label="普珥節"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="以斯帖記 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="intro-orb" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>以斯帖記</h1>
+    <p>Book of Esther</p>
+    <span class="sub">王后 · 陰謀 · 勇氣 · 逆轉 · 拯救</span>
+  </div>
+
+  <!-- Persian palace landscape -->
+  <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a1030"/>
+        <stop offset="50%" stop-color="#1c0c20"/>
+        <stop offset="100%" stop-color="#0c0410"/>
+      </linearGradient>
+      <linearGradient id="hill1G" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5a2858"/>
+        <stop offset="100%" stop-color="#1a0c1a"/>
+      </linearGradient>
+      <linearGradient id="hill2G" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3e1840"/>
+        <stop offset="100%" stop-color="#100810"/>
+      </linearGradient>
+      <linearGradient id="groundG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a1428"/>
+        <stop offset="100%" stop-color="#0a040a"/>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="1440" height="420" fill="url(#skyG)"/>
+    <!-- Distant rose hills -->
+    <path d="M0 320 Q180 240 360 280 Q540 220 720 260 Q900 200 1080 260 Q1260 220 1440 280 L1440 420 L0 420 Z"
+          fill="url(#hill2G)" opacity=".6"/>
+    <!-- Nearer hills with palace silhouette -->
+    <path d="M0 360 Q200 310 400 330 L440 330 L440 280 L460 260 L480 280 L480 330 Q500 320 540 330
+          L540 290 L560 270 L580 290 L580 330 Q700 300 720 270 L740 250 L760 270 Q780 300 800 330
+          Q900 310 1000 330 L1000 290 L1020 270 L1040 290 L1040 330 Q1200 310 1440 340 L1440 420 L0 420 Z"
+          fill="url(#hill1G)"/>
+    <!-- Ground -->
+    <rect x="0" y="360" width="1440" height="60" fill="url(#groundG)"/>
+    <!-- Palace glow on horizon -->
+    <ellipse cx="720" cy="280" rx="400" ry="50" fill="rgba(199,125,186,.08)"/>
+  </svg>
+
+  <!-- Esther figure in royal dress -->
+  <svg id="intro-esther" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="以斯帖 — Esther in royal dress">
+    <title>以斯帖 — Queen Esther standing in royal attire</title>
+    <!-- Head -->
+    <circle cx="30" cy="16" r="12" fill="#8a6838"/>
+    <!-- Hair -->
+    <path d="M18,14 Q22,4 30,2 Q38,4 42,14 L42,22 Q38,18 30,16 Q22,18 18,22 Z" fill="#2a1808"/>
+    <!-- Veil -->
+    <path d="M18,12 Q30,0 42,12 L44,28 Q30,22 16,28 Z" fill="rgba(199,125,186,.4)"/>
+    <!-- Face detail -->
+    <circle cx="26" cy="14" r="1.2" fill="#4a3020"/>
+    <circle cx="34" cy="14" r="1.2" fill="#4a3020"/>
+    <!-- Royal dress -->
+    <path d="M20,28 Q14,55 8,100 Q16,105 24,100 Q27,75 30,58 Q33,75 36,100 Q44,105 52,100 Q46,55 40,28 Z"
+          fill="#8a4080"/>
+    <!-- Dress overlay/sash -->
+    <path d="M22,30 Q30,28 38,30 L37,48 Q30,46 23,48 Z" fill="#c77dba" opacity=".6"/>
+    <!-- Belt -->
+    <line x1="20" y1="48" x2="40" y2="48" stroke="#d4a020" stroke-width="2"/>
+    <!-- Feet -->
+    <ellipse cx="22" cy="102" rx="7" ry="3" fill="#5a3028"/>
+    <ellipse cx="38" cy="102" rx="7" ry="3" fill="#5a3028"/>
+  </svg>
+
+  <div class="scroll-hint">↓ 向下滾動探索 · Scroll to explore</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — ESTHER BECOMES QUEEN  以斯帖被立為后
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-queen" aria-label="以斯帖被立為后 — Esther Becomes Queen">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="queen-ground" aria-hidden="true"></div>
+  <div id="queen-glow" aria-hidden="true"></div>
+
+  <!-- Throne room scene -->
+  <svg id="queen-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="以斯帖被加冕為王后 — Esther crowned as queen">
+    <title>以斯帖被立為后 — The king places the royal crown on Esther's head</title>
+    <defs>
+      <linearGradient id="throneG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d4a020"/>
+        <stop offset="50%" stop-color="#a07818"/>
+        <stop offset="100%" stop-color="#6a5010"/>
+      </linearGradient>
+      <linearGradient id="curtainLG" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#6a2060"/>
+        <stop offset="100%" stop-color="#3a1030"/>
+      </linearGradient>
+      <linearGradient id="curtainRG" x1="1" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6a2060"/>
+        <stop offset="100%" stop-color="#3a1030"/>
+      </linearGradient>
+      <linearGradient id="floorTG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a1028"/>
+        <stop offset="100%" stop-color="#100810"/>
+      </linearGradient>
+    </defs>
+    <!-- Floor -->
+    <rect x="0" y="380" width="1440" height="120" fill="url(#floorTG)"/>
+    <!-- Royal curtain left -->
+    <path d="M0 0 Q80 20 120 0 L120 360 Q80 380 0 360 Z" fill="url(#curtainLG)"/>
+    <path d="M120 0 Q160 40 180 0 L180 340 Q160 360 120 340 Z" fill="url(#curtainLG)" opacity=".7"/>
+    <!-- Royal curtain right -->
+    <path d="M1440 0 Q1360 20 1320 0 L1320 360 Q1360 380 1440 360 Z" fill="url(#curtainRG)"/>
+    <path d="M1320 0 Q1280 40 1260 0 L1260 340 Q1280 360 1320 340 Z" fill="url(#curtainRG)" opacity=".7"/>
+    <!-- Throne platform -->
+    <rect x="580" y="320" width="280" height="20" rx="3" fill="#8a6830"/>
+    <rect x="560" y="340" width="320" height="15" rx="3" fill="#6a5020"/>
+    <rect x="540" y="355" width="360" height="25" fill="#4a3818"/>
+    <!-- Throne chair -->
+    <rect x="640" y="220" width="160" height="110" rx="5" fill="url(#throneG)"/>
+    <!-- Throne back -->
+    <path d="M650,220 Q720,160 790,220" fill="#d4a020" stroke="#b08818" stroke-width="2"/>
+    <!-- Throne armrests -->
+    <rect x="630" y="280" width="20" height="50" rx="4" fill="#b08818"/>
+    <rect x="790" y="280" width="20" height="50" rx="4" fill="#b08818"/>
+    <!-- King figure (seated) -->
+    <circle cx="720" cy="252" r="14" fill="#7a5828"/>
+    <!-- King crown -->
+    <path d="M706,242 L710,230 L716,238 L720,226 L724,238 L730,230 L734,242 Z" fill="#ffd700"/>
+    <!-- King robe -->
+    <path d="M706,264 Q700,290 698,320 Q710,324 720,320 Q730,324 742,320 Q740,290 734,264 Z" fill="#4a2060"/>
+    <!-- King arm extending crown -->
+    <path d="M706,275 Q680,270 660,262" stroke="#7a5828" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- Crown being placed -->
+    <path d="M648,254 L652,242 L658,250 L662,238 L666,250 L672,242 L676,254 Z"
+          fill="#ffd700" style="animation:scepterGlow 3s ease-in-out infinite;"/>
+    <!-- Esther kneeling -->
+    <circle cx="660" cy="340" r="11" fill="#8a6838"/>
+    <!-- Esther hair -->
+    <path d="M649,336 Q654,328 660,326 Q666,328 671,336 L671,344 Q666,340 660,338 Q654,340 649,344 Z" fill="#2a1808"/>
+    <!-- Esther dress (kneeling) -->
+    <path d="M650,350 Q645,370 640,390 Q650,394 660,390 Q670,394 680,390 Q675,370 670,350 Z" fill="#8a4080"/>
+    <!-- Esther sash -->
+    <path d="M652,352 Q660,350 668,352 L667,360 Q660,358 653,360 Z" fill="#c77dba" opacity=".5"/>
+    <!-- Glow around crown -->
+    <ellipse cx="662" cy="248" rx="25" ry="18" fill="none"
+             stroke="rgba(255,215,0,.15)" stroke-width="6"
+             style="animation:breathe 2.5s ease-in-out infinite;"/>
+    <!-- Courtiers watching -->
+    <circle cx="400" cy="370" r="5" fill="rgba(100,70,90,.6)"/>
+    <circle cx="430" cy="374" r="4.5" fill="rgba(100,70,90,.55)"/>
+    <circle cx="460" cy="372" r="5" fill="rgba(100,70,90,.6)"/>
+    <circle cx="980" cy="372" r="5" fill="rgba(100,70,90,.6)"/>
+    <circle cx="1010" cy="370" r="4.5" fill="rgba(100,70,90,.55)"/>
+    <circle cx="1040" cy="374" r="5" fill="rgba(100,70,90,.6)"/>
+  </svg>
+
+  <div class="scene-heading" id="queen-heading" aria-hidden="true">
+    <h2>👑 以斯帖被立為后</h2>
+    <p>Esther Becomes Queen — Esther 2</p>
+  </div>
+  <div class="scene-verse">「王愛以斯帖過於愛眾女，就把王后的冠冕戴在她頭上」— 以斯帖記 2:17</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — HAMAN'S PLOT  哈曼的陰謀
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-plot" aria-label="哈曼的陰謀 — Haman's Plot">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="plot-shadow" aria-hidden="true"></div>
+
+  <!-- Haman scheming scene -->
+  <svg id="plot-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="哈曼密謀滅絕猶大人 — Haman plotting to destroy the Jews">
+    <title>哈曼的陰謀 — Haman schemes to destroy all Jews in Persia</title>
+    <defs>
+      <linearGradient id="darkFloorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a0a14"/>
+        <stop offset="100%" stop-color="#100408"/>
+      </linearGradient>
+      <linearGradient id="scrollG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d4c8a0"/>
+        <stop offset="50%" stop-color="#b0a078"/>
+        <stop offset="100%" stop-color="#8a7850"/>
+      </linearGradient>
+    </defs>
+    <!-- Dark floor -->
+    <rect x="0" y="380" width="1440" height="120" fill="url(#darkFloorG)"/>
+    <!-- Shadow over palace walls -->
+    <rect x="0" y="200" width="1440" height="200" fill="rgba(10,4,8,.4)"/>
+    <!-- Palace wall -->
+    <rect x="0" y="200" width="1440" height="10" fill="rgba(80,30,40,.3)"/>
+    <!-- Columns -->
+    <rect x="200" y="200" width="30" height="200" fill="rgba(60,20,30,.5)" rx="3"/>
+    <rect x="500" y="200" width="30" height="200" fill="rgba(60,20,30,.5)" rx="3"/>
+    <rect x="900" y="200" width="30" height="200" fill="rgba(60,20,30,.5)" rx="3"/>
+    <rect x="1200" y="200" width="30" height="200" fill="rgba(60,20,30,.5)" rx="3"/>
+    <!-- Haman figure (scheming) -->
+    <circle cx="720" cy="320" r="14" fill="#5a4020"/>
+    <!-- Haman hat (tall) -->
+    <path d="M708,310 L720,280 L732,310 Z" fill="#4a1820"/>
+    <!-- Haman robe -->
+    <path d="M706,332 Q700,360 696,395 Q706,400 720,396 Q734,400 744,395 Q740,360 734,332 Z" fill="#4a1820"/>
+    <!-- Haman hands rubbing together -->
+    <path d="M706,340 Q690,350 688,345" stroke="#5a4020" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M734,340 Q750,350 752,345" stroke="#5a4020" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <ellipse cx="720" cy="348" rx="12" ry="6" fill="rgba(90,64,32,.5)"/>
+    <!-- Evil decree scroll -->
+    <rect x="630" y="360" width="80" height="50" rx="4" fill="url(#scrollG)" opacity=".8"/>
+    <line x1="640" y1="372" x2="700" y2="372" stroke="rgba(80,30,20,.4)" stroke-width="1.5"/>
+    <line x1="640" y1="380" x2="700" y2="380" stroke="rgba(80,30,20,.4)" stroke-width="1.5"/>
+    <line x1="640" y1="388" x2="690" y2="388" stroke="rgba(80,30,20,.4)" stroke-width="1.5"/>
+    <line x1="640" y1="396" x2="700" y2="396" stroke="rgba(80,30,20,.4)" stroke-width="1.5"/>
+    <!-- Scroll roll left -->
+    <ellipse cx="630" cy="385" rx="6" ry="25" fill="#c8b880"/>
+    <!-- Scroll roll right -->
+    <ellipse cx="710" cy="385" rx="6" ry="25" fill="#c8b880"/>
+    <!-- Gallows in background -->
+    <line x1="1060" y1="200" x2="1060" y2="380" stroke="rgba(80,50,30,.4)" stroke-width="6"/>
+    <line x1="1060" y1="220" x2="1120" y2="220" stroke="rgba(80,50,30,.4)" stroke-width="5"/>
+    <line x1="1120" y1="220" x2="1120" y2="260" stroke="rgba(80,50,30,.3)" stroke-width="3"/>
+    <!-- Support beam -->
+    <line x1="1060" y1="250" x2="1100" y2="220" stroke="rgba(80,50,30,.3)" stroke-width="3"/>
+    <!-- Sinister red glow -->
+    <ellipse cx="720" cy="360" rx="120" ry="60" fill="rgba(180,30,30,.06)"/>
+    <!-- Shadow figure looming -->
+    <ellipse cx="720" cy="395" rx="80" ry="8" fill="rgba(0,0,0,.2)"/>
+  </svg>
+
+  <div class="scene-heading" id="plot-heading" aria-hidden="true">
+    <h2>😈 哈曼的陰謀</h2>
+    <p>Haman's Plot — Esther 3</p>
+  </div>
+  <div class="scene-verse">「哈曼要滅絕所有的猶大人」— 以斯帖記 3:6</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — ESTHER'S COURAGE  以斯帖的勇氣
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-courage" aria-label="以斯帖的勇氣 — Esther's Courage">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="courage-glow" aria-hidden="true"></div>
+
+  <!-- Esther approaching throne -->
+  <svg id="courage-svg" viewBox="0 0 1440 600" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="以斯帖勇敢地走進王的內院 — Esther bravely approaches the throne room">
+    <title>以斯帖的勇氣 — Esther risks her life to approach the king unsummoned</title>
+    <defs>
+      <linearGradient id="throneRoomG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a1030"/>
+        <stop offset="50%" stop-color="#1a0820"/>
+        <stop offset="100%" stop-color="#0c0410"/>
+      </linearGradient>
+      <linearGradient id="scepterG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffd700"/>
+        <stop offset="50%" stop-color="#d4a020"/>
+        <stop offset="100%" stop-color="#a07818"/>
+      </linearGradient>
+    </defs>
+    <!-- Throne room floor -->
+    <rect x="0" y="420" width="1440" height="180" fill="url(#throneRoomG)"/>
+    <!-- Carpet runner -->
+    <rect x="300" y="420" width="840" height="180" fill="rgba(138,64,128,.08)"/>
+    <line x1="300" y1="420" x2="300" y2="600" stroke="rgba(199,125,186,.15)" stroke-width="2"/>
+    <line x1="1140" y1="420" x2="1140" y2="600" stroke="rgba(199,125,186,.15)" stroke-width="2"/>
+    <!-- Grand columns -->
+    <rect x="250" y="140" width="40" height="300" fill="rgba(80,40,70,.4)" rx="4"/>
+    <rect x="450" y="140" width="35" height="300" fill="rgba(80,40,70,.35)" rx="4"/>
+    <rect x="950" y="140" width="35" height="300" fill="rgba(80,40,70,.35)" rx="4"/>
+    <rect x="1150" y="140" width="40" height="300" fill="rgba(80,40,70,.4)" rx="4"/>
+    <!-- Dramatic light rays from throne -->
+    <line x1="900" y1="280" x2="600" y2="500" stroke="rgba(255,215,0,.04)" stroke-width="40"/>
+    <line x1="900" y1="280" x2="750" y2="500" stroke="rgba(255,215,0,.06)" stroke-width="30"/>
+    <line x1="900" y1="280" x2="1050" y2="500" stroke="rgba(255,215,0,.04)" stroke-width="40"/>
+    <!-- King on throne (right side) -->
+    <rect x="840" y="310" width="120" height="80" rx="4" fill="rgba(160,120,30,.3)"/>
+    <path d="M850,310 Q900,270 950,310" fill="rgba(180,140,40,.25)"/>
+    <circle cx="900" cy="300" r="13" fill="#7a5828"/>
+    <!-- King crown -->
+    <path d="M887,290 L891,278 L897,286 L900,274 L903,286 L909,278 L913,290 Z" fill="#ffd700"/>
+    <!-- King robe -->
+    <path d="M888,312 Q884,340 882,370 Q892,374 900,370 Q908,374 918,370 Q916,340 912,312 Z" fill="#4a2060"/>
+    <!-- Golden scepter extended -->
+    <line x1="884" y1="330" x2="740" y2="360" stroke="url(#scepterG)" stroke-width="5" stroke-linecap="round"
+          style="animation:scepterGlow 3s ease-in-out infinite;"/>
+    <!-- Scepter tip orb -->
+    <circle cx="740" cy="360" r="6" fill="#ffd700" style="animation:scepterGlow 3s ease-in-out infinite;"/>
+    <!-- Esther approaching (left side) -->
+    <circle cx="580" cy="380" r="12" fill="#8a6838"/>
+    <!-- Esther hair -->
+    <path d="M568,376 Q574,368 580,366 Q586,368 592,376 L592,384 Q586,380 580,378 Q574,380 568,384 Z" fill="#2a1808"/>
+    <!-- Esther royal robes -->
+    <path d="M568,390 Q562,416 556,448 Q566,454 580,448 Q594,454 604,448 Q598,416 592,390 Z" fill="#8a4080"/>
+    <!-- Esther sash -->
+    <path d="M570,394 Q580,392 590,394 L589,404 Q580,402 571,404 Z" fill="#c77dba" opacity=".5"/>
+    <!-- Esther hands forward (reaching toward scepter) -->
+    <path d="M592,400 Q620,390 650,380" stroke="#8a6838" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Light between scepter and Esther -->
+    <ellipse cx="700" cy="370" rx="50" ry="25" fill="rgba(255,215,0,.06)"/>
+    <!-- Guards on sides -->
+    <circle cx="320" cy="400" r="6" fill="rgba(80,50,60,.5)"/>
+    <line x1="318" y1="394" x2="316" y2="378" stroke="rgba(140,120,100,.3)" stroke-width="2"/>
+    <circle cx="1100" cy="400" r="6" fill="rgba(80,50,60,.5)"/>
+    <line x1="1102" y1="394" x2="1104" y2="378" stroke="rgba(140,120,100,.3)" stroke-width="2"/>
+  </svg>
+
+  <div class="scene-heading" id="courage-heading" aria-hidden="true">
+    <h2>💪 以斯帖的勇氣</h2>
+    <p>Esther's Courage — Esther 4–5</p>
+  </div>
+  <div class="scene-verse">「我若死就死吧！」— 以斯帖記 4:16</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — THE REVERSAL  命運逆轉
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-reversal" aria-label="命運逆轉 — The Reversal">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="reversal-glow" aria-hidden="true"></div>
+
+  <!-- Banquet scene with reversal -->
+  <svg id="reversal-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="以斯帖在筵席上揭露哈曼 — Esther exposes Haman at the banquet">
+    <title>命運逆轉 — Esther reveals Haman's plot at the royal banquet</title>
+    <defs>
+      <linearGradient id="banquetFloorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a1028"/>
+        <stop offset="100%" stop-color="#120610"/>
+      </linearGradient>
+      <linearGradient id="tableG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6a4020"/>
+        <stop offset="100%" stop-color="#3a2010"/>
+      </linearGradient>
+    </defs>
+    <!-- Floor -->
+    <rect x="0" y="380" width="1440" height="120" fill="url(#banquetFloorG)"/>
+    <!-- Banquet table -->
+    <rect x="400" y="330" width="640" height="20" rx="3" fill="url(#tableG)"/>
+    <!-- Table legs -->
+    <rect x="420" y="350" width="12" height="40" fill="#4a2810"/>
+    <rect x="1008" y="350" width="12" height="40" fill="#4a2810"/>
+    <!-- Table cloth -->
+    <path d="M400,330 Q420,325 440,330" fill="rgba(138,64,128,.2)"/>
+    <path d="M1000,330 Q1020,325 1040,330" fill="rgba(138,64,128,.2)"/>
+    <!-- Goblets and plates on table -->
+    <ellipse cx="520" cy="328" rx="10" ry="4" fill="rgba(200,160,40,.3)"/>
+    <ellipse cx="600" cy="326" rx="8" ry="3" fill="rgba(180,140,40,.25)"/>
+    <ellipse cx="720" cy="328" rx="10" ry="4" fill="rgba(200,160,40,.3)"/>
+    <ellipse cx="840" cy="326" rx="8" ry="3" fill="rgba(180,140,40,.25)"/>
+    <ellipse cx="920" cy="328" rx="10" ry="4" fill="rgba(200,160,40,.3)"/>
+    <!-- Candelabra -->
+    <line x1="660" y1="328" x2="660" y2="300" stroke="#b08818" stroke-width="3"/>
+    <circle cx="660" cy="296" r="5" fill="rgba(255,200,60,.5)"/>
+    <ellipse cx="660" cy="296" rx="12" ry="8" fill="rgba(255,200,60,.08)"/>
+    <line x1="780" y1="328" x2="780" y2="300" stroke="#b08818" stroke-width="3"/>
+    <circle cx="780" cy="296" r="5" fill="rgba(255,200,60,.5)"/>
+    <ellipse cx="780" cy="296" rx="12" ry="8" fill="rgba(255,200,60,.08)"/>
+    <!-- King standing in anger (right) -->
+    <circle cx="920" cy="290" r="13" fill="#7a5828"/>
+    <path d="M907,280 L911,268 L917,276 L920,264 L923,276 L929,268 L933,280 Z" fill="#ffd700"/>
+    <path d="M908,302 Q904,330 900,360 Q910,366 920,360 Q930,366 940,360 Q936,330 932,302 Z" fill="#4a2060"/>
+    <!-- King angry gesture (arm raised) -->
+    <path d="M932,310 Q948,296 955,282" stroke="#7a5828" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Esther pointing at Haman (center-left) -->
+    <circle cx="580" cy="300" r="11" fill="#8a6838"/>
+    <path d="M569,296 Q574,288 580,286 Q586,288 591,296 L591,304 Q586,300 580,298 Q574,300 569,304 Z" fill="#2a1808"/>
+    <path d="M570,310 Q565,336 560,365 Q570,370 580,365 Q590,370 600,365 Q595,336 590,310 Z" fill="#8a4080"/>
+    <!-- Esther arm pointing -->
+    <path d="M590,318 Q640,310 680,306" stroke="#8a6838" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Pointing finger -->
+    <circle cx="682" cy="305" r="3" fill="#8a6838"/>
+    <!-- Haman cowering (center-right) -->
+    <circle cx="760" cy="340" r="12" fill="#5a4020"/>
+    <path d="M748,332 L760,310 L772,332 Z" fill="#4a1820"/>
+    <!-- Haman crouching/cowering body -->
+    <path d="M749,350 Q746,370 744,392 Q752,396 760,392 Q768,396 776,392 Q774,370 771,350 Z" fill="#4a1820"/>
+    <!-- Haman arms up defensively -->
+    <path d="M749,354 Q736,344 730,336" stroke="#5a4020" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M771,354 Q784,344 790,336" stroke="#5a4020" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Dramatic tension line -->
+    <ellipse cx="720" cy="340" rx="100" ry="40" fill="rgba(199,125,186,.04)"/>
+  </svg>
+
+  <div class="scene-heading" id="reversal-heading" aria-hidden="true">
+    <h2>⚖ 命運逆轉</h2>
+    <p>The Reversal — Esther 7</p>
+  </div>
+  <div class="scene-verse">「人就把哈曼掛在他為末底改所預備的木架上」— 以斯帖記 7:10</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — PURIM  普珥節
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-purim" aria-label="普珥節 — The Feast of Purim">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="purim-ground" aria-hidden="true"></div>
+  <div id="purim-glow" aria-hidden="true"></div>
+
+  <!-- Celebration scene -->
+  <svg id="purim-svg" viewBox="0 0 1440 600" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="猶大人歡慶普珥節 — The Jews celebrate the Feast of Purim">
+    <title>普珥節 — The joyful celebration of Purim with feasting and gift-giving</title>
+    <defs>
+      <linearGradient id="festFloorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a1830"/>
+        <stop offset="100%" stop-color="#1a0c18"/>
+      </linearGradient>
+      <linearGradient id="festTableG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7a5030"/>
+        <stop offset="100%" stop-color="#4a2818"/>
+      </linearGradient>
+    </defs>
+    <!-- Ground / floor -->
+    <rect x="0" y="440" width="1440" height="160" fill="url(#festFloorG)"/>
+    <!-- Feast tables -->
+    <rect x="200" y="400" width="400" height="14" rx="3" fill="url(#festTableG)"/>
+    <rect x="840" y="400" width="400" height="14" rx="3" fill="url(#festTableG)"/>
+    <!-- Table legs -->
+    <rect x="220" y="414" width="10" height="30" fill="#4a2818"/>
+    <rect x="580" y="414" width="10" height="30" fill="#4a2818"/>
+    <rect x="860" y="414" width="10" height="30" fill="#4a2818"/>
+    <rect x="1220" y="414" width="10" height="30" fill="#4a2818"/>
+    <!-- Food and goblets on tables -->
+    <ellipse cx="300" cy="398" rx="14" ry="5" fill="rgba(200,160,40,.3)"/>
+    <ellipse cx="400" cy="396" rx="10" ry="4" fill="rgba(180,80,60,.3)"/>
+    <ellipse cx="500" cy="398" rx="12" ry="5" fill="rgba(200,160,40,.25)"/>
+    <ellipse cx="940" cy="398" rx="14" ry="5" fill="rgba(200,160,40,.3)"/>
+    <ellipse cx="1040" cy="396" rx="10" ry="4" fill="rgba(180,80,60,.3)"/>
+    <ellipse cx="1140" cy="398" rx="12" ry="5" fill="rgba(200,160,40,.25)"/>
+    <!-- Mordecai in royal robes (center) -->
+    <circle cx="720" cy="360" r="14" fill="#6b4e14"/>
+    <!-- Mordecai crown/turban -->
+    <path d="M706,352 Q720,338 734,352 L734,358 Q720,352 706,358 Z" fill="#4a2060"/>
+    <path d="M710,352 Q720,344 730,352" stroke="#ffd700" stroke-width="2" fill="none"/>
+    <!-- Mordecai royal robe -->
+    <path d="M706,372 Q700,400 694,440 Q708,446 720,440 Q732,446 746,440 Q740,400 734,372 Z" fill="#4a2060"/>
+    <!-- Royal sash -->
+    <line x1="706" y1="388" x2="734" y2="388" stroke="#ffd700" stroke-width="2.5"/>
+    <!-- Chain of gold -->
+    <ellipse cx="720" cy="378" rx="10" ry="4" fill="none" stroke="#d4a020" stroke-width="1.5"/>
+    <!-- Dancing figures (left group) -->
+    <circle cx="140" cy="400" r="6" fill="rgba(160,100,140,.6)"/>
+    <path d="M134,406 Q130,424 128,445 Q134,448 140,445 Q146,448 152,445 Q150,424 146,406 Z" fill="rgba(140,80,120,.5)"/>
+    <path d="M134,412 Q124,406 118,400" stroke="rgba(160,100,140,.4)" stroke-width="3" fill="none"/>
+    <path d="M146,412 Q156,406 162,400" stroke="rgba(160,100,140,.4)" stroke-width="3" fill="none"/>
+
+    <circle cx="180" cy="396" r="5.5" fill="rgba(140,90,130,.6)"/>
+    <path d="M174,402 Q171,418 168,440 Q174,443 180,440 Q186,443 192,440 Q189,418 186,402 Z" fill="rgba(120,70,110,.5)"/>
+    <path d="M174,408 Q166,400 160,394" stroke="rgba(140,90,130,.4)" stroke-width="3" fill="none"/>
+    <path d="M186,408 Q194,400 200,394" stroke="rgba(140,90,130,.4)" stroke-width="3" fill="none"/>
+    <!-- Dancing figures (right group) -->
+    <circle cx="1280" cy="398" r="6" fill="rgba(160,100,140,.6)"/>
+    <path d="M1274,404 Q1270,422 1268,444 Q1274,447 1280,444 Q1286,447 1292,444 Q1290,422 1286,404 Z" fill="rgba(140,80,120,.5)"/>
+    <path d="M1274,410 Q1264,404 1258,398" stroke="rgba(160,100,140,.4)" stroke-width="3" fill="none"/>
+    <path d="M1286,410 Q1296,404 1302,398" stroke="rgba(160,100,140,.4)" stroke-width="3" fill="none"/>
+
+    <circle cx="1320" cy="394" r="5.5" fill="rgba(140,90,130,.6)"/>
+    <path d="M1314,400 Q1311,416 1308,438 Q1314,441 1320,438 Q1326,441 1332,438 Q1329,416 1326,400 Z" fill="rgba(120,70,110,.5)"/>
+    <!-- People exchanging gifts -->
+    <circle cx="460" cy="430" r="5" fill="rgba(140,100,120,.5)"/>
+    <circle cx="510" cy="432" r="5" fill="rgba(140,100,120,.5)"/>
+    <!-- Gift box between them -->
+    <rect x="478" y="426" width="14" height="12" rx="2" fill="rgba(199,125,186,.4)"/>
+    <line x1="485" y1="426" x2="485" y2="438" stroke="rgba(255,215,0,.4)" stroke-width="1.5"/>
+    <line x1="478" y1="432" x2="492" y2="432" stroke="rgba(255,215,0,.4)" stroke-width="1.5"/>
+    <!-- More gift exchange (right) -->
+    <circle cx="1000" cy="432" r="5" fill="rgba(140,100,120,.5)"/>
+    <circle cx="1050" cy="430" r="5" fill="rgba(140,100,120,.5)"/>
+    <rect x="1018" y="424" width="14" height="12" rx="2" fill="rgba(199,125,186,.4)"/>
+    <line x1="1025" y1="424" x2="1025" y2="436" stroke="rgba(255,215,0,.4)" stroke-width="1.5"/>
+    <line x1="1018" y1="430" x2="1032" y2="430" stroke="rgba(255,215,0,.4)" stroke-width="1.5"/>
+    <!-- Celebration particles / confetti -->
+    <circle cx="300" cy="340" r="2" fill="rgba(255,200,80,.4)"/>
+    <circle cx="500" cy="320" r="2.5" fill="rgba(199,125,186,.4)"/>
+    <circle cx="700" cy="310" r="2" fill="rgba(255,215,0,.35)"/>
+    <circle cx="900" cy="330" r="2.5" fill="rgba(199,125,186,.4)"/>
+    <circle cx="1100" cy="320" r="2" fill="rgba(255,200,80,.4)"/>
+    <circle cx="400" cy="310" r="1.5" fill="rgba(240,192,232,.3)"/>
+    <circle cx="600" cy="300" r="2" fill="rgba(255,215,0,.3)"/>
+    <circle cx="800" cy="325" r="1.5" fill="rgba(240,192,232,.3)"/>
+    <circle cx="1000" cy="310" r="2" fill="rgba(255,215,0,.3)"/>
+    <circle cx="1200" cy="335" r="1.5" fill="rgba(240,192,232,.3)"/>
+    <!-- Joyful glow -->
+    <ellipse cx="720" cy="400" rx="300" ry="60" fill="rgba(255,200,80,.04)"/>
+  </svg>
+
+  <div class="scene-heading" id="purim-heading" aria-hidden="true">
+    <h2>🎉 普珥節</h2>
+    <p>The Feast of Purim — Esther 9</p>
+  </div>
+  <div class="scene-verse">「猶大人脫離仇敵得平安，轉憂為喜，轉悲為樂」— 以斯帖記 9:22</div>
+</section>
+
+</body>
+</html>
