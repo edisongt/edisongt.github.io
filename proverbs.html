@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>箴言 · Proverbs</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #1c1c62;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+    @keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+    @keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.31), 564px 126px rgba(255,255,255,.41),
+        210px 347px rgba(255,255,255,.67), 1117px 45px rgba(255,255,255,.6),
+        66px 16px rgba(255,255,255,.35),  477px 259px rgba(255,255,255,.6),
+        1150px 102px rgba(255,255,255,.66), 1437px 280px rgba(255,255,255,.51),
+        920px 302px rgba(255,255,255,.44), 14px 389px rgba(255,255,255,.7),
+        1430px 217px rgba(255,255,255,.47), 319px 111px rgba(255,255,255,.78),
+        690px 53px rgba(255,255,255,.35),  199px 184px rgba(255,255,255,.72),
+        1237px 136px rgba(255,255,255,.7), 941px 275px rgba(255,255,255,.36),
+        776px 41px rgba(255,255,255,.58),  1288px 317px rgba(255,255,255,.74),
+        741px 296px rgba(255,255,255,.4),  143px 24px rgba(255,255,255,.63),
+        593px 41px rgba(255,255,255,.73),  207px 195px rgba(255,255,255,.44),
+        1302px 428px rgba(255,255,255,.48), 759px 182px rgba(255,255,255,.4),
+        547px 360px rgba(255,255,255,.77), 1328px 37px rgba(255,255,255,.6),
+        351px 274px rgba(255,255,255,.66), 335px 237px rgba(255,255,255,.49),
+        1311px 353px rgba(255,255,255,.58), 1403px 167px rgba(255,255,255,.72),
+        115px 118px rgba(255,255,255,.71), 647px 206px rgba(255,255,255,.43),
+        433px 468px rgba(255,255,255,.77), 645px 109px rgba(255,255,255,.63),
+        811px 453px rgba(255,255,255,.76), 940px 74px rgba(255,255,255,.43),
+        506px 382px rgba(255,255,255,.58), 539px 383px rgba(255,255,255,.59),
+        1196px 205px rgba(255,255,255,.48), 284px 261px rgba(255,255,255,.55),
+        97px 441px rgba(255,255,255,.35),  1286px 82px rgba(255,255,255,.7),
+        865px 306px rgba(255,255,255,.33), 782px 306px rgba(255,255,255,.8),
+        1084px 129px rgba(255,255,255,.79), 24px 349px rgba(255,255,255,.66),
+        1397px 454px rgba(255,255,255,.57), 547px 394px rgba(255,255,255,.62),
+        229px 151px rgba(255,255,255,.52), 930px 2px rgba(255,255,255,.78),
+        540px 498px rgba(255,255,255,.55), 366px 260px rgba(255,255,255,.76),
+        1281px 153px rgba(255,255,255,.72), 1040px 312px rgba(255,255,255,.4),
+        766px 391px rgba(255,255,255,.38), 1087px 471px rgba(255,255,255,.3),
+        664px 251px rgba(255,255,255,.31), 744px 450px rgba(255,255,255,.79),
+        630px 123px rgba(255,255,255,.33), 1162px 485px rgba(255,255,255,.34),
+        996px 418px rgba(255,255,255,.33), 1091px 393px rgba(255,255,255,.36),
+        1352px 244px rgba(255,255,255,.77), 339px 136px rgba(255,255,255,.56),
+        1243px 217px rgba(255,255,255,.78), 1105px 387px rgba(255,255,255,.66),
+        412px 366px rgba(255,255,255,.46), 1376px 333px rgba(255,255,255,.49),
+        1060px 232px rgba(255,255,255,.36), 461px 33px rgba(255,255,255,.47),
+        1205px 284px rgba(255,255,255,.42), 452px 4px rgba(255,255,255,.34),
+        1293px 31px rgba(255,255,255,.41), 65px 441px rgba(255,255,255,.47),
+        1053px 122px rgba(255,255,255,.44), 995px 110px rgba(255,255,255,.57),
+        1170px 296px rgba(255,255,255,.54), 969px 414px rgba(255,255,255,.5),
+        194px 50px rgba(255,255,255,.63),  726px 217px rgba(255,255,255,.51);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.9),  1324px 51px rgba(255,255,255,.72),
+        695px 410px rgba(255,255,255,.96), 510px 99px rgba(255,255,255,.76),
+        919px 72px rgba(255,255,255,.83),  571px 237px rgba(255,255,255,.77),
+        155px 227px rgba(255,255,255,.94), 1128px 51px rgba(255,255,255,.72),
+        1108px 429px rgba(255,255,255,.7), 192px 475px rgba(255,255,255,.93),
+        485px 86px rgba(255,255,255,.82),  986px 110px rgba(255,255,255,.96),
+        121px 85px rgba(255,255,255,.81),  800px 136px rgba(255,255,255,.98),
+        932px 147px rgba(255,255,255,.83), 1139px 339px rgba(255,255,255,.92),
+        318px 98px rgba(255,255,255,.79),  120px 297px rgba(255,255,255,.92),
+        125px 383px rgba(255,255,255,.79), 103px 300px rgba(255,255,255,.84),
+        1088px 81px rgba(255,255,255,.72), 1041px 42px rgba(255,255,255,.96),
+        141px 305px rgba(255,255,255,.72), 482px 207px rgba(255,255,255,.74),
+        1167px 127px rgba(255,255,255,.87), 82px 318px rgba(255,255,255,.72),
+        1347px 299px rgba(255,255,255,.87), 648px 479px rgba(255,255,255,.78),
+        1372px 367px rgba(255,255,255,.79), 544px 203px rgba(255,255,255,.74);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,235,255,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(80,200,120,.15);
+      border-color: rgba(80,200,120,.5);
+      color: #50c878;
+      box-shadow: 0 0 20px rgba(80,200,120,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #4a9878 0%, #68b888 40%, #c8c090 100%);
+    }
+    #intro-orb {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: clamp(55px,9vw,110px); height: clamp(55px,9vw,110px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 38%, #e8ffe8, #80e0a0 35%, #50c878 65%, #2a8a50);
+      box-shadow: 0 0 60px rgba(80,200,120,.6), 0 0 120px rgba(160,220,140,.25);
+      z-index: 4;
+      animation: orbGlow 4s ease-in-out infinite;
+    }
+    @keyframes orbGlow {
+      0%,100% { box-shadow: 0 0 60px rgba(80,200,120,.6), 0 0 120px rgba(160,220,140,.25); }
+      50%      { box-shadow: 0 0 90px rgba(80,200,120,.85), 0 0 180px rgba(160,220,140,.4); }
+    }
+    #intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#50c878 0%,#d0ffe0 45%,#2a8a50 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(80,200,120,.85); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(42,138,80,.7); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 48%; z-index: 5; }
+    #intro-solomon {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(70px,10vw,130px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — WISDOM CALLS  智慧的呼喚
+    ══════════════════════════════════════════════ */
+    #scene-wisdom {
+      background: linear-gradient(180deg, #c8a868 0%, #e0c880 40%, #d8c898 100%);
+    }
+    #wisdom-glow {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: 35vw; height: 35vh;
+      background: radial-gradient(ellipse, rgba(255,240,180,.35) 0%, rgba(255,220,120,.1) 50%, transparent 72%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #wisdom-city-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; z-index: 4; }
+    #wisdom-figure {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(120px,18vw,260px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    #wisdom-heading h2 {
+      background: linear-gradient(120deg,#50c878 0%,#d0ffe0 50%,#2a8a50 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #wisdom-heading p { color: rgba(42,100,60,.6); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — TWO PATHS  兩條道路
+    ══════════════════════════════════════════════ */
+    #scene-paths {
+      background: linear-gradient(180deg, #78c8a0 0%, #a0d8b8 40%, #e0d8b0 100%);
+    }
+    #paths-sun {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      width: clamp(55px,8vw,100px); height: clamp(55px,8vw,100px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fffbe0, #ffe080 40%, #f0c040 75%, #c8a030);
+      box-shadow: 0 0 50px rgba(240,200,80,.5), 0 0 100px rgba(200,180,60,.25);
+      z-index: 4;
+      animation: orbGlow 4.5s ease-in-out infinite;
+    }
+    #paths-scene-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 4; }
+    #paths-heading h2 {
+      background: linear-gradient(120deg,#2a8a50 0%,#a0ffc0 50%,#50c878 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #paths-heading p { color: rgba(42,100,60,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — FATHER'S INSTRUCTION  父親的教訓
+    ══════════════════════════════════════════════ */
+    #scene-instruction {
+      background: linear-gradient(180deg, #c8a060 0%, #e0c880 45%, #d8c490 100%);
+    }
+    #instruction-lamp-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 30vw; height: 35vh;
+      background: radial-gradient(ellipse, rgba(255,220,120,.3) 0%, rgba(255,200,80,.08) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+    #instruction-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+    #instruction-heading h2 {
+      background: linear-gradient(120deg,#50c878 0%,#c0ffe0 50%,#2a8a50 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #instruction-heading p { color: rgba(60,90,50,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — ANT AND DILIGENCE  勤勞的螞蟻
+    ══════════════════════════════════════════════ */
+    #scene-ant {
+      background: linear-gradient(180deg, #88c880 0%, #b0d890 40%, #e8d898 100%);
+    }
+    #ant-sunshine {
+      position: absolute; top: 5%; right: 15%;
+      width: clamp(50px,8vw,100px); height: clamp(50px,8vw,100px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fffee0, #ffe870 40%, #f0c830 75%, #c0a020);
+      box-shadow: 0 0 60px rgba(240,200,40,.6), 0 0 120px rgba(220,180,40,.3);
+      z-index: 4;
+      animation: orbGlow 4s ease-in-out infinite;
+    }
+    #ant-field-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 4; }
+    #ant-scene-svg {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(180px,28vw,380px);
+      animation: gentleSway 5s ease-in-out infinite;
+    }
+    #ant-heading h2 {
+      background: linear-gradient(120deg,#2a8a50 0%,#a0ffc0 50%,#50c878 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #ant-heading p { color: rgba(50,90,40,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — VIRTUOUS WOMAN  才德的婦人
+    ══════════════════════════════════════════════ */
+    #scene-virtuous {
+      background: linear-gradient(180deg, #d0a860 0%, #78c890 50%, #e0a8a0 100%);
+    }
+    #virtuous-sunrise {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 20%, rgba(255,220,140,.2) 0%, rgba(255,200,120,.06) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+    #virtuous-crown {
+      position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
+      z-index: 6; width: clamp(40px,6vw,80px);
+      animation: floatY 4s ease-in-out infinite;
+    }
+    #virtuous-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,32vw,420px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+    #virtuous-heading h2 {
+      background: linear-gradient(120deg,#50c878 0%,#ffe0f0 50%,#c87850 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    #virtuous-heading p { color: rgba(80,120,60,.55); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"      aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-wisdom"     aria-label="智慧的呼喚"></a>
+  <a class="nav-dot" href="#scene-paths"      aria-label="兩條道路"></a>
+  <a class="nav-dot" href="#scene-instruction" aria-label="父親的教訓"></a>
+  <a class="nav-dot" href="#scene-ant"        aria-label="勤勞的螞蟻"></a>
+  <a class="nav-dot" href="#scene-virtuous"   aria-label="才德的婦人"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="箴言 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="intro-orb" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>箴言</h1>
+    <p>Book of Proverbs</p>
+    <span class="sub">智慧 · 敬畏 · 訓誨 · 聰明 · 正直</span>
+  </div>
+
+  <!-- Throne room with Solomon and open scroll -->
+  <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="introFloorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a7858"/>
+        <stop offset="50%" stop-color="#2a5a3e"/>
+        <stop offset="100%" stop-color="#1a3a28"/>
+      </linearGradient>
+      <linearGradient id="scrollG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f0e8c0"/>
+        <stop offset="100%" stop-color="#d8c890"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Marble floor -->
+    <rect x="0" y="200" width="1440" height="220" fill="url(#introFloorG)"/>
+    <path d="M0,200 Q360,180 720,195 Q1080,210 1440,190 L1440,220 Q1080,230 720,215 Q360,200 0,220 Z" fill="#4a8a68" opacity=".4"/>
+
+    <!-- Throne platform -->
+    <rect x="580" y="230" width="280" height="20" rx="4" fill="#3a6a4a"/>
+    <rect x="600" y="210" width="240" height="25" rx="3" fill="#4a7a58"/>
+    <rect x="620" y="250" width="200" height="170" rx="2" fill="#2a5a3c" opacity=".3"/>
+
+    <!-- Throne chair -->
+    <rect x="665" y="180" width="110" height="130" rx="6" fill="#5a4a28"/>
+    <rect x="670" y="175" width="100" height="10" rx="5" fill="#8b7040"/>
+    <rect x="668" y="140" width="104" height="40" rx="8" fill="#6b5a30"/>
+    <circle cx="720" cy="155" r="10" fill="#50c878" opacity=".5"/>
+
+    <!-- Open scroll (left of throne) -->
+    <g transform="translate(380,260)">
+      <rect x="0" y="0" width="140" height="90" rx="4" fill="url(#scrollG)"/>
+      <ellipse cx="0" cy="45" rx="8" ry="48" fill="#c8b878"/>
+      <ellipse cx="140" cy="45" rx="8" ry="48" fill="#c8b878"/>
+      <line x1="18" y1="18" x2="122" y2="18" stroke="#8b7a50" stroke-width="1.5" opacity=".5"/>
+      <line x1="18" y1="32" x2="122" y2="32" stroke="#8b7a50" stroke-width="1.5" opacity=".5"/>
+      <line x1="18" y1="46" x2="100" y2="46" stroke="#8b7a50" stroke-width="1.5" opacity=".4"/>
+      <line x1="18" y1="60" x2="110" y2="60" stroke="#8b7a50" stroke-width="1.5" opacity=".4"/>
+      <line x1="18" y1="74" x2="90" y2="74" stroke="#8b7a50" stroke-width="1.5" opacity=".3"/>
+    </g>
+
+    <!-- More scrolls stacked (right of throne) -->
+    <g transform="translate(920,280)">
+      <rect x="0" y="20" width="80" height="14" rx="7" fill="#c8b878"/>
+      <rect x="10" y="8" width="80" height="14" rx="7" fill="#d8c888"/>
+      <rect x="5" y="36" width="70" height="14" rx="7" fill="#b8a868"/>
+    </g>
+
+    <!-- Pillars -->
+    <rect x="200" y="60" width="30" height="360" fill="#5a9a78" opacity=".4"/>
+    <rect x="197" y="55" width="36" height="14" rx="3" fill="#6aaa88" opacity=".4"/>
+    <rect x="1210" y="60" width="30" height="360" fill="#5a9a78" opacity=".4"/>
+    <rect x="1207" y="55" width="36" height="14" rx="3" fill="#6aaa88" opacity=".4"/>
+  </svg>
+
+  <!-- Solomon figure -->
+  <svg id="intro-solomon" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="所羅門王 — King Solomon">
+    <title>所羅門王坐在寶座上 — King Solomon on his throne</title>
+    <!-- Crown -->
+    <polygon points="35,28 40,14 45,24 50,10 55,24 60,14 65,28" fill="#d4a820" stroke="#b89018" stroke-width="1"/>
+    <circle cx="50" cy="18" r="3" fill="#50c878" opacity=".7"/>
+    <!-- Head -->
+    <circle cx="50" cy="42" r="16" fill="#8b7050"/>
+    <!-- Beard -->
+    <path d="M40,50 Q50,68 60,50 Q57,78 50,82 Q43,78 40,50 Z" fill="#6a5030" opacity=".7"/>
+    <!-- Royal robe -->
+    <path d="M36,60 Q28,100 24,160 Q34,165 44,160 Q47,130 50,110 Q53,130 56,160 Q66,165 76,160 Q72,100 64,60 Z"
+          fill="#3a7858"/>
+    <!-- Robe sash -->
+    <rect x="42" y="80" width="16" height="5" rx="2" fill="#d4a820" opacity=".6"/>
+    <!-- Arms resting -->
+    <path d="M36,68 Q24,80 20,95" stroke="#8b7050" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <path d="M64,68 Q76,80 80,95" stroke="#8b7050" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Feet -->
+    <ellipse cx="40" cy="163" rx="8" ry="3" fill="#2a4a30"/>
+    <ellipse cx="60" cy="163" rx="8" ry="3" fill="#2a4a30"/>
+  </svg>
+
+  <div class="scroll-hint">↓ 向下捲動 · Scroll ↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — WISDOM CALLS  智慧的呼喚
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-wisdom" aria-label="智慧的呼喚 — Wisdom's Call">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Warm glow behind Wisdom -->
+  <div id="wisdom-glow" aria-hidden="true"></div>
+
+  <!-- City scene background -->
+  <svg id="wisdom-city-svg" viewBox="0 0 1440 520" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="cityGroundG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#b8a060"/>
+        <stop offset="100%" stop-color="#8a7040"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Ground / marketplace -->
+    <rect x="0" y="300" width="1440" height="220" fill="url(#cityGroundG)"/>
+    <path d="M0,300 Q400,285 720,295 Q1100,305 1440,290 L1440,320 Q1100,325 720,315 Q400,305 0,320 Z" fill="#c8a868" opacity=".4"/>
+
+    <!-- City walls and buildings background -->
+    <rect x="50" y="100" width="180" height="200" rx="4" fill="#c8b078" opacity=".6"/>
+    <rect x="55" y="96" width="170" height="10" rx="2" fill="#d0b880" opacity=".6"/>
+    <rect x="80" y="140" width="30" height="45" rx="2" fill="#a08858" opacity=".5"/>
+    <rect x="150" y="160" width="25" height="35" rx="2" fill="#a08858" opacity=".5"/>
+
+    <rect x="300" y="80" width="160" height="220" rx="4" fill="#d0b880" opacity=".55"/>
+    <rect x="305" y="75" width="150" height="10" rx="2" fill="#d8c090" opacity=".6"/>
+    <rect x="330" y="130" width="28" height="40" rx="2" fill="#b09868" opacity=".5"/>
+    <rect x="400" y="150" width="25" height="30" rx="2" fill="#b09868" opacity=".5"/>
+
+    <!-- Gate arch (central) -->
+    <rect x="620" y="60" width="200" height="240" rx="4" fill="#b8a068"/>
+    <path d="M640,300 L640,160 Q720,100 800,160 L800,300 Z" fill="#8a7040"/>
+    <path d="M655,300 L655,170 Q720,115 785,170 L785,300 Z" fill="#a08850"/>
+
+    <!-- Right buildings -->
+    <rect x="900" y="90" width="170" height="210" rx="4" fill="#c8b078" opacity=".6"/>
+    <rect x="905" y="86" width="160" height="10" rx="2" fill="#d0b880" opacity=".6"/>
+    <rect x="930" y="140" width="28" height="40" rx="2" fill="#a08858" opacity=".5"/>
+
+    <rect x="1150" y="110" width="180" height="190" rx="4" fill="#d0b880" opacity=".55"/>
+    <rect x="1180" y="160" width="30" height="35" rx="2" fill="#b09868" opacity=".5"/>
+    <rect x="1260" y="150" width="25" height="30" rx="2" fill="#b09868" opacity=".5"/>
+
+    <!-- Market stalls -->
+    <g opacity=".5">
+      <rect x="180" y="310" width="70" height="50" rx="3" fill="#a08050"/>
+      <path d="M175,310 L215,290 L255,310 Z" fill="#c09060"/>
+      <rect x="1000" y="315" width="60" height="45" rx="3" fill="#a08050"/>
+      <path d="M995,315 L1030,295 L1065,315 Z" fill="#c09060"/>
+    </g>
+
+    <!-- Passers-by (small figures in marketplace) -->
+    <g opacity=".45">
+      <!-- Person 1 -->
+      <circle cx="280" cy="340" r="7" fill="#7a6a48"/>
+      <rect x="274" y="347" width="12" height="22" rx="2" fill="#8a7858"/>
+      <!-- Person 2 -->
+      <circle cx="440" cy="345" r="6" fill="#6a5a38"/>
+      <rect x="435" y="351" width="10" height="20" rx="2" fill="#7a6848"/>
+      <!-- Person 3 -->
+      <circle cx="1100" cy="338" r="7" fill="#7a6a48"/>
+      <rect x="1094" y="345" width="12" height="22" rx="2" fill="#8a7858"/>
+      <!-- Person 4 -->
+      <circle cx="1250" cy="342" r="6" fill="#6a5a38"/>
+      <rect x="1245" y="348" width="10" height="20" rx="2" fill="#7a6848"/>
+    </g>
+  </svg>
+
+  <!-- Personified Wisdom figure with light rays -->
+  <svg id="wisdom-figure" viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="智慧在街市上呼喊 — Wisdom calls out in the marketplace">
+    <title>智慧的呼喚 — Wisdom personified as a woman calling at the city gates</title>
+    <defs>
+      <radialGradient id="wisdomRayG" cx="50%" cy="30%">
+        <stop offset="0%" stop-color="rgba(255,240,180,.4)"/>
+        <stop offset="50%" stop-color="rgba(255,220,120,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Light rays emanating from figure -->
+    <ellipse cx="120" cy="100" rx="110" ry="120" fill="url(#wisdomRayG)"/>
+    <line x1="120" y1="60" x2="40" y2="10" stroke="rgba(255,240,180,.15)" stroke-width="4"/>
+    <line x1="120" y1="60" x2="200" y2="10" stroke="rgba(255,240,180,.15)" stroke-width="4"/>
+    <line x1="120" y1="60" x2="120" y2="0" stroke="rgba(255,240,180,.2)" stroke-width="3"/>
+    <line x1="120" y1="60" x2="20" y2="60" stroke="rgba(255,240,180,.1)" stroke-width="3"/>
+    <line x1="120" y1="60" x2="220" y2="60" stroke="rgba(255,240,180,.1)" stroke-width="3"/>
+
+    <!-- Head -->
+    <circle cx="120" cy="80" r="18" fill="#c8a878"/>
+    <!-- Hair/veil -->
+    <path d="M102,76 Q120,60 138,76 L140,90 Q130,82 120,84 Q110,82 100,90 Z" fill="#8a6a3a"/>
+    <path d="M138,76 Q144,86 142,110 Q136,95 132,88" fill="#7a5a30" opacity=".5"/>
+
+    <!-- Flowing robe -->
+    <path d="M108,98 Q98,140 92,220 Q104,225 114,220 Q117,180 120,155 Q123,180 126,220 Q136,225 148,220 Q142,140 132,98 Z"
+          fill="#e8e0c8"/>
+    <!-- Robe belt -->
+    <rect x="106" y="120" width="28" height="5" rx="2" fill="#d4a820" opacity=".5"/>
+
+    <!-- Raised arm (calling out) -->
+    <path d="M132,105 Q150,90 160,75" stroke="#c8a878" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- Open hand -->
+    <circle cx="162" cy="73" r="5" fill="#c8a878"/>
+
+    <!-- Other arm extended -->
+    <path d="M108,105 Q88,95 75,88" stroke="#c8a878" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="73" cy="87" r="5" fill="#c8a878"/>
+
+    <!-- Feet -->
+    <ellipse cx="110" cy="223" rx="7" ry="3" fill="#6a5030"/>
+    <ellipse cx="130" cy="223" rx="7" ry="3" fill="#6a5030"/>
+  </svg>
+
+  <div class="scene-heading" id="wisdom-heading" aria-hidden="true">
+    <h2>📢 智慧的呼喚</h2>
+    <p>Wisdom's Call — Proverbs 1:20-23</p>
+  </div>
+  <div class="scene-verse">「智慧在街市上呼喊，在寬闊處發聲」— 箴言 1:20</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — TWO PATHS  兩條道路
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-paths" aria-label="兩條道路 — Two Paths">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Sun at top -->
+  <div id="paths-sun" aria-hidden="true"></div>
+
+  <!-- Split landscape: bright path vs dark path -->
+  <svg id="paths-scene-svg" viewBox="0 0 1440 600" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="兩條道路 — A fork in the road: righteous and wicked paths">
+    <title>兩條道路 — Two paths diverge: the bright path of righteousness and the dark path of folly</title>
+    <defs>
+      <linearGradient id="brightPathG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#90d8a0"/>
+        <stop offset="100%" stop-color="#60a870"/>
+      </linearGradient>
+      <linearGradient id="darkPathG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8a7848"/>
+        <stop offset="100%" stop-color="#5a4828"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Left ground (bright, green) -->
+    <path d="M0,280 Q360,260 720,340 L0,600 Z" fill="url(#brightPathG)"/>
+    <!-- Right ground (darker, brown) -->
+    <path d="M720,340 Q1080,260 1440,280 L1440,600 L720,600 Z" fill="url(#darkPathG)"/>
+
+    <!-- Bright path (left) -->
+    <path d="M680,370 Q500,400 320,430 Q200,450 100,500" stroke="#f0e8c0" stroke-width="28" fill="none" opacity=".5" stroke-linecap="round"/>
+    <!-- Dark path (right) -->
+    <path d="M760,370 Q940,400 1120,430 Q1240,450 1340,500" stroke="#4a3828" stroke-width="28" fill="none" opacity=".5" stroke-linecap="round"/>
+
+    <!-- Trees along bright path -->
+    <g opacity=".7">
+      <!-- Tree 1 -->
+      <rect x="260" y="360" width="8" height="40" fill="#5a8040"/>
+      <ellipse cx="264" cy="345" rx="25" ry="22" fill="#68b868"/>
+      <ellipse cx="254" cy="350" rx="18" ry="16" fill="#58a858"/>
+      <!-- Tree 2 -->
+      <rect x="150" y="400" width="7" height="35" fill="#5a8040"/>
+      <ellipse cx="153" cy="388" rx="20" ry="18" fill="#60b060"/>
+      <!-- Tree 3 -->
+      <rect x="380" y="380" width="7" height="35" fill="#5a8040"/>
+      <ellipse cx="383" cy="368" rx="22" ry="20" fill="#58a858"/>
+    </g>
+
+    <!-- Flowers on bright path -->
+    <circle cx="220" cy="440" r="4" fill="#ff8888" opacity=".6"/>
+    <circle cx="300" cy="455" r="3.5" fill="#ffaa66" opacity=".6"/>
+    <circle cx="180" cy="465" r="4" fill="#ff88cc" opacity=".5"/>
+    <circle cx="350" cy="470" r="3" fill="#88ccff" opacity=".5"/>
+    <circle cx="420" cy="430" r="3.5" fill="#ffcc88" opacity=".5"/>
+
+    <!-- Shining city/house at end of bright path -->
+    <g opacity=".6" transform="translate(40,430)">
+      <rect x="0" y="10" width="60" height="50" rx="3" fill="#f0e8c0"/>
+      <polygon points="0,10 30,-10 60,10" fill="#d8c890"/>
+      <rect x="22" y="35" width="16" height="25" rx="1" fill="#b8a068"/>
+      <rect x="8" y="22" width="10" height="12" rx="1" fill="#c8b878"/>
+      <rect x="42" y="22" width="10" height="12" rx="1" fill="#c8b878"/>
+      <!-- Glow -->
+      <ellipse cx="30" cy="30" rx="40" ry="35" fill="rgba(255,240,180,.15)"/>
+    </g>
+
+    <!-- Thorns on dark path -->
+    <g opacity=".5" stroke="#5a4020" stroke-width="2" fill="none">
+      <path d="M900,400 Q910,385 920,400 Q930,385 940,400"/>
+      <path d="M1050,420 Q1060,405 1070,420 Q1080,405 1090,420"/>
+      <path d="M1180,440 Q1190,425 1200,440"/>
+      <path d="M980,430 Q990,415 1000,430 Q1010,415 1020,430"/>
+    </g>
+
+    <!-- Ruined structure at end of dark path -->
+    <g opacity=".5" transform="translate(1280,430)">
+      <rect x="0" y="15" width="50" height="40" rx="2" fill="#5a4828"/>
+      <rect x="0" y="15" width="50" height="5" fill="#6a5838"/>
+      <path d="M10,20 L10,55" stroke="#4a3818" stroke-width="2"/>
+      <path d="M25,15 L28,8 L35,15" fill="none" stroke="#4a3818" stroke-width="2"/>
+      <rect x="15" y="30" width="12" height="18" rx="1" fill="#3a2818" opacity=".6"/>
+    </g>
+
+    <!-- Young person at the fork -->
+    <g transform="translate(700,310)">
+      <!-- Head -->
+      <circle cx="20" cy="0" r="12" fill="#b8956a"/>
+      <!-- Hair -->
+      <path d="M8,-4 Q20,-16 32,-4 L32,2 Q26,-2 20,-1 Q14,-2 8,2 Z" fill="#5a4020"/>
+      <!-- Body / tunic -->
+      <path d="M12,12 Q6,40 2,85 Q10,88 18,85 Q20,65 20,50 Q20,65 22,85 Q30,88 38,85 Q34,40 28,12 Z"
+            fill="#68a878"/>
+      <!-- Arms slightly out (deciding pose) -->
+      <path d="M12,18 Q0,28 -6,40" stroke="#b8956a" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M28,18 Q40,28 46,40" stroke="#b8956a" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Feet -->
+      <ellipse cx="14" cy="88" rx="6" ry="2.5" fill="#3a2810"/>
+      <ellipse cx="26" cy="88" rx="6" ry="2.5" fill="#3a2810"/>
+    </g>
+  </svg>
+
+  <div class="scene-heading" id="paths-heading" aria-hidden="true">
+    <h2>🛤️ 兩條道路</h2>
+    <p>Two Paths — Proverbs 4:18-19</p>
+  </div>
+  <div class="scene-verse">「義人的路好像黎明的光，越照越明，直到日午」— 箴言 4:18</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — FATHER'S INSTRUCTION  父親的教訓
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-instruction" aria-label="父親的教訓 — A Father's Instruction">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Warm lamp glow -->
+  <div id="instruction-lamp-glow" aria-hidden="true"></div>
+
+  <!-- Indoor teaching scene -->
+  <svg id="instruction-scene-svg" viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="父親教導兒子 — A father teaching his son">
+    <title>父親的教訓 — A father seated, teaching his son with scrolls and lamplight</title>
+    <defs>
+      <radialGradient id="lampGlowG" cx="50%" cy="30%">
+        <stop offset="0%" stop-color="rgba(255,220,120,.35)"/>
+        <stop offset="40%" stop-color="rgba(255,200,80,.1)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d0b878"/>
+        <stop offset="100%" stop-color="#b89858"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Room background -->
+    <rect x="0" y="0" width="400" height="340" rx="4" fill="url(#wallG)" opacity=".3"/>
+    <!-- Floor -->
+    <rect x="0" y="240" width="400" height="100" fill="#a08050" opacity=".4"/>
+    <line x1="0" y1="240" x2="400" y2="240" stroke="#8a6a40" stroke-width="2" opacity=".3"/>
+
+    <!-- Lamp glow -->
+    <ellipse cx="200" cy="120" rx="140" ry="120" fill="url(#lampGlowG)"/>
+
+    <!-- Oil lamp (hanging) -->
+    <line x1="200" y1="0" x2="200" y2="50" stroke="#8a7040" stroke-width="2"/>
+    <ellipse cx="200" cy="58" rx="12" ry="6" fill="#c4a040"/>
+    <rect x="192" y="52" width="16" height="10" rx="3" fill="#b89030"/>
+    <!-- Flame -->
+    <ellipse cx="200" cy="48" rx="4" ry="8" fill="#ffe080" opacity=".8"/>
+    <ellipse cx="200" cy="46" rx="2" ry="5" fill="#fff8d0"/>
+
+    <!-- Bookshelf (left wall) -->
+    <rect x="15" y="60" width="80" height="120" rx="3" fill="#8a7040" opacity=".5"/>
+    <rect x="20" y="68" width="70" height="8" rx="1" fill="#6a5a30" opacity=".6"/>
+    <rect x="20" y="96" width="70" height="8" rx="1" fill="#6a5a30" opacity=".6"/>
+    <rect x="20" y="124" width="70" height="8" rx="1" fill="#6a5a30" opacity=".6"/>
+    <rect x="20" y="152" width="70" height="8" rx="1" fill="#6a5a30" opacity=".6"/>
+    <!-- Scroll on shelf -->
+    <rect x="25" y="72" width="22" height="7" rx="3.5" fill="#d8c890" opacity=".7"/>
+    <rect x="50" y="72" width="18" height="7" rx="3.5" fill="#c8b878" opacity=".7"/>
+    <rect x="28" y="100" width="20" height="7" rx="3.5" fill="#c8b880" opacity=".6"/>
+    <rect x="55" y="100" width="25" height="7" rx="3.5" fill="#d0c088" opacity=".6"/>
+    <rect x="22" y="128" width="24" height="7" rx="3.5" fill="#d8c890" opacity=".6"/>
+    <rect x="58" y="128" width="16" height="7" rx="3.5" fill="#c8b878" opacity=".6"/>
+    <rect x="25" y="156" width="30" height="7" rx="3.5" fill="#c0b070" opacity=".5"/>
+
+    <!-- Father figure (seated, left-center) -->
+    <g transform="translate(130,130)">
+      <!-- Seat / stool -->
+      <rect x="-15" y="70" width="50" height="12" rx="3" fill="#7a6030"/>
+      <rect x="-10" y="82" width="8" height="20" fill="#6a5028"/>
+      <rect x="22" y="82" width="8" height="20" fill="#6a5028"/>
+      <!-- Head -->
+      <circle cx="10" cy="0" r="16" fill="#8b7050"/>
+      <!-- Beard -->
+      <path d="M0,8 Q10,22 20,8 Q18,34 10,38 Q2,34 0,8 Z" fill="#6a5030" opacity=".7"/>
+      <!-- Head covering -->
+      <path d="M-6,-6 Q10,-18 26,-6 L26,2 Q18,-4 10,-3 Q2,-4 -6,2 Z" fill="#c8b078"/>
+      <!-- Robe -->
+      <path d="M-2,16 Q-8,42 -12,72 Q-4,75 4,72 Q6,55 10,42 Q14,55 16,72 Q24,75 32,72 Q28,42 22,16 Z"
+            fill="#a08858"/>
+      <!-- Teaching arm extended -->
+      <path d="M22,22 Q38,18 50,14" stroke="#8b7050" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <circle cx="52" cy="13" r="4" fill="#8b7050"/>
+      <!-- Left arm on lap -->
+      <path d="M-2,22 Q-10,35 -8,50" stroke="#8b7050" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- Scroll/tablet between them -->
+    <g transform="translate(195,200)">
+      <rect x="0" y="0" width="50" height="65" rx="3" fill="#e8e0c0" opacity=".8"/>
+      <line x1="8" y1="12" x2="42" y2="12" stroke="#8a7a50" stroke-width="1.2" opacity=".5"/>
+      <line x1="8" y1="22" x2="42" y2="22" stroke="#8a7a50" stroke-width="1.2" opacity=".5"/>
+      <line x1="8" y1="32" x2="38" y2="32" stroke="#8a7a50" stroke-width="1.2" opacity=".4"/>
+      <line x1="8" y1="42" x2="40" y2="42" stroke="#8a7a50" stroke-width="1.2" opacity=".4"/>
+      <line x1="8" y1="52" x2="35" y2="52" stroke="#8a7a50" stroke-width="1.2" opacity=".3"/>
+    </g>
+
+    <!-- Son/child figure (seated, right-center) -->
+    <g transform="translate(265,160)">
+      <!-- Seat / cushion -->
+      <rect x="-10" y="60" width="40" height="10" rx="3" fill="#7a6030"/>
+      <!-- Head -->
+      <circle cx="10" cy="0" r="12" fill="#b8956a"/>
+      <!-- Hair -->
+      <path d="M-2,-6 Q10,-16 22,-6 L22,0 Q16,-4 10,-3 Q4,-4 -2,0 Z" fill="#5a4020"/>
+      <!-- Tunic -->
+      <path d="M2,12 Q-2,35 -6,62 Q2,65 10,62 Q12,45 10,35 Q12,45 14,62 Q22,65 26,62 Q22,35 18,12 Z"
+            fill="#68a878"/>
+      <!-- Hands together (listening) -->
+      <path d="M2,18 Q-4,28 -2,38" stroke="#b8956a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M18,18 Q24,28 22,38" stroke="#b8956a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- Bookshelf (right wall) -->
+    <rect x="320" y="80" width="65" height="100" rx="3" fill="#8a7040" opacity=".4"/>
+    <rect x="325" y="88" width="55" height="7" rx="1" fill="#6a5a30" opacity=".5"/>
+    <rect x="325" y="112" width="55" height="7" rx="1" fill="#6a5a30" opacity=".5"/>
+    <rect x="325" y="136" width="55" height="7" rx="1" fill="#6a5a30" opacity=".5"/>
+    <rect x="328" y="91" width="16" height="6" rx="3" fill="#d0c088" opacity=".5"/>
+    <rect x="350" y="91" width="20" height="6" rx="3" fill="#c8b878" opacity=".5"/>
+    <rect x="330" y="115" width="22" height="6" rx="3" fill="#d8c890" opacity=".5"/>
+    <rect x="328" y="139" width="18" height="6" rx="3" fill="#c0b070" opacity=".4"/>
+  </svg>
+
+  <div class="scene-heading" id="instruction-heading" aria-hidden="true">
+    <h2>📜 父親的教訓</h2>
+    <p>A Father's Instruction — Proverbs 4:1-4</p>
+  </div>
+  <div class="scene-verse">「你要聽，我兒，要領受我的言語」— 箴言 4:10</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — ANT AND DILIGENCE  勤勞的螞蟻
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-ant" aria-label="勤勞的螞蟻 — The Diligent Ant">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Sunshine -->
+  <div id="ant-sunshine" aria-hidden="true"></div>
+
+  <!-- Wheat field background -->
+  <svg id="ant-field-svg" viewBox="0 0 1440 480" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="fieldG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#a0c870"/>
+        <stop offset="50%" stop-color="#88a850"/>
+        <stop offset="100%" stop-color="#607830"/>
+      </linearGradient>
+    </defs>
+    <!-- Green field -->
+    <path d="M0,100 Q360,60 720,90 Q1080,120 1440,80 L1440,480 L0,480 Z" fill="url(#fieldG)"/>
+    <!-- Wheat stalks -->
+    <g stroke="#c8a840" stroke-width="2" fill="none" opacity=".5">
+      <line x1="100" y1="160" x2="100" y2="80"/>
+      <ellipse cx="100" cy="72" rx="4" ry="10" fill="#d8b850" opacity=".5"/>
+      <line x1="250" y1="140" x2="250" y2="60"/>
+      <ellipse cx="250" cy="52" rx="4" ry="10" fill="#d8b850" opacity=".5"/>
+      <line x1="400" y1="150" x2="400" y2="75"/>
+      <ellipse cx="400" cy="67" rx="4" ry="10" fill="#d8b850" opacity=".5"/>
+      <line x1="550" y1="135" x2="550" y2="55"/>
+      <ellipse cx="550" cy="47" rx="4" ry="10" fill="#d8b850" opacity=".5"/>
+      <line x1="700" y1="145" x2="700" y2="70"/>
+      <ellipse cx="700" cy="62" rx="4" ry="10" fill="#d8b850" opacity=".5"/>
+      <line x1="850" y1="130" x2="850" y2="55"/>
+      <ellipse cx="850" cy="47" rx="4" ry="10" fill="#d8b850" opacity=".5"/>
+      <line x1="1000" y1="140" x2="1000" y2="65"/>
+      <ellipse cx="1000" cy="57" rx="4" ry="10" fill="#d8b850" opacity=".5"/>
+      <line x1="1150" y1="120" x2="1150" y2="50"/>
+      <ellipse cx="1150" cy="42" rx="4" ry="10" fill="#d8b850" opacity=".5"/>
+      <line x1="1300" y1="135" x2="1300" y2="60"/>
+      <ellipse cx="1300" cy="52" rx="4" ry="10" fill="#d8b850" opacity=".5"/>
+    </g>
+    <!-- Ground texture -->
+    <path d="M0,350 Q360,340 720,355 Q1080,370 1440,345 L1440,480 L0,480 Z" fill="#506828" opacity=".4"/>
+  </svg>
+
+  <!-- Ant scene with lazy person -->
+  <svg id="ant-scene-svg" viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="螞蟻搬運糧食與懶惰人睡覺 — Ants carrying grain and a lazy person sleeping">
+    <title>勤勞的螞蟻 — Diligent ants carrying grain while a lazy person sleeps under a tree</title>
+
+    <!-- Tree (right side, for lazy person) -->
+    <rect x="280" y="80" width="12" height="100" fill="#6a5028"/>
+    <ellipse cx="286" cy="65" rx="45" ry="40" fill="#58a848"/>
+    <ellipse cx="270" cy="75" rx="30" ry="28" fill="#4a9838"/>
+    <ellipse cx="305" cy="72" rx="28" ry="25" fill="#50a040"/>
+
+    <!-- Lazy person sleeping under tree -->
+    <g transform="translate(250,155)">
+      <!-- Body lying down -->
+      <ellipse cx="30" cy="18" rx="28" ry="8" fill="#8a7858" opacity=".7"/>
+      <!-- Head -->
+      <circle cx="60" cy="10" r="10" fill="#b8956a"/>
+      <!-- Hair -->
+      <path d="M52,5 Q60,-3 68,5" fill="#5a4020"/>
+      <!-- Z-z-z (sleeping) -->
+      <text x="72" y="-2" fill="rgba(255,255,255,.5)" font-size="11" font-weight="700">z</text>
+      <text x="82" y="-10" fill="rgba(255,255,255,.4)" font-size="9" font-weight="700">z</text>
+      <text x="90" y="-18" fill="rgba(255,255,255,.3)" font-size="7" font-weight="700">z</text>
+      <!-- Arm -->
+      <path d="M54,14 Q56,22 50,26" stroke="#b8956a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- Legs -->
+      <path d="M8,18 Q2,24 0,30" stroke="#8a7858" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- Giant ant carrying grain (center, detailed) -->
+    <g transform="translate(100,140)">
+      <!-- Grain on back -->
+      <ellipse cx="20" cy="-12" rx="12" ry="8" fill="#d8b850" opacity=".8"/>
+      <!-- Abdomen -->
+      <ellipse cx="40" cy="8" rx="18" ry="12" fill="#3a2010"/>
+      <!-- Thorax -->
+      <ellipse cx="18" cy="4" rx="12" ry="8" fill="#4a2818"/>
+      <!-- Head -->
+      <ellipse cx="0" cy="0" rx="9" ry="7" fill="#3a2010"/>
+      <!-- Mandibles -->
+      <path d="M-8,-2 Q-14,-6 -12,-10" stroke="#2a1808" stroke-width="1.5" fill="none"/>
+      <path d="M-8,2 Q-14,6 -12,10" stroke="#2a1808" stroke-width="1.5" fill="none"/>
+      <!-- Antennae -->
+      <path d="M-4,-6 Q-10,-18 -16,-20" stroke="#3a2010" stroke-width="1" fill="none"/>
+      <path d="M-2,-6 Q-4,-18 -2,-22" stroke="#3a2010" stroke-width="1" fill="none"/>
+      <!-- Legs (3 pairs) -->
+      <path d="M10,10 Q4,22 -2,28" stroke="#3a2010" stroke-width="1.5" fill="none"/>
+      <path d="M18,10 Q14,24 10,30" stroke="#3a2010" stroke-width="1.5" fill="none"/>
+      <path d="M30,10 Q28,24 24,30" stroke="#3a2010" stroke-width="1.5" fill="none"/>
+      <path d="M10,-2 Q4,-14 -2,-18" stroke="#3a2010" stroke-width="1.5" fill="none"/>
+      <path d="M20,-2 Q18,-14 16,-18" stroke="#3a2010" stroke-width="1.5" fill="none"/>
+      <path d="M32,-2 Q34,-12 38,-16" stroke="#3a2010" stroke-width="1.5" fill="none"/>
+    </g>
+
+    <!-- Trail of smaller ants -->
+    <g opacity=".7">
+      <!-- Ant 2 -->
+      <g transform="translate(40,168) scale(.5)">
+        <ellipse cx="40" cy="8" rx="16" ry="10" fill="#3a2010"/>
+        <ellipse cx="18" cy="4" rx="10" ry="7" fill="#4a2818"/>
+        <ellipse cx="0" cy="0" rx="7" ry="5" fill="#3a2010"/>
+        <ellipse cx="20" cy="-10" rx="8" ry="5" fill="#d8b850" opacity=".7"/>
+        <path d="M10,12 Q6,20 2,24" stroke="#3a2010" stroke-width="2" fill="none"/>
+        <path d="M22,12 Q20,22 18,26" stroke="#3a2010" stroke-width="2" fill="none"/>
+        <path d="M34,12 Q32,22 30,26" stroke="#3a2010" stroke-width="2" fill="none"/>
+      </g>
+      <!-- Ant 3 -->
+      <g transform="translate(170,178) scale(.45)">
+        <ellipse cx="40" cy="8" rx="16" ry="10" fill="#3a2010"/>
+        <ellipse cx="18" cy="4" rx="10" ry="7" fill="#4a2818"/>
+        <ellipse cx="0" cy="0" rx="7" ry="5" fill="#3a2010"/>
+        <ellipse cx="20" cy="-10" rx="8" ry="5" fill="#d8b850" opacity=".7"/>
+        <path d="M10,12 Q6,20 2,24" stroke="#3a2010" stroke-width="2" fill="none"/>
+        <path d="M22,12 Q20,22 18,26" stroke="#3a2010" stroke-width="2" fill="none"/>
+      </g>
+      <!-- Ant 4 -->
+      <g transform="translate(5,188) scale(.35)">
+        <ellipse cx="40" cy="8" rx="16" ry="10" fill="#3a2010"/>
+        <ellipse cx="18" cy="4" rx="10" ry="7" fill="#4a2818"/>
+        <ellipse cx="0" cy="0" rx="7" ry="5" fill="#3a2010"/>
+        <path d="M10,12 Q6,20 2,24" stroke="#3a2010" stroke-width="2.5" fill="none"/>
+        <path d="M22,12 Q20,22 18,26" stroke="#3a2010" stroke-width="2.5" fill="none"/>
+      </g>
+      <!-- Ant 5 (returning) -->
+      <g transform="translate(210,190) scale(.35)">
+        <ellipse cx="40" cy="8" rx="16" ry="10" fill="#3a2010"/>
+        <ellipse cx="18" cy="4" rx="10" ry="7" fill="#4a2818"/>
+        <ellipse cx="0" cy="0" rx="7" ry="5" fill="#3a2010"/>
+        <path d="M10,12 Q6,20 2,24" stroke="#3a2010" stroke-width="2.5" fill="none"/>
+        <path d="M22,12 Q20,22 18,26" stroke="#3a2010" stroke-width="2.5" fill="none"/>
+      </g>
+    </g>
+
+    <!-- Ant trail line (dotted) -->
+    <path d="M0,195 Q50,188 100,180 Q170,172 220,185 Q280,198 380,195"
+          stroke="#3a2010" stroke-width="1" fill="none" stroke-dasharray="3,6" opacity=".3"/>
+  </svg>
+
+  <div class="scene-heading" id="ant-heading" aria-hidden="true">
+    <h2>🐜 勤勞的螞蟻</h2>
+    <p>The Diligent Ant — Proverbs 6:6-8</p>
+  </div>
+  <div class="scene-verse">「懶惰人哪，你去察看螞蟻的動作就可得智慧」— 箴言 6:6</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — VIRTUOUS WOMAN  才德的婦人
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-virtuous" aria-label="才德的婦人 — The Virtuous Woman">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Warm sunrise glow -->
+  <div id="virtuous-sunrise" aria-hidden="true"></div>
+
+  <!-- Floating crown / reward -->
+  <svg id="virtuous-crown" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="crownGlowG" cx="50%" cy="50%">
+        <stop offset="0%" stop-color="rgba(255,220,100,.4)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="40" cy="30" rx="38" ry="25" fill="url(#crownGlowG)"/>
+    <polygon points="15,35 22,12 30,28 40,5 50,28 58,12 65,35" fill="#d4a820" stroke="#b89018" stroke-width="1"/>
+    <rect x="15" y="35" width="50" height="8" rx="2" fill="#c89818"/>
+    <circle cx="30" cy="22" r="3" fill="#50c878" opacity=".6"/>
+    <circle cx="40" cy="14" r="3.5" fill="#ff6060" opacity=".5"/>
+    <circle cx="50" cy="22" r="3" fill="#50c878" opacity=".6"/>
+  </svg>
+
+  <!-- Household scene with woman working -->
+  <svg id="virtuous-scene-svg" viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="才德的婦人在家中工作 — The virtuous woman working in her household">
+    <title>才德的婦人 — A woman of noble character weaving, with children and household</title>
+    <defs>
+      <linearGradient id="roomFloorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c8a868"/>
+        <stop offset="100%" stop-color="#a08848"/>
+      </linearGradient>
+      <linearGradient id="fabricG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8040a0"/>
+        <stop offset="100%" stop-color="#603080"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Room interior -->
+    <rect x="0" y="0" width="420" height="320" rx="4" fill="#d8c890" opacity=".25"/>
+    <!-- Floor -->
+    <rect x="0" y="220" width="420" height="100" fill="url(#roomFloorG)" opacity=".4"/>
+
+    <!-- Window (left) with sunrise light -->
+    <rect x="20" y="30" width="60" height="80" rx="3" fill="#e0d8b0" opacity=".5"/>
+    <rect x="24" y="34" width="52" height="72" rx="2" fill="#ffe8a0" opacity=".4"/>
+    <line x1="50" y1="34" x2="50" y2="106" stroke="#c8b078" stroke-width="2" opacity=".4"/>
+    <line x1="24" y1="70" x2="76" y2="70" stroke="#c8b078" stroke-width="2" opacity=".4"/>
+
+    <!-- Loom / weaving frame -->
+    <g transform="translate(120,60)">
+      <!-- Frame -->
+      <rect x="0" y="0" width="8" height="180" fill="#7a6030"/>
+      <rect x="100" y="0" width="8" height="180" fill="#7a6030"/>
+      <rect x="0" y="0" width="108" height="8" fill="#8a7040"/>
+      <rect x="0" y="172" width="108" height="8" fill="#8a7040"/>
+      <!-- Warp threads -->
+      <g stroke="#d0c090" stroke-width="1" opacity=".4">
+        <line x1="15" y1="8" x2="15" y2="172"/>
+        <line x1="30" y1="8" x2="30" y2="172"/>
+        <line x1="45" y1="8" x2="45" y2="172"/>
+        <line x1="60" y1="8" x2="60" y2="172"/>
+        <line x1="75" y1="8" x2="75" y2="172"/>
+        <line x1="90" y1="8" x2="90" y2="172"/>
+      </g>
+      <!-- Purple fabric being woven -->
+      <rect x="8" y="80" width="92" height="60" rx="2" fill="url(#fabricG)" opacity=".6"/>
+      <line x1="8" y1="90" x2="100" y2="90" stroke="#9050b0" stroke-width="1" opacity=".4"/>
+      <line x1="8" y1="100" x2="100" y2="100" stroke="#9050b0" stroke-width="1" opacity=".4"/>
+      <line x1="8" y1="110" x2="100" y2="110" stroke="#9050b0" stroke-width="1" opacity=".4"/>
+      <line x1="8" y1="120" x2="100" y2="120" stroke="#9050b0" stroke-width="1" opacity=".4"/>
+      <line x1="8" y1="130" x2="100" y2="130" stroke="#9050b0" stroke-width="1" opacity=".4"/>
+    </g>
+
+    <!-- Virtuous woman (at the loom) -->
+    <g transform="translate(155,120)">
+      <!-- Head -->
+      <circle cx="0" cy="0" r="14" fill="#c8a878"/>
+      <!-- Head covering / hair -->
+      <path d="M-14,-4 Q0,-18 14,-4 L14,4 Q7,-2 0,-1 Q-7,-2 -14,4 Z" fill="#7a5a30"/>
+      <path d="M14,-4 Q18,4 16,16 Q12,8 9,2" fill="#6a4a28" opacity=".5"/>
+      <!-- Robe -->
+      <path d="M-8,14 Q-14,42 -18,90 Q-10,93 -2,90 Q0,70 0,55 Q0,70 2,90 Q10,93 18,90 Q14,42 8,14 Z"
+            fill="#a07058"/>
+      <!-- Sash -->
+      <rect x="-6" y="35" width="12" height="4" rx="2" fill="#d4a820" opacity=".4"/>
+      <!-- Working arms (reaching to loom) -->
+      <path d="M8,20 Q22,16 34,12" stroke="#c8a878" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M-8,20 Q-18,22 -26,18" stroke="#c8a878" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Feet -->
+      <ellipse cx="-4" cy="93" rx="6" ry="2.5" fill="#5a3820"/>
+      <ellipse cx="6" cy="93" rx="6" ry="2.5" fill="#5a3820"/>
+    </g>
+
+    <!-- Child 1 (playing near mother) -->
+    <g transform="translate(280,200)">
+      <circle cx="0" cy="0" r="8" fill="#c0a070"/>
+      <path d="M-5,-4 Q0,-10 5,-4" fill="#6a4828"/>
+      <path d="M-4,8 Q-6,22 -8,38 Q-4,40 0,38 Q2,28 0,20 Q2,28 4,38 Q8,40 10,38 Q8,22 4,8 Z"
+            fill="#60a870"/>
+      <ellipse cx="-3" cy="40" rx="4" ry="1.5" fill="#3a2810"/>
+      <ellipse cx="5" cy="40" rx="4" ry="1.5" fill="#3a2810"/>
+    </g>
+
+    <!-- Child 2 (smaller, toddler) -->
+    <g transform="translate(310,215)">
+      <circle cx="0" cy="0" r="6" fill="#c0a070"/>
+      <path d="M-3,6 Q-5,16 -6,28 Q-2,30 2,28 Q2,20 0,14 Q2,20 4,28 Q8,30 10,28 Q8,16 3,6 Z"
+            fill="#c87850"/>
+      <ellipse cx="-1" cy="30" rx="3" ry="1.5" fill="#3a2810"/>
+      <ellipse cx="5" cy="30" rx="3" ry="1.5" fill="#3a2810"/>
+    </g>
+
+    <!-- Oil lamp (burning at night — diligence) -->
+    <g transform="translate(350,120)">
+      <ellipse cx="15" cy="40" rx="14" ry="7" fill="#b89030"/>
+      <rect x="8" y="30" width="14" height="12" rx="4" fill="#c4a040"/>
+      <!-- Wick holder -->
+      <rect x="13" y="24" width="4" height="8" fill="#a08020"/>
+      <!-- Flame -->
+      <ellipse cx="15" cy="20" rx="5" ry="9" fill="#ffe080" opacity=".8"/>
+      <ellipse cx="15" cy="18" rx="3" ry="6" fill="#fff8d0"/>
+      <!-- Glow -->
+      <ellipse cx="15" cy="28" rx="25" ry="20" fill="rgba(255,220,100,.1)"/>
+    </g>
+
+    <!-- Draped purple/fine fabric (on display) -->
+    <g transform="translate(55,160)" opacity=".5">
+      <path d="M0,0 Q10,8 20,0 Q30,8 40,0 L40,50 Q30,42 20,50 Q10,42 0,50 Z" fill="#7040a0"/>
+      <path d="M5,50 Q20,58 35,50 L35,55 Q20,63 5,55 Z" fill="#6030a0" opacity=".6"/>
+    </g>
+  </svg>
+
+  <div class="scene-heading" id="virtuous-heading" aria-hidden="true">
+    <h2>👑 才德的婦人</h2>
+    <p>The Virtuous Woman — Proverbs 31:10-31</p>
+  </div>
+  <div class="scene-verse">「才德的婦人誰能得著呢？她的價值遠勝過珍珠」— 箴言 31:10</div>
+</section>
+
+</body>
+</html>
