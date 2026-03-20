@@ -261,65 +261,106 @@
     }
     @keyframes hintPulse { 0%,100%{opacity:.3} 50%{opacity:.75} }
 
-    /* ── Nav link buttons (wiki & exodus) ── */
-    .nav-link {
-      position: fixed; right: 1.5rem; z-index: 30;
-      display: inline-flex; align-items: center; gap: .45rem;
-      padding: .42rem 1rem;
+    /* ── Dropdown Navigation Menu ── */
+    #nav-dropdown {
+      position: fixed; top: 1.2rem; right: 1.5rem; z-index: 100;
+    }
+    #nav-dropdown-toggle {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .55rem 1.2rem;
       border-radius: 999px;
-      background: rgba(255,255,255,0.07);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.13);
-      color: rgba(210,235,255,0.80);
-      text-decoration: none;
-      font-size: clamp(0.72rem, 1.2vw, 0.82rem); font-weight: 600; letter-spacing: .09em;
-      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(220,240,255,0.90);
+      font-size: clamp(0.78rem, 1.3vw, 0.9rem); font-weight: 700; letter-spacing: .1em;
+      cursor: pointer;
+      transition: background .3s, border-color .3s, box-shadow .3s, color .3s;
       animation: hintPulse 4s ease-in-out infinite;
     }
-    #wiki-link        { top: 1.2rem; }
-    #genesis-link     { top: 3.4rem; }
-    #exodus-link      { top: 5.6rem; }
-    #leviticus-link   { top: 7.8rem; }
-    #numbers-link     { top: 10.0rem; }
-    #deuteronomy-link { top: 12.2rem; }
-    .nav-link:hover { animation: none; }
-    #wiki-link:hover {
-      background: rgba(109,255,210,0.13);
-      border-color: rgba(109,255,210,0.45);
-      color: #6dffd2;
-      box-shadow: 0 0 20px rgba(109,255,210,0.18);
+    #nav-dropdown-toggle:hover,
+    #nav-dropdown:hover #nav-dropdown-toggle {
+      background: rgba(109,255,210,0.12);
+      border-color: rgba(109,255,210,0.4);
+      color: #b8f0d8;
+      box-shadow: 0 0 24px rgba(109,255,210,0.15);
+      animation: none;
     }
-    #genesis-link:hover {
-      background: rgba(100,180,255,0.13);
-      border-color: rgba(100,180,255,0.45);
-      color: #7ec8ff;
-      box-shadow: 0 0 20px rgba(100,180,255,0.18);
+    #nav-dropdown-toggle .arrow {
+      display: inline-block;
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+      font-size: .65em;
     }
-    #exodus-link:hover {
-      background: rgba(255,200,80,0.13);
-      border-color: rgba(255,200,80,0.45);
-      color: #ffd700;
-      box-shadow: 0 0 20px rgba(255,200,80,0.18);
+    #nav-dropdown:hover #nav-dropdown-toggle .arrow {
+      transform: rotate(180deg);
     }
-    #leviticus-link:hover {
-      background: rgba(255,160,60,0.13);
-      border-color: rgba(255,160,60,0.45);
-      color: #ffb347;
-      box-shadow: 0 0 20px rgba(255,160,60,0.18);
+
+    /* ── Dropdown Panel ── */
+    .nav-panel {
+      position: absolute; top: calc(100% + .6rem); right: 0;
+      min-width: 16rem;
+      background: rgba(8,10,20,0.88);
+      backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 1rem;
+      padding: .55rem 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px) scale(.97);
+      transition: opacity .3s cubic-bezier(.4,0,.2,1),
+                  transform .3s cubic-bezier(.4,0,.2,1),
+                  visibility .3s;
+      box-shadow: 0 8px 40px rgba(0,0,0,.55), 0 0 60px rgba(80,120,200,.06);
     }
-    #numbers-link:hover {
-      background: rgba(210,180,140,0.13);
-      border-color: rgba(210,180,140,0.45);
-      color: #d2b48c;
-      box-shadow: 0 0 20px rgba(210,180,140,0.18);
+    #nav-dropdown:hover .nav-panel {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
     }
-    #deuteronomy-link:hover {
-      background: rgba(255,140,90,0.13);
-      border-color: rgba(255,140,90,0.45);
-      color: #ff9966;
-      box-shadow: 0 0 20px rgba(255,140,90,0.18);
+
+    /* Group label */
+    .nav-group-label {
+      display: block;
+      padding: .4rem 1.1rem .2rem;
+      font-size: clamp(.58rem,1vw,.68rem); font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(180,200,220,.35);
+      pointer-events: none;
     }
+
+    /* Divider */
+    .nav-divider {
+      height: 1px;
+      margin: .35rem .8rem;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.1), transparent);
+    }
+
+    /* Link items */
+    .nav-panel .nav-item {
+      display: flex; align-items: center; gap: .55rem;
+      padding: .48rem 1.1rem;
+      color: rgba(210,230,255,0.78);
+      text-decoration: none;
+      font-size: clamp(.7rem,1.15vw,.82rem); font-weight: 600; letter-spacing: .07em;
+      transition: background .22s, color .22s, padding-left .22s;
+      border-radius: 0;
+    }
+    .nav-panel .nav-item:hover {
+      padding-left: 1.4rem;
+    }
+
+    /* Individual hover colors */
+    .nav-item[href="wiki.html"]:hover         { background: rgba(109,255,210,0.1); color: #6dffd2; }
+    .nav-item[href="genesis.html"]:hover      { background: rgba(100,180,255,0.1); color: #7ec8ff; }
+    .nav-item[href="exodus.html"]:hover       { background: rgba(255,200,80,0.1);  color: #ffd700; }
+    .nav-item[href="leviticus.html"]:hover    { background: rgba(255,160,60,0.1);  color: #ffb347; }
+    .nav-item[href="numbers.html"]:hover      { background: rgba(210,180,140,0.1); color: #d2b48c; }
+    .nav-item[href="deuteronomy.html"]:hover  { background: rgba(255,140,90,0.1);  color: #ff9966; }
+    .nav-item[href="joshua.html"]:hover       { background: rgba(74,140,94,0.12);  color: #66cc66; }
+    .nav-item[href="judges.html"]:hover       { background: rgba(160,64,64,0.12);  color: #e07060; }
+    .nav-item[href="ruth.html"]:hover         { background: rgba(196,160,64,0.12); color: #daa520; }
+    .nav-item[href="1samuel.html"]:hover      { background: rgba(74,90,170,0.12);  color: #8090dd; }
+    .nav-item[href="2samuel.html"]:hover      { background: rgba(184,134,11,0.12); color: #daa520; }
 
     /* ── Rainbow ── */
     #rainbow-svg {
@@ -1032,23 +1073,27 @@
 <!-- Interaction hint -->
 <div id="hint">🌿 Click the Tree of Life or the Tree of Knowledge to interact 🍎</div>
 
-<!-- Wiki / About link -->
-<a id="wiki-link" class="nav-link" href="wiki.html">🌱 關於我 · About</a>
-
-<!-- Genesis animation link -->
-<a id="genesis-link" class="nav-link" href="genesis.html">📖 創世記 · Genesis</a>
-
-<!-- Exodus animation link -->
-<a id="exodus-link" class="nav-link" href="exodus.html">📜 出埃及記 · Exodus</a>
-
-<!-- Leviticus animation link -->
-<a id="leviticus-link" class="nav-link" href="leviticus.html">🔥 利未記 · Leviticus</a>
-
-<!-- Numbers animation link -->
-<a id="numbers-link" class="nav-link" href="numbers.html">🏜️ 民數記 · Numbers</a>
-
-<!-- Deuteronomy animation link -->
-<a id="deuteronomy-link" class="nav-link" href="deuteronomy.html">⚖️ 申命記 · Deuteronomy</a>
+<!-- Navigation Dropdown Menu -->
+<nav id="nav-dropdown" aria-label="聖經書卷導航">
+  <div id="nav-dropdown-toggle">📜 聖經書卷 · Books <span class="arrow">▼</span></div>
+  <div class="nav-panel">
+    <a class="nav-item" href="wiki.html">🌱 關於我 · About</a>
+    <div class="nav-divider"></div>
+    <span class="nav-group-label">摩西五經 · Pentateuch</span>
+    <a class="nav-item" href="genesis.html">📖 創世記 · Genesis</a>
+    <a class="nav-item" href="exodus.html">📜 出埃及記 · Exodus</a>
+    <a class="nav-item" href="leviticus.html">🔥 利未記 · Leviticus</a>
+    <a class="nav-item" href="numbers.html">🏜️ 民數記 · Numbers</a>
+    <a class="nav-item" href="deuteronomy.html">⚖️ 申命記 · Deuteronomy</a>
+    <div class="nav-divider"></div>
+    <span class="nav-group-label">歷史書 · Historical Books</span>
+    <a class="nav-item" href="joshua.html">⚔️ 約書亞記 · Joshua</a>
+    <a class="nav-item" href="judges.html">🗡️ 士師記 · Judges</a>
+    <a class="nav-item" href="ruth.html">🌾 路得記 · Ruth</a>
+    <a class="nav-item" href="1samuel.html">👑 撒母耳記上 · 1 Samuel</a>
+    <a class="nav-item" href="2samuel.html">🏰 撒母耳記下 · 2 Samuel</a>
+  </div>
+</nav>
 
 <script>
 /* ── Build single large ivory rotating cube ── */
