@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>尼希米記 · Nehemiah</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #1c1a16;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+    @keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+    @keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.31), 564px 126px rgba(255,255,255,.41),
+        210px 347px rgba(255,255,255,.67), 1117px 45px rgba(255,255,255,.6),
+        66px 16px rgba(255,255,255,.35),  477px 259px rgba(255,255,255,.6),
+        1150px 102px rgba(255,255,255,.66), 1437px 280px rgba(255,255,255,.51),
+        920px 302px rgba(255,255,255,.44), 14px 389px rgba(255,255,255,.7),
+        1430px 217px rgba(255,255,255,.47), 319px 111px rgba(255,255,255,.78),
+        690px 53px rgba(255,255,255,.35),  199px 184px rgba(255,255,255,.72),
+        1237px 136px rgba(255,255,255,.7), 941px 275px rgba(255,255,255,.36),
+        776px 41px rgba(255,255,255,.58),  1288px 317px rgba(255,255,255,.74),
+        741px 296px rgba(255,255,255,.4),  143px 24px rgba(255,255,255,.63),
+        593px 41px rgba(255,255,255,.73),  207px 195px rgba(255,255,255,.44),
+        1302px 428px rgba(255,255,255,.48), 759px 182px rgba(255,255,255,.4),
+        547px 360px rgba(255,255,255,.77), 1328px 37px rgba(255,255,255,.6),
+        351px 274px rgba(255,255,255,.66), 335px 237px rgba(255,255,255,.49),
+        1311px 353px rgba(255,255,255,.58), 1403px 167px rgba(255,255,255,.72),
+        115px 118px rgba(255,255,255,.71), 647px 206px rgba(255,255,255,.43),
+        433px 468px rgba(255,255,255,.77), 645px 109px rgba(255,255,255,.63),
+        811px 453px rgba(255,255,255,.76), 940px 74px rgba(255,255,255,.43),
+        506px 382px rgba(255,255,255,.58), 539px 383px rgba(255,255,255,.59),
+        1196px 205px rgba(255,255,255,.48), 284px 261px rgba(255,255,255,.55),
+        97px 441px rgba(255,255,255,.35),  1286px 82px rgba(255,255,255,.7),
+        865px 306px rgba(255,255,255,.33), 782px 306px rgba(255,255,255,.8),
+        1084px 129px rgba(255,255,255,.79), 24px 349px rgba(255,255,255,.66),
+        1397px 454px rgba(255,255,255,.57), 547px 394px rgba(255,255,255,.62),
+        229px 151px rgba(255,255,255,.52), 930px 2px rgba(255,255,255,.78),
+        540px 498px rgba(255,255,255,.55), 366px 260px rgba(255,255,255,.76),
+        1281px 153px rgba(255,255,255,.72), 1040px 312px rgba(255,255,255,.4),
+        766px 391px rgba(255,255,255,.38), 1087px 471px rgba(255,255,255,.3),
+        664px 251px rgba(255,255,255,.31), 744px 450px rgba(255,255,255,.79),
+        630px 123px rgba(255,255,255,.33), 1162px 485px rgba(255,255,255,.34),
+        996px 418px rgba(255,255,255,.33), 1091px 393px rgba(255,255,255,.36),
+        1352px 244px rgba(255,255,255,.77), 339px 136px rgba(255,255,255,.56),
+        1243px 217px rgba(255,255,255,.78), 1105px 387px rgba(255,255,255,.66),
+        412px 366px rgba(255,255,255,.46), 1376px 333px rgba(255,255,255,.49),
+        1060px 232px rgba(255,255,255,.36), 461px 33px rgba(255,255,255,.47),
+        1205px 284px rgba(255,255,255,.42), 452px 4px rgba(255,255,255,.34),
+        1293px 31px rgba(255,255,255,.41), 65px 441px rgba(255,255,255,.47),
+        1053px 122px rgba(255,255,255,.44), 995px 110px rgba(255,255,255,.57),
+        1170px 296px rgba(255,255,255,.54), 969px 414px rgba(255,255,255,.5),
+        194px 50px rgba(255,255,255,.63),  726px 217px rgba(255,255,255,.51);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.9),  1324px 51px rgba(255,255,255,.72),
+        695px 410px rgba(255,255,255,.96), 510px 99px rgba(255,255,255,.76),
+        919px 72px rgba(255,255,255,.83),  571px 237px rgba(255,255,255,.77),
+        155px 227px rgba(255,255,255,.94), 1128px 51px rgba(255,255,255,.72),
+        1108px 429px rgba(255,255,255,.7), 192px 475px rgba(255,255,255,.93),
+        485px 86px rgba(255,255,255,.82),  986px 110px rgba(255,255,255,.96),
+        121px 85px rgba(255,255,255,.81),  800px 136px rgba(255,255,255,.98),
+        932px 147px rgba(255,255,255,.83), 1139px 339px rgba(255,255,255,.92),
+        318px 98px rgba(255,255,255,.79),  120px 297px rgba(255,255,255,.92),
+        125px 383px rgba(255,255,255,.79), 103px 300px rgba(255,255,255,.84),
+        1088px 81px rgba(255,255,255,.72), 1041px 42px rgba(255,255,255,.96),
+        141px 305px rgba(255,255,255,.72), 482px 207px rgba(255,255,255,.74),
+        1167px 127px rgba(255,255,255,.87), 82px 318px rgba(255,255,255,.72),
+        1347px 299px rgba(255,255,255,.87), 648px 479px rgba(255,255,255,.78),
+        1372px 367px rgba(255,255,255,.79), 544px 203px rgba(255,255,255,.74);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,235,255,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(139,125,107,.2);
+      border-color: rgba(139,125,107,.5);
+      color: #8b7d6b;
+      box-shadow: 0 0 20px rgba(139,125,107,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ── Scene-specific keyframes ── */
+    @keyframes introGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(139,125,107,.6), 0 0 110px rgba(90,78,64,.3); }
+      50%      { box-shadow: 0 0 80px rgba(200,184,160,.85), 0 0 160px rgba(139,125,107,.5); }
+    }
+    @keyframes wallBuild {
+      0%,100% { transform: translateY(0); opacity: .85; }
+      50%      { transform: translateY(-3px); opacity: 1; }
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #1c1a16 0%, #302a22 30%, #443a2e 65%, #584a3a 100%);
+    }
+    #intro-orb {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fffff0, #c8b8a0 40%, #8b7d6b 75%, #5a4e40);
+      box-shadow: 0 0 55px rgba(139,125,107,.6), 0 0 110px rgba(90,78,64,.3);
+      z-index: 4;
+      animation: introGlow 4s ease-in-out infinite;
+    }
+    #intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#8b7d6b 0%,#c8b8a0 45%,#5a4e40 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(200,184,160,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(160,140,120,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+    #intro-nehemiah {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — NEHEMIAH'S PRAYER  尼希米的禱告
+    ══════════════════════════════════════════════ */
+    #scene-prayer {
+      background: linear-gradient(180deg, #0e1020 0%, #1a1a3a 40%, #1c2040 70%, #222848 100%);
+    }
+    #prayer-moonlight {
+      position: absolute; top: 12%; right: 18%;
+      width: clamp(50px,8vw,90px); height: clamp(50px,8vw,90px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 45% 40%, #f0f0ff, #c8c8e8 50%, #8888b0);
+      box-shadow: 0 0 40px rgba(200,200,240,.5), 0 0 80px rgba(180,180,220,.25);
+      z-index: 4;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #prayer-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 5;
+    }
+    #prayer-heading h2 {
+      color: #a0b8d0;
+      text-shadow: 0 0 22px rgba(160,184,208,.6);
+    }
+    #prayer-heading p { color: rgba(160,180,210,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — REBUILDING THE WALL  重建城牆
+    ══════════════════════════════════════════════ */
+    #scene-wall {
+      background: linear-gradient(180deg, #3a3020 0%, #5a4a30 35%, #6a5838 65%, #7a6840 100%);
+    }
+    #wall-dust-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,50vw,600px); height: 40vh;
+      background: radial-gradient(ellipse at 50% 70%, rgba(200,180,140,.15) 0%, rgba(180,160,120,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3s ease-in-out infinite;
+    }
+    #wall-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 5;
+    }
+    #wall-heading h2 {
+      background: linear-gradient(120deg,#c8a860 0%,#ffe8b0 50%,#8b7d6b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #wall-heading p { color: rgba(200,180,140,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — OPPOSITION  仇敵的攔阻
+    ══════════════════════════════════════════════ */
+    #scene-opposition {
+      background: linear-gradient(180deg, #2a1418 0%, #3a1e22 35%, #4a2828 65%, #3a2020 100%);
+    }
+    #opposition-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,45vw,550px); height: 35vh;
+      background: radial-gradient(ellipse at 50% 60%, rgba(180,80,60,.12) 0%, rgba(140,60,40,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+    #opposition-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 5;
+    }
+    #opposition-heading h2 {
+      background: linear-gradient(120deg,#c84040 0%,#ffa080 50%,#8b4040 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #opposition-heading p { color: rgba(220,160,140,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — READING THE LAW  宣讀律法
+    ══════════════════════════════════════════════ */
+    #scene-law {
+      background: linear-gradient(180deg, #2a2210 0%, #4a3a1a 35%, #5a4820 65%, #6a5828 100%);
+    }
+    #law-glow {
+      position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 45vh;
+      background: radial-gradient(ellipse at 50% 40%, rgba(200,180,100,.12) 0%, rgba(160,140,80,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #law-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 72%; z-index: 5;
+    }
+    #law-heading h2 {
+      background: linear-gradient(120deg,#d4a840 0%,#fff0c0 50%,#8b7d6b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #law-heading p { color: rgba(210,190,140,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — COVENANT RENEWAL  重立聖約
+    ══════════════════════════════════════════════ */
+    #scene-covenant {
+      background: linear-gradient(180deg, #18161e 0%, #2a2438 50%, #342a40 75%, #2a2230 100%);
+    }
+    #covenant-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 30vw; height: 16vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(139,125,107,.25) 0%, rgba(90,78,64,.1) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    #covenant-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 72%; z-index: 5;
+    }
+    #covenant-heading h2 {
+      background: linear-gradient(120deg,#8b7d6b 0%,#d8c8b0 50%,#5a4e40 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #covenant-heading p { color: rgba(180,165,140,.5); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"      aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-prayer"     aria-label="尼希米的禱告"></a>
+  <a class="nav-dot" href="#scene-wall"       aria-label="重建城牆"></a>
+  <a class="nav-dot" href="#scene-opposition" aria-label="仇敵的攔阻"></a>
+  <a class="nav-dot" href="#scene-law"        aria-label="宣讀律法"></a>
+  <a class="nav-dot" href="#scene-covenant"   aria-label="重立聖約"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="尼希米記 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="intro-orb" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>尼希米記</h1>
+    <p>Book of Nehemiah</p>
+    <span class="sub">禱告 · 重建 · 抵擋 · 律法 · 聖約</span>
+  </div>
+
+  <!-- Jerusalem walls/ruins silhouette -->
+  <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a2218"/>
+        <stop offset="50%" stop-color="#1a1610"/>
+        <stop offset="100%" stop-color="#0e0c08"/>
+      </linearGradient>
+      <linearGradient id="ruinG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5a4e40"/>
+        <stop offset="100%" stop-color="#1a1610"/>
+      </linearGradient>
+      <linearGradient id="groundG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a2218"/>
+        <stop offset="100%" stop-color="#0e0c08"/>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="1440" height="420" fill="url(#skyG)"/>
+    <!-- Distant broken walls / hills -->
+    <path d="M0 340 Q100 310 200 320 L220 280 L240 320 Q360 300 480 310 L500 260 L510 270 L530 310 Q650 290 720 300 L740 240 L760 300 Q880 280 960 290 L980 250 L1000 290 Q1120 300 1200 310 L1220 270 L1240 310 Q1360 300 1440 320 L1440 420 L0 420 Z"
+          fill="url(#ruinG)" opacity=".6"/>
+    <!-- Nearer ruins -->
+    <path d="M0 370 Q120 330 240 350 L260 300 L280 310 L300 350 Q420 330 540 340 L560 290 L575 310 L590 340 Q700 320 800 335 L815 280 L830 290 L845 335 Q960 320 1080 330 L1100 285 L1120 330 Q1280 320 1440 340 L1440 420 L0 420 Z"
+          fill="url(#ruinG)"/>
+    <!-- Ground -->
+    <rect x="0" y="360" width="1440" height="60" fill="url(#groundG)"/>
+    <!-- Warm glow on horizon -->
+    <ellipse cx="720" cy="310" rx="500" ry="50" fill="rgba(139,125,107,.08)"/>
+  </svg>
+
+  <!-- Nehemiah figure looking toward ruins -->
+  <svg id="intro-nehemiah" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="尼希米望向廢墟 — Nehemiah looking toward the ruins of Jerusalem">
+    <title>尼希米望向廢墟 — Nehemiah gazing at the ruined walls</title>
+    <!-- Head -->
+    <circle cx="30" cy="16" r="12" fill="#6b4e14"/>
+    <!-- Head covering -->
+    <path d="M18,14 Q30,2 42,14 L42,20 Q30,14 18,20 Z" fill="#5a4e40"/>
+    <path d="M20,14 Q30,8 40,14" stroke="#8b7d6b" stroke-width="2" fill="none"/>
+    <!-- Beard -->
+    <path d="M24,24 Q30,34 36,24 Q34,40 30,42 Q26,40 24,24 Z" fill="#5a4020" opacity=".85"/>
+    <!-- Robe (cup bearer garments) -->
+    <path d="M20,30 Q14,60 12,95 Q18,98 24,95 Q26,75 30,60 Q34,75 36,95 Q42,98 48,95 Q46,60 40,30 Z"
+          fill="#6a5a48"/>
+    <!-- Sash -->
+    <line x1="20" y1="45" x2="40" y2="45" stroke="#8b7d6b" stroke-width="2.5"/>
+    <!-- Right arm at side -->
+    <path d="M40,34 Q46,50 44,62" stroke="#6b4e14" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Left hand shielding eyes, looking into distance -->
+    <path d="M20,34 Q12,28 10,22" stroke="#6b4e14" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Feet -->
+    <ellipse cx="22" cy="97" rx="7" ry="3" fill="#3d2200"/>
+    <ellipse cx="38" cy="97" rx="7" ry="3" fill="#3d2200"/>
+  </svg>
+
+  <div class="scroll-hint">↓ 向下滾動探索 · Scroll to explore</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — NEHEMIAH'S PRAYER  尼希米的禱告
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-prayer" aria-label="尼希米的禱告 — Nehemiah's Prayer">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Moon -->
+  <div id="prayer-moonlight" aria-hidden="true"></div>
+
+  <!-- Nehemiah kneeling by window with moonlight -->
+  <svg id="prayer-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="尼希米跪下禱告 — Nehemiah kneeling in prayer by a window">
+    <title>尼希米的禱告 — Nehemiah weeping and praying before the God of heaven</title>
+    <defs>
+      <linearGradient id="palaceFloorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a2430"/>
+        <stop offset="100%" stop-color="#14121a"/>
+      </linearGradient>
+      <linearGradient id="palaceWallG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a2838"/>
+        <stop offset="100%" stop-color="#1a1824"/>
+      </linearGradient>
+      <linearGradient id="moonBeamG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(200,200,240,.15)"/>
+        <stop offset="100%" stop-color="rgba(200,200,240,.02)"/>
+      </linearGradient>
+    </defs>
+    <!-- Palace floor -->
+    <rect x="0" y="380" width="1440" height="120" fill="url(#palaceFloorG)"/>
+    <!-- Palace wall -->
+    <rect x="0" y="100" width="1440" height="280" fill="url(#palaceWallG)" opacity=".5"/>
+    <!-- Window arch (right side, where moon shines through) -->
+    <path d="M1000,140 Q1060,100 1120,140 L1120,320 L1000,320 Z" fill="rgba(15,15,30,.8)"
+          stroke="rgba(100,100,140,.3)" stroke-width="3"/>
+    <!-- Moonlight beam through window -->
+    <polygon points="1000,320 1120,320 850,500 650,500" fill="url(#moonBeamG)"/>
+    <!-- Window bars -->
+    <line x1="1040" y1="140" x2="1040" y2="320" stroke="rgba(80,80,110,.4)" stroke-width="2"/>
+    <line x1="1080" y1="130" x2="1080" y2="320" stroke="rgba(80,80,110,.4)" stroke-width="2"/>
+    <!-- Palace columns in background -->
+    <rect x="200" y="120" width="20" height="270" fill="rgba(50,45,60,.4)" rx="3"/>
+    <rect x="400" y="120" width="20" height="270" fill="rgba(50,45,60,.3)" rx="3"/>
+    <!-- Column capitals -->
+    <rect x="195" y="115" width="30" height="12" fill="rgba(60,55,70,.4)" rx="2"/>
+    <rect x="395" y="115" width="30" height="12" fill="rgba(60,55,70,.3)" rx="2"/>
+    <!-- Nehemiah kneeling figure -->
+    <!-- Head -->
+    <circle cx="720" cy="320" r="16" fill="#6b4e14"/>
+    <!-- Head covering -->
+    <path d="M704,318 Q720,304 736,318 L736,326 Q720,320 704,326 Z" fill="#5a4e40"/>
+    <!-- Tears -->
+    <circle cx="712" cy="326" r="2" fill="rgba(150,180,220,.6)"/>
+    <circle cx="710" cy="332" r="1.5" fill="rgba(150,180,220,.4)"/>
+    <!-- Beard -->
+    <path d="M712,332 Q720,344 728,332 Q726,352 720,356 Q714,352 712,332 Z" fill="#5a4020" opacity=".8"/>
+    <!-- Kneeling body/robe -->
+    <path d="M708,338 Q700,370 695,400 Q710,406 725,400 Q730,370 732,338 Z" fill="#6a5a48"/>
+    <!-- Knees on ground -->
+    <ellipse cx="700" cy="400" rx="14" ry="6" fill="#5a4a38"/>
+    <ellipse cx="730" cy="400" rx="14" ry="6" fill="#5a4a38"/>
+    <!-- Arms raised in prayer -->
+    <path d="M708,345 Q690,330 685,310" stroke="#6b4e14" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M732,345 Q750,330 755,310" stroke="#6b4e14" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- Hands together in prayer -->
+    <circle cx="685" cy="308" r="4" fill="#6b4e14"/>
+    <circle cx="755" cy="308" r="4" fill="#6b4e14"/>
+    <!-- Cup on the ground nearby -->
+    <path d="M800,392 Q805,380 810,392 Z" fill="#c8a840" opacity=".6"/>
+    <ellipse cx="805" cy="392" rx="6" ry="2" fill="#c8a840" opacity=".5"/>
+    <!-- Palace background detail — distant arched doorway -->
+    <path d="M580,180 Q610,150 640,180 L640,390 L580,390 Z" fill="rgba(20,18,28,.6)"
+          stroke="rgba(80,75,90,.2)" stroke-width="2"/>
+  </svg>
+
+  <div class="scene-heading" id="prayer-heading" aria-hidden="true">
+    <h2>🙏 尼希米的禱告</h2>
+    <p>Nehemiah's Prayer — Nehemiah 1</p>
+  </div>
+  <div class="scene-verse">「我聽見這話，就坐下哭泣，在天上的神面前禱告」— 尼希米記 1:4</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — REBUILDING THE WALL  重建城牆
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-wall" aria-label="重建城牆 — Rebuilding the Wall">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="wall-dust-glow" aria-hidden="true"></div>
+
+  <!-- Workers building wall -->
+  <svg id="wall-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="工人重建耶路撒冷城牆 — Workers rebuilding the wall of Jerusalem">
+    <title>重建城牆 — The people rise up to rebuild the walls of Jerusalem</title>
+    <defs>
+      <linearGradient id="wallStoneG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8a7a5a"/>
+        <stop offset="50%" stop-color="#6a5a3a"/>
+        <stop offset="100%" stop-color="#4a3a20"/>
+      </linearGradient>
+      <linearGradient id="scaffoldG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6a5030"/>
+        <stop offset="100%" stop-color="#3d2a10"/>
+      </linearGradient>
+      <linearGradient id="earthFloorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a3020"/>
+        <stop offset="100%" stop-color="#1a1408"/>
+      </linearGradient>
+    </defs>
+    <!-- Ground -->
+    <rect x="0" y="400" width="1440" height="100" fill="url(#earthFloorG)"/>
+    <!-- Half-built wall — left section (taller, more complete) -->
+    <rect x="180" y="200" width="90" height="200" fill="url(#wallStoneG)" rx="2"/>
+    <!-- Brick lines left -->
+    <line x1="180" y1="230" x2="270" y2="230" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="180" y1="260" x2="270" y2="260" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="180" y1="290" x2="270" y2="290" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="180" y1="320" x2="270" y2="320" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="180" y1="350" x2="270" y2="350" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="180" y1="380" x2="270" y2="380" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="225" y1="200" x2="225" y2="400" stroke="rgba(60,50,30,.3)" stroke-width="1"/>
+    <!-- Half-built wall — centre section (shorter, being built) -->
+    <rect x="400" y="280" width="100" height="120" fill="url(#wallStoneG)" rx="2"
+          style="animation: wallBuild 5s ease-in-out infinite;"/>
+    <line x1="400" y1="310" x2="500" y2="310" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="400" y1="340" x2="500" y2="340" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="400" y1="370" x2="500" y2="370" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="450" y1="280" x2="450" y2="400" stroke="rgba(60,50,30,.3)" stroke-width="1"/>
+    <!-- Stone being placed on top -->
+    <rect x="420" y="270" width="30" height="15" fill="#9a8a6a" rx="2" opacity=".8"
+          style="animation: wallBuild 5s ease-in-out .5s infinite;"/>
+    <!-- Gap in wall (being repaired) -->
+    <rect x="620" y="320" width="80" height="80" fill="url(#wallStoneG)" rx="2" opacity=".7"/>
+    <line x1="620" y1="350" x2="700" y2="350" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="620" y1="380" x2="700" y2="380" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <!-- Right wall section (taller) -->
+    <rect x="850" y="220" width="90" height="180" fill="url(#wallStoneG)" rx="2"/>
+    <line x1="850" y1="250" x2="940" y2="250" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="850" y1="280" x2="940" y2="280" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="850" y1="310" x2="940" y2="310" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="850" y1="340" x2="940" y2="340" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="850" y1="370" x2="940" y2="370" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="895" y1="220" x2="895" y2="400" stroke="rgba(60,50,30,.3)" stroke-width="1"/>
+    <!-- Far right wall -->
+    <rect x="1100" y="260" width="80" height="140" fill="url(#wallStoneG)" rx="2"/>
+    <line x1="1100" y1="290" x2="1180" y2="290" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="1100" y1="320" x2="1180" y2="320" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="1100" y1="350" x2="1180" y2="350" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <line x1="1100" y1="380" x2="1180" y2="380" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <!-- Scaffolding on centre section -->
+    <line x1="380" y1="260" x2="380" y2="400" stroke="#5a4020" stroke-width="3"/>
+    <line x1="520" y1="260" x2="520" y2="400" stroke="#5a4020" stroke-width="3"/>
+    <line x1="380" y1="280" x2="520" y2="280" stroke="#5a4020" stroke-width="2.5"/>
+    <line x1="380" y1="340" x2="520" y2="340" stroke="#5a4020" stroke-width="2.5"/>
+    <!-- Cross bracing -->
+    <line x1="380" y1="280" x2="520" y2="340" stroke="#5a4020" stroke-width="1.5" opacity=".6"/>
+    <!-- Scaffolding on gap section -->
+    <line x1="600" y1="300" x2="600" y2="400" stroke="#5a4020" stroke-width="3"/>
+    <line x1="720" y1="300" x2="720" y2="400" stroke="#5a4020" stroke-width="3"/>
+    <line x1="600" y1="320" x2="720" y2="320" stroke="#5a4020" stroke-width="2.5"/>
+    <!-- Worker figures -->
+    <!-- Worker 1 — on scaffolding, placing stone -->
+    <circle cx="450" cy="260" r="6" fill="#6b4e14"/>
+    <path d="M444,265 Q442,280 440,295 Q444,298 448,295 Q450,283 452,295 Q456,298 460,295 Q458,280 456,265 Z" fill="#7a6a50"/>
+    <!-- Worker 2 — carrying stones on ground -->
+    <circle cx="560" cy="378" r="5" fill="#6b4e14"/>
+    <path d="M555,382 Q553,395 551,405 Q555,407 559,405 Q560,397 561,405 Q565,407 569,405 Q567,395 565,382 Z" fill="#6a5a48"/>
+    <rect x="548" y="374" width="14" height="10" fill="#8a7a5a" rx="2"/>
+    <!-- Worker 3 — at gap section -->
+    <circle cx="660" cy="300" r="6" fill="#6b4e14"/>
+    <path d="M654,305 Q652,320 650,335 Q654,338 658,335 Q660,323 662,335 Q666,338 670,335 Q668,320 666,305 Z" fill="#7a6a50"/>
+    <!-- Worker 4 — on right section -->
+    <circle cx="900" cy="200" r="6" fill="#6b4e14"/>
+    <path d="M894,205 Q892,220 890,235 Q894,238 898,235 Q900,223 902,235 Q906,238 910,235 Q908,220 906,205 Z" fill="#6a5a48"/>
+    <!-- Nehemiah overseeing (larger, central) -->
+    <circle cx="760" cy="365" r="8" fill="#6b4e14"/>
+    <path d="M752,372 Q749,393 746,410 Q752,413 758,410 Q760,396 762,410 Q768,413 774,410 Q771,393 768,372 Z" fill="#5a4e40"/>
+    <!-- Nehemiah's arm pointing -->
+    <path d="M768,378 Q785,370 795,365" stroke="#6b4e14" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Loose stones on ground -->
+    <ellipse cx="340" cy="410" rx="10" ry="6" fill="rgba(120,100,70,.4)"/>
+    <ellipse cx="780" cy="415" rx="8" ry="5" fill="rgba(110,90,65,.35)"/>
+    <ellipse cx="1050" cy="408" rx="12" ry="7" fill="rgba(130,110,80,.4)"/>
+    <!-- Dust particles -->
+    <ellipse cx="460" cy="290" rx="40" ry="12" fill="rgba(180,160,120,.06)"/>
+    <ellipse cx="670" cy="330" rx="30" ry="10" fill="rgba(180,160,120,.05)"/>
+  </svg>
+
+  <div class="scene-heading" id="wall-heading" aria-hidden="true">
+    <h2>🧱 重建城牆</h2>
+    <p>Rebuilding the Wall — Nehemiah 2–3</p>
+  </div>
+  <div class="scene-verse">「我們起來建造吧！」— 尼希米記 2:18</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — OPPOSITION  仇敵的攔阻
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-opposition" aria-label="仇敵的攔阻 — Opposition from Enemies">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="opposition-glow" aria-hidden="true"></div>
+
+  <!-- Workers with swords and tools, enemies outside -->
+  <svg id="opposition-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="工人一手拿兵器一手做工 — Workers holding weapons and tools">
+    <title>仇敵的攔阻 — The workers build with swords at their sides while enemies mock</title>
+    <defs>
+      <linearGradient id="darkWallG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6a5a4a"/>
+        <stop offset="50%" stop-color="#4a3a2a"/>
+        <stop offset="100%" stop-color="#2a2018"/>
+      </linearGradient>
+      <linearGradient id="darkGroundG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a1818"/>
+        <stop offset="100%" stop-color="#140c0c"/>
+      </linearGradient>
+    </defs>
+    <!-- Ground -->
+    <rect x="0" y="400" width="1440" height="100" fill="url(#darkGroundG)"/>
+    <!-- Wall under construction (centre) -->
+    <rect x="400" y="220" width="640" height="180" fill="url(#darkWallG)" rx="2"/>
+    <!-- Brick lines -->
+    <line x1="400" y1="250" x2="1040" y2="250" stroke="rgba(60,40,30,.4)" stroke-width="1"/>
+    <line x1="400" y1="280" x2="1040" y2="280" stroke="rgba(60,40,30,.4)" stroke-width="1"/>
+    <line x1="400" y1="310" x2="1040" y2="310" stroke="rgba(60,40,30,.4)" stroke-width="1"/>
+    <line x1="400" y1="340" x2="1040" y2="340" stroke="rgba(60,40,30,.4)" stroke-width="1"/>
+    <line x1="400" y1="370" x2="1040" y2="370" stroke="rgba(60,40,30,.4)" stroke-width="1"/>
+    <line x1="550" y1="220" x2="550" y2="400" stroke="rgba(60,40,30,.3)" stroke-width="1"/>
+    <line x1="720" y1="220" x2="720" y2="400" stroke="rgba(60,40,30,.3)" stroke-width="1"/>
+    <line x1="890" y1="220" x2="890" y2="400" stroke="rgba(60,40,30,.3)" stroke-width="1"/>
+    <!-- Watchman on wall (left) -->
+    <circle cx="430" cy="200" r="7" fill="#6b4e14"/>
+    <path d="M423,206 Q421,222 419,238 Q423,240 427,238 Q429,224 431,238 Q435,240 439,238 Q437,222 435,206 Z" fill="#6a5a48"/>
+    <!-- Watchman spear -->
+    <line x1="440" y1="195" x2="440" y2="240" stroke="#8a8a8a" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="440,192 437,200 443,200" fill="#a0a0a0"/>
+    <!-- Watchman on wall (right) -->
+    <circle cx="1010" cy="200" r="7" fill="#6b4e14"/>
+    <path d="M1003,206 Q1001,222 999,238 Q1003,240 1007,238 Q1009,224 1011,238 Q1015,240 1019,238 Q1017,222 1015,206 Z" fill="#6a5a48"/>
+    <line x1="1020" y1="195" x2="1020" y2="240" stroke="#8a8a8a" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="1020,192 1017,200 1023,200" fill="#a0a0a0"/>
+    <!-- Worker 1 — tool in one hand, sword in other -->
+    <circle cx="550" cy="375" r="7" fill="#6b4e14"/>
+    <path d="M543,381 Q541,396 539,410 Q543,412 547,410 Q549,398 551,410 Q555,412 559,410 Q557,396 555,381 Z" fill="#7a6a50"/>
+    <!-- Trowel in right hand -->
+    <line x1="558" y1="385" x2="572" y2="378" stroke="#8a7a5a" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Sword at left side -->
+    <line x1="540" y1="382" x2="536" y2="412" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round"/>
+    <line x1="534" y1="382" x2="546" y2="382" stroke="#808080" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Worker 2 — hammer and sword -->
+    <circle cx="700" cy="372" r="7" fill="#6b4e14"/>
+    <path d="M693,378 Q691,393 689,408 Q693,410 697,408 Q699,396 701,408 Q705,410 709,408 Q707,393 705,378 Z" fill="#6a5a48"/>
+    <!-- Hammer raised -->
+    <line x1="708" y1="375" x2="720" y2="360" stroke="#5a4020" stroke-width="2.5" stroke-linecap="round"/>
+    <rect x="718" y="355" width="8" height="6" fill="#6a6a6a" rx="1"/>
+    <!-- Sword on belt -->
+    <line x1="690" y1="380" x2="686" y2="410" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round"/>
+    <!-- Worker 3 — carrying stones with sword -->
+    <circle cx="850" cy="370" r="7" fill="#6b4e14"/>
+    <path d="M843,376 Q841,391 839,406 Q843,408 847,406 Q849,394 851,406 Q855,408 859,406 Q857,391 855,376 Z" fill="#7a6a50"/>
+    <rect x="838" y="368" width="14" height="10" fill="#8a7a5a" rx="2"/>
+    <line x1="860" y1="378" x2="864" y2="408" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round"/>
+    <!-- Enemies / mockers outside wall (left side) -->
+    <!-- Sanballat -->
+    <circle cx="200" cy="375" r="7" fill="rgba(120,60,50,.7)"/>
+    <path d="M193,381 Q191,396 189,410 Q193,412 197,410 Q199,398 201,410 Q205,412 209,410 Q207,396 205,381 Z" fill="rgba(100,40,35,.6)"/>
+    <!-- Raised fist (mocking) -->
+    <path d="M208,378 Q218,368 222,360" stroke="rgba(120,60,50,.6)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <!-- Tobiah -->
+    <circle cx="260" cy="378" r="6" fill="rgba(110,55,45,.65)"/>
+    <path d="M254,383 Q252,396 250,408 Q254,410 258,408 Q260,397 262,408 Q266,410 270,408 Q268,396 266,383 Z" fill="rgba(90,35,30,.55)"/>
+    <!-- Geshem -->
+    <circle cx="150" cy="380" r="6" fill="rgba(110,55,45,.6)"/>
+    <path d="M144,385 Q142,398 140,410 Q144,412 148,410 Q150,400 152,410 Q156,412 160,410 Q158,398 156,385 Z" fill="rgba(90,35,30,.5)"/>
+    <!-- Enemies on right side -->
+    <circle cx="1250" cy="376" r="6.5" fill="rgba(120,60,50,.65)"/>
+    <path d="M1243,382 Q1241,396 1239,408 Q1243,410 1247,408 Q1249,398 1251,408 Q1255,410 1259,408 Q1257,396 1255,382 Z" fill="rgba(100,40,35,.55)"/>
+    <circle cx="1310" cy="380" r="6" fill="rgba(110,55,45,.6)"/>
+    <path d="M1304,385 Q1302,398 1300,410 Q1304,412 1308,410 Q1310,400 1312,410 Q1316,412 1320,410 Q1318,398 1316,385 Z" fill="rgba(90,35,30,.5)"/>
+    <!-- Tension lines / angry marks -->
+    <line x1="225" y1="355" x2="230" y2="350" stroke="rgba(200,80,60,.3)" stroke-width="2"/>
+    <line x1="232" y1="355" x2="237" y2="350" stroke="rgba(200,80,60,.3)" stroke-width="2"/>
+    <line x1="1270" y1="358" x2="1275" y2="353" stroke="rgba(200,80,60,.3)" stroke-width="2"/>
+    <line x1="1277" y1="358" x2="1282" y2="353" stroke="rgba(200,80,60,.3)" stroke-width="2"/>
+    <!-- Red ominous glow around enemies -->
+    <ellipse cx="200" cy="390" rx="80" ry="30" fill="rgba(160,40,30,.06)"/>
+    <ellipse cx="1280" cy="390" rx="80" ry="30" fill="rgba(160,40,30,.06)"/>
+  </svg>
+
+  <div class="scene-heading" id="opposition-heading" aria-hidden="true">
+    <h2>⚔ 仇敵的攔阻</h2>
+    <p>Opposition — Nehemiah 4</p>
+  </div>
+  <div class="scene-verse">「我們禱告我們的神，又派人看守，晝夜防備」— 尼希米記 4:9</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — READING THE LAW  宣讀律法
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-law" aria-label="宣讀律法 — Reading the Law">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="law-glow" aria-hidden="true"></div>
+
+  <!-- Ezra reading scroll on platform, crowd below -->
+  <svg id="law-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="以斯拉站在木臺上宣讀律法 — Ezra reading the Law on a wooden platform">
+    <title>宣讀律法 — Ezra reads the Law of Moses to all the people</title>
+    <defs>
+      <linearGradient id="woodG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7a5a30"/>
+        <stop offset="50%" stop-color="#5a4020"/>
+        <stop offset="100%" stop-color="#3a2a10"/>
+      </linearGradient>
+      <linearGradient id="scrollG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#e8d8b0"/>
+        <stop offset="50%" stop-color="#f0e8c8"/>
+        <stop offset="100%" stop-color="#d8c8a0"/>
+      </linearGradient>
+      <linearGradient id="gatherFloorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a3018"/>
+        <stop offset="100%" stop-color="#1a1408"/>
+      </linearGradient>
+    </defs>
+    <!-- Ground / plaza floor -->
+    <rect x="0" y="380" width="1440" height="120" fill="url(#gatherFloorG)"/>
+    <!-- Wooden platform / podium -->
+    <rect x="620" y="240" width="200" height="160" fill="url(#woodG)" rx="3"/>
+    <!-- Platform planks -->
+    <line x1="620" y1="270" x2="820" y2="270" stroke="rgba(50,35,15,.4)" stroke-width="1"/>
+    <line x1="620" y1="300" x2="820" y2="300" stroke="rgba(50,35,15,.4)" stroke-width="1"/>
+    <line x1="620" y1="330" x2="820" y2="330" stroke="rgba(50,35,15,.4)" stroke-width="1"/>
+    <line x1="620" y1="360" x2="820" y2="360" stroke="rgba(50,35,15,.4)" stroke-width="1"/>
+    <!-- Platform legs -->
+    <rect x="630" y="400" width="12" height="30" fill="#4a3218"/>
+    <rect x="798" y="400" width="12" height="30" fill="#4a3218"/>
+    <!-- Platform railing -->
+    <line x1="618" y1="240" x2="618" y2="400" stroke="#6a4a28" stroke-width="4"/>
+    <line x1="822" y1="240" x2="822" y2="400" stroke="#6a4a28" stroke-width="4"/>
+    <line x1="618" y1="250" x2="822" y2="250" stroke="#6a4a28" stroke-width="3"/>
+    <!-- Steps on right side -->
+    <rect x="822" y="340" width="40" height="60" fill="#5a4020" rx="2"/>
+    <rect x="842" y="370" width="40" height="30" fill="#4a3218" rx="2"/>
+    <!-- Ezra standing on platform -->
+    <circle cx="720" cy="200" r="12" fill="#6b4e14"/>
+    <!-- Head covering -->
+    <path d="M708,198 Q720,186 732,198 L732,206 Q720,200 708,206 Z" fill="#e8e0d0"/>
+    <!-- Beard (priestly, long) -->
+    <path d="M712,210 Q720,226 728,210 Q726,238 720,242 Q714,238 712,210 Z" fill="#8a8a8a" opacity=".8"/>
+    <!-- Robe (priestly white/cream) -->
+    <path d="M710,218 Q704,240 700,265 Q708,268 716,265 Q718,248 720,238 Q722,248 724,265 Q732,268 740,265 Q736,240 730,218 Z"
+          fill="#e0d8c0"/>
+    <!-- Scroll held open in both hands -->
+    <rect x="690" y="220" width="60" height="8" fill="url(#scrollG)" rx="4"
+          style="filter:drop-shadow(0 0 6px rgba(200,180,120,.4));"/>
+    <!-- Scroll rolls at ends -->
+    <circle cx="690" cy="224" r="5" fill="#d8c8a0" stroke="#b0a080" stroke-width="1"/>
+    <circle cx="750" cy="224" r="5" fill="#d8c8a0" stroke="#b0a080" stroke-width="1"/>
+    <!-- Text lines on scroll -->
+    <line x1="698" y1="222" x2="742" y2="222" stroke="rgba(80,60,30,.3)" stroke-width="1"/>
+    <line x1="700" y1="225" x2="740" y2="225" stroke="rgba(80,60,30,.3)" stroke-width="1"/>
+    <!-- Arms holding scroll -->
+    <path d="M710,222 Q700,218 692,222" stroke="#6b4e14" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M730,222 Q740,218 748,222" stroke="#6b4e14" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Divine glow around scroll -->
+    <ellipse cx="720" cy="224" rx="45" ry="20" fill="none"
+             stroke="rgba(200,180,100,.1)" stroke-width="6"
+             style="animation:breathe 2.5s ease-in-out infinite;"/>
+    <!-- Crowd of listening people (rows) -->
+    <!-- Row 1 (closest) -->
+    <circle cx="400" cy="400" r="5" fill="rgba(100,80,50,.65)"/>
+    <circle cx="430" cy="398" r="4.5" fill="rgba(100,80,50,.6)"/>
+    <circle cx="460" cy="402" r="5" fill="rgba(100,80,50,.65)"/>
+    <circle cx="490" cy="399" r="4.5" fill="rgba(100,80,50,.6)"/>
+    <circle cx="520" cy="401" r="5" fill="rgba(100,80,50,.65)"/>
+    <circle cx="550" cy="398" r="4.5" fill="rgba(100,80,50,.6)"/>
+    <circle cx="580" cy="403" r="5" fill="rgba(100,80,50,.65)"/>
+    <circle cx="880" cy="401" r="5" fill="rgba(100,80,50,.65)"/>
+    <circle cx="910" cy="398" r="4.5" fill="rgba(100,80,50,.6)"/>
+    <circle cx="940" cy="402" r="5" fill="rgba(100,80,50,.65)"/>
+    <circle cx="970" cy="399" r="4.5" fill="rgba(100,80,50,.6)"/>
+    <circle cx="1000" cy="401" r="5" fill="rgba(100,80,50,.65)"/>
+    <circle cx="1030" cy="398" r="4.5" fill="rgba(100,80,50,.6)"/>
+    <circle cx="1060" cy="403" r="5" fill="rgba(100,80,50,.65)"/>
+    <!-- Row 2 (further back) -->
+    <circle cx="380" cy="418" r="4" fill="rgba(90,70,45,.5)"/>
+    <circle cx="410" cy="416" r="3.5" fill="rgba(90,70,45,.45)"/>
+    <circle cx="440" cy="420" r="4" fill="rgba(90,70,45,.5)"/>
+    <circle cx="470" cy="417" r="3.5" fill="rgba(90,70,45,.45)"/>
+    <circle cx="500" cy="419" r="4" fill="rgba(90,70,45,.5)"/>
+    <circle cx="530" cy="416" r="3.5" fill="rgba(90,70,45,.45)"/>
+    <circle cx="560" cy="421" r="4" fill="rgba(90,70,45,.5)"/>
+    <circle cx="590" cy="418" r="3.5" fill="rgba(90,70,45,.45)"/>
+    <circle cx="860" cy="419" r="4" fill="rgba(90,70,45,.5)"/>
+    <circle cx="890" cy="416" r="3.5" fill="rgba(90,70,45,.45)"/>
+    <circle cx="920" cy="420" r="4" fill="rgba(90,70,45,.5)"/>
+    <circle cx="950" cy="417" r="3.5" fill="rgba(90,70,45,.45)"/>
+    <circle cx="980" cy="419" r="4" fill="rgba(90,70,45,.5)"/>
+    <circle cx="1010" cy="416" r="3.5" fill="rgba(90,70,45,.45)"/>
+    <circle cx="1040" cy="421" r="4" fill="rgba(90,70,45,.5)"/>
+    <circle cx="1070" cy="418" r="3.5" fill="rgba(90,70,45,.45)"/>
+    <!-- Row 3 (furthest) -->
+    <circle cx="360" cy="436" r="3" fill="rgba(80,60,40,.35)"/>
+    <circle cx="390" cy="434" r="2.5" fill="rgba(80,60,40,.3)"/>
+    <circle cx="420" cy="438" r="3" fill="rgba(80,60,40,.35)"/>
+    <circle cx="450" cy="435" r="2.5" fill="rgba(80,60,40,.3)"/>
+    <circle cx="480" cy="437" r="3" fill="rgba(80,60,40,.35)"/>
+    <circle cx="510" cy="434" r="2.5" fill="rgba(80,60,40,.3)"/>
+    <circle cx="540" cy="439" r="3" fill="rgba(80,60,40,.35)"/>
+    <circle cx="920" cy="437" r="3" fill="rgba(80,60,40,.35)"/>
+    <circle cx="950" cy="434" r="2.5" fill="rgba(80,60,40,.3)"/>
+    <circle cx="980" cy="438" r="3" fill="rgba(80,60,40,.35)"/>
+    <circle cx="1010" cy="435" r="2.5" fill="rgba(80,60,40,.3)"/>
+    <circle cx="1040" cy="437" r="3" fill="rgba(80,60,40,.35)"/>
+    <circle cx="1070" cy="434" r="2.5" fill="rgba(80,60,40,.3)"/>
+  </svg>
+
+  <div class="scene-heading" id="law-heading" aria-hidden="true">
+    <h2>📖 宣讀律法</h2>
+    <p>Reading the Law — Nehemiah 8</p>
+  </div>
+  <div class="scene-verse">「眾民側耳而聽…使百姓明白律法」— 尼希米記 8:3,7</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — COVENANT RENEWAL  重立聖約
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-covenant" aria-label="重立聖約 — Covenant Renewal">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="covenant-glow" aria-hidden="true"></div>
+
+  <!-- Large scroll with seal, people raising hands, altar, Nehemiah leading -->
+  <svg id="covenant-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="百姓重立聖約 — The people renew the covenant">
+    <title>重立聖約 — Nehemiah leads the people in renewing the covenant with God</title>
+    <defs>
+      <linearGradient id="covenantFloorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a2230"/>
+        <stop offset="100%" stop-color="#141018"/>
+      </linearGradient>
+      <linearGradient id="altarG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7a6a5a"/>
+        <stop offset="50%" stop-color="#5a4a3a"/>
+        <stop offset="100%" stop-color="#3a2a1a"/>
+      </linearGradient>
+      <linearGradient id="bigScrollG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#d8c8a0"/>
+        <stop offset="50%" stop-color="#f0e8d0"/>
+        <stop offset="100%" stop-color="#c8b890"/>
+      </linearGradient>
+    </defs>
+    <!-- Floor -->
+    <rect x="0" y="380" width="1440" height="120" fill="url(#covenantFloorG)"/>
+    <!-- Stone altar (centre-left) -->
+    <rect x="560" y="300" width="80" height="100" fill="url(#altarG)" rx="3"/>
+    <!-- Altar texture -->
+    <line x1="560" y1="330" x2="640" y2="330" stroke="rgba(60,50,35,.4)" stroke-width="1"/>
+    <line x1="560" y1="360" x2="640" y2="360" stroke="rgba(60,50,35,.4)" stroke-width="1"/>
+    <!-- Fire on altar -->
+    <path d="M585,298 Q590,275 600,268 Q610,275 615,298" fill="rgba(220,160,40,.5)"/>
+    <path d="M590,298 Q595,280 600,274 Q605,280 610,298" fill="rgba(255,200,60,.4)"/>
+    <path d="M595,298 Q600,285 605,298" fill="rgba(255,240,100,.3)"/>
+    <!-- Fire glow -->
+    <ellipse cx="600" cy="290" rx="30" ry="20" fill="rgba(255,180,40,.08)"/>
+    <!-- Large covenant scroll (right of altar) -->
+    <rect x="700" y="220" width="100" height="180" fill="url(#bigScrollG)" rx="5"
+          style="filter:drop-shadow(0 2px 12px rgba(200,180,120,.3));"/>
+    <!-- Scroll roll tops -->
+    <ellipse cx="750" cy="220" rx="55" ry="8" fill="#c8b890" stroke="#a09870" stroke-width="1"/>
+    <ellipse cx="750" cy="400" rx="55" ry="8" fill="#c8b890" stroke="#a09870" stroke-width="1"/>
+    <!-- Text lines on scroll -->
+    <line x1="715" y1="250" x2="785" y2="250" stroke="rgba(80,60,30,.3)" stroke-width="1.5"/>
+    <line x1="720" y1="265" x2="780" y2="265" stroke="rgba(80,60,30,.25)" stroke-width="1.5"/>
+    <line x1="715" y1="280" x2="785" y2="280" stroke="rgba(80,60,30,.3)" stroke-width="1.5"/>
+    <line x1="720" y1="295" x2="780" y2="295" stroke="rgba(80,60,30,.25)" stroke-width="1.5"/>
+    <line x1="715" y1="310" x2="785" y2="310" stroke="rgba(80,60,30,.3)" stroke-width="1.5"/>
+    <line x1="720" y1="325" x2="780" y2="325" stroke="rgba(80,60,30,.25)" stroke-width="1.5"/>
+    <line x1="715" y1="340" x2="785" y2="340" stroke="rgba(80,60,30,.3)" stroke-width="1.5"/>
+    <line x1="720" y1="355" x2="780" y2="355" stroke="rgba(80,60,30,.25)" stroke-width="1.5"/>
+    <line x1="715" y1="370" x2="785" y2="370" stroke="rgba(80,60,30,.3)" stroke-width="1.5"/>
+    <!-- Wax seal on scroll -->
+    <circle cx="750" cy="385" r="10" fill="#8b4040" stroke="#6a3030" stroke-width="1.5"
+            style="filter:drop-shadow(0 0 4px rgba(140,60,60,.4));"/>
+    <text x="750" y="389" fill="rgba(255,200,200,.5)" font-size="8" text-anchor="middle" font-weight="700">約</text>
+    <!-- Scroll glow -->
+    <rect x="695" y="215" width="110" height="190" rx="8" fill="none"
+          stroke="rgba(200,180,120,.08)" stroke-width="6"
+          style="animation:breathe 3.5s ease-in-out infinite;"/>
+    <!-- Nehemiah figure (leading ceremony, left of altar) -->
+    <circle cx="500" cy="335" r="10" fill="#6b4e14"/>
+    <path d="M490,343 Q486,368 482,395 Q490,398 498,395 Q500,378 502,395 Q510,398 518,395 Q514,368 510,343 Z"
+          fill="#5a4e40"/>
+    <!-- Nehemiah's arm raised -->
+    <path d="M510,350 Q525,335 530,320" stroke="#6b4e14" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- Nehemiah's other arm toward scroll -->
+    <path d="M490,350 Q480,360 475,368" stroke="#6b4e14" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- Sash -->
+    <line x1="492" y1="358" x2="512" y2="358" stroke="#8b7d6b" stroke-width="2"/>
+    <!-- People raising hands in oath (left group) -->
+    <circle cx="260" cy="380" r="5" fill="rgba(100,80,55,.6)"/>
+    <path d="M256,374 Q252,366 250,358" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M264,374 Q268,366 270,358" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="310" cy="382" r="4.5" fill="rgba(100,80,55,.55)"/>
+    <path d="M306,376 Q302,368 300,360" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M314,376 Q318,368 320,360" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="360" cy="378" r="5" fill="rgba(100,80,55,.6)"/>
+    <path d="M356,372 Q352,364 350,356" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M364,372 Q368,364 370,356" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="410" cy="384" r="4.5" fill="rgba(100,80,55,.55)"/>
+    <path d="M406,378 Q402,370 400,362" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M414,378 Q418,370 420,362" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- People raising hands (right group) -->
+    <circle cx="880" cy="380" r="5" fill="rgba(100,80,55,.6)"/>
+    <path d="M876,374 Q872,366 870,358" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M884,374 Q888,366 890,358" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="930" cy="382" r="4.5" fill="rgba(100,80,55,.55)"/>
+    <path d="M926,376 Q922,368 920,360" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M934,376 Q938,368 940,360" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="980" cy="378" r="5" fill="rgba(100,80,55,.6)"/>
+    <path d="M976,372 Q972,364 970,356" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M984,372 Q988,364 990,356" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="1030" cy="384" r="4.5" fill="rgba(100,80,55,.55)"/>
+    <path d="M1026,378 Q1022,370 1020,362" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M1034,378 Q1038,370 1040,362" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Second row of people -->
+    <circle cx="240" cy="400" r="4" fill="rgba(85,68,45,.45)"/>
+    <circle cx="290" cy="402" r="3.5" fill="rgba(85,68,45,.4)"/>
+    <circle cx="340" cy="398" r="4" fill="rgba(85,68,45,.45)"/>
+    <circle cx="390" cy="401" r="3.5" fill="rgba(85,68,45,.4)"/>
+    <circle cx="440" cy="399" r="4" fill="rgba(85,68,45,.45)"/>
+    <circle cx="850" cy="400" r="4" fill="rgba(85,68,45,.45)"/>
+    <circle cx="900" cy="402" r="3.5" fill="rgba(85,68,45,.4)"/>
+    <circle cx="950" cy="398" r="4" fill="rgba(85,68,45,.45)"/>
+    <circle cx="1000" cy="401" r="3.5" fill="rgba(85,68,45,.4)"/>
+    <circle cx="1050" cy="399" r="4" fill="rgba(85,68,45,.45)"/>
+    <circle cx="1100" cy="402" r="3.5" fill="rgba(85,68,45,.4)"/>
+    <!-- Third row -->
+    <circle cx="220" cy="418" r="3" fill="rgba(75,58,38,.3)"/>
+    <circle cx="270" cy="420" r="2.5" fill="rgba(75,58,38,.25)"/>
+    <circle cx="320" cy="416" r="3" fill="rgba(75,58,38,.3)"/>
+    <circle cx="370" cy="419" r="2.5" fill="rgba(75,58,38,.25)"/>
+    <circle cx="420" cy="417" r="3" fill="rgba(75,58,38,.3)"/>
+    <circle cx="830" cy="418" r="3" fill="rgba(75,58,38,.3)"/>
+    <circle cx="880" cy="420" r="2.5" fill="rgba(75,58,38,.25)"/>
+    <circle cx="930" cy="416" r="3" fill="rgba(75,58,38,.3)"/>
+    <circle cx="980" cy="419" r="2.5" fill="rgba(75,58,38,.25)"/>
+    <circle cx="1030" cy="417" r="3" fill="rgba(75,58,38,.3)"/>
+    <circle cx="1080" cy="420" r="2.5" fill="rgba(75,58,38,.25)"/>
+  </svg>
+
+  <div class="scene-heading" id="covenant-heading" aria-hidden="true">
+    <h2>✍ 重立聖約</h2>
+    <p>Covenant Renewal — Nehemiah 10</p>
+  </div>
+  <div class="scene-verse">「我們起誓遵行神藉摩西所傳的律法」— 尼希米記 10:29</div>
+</section>
+
+</body>
+</html>
