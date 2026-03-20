@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>撒母耳記下 · 2 Samuel</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #04040e;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+    @keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+    @keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.31), 564px 126px rgba(255,255,255,.41),
+        210px 347px rgba(255,255,255,.67), 1117px 45px rgba(255,255,255,.6),
+        66px 16px rgba(255,255,255,.35),  477px 259px rgba(255,255,255,.6),
+        1150px 102px rgba(255,255,255,.66), 1437px 280px rgba(255,255,255,.51),
+        920px 302px rgba(255,255,255,.44), 14px 389px rgba(255,255,255,.7),
+        1430px 217px rgba(255,255,255,.47), 319px 111px rgba(255,255,255,.78),
+        690px 53px rgba(255,255,255,.35),  199px 184px rgba(255,255,255,.72),
+        1237px 136px rgba(255,255,255,.7), 941px 275px rgba(255,255,255,.36),
+        776px 41px rgba(255,255,255,.58),  1288px 317px rgba(255,255,255,.74),
+        741px 296px rgba(255,255,255,.4),  143px 24px rgba(255,255,255,.63),
+        593px 41px rgba(255,255,255,.73),  207px 195px rgba(255,255,255,.44),
+        1302px 428px rgba(255,255,255,.48), 759px 182px rgba(255,255,255,.4),
+        547px 360px rgba(255,255,255,.77), 1328px 37px rgba(255,255,255,.6),
+        351px 274px rgba(255,255,255,.66), 335px 237px rgba(255,255,255,.49),
+        1311px 353px rgba(255,255,255,.58), 1403px 167px rgba(255,255,255,.72),
+        115px 118px rgba(255,255,255,.71), 647px 206px rgba(255,255,255,.43),
+        433px 468px rgba(255,255,255,.77), 645px 109px rgba(255,255,255,.63),
+        811px 453px rgba(255,255,255,.76), 940px 74px rgba(255,255,255,.43),
+        506px 382px rgba(255,255,255,.58), 539px 383px rgba(255,255,255,.59),
+        1196px 205px rgba(255,255,255,.48), 284px 261px rgba(255,255,255,.55),
+        97px 441px rgba(255,255,255,.35),  1286px 82px rgba(255,255,255,.7),
+        865px 306px rgba(255,255,255,.33), 782px 306px rgba(255,255,255,.8),
+        1084px 129px rgba(255,255,255,.79), 24px 349px rgba(255,255,255,.66),
+        1397px 454px rgba(255,255,255,.57), 547px 394px rgba(255,255,255,.62),
+        229px 151px rgba(255,255,255,.52), 930px 2px rgba(255,255,255,.78),
+        540px 498px rgba(255,255,255,.55), 366px 260px rgba(255,255,255,.76),
+        1281px 153px rgba(255,255,255,.72), 1040px 312px rgba(255,255,255,.4),
+        766px 391px rgba(255,255,255,.38), 1087px 471px rgba(255,255,255,.3),
+        664px 251px rgba(255,255,255,.31), 744px 450px rgba(255,255,255,.79),
+        630px 123px rgba(255,255,255,.33), 1162px 485px rgba(255,255,255,.34),
+        996px 418px rgba(255,255,255,.33), 1091px 393px rgba(255,255,255,.36),
+        1352px 244px rgba(255,255,255,.77), 339px 136px rgba(255,255,255,.56),
+        1243px 217px rgba(255,255,255,.78), 1105px 387px rgba(255,255,255,.66),
+        412px 366px rgba(255,255,255,.46), 1376px 333px rgba(255,255,255,.49),
+        1060px 232px rgba(255,255,255,.36), 461px 33px rgba(255,255,255,.47),
+        1205px 284px rgba(255,255,255,.42), 452px 4px rgba(255,255,255,.34),
+        1293px 31px rgba(255,255,255,.41), 65px 441px rgba(255,255,255,.47),
+        1053px 122px rgba(255,255,255,.44), 995px 110px rgba(255,255,255,.57),
+        1170px 296px rgba(255,255,255,.54), 969px 414px rgba(255,255,255,.5),
+        194px 50px rgba(255,255,255,.63),  726px 217px rgba(255,255,255,.51);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.9),  1324px 51px rgba(255,255,255,.72),
+        695px 410px rgba(255,255,255,.96), 510px 99px rgba(255,255,255,.76),
+        919px 72px rgba(255,255,255,.83),  571px 237px rgba(255,255,255,.77),
+        155px 227px rgba(255,255,255,.94), 1128px 51px rgba(255,255,255,.72),
+        1108px 429px rgba(255,255,255,.7), 192px 475px rgba(255,255,255,.93),
+        485px 86px rgba(255,255,255,.82),  986px 110px rgba(255,255,255,.96),
+        121px 85px rgba(255,255,255,.81),  800px 136px rgba(255,255,255,.98),
+        932px 147px rgba(255,255,255,.83), 1139px 339px rgba(255,255,255,.92),
+        318px 98px rgba(255,255,255,.79),  120px 297px rgba(255,255,255,.92),
+        125px 383px rgba(255,255,255,.79), 103px 300px rgba(255,255,255,.84),
+        1088px 81px rgba(255,255,255,.72), 1041px 42px rgba(255,255,255,.96),
+        141px 305px rgba(255,255,255,.72), 482px 207px rgba(255,255,255,.74),
+        1167px 127px rgba(255,255,255,.87), 82px 318px rgba(255,255,255,.72),
+        1347px 299px rgba(255,255,255,.87), 648px 479px rgba(255,255,255,.78),
+        1372px 367px rgba(255,255,255,.79), 544px 203px rgba(255,255,255,.74);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,235,255,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(184,134,11,.15);
+      border-color: rgba(218,165,32,.5);
+      color: #daa520;
+      box-shadow: 0 0 20px rgba(218,165,32,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #0a0412 0%, #1a0a08 30%, #2d1400 65%, #3d1e00 100%);
+    }
+    #intro-crown-glow {
+      position: absolute; top: 16%; left: 50%; transform: translateX(-50%);
+      width: clamp(80px,12vw,150px); height: clamp(80px,12vw,150px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fff8e0, #daa520 40%, #b8860b 75%, #8b6508);
+      box-shadow: 0 0 55px rgba(218,165,32,.7), 0 0 110px rgba(184,134,11,.3);
+      z-index: 4;
+      animation: crownGlow 4s ease-in-out infinite;
+    }
+    @keyframes crownGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(218,165,32,.7), 0 0 110px rgba(184,134,11,.3); }
+      50%      { box-shadow: 0 0 80px rgba(218,165,32,.95), 0 0 160px rgba(184,134,11,.5); }
+    }
+    #intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#daa520 0%,#fff4b0 45%,#b8860b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(218,165,32,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(184,134,11,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+    #intro-throne {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(60px,8vw,110px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — DAVID BECOMES KING  大衛登基
+    ══════════════════════════════════════════════ */
+    #scene-coronation {
+      background: linear-gradient(180deg, #08040e 0%, #1a0d08 55%, #2a1500 100%);
+    }
+    #coronation-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#3a2200 0%,#201000 55%,#0c0600 100%);
+      z-index: 5;
+    }
+    #coronation-ground::before {
+      content: '';
+      position: absolute; top: -18%; left: 0; width: 100%; height: 30%;
+      background: radial-gradient(ellipse 30% 40% at 25% 80%, #4a2e08 0%, transparent 70%),
+                  radial-gradient(ellipse 25% 35% at 65% 70%, #3d2600 0%, transparent 65%),
+                  radial-gradient(ellipse 20% 30% at 88% 90%, #4a2e08 0%, transparent 60%);
+    }
+    #coronation-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 36vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(218,165,32,.35) 0%, rgba(184,134,11,.12) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 2s ease-in-out infinite;
+    }
+    #david-throne-svg {
+      position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(80px,12vw,160px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    .crowd-person {
+      position: absolute; bottom: 26%; z-index: 7;
+      border-radius: 38% 38% 0 0;
+      background: rgba(40,20,5,.85);
+    }
+    .crowd-person::before {
+      content: ''; position: absolute; top: -38%; left: 50%; transform: translateX(-50%);
+      width: 58%; height: 42%; background: rgba(40,20,5,.85); border-radius: 50%;
+    }
+    #coronation-heading h2 {
+      color: #daa520;
+      text-shadow: 0 0 22px rgba(218,165,32,.7);
+    }
+    #coronation-heading p { color: rgba(218,165,32,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — ARK TO JERUSALEM  約櫃進耶路撒冷
+    ══════════════════════════════════════════════ */
+    #scene-ark {
+      background: linear-gradient(180deg, #0a0614 0%, #14082a 45%, #1e0c00 100%);
+    }
+    #ark-divine-light {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 25%, rgba(218,165,32,.18) 0%, rgba(184,134,11,.06) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+    #ark-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 28%;
+      background: linear-gradient(180deg,#3a2600 0%,#1a1000 55%,#0a0500 100%);
+      z-index: 5;
+    }
+    #ark-svg {
+      position: absolute; bottom: 26%; left: 50%; transform: translateX(-50%);
+      z-index: 10; width: clamp(100px,16vw,220px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    #david-dancing {
+      position: absolute; bottom: 26%; left: 35%; z-index: 9;
+      width: clamp(40px,5vw,70px);
+      animation: danceSway 1.2s ease-in-out infinite;
+    }
+    @keyframes danceSway {
+      0%,100% { transform: rotate(-6deg) translateY(0);   }
+      25%      { transform: rotate(4deg)  translateY(-8px); }
+      50%      { transform: rotate(-4deg) translateY(-2px); }
+      75%      { transform: rotate(6deg)  translateY(-10px);}
+    }
+    #ark-heading h2 {
+      background: linear-gradient(120deg,#daa520 0%,#fff4b0 50%,#b8860b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #ark-heading p { color: rgba(218,165,32,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — BATHSHEBA  拔示巴事件
+    ══════════════════════════════════════════════ */
+    #scene-bathsheba {
+      background: linear-gradient(180deg, #08040a 0%, #0e0812 55%, #1a0808 100%);
+    }
+    #bathsheba-palace { position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 3; }
+    #bathsheba-moon {
+      position: absolute; top: 10%; right: 15%;
+      width: clamp(40px,5vw,70px); height: clamp(40px,5vw,70px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff8f0, #e0d8c0 60%, #c0b898);
+      box-shadow: 0 0 30px rgba(255,250,230,.25), 0 0 80px rgba(255,245,200,.1);
+      z-index: 4;
+      animation: breathe 5s ease-in-out infinite;
+    }
+    #nathan-prophet {
+      position: absolute; bottom: 34%; left: 38%; z-index: 9;
+      width: clamp(35px,4.5vw,60px);
+      animation: gentleSway 4s ease-in-out infinite;
+    }
+    #david-rooftop {
+      position: absolute; bottom: 42%; right: 36%; z-index: 9;
+      width: clamp(30px,4vw,55px);
+    }
+    #guilt-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 50vh;
+      background: radial-gradient(ellipse at 50% 60%, rgba(139,0,0,.16) 0%, rgba(139,0,0,.06) 45%, transparent 70%);
+      z-index: 4; pointer-events: none;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #bathsheba-heading h2 {
+      background: linear-gradient(120deg,#daa520 0%,#fff4b0 30%,#8b0000 70%,#cc2222 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    #bathsheba-heading p { color: rgba(255,200,130,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — ABSALOM'S REBELLION  押沙龍叛亂
+    ══════════════════════════════════════════════ */
+    #scene-absalom {
+      background: linear-gradient(180deg, #06020e 0%, #0c0818 35%, #1a0a08 70%, #0e0a06 100%);
+    }
+    #absalom-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 4; }
+    #absalom-red-sky {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(250px,50vw,600px); height: 35vh;
+      background: radial-gradient(ellipse at 50% 40%, rgba(139,0,0,.2) 0%, rgba(139,0,0,.06) 50%, transparent 70%);
+      z-index: 2; pointer-events: none;
+      animation: breathe 5s ease-in-out infinite;
+    }
+    #absalom-rider {
+      position: absolute; bottom: 38%; right: 28%; z-index: 9;
+      width: clamp(55px,7vw,100px);
+      animation: gentleSway 4s ease-in-out infinite;
+    }
+    #david-weeping {
+      position: absolute; bottom: 36%; left: 22%; z-index: 9;
+      width: clamp(35px,5vw,62px);
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #absalom-heading h2 {
+      background: linear-gradient(120deg,#8b0000 0%,#cc4444 50%,#daa520 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #absalom-heading p { color: rgba(200,160,130,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — GOD'S COVENANT  神的約
+    ══════════════════════════════════════════════ */
+    #scene-covenant {
+      background: linear-gradient(180deg, #04020a 0%, #0c0620 50%, #14102e 100%);
+    }
+    #covenant-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 3; }
+    #covenant-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(30px,5vw,70px); height: 55%;
+      background: linear-gradient(180deg,rgba(255,255,220,0) 0%,rgba(218,165,32,.5) 25%,rgba(218,165,32,.78) 65%,transparent 100%);
+      z-index: 6; filter: blur(12px);
+      animation: divinePulse 2.5s ease-in-out infinite;
+    }
+    @keyframes divinePulse {
+      0%,100% { opacity: .5; height: 44%; }
+      50%      { opacity: 1;  height: 54%; }
+    }
+    #covenant-glow-wide {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 15%, rgba(218,165,32,.2) 0%, rgba(184,134,11,.06) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3s ease-in-out infinite;
+    }
+    #covenant-cloud {
+      position: absolute; top: 6%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(140px,28vw,360px);
+      animation: cloudGlow 4.5s ease-in-out infinite;
+    }
+    @keyframes cloudGlow {
+      0%,100% { opacity: .75; transform: translateX(-50%) scale(1);    }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.05); }
+    }
+    #david-covenant {
+      position: absolute; bottom: 38%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(40px,5vw,68px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+    #covenant-heading h2 {
+      background: linear-gradient(120deg,#daa520 0%,#fff4e0 50%,#b8860b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    #covenant-heading p { color: rgba(218,190,140,.5); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"      aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-coronation" aria-label="大衛登基"></a>
+  <a class="nav-dot" href="#scene-ark"        aria-label="約櫃進耶路撒冷"></a>
+  <a class="nav-dot" href="#scene-bathsheba"  aria-label="拔示巴事件"></a>
+  <a class="nav-dot" href="#scene-absalom"    aria-label="押沙龍叛亂"></a>
+  <a class="nav-dot" href="#scene-covenant"   aria-label="神的約"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="撒母耳記下 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="intro-crown-glow" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>撒母耳記下</h1>
+    <p>Book of 2 Samuel</p>
+    <span class="sub">王國 · 耶路撒冷 · 約 · 審判 · 恩典</span>
+  </div>
+
+  <!-- Jerusalem skyline at dusk -->
+  <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3d1e00"/>
+        <stop offset="50%" stop-color="#2a1200"/>
+        <stop offset="100%" stop-color="#0c0600"/>
+      </linearGradient>
+      <linearGradient id="cityG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a3008"/>
+        <stop offset="100%" stop-color="#1a0e00"/>
+      </linearGradient>
+      <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5a4010"/>
+        <stop offset="100%" stop-color="#2a1800"/>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="1440" height="420" fill="url(#skyG)"/>
+    <!-- Distant hills -->
+    <path d="M0 340 Q180 280 360 310 Q540 260 720 290 Q900 250 1080 300 Q1260 270 1440 310 L1440 420 L0 420 Z"
+          fill="#1a0e06" opacity=".6"/>
+    <!-- City walls -->
+    <path d="M300 350 L300 260 L340 260 L340 240 L380 240 L380 260 L500 260 L500 230 L540 230 L540 260 L660 260 L660 250 L700 220 L740 250 L740 260 L900 260 L900 240 L940 240 L940 260 L1020 260 L1020 250 L1060 250 L1060 260 L1140 260 L1140 350"
+          fill="url(#wallG)" opacity=".8"/>
+    <!-- Tower/palace silhouette -->
+    <rect x="680" y="200" width="50" height="80" fill="#3a2008"/>
+    <polygon points="680,200 705,170 730,200" fill="#4a2e10"/>
+    <!-- City buildings -->
+    <rect x="420" y="260" width="60" height="90" fill="#2a1808" opacity=".7"/>
+    <rect x="520" y="250" width="45" height="100" fill="#2a1808" opacity=".6"/>
+    <rect x="800" y="255" width="55" height="95" fill="#2a1808" opacity=".7"/>
+    <!-- Ground -->
+    <rect x="0" y="350" width="1440" height="70" fill="#1a0e00"/>
+    <!-- Golden sunset glow -->
+    <ellipse cx="720" cy="260" rx="500" ry="60" fill="rgba(218,165,32,.1)"/>
+  </svg>
+
+  <!-- Crown and throne silhouette -->
+  <svg id="intro-throne" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="王座與冠冕 — Crown and throne">
+    <title>王座與冠冕 — Royal throne and crown of David</title>
+    <defs>
+      <linearGradient id="throneG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#b8860b"/>
+        <stop offset="100%" stop-color="#6b4e08"/>
+      </linearGradient>
+      <linearGradient id="crownIntroG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffd700"/>
+        <stop offset="50%" stop-color="#daa520"/>
+        <stop offset="100%" stop-color="#b8860b"/>
+      </linearGradient>
+    </defs>
+    <!-- Throne base -->
+    <rect x="20" y="70" width="60" height="50" rx="3" fill="url(#throneG)"/>
+    <!-- Throne back -->
+    <rect x="25" y="40" width="50" height="35" rx="4" fill="url(#throneG)"/>
+    <!-- Throne back top arch -->
+    <path d="M25,40 Q50,20 75,40" fill="#b8860b" stroke="#daa520" stroke-width="1.5"/>
+    <!-- Armrests -->
+    <rect x="15" y="75" width="10" height="25" rx="3" fill="#8b6508"/>
+    <rect x="75" y="75" width="10" height="25" rx="3" fill="#8b6508"/>
+    <!-- Crown floating above throne -->
+    <polygon points="35,12 40,2 45,10 50,0 55,10 60,2 65,12"
+             fill="url(#crownIntroG)" stroke="#ffd700" stroke-width=".8"/>
+    <rect x="35" y="12" width="30" height="8" rx="1" fill="url(#crownIntroG)"/>
+    <!-- Jewels -->
+    <circle cx="42" cy="16" r="2" fill="#8b0000"/>
+    <circle cx="50" cy="15" r="2.5" fill="#8b0000"/>
+    <circle cx="58" cy="16" r="2" fill="#8b0000"/>
+    <!-- Golden glow around crown -->
+    <ellipse cx="50" cy="12" rx="22" ry="14" fill="none"
+             stroke="rgba(218,165,32,.2)" stroke-width="6"
+             style="animation:breathe 3s ease-in-out infinite;"/>
+  </svg>
+
+  <div class="scroll-hint">↓ 向下滾動探索 · Scroll to explore</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — DAVID BECOMES KING  大衛登基
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-coronation" aria-label="大衛登基 — David Becomes King">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Ground -->
+  <div id="coronation-ground" aria-hidden="true"></div>
+
+  <!-- Golden coronation glow -->
+  <div id="coronation-glow" aria-hidden="true"></div>
+
+  <!-- David on throne with crown -->
+  <svg id="david-throne-svg" viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="大衛受膏為王 — David crowned king over Israel">
+    <title>大衛登基 — David crowned king in Hebron</title>
+    <defs>
+      <linearGradient id="throneG2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#b8860b"/>
+        <stop offset="100%" stop-color="#6b4e08"/>
+      </linearGradient>
+      <linearGradient id="robeKingG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8b0000"/>
+        <stop offset="60%" stop-color="#5a0000"/>
+        <stop offset="100%" stop-color="#3a0000"/>
+      </linearGradient>
+      <radialGradient id="crownGlowG" cx="50%" cy="50%">
+        <stop offset="0%" stop-color="rgba(255,215,0,.4)"/>
+        <stop offset="100%" stop-color="rgba(255,215,0,0)"/>
+      </radialGradient>
+    </defs>
+    <!-- Throne -->
+    <rect x="30" y="100" width="80" height="65" rx="4" fill="url(#throneG2)"/>
+    <rect x="38" y="68" width="64" height="40" rx="5" fill="url(#throneG2)"/>
+    <path d="M38,68 Q70,48 102,68" fill="#b8860b" stroke="#daa520" stroke-width="1.5"/>
+    <!-- Armrests -->
+    <rect x="22" y="108" width="14" height="32" rx="4" fill="#8b6508"/>
+    <rect x="104" y="108" width="14" height="32" rx="4" fill="#8b6508"/>
+    <!-- David seated — Head -->
+    <circle cx="70" cy="52" r="14" fill="#7a5a18"/>
+    <!-- Crown on David's head -->
+    <polygon points="56,42 60,30 64,38 70,26 76,38 80,30 84,42"
+             fill="#ffd700" stroke="#daa520" stroke-width=".6"/>
+    <rect x="56" y="42" width="28" height="6" rx="1" fill="#daa520"/>
+    <circle cx="63" cy="45" r="1.8" fill="#8b0000"/>
+    <circle cx="70" cy="44" r="2" fill="#8b0000"/>
+    <circle cx="77" cy="45" r="1.8" fill="#8b0000"/>
+    <!-- Crown glow -->
+    <ellipse cx="70" cy="38" rx="20" ry="14" fill="url(#crownGlowG)"/>
+    <!-- Beard -->
+    <path d="M62,60 Q70,72 78,60 Q76,80 70,84 Q64,80 62,60 Z" fill="#5a4010" opacity=".8"/>
+    <!-- Royal robe -->
+    <path d="M56,65 Q48,90 44,120 Q52,125 60,120 Q63,100 70,90 Q77,100 80,120 Q88,125 96,120 Q92,90 84,65 Z"
+          fill="url(#robeKingG)"/>
+    <!-- Gold trim on robe -->
+    <path d="M56,65 Q70,75 84,65" stroke="#daa520" stroke-width="2" fill="none"/>
+    <!-- Scepter in right hand -->
+    <line x1="90" y1="72" x2="108" y2="52" stroke="#daa520" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="108" cy="50" r="4" fill="#ffd700"/>
+    <!-- Left arm on armrest -->
+    <path d="M56,72 Q42,85 30,100" stroke="#7a5a18" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Feet -->
+    <ellipse cx="60" cy="128" rx="8" ry="3.5" fill="#3d2200"/>
+    <ellipse cx="80" cy="128" rx="8" ry="3.5" fill="#3d2200"/>
+  </svg>
+
+  <!-- Cheering crowd -->
+  <div class="crowd-person" style="left:18%; width:clamp(8px,1.2vw,14px); height:clamp(18px,2.4vw,30px);"></div>
+  <div class="crowd-person" style="left:22%; width:clamp(7px,1vw,12px);   height:clamp(16px,2.1vw,26px);"></div>
+  <div class="crowd-person" style="left:26%; width:clamp(8px,1.2vw,14px); height:clamp(20px,2.6vw,32px);"></div>
+  <div class="crowd-person" style="left:30%; width:clamp(7px,1vw,12px);   height:clamp(17px,2.2vw,28px);"></div>
+  <div class="crowd-person" style="left:66%; width:clamp(8px,1.2vw,14px); height:clamp(19px,2.5vw,31px);"></div>
+  <div class="crowd-person" style="left:70%; width:clamp(7px,1vw,12px);   height:clamp(16px,2.1vw,26px);"></div>
+  <div class="crowd-person" style="left:74%; width:clamp(8px,1.2vw,14px); height:clamp(21px,2.8vw,34px);"></div>
+  <div class="crowd-person" style="left:78%; width:clamp(7px,1vw,12px);   height:clamp(17px,2.2vw,28px);"></div>
+  <div class="crowd-person" style="left:82%; width:clamp(8px,1.2vw,14px); height:clamp(18px,2.4vw,30px);"></div>
+  <div class="crowd-person" style="left:20%; width:clamp(6px,.9vw,11px);  height:clamp(14px,1.9vw,24px); bottom:23%;"></div>
+  <div class="crowd-person" style="left:24%; width:clamp(6px,.9vw,11px);  height:clamp(15px,2vw,25px);   bottom:23%;"></div>
+  <div class="crowd-person" style="left:68%; width:clamp(6px,.9vw,11px);  height:clamp(13px,1.8vw,22px); bottom:23%;"></div>
+  <div class="crowd-person" style="left:72%; width:clamp(6px,.9vw,11px);  height:clamp(15px,2vw,25px);   bottom:23%;"></div>
+  <div class="crowd-person" style="left:76%; width:clamp(6px,.9vw,11px);  height:clamp(14px,1.9vw,24px); bottom:23%;"></div>
+  <div class="crowd-person" style="left:80%; width:clamp(6px,.9vw,11px);  height:clamp(13px,1.8vw,22px); bottom:23%;"></div>
+
+  <div class="scene-heading" id="coronation-heading" aria-hidden="true">
+    <h2>👑 大衛登基</h2>
+    <p>David Becomes King — 2 Samuel 2, 5</p>
+  </div>
+  <div class="scene-verse">「以色列眾支派來到希伯崙見大衛」— 撒母耳記下 5:1</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — ARK TO JERUSALEM  約櫃進耶路撒冷
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-ark" aria-label="約櫃進耶路撒冷 — The Ark Enters Jerusalem">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Divine golden light -->
+  <div id="ark-divine-light" aria-hidden="true"></div>
+
+  <!-- Ground -->
+  <div id="ark-ground" aria-hidden="true"></div>
+
+  <!-- Ark of the Covenant -->
+  <svg id="ark-svg" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="約櫃 — The Ark of the Covenant">
+    <title>約櫃進耶路撒冷 — The Ark entering Jerusalem</title>
+    <defs>
+      <linearGradient id="arkGoldG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffd700"/>
+        <stop offset="50%" stop-color="#daa520"/>
+        <stop offset="100%" stop-color="#b8860b"/>
+      </linearGradient>
+      <radialGradient id="arkGlowG" cx="50%" cy="40%">
+        <stop offset="0%" stop-color="rgba(255,215,0,.5)"/>
+        <stop offset="60%" stop-color="rgba(218,165,32,.15)"/>
+        <stop offset="100%" stop-color="rgba(218,165,32,0)"/>
+      </radialGradient>
+    </defs>
+    <!-- Divine glow behind ark -->
+    <ellipse cx="100" cy="70" rx="85" ry="65" fill="url(#arkGlowG)"/>
+    <!-- Ark body -->
+    <rect x="40" y="70" width="120" height="60" rx="3" fill="url(#arkGoldG)"
+          style="filter:drop-shadow(0 4px 18px rgba(218,165,32,.6));"/>
+    <!-- Gold band around ark -->
+    <rect x="38" y="68" width="124" height="6" rx="2" fill="#ffd700"/>
+    <rect x="38" y="126" width="124" height="6" rx="2" fill="#ffd700"/>
+    <!-- Carrying poles -->
+    <line x1="20" y1="85" x2="180" y2="85" stroke="#8b6508" stroke-width="5" stroke-linecap="round"/>
+    <line x1="20" y1="115" x2="180" y2="115" stroke="#8b6508" stroke-width="5" stroke-linecap="round"/>
+    <!-- Mercy seat / lid -->
+    <rect x="35" y="62" width="130" height="10" rx="3" fill="#ffd700"/>
+    <!-- Cherubim wings (simplified) -->
+    <path d="M55,62 Q40,30 65,40 Q80,48 85,62" fill="#daa520" opacity=".8"/>
+    <path d="M145,62 Q160,30 135,40 Q120,48 115,62" fill="#daa520" opacity=".8"/>
+    <!-- Cherubim bodies -->
+    <ellipse cx="70" cy="55" rx="8" ry="10" fill="#daa520"/>
+    <ellipse cx="130" cy="55" rx="8" ry="10" fill="#daa520"/>
+    <!-- Cherubim heads -->
+    <circle cx="70" cy="45" r="6" fill="#e8c840"/>
+    <circle cx="130" cy="45" r="6" fill="#e8c840"/>
+    <!-- Decorative pattern on ark -->
+    <line x1="55" y1="90" x2="145" y2="90" stroke="rgba(255,255,200,.3)" stroke-width="1"/>
+    <line x1="55" y1="100" x2="145" y2="100" stroke="rgba(255,255,200,.3)" stroke-width="1"/>
+    <line x1="55" y1="110" x2="145" y2="110" stroke="rgba(255,255,200,.3)" stroke-width="1"/>
+  </svg>
+
+  <!-- David dancing joyfully -->
+  <svg id="david-dancing" viewBox="0 0 60 110" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="大衛在約櫃前跳舞 — David dancing before the Ark">
+    <title>大衛極力跳舞 — David dancing with all his might</title>
+    <!-- Head -->
+    <circle cx="30" cy="14" r="11" fill="#7a5a18"/>
+    <!-- Crown (smaller, festive) -->
+    <polygon points="22,6 25,0 28,5 30,-2 32,5 35,0 38,6"
+             fill="#ffd700" stroke="#daa520" stroke-width=".5"/>
+    <rect x="22" y="6" width="16" height="4" rx="1" fill="#daa520"/>
+    <!-- Joyful face -->
+    <ellipse cx="26" cy="13" rx="1.5" ry="1" fill="#3d2200"/>
+    <ellipse cx="34" cy="13" rx="1.5" ry="1" fill="#3d2200"/>
+    <path d="M25,18 Q30,23 35,18" stroke="#3d2200" stroke-width="1.2" fill="none"/>
+    <!-- Ephod (linen garment) -->
+    <path d="M20,28 Q16,50 14,82 Q20,86 26,82 Q28,65 30,52 Q32,65 34,82 Q40,86 46,82 Q44,50 40,28 Z"
+          fill="#e8e0c8"/>
+    <!-- Ephod belt -->
+    <rect x="18" y="45" width="24" height="4" rx="1" fill="#daa520"/>
+    <!-- Right arm raised high (dancing) -->
+    <path d="M40,32 Q54,14 56,4" stroke="#7a5a18" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Left arm raised (dancing) -->
+    <path d="M20,32 Q8,18 4,8" stroke="#7a5a18" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Right leg (dynamic step) -->
+    <path d="M34,80 Q40,90 44,98" stroke="#7a5a18" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Left leg (kicked up) -->
+    <path d="M26,80 Q18,88 14,96" stroke="#7a5a18" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Feet -->
+    <ellipse cx="44" cy="100" rx="6" ry="3" fill="#3d2200"/>
+    <ellipse cx="14" cy="98" rx="6" ry="3" fill="#3d2200"/>
+    <!-- Joy lines / motion arcs -->
+    <path d="M52,8 Q58,4 56,12" stroke="rgba(218,165,32,.4)" stroke-width="1.5" fill="none"/>
+    <path d="M0,12 Q-4,6 4,4" stroke="rgba(218,165,32,.4)" stroke-width="1.5" fill="none"/>
+  </svg>
+
+  <div class="scene-heading" id="ark-heading" aria-hidden="true">
+    <h2>📦 約櫃進耶路撒冷</h2>
+    <p>The Ark Enters Jerusalem — 2 Samuel 6</p>
+  </div>
+  <div class="scene-verse">「大衛穿著細麻布的以弗得，在耶和華面前極力跳舞」— 撒母耳記下 6:14</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — BATHSHEBA  拔示巴事件
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-bathsheba" aria-label="拔示巴事件 — Bathsheba and Nathan's Confrontation">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Moon -->
+  <div id="bathsheba-moon" aria-hidden="true"></div>
+
+  <!-- Guilt / crimson glow -->
+  <div id="guilt-glow" aria-hidden="true"></div>
+
+  <!-- Palace rooftop at night -->
+  <svg id="bathsheba-palace" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="宮殿夜景 — Palace at night, Nathan confronting David">
+    <title>宮殿屋頂與先知拿單 — Palace rooftop with prophet Nathan's confrontation</title>
+    <defs>
+      <linearGradient id="palaceG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a1808"/>
+        <stop offset="100%" stop-color="#0c0600"/>
+      </linearGradient>
+      <linearGradient id="palaceDarkG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a0e06"/>
+        <stop offset="100%" stop-color="#080400"/>
+      </linearGradient>
+      <linearGradient id="bloodRedG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(139,0,0,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </linearGradient>
+    </defs>
+    <!-- Night sky gradient at bottom -->
+    <rect x="0" y="380" width="1440" height="120" fill="url(#palaceDarkG)"/>
+    <!-- Palace main structure -->
+    <rect x="200" y="220" width="1040" height="280" fill="url(#palaceG)"/>
+    <!-- Palace rooftop / parapet -->
+    <rect x="180" y="210" width="1080" height="18" rx="2" fill="#3a2210"/>
+    <!-- Crenellations -->
+    <rect x="200" y="196" width="30" height="18" fill="#3a2210"/>
+    <rect x="260" y="196" width="30" height="18" fill="#3a2210"/>
+    <rect x="320" y="196" width="30" height="18" fill="#3a2210"/>
+    <rect x="380" y="196" width="30" height="18" fill="#3a2210"/>
+    <rect x="440" y="196" width="30" height="18" fill="#3a2210"/>
+    <rect x="960" y="196" width="30" height="18" fill="#3a2210"/>
+    <rect x="1020" y="196" width="30" height="18" fill="#3a2210"/>
+    <rect x="1080" y="196" width="30" height="18" fill="#3a2210"/>
+    <rect x="1140" y="196" width="30" height="18" fill="#3a2210"/>
+    <!-- Palace columns -->
+    <rect x="340" y="240" width="16" height="180" fill="#2a1a0a"/>
+    <rect x="520" y="240" width="16" height="180" fill="#2a1a0a"/>
+    <rect x="700" y="240" width="16" height="180" fill="#2a1a0a"/>
+    <rect x="880" y="240" width="16" height="180" fill="#2a1a0a"/>
+    <rect x="1060" y="240" width="16" height="180" fill="#2a1a0a"/>
+    <!-- Palace tower (central) -->
+    <rect x="640" y="140" width="160" height="80" fill="#2a1808"/>
+    <polygon points="640,140 720,100 800,140" fill="#3a2210"/>
+    <!-- Window openings with faint warm light -->
+    <rect x="400" y="280" width="35" height="50" rx="2" fill="rgba(180,100,20,.08)"/>
+    <rect x="570" y="280" width="35" height="50" rx="2" fill="rgba(180,100,20,.08)"/>
+    <rect x="830" y="280" width="35" height="50" rx="2" fill="rgba(180,100,20,.08)"/>
+    <rect x="1000" y="280" width="35" height="50" rx="2" fill="rgba(180,100,20,.08)"/>
+    <!-- Tower window -->
+    <rect x="690" y="155" width="20" height="30" rx="2" fill="rgba(180,100,20,.12)"/>
+    <!-- Red shame overlay on palace -->
+    <rect x="200" y="210" width="1040" height="290" fill="url(#bloodRedG)" opacity=".4"/>
+    <!-- Ground/courtyard -->
+    <rect x="0" y="420" width="1440" height="80" fill="#0a0500"/>
+  </svg>
+
+  <!-- Nathan the prophet pointing -->
+  <svg id="nathan-prophet" viewBox="0 0 60 110" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="先知拿單指控大衛 — Prophet Nathan confronting David">
+    <title>先知拿單 — Prophet Nathan pointing accusingly</title>
+    <!-- Head -->
+    <circle cx="30" cy="14" r="11" fill="#6b4e14"/>
+    <!-- Head covering -->
+    <path d="M19,13 Q30,2 41,13 L41,20 Q30,15 19,20 Z" fill="#4a3200"/>
+    <!-- Stern face -->
+    <ellipse cx="26" cy="13" rx="1.2" ry="1" fill="#2a1800"/>
+    <ellipse cx="34" cy="13" rx="1.2" ry="1" fill="#2a1800"/>
+    <path d="M25,19 L35,19" stroke="#2a1800" stroke-width="1" fill="none"/>
+    <!-- Beard -->
+    <path d="M23,22 Q30,34 37,22 Q34,42 30,45 Q26,42 23,22 Z" fill="#5a4010" opacity=".85"/>
+    <!-- Prophet's robe (rough, dark) -->
+    <path d="M20,28 Q15,55 12,85 Q18,88 24,85 Q27,68 30,55 Q33,68 36,85 Q42,88 48,85 Q45,55 40,28 Z"
+          fill="#4a3a28"/>
+    <!-- Right arm extended, pointing accusingly -->
+    <path d="M40,34 Q54,24 60,18" stroke="#6b4e14" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Pointing finger -->
+    <line x1="60" y1="18" x2="65" y2="14" stroke="#6b4e14" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Left arm at side -->
+    <path d="M20,34 Q14,45 12,55" stroke="#6b4e14" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Staff -->
+    <line x1="12" y1="55" x2="8" y2="88" stroke="#3d2200" stroke-width="3" stroke-linecap="round"/>
+    <!-- Feet -->
+    <ellipse cx="22" cy="88" rx="6" ry="3" fill="#3d2200"/>
+    <ellipse cx="38" cy="88" rx="6" ry="3" fill="#3d2200"/>
+  </svg>
+
+  <!-- David cowering / ashamed on rooftop -->
+  <svg id="david-rooftop" viewBox="0 0 55 100" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="大衛在屋頂上 — David on the rooftop, ashamed">
+    <title>大衛悔罪 — David ashamed on the palace rooftop</title>
+    <!-- Head (bowed down) -->
+    <circle cx="28" cy="20" r="11" fill="#7a5a18"/>
+    <!-- Crown (askew, falling) -->
+    <polygon points="18,12 21,4 24,10 27,2 30,10 33,4 36,12"
+             fill="#daa520" opacity=".6" transform="rotate(-15,27,8)"/>
+    <!-- Beard -->
+    <path d="M21,28 Q28,38 35,28 Q33,46 28,48 Q23,46 21,28 Z" fill="#5a4010" opacity=".7"/>
+    <!-- Robe (crimson — royal but stained with guilt) -->
+    <path d="M18,32 Q14,55 12,78 Q18,82 23,78 Q25,65 28,55 Q31,65 33,78 Q38,82 44,78 Q42,55 38,32 Z"
+          fill="#5a0000"/>
+    <!-- Arms covering face (shame) -->
+    <path d="M38,35 Q42,28 40,22" stroke="#7a5a18" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M18,35 Q14,28 16,22" stroke="#7a5a18" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Feet -->
+    <ellipse cx="20" cy="80" rx="6" ry="3" fill="#3d2200"/>
+    <ellipse cx="36" cy="80" rx="6" ry="3" fill="#3d2200"/>
+  </svg>
+
+  <div class="scene-heading" id="bathsheba-heading" aria-hidden="true">
+    <h2>⚔ 拔示巴事件</h2>
+    <p>Bathsheba &amp; Nathan's Confrontation — 2 Samuel 11–12</p>
+  </div>
+  <div class="scene-verse">「你就是那人！」— 撒母耳記下 12:7</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — ABSALOM'S REBELLION  押沙龍叛亂
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-absalom" aria-label="押沙龍叛亂 — Absalom's Rebellion">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Dark red sky glow -->
+  <div id="absalom-red-sky" aria-hidden="true"></div>
+
+  <!-- Mount of Olives landscape -->
+  <svg id="absalom-landscape" viewBox="0 0 1440 550" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="橄欖山與耶路撒冷 — Mount of Olives and Jerusalem">
+    <title>押沙龍叛亂 — Absalom's rebellion, David fleeing over the Mount of Olives</title>
+    <defs>
+      <linearGradient id="oliveMtnG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a2010"/>
+        <stop offset="100%" stop-color="#0e0a04"/>
+      </linearGradient>
+      <linearGradient id="distCityG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a1808"/>
+        <stop offset="100%" stop-color="#1a0c04"/>
+      </linearGradient>
+      <linearGradient id="pathG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a2a14"/>
+        <stop offset="100%" stop-color="#1a1008"/>
+      </linearGradient>
+    </defs>
+    <!-- Distant Jerusalem in turmoil (burning glow) -->
+    <rect x="800" y="250" width="400" height="300" fill="url(#distCityG)" opacity=".4"/>
+    <ellipse cx="1000" cy="260" rx="150" ry="40" fill="rgba(139,0,0,.12)"/>
+    <!-- City silhouette in distance -->
+    <rect x="880" y="260" width="40" height="80" fill="#2a1208" opacity=".5"/>
+    <rect x="940" y="250" width="50" height="90" fill="#2a1208" opacity=".5"/>
+    <rect x="1010" y="255" width="35" height="85" fill="#2a1208" opacity=".5"/>
+    <polygon points="940,250 965,220 990,250" fill="#2a1208" opacity=".5"/>
+    <!-- Mount of Olives (foreground hill) -->
+    <path d="M0 550 L0 350 Q200 250 400 300 Q550 260 700 320 Q800 350 900 380 L1440 400 L1440 550 Z"
+          fill="url(#oliveMtnG)"/>
+    <!-- Olive trees (simplified) -->
+    <circle cx="180" cy="310" r="18" fill="rgba(60,80,30,.3)"/>
+    <line x1="180" y1="328" x2="180" y2="360" stroke="#3a2a10" stroke-width="3"/>
+    <circle cx="320" cy="290" r="22" fill="rgba(60,80,30,.25)"/>
+    <line x1="320" y1="312" x2="320" y2="348" stroke="#3a2a10" stroke-width="3"/>
+    <circle cx="500" cy="280" r="16" fill="rgba(60,80,30,.25)"/>
+    <line x1="500" y1="296" x2="500" y2="325" stroke="#3a2a10" stroke-width="2.5"/>
+    <circle cx="620" cy="305" r="20" fill="rgba(60,80,30,.2)"/>
+    <line x1="620" y1="325" x2="620" y2="355" stroke="#3a2a10" stroke-width="3"/>
+    <!-- Winding escape path -->
+    <path d="M100 450 Q200 400 350 380 Q500 350 650 370"
+          stroke="url(#pathG)" stroke-width="16" fill="none" stroke-linecap="round" opacity=".4"/>
+    <!-- Ground texture -->
+    <path d="M0 480 Q300 440 600 460 Q900 440 1200 470 L1440 460 L1440 550 L0 550 Z"
+          fill="#0a0604"/>
+  </svg>
+
+  <!-- Absalom on horseback -->
+  <svg id="absalom-rider" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="押沙龍騎馬 — Absalom on horseback">
+    <title>押沙龍叛亂 — Absalom riding in rebellion</title>
+    <defs>
+      <linearGradient id="horseG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a3018"/>
+        <stop offset="100%" stop-color="#2a1a0a"/>
+      </linearGradient>
+    </defs>
+    <!-- Horse body -->
+    <ellipse cx="60" cy="80" rx="35" ry="20" fill="url(#horseG)"/>
+    <!-- Horse neck -->
+    <path d="M85,72 Q95,50 90,38" stroke="#4a3018" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <!-- Horse head -->
+    <ellipse cx="92" cy="34" rx="10" ry="8" fill="#4a3018" transform="rotate(-15,92,34)"/>
+    <!-- Horse ear -->
+    <polygon points="88,26 92,18 96,26" fill="#3a2410"/>
+    <!-- Horse eye -->
+    <circle cx="96" cy="32" r="1.5" fill="#1a0e06"/>
+    <!-- Horse legs -->
+    <line x1="40" y1="96" x2="35" y2="125" stroke="#3a2010" stroke-width="5" stroke-linecap="round"/>
+    <line x1="50" y1="98" x2="48" y2="125" stroke="#3a2010" stroke-width="5" stroke-linecap="round"/>
+    <line x1="70" y1="98" x2="72" y2="125" stroke="#3a2010" stroke-width="5" stroke-linecap="round"/>
+    <line x1="80" y1="96" x2="85" y2="125" stroke="#3a2010" stroke-width="5" stroke-linecap="round"/>
+    <!-- Horse tail -->
+    <path d="M28,75 Q15,80 10,95" stroke="#2a1a0a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Absalom - body on horse -->
+    <circle cx="62" cy="42" r="10" fill="#7a5a18"/>
+    <!-- Absalom's long flowing hair -->
+    <path d="M52,42 Q45,55 40,70" stroke="#3a2a10" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M55,45 Q48,58 44,72" stroke="#4a3a18" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M72,42 Q78,55 82,68" stroke="#3a2a10" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M70,46 Q76,58 80,70" stroke="#4a3a18" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Absalom's robe -->
+    <path d="M54,52 Q50,62 48,72 Q56,76 62,72 Q68,76 74,72 Q72,62 68,52 Z"
+          fill="#5a0000"/>
+    <!-- Sword raised -->
+    <line x1="72" y1="52" x2="82" y2="28" stroke="#8a8a8a" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="78" y1="32" x2="86" y2="28" stroke="#8a8a8a" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+
+  <!-- David weeping on Mount of Olives -->
+  <svg id="david-weeping" viewBox="0 0 58 108" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="大衛在橄欖山上哭泣 — David weeping on the Mount of Olives">
+    <title>大衛哀哭 — David weeping as he flees Jerusalem</title>
+    <!-- Head (bowed, weeping) -->
+    <circle cx="29" cy="18" r="12" fill="#7a5a18"/>
+    <!-- Head covering (mourning cloth) -->
+    <path d="M17,16 Q29,5 41,16 L41,24 Q29,18 17,24 Z" fill="#3a3028"/>
+    <!-- Tears -->
+    <ellipse cx="24" cy="24" rx="1" ry="2" fill="rgba(100,160,220,.5)"/>
+    <ellipse cx="34" cy="25" rx="1" ry="2" fill="rgba(100,160,220,.5)"/>
+    <!-- Beard -->
+    <path d="M22,26 Q29,38 36,26 Q33,46 29,50 Q25,46 22,26 Z" fill="#5a4010" opacity=".7"/>
+    <!-- Torn / mourning robe -->
+    <path d="M19,32 Q14,58 12,88 Q18,92 24,88 Q26,72 29,58 Q32,72 34,88 Q40,92 46,88 Q44,58 39,32 Z"
+          fill="#3a2a1a"/>
+    <!-- Arms raised to cover face (weeping) -->
+    <path d="M39,36 Q44,26 40,18" stroke="#7a5a18" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <path d="M19,36 Q14,26 18,18" stroke="#7a5a18" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Bare feet (fled without shoes) -->
+    <ellipse cx="22" cy="92" rx="6" ry="3" fill="#5a4018"/>
+    <ellipse cx="36" cy="92" rx="6" ry="3" fill="#5a4018"/>
+    <!-- Sorrow aura -->
+    <ellipse cx="29" cy="55" rx="22" ry="40" fill="none"
+             stroke="rgba(100,120,180,.08)" stroke-width="10"/>
+  </svg>
+
+  <div class="scene-heading" id="absalom-heading" aria-hidden="true">
+    <h2>⚡ 押沙龍叛亂</h2>
+    <p>Absalom's Rebellion — 2 Samuel 15–18</p>
+  </div>
+  <div class="scene-verse">「我兒押沙龍啊！我兒，我兒押沙龍啊！」— 撒母耳記下 18:33</div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — GOD'S COVENANT  神的約
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-covenant" aria-label="神的約 — God's Covenant with David">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <!-- Divine light beam -->
+  <div id="covenant-divine-light" aria-hidden="true"></div>
+
+  <!-- Wide divine glow -->
+  <div id="covenant-glow-wide" aria-hidden="true"></div>
+
+  <!-- Divine cloud at top -->
+  <svg id="covenant-cloud" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="covenantCG" cx="50%" cy="60%">
+        <stop offset="0%"   stop-color="rgba(218,165,32,.35)"/>
+        <stop offset="40%"  stop-color="rgba(218,165,32,.18)"/>
+        <stop offset="100%" stop-color="rgba(184,134,11,0)"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="200" cy="110" rx="170" ry="65" fill="url(#covenantCG)"/>
+    <ellipse cx="140" cy="88" rx="100" ry="55" fill="rgba(218,190,120,.12)"/>
+    <ellipse cx="260" cy="88" rx="100" ry="55" fill="rgba(218,190,120,.12)"/>
+    <ellipse cx="200" cy="70" rx="120" ry="55" fill="rgba(255,235,180,.15)"/>
+    <!-- Inner divine glow -->
+    <ellipse cx="200" cy="80" rx="55" ry="38" fill="rgba(218,165,32,.12)"
+             style="animation:divinePulse 2.5s ease-in-out infinite;"/>
+  </svg>
+
+  <!-- Temple vision / eternal throne landscape -->
+  <svg id="covenant-landscape" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="大衛之約 — The Davidic Covenant, eternal throne vision">
+    <title>神的約 — God's promise to David of an everlasting kingdom</title>
+    <defs>
+      <linearGradient id="covenantMtnG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a1040"/>
+        <stop offset="50%" stop-color="#0e0828"/>
+        <stop offset="100%" stop-color="#06041a"/>
+      </linearGradient>
+      <linearGradient id="templeG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#daa520"/>
+        <stop offset="50%" stop-color="#b8860b"/>
+        <stop offset="100%" stop-color="#8b6508"/>
+      </linearGradient>
+      <linearGradient id="templeGlowG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(218,165,32,.3)"/>
+        <stop offset="100%" stop-color="rgba(218,165,32,0)"/>
+      </linearGradient>
+    </defs>
+    <!-- Mountain / base terrain -->
+    <path d="M0 500 L0 380 Q300 310 600 350 Q900 300 1200 340 Q1360 320 1440 360 L1440 500 Z"
+          fill="url(#covenantMtnG)"/>
+    <!-- Temple vision (glowing, ethereal) -->
+    <rect x="600" y="180" width="240" height="180" rx="4" fill="url(#templeG)" opacity=".3"/>
+    <!-- Temple columns -->
+    <rect x="620" y="200" width="14" height="150" fill="rgba(218,165,32,.25)"/>
+    <rect x="660" y="200" width="14" height="150" fill="rgba(218,165,32,.25)"/>
+    <rect x="766" y="200" width="14" height="150" fill="rgba(218,165,32,.25)"/>
+    <rect x="806" y="200" width="14" height="150" fill="rgba(218,165,32,.25)"/>
+    <!-- Temple roof / pediment -->
+    <polygon points="590,200 720,130 850,200" fill="rgba(218,165,32,.2)"/>
+    <!-- Temple entrance -->
+    <rect x="690" y="250" width="60" height="110" rx="3" fill="rgba(255,235,180,.08)"/>
+    <!-- Eternal throne inside temple (faint golden glow) -->
+    <rect x="700" y="280" width="40" height="50" rx="2" fill="rgba(218,165,32,.15)"/>
+    <path d="M700,280 Q720,260 740,280" fill="rgba(218,165,32,.12)"/>
+    <!-- Temple glow -->
+    <ellipse cx="720" cy="260" rx="120" ry="80" fill="url(#templeGlowG)" opacity=".5"/>
+    <!-- Divine light rays from heaven to temple -->
+    <line x1="720" y1="0" x2="660" y2="200" stroke="rgba(218,165,32,.08)" stroke-width="24"/>
+    <line x1="720" y1="0" x2="780" y2="200" stroke="rgba(218,165,32,.08)" stroke-width="24"/>
+    <line x1="720" y1="0" x2="720" y2="200" stroke="rgba(218,165,32,.12)" stroke-width="16"/>
+    <!-- Ground -->
+    <rect x="0" y="420" width="1440" height="80" fill="#04020e"/>
+    <!-- Stars of promise (tiny gold dots) -->
+    <circle cx="400" cy="120" r="2" fill="rgba(218,165,32,.4)"/>
+    <circle cx="520" cy="80" r="1.5" fill="rgba(218,165,32,.35)"/>
+    <circle cx="920" cy="90" r="2" fill="rgba(218,165,32,.4)"/>
+    <circle cx="1040" cy="130" r="1.5" fill="rgba(218,165,32,.35)"/>
+    <circle cx="300" cy="160" r="1.5" fill="rgba(218,165,32,.3)"/>
+    <circle cx="1120" cy="100" r="2" fill="rgba(218,165,32,.35)"/>
+  </svg>
+
+  <!-- David kneeling in prayer / awe -->
+  <svg id="david-covenant" viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="大衛在神面前跪下 — David kneeling before God">
+    <title>大衛領受神的約 — David receiving God's covenant promise</title>
+    <!-- Head (looking up) -->
+    <circle cx="30" cy="16" r="12" fill="#7a5a18"/>
+    <!-- Crown (gleaming) -->
+    <polygon points="20,8 24,0 28,6 30,-2 32,6 36,0 40,8"
+             fill="#ffd700" stroke="#daa520" stroke-width=".6"/>
+    <rect x="20" y="8" width="20" height="5" rx="1" fill="#daa520"/>
+    <!-- Jewels -->
+    <circle cx="26" cy="10" r="1.5" fill="#8b0000"/>
+    <circle cx="30" cy="9" r="1.8" fill="#8b0000"/>
+    <circle cx="34" cy="10" r="1.5" fill="#8b0000"/>
+    <!-- Face (looking upward) -->
+    <ellipse cx="26" cy="14" rx="1.2" ry="1" fill="#3d2200"/>
+    <ellipse cx="34" cy="14" rx="1.2" ry="1" fill="#3d2200"/>
+    <!-- Beard -->
+    <path d="M22,24 Q30,36 38,24 Q35,46 30,50 Q25,46 22,24 Z" fill="#5a4010" opacity=".8"/>
+    <!-- Royal robe (kneeling) -->
+    <path d="M20,30 Q16,50 14,72 Q22,78 30,72 Q38,78 46,72 Q44,50 40,30 Z"
+          fill="#5a0000"/>
+    <!-- Gold trim -->
+    <path d="M20,30 Q30,38 40,30" stroke="#daa520" stroke-width="1.5" fill="none"/>
+    <!-- Arms raised in prayer/awe -->
+    <path d="M40,36 Q50,22 54,10" stroke="#7a5a18" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <path d="M20,36 Q10,22 6,10" stroke="#7a5a18" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Knees (kneeling position) -->
+    <ellipse cx="24" cy="74" rx="7" ry="4" fill="#3a0000"/>
+    <ellipse cx="36" cy="74" rx="7" ry="4" fill="#3a0000"/>
+    <!-- Divine blessing glow around David -->
+    <ellipse cx="30" cy="42" rx="26" ry="38" fill="none"
+             stroke="rgba(218,165,32,.12)" stroke-width="8"/>
+  </svg>
+
+  <div class="scene-heading" id="covenant-heading" aria-hidden="true">
+    <h2>✨ 神的約</h2>
+    <p>God's Covenant with David — 2 Samuel 7</p>
+  </div>
+  <div class="scene-verse">「你的家和你的國必在我面前永遠堅立」— 撒母耳記下 7:16</div>
+</section>
+
+</body>
+</html>
