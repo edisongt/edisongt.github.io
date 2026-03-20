@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>但以理書 · Daniel</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #14181e;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+    @keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+    @keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.31), 564px 126px rgba(255,255,255,.41),
+        210px 347px rgba(255,255,255,.67), 1117px 45px rgba(255,255,255,.6),
+        66px 16px rgba(255,255,255,.35),  477px 259px rgba(255,255,255,.6),
+        1150px 102px rgba(255,255,255,.66), 1437px 280px rgba(255,255,255,.51),
+        920px 302px rgba(255,255,255,.44), 14px 389px rgba(255,255,255,.7),
+        1430px 217px rgba(255,255,255,.47), 319px 111px rgba(255,255,255,.78),
+        690px 53px rgba(255,255,255,.35),  199px 184px rgba(255,255,255,.72),
+        1237px 136px rgba(255,255,255,.7), 941px 275px rgba(255,255,255,.36),
+        776px 41px rgba(255,255,255,.58),  1288px 317px rgba(255,255,255,.74),
+        741px 296px rgba(255,255,255,.4),  143px 24px rgba(255,255,255,.63),
+        593px 41px rgba(255,255,255,.73),  207px 195px rgba(255,255,255,.44),
+        1302px 428px rgba(255,255,255,.48), 759px 182px rgba(255,255,255,.4),
+        547px 360px rgba(255,255,255,.77), 1328px 37px rgba(255,255,255,.6),
+        351px 274px rgba(255,255,255,.66), 335px 237px rgba(255,255,255,.49),
+        1311px 353px rgba(255,255,255,.58), 1403px 167px rgba(255,255,255,.72),
+        115px 118px rgba(255,255,255,.71), 647px 206px rgba(255,255,255,.43),
+        433px 468px rgba(255,255,255,.77), 645px 109px rgba(255,255,255,.63),
+        811px 453px rgba(255,255,255,.76), 940px 74px rgba(255,255,255,.43),
+        506px 382px rgba(255,255,255,.58), 539px 383px rgba(255,255,255,.59),
+        1196px 205px rgba(255,255,255,.48), 284px 261px rgba(255,255,255,.55),
+        97px 441px rgba(255,255,255,.35),  1286px 82px rgba(255,255,255,.7),
+        865px 306px rgba(255,255,255,.33), 782px 306px rgba(255,255,255,.8),
+        1084px 129px rgba(255,255,255,.79), 24px 349px rgba(255,255,255,.66),
+        1397px 454px rgba(255,255,255,.57), 547px 394px rgba(255,255,255,.62),
+        229px 151px rgba(255,255,255,.52), 930px 2px rgba(255,255,255,.78),
+        540px 498px rgba(255,255,255,.55), 366px 260px rgba(255,255,255,.76),
+        1281px 153px rgba(255,255,255,.72), 1040px 312px rgba(255,255,255,.4),
+        766px 391px rgba(255,255,255,.38), 1087px 471px rgba(255,255,255,.3),
+        664px 251px rgba(255,255,255,.31), 744px 450px rgba(255,255,255,.79),
+        630px 123px rgba(255,255,255,.33), 1162px 485px rgba(255,255,255,.34),
+        996px 418px rgba(255,255,255,.33), 1091px 393px rgba(255,255,255,.36),
+        1352px 244px rgba(255,255,255,.77), 339px 136px rgba(255,255,255,.56),
+        1243px 217px rgba(255,255,255,.78), 1105px 387px rgba(255,255,255,.66),
+        412px 366px rgba(255,255,255,.46), 1376px 333px rgba(255,255,255,.49),
+        1060px 232px rgba(255,255,255,.36), 461px 33px rgba(255,255,255,.47),
+        1205px 284px rgba(255,255,255,.42), 452px 4px rgba(255,255,255,.34),
+        1293px 31px rgba(255,255,255,.41), 65px 441px rgba(255,255,255,.47),
+        1053px 122px rgba(255,255,255,.44), 995px 110px rgba(255,255,255,.57),
+        1170px 296px rgba(255,255,255,.54), 969px 414px rgba(255,255,255,.5),
+        194px 50px rgba(255,255,255,.63),  726px 217px rgba(255,255,255,.51);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.9),  1324px 51px rgba(255,255,255,.72),
+        695px 410px rgba(255,255,255,.96), 510px 99px rgba(255,255,255,.76),
+        919px 72px rgba(255,255,255,.83),  571px 237px rgba(255,255,255,.77),
+        155px 227px rgba(255,255,255,.94), 1128px 51px rgba(255,255,255,.72),
+        1108px 429px rgba(255,255,255,.7), 192px 475px rgba(255,255,255,.93),
+        485px 86px rgba(255,255,255,.82),  986px 110px rgba(255,255,255,.96),
+        121px 85px rgba(255,255,255,.81),  800px 136px rgba(255,255,255,.98),
+        932px 147px rgba(255,255,255,.83), 1139px 339px rgba(255,255,255,.92),
+        318px 98px rgba(255,255,255,.79),  120px 297px rgba(255,255,255,.92),
+        125px 383px rgba(255,255,255,.79), 103px 300px rgba(255,255,255,.84),
+        1088px 81px rgba(255,255,255,.72), 1041px 42px rgba(255,255,255,.96),
+        141px 305px rgba(255,255,255,.72), 482px 207px rgba(255,255,255,.74),
+        1167px 127px rgba(255,255,255,.87), 82px 318px rgba(255,255,255,.72),
+        1347px 299px rgba(255,255,255,.87), 648px 479px rgba(255,255,255,.78),
+        1372px 367px rgba(255,255,255,.79), 544px 203px rgba(255,255,255,.74);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,235,255,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(200,160,48,.2);
+      border-color: rgba(200,160,48,.5);
+      color: #c8a030;
+      box-shadow: 0 0 20px rgba(200,160,48,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ── Scene-specific keyframes ── */
+    @keyframes introGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(200,160,48,.6), 0 0 110px rgba(180,140,30,.3); }
+      50%      { box-shadow: 0 0 80px rgba(220,180,60,.85), 0 0 160px rgba(200,160,48,.5); }
+    }
+    @keyframes fireFlicker {
+      0%   { transform: scaleY(1) scaleX(1); opacity: .7; }
+      25%  { transform: scaleY(1.08) scaleX(.96); opacity: .9; }
+      50%  { transform: scaleY(.95) scaleX(1.04); opacity: .8; }
+      75%  { transform: scaleY(1.05) scaleX(.98); opacity: 1; }
+      100% { transform: scaleY(1) scaleX(1); opacity: .7; }
+    }
+    @keyframes lionBreathe {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-2px) scale(1.02); }
+    }
+    @keyframes stoneStrike {
+      0%,100% { transform: translate(0,0) scale(1); opacity: .8; }
+      50%      { transform: translate(-2px,-3px) scale(1.06); opacity: 1; }
+    }
+    @keyframes cloudDrift {
+      0%   { transform: translateX(0); }
+      50%  { transform: translateX(15px); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes starRise {
+      0%,100% { opacity: .5; transform: translateY(0) scale(1); }
+      50%      { opacity: 1;  transform: translateY(-8px) scale(1.1); }
+    }
+    @keyframes gloryShine {
+      0%,100% { filter: drop-shadow(0 0 8px rgba(255,220,100,.5)); transform: scale(1); }
+      50%      { filter: drop-shadow(0 0 24px rgba(255,220,100,.9)); transform: scale(1.06); }
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #14181e 0%, #1a2028 30%, #222838 65%, #2a3040 100%);
+    }
+    #intro-orb {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fff8e0, #e8c860 40%, #c8a030 75%, #6a5018);
+      box-shadow: 0 0 55px rgba(200,160,48,.6), 0 0 110px rgba(180,140,30,.3);
+      z-index: 4;
+      animation: introGlow 4s ease-in-out infinite;
+    }
+    #intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#c8a030 0%,#f0d870 45%,#a08020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(200,170,80,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(180,150,60,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+    #intro-prophet {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — THE FIERY FURNACE  火窯試煉
+    ══════════════════════════════════════════════ */
+    #scene-furnace {
+      background: linear-gradient(180deg, #2a1008 0%, #4a1808 40%, #6a2810 70%, #4a1808 100%);
+    }
+    #furnace-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 35%;
+      background: linear-gradient(180deg,#2a1008 0%,#180804 55%,#0a0402 100%);
+      z-index: 5;
+    }
+    #furnace-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,120,30,.25) 0%, rgba(255,80,20,.1) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    #furnace-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 7;
+    }
+    #furnace-heading h2 {
+      color: #ff8830;
+      text-shadow: 0 0 22px rgba(255,136,48,.6);
+    }
+    #furnace-heading p { color: rgba(255,180,120,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — THE LION'S DEN  獅子坑
+    ══════════════════════════════════════════════ */
+    #scene-lions {
+      background: linear-gradient(180deg, #14181e 0%, #1e2420 40%, #282e24 65%, #1e2418 100%);
+    }
+    #lions-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: clamp(120px,25vw,300px); height: 30vh;
+      background: radial-gradient(ellipse, rgba(200,160,48,.12) 0%, rgba(180,140,30,.05) 50%, transparent 70%);
+      z-index: 4;
+      animation: breathe 3s ease-in-out infinite;
+    }
+    #lions-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 5;
+    }
+    #lions-heading h2 {
+      background: linear-gradient(120deg,#d0a040 0%,#c8a030 50%,#d0a040 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #lions-heading p { color: rgba(200,180,140,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — THE GREAT STATUE  巨像異象
+    ══════════════════════════════════════════════ */
+    #scene-statue {
+      background: linear-gradient(180deg, #141020 0%, #1e1830 40%, #282040 65%, #1e1830 100%);
+    }
+    #statue-shadow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,50vw,600px); height: 40vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(140,100,200,.1) 0%, rgba(100,70,160,.04) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3s ease-in-out infinite;
+    }
+    #statue-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 5;
+    }
+    #statue-heading h2 {
+      background: linear-gradient(120deg,#a088c0 0%,#c8b0e0 50%,#8068a0 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #statue-heading p { color: rgba(180,160,200,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — THE SON OF MAN  人子異象
+    ══════════════════════════════════════════════ */
+    #scene-sonofman {
+      background: linear-gradient(180deg, #14181e 0%, #1a2838 35%, #283848 65%, #3a5060 100%);
+    }
+    #sonofman-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 45vw; height: 20vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,240,180,.18) 0%, rgba(255,220,120,.07) 50%, transparent 72%);
+      z-index: 4;
+      animation: glowPulse 3.5s ease-in-out infinite;
+    }
+    #sonofman-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 5;
+    }
+    #sonofman-heading h2 {
+      background: linear-gradient(120deg,#ffd860 0%,#fff0a0 50%,#c8a030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    #sonofman-heading p { color: rgba(220,210,170,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — THE ETERNAL KINGDOM  永恆國度
+    ══════════════════════════════════════════════ */
+    #scene-kingdom {
+      background: linear-gradient(180deg, #141828 0%, #1a2040 35%, #2a3060 65%, #4a5080 100%);
+    }
+    #kingdom-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#1a2040 0%,#141828 55%,#0c1018 100%);
+      z-index: 5;
+    }
+    #kingdom-glow {
+      position: absolute; bottom: 32%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 16vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,240,180,.2) 0%, rgba(255,220,120,.08) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    #kingdom-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 7;
+    }
+    #kingdom-heading h2 {
+      background: linear-gradient(120deg,#ffd060 0%,#ffe880 50%,#c8a030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #kingdom-heading p { color: rgba(220,210,170,.55); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"     aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-furnace"   aria-label="火窯試煉"></a>
+  <a class="nav-dot" href="#scene-lions"     aria-label="獅子坑"></a>
+  <a class="nav-dot" href="#scene-statue"    aria-label="巨像異象"></a>
+  <a class="nav-dot" href="#scene-sonofman"  aria-label="人子異象"></a>
+  <a class="nav-dot" href="#scene-kingdom"   aria-label="永恆國度"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="但以理書 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="intro-orb" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>但以理書</h1>
+    <p>Book of Daniel</p>
+    <span class="sub">信心 · 異象 · 火窯 · 獅坑 · 國度</span>
+  </div>
+
+  <!-- Babylon city skyline with palace silhouette -->
+  <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#14181e"/>
+        <stop offset="50%" stop-color="#1a2028"/>
+        <stop offset="100%" stop-color="#0c1018"/>
+      </linearGradient>
+      <linearGradient id="hill1G" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#222838"/>
+        <stop offset="100%" stop-color="#0c1018"/>
+      </linearGradient>
+      <linearGradient id="hill2G" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a2028"/>
+        <stop offset="100%" stop-color="#080c10"/>
+      </linearGradient>
+      <linearGradient id="groundG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a2028"/>
+        <stop offset="100%" stop-color="#080c10"/>
+      </linearGradient>
+      <linearGradient id="euphratesG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="rgba(200,160,48,.05)"/>
+        <stop offset="50%" stop-color="rgba(200,160,48,.15)"/>
+        <stop offset="100%" stop-color="rgba(200,160,48,.05)"/>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="1440" height="420" fill="url(#skyG)"/>
+    <!-- Distant hills -->
+    <path d="M0 340 Q120 280 240 310 Q360 250 480 290 Q600 220 720 260 Q840 200 960 250 Q1080 210 1200 260 Q1320 230 1440 280 L1440 420 L0 420 Z"
+          fill="url(#hill2G)" opacity=".6"/>
+    <!-- Babylon palace silhouette -->
+    <rect x="580" y="280" width="60" height="70" fill="rgba(20,24,30,.8)"/>
+    <rect x="640" y="260" width="80" height="90" fill="rgba(22,26,34,.85)"/>
+    <rect x="660" y="240" width="40" height="20" fill="rgba(24,28,36,.8)"/>
+    <rect x="720" y="270" width="70" height="80" fill="rgba(20,24,30,.8)"/>
+    <rect x="790" y="285" width="50" height="65" fill="rgba(22,26,34,.75)"/>
+    <!-- Ziggurats / stepped towers -->
+    <path d="M670,240 L680,220 L700,220 L710,240 Z" fill="rgba(30,34,42,.9)"/>
+    <path d="M682,220 L688,205 L698,205 L704,220 Z" fill="rgba(34,38,46,.85)"/>
+    <rect x="688" y="195" width="10" height="12" fill="rgba(36,40,48,.8)"/>
+    <!-- Second tower -->
+    <path d="M740,270 L748,252 L764,252 L772,270 Z" fill="rgba(30,34,42,.85)"/>
+    <path d="M750,252 L755,240 L765,240 L770,252 Z" fill="rgba(34,38,46,.8)"/>
+    <!-- Window lights -->
+    <rect x="652" y="280" width="4" height="5" rx="1" fill="rgba(255,200,80,.25)"/>
+    <rect x="668" y="275" width="4" height="5" rx="1" fill="rgba(255,200,80,.2)"/>
+    <rect x="700" y="282" width="4" height="5" rx="1" fill="rgba(255,200,80,.18)"/>
+    <rect x="735" y="290" width="4" height="5" rx="1" fill="rgba(255,200,80,.22)"/>
+    <rect x="755" y="285" width="4" height="5" rx="1" fill="rgba(255,200,80,.15)"/>
+    <rect x="800" y="295" width="4" height="5" rx="1" fill="rgba(255,200,80,.2)"/>
+    <!-- Nearer hills -->
+    <path d="M0 380 Q100 340 200 360 Q300 320 400 350 Q500 310 600 340 Q700 300 800 330 Q900 320 1000 340 Q1100 310 1200 340 Q1300 330 1440 350 L1440 420 L0 420 Z"
+          fill="url(#hill1G)"/>
+    <!-- Ground -->
+    <rect x="0" y="380" width="1440" height="40" fill="url(#groundG)"/>
+    <!-- Euphrates River -->
+    <path d="M0 395 Q200 388 400 392 Q600 386 800 390 Q1000 384 1200 390 Q1350 388 1440 392 L1440 410 Q1200 405 1000 408 Q800 402 600 406 Q400 400 200 404 Q100 402 0 406 Z"
+          fill="url(#euphratesG)"/>
+    <!-- Gold glow on horizon -->
+    <ellipse cx="720" cy="300" rx="400" ry="50" fill="rgba(200,160,48,.06)"/>
+  </svg>
+
+  <!-- Daniel prophet figure -->
+  <svg id="intro-prophet" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="先知但以理 — Prophet Daniel standing firm in Babylon">
+    <title>先知但以理 — Prophet Daniel in royal robes at Babylon</title>
+    <!-- Head -->
+    <circle cx="30" cy="16" r="12" fill="#8a6838"/>
+    <!-- Hair -->
+    <path d="M18,14 Q22,4 30,2 Q38,4 42,14 L42,22 Q38,18 30,16 Q22,18 18,22 Z" fill="#2a1808"/>
+    <path d="M22,24 Q26,32 30,34 Q34,32 38,24" fill="#2a1808" opacity=".6"/>
+    <!-- Head covering / royal cap -->
+    <path d="M16,14 Q30,-2 44,14 L46,28 Q30,20 14,28 Z" fill="rgba(200,160,48,.6)"/>
+    <!-- Face detail -->
+    <circle cx="26" cy="14" r="1.2" fill="#4a3020"/>
+    <circle cx="34" cy="14" r="1.2" fill="#4a3020"/>
+    <!-- Royal robe (blue with gold accents) -->
+    <path d="M20,28 Q14,55 8,100 Q16,105 24,100 Q27,75 30,58 Q33,75 36,100 Q44,105 52,100 Q46,55 40,28 Z"
+          fill="#1a3060"/>
+    <!-- Gold sash -->
+    <path d="M22,30 Q30,28 38,30 L37,48 Q30,46 23,48 Z" fill="#c8a030" opacity=".6"/>
+    <!-- Gold belt -->
+    <line x1="20" y1="48" x2="40" y2="48" stroke="#e0c050" stroke-width="2"/>
+    <!-- Gold trim at robe bottom -->
+    <line x1="10" y1="98" x2="24" y2="98" stroke="#c8a030" stroke-width="1.5" opacity=".5"/>
+    <line x1="36" y1="98" x2="50" y2="98" stroke="#c8a030" stroke-width="1.5" opacity=".5"/>
+    <!-- Hands clasped (resolve) -->
+    <path d="M24,44 Q28,40 32,40 Q36,40 38,44" stroke="#8a6838" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Feet -->
+    <ellipse cx="22" cy="102" rx="7" ry="3" fill="#5a3028"/>
+    <ellipse cx="38" cy="102" rx="7" ry="3" fill="#5a3028"/>
+  </svg>
+
+  <div class="scene-verse">「但以理卻立志不以王的膳和王所飲的酒玷污自己」— 但以理書 1:8</div>
+  <div class="scroll-hint">↓ 向下滾動探索 · Scroll to explore</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — THE FIERY FURNACE  火窯試煉
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-furnace" aria-label="火窯試煉 — The Fiery Furnace">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="furnace-ground" aria-hidden="true"></div>
+  <div id="furnace-glow" aria-hidden="true"></div>
+
+  <!-- Blazing furnace with four figures -->
+  <svg id="furnace-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="烈火窯中三人與第四位 — Three men in the fiery furnace with a fourth figure">
+    <title>火窯試煉 — Shadrach, Meshach, and Abednego in the furnace with a divine fourth figure</title>
+    <defs>
+      <linearGradient id="fireFloorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a1808"/>
+        <stop offset="100%" stop-color="#1a0c04"/>
+      </linearGradient>
+      <radialGradient id="furnaceHeatG" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(255,200,60,.3)"/>
+        <stop offset="30%" stop-color="rgba(255,120,30,.15)"/>
+        <stop offset="60%" stop-color="rgba(200,60,10,.06)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="furnaceWallG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a2810"/>
+        <stop offset="100%" stop-color="#2a1808"/>
+      </linearGradient>
+    </defs>
+    <!-- Fiery ground -->
+    <rect x="0" y="380" width="1440" height="120" fill="url(#fireFloorG)"/>
+    <!-- Furnace structure walls -->
+    <rect x="360" y="120" width="50" height="300" fill="url(#furnaceWallG)"/>
+    <rect x="1030" y="120" width="50" height="300" fill="url(#furnaceWallG)"/>
+    <!-- Furnace arch top -->
+    <path d="M360,120 Q720,20 1080,120" fill="none" stroke="#5a3818" stroke-width="8"/>
+    <path d="M370,125 Q720,30 1070,125" fill="none" stroke="#4a2810" stroke-width="4"/>
+    <!-- Furnace interior heat glow -->
+    <ellipse cx="720" cy="280" rx="320" ry="180" fill="url(#furnaceHeatG)"/>
+
+    <!-- Flames LEFT -->
+    <g style="animation:fireFlicker 1.5s ease-in-out infinite;" transform-origin="480 380">
+      <path d="M440,380 Q450,320 460,340 Q470,280 480,310 Q490,260 500,300 Q510,330 520,380 Z"
+            fill="rgba(255,120,20,.35)"/>
+      <path d="M450,380 Q460,340 470,355 Q475,310 485,335 Q495,300 505,340 Q510,360 515,380 Z"
+            fill="rgba(255,180,40,.25)"/>
+      <path d="M460,380 Q468,350 475,360 Q480,330 490,350 Q498,340 505,380 Z"
+            fill="rgba(255,220,80,.2)"/>
+    </g>
+    <!-- Flames RIGHT -->
+    <g style="animation:fireFlicker 1.8s ease-in-out .3s infinite;" transform-origin="960 380">
+      <path d="M920,380 Q930,310 940,340 Q950,270 960,300 Q970,250 980,310 Q990,330 1000,380 Z"
+            fill="rgba(255,120,20,.35)"/>
+      <path d="M930,380 Q940,330 950,350 Q958,300 968,330 Q978,290 988,340 Q993,355 998,380 Z"
+            fill="rgba(255,180,40,.25)"/>
+      <path d="M942,380 Q950,345 958,358 Q965,325 975,350 Q982,338 990,380 Z"
+            fill="rgba(255,220,80,.2)"/>
+    </g>
+    <!-- Flames CENTRE (behind figures) -->
+    <g style="animation:fireFlicker 2s ease-in-out .6s infinite;" transform-origin="720 380">
+      <path d="M650,380 Q665,300 680,330 Q695,260 710,300 Q720,240 730,290 Q745,250 760,310 Q775,280 790,380 Z"
+            fill="rgba(255,100,15,.25)"/>
+      <path d="M670,380 Q680,320 695,345 Q705,280 720,310 Q735,270 745,320 Q760,300 770,380 Z"
+            fill="rgba(255,160,30,.18)"/>
+      <path d="M690,380 Q700,340 710,355 Q720,310 730,340 Q740,320 750,380 Z"
+            fill="rgba(255,200,60,.12)"/>
+    </g>
+
+    <!-- FIGURE 1 — Shadrach -->
+    <g style="animation:gentleSway 6s ease-in-out infinite;">
+      <circle cx="620" cy="260" r="12" fill="#8a6838"/>
+      <path d="M610,272 Q606,300 604,340 Q610,342 616,340 L618,310 L620,340 Q626,342 632,340 Q630,300 628,272 Z"
+            fill="#4a3828"/>
+      <ellipse cx="618" cy="342" rx="6" ry="2.5" fill="#5a3020"/>
+      <ellipse cx="628" cy="342" rx="6" ry="2.5" fill="#5a3020"/>
+    </g>
+
+    <!-- FIGURE 2 — Meshach -->
+    <g style="animation:gentleSway 6s ease-in-out .5s infinite;">
+      <circle cx="700" cy="255" r="12" fill="#8a6838"/>
+      <path d="M690,267 Q686,295 684,335 Q690,337 696,335 L698,305 L700,335 Q706,337 712,335 Q710,295 708,267 Z"
+            fill="#4a3020"/>
+      <ellipse cx="696" cy="337" rx="6" ry="2.5" fill="#5a3020"/>
+      <ellipse cx="706" cy="337" rx="6" ry="2.5" fill="#5a3020"/>
+    </g>
+
+    <!-- FIGURE 3 — Abednego -->
+    <g style="animation:gentleSway 6s ease-in-out 1s infinite;">
+      <circle cx="780" cy="258" r="12" fill="#8a6838"/>
+      <path d="M770,270 Q766,298 764,338 Q770,340 776,338 L778,308 L780,338 Q786,340 792,338 Q790,298 788,270 Z"
+            fill="#483820"/>
+      <ellipse cx="776" cy="340" rx="6" ry="2.5" fill="#5a3020"/>
+      <ellipse cx="786" cy="340" rx="6" ry="2.5" fill="#5a3020"/>
+    </g>
+
+    <!-- FIGURE 4 — The divine fourth figure (brighter, radiant) -->
+    <g style="animation:gloryShine 4s ease-in-out infinite;">
+      <ellipse cx="840" cy="290" rx="25" ry="40" fill="rgba(255,240,180,.12)"/>
+      <circle cx="840" cy="250" r="14" fill="rgba(255,240,200,.35)"/>
+      <path d="M828,264 Q824,295 822,340 Q828,342 834,340 L836,305 L840,340 Q846,342 852,340 Q850,295 848,264 Z"
+            fill="rgba(255,255,240,.2)"/>
+      <!-- Radiant glow around fourth figure -->
+      <ellipse cx="840" cy="290" rx="40" ry="55" fill="rgba(255,240,160,.06)"/>
+    </g>
+
+    <!-- Ember sparks floating -->
+    <circle cx="550" cy="200" r="2" fill="rgba(255,180,40,.4)" style="animation:floatY 3s ease-in-out infinite;"/>
+    <circle cx="680" cy="180" r="1.5" fill="rgba(255,200,60,.35)" style="animation:floatY 4s ease-in-out .5s infinite;"/>
+    <circle cx="820" cy="190" r="2" fill="rgba(255,160,30,.4)" style="animation:floatY 3.5s ease-in-out 1s infinite;"/>
+    <circle cx="900" cy="210" r="1.5" fill="rgba(255,220,80,.3)" style="animation:floatY 4.5s ease-in-out 1.5s infinite;"/>
+    <circle cx="600" cy="170" r="1.8" fill="rgba(255,140,20,.35)" style="animation:floatY 5s ease-in-out .8s infinite;"/>
+    <circle cx="760" cy="160" r="2" fill="rgba(255,200,50,.3)" style="animation:floatY 4s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <div class="scene-heading" id="furnace-heading" aria-hidden="true">
+    <h2>🔥 火窯試煉</h2>
+    <p>The Fiery Furnace — Daniel 3</p>
+  </div>
+  <div class="scene-verse">「我們所事奉的神，能將我們從烈火的窯中救出來」— 但以理書 3:17</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — THE LION'S DEN  獅子坑
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-lions" aria-label="獅子坑 — The Lion's Den">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="lions-glow" aria-hidden="true"></div>
+
+  <!-- Dark cave with lions and Daniel praying -->
+  <svg id="lions-svg" viewBox="0 0 1440 600" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="但以理在獅子坑中禱告 — Daniel praying in the lion's den">
+    <title>獅子坑 — Daniel praying peacefully among lions with divine light from above</title>
+    <defs>
+      <linearGradient id="caveG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#14181e"/>
+        <stop offset="40%" stop-color="#1e2420"/>
+        <stop offset="100%" stop-color="#282e24"/>
+      </linearGradient>
+      <linearGradient id="caveFloorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a3428"/>
+        <stop offset="100%" stop-color="#1a1810"/>
+      </linearGradient>
+      <radialGradient id="divineLightG" cx="50%" cy="0%" r="60%">
+        <stop offset="0%" stop-color="rgba(255,240,180,.2)"/>
+        <stop offset="40%" stop-color="rgba(200,160,48,.08)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Cave background -->
+    <rect x="0" y="0" width="1440" height="600" fill="url(#caveG)"/>
+    <!-- Cave walls (rough rock) -->
+    <path d="M0,0 L0,600 Q100,580 150,500 Q180,450 160,380 Q140,300 100,250 Q80,200 120,150 Q160,100 140,50 Q120,0 0,0 Z"
+          fill="rgba(40,36,28,.6)"/>
+    <path d="M1440,0 L1440,600 Q1340,580 1290,500 Q1260,450 1280,380 Q1300,300 1340,250 Q1360,200 1320,150 Q1280,100 1300,50 Q1320,0 1440,0 Z"
+          fill="rgba(40,36,28,.6)"/>
+    <!-- Cave ceiling -->
+    <path d="M0,0 Q200,80 400,60 Q600,40 720,80 Q840,40 1040,60 Q1240,80 1440,0 L1440,0 L0,0 Z"
+          fill="rgba(30,28,20,.8)"/>
+    <!-- Cave opening above (light source) -->
+    <ellipse cx="720" cy="40" rx="120" ry="50" fill="rgba(200,180,140,.08)"/>
+    <!-- Divine light beam from above -->
+    <rect x="0" y="0" width="1440" height="600" fill="url(#divineLightG)"/>
+    <path d="M660,0 L620,300 L720,350 L820,300 L780,0 Z" fill="rgba(255,240,180,.04)"/>
+    <!-- Cave floor -->
+    <path d="M0 420 Q200 400 400 415 Q600 395 800 410 Q1000 400 1200 415 Q1350 405 1440 420 L1440 600 L0 600 Z"
+          fill="url(#caveFloorG)"/>
+
+    <!-- LION LEFT — lying peacefully -->
+    <g style="animation:lionBreathe 5s ease-in-out infinite;">
+      <!-- Body -->
+      <ellipse cx="420" cy="410" rx="70" ry="30" fill="rgba(180,140,60,.35)"/>
+      <!-- Head -->
+      <ellipse cx="480" cy="390" rx="22" ry="18" fill="rgba(200,160,70,.4)"/>
+      <!-- Mane -->
+      <ellipse cx="478" cy="388" rx="30" ry="24" fill="rgba(160,120,40,.25)"/>
+      <!-- Eyes (closed — peaceful) -->
+      <path d="M474,386 Q478,384 482,386" stroke="rgba(80,60,20,.4)" stroke-width="1.5" fill="none"/>
+      <!-- Ears -->
+      <ellipse cx="470" cy="374" rx="5" ry="7" fill="rgba(180,140,50,.3)"/>
+      <ellipse cx="490" cy="376" rx="5" ry="7" fill="rgba(180,140,50,.3)"/>
+      <!-- Front paws -->
+      <ellipse cx="490" cy="430" rx="10" ry="6" fill="rgba(180,140,60,.3)"/>
+      <!-- Tail -->
+      <path d="M350,405 Q330,390 340,375" stroke="rgba(180,140,60,.25)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- LION RIGHT — sitting calmly -->
+    <g style="animation:lionBreathe 5.5s ease-in-out .5s infinite;">
+      <!-- Body -->
+      <ellipse cx="1000" cy="405" rx="65" ry="35" fill="rgba(170,130,55,.35)"/>
+      <!-- Head (raised slightly) -->
+      <ellipse cx="960" cy="378" rx="24" ry="20" fill="rgba(190,150,65,.4)"/>
+      <!-- Mane -->
+      <ellipse cx="962" cy="376" rx="32" ry="26" fill="rgba(150,115,38,.25)"/>
+      <!-- Eyes (half-closed, calm) -->
+      <path d="M954,374 Q958,372 962,374" stroke="rgba(80,60,20,.4)" stroke-width="1.5" fill="none"/>
+      <!-- Ears -->
+      <ellipse cx="950" cy="360" rx="6" ry="8" fill="rgba(170,130,50,.3)"/>
+      <ellipse cx="974" cy="362" rx="6" ry="8" fill="rgba(170,130,50,.3)"/>
+      <!-- Front paws -->
+      <ellipse cx="950" cy="428" rx="10" ry="6" fill="rgba(170,130,55,.3)"/>
+      <ellipse cx="970" cy="430" rx="10" ry="6" fill="rgba(170,130,55,.3)"/>
+      <!-- Tail -->
+      <path d="M1065,400 Q1085,385 1075,370" stroke="rgba(170,130,55,.25)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- LION BACK — lying in shadow -->
+    <g style="animation:lionBreathe 6s ease-in-out 1s infinite;">
+      <ellipse cx="600" cy="380" rx="50" ry="22" fill="rgba(140,105,40,.2)"/>
+      <ellipse cx="560" cy="368" rx="16" ry="14" fill="rgba(160,120,50,.25)"/>
+      <ellipse cx="558" cy="366" rx="22" ry="18" fill="rgba(130,100,35,.15)"/>
+    </g>
+
+    <!-- DANIEL — kneeling in prayer at centre -->
+    <g style="animation:gentleSway 6s ease-in-out infinite;">
+      <!-- Head -->
+      <circle cx="720" cy="340" r="12" fill="#8a6838"/>
+      <!-- Hair -->
+      <path d="M708,338 Q712,328 720,326 Q728,328 732,338 L732,344 Q728,340 720,338 Q712,340 708,344 Z" fill="#2a1808"/>
+      <!-- Head covering -->
+      <path d="M706,338 Q720,322 734,338 L736,348 Q720,340 704,348 Z" fill="rgba(200,160,48,.5)"/>
+      <!-- Face -->
+      <circle cx="716" cy="338" r="1.2" fill="#4a3020"/>
+      <circle cx="724" cy="338" r="1.2" fill="#4a3020"/>
+      <!-- Body / robe (kneeling) -->
+      <path d="M710,352 Q706,370 704,400 Q710,404 720,400 Q730,404 736,400 Q734,370 730,352 Z"
+            fill="#1a3060"/>
+      <!-- Gold sash -->
+      <path d="M712,355 Q720,353 728,355 L727,368 Q720,366 713,368 Z" fill="#c8a030" opacity=".5"/>
+      <!-- Hands raised in prayer -->
+      <path d="M710,358 L702,348 L700,342" stroke="#8a6838" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M730,358 L738,348 L740,342" stroke="#8a6838" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <!-- Knees -->
+      <ellipse cx="714" cy="402" rx="8" ry="4" fill="#1a3060"/>
+      <ellipse cx="726" cy="402" rx="8" ry="4" fill="#1a3060"/>
+    </g>
+
+    <!-- Floating dust/light particles -->
+    <circle cx="680" cy="200" r="1.5" fill="rgba(255,240,180,.3)" style="animation:floatY 5s ease-in-out infinite;"/>
+    <circle cx="740" cy="180" r="1" fill="rgba(255,240,180,.25)" style="animation:floatY 6s ease-in-out .5s infinite;"/>
+    <circle cx="700" cy="250" r="1.5" fill="rgba(255,240,180,.2)" style="animation:floatY 4.5s ease-in-out 1s infinite;"/>
+    <circle cx="760" cy="230" r="1" fill="rgba(255,240,180,.25)" style="animation:floatY 5.5s ease-in-out 1.5s infinite;"/>
+  </svg>
+
+  <div class="scene-heading" id="lions-heading" aria-hidden="true">
+    <h2>🦁 獅子坑</h2>
+    <p>The Lion's Den — Daniel 6</p>
+  </div>
+  <div class="scene-verse">「我的神差遣使者封住獅子的口」— 但以理書 6:22</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — THE GREAT STATUE  巨像異象
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-statue" aria-label="巨像異象 — The Great Statue">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="statue-shadow" aria-hidden="true"></div>
+
+  <!-- Nebuchadnezzar's dream: the great statue -->
+  <svg id="statue-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="尼布甲尼撒夢中的巨像 — Nebuchadnezzar's dream statue with gold, silver, bronze, iron, and clay">
+    <title>巨像異象 — The great statue from Nebuchadnezzar's dream being struck by a stone</title>
+    <defs>
+      <linearGradient id="dreamSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#141020"/>
+        <stop offset="60%" stop-color="#1e1830"/>
+        <stop offset="100%" stop-color="#282040"/>
+      </linearGradient>
+      <linearGradient id="goldHeadG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e8c840"/>
+        <stop offset="100%" stop-color="#c8a030"/>
+      </linearGradient>
+      <linearGradient id="silverChestG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c0c8d0"/>
+        <stop offset="100%" stop-color="#8890a0"/>
+      </linearGradient>
+      <linearGradient id="bronzeBellyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#b08840"/>
+        <stop offset="100%" stop-color="#806028"/>
+      </linearGradient>
+      <linearGradient id="ironLegsG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#707880"/>
+        <stop offset="100%" stop-color="#505860"/>
+      </linearGradient>
+      <linearGradient id="clayFeetG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#706050"/>
+        <stop offset="50%" stop-color="#605040"/>
+        <stop offset="100%" stop-color="#8a7060"/>
+      </linearGradient>
+    </defs>
+    <!-- Dream sky -->
+    <rect x="0" y="0" width="1440" height="500" fill="url(#dreamSkyG)"/>
+    <!-- Dream mist -->
+    <ellipse cx="720" cy="250" rx="500" ry="200" fill="rgba(100,80,160,.06)"/>
+    <!-- Ground -->
+    <path d="M0 420 Q360 405 720 415 Q1080 405 1440 420 L1440 500 L0 500 Z"
+          fill="rgba(30,25,40,.5)"/>
+
+    <!-- THE GREAT STATUE -->
+    <!-- Gold head -->
+    <ellipse cx="720" cy="108" rx="28" ry="32" fill="url(#goldHeadG)"/>
+    <!-- Gold crown -->
+    <path d="M695,82 L700,68 L710,78 L720,64 L730,78 L740,68 L745,82 Z" fill="#e8c840"/>
+    <!-- Face features -->
+    <circle cx="712" cy="105" r="2.5" fill="rgba(100,80,20,.4)"/>
+    <circle cx="728" cy="105" r="2.5" fill="rgba(100,80,20,.4)"/>
+    <path d="M714,118 Q720,122 726,118" stroke="rgba(100,80,20,.3)" stroke-width="1.5" fill="none"/>
+    <!-- Gold neck -->
+    <rect x="710" y="138" width="20" height="12" fill="#c8a030" rx="4"/>
+
+    <!-- Silver chest and arms -->
+    <path d="M690,150 Q680,180 670,210 Q660,230 650,240 L650,260 L668,260 Q676,235 685,210 L695,190
+            Q720,175 745,190 L755,210 Q764,235 772,260 L790,260 L790,240 Q780,230 770,210 Q760,180 750,150 Z"
+          fill="url(#silverChestG)"/>
+    <!-- Chest highlight -->
+    <ellipse cx="720" cy="180" rx="20" ry="15" fill="rgba(220,225,235,.15)"/>
+
+    <!-- Bronze belly and thighs -->
+    <path d="M694,210 Q688,250 685,280 Q682,300 685,310 L690,320 Q705,325 720,320 Q735,325 750,320
+            L755,310 Q758,300 755,280 Q752,250 746,210 Z"
+          fill="url(#bronzeBellyG)"/>
+    <!-- Belt line -->
+    <line x1="690" y1="215" x2="750" y2="215" stroke="rgba(160,120,50,.4)" stroke-width="2"/>
+
+    <!-- Iron legs -->
+    <rect x="693" y="320" width="22" height="80" fill="url(#ironLegsG)" rx="4"/>
+    <rect x="725" y="320" width="22" height="80" fill="url(#ironLegsG)" rx="4"/>
+    <!-- Knee joints -->
+    <ellipse cx="704" cy="360" rx="12" ry="4" fill="rgba(90,98,110,.3)"/>
+    <ellipse cx="736" cy="360" rx="12" ry="4" fill="rgba(90,98,110,.3)"/>
+
+    <!-- Clay + iron feet (mixed, cracked) -->
+    <path d="M685,400 Q688,415 690,428 L718,428 Q720,418 716,400 Z" fill="url(#clayFeetG)"/>
+    <path d="M724,400 Q720,418 722,428 L750,428 Q752,415 755,400 Z" fill="url(#clayFeetG)"/>
+    <!-- Crack lines in feet -->
+    <line x1="698" y1="408" x2="705" y2="425" stroke="rgba(40,30,20,.3)" stroke-width="1"/>
+    <line x1="735" y1="410" x2="740" y2="426" stroke="rgba(40,30,20,.3)" stroke-width="1"/>
+    <line x1="692" y1="418" x2="710" y2="420" stroke="rgba(60,50,40,.2)" stroke-width="1"/>
+    <line x1="730" y1="416" x2="748" y2="422" stroke="rgba(60,50,40,.2)" stroke-width="1"/>
+
+    <!-- THE STONE — cut without hands, striking the feet -->
+    <g style="animation:stoneStrike 3s ease-in-out infinite;">
+      <circle cx="660" cy="415" r="18" fill="rgba(120,110,100,.6)"/>
+      <circle cx="660" cy="415" r="14" fill="rgba(140,130,120,.4)"/>
+      <!-- Stone glow -->
+      <ellipse cx="660" cy="415" rx="30" ry="25" fill="rgba(200,180,255,.08)"/>
+      <!-- Impact lines -->
+      <line x1="676" y1="410" x2="685" y2="408" stroke="rgba(255,240,200,.15)" stroke-width="1.5"/>
+      <line x1="674" y1="420" x2="684" y2="422" stroke="rgba(255,240,200,.12)" stroke-width="1.5"/>
+      <line x1="678" y1="415" x2="686" y2="415" stroke="rgba(255,240,200,.18)" stroke-width="1"/>
+    </g>
+
+    <!-- Dream aura around statue -->
+    <ellipse cx="720" cy="260" rx="120" ry="180" fill="rgba(140,100,200,.04)"/>
+
+    <!-- Nebuchadnezzar watching (far left) -->
+    <g style="animation:gentleSway 6s ease-in-out infinite;">
+      <circle cx="250" cy="370" r="10" fill="#8a6838"/>
+      <!-- Crown -->
+      <path d="M240,364 L242,354 L246,360 L250,352 L254,360 L258,354 L260,364 Z" fill="#c8a030"/>
+      <!-- Royal robe -->
+      <path d="M242,380 Q238,400 236,428 Q242,430 248,428 L250,405 L252,428 Q258,430 264,428 Q262,400 258,380 Z"
+            fill="#4a2060"/>
+      <ellipse cx="248" cy="430" rx="6" ry="2.5" fill="#5a3028"/>
+      <ellipse cx="258" cy="430" rx="6" ry="2.5" fill="#5a3028"/>
+    </g>
+
+    <!-- Floating dream particles -->
+    <circle cx="500" cy="180" r="1.5" fill="rgba(160,140,220,.3)" style="animation:floatY 5s ease-in-out infinite;"/>
+    <circle cx="850" cy="200" r="1.5" fill="rgba(160,140,220,.25)" style="animation:floatY 6s ease-in-out .5s infinite;"/>
+    <circle cx="620" cy="150" r="1" fill="rgba(180,160,240,.3)" style="animation:floatY 4.5s ease-in-out 1s infinite;"/>
+    <circle cx="950" cy="170" r="1" fill="rgba(180,160,240,.2)" style="animation:floatY 5.5s ease-in-out 1.5s infinite;"/>
+  </svg>
+
+  <div class="scene-heading" id="statue-heading" aria-hidden="true">
+    <h2>🗿 巨像異象</h2>
+    <p>The Great Statue — Daniel 2</p>
+  </div>
+  <div class="scene-verse">「有一塊非人手鑿出來的石頭，打在這像半鐵半泥的腳上」— 但以理書 2:34</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — THE SON OF MAN  人子異象
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-sonofman" aria-label="人子異象 — The Son of Man">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="sonofman-glow" aria-hidden="true"></div>
+
+  <!-- Heavenly throne scene -->
+  <svg id="sonofman-svg" viewBox="0 0 1440 600" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="人子駕雲來到亘古常在者面前 — The Son of Man coming on clouds before the Ancient of Days">
+    <title>人子異象 — The Son of Man coming on clouds of heaven to the Ancient of Days on the throne</title>
+    <defs>
+      <linearGradient id="throneSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#14181e"/>
+        <stop offset="40%" stop-color="#1a2838"/>
+        <stop offset="100%" stop-color="#283848"/>
+      </linearGradient>
+      <radialGradient id="throneGlowG" cx="35%" cy="45%" r="40%">
+        <stop offset="0%" stop-color="rgba(255,255,240,.2)"/>
+        <stop offset="40%" stop-color="rgba(255,240,180,.08)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <radialGradient id="sonGlowG" cx="65%" cy="45%" r="30%">
+        <stop offset="0%" stop-color="rgba(255,220,120,.15)"/>
+        <stop offset="50%" stop-color="rgba(200,160,48,.05)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Sky -->
+    <rect x="0" y="0" width="1440" height="600" fill="url(#throneSkyG)"/>
+    <!-- Throne glow -->
+    <rect x="0" y="0" width="1440" height="600" fill="url(#throneGlowG)"/>
+    <rect x="0" y="0" width="1440" height="600" fill="url(#sonGlowG)"/>
+
+    <!-- Clouds layer (bottom) -->
+    <ellipse cx="400" cy="480" rx="250" ry="40" fill="rgba(200,210,230,.06)"/>
+    <ellipse cx="900" cy="470" rx="300" ry="45" fill="rgba(200,210,230,.05)"/>
+    <ellipse cx="1300" cy="490" rx="200" ry="35" fill="rgba(200,210,230,.04)"/>
+
+    <!-- Fire river before the throne (Daniel 7:10) -->
+    <path d="M300,420 Q400,415 500,418 Q600,412 700,416 L700,440 Q600,436 500,440 Q400,436 300,442 Z"
+          fill="rgba(255,160,40,.06)"/>
+    <path d="M300,425 Q450,420 600,424" stroke="rgba(255,180,60,.08)" stroke-width="3" fill="none"
+          stroke-dasharray="10,6"/>
+
+    <!-- ANCIENT OF DAYS — seated on throne (left of centre) -->
+    <!-- Throne structure -->
+    <rect x="420" y="270" width="120" height="150" rx="6" fill="rgba(255,255,240,.08)"/>
+    <path d="M410,270 Q480,230 550,270" fill="rgba(255,255,240,.06)"/>
+    <!-- Throne arms -->
+    <rect x="410" y="300" width="15" height="80" rx="4" fill="rgba(255,255,240,.06)"/>
+    <rect x="535" y="300" width="15" height="80" rx="4" fill="rgba(255,255,240,.06)"/>
+    <!-- Fiery throne wheels -->
+    <circle cx="440" cy="420" r="12" fill="none" stroke="rgba(255,180,60,.15)" stroke-width="2"/>
+    <circle cx="520" cy="420" r="12" fill="none" stroke="rgba(255,180,60,.15)" stroke-width="2"/>
+
+    <!-- Ancient of Days figure -->
+    <g style="animation:breathe 4s ease-in-out infinite;">
+      <!-- Bright glow -->
+      <ellipse cx="480" cy="330" rx="50" ry="70" fill="rgba(255,255,240,.06)"/>
+      <!-- Head -->
+      <circle cx="480" cy="290" r="16" fill="rgba(255,255,240,.3)"/>
+      <!-- White hair like wool -->
+      <path d="M464,286 Q470,272 480,268 Q490,272 496,286 L498,300 Q490,295 480,293 Q470,295 462,300 Z"
+            fill="rgba(255,255,255,.25)"/>
+      <path d="M464,298 Q472,310 480,314 Q488,310 496,298" fill="rgba(255,255,255,.15)"/>
+      <!-- White garment -->
+      <path d="M468,306 Q462,340 458,400 Q466,404 474,400 L478,360 L482,400 Q490,404 498,400 Q494,340 490,306 Z"
+            fill="rgba(255,255,255,.2)"/>
+      <!-- Brilliant white aura -->
+      <ellipse cx="480" cy="330" rx="35" ry="50" fill="rgba(255,255,240,.04)"/>
+    </g>
+
+    <!-- Clouds around the Son of Man (right) -->
+    <g style="animation:cloudDrift 8s ease-in-out infinite;">
+      <ellipse cx="920" cy="300" rx="100" ry="30" fill="rgba(200,210,230,.08)"/>
+      <ellipse cx="960" cy="280" rx="80" ry="25" fill="rgba(200,210,230,.06)"/>
+      <ellipse cx="880" cy="320" rx="90" ry="28" fill="rgba(200,210,230,.05)"/>
+    </g>
+    <g style="animation:cloudDrift 10s ease-in-out 2s infinite;">
+      <ellipse cx="1000" cy="340" rx="70" ry="22" fill="rgba(200,210,230,.05)"/>
+      <ellipse cx="860" cy="280" rx="60" ry="18" fill="rgba(200,210,230,.04)"/>
+    </g>
+
+    <!-- SON OF MAN — coming on clouds (right of centre) -->
+    <g style="animation:gloryShine 4s ease-in-out infinite;">
+      <!-- Golden glow -->
+      <ellipse cx="920" cy="310" rx="45" ry="65" fill="rgba(255,240,180,.08)"/>
+      <!-- Head -->
+      <circle cx="920" cy="275" r="14" fill="rgba(255,240,200,.35)"/>
+      <!-- Hair -->
+      <path d="M906,273 Q910,261 920,258 Q930,261 934,273 L936,283 Q930,278 920,276 Q910,278 904,283 Z"
+            fill="rgba(255,240,200,.2)"/>
+      <!-- Radiant robe -->
+      <path d="M908,289 Q904,320 900,370 Q908,374 916,370 L918,335 L922,370 Q930,374 938,370 Q934,320 930,289 Z"
+            fill="rgba(255,255,240,.2)"/>
+      <!-- Golden sash -->
+      <line x1="908" y1="300" x2="932" y2="300" stroke="rgba(200,160,48,.4)" stroke-width="2.5"/>
+      <!-- Arms extended -->
+      <path d="M906,295 L892,285 L886,280" stroke="rgba(255,240,200,.2)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M934,295 L948,285 L954,280" stroke="rgba(255,240,200,.2)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <!-- Radiant aura -->
+      <ellipse cx="920" cy="310" rx="60" ry="80" fill="rgba(255,240,160,.03)"/>
+    </g>
+
+    <!-- Thousands upon thousands attending (subtle figures) -->
+    <g opacity=".15">
+      <circle cx="200" cy="400" r="4" fill="#c8d0e0"/>
+      <circle cx="220" cy="405" r="4" fill="#c8d0e0"/>
+      <circle cx="240" cy="398" r="4" fill="#c8d0e0"/>
+      <circle cx="260" cy="408" r="4" fill="#c8d0e0"/>
+      <circle cx="280" cy="402" r="4" fill="#c8d0e0"/>
+      <circle cx="300" cy="410" r="4" fill="#c8d0e0"/>
+      <circle cx="320" cy="404" r="4" fill="#c8d0e0"/>
+      <circle cx="620" cy="435" r="4" fill="#c8d0e0"/>
+      <circle cx="640" cy="440" r="4" fill="#c8d0e0"/>
+      <circle cx="660" cy="432" r="4" fill="#c8d0e0"/>
+      <circle cx="780" cy="438" r="4" fill="#c8d0e0"/>
+      <circle cx="800" cy="442" r="4" fill="#c8d0e0"/>
+      <circle cx="1100" cy="430" r="4" fill="#c8d0e0"/>
+      <circle cx="1120" cy="436" r="4" fill="#c8d0e0"/>
+      <circle cx="1140" cy="428" r="4" fill="#c8d0e0"/>
+      <circle cx="1160" cy="438" r="4" fill="#c8d0e0"/>
+    </g>
+
+    <!-- Celestial particles -->
+    <circle cx="400" cy="200" r="2" fill="rgba(255,240,180,.3)" style="animation:floatY 4s ease-in-out infinite;"/>
+    <circle cx="600" cy="180" r="1.5" fill="rgba(255,240,180,.25)" style="animation:floatY 5s ease-in-out .5s infinite;"/>
+    <circle cx="800" cy="160" r="2" fill="rgba(255,240,180,.3)" style="animation:floatY 4.5s ease-in-out 1s infinite;"/>
+    <circle cx="1000" cy="200" r="1.5" fill="rgba(255,240,180,.25)" style="animation:floatY 5.5s ease-in-out 1.5s infinite;"/>
+    <circle cx="300" cy="250" r="1.8" fill="rgba(255,240,160,.2)" style="animation:floatY 6s ease-in-out .8s infinite;"/>
+    <circle cx="1100" cy="240" r="2" fill="rgba(255,240,160,.25)" style="animation:floatY 4s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <div class="scene-heading" id="sonofman-heading" aria-hidden="true">
+    <h2>👑 人子異象</h2>
+    <p>The Son of Man — Daniel 7</p>
+  </div>
+  <div class="scene-verse">「見有一位像人子的，駕著天雲而來」— 但以理書 7:13</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — THE ETERNAL KINGDOM  永恆國度
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-kingdom" aria-label="永恆國度 — The Eternal Kingdom">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="kingdom-ground" aria-hidden="true"></div>
+  <div id="kingdom-glow" aria-hidden="true"></div>
+
+  <!-- Starry sky with dawn horizon, figures shining like stars -->
+  <svg id="kingdom-svg" viewBox="0 0 1440 600" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-label="智慧人發光如天上的光 — The wise shining like stars in the eternal kingdom">
+    <title>永恆國度 — The wise shining like the brightness of the sky, like stars forever</title>
+    <defs>
+      <linearGradient id="dawnSkyG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#c8a030"/>
+        <stop offset="20%" stop-color="#6a5020"/>
+        <stop offset="50%" stop-color="#1a2040"/>
+        <stop offset="100%" stop-color="#141828"/>
+      </linearGradient>
+      <radialGradient id="dawnGlowG" cx="50%" cy="100%" r="60%">
+        <stop offset="0%" stop-color="rgba(255,220,120,.2)"/>
+        <stop offset="40%" stop-color="rgba(200,160,48,.08)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="horizonG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(200,160,48,.3)"/>
+        <stop offset="50%" stop-color="rgba(200,160,48,.1)"/>
+        <stop offset="100%" stop-color="rgba(20,24,40,.8)"/>
+      </linearGradient>
+    </defs>
+    <!-- Dawn sky -->
+    <rect x="0" y="0" width="1440" height="600" fill="url(#dawnSkyG)"/>
+    <!-- Dawn glow at horizon -->
+    <rect x="0" y="0" width="1440" height="600" fill="url(#dawnGlowG)"/>
+    <!-- Horizon line -->
+    <path d="M0 440 Q360 425 720 435 Q1080 425 1440 440 L1440 600 L0 600 Z"
+          fill="url(#horizonG)"/>
+    <!-- Horizon glow band -->
+    <ellipse cx="720" cy="440" rx="600" ry="30" fill="rgba(255,220,120,.08)"/>
+
+    <!-- Large bright stars (Daniel 12:3) -->
+    <g style="animation:starRise 4s ease-in-out infinite;">
+      <circle cx="720" cy="120" r="6" fill="rgba(255,240,180,.6)"/>
+      <ellipse cx="720" cy="120" rx="18" ry="18" fill="rgba(255,240,180,.1)"/>
+      <!-- Star rays -->
+      <line x1="720" y1="100" x2="720" y2="90" stroke="rgba(255,240,180,.3)" stroke-width="1.5"/>
+      <line x1="720" y1="140" x2="720" y2="150" stroke="rgba(255,240,180,.3)" stroke-width="1.5"/>
+      <line x1="700" y1="120" x2="690" y2="120" stroke="rgba(255,240,180,.3)" stroke-width="1.5"/>
+      <line x1="740" y1="120" x2="750" y2="120" stroke="rgba(255,240,180,.3)" stroke-width="1.5"/>
+    </g>
+    <g style="animation:starRise 5s ease-in-out .5s infinite;">
+      <circle cx="500" cy="160" r="4" fill="rgba(255,240,180,.5)"/>
+      <ellipse cx="500" cy="160" rx="12" ry="12" fill="rgba(255,240,180,.08)"/>
+    </g>
+    <g style="animation:starRise 4.5s ease-in-out 1s infinite;">
+      <circle cx="940" cy="140" r="4.5" fill="rgba(255,240,180,.5)"/>
+      <ellipse cx="940" cy="140" rx="14" ry="14" fill="rgba(255,240,180,.08)"/>
+    </g>
+    <g style="animation:starRise 5.5s ease-in-out 1.5s infinite;">
+      <circle cx="350" cy="200" r="3.5" fill="rgba(255,240,180,.45)"/>
+      <ellipse cx="350" cy="200" rx="10" ry="10" fill="rgba(255,240,180,.06)"/>
+    </g>
+    <g style="animation:starRise 4s ease-in-out 2s infinite;">
+      <circle cx="1100" cy="180" r="3.5" fill="rgba(255,240,180,.45)"/>
+      <ellipse cx="1100" cy="180" rx="10" ry="10" fill="rgba(255,240,180,.06)"/>
+    </g>
+
+    <!-- FIGURES RISING / SHINING (resurrection - Daniel 12:2-3) -->
+    <!-- Figure 1 (centre) — rising, glowing brightly -->
+    <g style="animation:starRise 4s ease-in-out infinite;">
+      <ellipse cx="720" cy="360" rx="20" ry="50" fill="rgba(255,240,180,.06)"/>
+      <circle cx="720" cy="330" r="10" fill="rgba(255,240,200,.3)"/>
+      <path d="M712,340 Q708,365 706,400 Q712,402 718,400 L720,370 L722,400 Q728,402 734,400 Q732,365 728,340 Z"
+            fill="rgba(255,255,240,.15)"/>
+      <!-- Radiance lines -->
+      <line x1="720" y1="318" x2="720" y2="308" stroke="rgba(255,240,180,.2)" stroke-width="1.5"/>
+      <line x1="708" y1="325" x2="700" y2="318" stroke="rgba(255,240,180,.15)" stroke-width="1"/>
+      <line x1="732" y1="325" x2="740" y2="318" stroke="rgba(255,240,180,.15)" stroke-width="1"/>
+    </g>
+
+    <!-- Figure 2 (left) -->
+    <g style="animation:starRise 5s ease-in-out .8s infinite;">
+      <ellipse cx="520" cy="370" rx="16" ry="40" fill="rgba(255,240,180,.04)"/>
+      <circle cx="520" cy="345" r="8" fill="rgba(255,240,200,.22)"/>
+      <path d="M514,353 Q510,375 508,400 Q514,402 520,400 L520,375 L522,400 Q526,402 530,400 Q528,375 526,353 Z"
+            fill="rgba(255,255,240,.1)"/>
+    </g>
+
+    <!-- Figure 3 (right) -->
+    <g style="animation:starRise 4.5s ease-in-out 1.2s infinite;">
+      <ellipse cx="920" cy="365" rx="16" ry="40" fill="rgba(255,240,180,.04)"/>
+      <circle cx="920" cy="340" r="8" fill="rgba(255,240,200,.22)"/>
+      <path d="M914,348 Q910,370 908,395 Q914,397 920,395 L920,370 L922,395 Q926,397 930,395 Q928,370 926,348 Z"
+            fill="rgba(255,255,240,.1)"/>
+    </g>
+
+    <!-- Figure 4 (far left) -->
+    <g style="animation:starRise 5.5s ease-in-out 1.6s infinite;">
+      <circle cx="320" cy="370" r="6" fill="rgba(255,240,200,.18)"/>
+      <path d="M316,376 Q314,392 312,410 Q316,412 320,410 L320,392 L322,410 Q324,412 326,410 Q324,392 324,376 Z"
+            fill="rgba(255,255,240,.08)"/>
+    </g>
+
+    <!-- Figure 5 (far right) -->
+    <g style="animation:starRise 4.8s ease-in-out 2s infinite;">
+      <circle cx="1120" cy="365" r="6" fill="rgba(255,240,200,.18)"/>
+      <path d="M1116,371 Q1114,387 1112,405 Q1116,407 1120,405 L1120,387 L1122,405 Q1124,407 1126,405 Q1124,387 1124,371 Z"
+            fill="rgba(255,255,240,.08)"/>
+    </g>
+
+    <!-- Golden horizon reflection -->
+    <ellipse cx="720" cy="480" rx="400" ry="40" fill="rgba(200,160,48,.06)"/>
+
+    <!-- Floating golden light particles -->
+    <circle cx="400" cy="280" r="2" fill="rgba(255,220,100,.3)" style="animation:floatY 4s ease-in-out infinite;"/>
+    <circle cx="600" cy="260" r="1.5" fill="rgba(255,220,100,.25)" style="animation:floatY 5s ease-in-out .5s infinite;"/>
+    <circle cx="840" cy="240" r="2" fill="rgba(255,220,100,.3)" style="animation:floatY 4.5s ease-in-out 1s infinite;"/>
+    <circle cx="1050" cy="270" r="1.5" fill="rgba(255,220,100,.25)" style="animation:floatY 5.5s ease-in-out 1.5s infinite;"/>
+    <circle cx="280" cy="310" r="1.8" fill="rgba(255,240,160,.2)" style="animation:floatY 6s ease-in-out .8s infinite;"/>
+    <circle cx="1200" cy="300" r="2" fill="rgba(255,240,160,.25)" style="animation:floatY 4s ease-in-out 2s infinite;"/>
+    <circle cx="180" cy="250" r="1.5" fill="rgba(255,220,100,.2)" style="animation:floatY 5s ease-in-out 1.2s infinite;"/>
+  </svg>
+
+  <div class="scene-heading" id="kingdom-heading" aria-hidden="true">
+    <h2>✨ 永恆國度</h2>
+    <p>The Eternal Kingdom — Daniel 12</p>
+  </div>
+  <div class="scene-verse">「智慧人必發光，如同天上的光」— 但以理書 12:3</div>
+</section>
+
+</body>
+</html>
