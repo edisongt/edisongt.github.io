@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>俄巴底亞書 · Obadiah</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #14100a;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+    @keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+    @keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.21), 564px 126px rgba(255,255,255,.26),
+        210px 347px rgba(255,255,255,.37), 1117px 45px rgba(255,255,255,.30),
+        66px 16px rgba(255,255,255,.20),  477px 259px rgba(255,255,255,.32),
+        1150px 102px rgba(255,255,255,.36), 1437px 280px rgba(255,255,255,.28),
+        920px 302px rgba(255,255,255,.24), 14px 389px rgba(255,255,255,.35),
+        1430px 217px rgba(255,255,255,.27), 319px 111px rgba(255,255,255,.38),
+        690px 53px rgba(255,255,255,.22),  199px 184px rgba(255,255,255,.34),
+        1237px 136px rgba(255,255,255,.35), 941px 275px rgba(255,255,255,.23),
+        776px 41px rgba(255,255,255,.30),  1288px 317px rgba(255,255,255,.36),
+        741px 296px rgba(255,255,255,.25),  143px 24px rgba(255,255,255,.33),
+        593px 41px rgba(255,255,255,.35),  207px 195px rgba(255,255,255,.24),
+        1302px 428px rgba(255,255,255,.28), 759px 182px rgba(255,255,255,.22),
+        547px 360px rgba(255,255,255,.37), 1328px 37px rgba(255,255,255,.30),
+        351px 274px rgba(255,255,255,.33), 335px 237px rgba(255,255,255,.26),
+        1311px 353px rgba(255,255,255,.30), 1403px 167px rgba(255,255,255,.35),
+        115px 118px rgba(255,255,255,.34), 647px 206px rgba(255,255,255,.23),
+        433px 468px rgba(255,255,255,.37), 645px 109px rgba(255,255,255,.33),
+        811px 453px rgba(255,255,255,.36), 940px 74px rgba(255,255,255,.23),
+        506px 382px rgba(255,255,255,.30), 539px 383px rgba(255,255,255,.29),
+        1196px 205px rgba(255,255,255,.28), 284px 261px rgba(255,255,255,.32),
+        97px 441px rgba(255,255,255,.20),  1286px 82px rgba(255,255,255,.35),
+        865px 306px rgba(255,255,255,.21), 782px 306px rgba(255,255,255,.38),
+        1084px 129px rgba(255,255,255,.37), 24px 349px rgba(255,255,255,.33),
+        1397px 454px rgba(255,255,255,.27), 547px 394px rgba(255,255,255,.32),
+        229px 151px rgba(255,255,255,.28), 930px 2px rgba(255,255,255,.38),
+        540px 498px rgba(255,255,255,.25), 366px 260px rgba(255,255,255,.36),
+        1281px 153px rgba(255,255,255,.34), 1040px 312px rgba(255,255,255,.22),
+        766px 391px rgba(255,255,255,.20), 1087px 471px rgba(255,255,255,.18),
+        664px 251px rgba(255,255,255,.21), 744px 450px rgba(255,255,255,.37),
+        630px 123px rgba(255,255,255,.23), 1162px 485px rgba(255,255,255,.22),
+        996px 418px rgba(255,255,255,.23), 1091px 393px rgba(255,255,255,.26),
+        1352px 244px rgba(255,255,255,.37), 339px 136px rgba(255,255,255,.28),
+        1243px 217px rgba(255,255,255,.38), 1105px 387px rgba(255,255,255,.33),
+        412px 366px rgba(255,255,255,.26), 1376px 333px rgba(255,255,255,.27),
+        1060px 232px rgba(255,255,255,.24), 461px 33px rgba(255,255,255,.27),
+        1205px 284px rgba(255,255,255,.22), 452px 4px rgba(255,255,255,.24),
+        1293px 31px rgba(255,255,255,.21), 65px 441px rgba(255,255,255,.27),
+        1053px 122px rgba(255,255,255,.24), 995px 110px rgba(255,255,255,.30),
+        1170px 296px rgba(255,255,255,.28), 969px 414px rgba(255,255,255,.25),
+        194px 50px rgba(255,255,255,.33),  726px 217px rgba(255,255,255,.26);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.45),  1324px 51px rgba(255,255,255,.38),
+        695px 410px rgba(255,255,255,.48), 510px 99px rgba(255,255,255,.40),
+        919px 72px rgba(255,255,255,.43),  571px 237px rgba(255,255,255,.38),
+        155px 227px rgba(255,255,255,.47), 1128px 51px rgba(255,255,255,.36),
+        1108px 429px rgba(255,255,255,.35), 192px 475px rgba(255,255,255,.46),
+        485px 86px rgba(255,255,255,.42),  986px 110px rgba(255,255,255,.48),
+        121px 85px rgba(255,255,255,.41),  800px 136px rgba(255,255,255,.49),
+        932px 147px rgba(255,255,255,.43), 1139px 339px rgba(255,255,255,.46),
+        318px 98px rgba(255,255,255,.39),  120px 297px rgba(255,255,255,.45),
+        125px 383px rgba(255,255,255,.39), 103px 300px rgba(255,255,255,.42),
+        1088px 81px rgba(255,255,255,.36), 1041px 42px rgba(255,255,255,.48),
+        141px 305px rgba(255,255,255,.36), 482px 207px rgba(255,255,255,.38),
+        1167px 127px rgba(255,255,255,.43), 82px 318px rgba(255,255,255,.36),
+        1347px 299px rgba(255,255,255,.43), 648px 479px rgba(255,255,255,.39),
+        1372px 367px rgba(255,255,255,.39), 544px 203px rgba(255,255,255,.38);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,220,230,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(139,69,19,.2);
+      border-color: rgba(139,69,19,.5);
+      color: #8b4513;
+      box-shadow: 0 0 20px rgba(139,69,19,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ── Obadiah-specific keyframes ── */
+    @keyframes cliffGlow {
+      0%,100% { opacity: .4; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .8; transform: translateX(-50%) scale(1.08); }
+    }
+    @keyframes rockPulse {
+      0%,100% { transform: translateY(0); opacity: .7; }
+      50%      { transform: translateY(-6px); opacity: 1; }
+    }
+    @keyframes flameSway {
+      0%,100% { transform: rotate(-2deg) translateY(0); }
+      50%      { transform: rotate(2deg) translateY(-3px); }
+    }
+    @keyframes sealShine {
+      0%,100% { opacity: .5; filter: brightness(1); }
+      50%      { opacity: 1;  filter: brightness(1.4); }
+    }
+    @keyframes divinePulse {
+      0%,100% { opacity: .3; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scale(1.12); }
+    }
+    @keyframes dustDrift {
+      0%   { transform: translateY(0) translateX(0); opacity: .4; }
+      50%  { transform: translateY(-20px) translateX(8px); opacity: .7; }
+      100% { transform: translateY(-40px) translateX(0); opacity: 0; }
+    }
+    @keyframes fireFlicker {
+      0%,100% { opacity: .3; transform: scaleY(1); }
+      50%      { opacity: .5; transform: scaleY(1.05); }
+    }
+    @keyframes judgmentGlow {
+      0%,100% { opacity: .4; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleX(1.08); }
+    }
+    @keyframes lightBeam {
+      0%,100% { opacity: .3; transform: translateX(-50%) scaleY(1); }
+      50%      { opacity: .6; transform: translateX(-50%) scaleY(1.08); }
+    }
+    @keyframes emberGlow {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #14100a 0%, #1e1610 40%, #261e14 70%, #14100a 100%);
+    }
+    #intro-ember-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(139,69,19,.12) 0%, rgba(120,50,10,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: emberGlow 4s ease-in-out infinite;
+    }
+    #intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#8b4513 0%,#c27a3a 45%,#5a2a0a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(139,69,19,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(139,69,19,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-cliff-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(120px,16vw,220px);
+    }
+    #intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — EDOM'S PRIDE 以東的驕傲
+    ══════════════════════════════════════════════ */
+    #scene-pride {
+      background: linear-gradient(180deg, #0e0a06 0%, #14100a 40%, #1e1610 70%, #0e0a06 100%);
+    }
+    #pride-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(139,69,19,.15) 0%, rgba(100,40,10,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #pride-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 8s ease-in-out infinite;
+    }
+    #pride-heading h2 {
+      color: #8b4513;
+      text-shadow: 0 0 22px rgba(139,69,19,.5);
+    }
+    #pride-heading p { color: rgba(139,69,19,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — BROTHER'S BETRAYAL 兄弟的背叛
+    ══════════════════════════════════════════════ */
+    #scene-betray {
+      background: linear-gradient(180deg, #160e06 0%, #241a0e 40%, #322414 70%, #241808 100%);
+    }
+    #betray-light-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(139,69,19,.18) 0%, rgba(120,50,10,.07) 45%, transparent 70%);
+      z-index: 3;
+      animation: divinePulse 3.5s ease-in-out infinite;
+    }
+    #betray-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+    #betray-heading h2 {
+      color: #8b4513;
+      text-shadow: 0 0 22px rgba(139,69,19,.6);
+    }
+    #betray-heading p { color: rgba(139,69,19,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — DECLARATION OF JUDGMENT 審判的宣告
+    ══════════════════════════════════════════════ */
+    #scene-declare {
+      background: linear-gradient(180deg, #100e0a 0%, #18140e 40%, #1e1a14 70%, #16140e 100%);
+    }
+    #declare-light-beam {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(80px,12vw,200px); height: 100%;
+      background: linear-gradient(180deg,rgba(180,100,40,0) 0%,rgba(139,69,19,.2) 30%,rgba(139,69,19,.35) 65%,transparent 100%);
+      z-index: 3; filter: blur(12px);
+      animation: lightBeam 3s ease-in-out infinite;
+    }
+    #declare-scene-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+    #declare-heading h2 {
+      color: #c27a3a;
+      text-shadow: 0 0 18px rgba(139,69,19,.5);
+    }
+    #declare-heading p { color: rgba(139,69,19,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — JUDGMENT ON NATIONS 萬國的審判
+    ══════════════════════════════════════════════ */
+    #scene-nations {
+      background: linear-gradient(180deg, #10100c 0%, #1a180e 35%, #242014 60%, #302a1c 85%, #242014 100%);
+    }
+    #nations-judgment-light {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(139,69,19,.15) 0%, rgba(120,50,10,.06) 50%, transparent 75%);
+      z-index: 3;
+      animation: judgmentGlow 4s ease-in-out infinite;
+    }
+    #nations-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+    #nations-heading h2 {
+      background: linear-gradient(120deg,#5a2a0a 0%,#c27a3a 50%,#3a1a06 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #nations-heading p { color: rgba(139,69,19,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — VICTORY ON MOUNT ZION 錫安山的得勝
+    ══════════════════════════════════════════════ */
+    #scene-zion {
+      background: linear-gradient(180deg, #1a1610 0%, #261e14 40%, #32281c 70%, #3a3024 100%);
+    }
+    #zion-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(180,100,40,0) 0%,rgba(139,69,19,.3) 25%,rgba(139,69,19,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: cliffGlow 2.5s ease-in-out infinite;
+    }
+    #zion-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(139,69,19,.08) 0%, rgba(120,50,10,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #zion-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(180px,28vw,380px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    #zion-heading h2 {
+      background: linear-gradient(120deg,#8b4513 0%,#c27a3a 50%,#5a2a0a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    #zion-heading p { color: rgba(139,69,19,.5); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"    aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-pride"    aria-label="以東的驕傲"></a>
+  <a class="nav-dot" href="#scene-betray"   aria-label="兄弟的背叛"></a>
+  <a class="nav-dot" href="#scene-declare"  aria-label="審判的宣告"></a>
+  <a class="nav-dot" href="#scene-nations"  aria-label="萬國的審判"></a>
+  <a class="nav-dot" href="#scene-zion"     aria-label="錫安山的得勝"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="俄巴底亞書 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="intro-ember-glow" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>俄巴底亞書</h1>
+    <p>Obadiah</p>
+    <span class="sub">驕傲 · 審判 · 以東 · 背叛 · 公義 · 復興</span>
+  </div>
+
+  <!-- Edom cliff fortress with eagle's nest silhouette -->
+  <svg id="intro-cliff-svg" viewBox="0 0 220 260" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="以東的懸崖要塞">
+    <!-- Rocky cliff base -->
+    <path d="M30,250 L40,180 L55,160 L70,170 L85,130 L100,110 L115,120 L130,100 L145,115
+             L160,90 L175,110 L185,140 L195,250 Z"
+          fill="#4a2a14" stroke="#5a3a1e" stroke-width="1"/>
+    <!-- Cliff face details -->
+    <path d="M55,160 L65,175 L75,165" fill="#3a1e0e" opacity=".6"/>
+    <path d="M130,100 L140,120 L150,108" fill="#3a1e0e" opacity=".5"/>
+    <path d="M85,130 L92,145 L100,135" fill="#3a1e0e" opacity=".5"/>
+    <!-- Fortress on cliff top -->
+    <rect x="120" y="72" width="50" height="28" rx="2" fill="#5a3a1e" stroke="#6a4a28" stroke-width="1"/>
+    <rect x="118" y="68" width="54" height="8" rx="1" fill="#6a4a28"/>
+    <!-- Fortress battlements -->
+    <rect x="120" y="62" width="8" height="10" fill="#5a3a1e"/>
+    <rect x="134" y="62" width="8" height="10" fill="#5a3a1e"/>
+    <rect x="148" y="62" width="8" height="10" fill="#5a3a1e"/>
+    <rect x="162" y="62" width="8" height="10" fill="#5a3a1e"/>
+    <!-- Tower -->
+    <rect x="138" y="40" width="14" height="32" rx="1" fill="#5a3a1e" stroke="#6a4a28" stroke-width=".5"/>
+    <rect x="136" y="36" width="18" height="6" rx="1" fill="#6a4a28"/>
+    <!-- Eagle soaring above -->
+    <path d="M75,35 Q85,20 95,28 Q100,32 110,25 Q105,35 95,38 Q90,40 85,35 Z"
+          fill="#5a4a30" opacity=".7" style="animation: gentleSway 4s ease-in-out infinite;"/>
+    <circle cx="92" cy="30" r="1" fill="#1a1008"/>
+    <!-- Rock crevices / cave openings -->
+    <ellipse cx="80" cy="185" rx="8" ry="5" fill="#1a0e06"/>
+    <ellipse cx="150" cy="155" rx="6" ry="4" fill="#1a0e06"/>
+    <ellipse cx="110" cy="200" rx="7" ry="4" fill="#1a0e06"/>
+    <!-- Fallen rocks at base -->
+    <ellipse cx="50" cy="248" rx="8" ry="4" fill="#3a2010" transform="rotate(-5 50 248)"/>
+    <ellipse cx="170" cy="246" rx="7" ry="3.5" fill="#3a2010" transform="rotate(8 170 246)"/>
+    <ellipse cx="100" cy="250" rx="6" ry="3" fill="#4a2a14"/>
+    <!-- Dust particles -->
+    <circle cx="90" cy="170" r="1.5" fill="rgba(139,69,19,.25)" style="animation: dustDrift 4s ease-out infinite;"/>
+    <circle cx="150" cy="140" r="1" fill="rgba(139,69,19,.2)" style="animation: dustDrift 5s ease-out 1.5s infinite;"/>
+    <circle cx="120" cy="160" r="1.2" fill="rgba(139,69,19,.22)" style="animation: dustDrift 4.5s ease-out .8s infinite;"/>
+    <!-- Faint glow around fortress -->
+    <ellipse cx="145" cy="85" rx="50" ry="35" fill="rgba(139,69,19,.04)"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="horizonG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#14100a"/>
+        <stop offset="100%" stop-color="#0a0806"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,170 240,190 Q360,160 480,185 Q600,150 720,175
+             Q840,145 960,170 Q1080,155 1200,180 Q1320,160 1440,190
+             L1440,300 L0,300 Z"
+          fill="url(#horizonG1)"/>
+    <circle cx="300" cy="178" r="2" fill="rgba(139,69,19,.3)" style="animation: emberGlow 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="165" r="1.5" fill="rgba(139,69,19,.25)" style="animation: emberGlow 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="172" r="1.8" fill="rgba(139,69,19,.2)" style="animation: emberGlow 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="180" r="2" fill="rgba(139,69,19,.3)" style="animation: emberGlow 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <div class="scroll-hint" aria-hidden="true">▽ 向下捲動 · Scroll ▽</div>
+  <div class="scene-verse">「住在磐石穴中、居所在高處的啊，你因心裡驕傲說：誰能將我拉下地去呢？」— 俄巴底亞書 1:3</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — EDOM'S PRIDE 以東的驕傲
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-pride" aria-label="以東的驕傲">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="pride-glow" aria-hidden="true"></div>
+
+  <!-- Towering red cliff with fortress at summit, eagle circling -->
+  <svg id="pride-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="以東驕傲的高處居所">
+    <defs>
+      <linearGradient id="prideCliffG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6a3a18"/>
+        <stop offset="100%" stop-color="#2a1408"/>
+      </linearGradient>
+      <radialGradient id="prideSkyG" cx="50%" cy="20%" r="45%">
+        <stop offset="0%" stop-color="rgba(139,69,19,.1)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Dark sky -->
+    <rect width="600" height="400" fill="#0e0a06"/>
+    <!-- Sky glow -->
+    <ellipse cx="300" cy="80" rx="250" ry="100" fill="url(#prideSkyG)"/>
+    <!-- Massive cliff / mountain -->
+    <path d="M150,400 L170,280 L190,220 L210,180 L240,130 L270,90 L300,60
+             L330,80 L360,120 L390,170 L410,220 L430,280 L450,400 Z"
+          fill="url(#prideCliffG)"/>
+    <!-- Cliff face strata layers -->
+    <path d="M200,200 Q250,195 300,190 Q350,195 400,200" stroke="rgba(90,50,20,.3)" stroke-width="1.5" fill="none"/>
+    <path d="M185,240 Q250,232 300,230 Q350,232 415,240" stroke="rgba(90,50,20,.3)" stroke-width="1.5" fill="none"/>
+    <path d="M175,280 Q250,272 300,270 Q350,272 425,280" stroke="rgba(90,50,20,.25)" stroke-width="1.5" fill="none"/>
+    <path d="M168,320 Q250,310 300,308 Q350,310 432,320" stroke="rgba(90,50,20,.2)" stroke-width="1.5" fill="none"/>
+    <!-- Fortress walls at summit -->
+    <rect x="255" y="48" width="90" height="22" rx="2" fill="#5a3a1e" stroke="#6a4a28" stroke-width="1"/>
+    <rect x="252" y="42" width="96" height="8" rx="1" fill="#6a4a28"/>
+    <!-- Battlements -->
+    <rect x="255" y="34" width="8" height="12" fill="#5a3a1e"/>
+    <rect x="270" y="34" width="8" height="12" fill="#5a3a1e"/>
+    <rect x="285" y="34" width="8" height="12" fill="#5a3a1e"/>
+    <rect x="300" y="34" width="8" height="12" fill="#5a3a1e"/>
+    <rect x="315" y="34" width="8" height="12" fill="#5a3a1e"/>
+    <rect x="330" y="34" width="8" height="12" fill="#5a3a1e"/>
+    <!-- Central tower -->
+    <rect x="283" y="15" width="18" height="27" rx="1" fill="#5a3a1e" stroke="#6a4a28" stroke-width=".5"/>
+    <rect x="280" y="10" width="24" height="7" rx="1" fill="#6a4a28"/>
+    <!-- Cave openings in cliff -->
+    <ellipse cx="240" cy="200" rx="12" ry="8" fill="#0e0806"/>
+    <ellipse cx="350" cy="185" rx="10" ry="7" fill="#0e0806"/>
+    <ellipse cx="280" cy="250" rx="14" ry="9" fill="#0e0806"/>
+    <ellipse cx="330" cy="300" rx="11" ry="7" fill="#0e0806"/>
+    <!-- Eagle soaring high -->
+    <g style="animation: gentleSway 5s ease-in-out infinite;">
+      <path d="M100,70 Q120,45 140,58 Q150,65 165,55 Q158,70 145,75 Q135,78 120,72 Z"
+            fill="#5a4a30" opacity=".6"/>
+      <circle cx="133" cy="62" r="1.5" fill="#1a0e06"/>
+    </g>
+    <!-- Second eagle in distance -->
+    <g style="animation: gentleSway 6s ease-in-out 2s infinite;">
+      <path d="M460,100 Q475,85 490,92 Q497,97 508,90 Q503,100 493,103 Q486,105 475,100 Z"
+            fill="#4a3a24" opacity=".4"/>
+    </g>
+    <!-- Ground terrain -->
+    <path d="M0,360 Q100,340 200,355 Q300,335 400,350 Q500,340 600,360 L600,400 L0,400 Z"
+          fill="#1a0e06"/>
+    <!-- Rocky debris -->
+    <ellipse cx="180" cy="385" rx="10" ry="5" fill="#2a1a0c"/>
+    <ellipse cx="420" cy="380" rx="12" ry="5" fill="#2a1a0c"/>
+    <ellipse cx="300" cy="390" rx="8" ry="4" fill="#2a1a0c"/>
+    <!-- Dust particles -->
+    <circle cx="280" cy="150" r="1.5" fill="rgba(139,69,19,.3)" style="animation: dustDrift 3.5s ease-out infinite;"/>
+    <circle cx="340" cy="130" r="1.2" fill="rgba(139,69,19,.25)" style="animation: dustDrift 4s ease-out 1s infinite;"/>
+    <circle cx="300" cy="100" r="1" fill="rgba(139,69,19,.2)" style="animation: dustDrift 4.5s ease-out 2s infinite;"/>
+    <!-- Warm glow on cliff face -->
+    <ellipse cx="300" cy="180" rx="80" ry="100" fill="rgba(139,69,19,.04)"/>
+  </svg>
+
+  <div class="scene-heading" id="pride-heading" aria-hidden="true">
+    <h2>🦅 以東的驕傲</h2>
+    <p>Edom's Pride — Obadiah 1:3-4</p>
+  </div>
+  <div class="scene-verse">「住在磐石穴中、居所在高處的啊，你因心裡驕傲說：誰能將我拉下地去呢？」— 俄巴底亞書 1:3</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — BROTHER'S BETRAYAL 兄弟的背叛
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-betray" aria-label="兄弟的背叛">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="betray-light-glow" aria-hidden="true"></div>
+
+  <!-- Jerusalem under attack with Edom watching from afar -->
+  <svg id="betray-scene-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="以東袖手旁觀耶路撒冷被攻">
+    <defs>
+      <linearGradient id="betraySkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#160e06"/>
+        <stop offset="60%" stop-color="#241a0e"/>
+        <stop offset="100%" stop-color="#160e06"/>
+      </linearGradient>
+      <radialGradient id="fireGlowG" cx="35%" cy="45%" r="30%">
+        <stop offset="0%" stop-color="rgba(200,80,20,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Sky -->
+    <rect width="1440" height="500" fill="url(#betraySkyG)"/>
+    <!-- Fire glow behind Jerusalem -->
+    <ellipse cx="480" cy="220" rx="300" ry="150" fill="url(#fireGlowG)"/>
+    <!-- Smoke rising -->
+    <ellipse cx="420" cy="140" rx="40" ry="25" fill="rgba(80,60,40,.15)" style="animation: dustDrift 6s ease-out infinite;"/>
+    <ellipse cx="500" cy="120" rx="35" ry="20" fill="rgba(80,60,40,.12)" style="animation: dustDrift 7s ease-out 1s infinite;"/>
+    <ellipse cx="460" cy="100" rx="30" ry="18" fill="rgba(80,60,40,.1)" style="animation: dustDrift 8s ease-out 2s infinite;"/>
+    <!-- Ground -->
+    <rect y="360" width="1440" height="140" fill="#160e06"/>
+    <!-- Jerusalem walls (left side, damaged) -->
+    <rect x="350" y="250" width="260" height="110" rx="3" fill="#4a3a20" stroke="#5a4220" stroke-width="1"/>
+    <!-- Broken wall sections -->
+    <path d="M350,250 L355,235 L370,245 L380,230 L400,248 L415,235 L430,250"
+          fill="#4a3a20" stroke="#5a4220" stroke-width="1"/>
+    <path d="M480,250 L490,238 L505,248 L515,232 L530,245 L545,235 L560,240 L570,250 L610,250"
+          fill="#4a3a20" stroke="#5a4220" stroke-width="1"/>
+    <!-- Breach in wall -->
+    <path d="M430,260 L440,310 L470,320 L460,260" fill="#1a0e06"/>
+    <!-- Fire flames on city -->
+    <g style="animation: flameSway 2s ease-in-out infinite;">
+      <path d="M400,245 Q405,220 410,230 Q415,210 420,225 Q425,205 430,230 Q435,245 400,245 Z"
+            fill="rgba(200,80,20,.3)"/>
+      <path d="M405,240 Q410,225 415,235 Q420,218 425,238 Z"
+            fill="rgba(240,120,30,.2)"/>
+    </g>
+    <g style="animation: flameSway 2.5s ease-in-out .5s infinite;">
+      <path d="M520,242 Q525,215 530,228 Q535,200 540,222 Q545,238 520,242 Z"
+            fill="rgba(200,80,20,.25)"/>
+      <path d="M525,238 Q530,220 535,232 Q540,215 542,235 Z"
+            fill="rgba(240,120,30,.18)"/>
+    </g>
+    <!-- Tower (partially destroyed) -->
+    <rect x="370" y="210" width="30" height="50" fill="#5a4220" rx="2"/>
+    <path d="M370,210 L380,195 L400,210" fill="#5a4220"/>
+    <rect x="375" y="230" width="8" height="10" fill="#1a0e06"/>
+    <!-- Edom watchers (right side, on hill, standing passively) -->
+    <path d="M950,360 Q1000,300 1050,290 Q1100,280 1150,300 Q1200,320 1250,360 L1250,400 L950,400 Z"
+          fill="#2a1a0c"/>
+    <!-- Edom figure 1 -->
+    <circle cx="1060" cy="268" r="10" fill="#5a3a1e"/>
+    <path d="M1052,278 L1050,330 Q1056,333 1062,330 L1060,310 L1068,330 Q1074,333 1078,330 L1072,278 Z" fill="#4a2a14"/>
+    <!-- Edom figure 2 (arms crossed) -->
+    <circle cx="1110" cy="278" r="9" fill="#5a3a1e"/>
+    <path d="M1103,287 L1101,335 Q1107,338 1113,335 L1111,315 L1118,335 Q1124,338 1128,335 L1121,287 Z" fill="#4a2a14"/>
+    <path d="M1103,295 Q1107,300 1121,295" stroke="#4a2a14" stroke-width="3" fill="none"/>
+    <!-- Edom figure 3 -->
+    <circle cx="1020" cy="288" r="8" fill="#5a3a1e"/>
+    <path d="M1014,296 L1012,340 Q1017,343 1022,340 L1020,322 L1027,340 Q1032,343 1036,340 L1030,296 Z" fill="#4a2a14"/>
+    <!-- Distance gap between Jerusalem and Edom -->
+    <path d="M700,380 Q800,370 900,375 Q950,372 1000,378" stroke="rgba(139,69,19,.06)" stroke-width="2" fill="none"/>
+    <!-- Foreground hills -->
+    <path d="M0,420 Q200,400 400,415 Q600,395 720,410 Q850,395 1050,415 Q1250,400 1440,420 L1440,500 L0,500 Z"
+          fill="#0e0806"/>
+    <!-- Ember particles from fire -->
+    <circle cx="430" cy="200" r="2" fill="rgba(200,80,20,.4)">
+      <animate attributeName="cy" values="210;160;210" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.5;.2" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="540" cy="190" r="1.5" fill="rgba(200,80,20,.3)">
+      <animate attributeName="cy" values="200;150;200" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".15;.45;.15" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="470" cy="180" r="2" fill="rgba(240,120,30,.35)">
+      <animate attributeName="cy" values="195;140;195" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.55;.2" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <div class="scene-heading" id="betray-heading" aria-hidden="true">
+    <h2>💔 兄弟的背叛</h2>
+    <p>Brother's Betrayal — Obadiah 1:10-11</p>
+  </div>
+  <div class="scene-verse">「你兄弟遭難的日子，你不當站在一旁」— 俄巴底亞書 1:11</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — DECLARATION OF JUDGMENT 審判的宣告
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-declare" aria-label="審判的宣告">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="declare-light-beam" aria-hidden="true"></div>
+
+  <!-- Scales of justice with divine light, Edom's fortress crumbling -->
+  <svg id="declare-scene-svg" viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="公義審判的天秤">
+    <defs>
+      <radialGradient id="declareGlowG" cx="50%" cy="35%" r="40%">
+        <stop offset="0%" stop-color="rgba(194,122,58,.2)"/>
+        <stop offset="40%" stop-color="rgba(139,69,19,.08)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="scaleG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8a6a3a"/>
+        <stop offset="100%" stop-color="#5a3a1e"/>
+      </linearGradient>
+    </defs>
+    <!-- Divine glow -->
+    <ellipse cx="200" cy="140" rx="160" ry="120" fill="url(#declareGlowG)"/>
+    <!-- Central pillar of scales -->
+    <rect x="196" y="80" width="8" height="180" fill="url(#scaleG)" rx="2"/>
+    <rect x="190" y="74" width="20" height="10" rx="3" fill="#8a6a3a"/>
+    <!-- Balance beam (tilted — Edom side is lower/heavier with guilt) -->
+    <line x1="80" y1="140" x2="320" y2="120" stroke="#8a6a3a" stroke-width="4" stroke-linecap="round"/>
+    <!-- Left chain (Edom — heavier, lower) -->
+    <line x1="80" y1="140" x2="80" y2="195" stroke="#6a4a28" stroke-width="2"/>
+    <line x1="60" y1="140" x2="60" y2="195" stroke="#6a4a28" stroke-width="2"/>
+    <line x1="100" y1="140" x2="100" y2="195" stroke="#6a4a28" stroke-width="2"/>
+    <!-- Left pan (Edom's sins — heavy) -->
+    <path d="M45,195 Q50,205 80,210 Q110,205 115,195 Z" fill="#6a4a28" stroke="#8a6a3a" stroke-width="1"/>
+    <!-- Symbols of sin on left pan -->
+    <circle cx="65" cy="200" r="4" fill="rgba(200,80,20,.4)"/>
+    <circle cx="80" cy="198" r="5" fill="rgba(180,60,15,.35)"/>
+    <circle cx="95" cy="200" r="4" fill="rgba(200,80,20,.3)"/>
+    <!-- Right chain (judgment — lighter, higher) -->
+    <line x1="300" y1="120" x2="300" y2="170" stroke="#6a4a28" stroke-width="2"/>
+    <line x1="320" y1="120" x2="320" y2="170" stroke="#6a4a28" stroke-width="2"/>
+    <line x1="340" y1="120" x2="340" y2="170" stroke="#6a4a28" stroke-width="2"/>
+    <!-- Right pan -->
+    <path d="M285,170 Q290,180 320,185 Q350,180 355,170 Z" fill="#6a4a28" stroke="#8a6a3a" stroke-width="1"/>
+    <!-- Sword of justice on right pan -->
+    <rect x="315" y="155" width="3" height="20" fill="#8a6a3a" transform="rotate(-15 316 165)"/>
+    <path d="M310,155 L317,148 L324,155 Z" fill="#c27a3a" transform="rotate(-15 317 152)"/>
+    <!-- Top ornament — divine eye/light -->
+    <circle cx="200" cy="68" r="12" fill="none" stroke="rgba(139,69,19,.3)" stroke-width="2"
+            style="animation: sealShine 3s ease-in-out infinite;"/>
+    <circle cx="200" cy="68" r="6" fill="rgba(194,122,58,.3)"
+            style="animation: sealShine 2.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="68" r="3" fill="rgba(194,122,58,.5)"/>
+    <!-- Light rays from top -->
+    <line x1="200" y1="50" x2="200" y2="20" stroke="rgba(139,69,19,.12)" stroke-width="2"/>
+    <line x1="188" y1="56" x2="160" y2="30" stroke="rgba(139,69,19,.08)" stroke-width="2"/>
+    <line x1="212" y1="56" x2="240" y2="30" stroke="rgba(139,69,19,.08)" stroke-width="2"/>
+    <!-- Crumbling cliff fragments below scales -->
+    <rect x="60" y="280" width="18" height="10" rx="2" fill="#3a1e0e" transform="rotate(-10 69 285)"
+          style="animation: rockPulse 5s ease-in-out infinite;"/>
+    <rect x="90" y="290" width="14" height="8" rx="2" fill="#4a2a14" transform="rotate(5 97 294)"/>
+    <rect x="280" y="275" width="16" height="9" rx="2" fill="#3a1e0e" transform="rotate(8 288 280)"/>
+    <rect x="310" y="288" width="12" height="7" rx="2" fill="#4a2a14" transform="rotate(-3 316 292)"/>
+    <!-- Base platform -->
+    <rect x="170" y="260" width="60" height="12" rx="3" fill="#5a3a1e"/>
+    <rect x="160" y="272" width="80" height="10" rx="3" fill="#4a2a14"/>
+    <!-- Radiating judgment rings -->
+    <circle cx="200" cy="150" r="60" fill="none" stroke="rgba(139,69,19,.06)" stroke-width="2"
+            style="animation: cliffGlow 3s ease-in-out infinite;"/>
+    <circle cx="200" cy="150" r="90" fill="none" stroke="rgba(139,69,19,.04)" stroke-width="2"
+            style="animation: cliffGlow 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="150" r="120" fill="none" stroke="rgba(139,69,19,.02)" stroke-width="2"
+            style="animation: cliffGlow 4s ease-in-out 1s infinite;"/>
+    <!-- Ground shadow -->
+    <ellipse cx="200" cy="310" rx="120" ry="8" fill="rgba(20,16,10,.5)"/>
+    <!-- Light particles -->
+    <circle cx="150" cy="110" r="2" fill="rgba(139,69,19,.4)">
+      <animate attributeName="opacity" values=".2;.6;.2" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="100" r="1.5" fill="rgba(139,69,19,.35)">
+      <animate attributeName="opacity" values=".15;.5;.15" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="90" r="2" fill="rgba(194,122,58,.4)">
+      <animate attributeName="opacity" values=".2;.65;.2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <div class="scene-heading" id="declare-heading" aria-hidden="true">
+    <h2>⚖️ 審判的宣告</h2>
+    <p>Declaration of Judgment — Obadiah 1:15</p>
+  </div>
+  <div class="scene-verse">「你怎樣行，他也必照樣向你行」— 俄巴底亞書 1:15</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — JUDGMENT ON NATIONS 萬國的審判
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-nations" aria-label="萬國的審判">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="nations-judgment-light" aria-hidden="true"></div>
+
+  <!-- Cup of judgment overflowing upon nations, crumbling thrones -->
+  <svg id="nations-scene-svg" viewBox="0 0 1440 420" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="萬國面臨審判的日子">
+    <defs>
+      <linearGradient id="nationsSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#14120a"/>
+        <stop offset="40%" stop-color="#1e1a0e"/>
+        <stop offset="70%" stop-color="#282014"/>
+        <stop offset="100%" stop-color="#342a1a"/>
+      </linearGradient>
+      <radialGradient id="cupGlowG" cx="50%" cy="40%" r="30%">
+        <stop offset="0%" stop-color="rgba(200,80,20,.12)"/>
+        <stop offset="50%" stop-color="rgba(139,69,19,.05)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Sky -->
+    <rect width="1440" height="420" fill="url(#nationsSkyG)"/>
+    <!-- Ominous glow -->
+    <ellipse cx="720" cy="170" rx="300" ry="120" fill="url(#cupGlowG)"/>
+    <!-- Ground / desolate land -->
+    <path d="M0,300 Q200,270 400,290 Q600,260 720,280 Q850,260 1050,290 Q1250,270 1440,300 L1440,420 L0,420 Z"
+          fill="#1e1608"/>
+    <path d="M0,330 Q180,310 360,325 Q540,300 720,315 Q900,300 1080,325 Q1260,310 1440,330 L1440,420 L0,420 Z"
+          fill="#161008"/>
+    <!-- Giant cup of judgment (center) -->
+    <path d="M660,160 L665,140 Q690,130 720,128 Q750,130 775,140 L780,160
+             L775,260 Q750,275 720,278 Q690,275 665,260 Z"
+          fill="#5a3a1e" stroke="#8a6a3a" stroke-width="1.5"/>
+    <!-- Cup inner glow -->
+    <ellipse cx="720" cy="148" rx="42" ry="12" fill="rgba(200,80,20,.2)"/>
+    <!-- Liquid overflowing -->
+    <path d="M665,155 Q660,160 655,175 Q650,190 660,200" stroke="rgba(200,80,20,.25)" stroke-width="3" fill="none"
+          style="animation: flameSway 3s ease-in-out infinite;"/>
+    <path d="M775,155 Q780,162 785,178 Q790,195 782,205" stroke="rgba(200,80,20,.25)" stroke-width="3" fill="none"
+          style="animation: flameSway 3.5s ease-in-out .5s infinite;"/>
+    <!-- Cup stem and base -->
+    <rect x="712" y="278" width="16" height="20" fill="#5a3a1e" rx="2"/>
+    <ellipse cx="720" cy="300" rx="30" ry="6" fill="#5a3a1e" stroke="#8a6a3a" stroke-width="1"/>
+    <!-- Falling crown (left — symbolizing fallen nation) -->
+    <g style="animation: dustDrift 5s ease-out infinite;">
+      <path d="M280,200 L290,180 L300,195 L310,175 L320,190 L330,172 L340,200 Z"
+            fill="#6a5a28" stroke="#8a7a3a" stroke-width="1" opacity=".5"/>
+    </g>
+    <!-- Crumbling throne (left) -->
+    <rect x="240" y="280" width="60" height="40" rx="2" fill="#3a2a14" transform="rotate(-5 270 300)"/>
+    <rect x="238" y="270" width="20" height="20" rx="1" fill="#4a3a1e" transform="rotate(-8 248 280)"/>
+    <rect x="282" y="272" width="20" height="18" rx="1" fill="#4a3a1e" transform="rotate(3 292 281)"/>
+    <!-- Crumbling throne (right) -->
+    <rect x="1080" y="275" width="55" height="38" rx="2" fill="#3a2a14" transform="rotate(4 1107 294)"/>
+    <rect x="1078" y="266" width="18" height="18" rx="1" fill="#4a3a1e" transform="rotate(6 1087 275)"/>
+    <rect x="1118" y="268" width="18" height="16" rx="1" fill="#4a3a1e" transform="rotate(-5 1127 276)"/>
+    <!-- Falling crown (right) -->
+    <g style="animation: dustDrift 6s ease-out 1.5s infinite;">
+      <path d="M1100,210 L1108,192 L1116,205 L1124,188 L1132,202 L1140,185 L1148,210 Z"
+            fill="#6a5a28" stroke="#8a7a3a" stroke-width="1" opacity=".45"/>
+    </g>
+    <!-- Scattered broken pillars (left) -->
+    <rect x="160" y="290" width="12" height="40" rx="2" fill="#3a2a14" transform="rotate(-20 166 310)"/>
+    <rect x="190" y="300" width="10" height="30" rx="2" fill="#4a3a1e" transform="rotate(15 195 315)"/>
+    <!-- Scattered broken pillars (right) -->
+    <rect x="1200" y="285" width="12" height="38" rx="2" fill="#3a2a14" transform="rotate(18 1206 304)"/>
+    <rect x="1230" y="295" width="10" height="28" rx="2" fill="#4a3a1e" transform="rotate(-12 1235 309)"/>
+    <!-- Foreground dark ground -->
+    <path d="M0,370 Q200,355 400,365 Q600,350 720,360 Q850,350 1050,365 Q1250,355 1440,370 L1440,420 L0,420 Z"
+          fill="#10100c"/>
+    <!-- Fire/judgment particles -->
+    <circle cx="500" cy="230" r="1.5" fill="rgba(200,80,20,.35)"/>
+    <circle cx="650" cy="200" r="1" fill="rgba(200,80,20,.25)"/>
+    <circle cx="800" cy="215" r="1.2" fill="rgba(200,80,20,.3)"/>
+    <circle cx="940" cy="240" r="1" fill="rgba(200,80,20,.25)"/>
+    <!-- Warm ominous stars -->
+    <circle cx="400" cy="100" r="1.5" fill="rgba(139,69,19,.4)"/>
+    <circle cx="560" cy="80" r="1" fill="rgba(139,69,19,.3)"/>
+    <circle cx="880" cy="90" r="1.2" fill="rgba(139,69,19,.35)"/>
+    <circle cx="1040" cy="110" r="1" fill="rgba(139,69,19,.3)"/>
+  </svg>
+
+  <div class="scene-heading" id="nations-heading" aria-hidden="true">
+    <h2>🔥 萬國的審判</h2>
+    <p>Judgment on Nations — Obadiah 1:15-16</p>
+  </div>
+  <div class="scene-verse">「耶和華降罰的日子臨近萬國」— 俄巴底亞書 1:15</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — VICTORY ON MOUNT ZION 錫安山的得勝
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-zion" aria-label="錫安山的得勝">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="zion-divine-light" aria-hidden="true"></div>
+  <div id="zion-glow" aria-hidden="true"></div>
+
+  <!-- Mount Zion with holy light, restored people gathering, banner of victory -->
+  <svg id="zion-scene-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="錫安山上的得勝與復興">
+    <defs>
+      <radialGradient id="zionGlowG" cx="50%" cy="30%" r="45%">
+        <stop offset="0%" stop-color="rgba(194,122,58,.2)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="zionMountG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6a5030"/>
+        <stop offset="100%" stop-color="#3a2818"/>
+      </linearGradient>
+    </defs>
+    <!-- Divine glow -->
+    <ellipse cx="200" cy="120" rx="160" ry="110" fill="url(#zionGlowG)"/>
+    <!-- Radiating holy light rings -->
+    <circle cx="200" cy="100" r="50" fill="none" stroke="rgba(139,69,19,.1)" stroke-width="2"
+            style="animation: cliffGlow 3s ease-in-out infinite;"/>
+    <circle cx="200" cy="100" r="80" fill="none" stroke="rgba(139,69,19,.07)" stroke-width="2"
+            style="animation: cliffGlow 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="100" r="110" fill="none" stroke="rgba(139,69,19,.04)" stroke-width="2"
+            style="animation: cliffGlow 4s ease-in-out 1s infinite;"/>
+    <!-- Light rays from above -->
+    <line x1="200" y1="10" x2="120" y2="160" stroke="rgba(139,69,19,.06)" stroke-width="5"/>
+    <line x1="200" y1="10" x2="160" y2="140" stroke="rgba(139,69,19,.08)" stroke-width="4"/>
+    <line x1="200" y1="10" x2="200" y2="120" stroke="rgba(139,69,19,.1)" stroke-width="3"/>
+    <line x1="200" y1="10" x2="240" y2="140" stroke="rgba(139,69,19,.08)" stroke-width="4"/>
+    <line x1="200" y1="10" x2="280" y2="160" stroke="rgba(139,69,19,.06)" stroke-width="5"/>
+    <!-- Mount Zion -->
+    <path d="M50,320 Q80,250 120,210 Q160,175 200,150
+             Q240,175 280,210 Q320,250 350,320 L400,370 L0,370 Z"
+          fill="url(#zionMountG)"/>
+    <!-- Mountain texture -->
+    <path d="M120,210 Q160,200 200,195 Q240,200 280,210" stroke="rgba(90,60,25,.2)" stroke-width="1" fill="none"/>
+    <path d="M90,260 Q150,248 200,245 Q250,248 310,260" stroke="rgba(90,60,25,.15)" stroke-width="1" fill="none"/>
+    <!-- Restored temple/altar at summit -->
+    <rect x="180" y="135" width="40" height="20" rx="2" fill="#6a5030" stroke="#8a6a3a" stroke-width="1"/>
+    <rect x="177" y="130" width="46" height="8" rx="2" fill="#8a6a3a"/>
+    <!-- Small pillars -->
+    <rect x="185" y="118" width="6" height="17" fill="#7a5a30" rx="1"/>
+    <rect x="209" y="118" width="6" height="17" fill="#7a5a30" rx="1"/>
+    <rect x="183" y="114" width="10" height="6" rx="1" fill="#8a6a3a"/>
+    <rect x="207" y="114" width="10" height="6" rx="1" fill="#8a6a3a"/>
+    <!-- Victory banner / flag -->
+    <rect x="198" y="85" width="4" height="35" fill="#6a4a28" rx="1"/>
+    <path d="M202,87 L230,95 L202,105 Z" fill="rgba(139,69,19,.5)" stroke="rgba(194,122,58,.4)" stroke-width="1"
+          style="animation: flameSway 3s ease-in-out infinite;"/>
+    <!-- Gathered people (restored Israel) -->
+    <!-- Person 1 -->
+    <circle cx="155" cy="225" r="7" fill="#5a4a2a"/>
+    <path d="M150,232 L148,268 Q153,271 158,268 L156,252 L162,268 Q167,271 170,268 L164,232 Z" fill="#4a3a1e"/>
+    <!-- Person 2 -->
+    <circle cx="200" cy="215" r="8" fill="#5a4a2a"/>
+    <path d="M194,223 L192,262 Q198,265 204,262 L202,245 L208,262 Q214,265 218,262 L210,223 Z" fill="#4a3a1e"/>
+    <!-- Person 3 -->
+    <circle cx="245" cy="225" r="7" fill="#5a4a2a"/>
+    <path d="M240,232 L238,268 Q243,271 248,268 L246,252 L252,268 Q257,271 260,268 L254,232 Z" fill="#4a3a1e"/>
+    <!-- Person 4 (arms raised in worship) -->
+    <circle cx="175" cy="240" r="6" fill="#5a4a2a"/>
+    <path d="M171,246 L169,278 Q174,280 179,278 L177,264 L183,278 Q188,280 191,278 L185,246 Z" fill="#4a3a1e"/>
+    <path d="M171,248 Q165,238 160,225" stroke="#4a3a1e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M185,248 Q191,238 196,225" stroke="#4a3a1e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Person 5 (arms raised) -->
+    <circle cx="225" cy="240" r="6" fill="#5a4a2a"/>
+    <path d="M221,246 L219,278 Q224,280 229,278 L227,264 L233,278 Q238,280 241,278 L235,246 Z" fill="#4a3a1e"/>
+    <path d="M221,248 Q215,238 210,225" stroke="#4a3a1e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M235,248 Q241,238 246,225" stroke="#4a3a1e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Holy glow at summit -->
+    <ellipse cx="200" cy="130" rx="35" ry="20" fill="rgba(194,122,58,.12)"
+             style="animation: sealShine 3s ease-in-out infinite;"/>
+    <ellipse cx="200" cy="130" rx="20" ry="12" fill="rgba(194,122,58,.08)"
+             style="animation: sealShine 2.5s ease-in-out .5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="200" cy="370" rx="180" ry="12" fill="rgba(20,16,10,.5)"/>
+    <!-- Sparkle particles of hope -->
+    <circle cx="170" cy="100" r="2" fill="rgba(194,122,58,.45)">
+      <animate attributeName="opacity" values=".2;.7;.2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="235" cy="95" r="1.5" fill="rgba(194,122,58,.4)">
+      <animate attributeName="opacity" values=".15;.6;.15" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="80" r="2.5" fill="rgba(194,122,58,.5)">
+      <animate attributeName="opacity" values=".2;.75;.2" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="150" cy="120" r="1.5" fill="rgba(194,122,58,.3)">
+      <animate attributeName="opacity" values=".1;.5;.1" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="255" cy="115" r="1.8" fill="rgba(194,122,58,.35)">
+      <animate attributeName="opacity" values=".15;.55;.15" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <div class="scene-heading" id="zion-heading" aria-hidden="true">
+    <h2>⛰️ 錫安山的得勝</h2>
+    <p>Victory on Mount Zion — Obadiah 1:17-21</p>
+  </div>
+  <div class="scene-verse">「在錫安山必有逃脫的人，那山也必成聖」— 俄巴底亞書 1:17</div>
+</section>
+
+</body>
+</html>
