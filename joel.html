@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>約珥書 · Joel</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #0e1420;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+    @keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+    @keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.21), 564px 126px rgba(255,255,255,.26),
+        210px 347px rgba(255,255,255,.37), 1117px 45px rgba(255,255,255,.30),
+        66px 16px rgba(255,255,255,.20),  477px 259px rgba(255,255,255,.32),
+        1150px 102px rgba(255,255,255,.36), 1437px 280px rgba(255,255,255,.28),
+        920px 302px rgba(255,255,255,.24), 14px 389px rgba(255,255,255,.35),
+        1430px 217px rgba(255,255,255,.27), 319px 111px rgba(255,255,255,.38),
+        690px 53px rgba(255,255,255,.22),  199px 184px rgba(255,255,255,.34),
+        1237px 136px rgba(255,255,255,.35), 941px 275px rgba(255,255,255,.23),
+        776px 41px rgba(255,255,255,.30),  1288px 317px rgba(255,255,255,.36),
+        741px 296px rgba(255,255,255,.25),  143px 24px rgba(255,255,255,.33),
+        593px 41px rgba(255,255,255,.35),  207px 195px rgba(255,255,255,.24),
+        1302px 428px rgba(255,255,255,.28), 759px 182px rgba(255,255,255,.22),
+        547px 360px rgba(255,255,255,.37), 1328px 37px rgba(255,255,255,.30),
+        351px 274px rgba(255,255,255,.33), 335px 237px rgba(255,255,255,.26),
+        1311px 353px rgba(255,255,255,.30), 1403px 167px rgba(255,255,255,.35),
+        115px 118px rgba(255,255,255,.34), 647px 206px rgba(255,255,255,.23),
+        433px 468px rgba(255,255,255,.37), 645px 109px rgba(255,255,255,.33),
+        811px 453px rgba(255,255,255,.36), 940px 74px rgba(255,255,255,.23),
+        506px 382px rgba(255,255,255,.30), 539px 383px rgba(255,255,255,.29),
+        1196px 205px rgba(255,255,255,.28), 284px 261px rgba(255,255,255,.32),
+        97px 441px rgba(255,255,255,.20),  1286px 82px rgba(255,255,255,.35),
+        865px 306px rgba(255,255,255,.21), 782px 306px rgba(255,255,255,.38),
+        1084px 129px rgba(255,255,255,.37), 24px 349px rgba(255,255,255,.33),
+        1397px 454px rgba(255,255,255,.27), 547px 394px rgba(255,255,255,.32),
+        229px 151px rgba(255,255,255,.28), 930px 2px rgba(255,255,255,.38),
+        540px 498px rgba(255,255,255,.25), 366px 260px rgba(255,255,255,.36),
+        1281px 153px rgba(255,255,255,.34), 1040px 312px rgba(255,255,255,.22),
+        766px 391px rgba(255,255,255,.20), 1087px 471px rgba(255,255,255,.18),
+        664px 251px rgba(255,255,255,.21), 744px 450px rgba(255,255,255,.37),
+        630px 123px rgba(255,255,255,.23), 1162px 485px rgba(255,255,255,.22),
+        996px 418px rgba(255,255,255,.23), 1091px 393px rgba(255,255,255,.26),
+        1352px 244px rgba(255,255,255,.37), 339px 136px rgba(255,255,255,.28),
+        1243px 217px rgba(255,255,255,.38), 1105px 387px rgba(255,255,255,.33),
+        412px 366px rgba(255,255,255,.26), 1376px 333px rgba(255,255,255,.27),
+        1060px 232px rgba(255,255,255,.24), 461px 33px rgba(255,255,255,.27),
+        1205px 284px rgba(255,255,255,.22), 452px 4px rgba(255,255,255,.24),
+        1293px 31px rgba(255,255,255,.21), 65px 441px rgba(255,255,255,.27),
+        1053px 122px rgba(255,255,255,.24), 995px 110px rgba(255,255,255,.30),
+        1170px 296px rgba(255,255,255,.28), 969px 414px rgba(255,255,255,.25),
+        194px 50px rgba(255,255,255,.33),  726px 217px rgba(255,255,255,.26);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.45),  1324px 51px rgba(255,255,255,.38),
+        695px 410px rgba(255,255,255,.48), 510px 99px rgba(255,255,255,.40),
+        919px 72px rgba(255,255,255,.43),  571px 237px rgba(255,255,255,.38),
+        155px 227px rgba(255,255,255,.47), 1128px 51px rgba(255,255,255,.36),
+        1108px 429px rgba(255,255,255,.35), 192px 475px rgba(255,255,255,.46),
+        485px 86px rgba(255,255,255,.42),  986px 110px rgba(255,255,255,.48),
+        121px 85px rgba(255,255,255,.41),  800px 136px rgba(255,255,255,.49),
+        932px 147px rgba(255,255,255,.43), 1139px 339px rgba(255,255,255,.46),
+        318px 98px rgba(255,255,255,.39),  120px 297px rgba(255,255,255,.45),
+        125px 383px rgba(255,255,255,.39), 103px 300px rgba(255,255,255,.42),
+        1088px 81px rgba(255,255,255,.36), 1041px 42px rgba(255,255,255,.48),
+        141px 305px rgba(255,255,255,.36), 482px 207px rgba(255,255,255,.38),
+        1167px 127px rgba(255,255,255,.43), 82px 318px rgba(255,255,255,.36),
+        1347px 299px rgba(255,255,255,.43), 648px 479px rgba(255,255,255,.39),
+        1372px 367px rgba(255,255,255,.39), 544px 203px rgba(255,255,255,.38);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,220,230,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(68,136,204,.2);
+      border-color: rgba(68,136,204,.5);
+      color: #4488cc;
+      box-shadow: 0 0 20px rgba(68,136,204,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ── Joel-specific keyframes ── */
+    @keyframes locustFly {
+      0%,100% { transform: translateY(0) translateX(0); opacity: .7; }
+      25%      { transform: translateY(-8px) translateX(4px); opacity: .9; }
+      50%      { transform: translateY(-3px) translateX(-3px); opacity: .8; }
+      75%      { transform: translateY(-10px) translateX(2px); opacity: .6; }
+    }
+    @keyframes swarmDrift {
+      0%,100% { transform: translateX(0) translateY(0); opacity: .5; }
+      50%      { transform: translateX(15px) translateY(-8px); opacity: .8; }
+    }
+    @keyframes tearPulse {
+      0%,100% { opacity: .4; transform: scale(1); }
+      50%      { opacity: .8; transform: scale(1.06); }
+    }
+    @keyframes fireGlow {
+      0%,100% { opacity: .5; filter: brightness(1); }
+      50%      { opacity: 1;  filter: brightness(1.4); }
+    }
+    @keyframes spiritPour {
+      0%   { transform: translateY(0); opacity: .3; }
+      50%  { transform: translateY(12px); opacity: .7; }
+      100% { transform: translateY(24px); opacity: 0; }
+    }
+    @keyframes spiritGlow {
+      0%,100% { opacity: .3; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scale(1.12); }
+    }
+    @keyframes darkSkyPulse {
+      0%,100% { opacity: .4; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .8; transform: translateX(-50%) scale(1.08); }
+    }
+    @keyframes waterFlow {
+      0%,100% { opacity: .3; transform: scaleX(1); }
+      50%      { opacity: .5; transform: scaleX(1.05); }
+    }
+    @keyframes mountainGlow {
+      0%,100% { opacity: .4; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleX(1.08); }
+    }
+    @keyframes emberGlow {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+    @keyframes dustDrift {
+      0%   { transform: translateY(0) translateX(0); opacity: .4; }
+      50%  { transform: translateY(-20px) translateX(8px); opacity: .7; }
+      100% { transform: translateY(-40px) translateX(0); opacity: 0; }
+    }
+    @keyframes heartBeat {
+      0%,100% { transform: scale(1); opacity: .7; }
+      15%      { transform: scale(1.12); opacity: 1; }
+      30%      { transform: scale(1); opacity: .7; }
+      45%      { transform: scale(1.08); opacity: .9; }
+    }
+    @keyframes lightBeam {
+      0%,100% { opacity: .3; transform: translateX(-50%) scaleY(1); }
+      50%      { opacity: .6; transform: translateX(-50%) scaleY(1.08); }
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #0e1420 0%, #121a2a 40%, #162030 70%, #0e1420 100%);
+    }
+    #intro-ember-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(68,136,204,.12) 0%, rgba(50,100,160,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: emberGlow 4s ease-in-out infinite;
+    }
+    #intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#4488cc 0%,#88ccff 45%,#2a5588 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(68,136,204,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(68,136,204,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-locust-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(120px,16vw,220px);
+    }
+    #intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — LOCUST PLAGUE 蝗蟲之災
+    ══════════════════════════════════════════════ */
+    #scene-locusts {
+      background: linear-gradient(180deg, #080c10 0%, #0e1420 40%, #141c28 70%, #080c10 100%);
+    }
+    #locusts-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(68,136,204,.15) 0%, rgba(40,80,130,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #locusts-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 8s ease-in-out infinite;
+    }
+    #locusts-heading h2 {
+      color: #4488cc;
+      text-shadow: 0 0 22px rgba(68,136,204,.5);
+    }
+    #locusts-heading p { color: rgba(68,136,204,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — CALL TO REPENTANCE 悔改的呼召
+    ══════════════════════════════════════════════ */
+    #scene-repent {
+      background: linear-gradient(180deg, #0c1018 0%, #141e2e 40%, #1c2838 70%, #141a24 100%);
+    }
+    #repent-light-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(68,136,204,.18) 0%, rgba(50,100,160,.07) 45%, transparent 70%);
+      z-index: 3;
+      animation: spiritGlow 3.5s ease-in-out infinite;
+    }
+    #repent-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+    #repent-heading h2 {
+      color: #4488cc;
+      text-shadow: 0 0 22px rgba(68,136,204,.6);
+    }
+    #repent-heading p { color: rgba(68,136,204,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — DAY OF THE LORD 耶和華的日子
+    ══════════════════════════════════════════════ */
+    #scene-day {
+      background: linear-gradient(180deg, #0a0e14 0%, #10161e 40%, #161e28 70%, #0e1420 100%);
+    }
+    #day-light-beam {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(80px,12vw,200px); height: 100%;
+      background: linear-gradient(180deg,rgba(100,180,255,0) 0%,rgba(68,136,204,.2) 30%,rgba(68,136,204,.35) 65%,transparent 100%);
+      z-index: 3; filter: blur(12px);
+      animation: lightBeam 3s ease-in-out infinite;
+    }
+    #day-scene-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+    #day-heading h2 {
+      color: #88ccff;
+      text-shadow: 0 0 18px rgba(68,136,204,.5);
+    }
+    #day-heading p { color: rgba(68,136,204,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — OUTPOURING OF THE SPIRIT 聖靈澆灌
+    ══════════════════════════════════════════════ */
+    #scene-spirit {
+      background: linear-gradient(180deg, #0c1220 0%, #141e30 35%, #1c2840 60%, #243450 85%, #1c2840 100%);
+    }
+    #spirit-pour-light {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(68,136,204,.15) 0%, rgba(50,100,160,.06) 50%, transparent 75%);
+      z-index: 3;
+      animation: mountainGlow 4s ease-in-out infinite;
+    }
+    #spirit-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+    #spirit-heading h2 {
+      background: linear-gradient(120deg,#2a5588 0%,#88ccff 50%,#1a3a60 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #spirit-heading p { color: rgba(68,136,204,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — RESTORATION & JUDGMENT 復興與審判
+    ══════════════════════════════════════════════ */
+    #scene-restore {
+      background: linear-gradient(180deg, #101824 0%, #182436 40%, #203050 70%, #2a3c58 100%);
+    }
+    #restore-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(100,180,255,0) 0%,rgba(68,136,204,.3) 25%,rgba(68,136,204,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: darkSkyPulse 2.5s ease-in-out infinite;
+    }
+    #restore-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(68,136,204,.08) 0%, rgba(50,100,160,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #restore-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(180px,28vw,380px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    #restore-heading h2 {
+      background: linear-gradient(120deg,#4488cc 0%,#88ddff 50%,#2a5588 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    #restore-heading p { color: rgba(68,136,204,.5); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"    aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-locusts"  aria-label="蝗蟲之災"></a>
+  <a class="nav-dot" href="#scene-repent"   aria-label="悔改的呼召"></a>
+  <a class="nav-dot" href="#scene-day"      aria-label="耶和華的日子"></a>
+  <a class="nav-dot" href="#scene-spirit"   aria-label="聖靈澆灌"></a>
+  <a class="nav-dot" href="#scene-restore"  aria-label="復興與審判"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="約珥書 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="intro-ember-glow" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>約珥書</h1>
+    <p>Joel</p>
+    <span class="sub">蝗災 · 悔改 · 審判 · 聖靈 · 復興 · 末日</span>
+  </div>
+
+  <!-- Locust swarm silhouette over barren field -->
+  <svg id="intro-locust-svg" viewBox="0 0 220 260" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="蝗蟲群">
+    <!-- Barren tree trunk -->
+    <rect x="95" y="150" width="12" height="70" rx="3" fill="#2a3a4a"/>
+    <rect x="88" y="220" width="26" height="8" rx="3" fill="#1e2e3e"/>
+    <!-- Dead branches -->
+    <path d="M101,150 Q85,130 70,120" stroke="#2a3a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M101,155 Q120,135 140,125" stroke="#2a3a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M101,165 Q80,150 65,148" stroke="#2a3a4a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M101,170 Q125,155 145,150" stroke="#2a3a4a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M70,120 Q60,110 55,100" stroke="#2a3a4a" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M140,125 Q150,115 155,105" stroke="#2a3a4a" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Stripped leaf remnants -->
+    <path d="M68,122 Q62,118 60,125" stroke="#1a2a1a" stroke-width="1" fill="none" opacity=".4"/>
+    <path d="M142,127 Q148,123 146,130" stroke="#1a2a1a" stroke-width="1" fill="none" opacity=".4"/>
+    <!-- Locust 1 (large, on branch) -->
+    <g style="animation: locustFly 3s ease-in-out infinite;">
+      <ellipse cx="80" cy="115" rx="8" ry="4" fill="#3a5030"/>
+      <ellipse cx="73" cy="115" rx="4" ry="3" fill="#4a6040"/>
+      <path d="M88,113 Q95,108 100,112" stroke="#3a5030" stroke-width="1" fill="none" opacity=".6"/>
+      <path d="M88,117 Q95,122 100,118" stroke="#3a5030" stroke-width="1" fill="none" opacity=".6"/>
+      <line x1="70" y1="113" x2="64" y2="108" stroke="#3a5030" stroke-width=".8"/>
+      <line x1="70" y1="114" x2="63" y2="111" stroke="#3a5030" stroke-width=".8"/>
+    </g>
+    <!-- Locust 2 (flying) -->
+    <g style="animation: locustFly 2.5s ease-in-out .5s infinite;">
+      <ellipse cx="140" cy="90" rx="7" ry="3.5" fill="#3a5030"/>
+      <ellipse cx="134" cy="90" rx="3.5" ry="2.5" fill="#4a6040"/>
+      <path d="M147,88 Q153,83 158,87" stroke="#3a5030" stroke-width="1" fill="none" opacity=".5"/>
+      <path d="M147,92 Q153,97 158,93" stroke="#3a5030" stroke-width="1" fill="none" opacity=".5"/>
+    </g>
+    <!-- Locust 3 (small, flying) -->
+    <g style="animation: locustFly 3.5s ease-in-out 1s infinite;">
+      <ellipse cx="50" cy="80" rx="5" ry="2.5" fill="#3a5030" opacity=".7"/>
+      <ellipse cx="46" cy="80" rx="2.5" ry="2" fill="#4a6040" opacity=".7"/>
+      <path d="M55,78 Q59,75 62,78" stroke="#3a5030" stroke-width=".8" fill="none" opacity=".4"/>
+      <path d="M55,82 Q59,85 62,82" stroke="#3a5030" stroke-width=".8" fill="none" opacity=".4"/>
+    </g>
+    <!-- Locust 4 -->
+    <g style="animation: locustFly 2.8s ease-in-out 1.5s infinite;">
+      <ellipse cx="160" cy="70" rx="5" ry="2.5" fill="#3a5030" opacity=".6"/>
+      <ellipse cx="156" cy="70" rx="2.5" ry="2" fill="#4a6040" opacity=".6"/>
+    </g>
+    <!-- Locust 5 -->
+    <g style="animation: locustFly 3.2s ease-in-out 2s infinite;">
+      <ellipse cx="110" cy="100" rx="6" ry="3" fill="#3a5030" opacity=".65"/>
+      <ellipse cx="105" cy="100" rx="3" ry="2.2" fill="#4a6040" opacity=".65"/>
+      <path d="M116,98 Q121,94 125,97" stroke="#3a5030" stroke-width=".8" fill="none" opacity=".4"/>
+      <path d="M116,102 Q121,106 125,103" stroke="#3a5030" stroke-width=".8" fill="none" opacity=".4"/>
+    </g>
+    <!-- Ground debris -->
+    <ellipse cx="110" cy="235" rx="50" ry="3" fill="rgba(68,136,204,.04)"/>
+    <!-- Faint dust -->
+    <circle cx="90" cy="200" r="1.5" fill="rgba(68,136,204,.2)" style="animation: dustDrift 4s ease-out infinite;"/>
+    <circle cx="130" cy="195" r="1" fill="rgba(68,136,204,.15)" style="animation: dustDrift 5s ease-out 1.5s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="horizonG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0e1420"/>
+        <stop offset="100%" stop-color="#080c14"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,170 240,190 Q360,160 480,185 Q600,150 720,175
+             Q840,145 960,170 Q1080,155 1200,180 Q1320,160 1440,190
+             L1440,300 L0,300 Z"
+          fill="url(#horizonG1)"/>
+    <circle cx="300" cy="178" r="2" fill="rgba(68,136,204,.3)" style="animation: emberGlow 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="165" r="1.5" fill="rgba(68,136,204,.25)" style="animation: emberGlow 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="172" r="1.8" fill="rgba(68,136,204,.2)" style="animation: emberGlow 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="180" r="2" fill="rgba(68,136,204,.3)" style="animation: emberGlow 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <div class="scroll-hint" aria-hidden="true">▽ 向下捲動 · Scroll ▽</div>
+  <div class="scene-verse">「耶和華的日子將到，已經臨近」— 約珥書 2:1</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — LOCUST PLAGUE 蝗蟲之災
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-locusts" aria-label="蝗蟲之災">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="locusts-glow" aria-hidden="true"></div>
+
+  <!-- Devastated farmland with locust swarm darkening the sky -->
+  <svg id="locusts-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="蝗蟲吞噬田地">
+    <defs>
+      <linearGradient id="locustSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a2030"/>
+        <stop offset="100%" stop-color="#0e1420"/>
+      </linearGradient>
+      <linearGradient id="fieldG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a2418"/>
+        <stop offset="100%" stop-color="#1a1610"/>
+      </linearGradient>
+    </defs>
+    <!-- Dark sky -->
+    <rect width="600" height="400" fill="url(#locustSkyG)"/>
+    <!-- Barren field -->
+    <path d="M0,260 Q100,240 200,250 Q300,235 400,248 Q500,235 600,260 L600,400 L0,400 Z"
+          fill="url(#fieldG)"/>
+    <!-- Stripped crops (bare stalks) -->
+    <line x1="80" y1="260" x2="80" y2="230" stroke="#3a3020" stroke-width="2"/>
+    <line x1="100" y1="255" x2="100" y2="225" stroke="#3a3020" stroke-width="2"/>
+    <line x1="120" y1="252" x2="120" y2="220" stroke="#3a3020" stroke-width="2"/>
+    <line x1="140" y1="250" x2="140" y2="218" stroke="#3a3020" stroke-width="2"/>
+    <line x1="160" y1="248" x2="160" y2="216" stroke="#3a3020" stroke-width="2"/>
+    <line x1="420" y1="248" x2="420" y2="215" stroke="#3a3020" stroke-width="2"/>
+    <line x1="440" y1="246" x2="440" y2="213" stroke="#3a3020" stroke-width="2"/>
+    <line x1="460" y1="244" x2="460" y2="210" stroke="#3a3020" stroke-width="2"/>
+    <line x1="480" y1="246" x2="480" y2="214" stroke="#3a3020" stroke-width="2"/>
+    <line x1="500" y1="250" x2="500" y2="218" stroke="#3a3020" stroke-width="2"/>
+    <!-- Dead tree left -->
+    <rect x="210" y="200" width="8" height="60" rx="2" fill="#2a2218"/>
+    <path d="M214,200 Q200,180 190,170" stroke="#2a2218" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M214,205 Q225,185 235,175" stroke="#2a2218" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M190,170 Q183,160 180,150" stroke="#2a2218" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Dead tree right -->
+    <rect x="370" y="195" width="8" height="55" rx="2" fill="#2a2218"/>
+    <path d="M374,195 Q360,175 350,165" stroke="#2a2218" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M374,200 Q385,180 395,170" stroke="#2a2218" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Massive locust swarm (wave pattern in sky) -->
+    <g style="animation: swarmDrift 5s ease-in-out infinite;">
+      <!-- Swarm cloud -->
+      <ellipse cx="300" cy="100" rx="180" ry="50" fill="rgba(40,50,30,.3)"/>
+      <ellipse cx="250" cy="85" rx="120" ry="35" fill="rgba(50,60,35,.25)"/>
+      <ellipse cx="360" cy="110" rx="130" ry="40" fill="rgba(45,55,32,.2)"/>
+      <!-- Individual locusts in swarm -->
+      <ellipse cx="220" cy="90" rx="5" ry="2.5" fill="#3a5030" opacity=".6"/>
+      <ellipse cx="260" cy="80" rx="4" ry="2" fill="#4a6040" opacity=".5"/>
+      <ellipse cx="300" cy="95" rx="5" ry="2.5" fill="#3a5030" opacity=".6"/>
+      <ellipse cx="340" cy="85" rx="4" ry="2" fill="#4a6040" opacity=".5"/>
+      <ellipse cx="380" cy="100" rx="5" ry="2.5" fill="#3a5030" opacity=".55"/>
+      <ellipse cx="280" cy="105" rx="4.5" ry="2.2" fill="#3a5030" opacity=".5"/>
+      <ellipse cx="320" cy="75" rx="4" ry="2" fill="#4a6040" opacity=".45"/>
+      <ellipse cx="200" cy="100" rx="3.5" ry="1.8" fill="#3a5030" opacity=".45"/>
+      <ellipse cx="400" cy="90" rx="3.5" ry="1.8" fill="#3a5030" opacity=".45"/>
+      <ellipse cx="240" cy="110" rx="4" ry="2" fill="#4a6040" opacity=".4"/>
+      <ellipse cx="360" cy="120" rx="4" ry="2" fill="#3a5030" opacity=".4"/>
+    </g>
+    <!-- Flying locusts (foreground, larger) -->
+    <g style="animation: locustFly 2.5s ease-in-out infinite;">
+      <ellipse cx="180" cy="160" rx="8" ry="4" fill="#3a5030"/>
+      <ellipse cx="173" cy="160" rx="4" ry="3" fill="#4a6040"/>
+      <path d="M188,158 Q195,153 200,157" stroke="#3a5030" stroke-width="1.2" fill="none"/>
+      <path d="M188,162 Q195,167 200,163" stroke="#3a5030" stroke-width="1.2" fill="none"/>
+    </g>
+    <g style="animation: locustFly 3s ease-in-out .8s infinite;">
+      <ellipse cx="400" cy="150" rx="7" ry="3.5" fill="#3a5030"/>
+      <ellipse cx="394" cy="150" rx="3.5" ry="2.5" fill="#4a6040"/>
+      <path d="M407,148 Q413,143 417,147" stroke="#3a5030" stroke-width="1" fill="none"/>
+      <path d="M407,152 Q413,157 417,153" stroke="#3a5030" stroke-width="1" fill="none"/>
+    </g>
+    <g style="animation: locustFly 2.8s ease-in-out 1.5s infinite;">
+      <ellipse cx="300" cy="180" rx="6" ry="3" fill="#3a5030" opacity=".7"/>
+      <ellipse cx="295" cy="180" rx="3" ry="2.2" fill="#4a6040" opacity=".7"/>
+    </g>
+    <!-- Locust on crop stalk -->
+    <g>
+      <ellipse cx="142" cy="220" rx="5" ry="2.5" fill="#3a5030"/>
+      <ellipse cx="138" cy="220" rx="2.5" ry="2" fill="#4a6040"/>
+      <line x1="135" y1="222" x2="132" y2="226" stroke="#3a5030" stroke-width=".8"/>
+      <line x1="136" y1="218" x2="133" y2="214" stroke="#3a5030" stroke-width=".8"/>
+    </g>
+    <!-- Barren ground details -->
+    <path d="M50,300 Q80,295 110,300" stroke="rgba(42,34,24,.4)" stroke-width="1" fill="none"/>
+    <path d="M250,290 Q280,285 310,290" stroke="rgba(42,34,24,.4)" stroke-width="1" fill="none"/>
+    <path d="M450,295 Q480,290 510,295" stroke="rgba(42,34,24,.4)" stroke-width="1" fill="none"/>
+    <!-- Warm devastation glow -->
+    <ellipse cx="300" cy="250" rx="150" ry="60" fill="rgba(68,136,204,.04)"/>
+  </svg>
+
+  <div class="scene-heading" id="locusts-heading" aria-hidden="true">
+    <h2>🦗 蝗蟲之災</h2>
+    <p>The Locust Plague — Joel 1:4</p>
+  </div>
+  <div class="scene-verse">「剪蟲剩下的，蝗蟲來吃」— 約珥書 1:4</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — CALL TO REPENTANCE 悔改的呼召
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-repent" aria-label="悔改的呼召">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="repent-light-glow" aria-hidden="true"></div>
+
+  <!-- People kneeling in repentance, torn garments, divine light from above -->
+  <svg id="repent-scene-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="百姓撕裂心腸悔改">
+    <defs>
+      <linearGradient id="repentSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0c1018"/>
+        <stop offset="60%" stop-color="#141e2e"/>
+        <stop offset="100%" stop-color="#0c1018"/>
+      </linearGradient>
+      <radialGradient id="repentLightG" cx="50%" cy="12%" r="40%">
+        <stop offset="0%" stop-color="rgba(68,136,204,.2)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Sky -->
+    <rect width="1440" height="500" fill="url(#repentSkyG)"/>
+    <!-- Divine light from above -->
+    <ellipse cx="720" cy="60" rx="300" ry="120" fill="url(#repentLightG)"/>
+    <!-- Light rays -->
+    <line x1="720" y1="20" x2="520" y2="240" stroke="rgba(68,136,204,.06)" stroke-width="6"/>
+    <line x1="720" y1="20" x2="620" y2="210" stroke="rgba(68,136,204,.08)" stroke-width="5"/>
+    <line x1="720" y1="20" x2="720" y2="190" stroke="rgba(68,136,204,.1)" stroke-width="4"/>
+    <line x1="720" y1="20" x2="820" y2="210" stroke="rgba(68,136,204,.08)" stroke-width="5"/>
+    <line x1="720" y1="20" x2="920" y2="240" stroke="rgba(68,136,204,.06)" stroke-width="6"/>
+    <!-- Ground -->
+    <rect y="380" width="1440" height="120" fill="#0c1018"/>
+    <!-- Heart symbol (torn) — center -->
+    <g style="animation: heartBeat 4s ease-in-out infinite;">
+      <path d="M700,160 Q700,130 720,120 Q740,130 740,160 L720,185 Z" fill="rgba(180,60,60,.25)" stroke="rgba(200,80,80,.3)" stroke-width="1.5"/>
+      <line x1="720" y1="130" x2="720" y2="180" stroke="rgba(255,255,255,.15)" stroke-width="1.5" stroke-dasharray="3,4"/>
+    </g>
+    <!-- Kneeling person 1 -->
+    <circle cx="580" cy="310" r="13" fill="#3a4a5a"/>
+    <path d="M570,323 L568,355 Q574,358 580,358 Q586,358 592,355 L590,323 Z" fill="#2a3a4a"/>
+    <path d="M568,355 L560,380 Q572,383 580,380" fill="#2a3a4a"/>
+    <path d="M592,355 L600,380 Q588,383 580,380" fill="#2a3a4a"/>
+    <path d="M570,326 Q560,335 555,340" stroke="#2a3a4a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M590,326 Q600,335 605,340" stroke="#2a3a4a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Kneeling person 2 -->
+    <circle cx="720" cy="300" r="14" fill="#3a4a5a"/>
+    <path d="M708,314 L706,350 Q714,354 722,354 Q730,354 738,350 L734,314 Z" fill="#2a3a4a"/>
+    <path d="M706,350 L698,380 Q712,384 720,380" fill="#2a3a4a"/>
+    <path d="M738,350 L746,380 Q732,384 720,380" fill="#2a3a4a"/>
+    <path d="M708,316 Q695,325 688,332" stroke="#2a3a4a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M734,316 Q747,325 754,332" stroke="#2a3a4a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Raised hands in prayer -->
+    <path d="M688,332 Q685,318 690,308" stroke="#3a4a5a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M754,332 Q757,318 752,308" stroke="#3a4a5a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Kneeling person 3 -->
+    <circle cx="860" cy="308" r="12" fill="#3a4a5a"/>
+    <path d="M850,320 L848,352 Q854,355 860,355 Q866,355 872,352 L870,320 Z" fill="#2a3a4a"/>
+    <path d="M848,352 L840,378 Q852,381 860,378" fill="#2a3a4a"/>
+    <path d="M872,352 L880,378 Q868,381 860,378" fill="#2a3a4a"/>
+    <path d="M850,322 Q840,332 835,338" stroke="#2a3a4a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M870,322 Q880,332 885,338" stroke="#2a3a4a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Kneeling person 4 (background, smaller) -->
+    <circle cx="650" cy="330" r="10" fill="#2a3848"/>
+    <path d="M642,340 L640,365 Q646,367 650,367 Q654,367 660,365 L658,340 Z" fill="#1e2e3e"/>
+    <!-- Kneeling person 5 (background) -->
+    <circle cx="790" cy="328" r="10" fill="#2a3848"/>
+    <path d="M782,338 L780,363 Q786,365 790,365 Q794,365 800,363 L798,338 Z" fill="#1e2e3e"/>
+    <!-- Torn cloth fragments floating -->
+    <path d="M600,280 Q605,275 610,280 Q608,285 600,280 Z" fill="rgba(68,136,204,.15)"
+          style="animation: dustDrift 5s ease-out infinite;"/>
+    <path d="M840,275 Q845,270 850,275 Q848,280 840,275 Z" fill="rgba(68,136,204,.15)"
+          style="animation: dustDrift 4s ease-out 1.5s infinite;"/>
+    <!-- Foreground hills -->
+    <path d="M0,420 Q200,390 400,410 Q600,380 720,400 Q850,380 1050,410 Q1250,390 1440,420 L1440,500 L0,500 Z"
+          fill="#080c14"/>
+    <!-- Tears / light particles descending -->
+    <circle cx="650" cy="180" r="2" fill="rgba(68,136,204,.35)">
+      <animate attributeName="cy" values="160;220;160" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.5;.2" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="790" cy="170" r="1.5" fill="rgba(68,136,204,.3)">
+      <animate attributeName="cy" values="150;210;150" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".15;.45;.15" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="720" cy="150" r="2.5" fill="rgba(68,136,204,.4)">
+      <animate attributeName="cy" values="130;190;130" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.55;.2" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <div class="scene-heading" id="repent-heading" aria-hidden="true">
+    <h2>💔 悔改的呼召</h2>
+    <p>Call to Repentance — Joel 2:13</p>
+  </div>
+  <div class="scene-verse">「你們要撕裂心腸，不撕裂衣服」— 約珥書 2:13</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — DAY OF THE LORD 耶和華的日子
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-day" aria-label="耶和華的日子">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="day-light-beam" aria-hidden="true"></div>
+
+  <!-- Dark apocalyptic sky with trumpet, blood moon, fire -->
+  <svg id="day-scene-svg" viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="耶和華的日子來臨">
+    <defs>
+      <radialGradient id="dayGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(100,180,255,.2)"/>
+        <stop offset="40%" stop-color="rgba(68,136,204,.08)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <radialGradient id="bloodMoonG" cx="40%" cy="35%" r="50%">
+        <stop offset="0%" stop-color="#cc4444"/>
+        <stop offset="50%" stop-color="#882222"/>
+        <stop offset="100%" stop-color="#441111"/>
+      </radialGradient>
+    </defs>
+    <!-- Ominous glow -->
+    <ellipse cx="200" cy="140" rx="160" ry="120" fill="url(#dayGlowG)"/>
+    <!-- Blood moon -->
+    <circle cx="200" cy="80" r="35" fill="url(#bloodMoonG)"
+            style="animation: fireGlow 4s ease-in-out infinite;"/>
+    <circle cx="200" cy="80" r="38" fill="none" stroke="rgba(200,60,60,.15)" stroke-width="3"
+            style="animation: tearPulse 3s ease-in-out infinite;"/>
+    <circle cx="200" cy="80" r="44" fill="none" stroke="rgba(200,60,60,.08)" stroke-width="2"
+            style="animation: tearPulse 3.5s ease-in-out .5s infinite;"/>
+    <!-- Moon surface details -->
+    <circle cx="190" cy="72" r="6" fill="rgba(100,20,20,.3)"/>
+    <circle cx="210" cy="85" r="4" fill="rgba(100,20,20,.25)"/>
+    <circle cx="195" cy="90" r="3" fill="rgba(100,20,20,.2)"/>
+    <!-- Trumpet (shofar) -->
+    <g transform="translate(200,170) rotate(-15)">
+      <path d="M-50,0 Q-45,-5 -30,-3 L40,-3 Q55,-8 70,-20 Q75,-22 75,-18 Q60,-5 45,3 L-30,3 Q-45,5 -50,0 Z"
+            fill="#6a5a40" stroke="#8a7a50" stroke-width="1"/>
+      <ellipse cx="-50" cy="0" rx="4" ry="6" fill="#5a4a30"/>
+      <ellipse cx="72" cy="-18" rx="8" ry="12" fill="none" stroke="#8a7a50" stroke-width="1.5"/>
+      <!-- Sound waves from trumpet -->
+      <path d="M80,-18 Q95,-25 100,-18 Q95,-11 80,-18" fill="none" stroke="rgba(68,136,204,.2)" stroke-width="1.5"
+            style="animation: tearPulse 2s ease-in-out infinite;"/>
+      <path d="M90,-18 Q110,-28 118,-18 Q110,-8 90,-18" fill="none" stroke="rgba(68,136,204,.15)" stroke-width="1.5"
+            style="animation: tearPulse 2.5s ease-in-out .3s infinite;"/>
+      <path d="M100,-18 Q125,-32 135,-18 Q125,-4 100,-18" fill="none" stroke="rgba(68,136,204,.1)" stroke-width="1.5"
+            style="animation: tearPulse 3s ease-in-out .6s infinite;"/>
+    </g>
+    <!-- Darkened sun (eclipse effect) -->
+    <circle cx="320" cy="60" r="20" fill="#1a1a2a" stroke="rgba(68,136,204,.2)" stroke-width="2"/>
+    <circle cx="320" cy="60" r="24" fill="none" stroke="rgba(68,136,204,.1)" stroke-width="1"/>
+    <!-- Fire / smoke rising from earth -->
+    <g style="animation: dustDrift 3s ease-out infinite;">
+      <path d="M100,300 Q95,280 105,265 Q110,250 100,240" stroke="rgba(180,80,40,.2)" stroke-width="3" fill="none"/>
+    </g>
+    <g style="animation: dustDrift 4s ease-out 1s infinite;">
+      <path d="M300,295 Q295,275 305,260 Q310,245 300,235" stroke="rgba(180,80,40,.2)" stroke-width="3" fill="none"/>
+    </g>
+    <g style="animation: dustDrift 3.5s ease-out 2s infinite;">
+      <path d="M200,305 Q195,285 205,270 Q210,255 200,245" stroke="rgba(180,80,40,.15)" stroke-width="2.5" fill="none"/>
+    </g>
+    <!-- Dark clouds -->
+    <ellipse cx="120" cy="130" rx="60" ry="20" fill="rgba(20,28,40,.6)"/>
+    <ellipse cx="280" cy="120" rx="55" ry="18" fill="rgba(20,28,40,.5)"/>
+    <ellipse cx="200" cy="140" rx="70" ry="22" fill="rgba(20,28,40,.4)"/>
+    <!-- Stars falling -->
+    <circle cx="80" cy="50" r="2" fill="rgba(255,255,255,.4)">
+      <animate attributeName="cy" values="40;100;40" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".5;.1;.5" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="330" cy="40" r="1.5" fill="rgba(255,255,255,.35)">
+      <animate attributeName="cy" values="30;90;30" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".4;.1;.4" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Ground -->
+    <path d="M0,310 Q100,295 200,305 Q300,292 400,310 L400,360 L0,360 Z" fill="#0a0e14"/>
+    <!-- Ground cracks -->
+    <path d="M150,320 L155,330 L148,340" stroke="rgba(68,136,204,.08)" stroke-width="1" fill="none"/>
+    <path d="M250,315 L253,328 L247,338" stroke="rgba(68,136,204,.08)" stroke-width="1" fill="none"/>
+    <!-- Radiating judgment light -->
+    <circle cx="200" cy="80" r="60" fill="none" stroke="rgba(200,60,60,.06)" stroke-width="2"
+            style="animation: darkSkyPulse 3s ease-in-out infinite;"/>
+    <circle cx="200" cy="80" r="90" fill="none" stroke="rgba(200,60,60,.04)" stroke-width="2"
+            style="animation: darkSkyPulse 3.5s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <div class="scene-heading" id="day-heading" aria-hidden="true">
+    <h2>⚡ 耶和華的日子</h2>
+    <p>Day of the LORD — Joel 2:1</p>
+  </div>
+  <div class="scene-verse">「耶和華的日子將到，已經臨近」— 約珥書 2:1</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — OUTPOURING OF THE SPIRIT 聖靈澆灌
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-spirit" aria-label="聖靈澆灌">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="spirit-pour-light" aria-hidden="true"></div>
+
+  <!-- Spirit descending like water/fire on people, prophesying, dreaming -->
+  <svg id="spirit-scene-svg" viewBox="0 0 1440 420" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="聖靈澆灌凡有血氣的">
+    <defs>
+      <linearGradient id="spiritSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0c1220"/>
+        <stop offset="40%" stop-color="#141e30"/>
+        <stop offset="70%" stop-color="#1c2840"/>
+        <stop offset="100%" stop-color="#243450"/>
+      </linearGradient>
+      <radialGradient id="spiritGlowG" cx="50%" cy="10%" r="40%">
+        <stop offset="0%" stop-color="rgba(100,180,255,.2)"/>
+        <stop offset="50%" stop-color="rgba(68,136,204,.08)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="spiritStreamG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(100,180,255,.3)"/>
+        <stop offset="50%" stop-color="rgba(68,136,204,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </linearGradient>
+    </defs>
+    <!-- Sky -->
+    <rect width="1440" height="420" fill="url(#spiritSkyG)"/>
+    <!-- Divine glow from above -->
+    <ellipse cx="720" cy="30" rx="400" ry="120" fill="url(#spiritGlowG)"/>
+    <!-- Spirit streams pouring down -->
+    <rect x="690" y="0" width="8" height="200" fill="url(#spiritStreamG)" opacity=".4"
+          style="animation: spiritPour 3s ease-in-out infinite;"/>
+    <rect x="730" y="0" width="6" height="180" fill="url(#spiritStreamG)" opacity=".3"
+          style="animation: spiritPour 3.5s ease-in-out .5s infinite;"/>
+    <rect x="660" y="0" width="5" height="170" fill="url(#spiritStreamG)" opacity=".25"
+          style="animation: spiritPour 4s ease-in-out 1s infinite;"/>
+    <rect x="760" y="0" width="5" height="175" fill="url(#spiritStreamG)" opacity=".25"
+          style="animation: spiritPour 3.8s ease-in-out .8s infinite;"/>
+    <!-- Wider spirit cascade -->
+    <path d="M620,0 Q650,80 680,160 Q700,200 720,220" stroke="rgba(68,136,204,.1)" stroke-width="15" fill="none" filter="url(#spiritBlur)"/>
+    <path d="M820,0 Q790,80 760,160 Q740,200 720,220" stroke="rgba(68,136,204,.1)" stroke-width="15" fill="none"/>
+    <!-- Dove silhouette (Holy Spirit symbol) -->
+    <g transform="translate(720,80)" style="animation: floatY 4s ease-in-out infinite;">
+      <path d="M0,-15 Q-15,-25 -30,-20 Q-20,-12 -8,-10 L0,0 L8,-10 Q20,-12 30,-20 Q15,-25 0,-15 Z"
+            fill="rgba(200,230,255,.3)" stroke="rgba(200,230,255,.2)" stroke-width="1"/>
+      <path d="M0,0 L-3,12 L0,8 L3,12 Z" fill="rgba(200,230,255,.25)"/>
+    </g>
+    <!-- Rolling ground -->
+    <path d="M0,300 Q200,270 400,290 Q600,260 720,280 Q850,260 1050,290 Q1250,270 1440,300 L1440,420 L0,420 Z"
+          fill="#141e30"/>
+    <path d="M0,320 Q180,295 360,315 Q540,290 720,305 Q900,290 1080,315 Q1260,295 1440,320 L1440,420 L0,420 Z"
+          fill="#101824"/>
+    <!-- Person 1 — arms raised, receiving Spirit -->
+    <circle cx="600" cy="260" r="13" fill="#3a4a5a"/>
+    <path d="M590,273 L588,320 Q594,323 600,323 Q606,323 612,320 L610,273 Z" fill="#2a3a4a"/>
+    <path d="M590,275 Q580,260 578,245" stroke="#3a4a5a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M610,275 Q620,260 622,245" stroke="#3a4a5a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Flame above person 1 -->
+    <path d="M600,240 Q595,228 600,218 Q605,228 600,240 Z" fill="rgba(68,136,204,.4)"
+          style="animation: fireGlow 2s ease-in-out infinite;"/>
+    <!-- Person 2 — prophesying -->
+    <circle cx="720" cy="255" r="14" fill="#3a4a5a"/>
+    <path d="M708,269 L706,320 Q714,324 722,324 Q730,324 738,320 L734,269 Z" fill="#2a3a4a"/>
+    <path d="M708,271 Q696,258 690,248" stroke="#3a4a5a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M734,271 Q746,258 752,248" stroke="#3a4a5a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Flame above person 2 -->
+    <path d="M720,235 Q714,220 720,208 Q726,220 720,235 Z" fill="rgba(68,136,204,.45)"
+          style="animation: fireGlow 2.5s ease-in-out .3s infinite;"/>
+    <!-- Person 3 — arms raised -->
+    <circle cx="840" cy="262" r="12" fill="#3a4a5a"/>
+    <path d="M830,274 L828,318 Q834,321 840,321 Q846,321 852,318 L850,274 Z" fill="#2a3a4a"/>
+    <path d="M830,276 Q822,264 820,252" stroke="#3a4a5a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M850,276 Q858,264 860,252" stroke="#3a4a5a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Flame above person 3 -->
+    <path d="M840,242 Q835,230 840,220 Q845,230 840,242 Z" fill="rgba(68,136,204,.35)"
+          style="animation: fireGlow 2.2s ease-in-out .6s infinite;"/>
+    <!-- Background people (smaller) -->
+    <circle cx="510" cy="280" r="10" fill="#2a3848"/>
+    <path d="M502,290 L500,320 Q506,322 510,322 Q514,322 520,320 L518,290 Z" fill="#1e2e3e"/>
+    <path d="M510,265 Q505,255 510,248 Q515,255 510,265 Z" fill="rgba(68,136,204,.25)"
+          style="animation: fireGlow 2.8s ease-in-out 1s infinite;"/>
+    <circle cx="930" cy="278" r="10" fill="#2a3848"/>
+    <path d="M922,288 L920,318 Q926,320 930,320 Q934,320 940,318 L938,288 Z" fill="#1e2e3e"/>
+    <path d="M930,263 Q925,253 930,246 Q935,253 930,263 Z" fill="rgba(68,136,204,.25)"
+          style="animation: fireGlow 2.6s ease-in-out 1.3s infinite;"/>
+    <!-- Spirit particles descending -->
+    <circle cx="620" cy="140" r="2.5" fill="rgba(100,180,255,.4)">
+      <animate attributeName="cy" values="120;200;120" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.5;.2" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="780" cy="130" r="2" fill="rgba(100,180,255,.35)">
+      <animate attributeName="cy" values="110;190;110" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".15;.45;.15" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="720" cy="100" r="3" fill="rgba(100,180,255,.45)">
+      <animate attributeName="cy" values="80;170;80" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.55;.2" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="680" cy="160" r="1.8" fill="rgba(100,180,255,.3)">
+      <animate attributeName="cy" values="140;220;140" dur="3.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".15;.4;.15" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="760" cy="145" r="2.2" fill="rgba(100,180,255,.35)">
+      <animate attributeName="cy" values="125;205;125" dur="3.8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.5;.2" dur="3.8s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Foreground -->
+    <path d="M0,370 Q200,350 400,365 Q600,345 720,360 Q850,345 1050,365 Q1250,350 1440,370 L1440,420 L0,420 Z"
+          fill="#0c1220"/>
+  </svg>
+
+  <div class="scene-heading" id="spirit-heading" aria-hidden="true">
+    <h2>🕊️ 聖靈澆灌</h2>
+    <p>Outpouring of the Spirit — Joel 2:28</p>
+  </div>
+  <div class="scene-verse">「以後，我要將我的靈澆灌凡有血氣的」— 約珥書 2:28</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — RESTORATION & JUDGMENT 復興與審判
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-restore" aria-label="復興與審判">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="restore-divine-light" aria-hidden="true"></div>
+  <div id="restore-glow" aria-hidden="true"></div>
+
+  <!-- Mountains dripping wine, hills flowing milk, restored paradise -->
+  <svg id="restore-scene-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="大山滴甜酒小山流奶子">
+    <defs>
+      <radialGradient id="restoreGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(100,180,255,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="mountainLeftG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a4060"/>
+        <stop offset="100%" stop-color="#182838"/>
+      </linearGradient>
+      <linearGradient id="mountainRightG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#243858"/>
+        <stop offset="100%" stop-color="#162434"/>
+      </linearGradient>
+      <linearGradient id="wineStreamG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(160,60,80,.4)"/>
+        <stop offset="100%" stop-color="rgba(140,40,60,.1)"/>
+      </linearGradient>
+      <linearGradient id="milkStreamG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(240,235,220,.35)"/>
+        <stop offset="100%" stop-color="rgba(220,215,200,.08)"/>
+      </linearGradient>
+    </defs>
+    <!-- Celestial glow -->
+    <ellipse cx="200" cy="140" rx="160" ry="120" fill="url(#restoreGlowG)"/>
+    <!-- Left mountain -->
+    <path d="M0,280 Q30,200 80,150 Q110,120 140,140 Q160,160 180,200 L180,350 L0,350 Z"
+          fill="url(#mountainLeftG)"/>
+    <!-- Right mountain -->
+    <path d="M220,200 Q240,160 260,130 Q290,110 320,140 Q350,180 380,220 L400,350 L220,350 Z"
+          fill="url(#mountainRightG)"/>
+    <!-- Small hills in between -->
+    <path d="M140,280 Q160,255 180,250 Q200,245 220,250 Q240,255 260,280 L260,350 L140,350 Z"
+          fill="#1e3048"/>
+    <!-- Wine dripping from left mountain -->
+    <path d="M90,160 Q88,180 92,200 Q90,220 93,240" stroke="url(#wineStreamG)" stroke-width="3" fill="none"
+          style="animation: waterFlow 3s ease-in-out infinite;"/>
+    <path d="M110,155 Q108,175 112,195 Q110,215 113,235" stroke="url(#wineStreamG)" stroke-width="2.5" fill="none"
+          style="animation: waterFlow 3.5s ease-in-out .5s infinite;"/>
+    <path d="M70,175 Q68,195 72,215 Q70,235 73,250" stroke="url(#wineStreamG)" stroke-width="2" fill="none"
+          style="animation: waterFlow 4s ease-in-out 1s infinite;"/>
+    <!-- Wine drops -->
+    <circle cx="92" cy="245" r="2" fill="rgba(160,60,80,.4)">
+      <animate attributeName="cy" values="240;260;240" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".3;.6;.3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="112" cy="240" r="1.5" fill="rgba(160,60,80,.35)">
+      <animate attributeName="cy" values="235;255;235" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".25;.5;.25" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Milk flowing from right mountain -->
+    <path d="M290,145 Q288,165 292,185 Q290,205 293,225" stroke="url(#milkStreamG)" stroke-width="3" fill="none"
+          style="animation: waterFlow 3.2s ease-in-out .3s infinite;"/>
+    <path d="M310,150 Q308,170 312,190 Q310,210 313,230" stroke="url(#milkStreamG)" stroke-width="2.5" fill="none"
+          style="animation: waterFlow 3.8s ease-in-out .8s infinite;"/>
+    <path d="M330,165 Q328,185 332,205 Q330,225 333,245" stroke="url(#milkStreamG)" stroke-width="2" fill="none"
+          style="animation: waterFlow 4.2s ease-in-out 1.3s infinite;"/>
+    <!-- Milk drops -->
+    <circle cx="292" cy="230" r="2" fill="rgba(240,235,220,.3)">
+      <animate attributeName="cy" values="225;245;225" dur="2.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.5;.2" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="312" cy="235" r="1.5" fill="rgba(240,235,220,.25)">
+      <animate attributeName="cy" values="230;250;230" dur="2.8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".15;.45;.15" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <!-- River / fountain in the valley -->
+    <path d="M170,290 Q185,285 200,282 Q215,285 230,290" stroke="rgba(68,136,204,.25)" stroke-width="4" fill="none"
+          style="animation: waterFlow 3s ease-in-out infinite;"/>
+    <path d="M175,298 Q190,293 200,290 Q210,293 225,298" stroke="rgba(68,136,204,.2)" stroke-width="3" fill="none"
+          style="animation: waterFlow 3.5s ease-in-out .5s infinite;"/>
+    <!-- Fountain from temple (Joel 3:18) -->
+    <rect x="195" y="268" width="10" height="16" rx="2" fill="#2a4060" stroke="#3a5070" stroke-width="1"/>
+    <path d="M193,268 L200,260 L207,268 Z" fill="#3a5070"/>
+    <path d="M200,260 Q198,250 200,242 Q202,250 200,260" stroke="rgba(68,136,204,.3)" stroke-width="2" fill="none"
+          style="animation: spiritPour 2.5s ease-in-out infinite;"/>
+    <!-- Green restoration — vines and plants -->
+    <path d="M155,275 Q145,265 140,255 Q138,248 142,242" stroke="#2a5a3a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="140" cy="255" r="4" fill="#2a5a3a" opacity=".5"/>
+    <circle cx="142" cy="242" r="5" fill="#1a4a2a" opacity=".4"/>
+    <path d="M245,275 Q255,265 260,255 Q262,248 258,242" stroke="#2a5a3a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="260" cy="255" r="4" fill="#2a5a3a" opacity=".5"/>
+    <circle cx="258" cy="242" r="5" fill="#1a4a2a" opacity=".4"/>
+    <!-- Stars / light particles of restoration -->
+    <circle cx="150" cy="120" r="2" fill="rgba(100,180,255,.4)">
+      <animate attributeName="opacity" values=".2;.6;.2" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="110" r="1.5" fill="rgba(100,180,255,.35)">
+      <animate attributeName="opacity" values=".15;.5;.15" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="90" r="2.5" fill="rgba(100,180,255,.45)">
+      <animate attributeName="opacity" values=".2;.65;.2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="120" cy="180" r="1.5" fill="rgba(100,180,255,.3)">
+      <animate attributeName="opacity" values=".1;.4;.1" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="280" cy="170" r="1.8" fill="rgba(100,180,255,.35)">
+      <animate attributeName="opacity" values=".15;.5;.15" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Ground shadow -->
+    <ellipse cx="200" cy="350" rx="140" ry="10" fill="rgba(14,20,32,.5)"/>
+    <!-- Radiating blessing light -->
+    <circle cx="200" cy="260" r="50" fill="none" stroke="rgba(68,136,204,.06)" stroke-width="2"
+            style="animation: darkSkyPulse 3s ease-in-out infinite;"/>
+    <circle cx="200" cy="260" r="80" fill="none" stroke="rgba(68,136,204,.04)" stroke-width="2"
+            style="animation: darkSkyPulse 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="260" r="110" fill="none" stroke="rgba(68,136,204,.02)" stroke-width="2"
+            style="animation: darkSkyPulse 4s ease-in-out 1s infinite;"/>
+  </svg>
+
+  <div class="scene-heading" id="restore-heading" aria-hidden="true">
+    <h2>⛰️ 復興與審判</h2>
+    <p>Restoration &amp; Judgment — Joel 3:18</p>
+  </div>
+  <div class="scene-verse">「到那日，大山要滴甜酒，小山要流奶子」— 約珥書 3:18</div>
+</section>
+
+</body>
+</html>
