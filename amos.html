@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>阿摩司書 · Amos</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #161208;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+    @keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+    @keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.21), 564px 126px rgba(255,255,255,.26),
+        210px 347px rgba(255,255,255,.37), 1117px 45px rgba(255,255,255,.30),
+        66px 16px rgba(255,255,255,.20),  477px 259px rgba(255,255,255,.32),
+        1150px 102px rgba(255,255,255,.36), 1437px 280px rgba(255,255,255,.28),
+        920px 302px rgba(255,255,255,.24), 14px 389px rgba(255,255,255,.35),
+        1430px 217px rgba(255,255,255,.27), 319px 111px rgba(255,255,255,.38),
+        690px 53px rgba(255,255,255,.22),  199px 184px rgba(255,255,255,.34),
+        1237px 136px rgba(255,255,255,.35), 941px 275px rgba(255,255,255,.23),
+        776px 41px rgba(255,255,255,.30),  1288px 317px rgba(255,255,255,.36),
+        741px 296px rgba(255,255,255,.25),  143px 24px rgba(255,255,255,.33),
+        593px 41px rgba(255,255,255,.35),  207px 195px rgba(255,255,255,.24),
+        1302px 428px rgba(255,255,255,.28), 759px 182px rgba(255,255,255,.22),
+        547px 360px rgba(255,255,255,.37), 1328px 37px rgba(255,255,255,.30),
+        351px 274px rgba(255,255,255,.33), 335px 237px rgba(255,255,255,.26),
+        1311px 353px rgba(255,255,255,.30), 1403px 167px rgba(255,255,255,.35),
+        115px 118px rgba(255,255,255,.34), 647px 206px rgba(255,255,255,.23),
+        433px 468px rgba(255,255,255,.37), 645px 109px rgba(255,255,255,.33),
+        811px 453px rgba(255,255,255,.36), 940px 74px rgba(255,255,255,.23),
+        506px 382px rgba(255,255,255,.30), 539px 383px rgba(255,255,255,.29),
+        1196px 205px rgba(255,255,255,.28), 284px 261px rgba(255,255,255,.32),
+        97px 441px rgba(255,255,255,.20),  1286px 82px rgba(255,255,255,.35),
+        865px 306px rgba(255,255,255,.21), 782px 306px rgba(255,255,255,.38),
+        1084px 129px rgba(255,255,255,.37), 24px 349px rgba(255,255,255,.33),
+        1397px 454px rgba(255,255,255,.27), 547px 394px rgba(255,255,255,.32),
+        229px 151px rgba(255,255,255,.28), 930px 2px rgba(255,255,255,.38),
+        540px 498px rgba(255,255,255,.25), 366px 260px rgba(255,255,255,.36),
+        1281px 153px rgba(255,255,255,.34), 1040px 312px rgba(255,255,255,.22),
+        766px 391px rgba(255,255,255,.20), 1087px 471px rgba(255,255,255,.18),
+        664px 251px rgba(255,255,255,.21), 744px 450px rgba(255,255,255,.37),
+        630px 123px rgba(255,255,255,.23), 1162px 485px rgba(255,255,255,.22),
+        996px 418px rgba(255,255,255,.23), 1091px 393px rgba(255,255,255,.26),
+        1352px 244px rgba(255,255,255,.37), 339px 136px rgba(255,255,255,.28),
+        1243px 217px rgba(255,255,255,.38), 1105px 387px rgba(255,255,255,.33),
+        412px 366px rgba(255,255,255,.26), 1376px 333px rgba(255,255,255,.27),
+        1060px 232px rgba(255,255,255,.24), 461px 33px rgba(255,255,255,.27),
+        1205px 284px rgba(255,255,255,.22), 452px 4px rgba(255,255,255,.24),
+        1293px 31px rgba(255,255,255,.21), 65px 441px rgba(255,255,255,.27),
+        1053px 122px rgba(255,255,255,.24), 995px 110px rgba(255,255,255,.30),
+        1170px 296px rgba(255,255,255,.28), 969px 414px rgba(255,255,255,.25),
+        194px 50px rgba(255,255,255,.33),  726px 217px rgba(255,255,255,.26);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.45),  1324px 51px rgba(255,255,255,.38),
+        695px 410px rgba(255,255,255,.48), 510px 99px rgba(255,255,255,.40),
+        919px 72px rgba(255,255,255,.43),  571px 237px rgba(255,255,255,.38),
+        155px 227px rgba(255,255,255,.47), 1128px 51px rgba(255,255,255,.36),
+        1108px 429px rgba(255,255,255,.35), 192px 475px rgba(255,255,255,.46),
+        485px 86px rgba(255,255,255,.42),  986px 110px rgba(255,255,255,.48),
+        121px 85px rgba(255,255,255,.41),  800px 136px rgba(255,255,255,.49),
+        932px 147px rgba(255,255,255,.43), 1139px 339px rgba(255,255,255,.46),
+        318px 98px rgba(255,255,255,.39),  120px 297px rgba(255,255,255,.45),
+        125px 383px rgba(255,255,255,.39), 103px 300px rgba(255,255,255,.42),
+        1088px 81px rgba(255,255,255,.36), 1041px 42px rgba(255,255,255,.48),
+        141px 305px rgba(255,255,255,.36), 482px 207px rgba(255,255,255,.38),
+        1167px 127px rgba(255,255,255,.43), 82px 318px rgba(255,255,255,.36),
+        1347px 299px rgba(255,255,255,.43), 648px 479px rgba(255,255,255,.39),
+        1372px 367px rgba(255,255,255,.39), 544px 203px rgba(255,255,255,.38);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,220,230,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(184,134,11,.2);
+      border-color: rgba(184,134,11,.5);
+      color: #b8860b;
+      box-shadow: 0 0 20px rgba(184,134,11,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ── Amos-specific keyframes ── */
+    @keyframes bronzeGlow {
+      0%,100% { opacity: .4; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .8; transform: translateX(-50%) scale(1.08); }
+    }
+    @keyframes waterFlow {
+      0%,100% { transform: translateY(0) scaleX(1); opacity: .7; }
+      50%      { transform: translateY(-4px) scaleX(1.03); opacity: 1; }
+    }
+    @keyframes plumbSwing {
+      0%,100% { transform: rotate(-2deg); }
+      50%      { transform: rotate(2deg); }
+    }
+    @keyframes firePulse {
+      0%,100% { opacity: .5; filter: brightness(1); }
+      50%      { opacity: 1;  filter: brightness(1.4); }
+    }
+    @keyframes divinePulse {
+      0%,100% { opacity: .3; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scale(1.12); }
+    }
+    @keyframes dustDrift {
+      0%   { transform: translateY(0) translateX(0); opacity: .4; }
+      50%  { transform: translateY(-20px) translateX(8px); opacity: .7; }
+      100% { transform: translateY(-40px) translateX(0); opacity: 0; }
+    }
+    @keyframes leafGrow {
+      0%,100% { opacity: .3; transform: scaleY(1); }
+      50%      { opacity: .5; transform: scaleY(1.05); }
+    }
+    @keyframes tentRise {
+      0%,100% { opacity: .4; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleX(1.08); }
+    }
+    @keyframes lightBeam {
+      0%,100% { opacity: .3; transform: translateX(-50%) scaleY(1); }
+      50%      { opacity: .6; transform: translateX(-50%) scaleY(1.08); }
+    }
+    @keyframes emberGlow {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #161208 0%, #1e1810 40%, #261e14 70%, #161208 100%);
+    }
+    #intro-ember-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(184,134,11,.12) 0%, rgba(150,110,8,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: emberGlow 4s ease-in-out infinite;
+    }
+    #intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#b8860b 0%,#d4a850 45%,#7a5a08 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(184,134,11,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(184,134,11,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-shepherd-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(120px,16vw,220px);
+    }
+    #intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — THE SHEPHERD PROPHET 牧人先知
+    ══════════════════════════════════════════════ */
+    #scene-shepherd {
+      background: linear-gradient(180deg, #0e0c06 0%, #161208 40%, #1e180e 70%, #0e0c06 100%);
+    }
+    #shepherd-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(184,134,11,.15) 0%, rgba(120,90,6,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #shepherd-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 8s ease-in-out infinite;
+    }
+    #shepherd-heading h2 {
+      color: #b8860b;
+      text-shadow: 0 0 22px rgba(184,134,11,.5);
+    }
+    #shepherd-heading p { color: rgba(184,134,11,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — JUDGMENT ON NATIONS 列國的審判
+    ══════════════════════════════════════════════ */
+    #scene-nations {
+      background: linear-gradient(180deg, #1a1006 0%, #2a1a08 40%, #3a2410 70%, #2a140a 100%);
+    }
+    #nations-fire-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(184,134,11,.18) 0%, rgba(160,100,8,.07) 45%, transparent 70%);
+      z-index: 3;
+      animation: divinePulse 3.5s ease-in-out infinite;
+    }
+    #nations-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+    #nations-heading h2 {
+      color: #b8860b;
+      text-shadow: 0 0 22px rgba(184,134,11,.6);
+    }
+    #nations-heading p { color: rgba(184,134,11,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — JUSTICE LIKE A RIVER 公義如江河
+    ══════════════════════════════════════════════ */
+    #scene-justice {
+      background: linear-gradient(180deg, #10120e 0%, #181c14 40%, #1e221a 70%, #161a10 100%);
+    }
+    #justice-water-glow {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(80px,12vw,200px); height: 100%;
+      background: linear-gradient(180deg,rgba(100,180,220,0) 0%,rgba(184,134,11,.2) 30%,rgba(80,140,180,.35) 65%,transparent 100%);
+      z-index: 3; filter: blur(12px);
+      animation: lightBeam 3s ease-in-out infinite;
+    }
+    #justice-scene-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+    #justice-heading h2 {
+      color: #d4a850;
+      text-shadow: 0 0 18px rgba(184,134,11,.5);
+    }
+    #justice-heading p { color: rgba(184,134,11,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — VISION OF THE PLUMB LINE 準繩的異象
+    ══════════════════════════════════════════════ */
+    #scene-plumb {
+      background: linear-gradient(180deg, #121010 0%, #1a1818 35%, #242220 60%, #302e28 85%, #242220 100%);
+    }
+    #plumb-light {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(184,134,11,.15) 0%, rgba(150,110,8,.06) 50%, transparent 75%);
+      z-index: 3;
+      animation: tentRise 4s ease-in-out infinite;
+    }
+    #plumb-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+    #plumb-heading h2 {
+      background: linear-gradient(120deg,#7a6a08 0%,#d4a850 50%,#5a4a06 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #plumb-heading p { color: rgba(184,134,11,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — RESTORATION 大衛倒塌帳幕的復興
+    ══════════════════════════════════════════════ */
+    #scene-restore {
+      background: linear-gradient(180deg, #1a1610 0%, #242014 40%, #30281a 70%, #3a3024 100%);
+    }
+    #restore-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(184,134,11,0) 0%,rgba(184,134,11,.3) 25%,rgba(184,134,11,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: bronzeGlow 2.5s ease-in-out infinite;
+    }
+    #restore-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(184,134,11,.08) 0%, rgba(150,100,8,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #restore-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(180px,28vw,380px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    #restore-heading h2 {
+      background: linear-gradient(120deg,#b8860b 0%,#d4a850 50%,#7a5a08 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    #restore-heading p { color: rgba(184,134,11,.5); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"     aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-shepherd"  aria-label="牧人先知"></a>
+  <a class="nav-dot" href="#scene-nations"   aria-label="列國的審判"></a>
+  <a class="nav-dot" href="#scene-justice"   aria-label="公義如江河"></a>
+  <a class="nav-dot" href="#scene-plumb"     aria-label="準繩的異象"></a>
+  <a class="nav-dot" href="#scene-restore"   aria-label="大衛帳幕的復興"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="阿摩司書 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="intro-ember-glow" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>阿摩司書</h1>
+    <p>Amos</p>
+    <span class="sub">公義 · 審判 · 先知 · 準繩 · 列國 · 復興</span>
+  </div>
+
+  <!-- Shepherd with staff and sycamore tree silhouette -->
+  <svg id="intro-shepherd-svg" viewBox="0 0 220 260" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="牧人與桑樹">
+    <!-- Sycamore tree -->
+    <rect x="140" y="120" width="10" height="100" fill="#4a3a18" rx="2"/>
+    <path d="M120,80 Q130,50 150,45 Q170,50 180,80 Q165,95 150,88 Q135,95 120,80 Z"
+          fill="#3a5a20" opacity=".7"/>
+    <path d="M110,110 Q125,85 150,78 Q175,85 190,110 Q170,118 150,112 Q130,118 110,110 Z"
+          fill="#2a4a14" opacity=".6"/>
+    <circle cx="130" cy="92" r="4" fill="#5a8a30" opacity=".5"/>
+    <circle cx="168" cy="88" r="3.5" fill="#4a7a22" opacity=".5"/>
+    <circle cx="150" cy="100" r="4" fill="#5a8a30" opacity=".4"/>
+    <!-- Shepherd figure -->
+    <circle cx="70" cy="135" r="12" fill="#5a4a28"/>
+    <path d="M60,148 L57,210 Q64,213 71,210 L69,185 L77,210 Q84,213 90,210 L82,148 Z" fill="#4a3a1a"/>
+    <!-- Shepherd's cloak -->
+    <path d="M56,155 Q50,170 52,190 L60,185" fill="#5a4a28" opacity=".6"/>
+    <path d="M84,155 Q90,170 88,190 L80,185" fill="#5a4a28" opacity=".6"/>
+    <!-- Shepherd's staff -->
+    <line x1="42" y1="120" x2="42" y2="220" stroke="#6a5a2a" stroke-width="3" stroke-linecap="round"/>
+    <path d="M42,120 Q42,108 52,108" stroke="#6a5a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Sheep nearby -->
+    <ellipse cx="105" cy="212" rx="12" ry="8" fill="#d0c8b8" opacity=".5"/>
+    <circle cx="114" cy="207" r="5" fill="#d0c8b8" opacity=".5"/>
+    <ellipse cx="88" cy="218" rx="10" ry="7" fill="#c8c0b0" opacity=".4"/>
+    <circle cx="96" cy="214" r="4" fill="#c8c0b0" opacity=".4"/>
+    <!-- Ground and dust -->
+    <circle cx="60" cy="200" r="1.5" fill="rgba(184,134,11,.25)" style="animation: dustDrift 4s ease-out infinite;"/>
+    <circle cx="120" cy="195" r="1" fill="rgba(184,134,11,.2)" style="animation: dustDrift 5s ease-out 1.5s infinite;"/>
+    <circle cx="90" cy="205" r="1.2" fill="rgba(184,134,11,.22)" style="animation: dustDrift 4.5s ease-out .8s infinite;"/>
+    <!-- Faint glow -->
+    <ellipse cx="110" cy="170" rx="60" ry="50" fill="rgba(184,134,11,.04)"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="horizonG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#161208"/>
+        <stop offset="100%" stop-color="#0c0a04"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,170 240,190 Q360,160 480,185 Q600,150 720,175
+             Q840,145 960,170 Q1080,155 1200,180 Q1320,160 1440,190
+             L1440,300 L0,300 Z"
+          fill="url(#horizonG1)"/>
+    <circle cx="300" cy="178" r="2" fill="rgba(184,134,11,.3)" style="animation: emberGlow 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="165" r="1.5" fill="rgba(184,134,11,.25)" style="animation: emberGlow 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="172" r="1.8" fill="rgba(184,134,11,.2)" style="animation: emberGlow 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="180" r="2" fill="rgba(184,134,11,.3)" style="animation: emberGlow 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <div class="scroll-hint" aria-hidden="true">▽ 向下捲動 · Scroll ▽</div>
+  <div class="scene-verse">「耶和華從錫安吼叫，從耶路撒冷發聲」— 阿摩司書 1:2</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — THE SHEPHERD PROPHET 牧人先知
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-shepherd" aria-label="牧人先知">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="shepherd-glow" aria-hidden="true"></div>
+
+  <!-- Shepherd standing among flock at Tekoa, sycamore figs in hand -->
+  <svg id="shepherd-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="提哥亞的牧人先知阿摩司">
+    <defs>
+      <radialGradient id="shepherdGlowG" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#0a0806"/>
+        <stop offset="40%" stop-color="#161208"/>
+        <stop offset="70%" stop-color="rgba(184,134,11,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="hillG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#302818"/>
+        <stop offset="100%" stop-color="#161208"/>
+      </linearGradient>
+    </defs>
+    <!-- Dark sky -->
+    <rect width="600" height="400" fill="#0e0c06"/>
+    <!-- Rolling hills of Tekoa -->
+    <path d="M0,220 Q80,180 160,200 Q240,170 320,190 Q400,160 480,185 Q540,200 600,220 L600,400 L0,400 Z"
+          fill="url(#hillG)"/>
+    <path d="M0,260 Q100,235 200,250 Q300,230 400,248 Q500,235 600,260 L600,400 L0,400 Z"
+          fill="#1e1a0e"/>
+    <!-- Sycamore tree on the right -->
+    <rect x="440" y="160" width="12" height="90" fill="#5a4020" rx="2"/>
+    <path d="M415,120 Q425,90 452,82 Q478,90 488,120 Q470,132 452,124 Q434,132 415,120 Z"
+          fill="#3a5a20" opacity=".7" style="animation: leafGrow 5s ease-in-out infinite;"/>
+    <path d="M405,150 Q420,128 452,118 Q484,128 498,150 Q475,158 452,152 Q428,158 405,150 Z"
+          fill="#2a4a14" opacity=".6" style="animation: leafGrow 6s ease-in-out 1s infinite;"/>
+    <!-- Sycamore figs -->
+    <circle cx="430" cy="135" r="4" fill="#6a8a3a" opacity=".6"/>
+    <circle cx="472" cy="130" r="3.5" fill="#5a7a2a" opacity=".6"/>
+    <circle cx="450" cy="142" r="4" fill="#6a8a3a" opacity=".5"/>
+    <!-- Amos — shepherd figure, larger -->
+    <circle cx="280" cy="195" r="16" fill="#5a4a28"/>
+    <path d="M265,212 L262,310 Q272,314 282,310 L279,265 L290,310 Q300,314 308,310 L298,212 Z" fill="#4a3a1a"/>
+    <!-- Cloak -->
+    <path d="M260,218 Q248,240 252,280 L265,270" fill="#5a4a28" opacity=".6"/>
+    <path d="M302,218 Q314,240 310,280 L298,270" fill="#5a4a28" opacity=".6"/>
+    <!-- Staff in left hand -->
+    <line x1="240" y1="185" x2="240" y2="320" stroke="#6a5a2a" stroke-width="4" stroke-linecap="round"/>
+    <path d="M240,185 Q240,170 254,170" stroke="#6a5a2a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Arm reaching with sycamore fig -->
+    <path d="M298,220 Q320,210 330,200" stroke="#5a4a30" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="332" cy="198" r="5" fill="#6a8a3a" opacity=".7"/>
+    <!-- Flock of sheep -->
+    <ellipse cx="160" cy="290" rx="16" ry="10" fill="#d0c8b8" opacity=".5"/>
+    <circle cx="172" cy="284" r="6" fill="#d0c8b8" opacity=".5"/>
+    <ellipse cx="130" cy="298" rx="14" ry="9" fill="#c8c0b0" opacity=".4"/>
+    <circle cx="140" cy="293" r="5.5" fill="#c8c0b0" opacity=".4"/>
+    <ellipse cx="195" cy="295" rx="13" ry="8" fill="#d0c8b8" opacity=".45"/>
+    <circle cx="205" cy="290" r="5" fill="#d0c8b8" opacity=".45"/>
+    <ellipse cx="110" cy="305" rx="12" ry="7" fill="#c0b8a8" opacity=".35"/>
+    <!-- Dust and warm glow -->
+    <circle cx="200" cy="280" r="2" fill="rgba(184,134,11,.3)" style="animation: dustDrift 3.5s ease-out infinite;"/>
+    <circle cx="320" cy="250" r="1.5" fill="rgba(184,134,11,.25)" style="animation: dustDrift 4s ease-out 1s infinite;"/>
+    <circle cx="260" cy="300" r="1.2" fill="rgba(184,134,11,.2)" style="animation: dustDrift 4.5s ease-out 2s infinite;"/>
+    <ellipse cx="300" cy="270" rx="120" ry="60" fill="rgba(184,134,11,.05)"/>
+  </svg>
+
+  <div class="scene-heading" id="shepherd-heading" aria-hidden="true">
+    <h2>🐑 牧人先知</h2>
+    <p>The Shepherd Prophet — Amos 7:14</p>
+  </div>
+  <div class="scene-verse">「我原不是先知⋯我是牧人，又是修理桑樹的」— 阿摩司書 7:14</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — JUDGMENT ON NATIONS 列國的審判
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-nations" aria-label="列國的審判">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="nations-fire-glow" aria-hidden="true"></div>
+
+  <!-- Fire consuming cities, nations surrounding Israel -->
+  <svg id="nations-scene-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="火焰吞滅列國城牆">
+    <defs>
+      <linearGradient id="nationsSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a1006"/>
+        <stop offset="60%" stop-color="#2a1a08"/>
+        <stop offset="100%" stop-color="#1a1006"/>
+      </linearGradient>
+      <radialGradient id="fireGlowG" cx="50%" cy="60%" r="40%">
+        <stop offset="0%" stop-color="rgba(200,80,20,.2)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Sky -->
+    <rect width="1440" height="500" fill="url(#nationsSkyG)"/>
+    <!-- Fire glow in sky -->
+    <ellipse cx="720" cy="250" rx="400" ry="150" fill="url(#fireGlowG)"/>
+    <!-- Ground -->
+    <rect y="380" width="1440" height="120" fill="#1a1006"/>
+    <!-- Damascus city wall (left) — crumbling -->
+    <rect x="150" y="260" width="140" height="120" fill="#4a3a1a" rx="3"/>
+    <rect x="160" y="250" width="20" height="130" fill="#5a4a22" rx="2"/>
+    <rect x="260" y="250" width="20" height="130" fill="#5a4a22" rx="2"/>
+    <rect x="155" y="245" width="130" height="15" rx="2" fill="#5a4a22"/>
+    <!-- Damascus fire -->
+    <path d="M180,240 Q185,200 195,215 Q200,185 210,210 Q220,190 225,230 Q230,205 240,240"
+          fill="rgba(200,80,20,.5)" style="animation: firePulse 2s ease-in-out infinite;"/>
+    <path d="M190,230 Q195,210 205,220 Q210,195 215,225"
+          fill="rgba(240,160,40,.4)" style="animation: firePulse 1.8s ease-in-out .3s infinite;"/>
+    <!-- Gaza city wall (center-left) -->
+    <rect x="420" y="280" width="120" height="100" fill="#4a3a1a" rx="3"/>
+    <rect x="430" y="270" width="18" height="110" fill="#5a4a22" rx="2"/>
+    <rect x="512" y="270" width="18" height="110" fill="#5a4a22" rx="2"/>
+    <rect x="425" y="265" width="110" height="12" rx="2" fill="#5a4a22"/>
+    <!-- Gaza fire -->
+    <path d="M450,260 Q455,225 465,240 Q470,210 480,235 Q488,218 495,255"
+          fill="rgba(200,80,20,.45)" style="animation: firePulse 2.2s ease-in-out .5s infinite;"/>
+    <path d="M458,250 Q462,235 470,245 Q475,220 480,248"
+          fill="rgba(240,160,40,.35)" style="animation: firePulse 2s ease-in-out .8s infinite;"/>
+    <!-- Tyre city wall (center-right) -->
+    <rect x="700" y="270" width="130" height="110" fill="#4a3a1a" rx="3"/>
+    <rect x="710" y="260" width="18" height="120" fill="#5a4a22" rx="2"/>
+    <rect x="802" y="260" width="18" height="120" fill="#5a4a22" rx="2"/>
+    <rect x="705" y="255" width="120" height="12" rx="2" fill="#5a4a22"/>
+    <!-- Tyre fire -->
+    <path d="M735,250 Q740,215 750,230 Q755,200 765,225 Q773,208 780,245"
+          fill="rgba(200,80,20,.45)" style="animation: firePulse 2.1s ease-in-out .3s infinite;"/>
+    <path d="M742,240 Q747,225 755,235 Q760,215 765,240"
+          fill="rgba(240,160,40,.35)" style="animation: firePulse 1.9s ease-in-out .6s infinite;"/>
+    <!-- Edom fortress (right) -->
+    <rect x="1000" y="265" width="130" height="115" fill="#4a3a1a" rx="3"/>
+    <rect x="1010" y="255" width="20" height="125" fill="#5a4a22" rx="2"/>
+    <rect x="1100" y="255" width="20" height="125" fill="#5a4a22" rx="2"/>
+    <rect x="1005" y="250" width="120" height="12" rx="2" fill="#5a4a22"/>
+    <!-- Edom fire -->
+    <path d="M1035,245 Q1040,210 1050,225 Q1055,195 1065,220 Q1073,203 1080,240"
+          fill="rgba(200,80,20,.5)" style="animation: firePulse 2.3s ease-in-out .7s infinite;"/>
+    <path d="M1042,235 Q1047,220 1055,230 Q1060,210 1065,235"
+          fill="rgba(240,160,40,.4)" style="animation: firePulse 2s ease-in-out 1s infinite;"/>
+    <!-- Falling embers -->
+    <circle cx="220" cy="220" r="2" fill="rgba(240,120,20,.5)">
+      <animate attributeName="cy" values="200;300;200" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".3;.6;.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="490" cy="230" r="1.5" fill="rgba(240,120,20,.4)">
+      <animate attributeName="cy" values="210;310;210" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.5;.2" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="780" cy="225" r="2" fill="rgba(240,120,20,.45)">
+      <animate attributeName="cy" values="205;305;205" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".25;.55;.25" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1070" cy="215" r="1.8" fill="rgba(240,120,20,.5)">
+      <animate attributeName="cy" values="195;295;195" dur="3.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".3;.6;.3" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Smoke rising -->
+    <circle cx="210" cy="180" r="8" fill="rgba(80,60,30,.15)" style="animation: dustDrift 5s ease-out infinite;"/>
+    <circle cx="475" cy="190" r="6" fill="rgba(80,60,30,.12)" style="animation: dustDrift 6s ease-out 1s infinite;"/>
+    <circle cx="760" cy="185" r="7" fill="rgba(80,60,30,.13)" style="animation: dustDrift 5.5s ease-out .5s infinite;"/>
+    <circle cx="1060" cy="175" r="8" fill="rgba(80,60,30,.15)" style="animation: dustDrift 5s ease-out 2s infinite;"/>
+    <!-- Foreground hills -->
+    <path d="M0,420 Q200,390 400,410 Q600,380 720,400 Q850,380 1050,410 Q1250,390 1440,420 L1440,500 L0,500 Z"
+          fill="#120e04"/>
+  </svg>
+
+  <div class="scene-heading" id="nations-heading" aria-hidden="true">
+    <h2>🔥 列國的審判</h2>
+    <p>Judgment on Nations — Amos 1:3–2:16</p>
+  </div>
+  <div class="scene-verse">「三番四次的犯罪，我必不免去他的刑罰」— 阿摩司書 1:3</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — JUSTICE LIKE A RIVER 公義如江河
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-justice" aria-label="公義如江河">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="justice-water-glow" aria-hidden="true"></div>
+
+  <!-- Mighty river flowing with waves of justice -->
+  <svg id="justice-scene-svg" viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="公義如大水滾滾的江河">
+    <defs>
+      <radialGradient id="justiceGlowG" cx="50%" cy="45%" r="40%">
+        <stop offset="0%" stop-color="rgba(100,160,200,.2)"/>
+        <stop offset="40%" stop-color="rgba(184,134,11,.1)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="waterG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a6a8a"/>
+        <stop offset="50%" stop-color="#2a4a6a"/>
+        <stop offset="100%" stop-color="#1a2a3a"/>
+      </linearGradient>
+      <linearGradient id="riverBankG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a3020"/>
+        <stop offset="100%" stop-color="#1a1810"/>
+      </linearGradient>
+    </defs>
+    <!-- Glow behind river -->
+    <ellipse cx="200" cy="180" rx="160" ry="120" fill="url(#justiceGlowG)"/>
+    <!-- Rocky cliffs / riverbanks — left -->
+    <path d="M0,100 Q20,90 40,110 L40,280 Q20,290 0,280 Z" fill="#3a3020"/>
+    <path d="M40,120 Q60,100 80,130 L80,260 Q60,280 40,270 Z" fill="#4a3a20"/>
+    <!-- Rocky cliffs / riverbanks — right -->
+    <path d="M320,110 Q340,95 360,115 L360,270 Q340,285 320,275 Z" fill="#4a3a20"/>
+    <path d="M360,100 Q380,88 400,108 L400,280 Q380,290 360,278 Z" fill="#3a3020"/>
+    <!-- The mighty river flowing through -->
+    <path d="M80,130 Q130,110 200,120 Q270,110 320,130 L320,275 Q270,290 200,280 Q130,290 80,275 Z"
+          fill="url(#waterG)" opacity=".7" style="animation: waterFlow 3s ease-in-out infinite;"/>
+    <!-- Water waves -->
+    <path d="M90,160 Q140,148 200,155 Q260,148 310,160" stroke="rgba(140,200,240,.2)" stroke-width="2" fill="none"
+          style="animation: waterFlow 2.5s ease-in-out infinite;"/>
+    <path d="M90,190 Q140,178 200,185 Q260,178 310,190" stroke="rgba(140,200,240,.18)" stroke-width="2" fill="none"
+          style="animation: waterFlow 3s ease-in-out .5s infinite;"/>
+    <path d="M90,220 Q140,208 200,215 Q260,208 310,220" stroke="rgba(140,200,240,.15)" stroke-width="2" fill="none"
+          style="animation: waterFlow 3.5s ease-in-out 1s infinite;"/>
+    <path d="M90,250 Q140,238 200,245 Q260,238 310,250" stroke="rgba(140,200,240,.12)" stroke-width="2" fill="none"
+          style="animation: waterFlow 4s ease-in-out 1.5s infinite;"/>
+    <!-- White water / foam -->
+    <ellipse cx="160" cy="170" rx="15" ry="3" fill="rgba(200,230,255,.15)"
+             style="animation: waterFlow 2s ease-in-out infinite;"/>
+    <ellipse cx="230" cy="200" rx="18" ry="3" fill="rgba(200,230,255,.12)"
+             style="animation: waterFlow 2.5s ease-in-out .8s infinite;"/>
+    <ellipse cx="180" cy="235" rx="14" ry="3" fill="rgba(200,230,255,.1)"
+             style="animation: waterFlow 3s ease-in-out .4s infinite;"/>
+    <!-- Scales of justice floating above the river -->
+    <line x1="200" y1="50" x2="200" y2="90" stroke="#b8860b" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="160" y1="72" x2="240" y2="72" stroke="#b8860b" stroke-width="2" stroke-linecap="round"/>
+    <!-- Left pan -->
+    <path d="M155,72 L148,92 Q155,98 165,92 Z" fill="none" stroke="#b8860b" stroke-width="1.5"/>
+    <line x1="160" y1="72" x2="155" y2="72" stroke="#b8860b" stroke-width="1.5"/>
+    <line x1="160" y1="72" x2="165" y2="72" stroke="#b8860b" stroke-width="1.5"/>
+    <!-- Right pan -->
+    <path d="M235,72 L228,92 Q235,98 245,92 Z" fill="none" stroke="#b8860b" stroke-width="1.5"/>
+    <line x1="240" y1="72" x2="235" y2="72" stroke="#b8860b" stroke-width="1.5"/>
+    <line x1="240" y1="72" x2="245" y2="72" stroke="#b8860b" stroke-width="1.5"/>
+    <!-- Scale glow -->
+    <ellipse cx="200" cy="75" rx="30" ry="20" fill="rgba(184,134,11,.1)"/>
+    <!-- Light on water -->
+    <circle cx="180" cy="155" r="2" fill="rgba(184,134,11,.4)">
+      <animate attributeName="opacity" values=".2;.6;.2" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="220" cy="210" r="1.5" fill="rgba(140,200,240,.35)">
+      <animate attributeName="opacity" values=".15;.5;.15" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="175" r="2" fill="rgba(184,134,11,.35)">
+      <animate attributeName="opacity" values=".2;.55;.2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Ground shadow -->
+    <ellipse cx="200" cy="310" rx="140" ry="10" fill="rgba(22,18,8,.5)"/>
+  </svg>
+
+  <div class="scene-heading" id="justice-heading" aria-hidden="true">
+    <h2>⚖️ 公義如江河</h2>
+    <p>Justice Like a River — Amos 5:24</p>
+  </div>
+  <div class="scene-verse">「惟願公平如大水滾滾，使公義如江河滔滔」— 阿摩司書 5:24</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — VISION OF THE PLUMB LINE 準繩的異象
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-plumb" aria-label="準繩的異象">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="plumb-light" aria-hidden="true"></div>
+
+  <!-- Wall with plumb line, divine hand above -->
+  <svg id="plumb-scene-svg" viewBox="0 0 1440 420" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="準繩量度歪曲的牆">
+    <defs>
+      <linearGradient id="plumbSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#141210"/>
+        <stop offset="40%" stop-color="#1e1c18"/>
+        <stop offset="70%" stop-color="#282620"/>
+        <stop offset="100%" stop-color="#322e28"/>
+      </linearGradient>
+      <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5a4a28"/>
+        <stop offset="100%" stop-color="#3a2a14"/>
+      </linearGradient>
+    </defs>
+    <!-- Sky -->
+    <rect width="1440" height="420" fill="url(#plumbSkyG)"/>
+    <!-- Divine light from above -->
+    <ellipse cx="720" cy="40" rx="200" ry="80" fill="rgba(184,134,11,.1)"/>
+    <line x1="720" y1="20" x2="720" y2="120" stroke="rgba(184,134,11,.15)" stroke-width="3"/>
+    <!-- Divine hand holding plumb line -->
+    <path d="M700,45 Q705,35 720,32 Q735,35 740,45 L738,65 Q730,70 720,68 Q710,70 702,65 Z"
+          fill="#6a5a3a" stroke="#7a6a42" stroke-width="1"/>
+    <!-- The crooked wall (left section) -->
+    <path d="M300,120 L310,380 L600,380 L590,120 Z" fill="url(#wallG)"/>
+    <!-- Wall stone rows -->
+    <rect x="305" y="125" width="70" height="25" rx="1" fill="#5a4a28" transform="rotate(1 340 137)"/>
+    <rect x="378" y="126" width="65" height="25" rx="1" fill="#4a3a1a" transform="rotate(1 410 138)"/>
+    <rect x="446" y="127" width="72" height="25" rx="1" fill="#5a4a28" transform="rotate(1 482 139)"/>
+    <rect x="521" y="128" width="60" height="25" rx="1" fill="#4a3a1a" transform="rotate(1 551 140)"/>
+    <rect x="306" y="155" width="65" height="25" rx="1" fill="#4a3a1a" transform="rotate(.5 338 167)"/>
+    <rect x="374" y="156" width="72" height="25" rx="1" fill="#5a4a28" transform="rotate(.5 410 168)"/>
+    <rect x="449" y="157" width="60" height="25" rx="1" fill="#4a3a1a" transform="rotate(.5 479 169)"/>
+    <rect x="512" y="157" width="70" height="25" rx="1" fill="#5a4a28" transform="rotate(.5 547 169)"/>
+    <rect x="307" y="185" width="68" height="25" rx="1" fill="#5a4a28"/>
+    <rect x="378" y="185" width="62" height="25" rx="1" fill="#4a3a1a"/>
+    <rect x="443" y="185" width="74" height="25" rx="1" fill="#5a4a28"/>
+    <rect x="520" y="185" width="65" height="25" rx="1" fill="#4a3a1a"/>
+    <!-- More stone rows -->
+    <rect x="308" y="215" width="66" height="25" rx="1" fill="#4a3a1a"/>
+    <rect x="377" y="215" width="70" height="25" rx="1" fill="#5a4a28"/>
+    <rect x="450" y="215" width="60" height="25" rx="1" fill="#4a3a1a"/>
+    <rect x="513" y="215" width="72" height="25" rx="1" fill="#5a4a28"/>
+    <!-- The straight wall (right section) -->
+    <rect x="780" y="120" width="300" height="260" fill="url(#wallG)"/>
+    <!-- Right wall stone rows -->
+    <rect x="785" y="125" width="70" height="25" rx="1" fill="#5a4a28"/>
+    <rect x="858" y="125" width="65" height="25" rx="1" fill="#4a3a1a"/>
+    <rect x="926" y="125" width="72" height="25" rx="1" fill="#5a4a28"/>
+    <rect x="1001" y="125" width="70" height="25" rx="1" fill="#4a3a1a"/>
+    <rect x="785" y="155" width="65" height="25" rx="1" fill="#4a3a1a"/>
+    <rect x="853" y="155" width="72" height="25" rx="1" fill="#5a4a28"/>
+    <rect x="928" y="155" width="68" height="25" rx="1" fill="#4a3a1a"/>
+    <rect x="999" y="155" width="70" height="25" rx="1" fill="#5a4a28"/>
+    <!-- THE PLUMB LINE — center, hanging from divine hand -->
+    <line x1="720" y1="65" x2="720" y2="380" stroke="#b8860b" stroke-width="2.5"
+          stroke-dasharray="6,4" style="animation: plumbSwing 4s ease-in-out infinite;"/>
+    <!-- Plumb bob weight -->
+    <path d="M712,370 L720,395 L728,370 Z" fill="#b8860b"
+          style="animation: plumbSwing 4s ease-in-out infinite;"/>
+    <circle cx="720" cy="372" r="5" fill="#d4a850" opacity=".7"
+            style="animation: firePulse 3s ease-in-out infinite;"/>
+    <!-- Glow along the plumb line -->
+    <line x1="720" y1="65" x2="720" y2="380" stroke="rgba(184,134,11,.08)" stroke-width="12" filter="blur(6px)"/>
+    <!-- Cracks in the crooked wall -->
+    <path d="M400,180 L405,200 L398,220" stroke="rgba(22,18,8,.6)" stroke-width="1.5" fill="none"/>
+    <path d="M500,160 L503,185 L497,210" stroke="rgba(22,18,8,.6)" stroke-width="1.5" fill="none"/>
+    <!-- Ground -->
+    <rect y="380" width="1440" height="40" fill="#141210"/>
+    <!-- Foreground -->
+    <path d="M0,390 Q200,380 400,388 Q600,375 720,385 Q850,375 1050,388 Q1250,380 1440,390 L1440,420 L0,420 Z"
+          fill="#0e0c08"/>
+    <!-- Bronze light particles -->
+    <circle cx="720" cy="200" r="2" fill="rgba(184,134,11,.4)"/>
+    <circle cx="715" cy="280" r="1.5" fill="rgba(184,134,11,.3)"/>
+    <circle cx="725" cy="340" r="1.8" fill="rgba(184,134,11,.35)"/>
+  </svg>
+
+  <div class="scene-heading" id="plumb-heading" aria-hidden="true">
+    <h2>📐 準繩的異象</h2>
+    <p>Vision of the Plumb Line — Amos 7:7-8</p>
+  </div>
+  <div class="scene-verse">「主又指示我，他手拿準繩，站在一道牆旁」— 阿摩司書 7:7</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — RESTORATION 大衛倒塌帳幕的復興
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-restore" aria-label="大衛倒塌帳幕的復興">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="restore-divine-light" aria-hidden="true"></div>
+  <div id="restore-glow" aria-hidden="true"></div>
+
+  <!-- Fallen tabernacle being raised, light pouring through -->
+  <svg id="restore-scene-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="大衛倒塌的帳幕被建立">
+    <defs>
+      <radialGradient id="restoreGlowG" cx="50%" cy="40%" r="40%">
+        <stop offset="0%" stop-color="rgba(184,134,11,.2)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="tentG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8a7040"/>
+        <stop offset="100%" stop-color="#5a4a2a"/>
+      </linearGradient>
+      <radialGradient id="restoreInnerG" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(184,134,11,.15)"/>
+        <stop offset="50%" stop-color="rgba(184,134,11,.05)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Divine glow -->
+    <ellipse cx="200" cy="160" rx="150" ry="120" fill="url(#restoreGlowG)"/>
+    <!-- Radiating light from above -->
+    <circle cx="200" cy="160" r="60" fill="none" stroke="rgba(184,134,11,.1)" stroke-width="2"
+            style="animation: bronzeGlow 3s ease-in-out infinite;"/>
+    <circle cx="200" cy="160" r="90" fill="none" stroke="rgba(184,134,11,.07)" stroke-width="2"
+            style="animation: bronzeGlow 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="160" r="120" fill="none" stroke="rgba(184,134,11,.04)" stroke-width="2"
+            style="animation: bronzeGlow 4s ease-in-out 1s infinite;"/>
+    <!-- Light beam from above -->
+    <line x1="200" y1="20" x2="200" y2="100" stroke="rgba(184,134,11,.15)" stroke-width="3"/>
+    <line x1="200" y1="30" x2="140" y2="120" stroke="rgba(184,134,11,.08)" stroke-width="2"/>
+    <line x1="200" y1="30" x2="260" y2="120" stroke="rgba(184,134,11,.08)" stroke-width="2"/>
+    <!-- The tabernacle / tent being raised -->
+    <!-- Center pole (rising) -->
+    <rect x="196" y="100" width="8" height="170" fill="#6a5a30" rx="2"/>
+    <circle cx="200" cy="98" r="6" fill="#b8860b" opacity=".7"
+            style="animation: firePulse 3s ease-in-out infinite;"/>
+    <!-- Left tent fabric -->
+    <path d="M200,105 L80,250 L90,260 L200,120 Z" fill="url(#tentG)" opacity=".7"/>
+    <path d="M80,250 L60,265 L90,260 Z" fill="#5a4a2a" opacity=".6"/>
+    <!-- Right tent fabric -->
+    <path d="M200,105 L320,250 L310,260 L200,120 Z" fill="url(#tentG)" opacity=".7"/>
+    <path d="M320,250 L340,265 L310,260 Z" fill="#5a4a2a" opacity=".6"/>
+    <!-- Tent cross-supports -->
+    <line x1="110" y1="210" x2="290" y2="210" stroke="#6a5a30" stroke-width="2" opacity=".5"/>
+    <line x1="130" y1="235" x2="270" y2="235" stroke="#6a5a30" stroke-width="2" opacity=".4"/>
+    <!-- Tent pegs and ropes -->
+    <line x1="80" y1="250" x2="50" y2="295" stroke="#5a4a28" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="320" y1="250" x2="350" y2="295" stroke="#5a4a28" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <path d="M46,293 L50,300 L54,293" fill="#5a4a28"/>
+    <path d="M346,293 L350,300 L354,293" fill="#5a4a28"/>
+    <!-- Inner glow within the tent -->
+    <ellipse cx="200" cy="200" rx="60" ry="40" fill="url(#restoreInnerG)"
+             style="animation: firePulse 3s ease-in-out infinite;"/>
+    <!-- Broken pieces on the ground being gathered -->
+    <rect x="100" y="280" width="18" height="8" rx="1" fill="#4a3a1a" transform="rotate(-10 109 284)"/>
+    <rect x="280" y="285" width="16" height="7" rx="1" fill="#4a3a1a" transform="rotate(8 288 288)"/>
+    <rect x="150" y="290" width="14" height="6" rx="1" fill="#3a2a14" transform="rotate(-5 157 293)"/>
+    <!-- Vines and new growth (restoration) -->
+    <path d="M70,270 Q60,255 55,235 Q52,220 58,205" stroke="#2a5a20" stroke-width="2.5" fill="none" stroke-linecap="round"
+          style="animation: leafGrow 5s ease-in-out infinite;"/>
+    <circle cx="55" cy="235" r="3" fill="#3a6a2a" opacity=".6"/>
+    <circle cx="58" cy="205" r="4" fill="#2a5a1a" opacity=".5"/>
+    <path d="M330,275 Q340,258 345,240 Q348,222 342,208" stroke="#2a5a20" stroke-width="2" fill="none" stroke-linecap="round"
+          style="animation: leafGrow 5.5s ease-in-out .5s infinite;"/>
+    <circle cx="345" cy="240" r="3" fill="#3a6a2a" opacity=".5"/>
+    <circle cx="342" cy="208" r="3.5" fill="#2a5a1a" opacity=".5"/>
+    <!-- Sparkles of restoration -->
+    <circle cx="175" cy="150" r="2" fill="rgba(184,134,11,.5)">
+      <animate attributeName="opacity" values=".2;.7;.2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="230" cy="145" r="1.5" fill="rgba(184,134,11,.45)">
+      <animate attributeName="opacity" values=".15;.6;.15" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="130" r="2.5" fill="rgba(184,134,11,.5)">
+      <animate attributeName="opacity" values=".2;.75;.2" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="155" cy="180" r="1.5" fill="rgba(184,134,11,.35)">
+      <animate attributeName="opacity" values=".1;.5;.1" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="175" r="1.8" fill="rgba(184,134,11,.4)">
+      <animate attributeName="opacity" values=".15;.55;.15" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Ground shadow -->
+    <ellipse cx="200" cy="320" rx="100" ry="10" fill="rgba(22,18,8,.5)"/>
+  </svg>
+
+  <div class="scene-heading" id="restore-heading" aria-hidden="true">
+    <h2>🏕️ 大衛倒塌帳幕的復興</h2>
+    <p>Restoration of David's Tabernacle — Amos 9:11-15</p>
+  </div>
+  <div class="scene-verse">「到那日，我必建立大衛倒塌的帳幕」— 阿摩司書 9:11</div>
+</section>
+
+</body></html>
