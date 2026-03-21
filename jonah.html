@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>約拿書 · Jonah</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #0a1418;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+    @keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+    @keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.21), 564px 126px rgba(255,255,255,.26),
+        210px 347px rgba(255,255,255,.37), 1117px 45px rgba(255,255,255,.30),
+        66px 16px rgba(255,255,255,.20),  477px 259px rgba(255,255,255,.32),
+        1150px 102px rgba(255,255,255,.36), 1437px 280px rgba(255,255,255,.28),
+        920px 302px rgba(255,255,255,.24), 14px 389px rgba(255,255,255,.35),
+        1430px 217px rgba(255,255,255,.27), 319px 111px rgba(255,255,255,.38),
+        690px 53px rgba(255,255,255,.22),  199px 184px rgba(255,255,255,.34),
+        1237px 136px rgba(255,255,255,.35), 941px 275px rgba(255,255,255,.23),
+        776px 41px rgba(255,255,255,.30),  1288px 317px rgba(255,255,255,.36),
+        741px 296px rgba(255,255,255,.25),  143px 24px rgba(255,255,255,.33),
+        593px 41px rgba(255,255,255,.35),  207px 195px rgba(255,255,255,.24),
+        1302px 428px rgba(255,255,255,.28), 759px 182px rgba(255,255,255,.22),
+        547px 360px rgba(255,255,255,.37), 1328px 37px rgba(255,255,255,.30),
+        351px 274px rgba(255,255,255,.33), 335px 237px rgba(255,255,255,.26),
+        1311px 353px rgba(255,255,255,.30), 1403px 167px rgba(255,255,255,.35),
+        115px 118px rgba(255,255,255,.34), 647px 206px rgba(255,255,255,.23),
+        433px 468px rgba(255,255,255,.37), 645px 109px rgba(255,255,255,.33),
+        811px 453px rgba(255,255,255,.36), 940px 74px rgba(255,255,255,.23),
+        506px 382px rgba(255,255,255,.30), 539px 383px rgba(255,255,255,.29),
+        1196px 205px rgba(255,255,255,.28), 284px 261px rgba(255,255,255,.32),
+        97px 441px rgba(255,255,255,.20),  1286px 82px rgba(255,255,255,.35),
+        865px 306px rgba(255,255,255,.21), 782px 306px rgba(255,255,255,.38),
+        1084px 129px rgba(255,255,255,.37), 24px 349px rgba(255,255,255,.33),
+        1397px 454px rgba(255,255,255,.27), 547px 394px rgba(255,255,255,.32),
+        229px 151px rgba(255,255,255,.28), 930px 2px rgba(255,255,255,.38),
+        540px 498px rgba(255,255,255,.25), 366px 260px rgba(255,255,255,.36),
+        1281px 153px rgba(255,255,255,.34), 1040px 312px rgba(255,255,255,.22),
+        766px 391px rgba(255,255,255,.20), 1087px 471px rgba(255,255,255,.18),
+        664px 251px rgba(255,255,255,.21), 744px 450px rgba(255,255,255,.37),
+        630px 123px rgba(255,255,255,.23), 1162px 485px rgba(255,255,255,.22),
+        996px 418px rgba(255,255,255,.23), 1091px 393px rgba(255,255,255,.26),
+        1352px 244px rgba(255,255,255,.37), 339px 136px rgba(255,255,255,.28),
+        1243px 217px rgba(255,255,255,.38), 1105px 387px rgba(255,255,255,.33),
+        412px 366px rgba(255,255,255,.26), 1376px 333px rgba(255,255,255,.27),
+        1060px 232px rgba(255,255,255,.24), 461px 33px rgba(255,255,255,.27),
+        1205px 284px rgba(255,255,255,.22), 452px 4px rgba(255,255,255,.24),
+        1293px 31px rgba(255,255,255,.21), 65px 441px rgba(255,255,255,.27),
+        1053px 122px rgba(255,255,255,.24), 995px 110px rgba(255,255,255,.30),
+        1170px 296px rgba(255,255,255,.28), 969px 414px rgba(255,255,255,.25),
+        194px 50px rgba(255,255,255,.33),  726px 217px rgba(255,255,255,.26);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.45),  1324px 51px rgba(255,255,255,.38),
+        695px 410px rgba(255,255,255,.48), 510px 99px rgba(255,255,255,.40),
+        919px 72px rgba(255,255,255,.43),  571px 237px rgba(255,255,255,.38),
+        155px 227px rgba(255,255,255,.47), 1128px 51px rgba(255,255,255,.36),
+        1108px 429px rgba(255,255,255,.35), 192px 475px rgba(255,255,255,.46),
+        485px 86px rgba(255,255,255,.42),  986px 110px rgba(255,255,255,.48),
+        121px 85px rgba(255,255,255,.41),  800px 136px rgba(255,255,255,.49),
+        932px 147px rgba(255,255,255,.43), 1139px 339px rgba(255,255,255,.46),
+        318px 98px rgba(255,255,255,.39),  120px 297px rgba(255,255,255,.45),
+        125px 383px rgba(255,255,255,.39), 103px 300px rgba(255,255,255,.42),
+        1088px 81px rgba(255,255,255,.36), 1041px 42px rgba(255,255,255,.48),
+        141px 305px rgba(255,255,255,.36), 482px 207px rgba(255,255,255,.38),
+        1167px 127px rgba(255,255,255,.43), 82px 318px rgba(255,255,255,.36),
+        1347px 299px rgba(255,255,255,.43), 648px 479px rgba(255,255,255,.39),
+        1372px 367px rgba(255,255,255,.39), 544px 203px rgba(255,255,255,.38);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,220,230,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(32,144,160,.2);
+      border-color: rgba(32,144,160,.5);
+      color: #2090a0;
+      box-shadow: 0 0 20px rgba(32,144,160,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ── Jonah-specific keyframes ── */
+    @keyframes oceanGlow {
+      0%,100% { opacity: .4; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .8; transform: translateX(-50%) scale(1.08); }
+    }
+    @keyframes waveRise {
+      0%,100% { transform: translateY(0); opacity: .7; }
+      50%      { transform: translateY(-6px); opacity: 1; }
+    }
+    @keyframes seaweedSway {
+      0%,100% { transform: rotate(-2deg) translateY(0); }
+      50%      { transform: rotate(2deg) translateY(-3px); }
+    }
+    @keyframes glimmerShine {
+      0%,100% { opacity: .5; filter: brightness(1); }
+      50%      { opacity: 1;  filter: brightness(1.4); }
+    }
+    @keyframes divinePulse {
+      0%,100% { opacity: .3; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scale(1.12); }
+    }
+    @keyframes bubbleRise {
+      0%   { transform: translateY(0) translateX(0); opacity: .4; }
+      50%  { transform: translateY(-20px) translateX(8px); opacity: .7; }
+      100% { transform: translateY(-40px) translateX(0); opacity: 0; }
+    }
+    @keyframes depthGlow {
+      0%,100% { opacity: .3; transform: scaleY(1); }
+      50%      { opacity: .5; transform: scaleY(1.05); }
+    }
+    @keyframes surfaceGlow {
+      0%,100% { opacity: .4; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleX(1.08); }
+    }
+    @keyframes lightBeam {
+      0%,100% { opacity: .3; transform: translateX(-50%) scaleY(1); }
+      50%      { opacity: .6; transform: translateX(-50%) scaleY(1.08); }
+    }
+    @keyframes emberGlow {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #0a1418 0%, #0e1c22 40%, #121e24 70%, #0a1418 100%);
+    }
+    #intro-ocean-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(32,144,160,.12) 0%, rgba(20,120,140,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: emberGlow 4s ease-in-out infinite;
+    }
+    #intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#2090a0 0%,#40c8d8 45%,#106070 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(32,144,160,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(32,144,160,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-ship-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(120px,16vw,220px);
+    }
+    #intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — FLEEING TO TARSHISH 逃往他施
+    ══════════════════════════════════════════════ */
+    #scene-flee {
+      background: linear-gradient(180deg, #060a0c 0%, #0a1418 40%, #0e1c22 70%, #060a0c 100%);
+    }
+    #flee-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(32,144,160,.15) 0%, rgba(10,100,120,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #flee-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 8s ease-in-out infinite;
+    }
+    #flee-heading h2 {
+      color: #2090a0;
+      text-shadow: 0 0 22px rgba(32,144,160,.5);
+    }
+    #flee-heading p { color: rgba(32,144,160,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — STORM & GREAT FISH 暴風與大魚
+    ══════════════════════════════════════════════ */
+    #scene-storm {
+      background: linear-gradient(180deg, #0a1418 0%, #0e1c22 40%, #162830 70%, #0e1c22 100%);
+    }
+    #storm-light-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(32,144,160,.18) 0%, rgba(20,120,140,.07) 45%, transparent 70%);
+      z-index: 3;
+      animation: divinePulse 3.5s ease-in-out infinite;
+    }
+    #storm-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+    #storm-heading h2 {
+      color: #2090a0;
+      text-shadow: 0 0 22px rgba(32,144,160,.6);
+    }
+    #storm-heading p { color: rgba(32,144,160,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — PRAYER FROM THE FISH 魚腹中的禱告
+    ══════════════════════════════════════════════ */
+    #scene-prayer {
+      background: linear-gradient(180deg, #080e12 0%, #0c1418 40%, #101a1e 70%, #0a1418 100%);
+    }
+    #prayer-light-beam {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(80px,12vw,200px); height: 100%;
+      background: linear-gradient(180deg,rgba(64,220,240,0) 0%,rgba(32,144,160,.2) 30%,rgba(32,144,160,.35) 65%,transparent 100%);
+      z-index: 3; filter: blur(12px);
+      animation: lightBeam 3s ease-in-out infinite;
+    }
+    #prayer-scene-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+    #prayer-heading h2 {
+      color: #40c8d8;
+      text-shadow: 0 0 18px rgba(32,144,160,.5);
+    }
+    #prayer-heading p { color: rgba(32,144,160,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — NINEVEH REPENTS 尼尼微的悔改
+    ══════════════════════════════════════════════ */
+    #scene-repent {
+      background: linear-gradient(180deg, #080e12 0%, #0c1418 35%, #121e24 60%, #1a2830 85%, #121e24 100%);
+    }
+    #repent-city-light {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(32,144,160,.15) 0%, rgba(20,120,140,.06) 50%, transparent 75%);
+      z-index: 3;
+      animation: surfaceGlow 4s ease-in-out infinite;
+    }
+    #repent-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+    #repent-heading h2 {
+      background: linear-gradient(120deg,#1a8090 0%,#40c8d8 50%,#106070 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #repent-heading p { color: rgba(32,144,160,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — GOD'S COMPASSION 神的憐憫
+    ══════════════════════════════════════════════ */
+    #scene-mercy {
+      background: linear-gradient(180deg, #0c1418 0%, #121e24 40%, #1a2830 70%, #223038 100%);
+    }
+    #mercy-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(64,220,240,0) 0%,rgba(32,144,160,.3) 25%,rgba(32,144,160,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: oceanGlow 2.5s ease-in-out infinite;
+    }
+    #mercy-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(32,144,160,.08) 0%, rgba(20,120,140,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #mercy-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(180px,28vw,380px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    #mercy-heading h2 {
+      background: linear-gradient(120deg,#2090a0 0%,#40c8d8 50%,#106070 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    #mercy-heading p { color: rgba(32,144,160,.5); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"    aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-flee"     aria-label="逃往他施"></a>
+  <a class="nav-dot" href="#scene-storm"    aria-label="暴風與大魚"></a>
+  <a class="nav-dot" href="#scene-prayer"   aria-label="魚腹中的禱告"></a>
+  <a class="nav-dot" href="#scene-repent"   aria-label="尼尼微的悔改"></a>
+  <a class="nav-dot" href="#scene-mercy"    aria-label="神的憐憫"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="約拿書 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="intro-ocean-glow" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>約拿書</h1>
+    <p>Jonah</p>
+    <span class="sub">逃避 · 風暴 · 大魚 · 悔改 · 憐憫 · 恩典</span>
+  </div>
+
+  <!-- Ship silhouette on the sea -->
+  <svg id="intro-ship-svg" viewBox="0 0 220 260" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="海上的船">
+    <!-- Ship hull -->
+    <path d="M60,180 Q70,210 110,215 Q150,210 160,180 Z" fill="#0a5060" stroke="#1a8090" stroke-width="1"/>
+    <path d="M65,185 Q75,205 110,210 Q145,205 155,185 Z" fill="#083848"/>
+    <!-- Deck -->
+    <rect x="75" y="172" width="70" height="10" rx="2" fill="#0a5060"/>
+    <!-- Mast -->
+    <rect x="108" y="90" width="4" height="85" fill="#1a8090"/>
+    <!-- Sail -->
+    <path d="M112,95 Q145,130 135,170 L112,170 Z" fill="rgba(32,144,160,.25)" stroke="rgba(32,144,160,.4)" stroke-width="1"/>
+    <path d="M108,95 Q75,130 85,170 L108,170 Z" fill="rgba(32,144,160,.18)" stroke="rgba(32,144,160,.3)" stroke-width="1"/>
+    <!-- Crow's nest -->
+    <rect x="103" y="86" width="14" height="6" rx="2" fill="#1a8090"/>
+    <!-- Flag -->
+    <path d="M110,86 L110,74 L125,80 L110,86" fill="rgba(32,144,160,.5)"/>
+    <!-- Water reflection below hull -->
+    <ellipse cx="110" cy="220" rx="55" ry="6" fill="rgba(32,144,160,.1)"/>
+    <!-- Ripples -->
+    <path d="M50,222 Q80,218 110,222 Q140,226 170,222" stroke="rgba(32,144,160,.15)" stroke-width="1.5" fill="none"/>
+    <path d="M40,232 Q80,228 110,232 Q140,236 180,232" stroke="rgba(32,144,160,.1)" stroke-width="1" fill="none"/>
+    <!-- Bubbles -->
+    <circle cx="80" cy="225" r="1.5" fill="rgba(32,144,160,.25)" style="animation: bubbleRise 4s ease-out infinite;"/>
+    <circle cx="140" cy="228" r="1" fill="rgba(32,144,160,.2)" style="animation: bubbleRise 5s ease-out 1.5s infinite;"/>
+    <circle cx="110" cy="230" r="1.2" fill="rgba(32,144,160,.22)" style="animation: bubbleRise 4.5s ease-out .8s infinite;"/>
+    <!-- Faint glow around ship -->
+    <ellipse cx="110" cy="190" rx="60" ry="50" fill="rgba(32,144,160,.04)"/>
+  </svg>
+
+  <!-- Ocean horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="horizonG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0a1418"/>
+        <stop offset="100%" stop-color="#060a0c"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,170 240,190 Q360,160 480,185 Q600,150 720,175
+             Q840,145 960,170 Q1080,155 1200,180 Q1320,160 1440,190
+             L1440,300 L0,300 Z"
+          fill="url(#horizonG1)"/>
+    <circle cx="300" cy="178" r="2" fill="rgba(32,144,160,.3)" style="animation: emberGlow 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="165" r="1.5" fill="rgba(32,144,160,.25)" style="animation: emberGlow 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="172" r="1.8" fill="rgba(32,144,160,.2)" style="animation: emberGlow 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="180" r="2" fill="rgba(32,144,160,.3)" style="animation: emberGlow 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <div class="scroll-hint" aria-hidden="true">▽ 向下捲動 · Scroll ▽</div>
+  <div class="scene-verse">「約拿卻起來，逃往他施去躲避耶和華」— 約拿書 1:3</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — FLEEING TO TARSHISH 逃往他施
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-flee" aria-label="逃往他施">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="flee-glow" aria-hidden="true"></div>
+
+  <!-- Ship sailing away at night, Jonah fleeing, port of Joppa receding -->
+  <svg id="flee-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="約拿逃往他施的船">
+    <defs>
+      <linearGradient id="fleeSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#060a0c"/>
+        <stop offset="50%" stop-color="#0a1418"/>
+        <stop offset="100%" stop-color="#0e1c22"/>
+      </linearGradient>
+      <linearGradient id="fleeSeaG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0a1c22"/>
+        <stop offset="100%" stop-color="#060e12"/>
+      </linearGradient>
+    </defs>
+    <!-- Night sky -->
+    <rect width="600" height="400" fill="url(#fleeSkyG)"/>
+    <!-- Moon -->
+    <circle cx="480" cy="60" r="18" fill="rgba(200,220,230,.12)"/>
+    <circle cx="485" cy="55" r="16" fill="#060a0c"/>
+    <!-- Sea horizon -->
+    <path d="M0,230 Q100,220 200,228 Q300,218 400,226 Q500,220 600,230 L600,400 L0,400 Z"
+          fill="url(#fleeSeaG)"/>
+    <!-- Distant Joppa port (left, small) -->
+    <rect x="20" y="210" width="8" height="25" fill="#0a3848"/>
+    <rect x="30" y="215" width="12" height="20" fill="#083040"/>
+    <rect x="44" y="218" width="6" height="17" fill="#0a3848"/>
+    <rect x="15" y="208" width="40" height="4" rx="1" fill="#0a4050"/>
+    <!-- Tiny torch on port -->
+    <circle cx="36" cy="208" r="3" fill="rgba(32,144,160,.35)" style="animation: glimmerShine 3s ease-in-out infinite;"/>
+    <!-- Ship (center-right, larger, sailing away) -->
+    <path d="M320,260 Q340,300 400,305 Q460,300 480,260 Z" fill="#0a5060" stroke="#1a8090" stroke-width="1.5"/>
+    <path d="M330,268 Q350,295 400,298 Q450,295 470,268 Z" fill="#083848"/>
+    <!-- Deck -->
+    <rect x="340" y="252" width="120" height="10" rx="2" fill="#0a5060"/>
+    <!-- Mast -->
+    <rect x="398" y="130" width="5" height="125" fill="#1a8090"/>
+    <!-- Main sail (billowing) -->
+    <path d="M403,135 Q460,170 450,250 L403,250 Z" fill="rgba(32,144,160,.2)" stroke="rgba(32,144,160,.35)" stroke-width="1"/>
+    <path d="M398,135 Q340,170 350,250 L398,250 Z" fill="rgba(32,144,160,.15)" stroke="rgba(32,144,160,.25)" stroke-width="1"/>
+    <!-- Sail rigging -->
+    <line x1="400" y1="130" x2="340" y2="255" stroke="rgba(32,144,160,.12)" stroke-width=".8"/>
+    <line x1="400" y1="130" x2="460" y2="255" stroke="rgba(32,144,160,.12)" stroke-width=".8"/>
+    <!-- Jonah figure on deck (hunched, sleeping) -->
+    <circle cx="370" cy="245" r="6" fill="#1a6070"/>
+    <path d="M365,251 Q363,262 368,265 Q372,262 375,265 Q380,262 377,251 Z" fill="#0a5060"/>
+    <path d="M364,250 Q362,248 360,252" stroke="#1a6070" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Wave patterns on sea -->
+    <path d="M0,270 Q60,262 120,270 Q180,278 240,270 Q300,262 360,270 Q420,278 480,270 Q540,262 600,270"
+          stroke="rgba(32,144,160,.1)" stroke-width="2" fill="none"/>
+    <path d="M0,290 Q70,282 140,290 Q210,298 280,290 Q350,282 420,290 Q490,298 560,290 Q595,286 600,290"
+          stroke="rgba(32,144,160,.08)" stroke-width="1.5" fill="none"/>
+    <path d="M0,310 Q80,302 160,310 Q240,318 320,310 Q400,302 480,310 Q560,318 600,310"
+          stroke="rgba(32,144,160,.06)" stroke-width="1.5" fill="none"/>
+    <!-- Ship wake -->
+    <path d="M320,290 Q280,300 230,295 Q180,300 140,295" stroke="rgba(32,144,160,.08)" stroke-width="1.5" fill="none"/>
+    <path d="M325,300 Q285,310 240,305 Q195,310 160,305" stroke="rgba(32,144,160,.05)" stroke-width="1" fill="none"/>
+    <!-- Water reflection of moon -->
+    <ellipse cx="480" cy="240" rx="20" ry="4" fill="rgba(200,220,230,.04)"/>
+    <!-- Bubbles -->
+    <circle cx="350" cy="300" r="1.5" fill="rgba(32,144,160,.3)" style="animation: bubbleRise 3.5s ease-out infinite;"/>
+    <circle cx="420" cy="310" r="1.2" fill="rgba(32,144,160,.25)" style="animation: bubbleRise 4s ease-out 1s infinite;"/>
+    <circle cx="380" cy="320" r="1" fill="rgba(32,144,160,.2)" style="animation: bubbleRise 4.5s ease-out 2s infinite;"/>
+    <!-- Sea glow -->
+    <ellipse cx="400" cy="290" rx="120" ry="40" fill="rgba(32,144,160,.04)"/>
+  </svg>
+
+  <div class="scene-heading" id="flee-heading" aria-hidden="true">
+    <h2>🚢 逃往他施</h2>
+    <p>Fleeing to Tarshish — Jonah 1:3</p>
+  </div>
+  <div class="scene-verse">「約拿卻起來，逃往他施去躲避耶和華」— 約拿書 1:3</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — STORM & GREAT FISH 暴風與大魚
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-storm" aria-label="暴風與大魚">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="storm-light-glow" aria-hidden="true"></div>
+
+  <!-- Stormy sea with great fish emerging, ship tossed by waves -->
+  <svg id="storm-scene-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="暴風中大魚吞約拿">
+    <defs>
+      <linearGradient id="stormSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0a1418"/>
+        <stop offset="60%" stop-color="#0e1c22"/>
+        <stop offset="100%" stop-color="#0a1418"/>
+      </linearGradient>
+      <radialGradient id="stormLightG" cx="50%" cy="15%" r="40%">
+        <stop offset="0%" stop-color="rgba(32,144,160,.2)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Stormy sky -->
+    <rect width="1440" height="500" fill="url(#stormSkyG)"/>
+    <!-- Lightning flash glow -->
+    <ellipse cx="720" cy="60" rx="200" ry="80" fill="url(#stormLightG)"/>
+    <!-- Lightning bolt -->
+    <path d="M720,30 L700,90 L730,85 L690,160" stroke="rgba(64,200,216,.3)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M680,20 L665,75 L690,70 L660,140" stroke="rgba(64,200,216,.15)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Storm clouds -->
+    <ellipse cx="400" cy="60" rx="200" ry="50" fill="rgba(12,20,28,.8)"/>
+    <ellipse cx="750" cy="45" rx="250" ry="55" fill="rgba(10,18,24,.85)"/>
+    <ellipse cx="1100" cy="65" rx="200" ry="45" fill="rgba(12,20,28,.8)"/>
+    <!-- Turbulent sea -->
+    <path d="M0,250 Q100,200 200,240 Q300,180 400,230 Q500,190 600,250
+             Q700,200 800,240 Q900,190 1000,250 Q1100,200 1200,240 Q1350,190 1440,250
+             L1440,500 L0,500 Z"
+          fill="#0a1c22"/>
+    <!-- Crashing wave peaks -->
+    <path d="M180,220 Q200,190 230,210 Q240,195 260,215" stroke="rgba(32,144,160,.2)" stroke-width="3" fill="none"/>
+    <path d="M580,230 Q600,200 630,220 Q640,205 660,225" stroke="rgba(32,144,160,.2)" stroke-width="3" fill="none"/>
+    <path d="M1000,220 Q1020,190 1050,210 Q1060,195 1080,215" stroke="rgba(32,144,160,.15)" stroke-width="3" fill="none"/>
+    <!-- Spray/foam -->
+    <circle cx="210" cy="205" r="3" fill="rgba(200,230,240,.1)"/>
+    <circle cx="225" cy="198" r="2" fill="rgba(200,230,240,.08)"/>
+    <circle cx="610" cy="210" r="3" fill="rgba(200,230,240,.1)"/>
+    <!-- Tiny ship being tossed (left side) -->
+    <g transform="rotate(-15 350 260)">
+      <path d="M310,260 Q320,278 350,280 Q380,278 390,260 Z" fill="#0a5060" stroke="#1a8090" stroke-width="1"/>
+      <rect x="348" y="230" width="3" height="32" fill="#1a8090"/>
+      <path d="M351,232 Q370,245 367,260 L351,260 Z" fill="rgba(32,144,160,.15)"/>
+    </g>
+    <!-- Great fish / whale emerging from deep (right side) -->
+    <path d="M850,300 Q880,260 950,240 Q1020,230 1080,250 Q1120,270 1130,310
+             Q1120,350 1080,370 Q1020,390 950,380 Q880,370 850,340 Z"
+          fill="#083848" stroke="#1a6070" stroke-width="2"/>
+    <!-- Fish eye -->
+    <circle cx="920" cy="280" r="12" fill="#0a2028" stroke="#1a6070" stroke-width="1.5"/>
+    <circle cx="918" cy="278" r="5" fill="rgba(32,144,160,.4)"/>
+    <circle cx="916" cy="276" r="2" fill="rgba(64,200,216,.6)"/>
+    <!-- Fish mouth (open) -->
+    <path d="M850,300 Q840,310 835,320 Q840,330 850,340" stroke="#1a6070" stroke-width="2" fill="#041018"/>
+    <path d="M850,300 Q860,315 850,340" stroke="#0a3040" stroke-width="1" fill="none"/>
+    <!-- Fish fins -->
+    <path d="M1050,260 Q1070,230 1090,240 Q1080,260 1060,265" fill="#0a4050" stroke="#1a6070" stroke-width="1"/>
+    <path d="M1050,360 Q1070,390 1090,380 Q1080,360 1060,355" fill="#0a4050" stroke="#1a6070" stroke-width="1"/>
+    <!-- Fish tail -->
+    <path d="M1120,290 Q1160,260 1180,270 Q1160,310 1180,350 Q1160,360 1120,330"
+          fill="#083848" stroke="#1a6070" stroke-width="1.5"/>
+    <!-- Fish body texture lines -->
+    <path d="M900,270 Q950,265 1000,275" stroke="rgba(26,96,112,.3)" stroke-width="1" fill="none"/>
+    <path d="M900,290 Q950,285 1010,295" stroke="rgba(26,96,112,.3)" stroke-width="1" fill="none"/>
+    <path d="M880,330 Q940,335 1000,325" stroke="rgba(26,96,112,.3)" stroke-width="1" fill="none"/>
+    <!-- Jonah falling into the sea (between ship and fish) -->
+    <circle cx="620" cy="280" r="10" fill="#1a6070"/>
+    <path d="M613,290 L610,325 Q617,328 622,325 L620,310 L628,325 Q633,328 638,325 L630,290 Z" fill="#0a5060"/>
+    <path d="M612,292 Q600,285 595,275" stroke="#1a6070" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M630,292 Q642,285 648,275" stroke="#1a6070" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Splash around Jonah -->
+    <circle cx="605" cy="270" r="2.5" fill="rgba(64,200,216,.15)"/>
+    <circle cx="640" cy="268" r="2" fill="rgba(64,200,216,.12)"/>
+    <circle cx="620" cy="260" r="3" fill="rgba(64,200,216,.1)"/>
+    <!-- Foreground dark water -->
+    <path d="M0,420 Q200,390 400,410 Q600,380 720,400 Q850,380 1050,410 Q1250,390 1440,420 L1440,500 L0,500 Z"
+          fill="#060e12"/>
+    <!-- Bubbles rising -->
+    <circle cx="650" cy="320" r="2" fill="rgba(32,144,160,.35)">
+      <animate attributeName="cy" values="320;270;320" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.5;.2" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="600" cy="340" r="1.5" fill="rgba(32,144,160,.3)">
+      <animate attributeName="cy" values="340;290;340" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".15;.45;.15" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="900" cy="350" r="2.5" fill="rgba(32,144,160,.4)">
+      <animate attributeName="cy" values="350;300;350" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.55;.2" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <div class="scene-heading" id="storm-heading" aria-hidden="true">
+    <h2>🌊 暴風與大魚</h2>
+    <p>The Storm &amp; Great Fish — Jonah 1:4-17</p>
+  </div>
+  <div class="scene-verse">「耶和華安排一條大魚吞了約拿」— 約拿書 1:17</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — PRAYER FROM THE FISH 魚腹中的禱告
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-prayer" aria-label="魚腹中的禱告">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="prayer-light-beam" aria-hidden="true"></div>
+
+  <!-- Underwater scene: Jonah praying inside the great fish, light filtering from above -->
+  <svg id="prayer-scene-svg" viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="約拿在魚腹中禱告">
+    <defs>
+      <radialGradient id="prayerGlowG" cx="50%" cy="35%" r="40%">
+        <stop offset="0%" stop-color="rgba(64,200,216,.2)"/>
+        <stop offset="40%" stop-color="rgba(32,144,160,.08)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="depthG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(32,144,160,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </linearGradient>
+    </defs>
+    <!-- Underwater glow -->
+    <ellipse cx="200" cy="140" rx="160" ry="120" fill="url(#prayerGlowG)"/>
+    <!-- Light filtering from above -->
+    <line x1="200" y1="0" x2="160" y2="100" stroke="rgba(64,200,216,.08)" stroke-width="8"/>
+    <line x1="200" y1="0" x2="200" y2="90" stroke="rgba(64,200,216,.1)" stroke-width="6"/>
+    <line x1="200" y1="0" x2="240" y2="100" stroke="rgba(64,200,216,.08)" stroke-width="8"/>
+    <!-- Fish belly outline (cavernous interior) -->
+    <path d="M40,100 Q20,160 30,220 Q50,290 100,310 Q160,330 200,325
+             Q240,330 300,310 Q350,290 370,220 Q380,160 360,100
+             Q340,60 300,50 Q240,40 200,45 Q160,40 100,50 Q60,60 40,100 Z"
+          fill="none" stroke="rgba(26,96,112,.25)" stroke-width="2"/>
+    <!-- Inner ribbing of the fish -->
+    <path d="M60,120 Q120,100 200,105 Q280,100 340,120" stroke="rgba(26,96,112,.15)" stroke-width="1.5" fill="none"/>
+    <path d="M50,160 Q120,140 200,145 Q280,140 350,160" stroke="rgba(26,96,112,.12)" stroke-width="1.5" fill="none"/>
+    <path d="M45,200 Q120,180 200,185 Q280,180 355,200" stroke="rgba(26,96,112,.1)" stroke-width="1.5" fill="none"/>
+    <path d="M55,240 Q130,220 200,225 Q270,220 345,240" stroke="rgba(26,96,112,.08)" stroke-width="1.5" fill="none"/>
+    <!-- Jonah kneeling in prayer (center) -->
+    <circle cx="200" cy="210" r="14" fill="#1a6070"/>
+    <!-- Body (kneeling) -->
+    <path d="M190,224 Q185,250 188,270 Q195,275 200,270 L200,260
+             L208,270 Q215,275 218,270 Q215,250 210,224 Z" fill="#0a5060"/>
+    <!-- Arms raised in prayer -->
+    <path d="M188,228 Q175,215 170,195" stroke="#1a6070" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M212,228 Q225,215 230,195" stroke="#1a6070" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Hands reaching upward -->
+    <circle cx="168" cy="193" r="4" fill="#1a6070"/>
+    <circle cx="232" cy="193" r="4" fill="#1a6070"/>
+    <!-- Prayer glow around Jonah -->
+    <ellipse cx="200" cy="220" rx="45" ry="40" fill="rgba(64,200,216,.06)"/>
+    <ellipse cx="200" cy="210" rx="30" ry="25" fill="rgba(64,200,216,.04)"/>
+    <!-- Rising light from prayer -->
+    <line x1="200" y1="195" x2="200" y2="50" stroke="rgba(64,200,216,.1)" stroke-width="2"
+          style="animation: depthGlow 3s ease-in-out infinite;"/>
+    <!-- Radiating light rings from prayer -->
+    <circle cx="200" cy="210" r="50" fill="none" stroke="rgba(32,144,160,.08)" stroke-width="1.5"
+            style="animation: oceanGlow 3s ease-in-out infinite;"/>
+    <circle cx="200" cy="210" r="75" fill="none" stroke="rgba(32,144,160,.05)" stroke-width="1.5"
+            style="animation: oceanGlow 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="210" r="100" fill="none" stroke="rgba(32,144,160,.03)" stroke-width="1.5"
+            style="animation: oceanGlow 4s ease-in-out 1s infinite;"/>
+    <!-- Bubbles floating up -->
+    <circle cx="180" cy="170" r="3" fill="rgba(64,200,216,.2)">
+      <animate attributeName="cy" values="170;120;170" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".1;.3;.1" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="220" cy="160" r="2.5" fill="rgba(64,200,216,.18)">
+      <animate attributeName="cy" values="160;110;160" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".1;.25;.1" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="180" r="4" fill="rgba(64,200,216,.15)">
+      <animate attributeName="cy" values="180;100;180" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".1;.35;.1" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="165" cy="240" r="2" fill="rgba(64,200,216,.12)">
+      <animate attributeName="cy" values="240;180;240" dur="4.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".08;.22;.08" dur="4.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="238" cy="250" r="1.8" fill="rgba(64,200,216,.14)">
+      <animate attributeName="cy" values="250;190;250" dur="3.8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".1;.28;.1" dur="3.8s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Seaweed at bottom -->
+    <path d="M80,310 Q85,280 78,260" stroke="rgba(20,100,80,.2)" stroke-width="3" fill="none" stroke-linecap="round"
+          style="animation: seaweedSway 5s ease-in-out infinite;"/>
+    <path d="M90,315 Q95,290 88,270" stroke="rgba(20,100,80,.15)" stroke-width="2.5" fill="none" stroke-linecap="round"
+          style="animation: seaweedSway 5.5s ease-in-out .5s infinite;"/>
+    <path d="M310,310 Q305,280 312,260" stroke="rgba(20,100,80,.2)" stroke-width="3" fill="none" stroke-linecap="round"
+          style="animation: seaweedSway 4.5s ease-in-out 1s infinite;"/>
+    <path d="M320,315 Q315,290 322,270" stroke="rgba(20,100,80,.15)" stroke-width="2.5" fill="none" stroke-linecap="round"
+          style="animation: seaweedSway 5s ease-in-out .3s infinite;"/>
+    <!-- Ground shadow -->
+    <ellipse cx="200" cy="330" rx="120" ry="8" fill="rgba(6,10,12,.4)"/>
+  </svg>
+
+  <div class="scene-heading" id="prayer-heading" aria-hidden="true">
+    <h2>🙏 魚腹中的禱告</h2>
+    <p>Prayer from the Fish — Jonah 2:1-10</p>
+  </div>
+  <div class="scene-verse">「我從深淵的信中呼求，你就俯聽我的聲音」— 約拿書 2:2</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — NINEVEH REPENTS 尼尼微的悔改
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-repent" aria-label="尼尼微的悔改">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="repent-city-light" aria-hidden="true"></div>
+
+  <!-- City of Nineveh, people in sackcloth, fasting and praying -->
+  <svg id="repent-scene-svg" viewBox="0 0 1440 420" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="尼尼微城的百姓悔改">
+    <defs>
+      <linearGradient id="repentSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0a1418"/>
+        <stop offset="40%" stop-color="#0e1c22"/>
+        <stop offset="70%" stop-color="#121e24"/>
+        <stop offset="100%" stop-color="#162830"/>
+      </linearGradient>
+      <radialGradient id="repentGlowG" cx="50%" cy="30%" r="35%">
+        <stop offset="0%" stop-color="rgba(64,200,216,.12)"/>
+        <stop offset="50%" stop-color="rgba(32,144,160,.04)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Sky -->
+    <rect width="1440" height="420" fill="url(#repentSkyG)"/>
+    <!-- Soft light from above -->
+    <ellipse cx="720" cy="80" rx="300" ry="100" fill="url(#repentGlowG)"/>
+    <!-- Light rays descending -->
+    <line x1="720" y1="30" x2="520" y2="200" stroke="rgba(32,144,160,.06)" stroke-width="6"/>
+    <line x1="720" y1="30" x2="620" y2="180" stroke="rgba(32,144,160,.08)" stroke-width="5"/>
+    <line x1="720" y1="30" x2="720" y2="170" stroke="rgba(32,144,160,.1)" stroke-width="4"/>
+    <line x1="720" y1="30" x2="820" y2="180" stroke="rgba(32,144,160,.08)" stroke-width="5"/>
+    <line x1="720" y1="30" x2="920" y2="200" stroke="rgba(32,144,160,.06)" stroke-width="6"/>
+    <!-- Ground -->
+    <rect y="310" width="1440" height="110" fill="#0a1418"/>
+    <!-- City walls (far back) -->
+    <rect x="200" y="140" width="1040" height="170" fill="#0c1c24" stroke="#1a3040" stroke-width="1"/>
+    <!-- Crenellations along top -->
+    <rect x="200" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="260" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="320" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="380" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="440" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="500" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="560" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="620" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="680" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="740" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="800" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="860" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="920" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="980" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="1040" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="1100" y="132" width="40" height="14" fill="#0c1c24"/>
+    <rect x="1160" y="132" width="40" height="14" fill="#0c1c24"/>
+    <!-- City gate (center) -->
+    <path d="M680,170 Q720,145 760,170 L760,310 L680,310 Z" fill="#081418" stroke="#1a3040" stroke-width="1"/>
+    <!-- Tower left -->
+    <rect x="400" y="110" width="50" height="200" fill="#0e1c24" stroke="#1a3040" stroke-width="1"/>
+    <rect x="395" y="105" width="60" height="10" rx="2" fill="#122430"/>
+    <!-- Tower right -->
+    <rect x="990" y="110" width="50" height="200" fill="#0e1c24" stroke="#1a3040" stroke-width="1"/>
+    <rect x="985" y="105" width="60" height="10" rx="2" fill="#122430"/>
+    <!-- Ziggurats/buildings behind wall -->
+    <path d="M500,145 L530,100 L560,145" fill="#0a1820"/>
+    <path d="M850,145 L880,90 L910,145" fill="#0a1820"/>
+    <!-- People kneeling/prostrating (in front of gate) -->
+    <!-- Person 1 kneeling -->
+    <circle cx="580" cy="280" r="10" fill="#1a5060"/>
+    <path d="M572,290 L570,330 Q577,333 582,330 L580,315 L588,330 Q593,333 598,330 L590,290 Z" fill="#0a3848"/>
+    <path d="M572,292 Q565,286 560,278" stroke="#1a5060" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Person 2 bowing -->
+    <circle cx="660" cy="288" r="9" fill="#1a5060"/>
+    <path d="M653,297 L650,330 Q657,333 662,330 L660,318 L668,330 Q673,333 678,330 L670,297 Z" fill="#0a3848"/>
+    <path d="M653,298 Q645,305 640,310" stroke="#1a5060" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M670,298 Q678,305 682,310" stroke="#1a5060" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Person 3 prostrating -->
+    <ellipse cx="780" cy="305" rx="14" ry="6" fill="#0a3848"/>
+    <circle cx="770" cy="300" r="7" fill="#1a5060"/>
+    <!-- Person 4 kneeling with arms raised -->
+    <circle cx="860" cy="282" r="10" fill="#1a5060"/>
+    <path d="M852,292 L850,330 Q857,333 862,330 L860,318 L868,330 Q873,333 878,330 L870,292 Z" fill="#0a3848"/>
+    <path d="M852,294 Q843,280 840,265" stroke="#1a5060" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M870,294 Q879,280 882,265" stroke="#1a5060" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Person 5 small in background -->
+    <circle cx="720" cy="270" r="7" fill="#1a4858"/>
+    <path d="M715,277 L713,305 Q718,307 723,305 L721,292 L727,305 Q732,307 735,305 L729,277 Z" fill="#0a3040"/>
+    <!-- Sackcloth texture lines on people -->
+    <path d="M574,300 L578,310" stroke="rgba(26,80,96,.3)" stroke-width=".5"/>
+    <path d="M584,300 L586,310" stroke="rgba(26,80,96,.3)" stroke-width=".5"/>
+    <path d="M854,302 L858,312" stroke="rgba(26,80,96,.3)" stroke-width=".5"/>
+    <path d="M864,302 L866,312" stroke="rgba(26,80,96,.3)" stroke-width=".5"/>
+    <!-- Foreground ground -->
+    <path d="M0,350 Q200,330 400,345 Q600,325 720,340 Q850,325 1050,345 Q1250,330 1440,350 L1440,420 L0,420 Z"
+          fill="#080e12"/>
+    <!-- Light particles descending (God's attention) -->
+    <circle cx="650" cy="150" r="2" fill="rgba(32,144,160,.35)">
+      <animate attributeName="cy" values="130;190;130" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.5;.2" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="790" cy="140" r="1.5" fill="rgba(32,144,160,.3)">
+      <animate attributeName="cy" values="120;180;120" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".15;.45;.15" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="720" cy="120" r="2.5" fill="rgba(32,144,160,.4)">
+      <animate attributeName="cy" values="100;160;100" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.55;.2" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <div class="scene-heading" id="repent-heading" aria-hidden="true">
+    <h2>🏙️ 尼尼微的悔改</h2>
+    <p>Nineveh Repents — Jonah 3:1-10</p>
+  </div>
+  <div class="scene-verse">「尼尼微人信服神，便宣告禁食」— 約拿書 3:5</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — GOD'S COMPASSION 神的憐憫
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-mercy" aria-label="神的憐憫">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="mercy-divine-light" aria-hidden="true"></div>
+  <div id="mercy-glow" aria-hidden="true"></div>
+
+  <!-- Jonah under the vine/plant, overlooking Nineveh, sunrise, God's compassion -->
+  <svg id="mercy-scene-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="蓖麻下的約拿與神的憐憫">
+    <defs>
+      <radialGradient id="mercyGlowG" cx="50%" cy="40%" r="40%">
+        <stop offset="0%" stop-color="rgba(64,200,216,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <radialGradient id="sunriseG" cx="50%" cy="80%" r="50%">
+        <stop offset="0%" stop-color="rgba(64,200,216,.12)"/>
+        <stop offset="40%" stop-color="rgba(32,144,160,.05)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="vineG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#0a4838"/>
+        <stop offset="100%" stop-color="#1a6850"/>
+      </linearGradient>
+    </defs>
+    <!-- Soft divine glow -->
+    <ellipse cx="200" cy="160" rx="150" ry="120" fill="url(#mercyGlowG)"/>
+    <!-- Sunrise glow at horizon -->
+    <ellipse cx="200" cy="310" rx="180" ry="50" fill="url(#sunriseG)"/>
+    <!-- Distant Nineveh cityscape silhouette -->
+    <rect x="100" y="280" width="200" height="30" fill="rgba(12,28,36,.6)"/>
+    <rect x="130" y="268" width="20" height="18" fill="rgba(12,28,36,.5)"/>
+    <rect x="160" y="260" width="15" height="26" fill="rgba(12,28,36,.5)"/>
+    <path d="M185,270 L200,248 L215,270" fill="rgba(12,28,36,.5)"/>
+    <rect x="225" y="265" width="18" height="21" fill="rgba(12,28,36,.5)"/>
+    <rect x="255" y="270" width="15" height="16" fill="rgba(12,28,36,.5)"/>
+    <!-- Radiating light from above over city -->
+    <circle cx="200" cy="240" r="60" fill="none" stroke="rgba(32,144,160,.06)" stroke-width="2"
+            style="animation: oceanGlow 3s ease-in-out infinite;"/>
+    <circle cx="200" cy="240" r="90" fill="none" stroke="rgba(32,144,160,.04)" stroke-width="2"
+            style="animation: oceanGlow 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="240" r="120" fill="none" stroke="rgba(32,144,160,.02)" stroke-width="2"
+            style="animation: oceanGlow 4s ease-in-out 1s infinite;"/>
+    <!-- Hill where Jonah sits -->
+    <path d="M20,340 Q60,300 120,310 Q160,300 200,310 Q240,300 280,310 Q340,300 380,340 L380,400 L20,400 Z"
+          fill="#0a1c22"/>
+    <!-- Vine/plant (蓖麻) with large leaves -->
+    <rect x="108" y="210" width="5" height="100" fill="url(#vineG)"
+          style="animation: depthGlow 5s ease-in-out infinite;"/>
+    <!-- Vine branches -->
+    <path d="M110,230 Q90,210 70,215" stroke="#0a4838" stroke-width="2.5" fill="none" stroke-linecap="round"
+          style="animation: seaweedSway 5s ease-in-out infinite;"/>
+    <path d="M110,250 Q85,235 65,240" stroke="#0a4838" stroke-width="2" fill="none" stroke-linecap="round"
+          style="animation: seaweedSway 6s ease-in-out 1s infinite;"/>
+    <path d="M113,220 Q135,200 150,205" stroke="#0a4838" stroke-width="2.5" fill="none" stroke-linecap="round"
+          style="animation: seaweedSway 5.5s ease-in-out .5s infinite;"/>
+    <!-- Large leaves -->
+    <ellipse cx="70" cy="213" rx="18" ry="10" fill="#1a6850" opacity=".7" transform="rotate(-15 70 213)"/>
+    <ellipse cx="65" cy="238" rx="16" ry="9" fill="#0a5840" opacity=".6" transform="rotate(-10 65 238)"/>
+    <ellipse cx="150" cy="203" rx="18" ry="10" fill="#1a6850" opacity=".7" transform="rotate(15 150 203)"/>
+    <ellipse cx="110" cy="208" rx="20" ry="12" fill="#1a6850" opacity=".5" transform="rotate(-5 110 208)"/>
+    <!-- Leaf veins -->
+    <line x1="60" y1="213" x2="80" y2="213" stroke="rgba(10,72,56,.4)" stroke-width=".5"/>
+    <line x1="140" y1="203" x2="160" y2="203" stroke="rgba(10,72,56,.4)" stroke-width=".5"/>
+    <!-- Jonah sitting under the vine, looking at city -->
+    <circle cx="135" cy="290" r="12" fill="#1a6070"/>
+    <!-- Body (sitting) -->
+    <path d="M126,302 Q122,320 126,335 Q133,340 140,335 Q142,320 145,302 Z" fill="#0a5060"/>
+    <!-- Legs (sitting, extended) -->
+    <path d="M128,330 Q135,340 145,345 Q150,342 148,335" fill="#0a5060"/>
+    <!-- Arms (one on knee, one gesturing toward city) -->
+    <path d="M125,304 Q118,310 115,320" stroke="#1a6070" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M145,304 Q155,300 168,295" stroke="#1a6070" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <!-- Light rays from above (God's presence) -->
+    <line x1="200" y1="30" x2="135" y2="280" stroke="rgba(32,144,160,.06)" stroke-width="4"/>
+    <line x1="200" y1="30" x2="200" y2="240" stroke="rgba(32,144,160,.08)" stroke-width="3"/>
+    <line x1="200" y1="30" x2="280" y2="260" stroke="rgba(32,144,160,.05)" stroke-width="4"/>
+    <!-- Worm eating vine (subtle detail) -->
+    <circle cx="108" cy="260" r="2.5" fill="#2a5040"/>
+    <path d="M106,258 Q108,255 110,258" stroke="#3a6050" stroke-width="1" fill="none"/>
+    <!-- Sparkles of divine compassion -->
+    <circle cx="175" cy="200" r="2" fill="rgba(64,200,216,.4)">
+      <animate attributeName="opacity" values=".2;.6;.2" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="230" cy="180" r="1.5" fill="rgba(64,200,216,.35)">
+      <animate attributeName="opacity" values=".15;.5;.15" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="170" r="2.5" fill="rgba(80,230,240,.4)">
+      <animate attributeName="opacity" values=".2;.65;.2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="160" cy="250" r="1.5" fill="rgba(64,200,216,.3)">
+      <animate attributeName="opacity" values=".1;.4;.1" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="230" r="1.8" fill="rgba(64,200,216,.35)">
+      <animate attributeName="opacity" values=".15;.5;.15" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Ground shadow -->
+    <ellipse cx="200" cy="365" rx="100" ry="8" fill="rgba(6,10,12,.4)"/>
+  </svg>
+
+  <div class="scene-heading" id="mercy-heading" aria-hidden="true">
+    <h2>💚 神的憐憫</h2>
+    <p>God's Compassion — Jonah 4:1-11</p>
+  </div>
+  <div class="scene-verse">「何況這尼尼微大城，其中不能分辨左手右手的有十二萬多人，我豈能不愛惜呢？」— 約拿書 4:11</div>
+</section>
+
+</body>
+</html>
