@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>何西阿書 · Hosea</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #1a1014;
+      color: #e8eaf0;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* ── Scenes ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* ── Shared keyframes ── */
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.25} 50%{opacity:.7} }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+    @keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+    @keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+    /* ── CSS-only star field (box-shadow trick) ── */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .starfield::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 1px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        1310px 58px rgba(255,255,255,.21), 564px 126px rgba(255,255,255,.26),
+        210px 347px rgba(255,255,255,.37), 1117px 45px rgba(255,255,255,.30),
+        66px 16px rgba(255,255,255,.20),  477px 259px rgba(255,255,255,.32),
+        1150px 102px rgba(255,255,255,.36), 1437px 280px rgba(255,255,255,.28),
+        920px 302px rgba(255,255,255,.24), 14px 389px rgba(255,255,255,.35),
+        1430px 217px rgba(255,255,255,.27), 319px 111px rgba(255,255,255,.38),
+        690px 53px rgba(255,255,255,.22),  199px 184px rgba(255,255,255,.34),
+        1237px 136px rgba(255,255,255,.35), 941px 275px rgba(255,255,255,.23),
+        776px 41px rgba(255,255,255,.30),  1288px 317px rgba(255,255,255,.36),
+        741px 296px rgba(255,255,255,.25),  143px 24px rgba(255,255,255,.33),
+        593px 41px rgba(255,255,255,.35),  207px 195px rgba(255,255,255,.24),
+        1302px 428px rgba(255,255,255,.28), 759px 182px rgba(255,255,255,.22),
+        547px 360px rgba(255,255,255,.37), 1328px 37px rgba(255,255,255,.30),
+        351px 274px rgba(255,255,255,.33), 335px 237px rgba(255,255,255,.26),
+        1311px 353px rgba(255,255,255,.30), 1403px 167px rgba(255,255,255,.35),
+        115px 118px rgba(255,255,255,.34), 647px 206px rgba(255,255,255,.23),
+        433px 468px rgba(255,255,255,.37), 645px 109px rgba(255,255,255,.33),
+        811px 453px rgba(255,255,255,.36), 940px 74px rgba(255,255,255,.23),
+        506px 382px rgba(255,255,255,.30), 539px 383px rgba(255,255,255,.29),
+        1196px 205px rgba(255,255,255,.28), 284px 261px rgba(255,255,255,.32),
+        97px 441px rgba(255,255,255,.20),  1286px 82px rgba(255,255,255,.35),
+        865px 306px rgba(255,255,255,.21), 782px 306px rgba(255,255,255,.38),
+        1084px 129px rgba(255,255,255,.37), 24px 349px rgba(255,255,255,.33),
+        1397px 454px rgba(255,255,255,.27), 547px 394px rgba(255,255,255,.32),
+        229px 151px rgba(255,255,255,.28), 930px 2px rgba(255,255,255,.38),
+        540px 498px rgba(255,255,255,.25), 366px 260px rgba(255,255,255,.36),
+        1281px 153px rgba(255,255,255,.34), 1040px 312px rgba(255,255,255,.22),
+        766px 391px rgba(255,255,255,.20), 1087px 471px rgba(255,255,255,.18),
+        664px 251px rgba(255,255,255,.21), 744px 450px rgba(255,255,255,.37),
+        630px 123px rgba(255,255,255,.23), 1162px 485px rgba(255,255,255,.22),
+        996px 418px rgba(255,255,255,.23), 1091px 393px rgba(255,255,255,.26),
+        1352px 244px rgba(255,255,255,.37), 339px 136px rgba(255,255,255,.28),
+        1243px 217px rgba(255,255,255,.38), 1105px 387px rgba(255,255,255,.33),
+        412px 366px rgba(255,255,255,.26), 1376px 333px rgba(255,255,255,.27),
+        1060px 232px rgba(255,255,255,.24), 461px 33px rgba(255,255,255,.27),
+        1205px 284px rgba(255,255,255,.22), 452px 4px rgba(255,255,255,.24),
+        1293px 31px rgba(255,255,255,.21), 65px 441px rgba(255,255,255,.27),
+        1053px 122px rgba(255,255,255,.24), 995px 110px rgba(255,255,255,.30),
+        1170px 296px rgba(255,255,255,.28), 969px 414px rgba(255,255,255,.25),
+        194px 50px rgba(255,255,255,.33),  726px 217px rgba(255,255,255,.26);
+      animation: starsTwinkle 6s ease-in-out infinite;
+    }
+    .starfield::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow:
+        111px 345px rgba(255,255,255,.45),  1324px 51px rgba(255,255,255,.38),
+        695px 410px rgba(255,255,255,.48), 510px 99px rgba(255,255,255,.40),
+        919px 72px rgba(255,255,255,.43),  571px 237px rgba(255,255,255,.38),
+        155px 227px rgba(255,255,255,.47), 1128px 51px rgba(255,255,255,.36),
+        1108px 429px rgba(255,255,255,.35), 192px 475px rgba(255,255,255,.46),
+        485px 86px rgba(255,255,255,.42),  986px 110px rgba(255,255,255,.48),
+        121px 85px rgba(255,255,255,.41),  800px 136px rgba(255,255,255,.49),
+        932px 147px rgba(255,255,255,.43), 1139px 339px rgba(255,255,255,.46),
+        318px 98px rgba(255,255,255,.39),  120px 297px rgba(255,255,255,.45),
+        125px 383px rgba(255,255,255,.39), 103px 300px rgba(255,255,255,.42),
+        1088px 81px rgba(255,255,255,.36), 1041px 42px rgba(255,255,255,.48),
+        141px 305px rgba(255,255,255,.36), 482px 207px rgba(255,255,255,.38),
+        1167px 127px rgba(255,255,255,.43), 82px 318px rgba(255,255,255,.36),
+        1347px 299px rgba(255,255,255,.43), 648px 479px rgba(255,255,255,.39),
+        1372px 367px rgba(255,255,255,.39), 544px 203px rgba(255,255,255,.38);
+      animation: starsTwinkle 8s ease-in-out 1s infinite;
+    }
+    @keyframes starsTwinkle {
+      0%,100% { opacity: .6; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Back button ── */
+    #back-btn {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(210,220,230,.80);
+      text-decoration: none;
+      font-size: clamp(.72rem, 1.2vw, .82rem); font-weight: 600; letter-spacing: .09em;
+      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+      animation: hintPulse 4s ease-in-out infinite;
+    }
+    #back-btn:hover {
+      background: rgba(224,96,112,.2);
+      border-color: rgba(224,96,112,.5);
+      color: #e06070;
+      box-shadow: 0 0 20px rgba(224,96,112,.2);
+      animation: none;
+    }
+
+    /* ── Scene nav dots ── */
+    #nav-dots {
+      position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: .7rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.35);
+      display: block;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      font-size: clamp(.75rem,1.3vw,.9rem); letter-spacing: .1em;
+      color: rgba(255,255,255,.4); z-index: 100; pointer-events: none;
+      animation: hintPulse 3s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    /* ── Scene title block ── */
+    .scene-heading {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      white-space: nowrap;
+    }
+    .scene-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: .1em;
+    }
+    .scene-heading p {
+      font-size: clamp(.75rem, 1.4vw, .95rem);
+      opacity: .65; margin-top: .4rem; letter-spacing: .08em;
+    }
+
+    /* ── Scene verse (bottom-centre) ── */
+    .scene-verse {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; z-index: 100; pointer-events: none;
+      font-size: clamp(.75rem, 1.3vw, .9rem);
+      color: rgba(255,255,255,.45); letter-spacing: .07em;
+      white-space: nowrap;
+    }
+
+    /* ── Hosea-specific keyframes ── */
+    @keyframes heartbeat {
+      0%,100% { opacity: .4; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .8; transform: translateX(-50%) scale(1.08); }
+    }
+    @keyframes tearDrop {
+      0%,100% { transform: translateY(0); opacity: .7; }
+      50%      { transform: translateY(-6px); opacity: 1; }
+    }
+    @keyframes thornSway {
+      0%,100% { transform: rotate(-2deg) translateY(0); }
+      50%      { transform: rotate(2deg) translateY(-3px); }
+    }
+    @keyframes ringShine {
+      0%,100% { opacity: .5; filter: brightness(1); }
+      50%      { opacity: 1;  filter: brightness(1.4); }
+    }
+    @keyframes divinePulse {
+      0%,100% { opacity: .3; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scale(1.12); }
+    }
+    @keyframes tearFall {
+      0%   { transform: translateY(0) translateX(0); opacity: .4; }
+      50%  { transform: translateY(20px) translateX(2px); opacity: .7; }
+      100% { transform: translateY(40px) translateX(0); opacity: 0; }
+    }
+    @keyframes vineWither {
+      0%,100% { opacity: .3; transform: scaleY(1); }
+      50%      { opacity: .5; transform: scaleY(1.05); }
+    }
+    @keyframes stormGlow {
+      0%,100% { opacity: .4; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleX(1.08); }
+    }
+    @keyframes lightBeam {
+      0%,100% { opacity: .3; transform: translateX(-50%) scaleY(1); }
+      50%      { opacity: .6; transform: translateX(-50%) scaleY(1.08); }
+    }
+    @keyframes roseGlow {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+    @keyframes whirlwind {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes bloomPulse {
+      0%,100% { transform: scale(1); opacity: .7; }
+      50%      { transform: scale(1.1); opacity: 1; }
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+    #scene-intro {
+      background: linear-gradient(180deg, #1a1014 0%, #221418 40%, #2a181e 70%, #1a1014 100%);
+    }
+    #intro-rose-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(224,96,112,.12) 0%, rgba(180,60,80,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: roseGlow 4s ease-in-out infinite;
+    }
+    #intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+    #intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#e06070 0%,#f0909a 45%,#8a3040 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+    #intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(224,96,112,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+    #intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(224,96,112,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+    #intro-heart-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(120px,16vw,220px);
+    }
+    #intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCENE 2 — THE UNFAITHFUL MARRIAGE 不忠的婚姻
+    ══════════════════════════════════════════════ */
+    #scene-marriage {
+      background: linear-gradient(180deg, #0e0a0c 0%, #1a1014 40%, #221418 70%, #0e0a0c 100%);
+    }
+    #marriage-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(224,96,112,.15) 0%, rgba(140,50,60,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #marriage-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 8s ease-in-out infinite;
+    }
+    #marriage-heading h2 {
+      color: #e06070;
+      text-shadow: 0 0 22px rgba(224,96,112,.5);
+    }
+    #marriage-heading p { color: rgba(224,96,112,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 3 — ISRAEL'S APOSTASY 以色列的背道
+    ══════════════════════════════════════════════ */
+    #scene-apostasy {
+      background: linear-gradient(180deg, #1a100c 0%, #2a1810 40%, #3a2018 70%, #2a1410 100%);
+    }
+    #apostasy-light-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(224,96,112,.18) 0%, rgba(180,60,80,.07) 45%, transparent 70%);
+      z-index: 3;
+      animation: divinePulse 3.5s ease-in-out infinite;
+    }
+    #apostasy-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+    #apostasy-heading h2 {
+      color: #e06070;
+      text-shadow: 0 0 22px rgba(224,96,112,.6);
+    }
+    #apostasy-heading p { color: rgba(224,96,112,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 4 — GOD'S JUDGMENT 神的審判
+    ══════════════════════════════════════════════ */
+    #scene-judgment {
+      background: linear-gradient(180deg, #14100e 0%, #1c1614 40%, #221c1a 70%, #1a1410 100%);
+    }
+    #judgment-storm-beam {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(80px,12vw,200px); height: 100%;
+      background: linear-gradient(180deg,rgba(255,120,120,0) 0%,rgba(224,96,112,.2) 30%,rgba(224,96,112,.35) 65%,transparent 100%);
+      z-index: 3; filter: blur(12px);
+      animation: lightBeam 3s ease-in-out infinite;
+    }
+    #judgment-scene-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+    #judgment-heading h2 {
+      color: #f0909a;
+      text-shadow: 0 0 18px rgba(224,96,112,.5);
+    }
+    #judgment-heading p { color: rgba(224,96,112,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 5 — LOVE'S CALL 慈愛的呼喚
+    ══════════════════════════════════════════════ */
+    #scene-love {
+      background: linear-gradient(180deg, #141014 0%, #1e1820 35%, #2a2028 60%, #3a2830 85%, #2a2028 100%);
+    }
+    #love-warm-light {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(224,96,112,.15) 0%, rgba(180,60,80,.06) 50%, transparent 75%);
+      z-index: 3;
+      animation: stormGlow 4s ease-in-out infinite;
+    }
+    #love-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+    #love-heading h2 {
+      background: linear-gradient(120deg,#8a4050 0%,#f0909a 50%,#6a2030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    #love-heading p { color: rgba(224,96,112,.55); }
+
+    /* ══════════════════════════════════════════════
+       SCENE 6 — HEALING & RESTORATION 醫治與復興
+    ══════════════════════════════════════════════ */
+    #scene-healing {
+      background: linear-gradient(180deg, #1e1418 0%, #2a1c22 40%, #3a2430 70%, #44283a 100%);
+    }
+    #healing-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,150,160,0) 0%,rgba(224,96,112,.3) 25%,rgba(224,96,112,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: heartbeat 2.5s ease-in-out infinite;
+    }
+    #healing-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(224,96,112,.08) 0%, rgba(180,60,80,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    #healing-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(180px,28vw,380px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    #healing-heading h2 {
+      background: linear-gradient(120deg,#e06070 0%,#f0a0aa 50%,#8a3040 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    #healing-heading p { color: rgba(224,96,112,.5); }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Back button -->
+<a id="back-btn" href="index.html">← 返回 · Back</a>
+
+<!-- Scene navigation dots -->
+<nav id="nav-dots" aria-label="場景導航">
+  <a class="nav-dot" href="#scene-intro"     aria-label="開場"></a>
+  <a class="nav-dot" href="#scene-marriage"  aria-label="不忠的婚姻"></a>
+  <a class="nav-dot" href="#scene-apostasy"  aria-label="以色列的背道"></a>
+  <a class="nav-dot" href="#scene-judgment"  aria-label="神的審判"></a>
+  <a class="nav-dot" href="#scene-love"      aria-label="慈愛的呼喚"></a>
+  <a class="nav-dot" href="#scene-healing"   aria-label="醫治與復興"></a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="何西阿書 — 開場">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="intro-rose-glow" aria-hidden="true"></div>
+
+  <div id="intro-title">
+    <h1>何西阿書</h1>
+    <p>Hosea</p>
+    <span class="sub">忠愛 · 背約 · 審判 · 悔改 · 復興 · 醫治</span>
+  </div>
+
+  <!-- Broken heart with covenant scroll, symbolising faithful love amid betrayal -->
+  <svg id="intro-heart-svg" viewBox="0 0 220 260" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="破碎的心與盟約卷軸">
+    <!-- Heart shape (cracked) -->
+    <path d="M110,220 Q40,180 30,130 Q20,80 60,55 Q90,35 110,70 Q130,35 160,55 Q200,80 190,130 Q180,180 110,220 Z"
+          fill="#5a2030" stroke="#8a3040" stroke-width="1.5" opacity=".8"/>
+    <path d="M110,220 Q40,180 30,130 Q20,80 60,55 Q90,35 110,70 Q130,35 160,55 Q200,80 190,130 Q180,180 110,220 Z"
+          fill="none" stroke="#e06070" stroke-width="1" opacity=".4"/>
+    <!-- Crack line through the heart -->
+    <path d="M110,70 L105,100 L115,120 L108,145 L112,170 L110,220"
+          stroke="#1a1014" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".8"/>
+    <path d="M105,100 L98,108 M115,120 L122,128 M108,145 L100,150"
+          stroke="#1a1014" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".6"/>
+    <!-- Faint inner glow of the heart -->
+    <ellipse cx="110" cy="130" rx="45" ry="50" fill="rgba(224,96,112,.08)"/>
+    <!-- Small covenant scroll at bottom -->
+    <rect x="85" y="230" width="50" height="14" rx="4" fill="#5a3a3a" stroke="#8a5a5a" stroke-width=".8"/>
+    <circle cx="85" cy="237" r="5" fill="#6a4a4a"/>
+    <circle cx="135" cy="237" r="5" fill="#6a4a4a"/>
+    <line x1="92" y1="234" x2="128" y2="234" stroke="rgba(224,96,112,.3)" stroke-width=".5"/>
+    <line x1="92" y1="237" x2="128" y2="237" stroke="rgba(224,96,112,.3)" stroke-width=".5"/>
+    <line x1="92" y1="240" x2="128" y2="240" stroke="rgba(224,96,112,.3)" stroke-width=".5"/>
+    <!-- Tear drops falling -->
+    <ellipse cx="80" cy="160" rx="3" ry="5" fill="rgba(224,96,112,.3)"
+             style="animation: tearFall 3s ease-out infinite;"/>
+    <ellipse cx="140" cy="150" rx="2.5" ry="4.5" fill="rgba(224,96,112,.25)"
+             style="animation: tearFall 4s ease-out 1s infinite;"/>
+    <ellipse cx="100" cy="175" rx="2" ry="4" fill="rgba(224,96,112,.2)"
+             style="animation: tearFall 3.5s ease-out 0.5s infinite;"/>
+    <!-- Rose petals drifting -->
+    <ellipse cx="55" cy="90" rx="6" ry="3" fill="rgba(224,96,112,.2)" transform="rotate(-30 55 90)"
+             style="animation: tearFall 5s ease-out 2s infinite;"/>
+    <ellipse cx="165" cy="100" rx="5" ry="3" fill="rgba(224,96,112,.18)" transform="rotate(25 165 100)"
+             style="animation: tearFall 4.5s ease-out 1.5s infinite;"/>
+    <!-- Faint glow around heart -->
+    <ellipse cx="110" cy="140" rx="70" ry="60" fill="rgba(224,96,112,.04)"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="horizonG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a1014"/>
+        <stop offset="100%" stop-color="#0e080a"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,170 240,190 Q360,160 480,185 Q600,150 720,175
+             Q840,145 960,170 Q1080,155 1200,180 Q1320,160 1440,190
+             L1440,300 L0,300 Z"
+          fill="url(#horizonG1)"/>
+    <circle cx="300" cy="178" r="2" fill="rgba(224,96,112,.3)" style="animation: roseGlow 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="165" r="1.5" fill="rgba(224,96,112,.25)" style="animation: roseGlow 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="172" r="1.8" fill="rgba(224,96,112,.2)" style="animation: roseGlow 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="180" r="2" fill="rgba(224,96,112,.3)" style="animation: roseGlow 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <div class="scroll-hint" aria-hidden="true">▽ 向下捲動 · Scroll ▽</div>
+  <div class="scene-verse">「像先知何西阿對不忠妻子的愛，象徵神對以色列的愛」</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — THE UNFAITHFUL MARRIAGE 不忠的婚姻
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-marriage" aria-label="不忠的婚姻">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="marriage-glow" aria-hidden="true"></div>
+
+  <!-- Hosea and Gomer wedding scene with broken vow imagery -->
+  <svg id="marriage-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="何西阿娶歌篾為妻">
+    <defs>
+      <radialGradient id="marriageGlowG" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#0e080a"/>
+        <stop offset="40%" stop-color="#1a1014"/>
+        <stop offset="70%" stop-color="rgba(224,96,112,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="altarG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5a3a3a"/>
+        <stop offset="100%" stop-color="#3a2020"/>
+      </linearGradient>
+    </defs>
+    <!-- Dark background -->
+    <rect width="600" height="400" fill="#0e080a"/>
+    <!-- Warm ambient glow -->
+    <ellipse cx="300" cy="200" rx="250" ry="180" fill="url(#marriageGlowG)"/>
+    <!-- Wedding canopy/chuppah -->
+    <rect x="160" y="80" width="8" height="200" fill="#5a3a2a" rx="2"/>
+    <rect x="432" y="80" width="8" height="200" fill="#5a3a2a" rx="2"/>
+    <path d="M160,85 Q300,55 440,85" stroke="#8a5050" stroke-width="3" fill="none"/>
+    <path d="M165,85 Q300,60 435,85" stroke="rgba(224,96,112,.2)" stroke-width="8" fill="none"/>
+    <!-- Draped fabric -->
+    <path d="M164,85 Q230,100 300,90 Q370,100 436,85 L436,95 Q370,110 300,100 Q230,110 164,95 Z"
+          fill="rgba(224,96,112,.08)"/>
+    <!-- Hosea figure (left, steady) -->
+    <circle cx="240" cy="170" r="14" fill="#6a5040"/>
+    <path d="M228,184 L225,285 Q232,290 240,285 L238,240 L248,285 Q255,290 262,285 L252,184 Z" fill="#4a3040"/>
+    <path d="M228,186 Q218,200 210,215" stroke="#5a4040" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M252,186 Q262,200 268,210" stroke="#5a4040" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Hosea's outstretched hand -->
+    <circle cx="268" cy="210" r="5" fill="#6a5040"/>
+    <!-- Gomer figure (right, turning away slightly) -->
+    <circle cx="360" cy="172" r="13" fill="#6a5040"/>
+    <path d="M349,185 L347,285 Q353,290 360,285 L358,242 L367,285 Q373,290 380,285 L371,185 Z" fill="#5a2838"/>
+    <path d="M349,187 Q340,198 335,210" stroke="#5a3848" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M371,187 Q380,195 388,205" stroke="#5a3848" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Gomer looking away -->
+    <path d="M365,168 Q372,165 378,168" stroke="#6a5040" stroke-width="1.5" fill="none"/>
+    <!-- Broken covenant scroll between them -->
+    <rect x="278" y="225" width="44" height="12" rx="4" fill="#5a3a3a" stroke="#7a4a4a" stroke-width=".8"/>
+    <path d="M300,225 L300,237" stroke="#1a1014" stroke-width="1.5"/>
+    <!-- Crack in the ground -->
+    <path d="M290,295 L295,310 L288,330 L293,350 L290,380"
+          stroke="rgba(224,96,112,.15)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Rose petals scattered on ground -->
+    <ellipse cx="220" cy="300" rx="5" ry="3" fill="rgba(224,96,112,.2)" transform="rotate(-20 220 300)"/>
+    <ellipse cx="280" cy="310" rx="4" ry="2.5" fill="rgba(224,96,112,.15)" transform="rotate(30 280 310)"/>
+    <ellipse cx="350" cy="305" rx="5" ry="3" fill="rgba(224,96,112,.18)" transform="rotate(-10 350 305)"/>
+    <ellipse cx="380" cy="315" rx="4" ry="2.5" fill="rgba(224,96,112,.12)" transform="rotate(40 380 315)"/>
+    <!-- Falling tear from Hosea -->
+    <ellipse cx="235" cy="185" rx="2" ry="3.5" fill="rgba(200,220,240,.25)"
+             style="animation: tearFall 3s ease-out infinite;"/>
+    <!-- Warm glow at center -->
+    <ellipse cx="300" cy="220" rx="80" ry="50" fill="rgba(224,96,112,.05)"/>
+    <!-- Faint thorny vine at base -->
+    <path d="M100,380 Q150,365 200,370 Q250,360 300,368 Q350,360 400,370 Q450,365 500,380"
+          stroke="rgba(100,60,60,.3)" stroke-width="2" fill="none"/>
+    <circle cx="180" cy="368" r="2" fill="rgba(140,60,60,.3)"/>
+    <circle cx="320" cy="365" r="2" fill="rgba(140,60,60,.3)"/>
+    <circle cx="420" cy="372" r="2" fill="rgba(140,60,60,.3)"/>
+  </svg>
+
+  <div class="scene-heading" id="marriage-heading" aria-hidden="true">
+    <h2>💔 不忠的婚姻</h2>
+    <p>The Unfaithful Marriage — Hosea 1:2</p>
+  </div>
+  <div class="scene-verse">「耶和華對何西阿說：你去娶淫婦為妻」— 何西阿書 1:2</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — ISRAEL'S APOSTASY 以色列的背道
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-apostasy" aria-label="以色列的背道">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="apostasy-light-glow" aria-hidden="true"></div>
+
+  <!-- People bowing to idols, broken tablets, darkened land -->
+  <svg id="apostasy-scene-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="以色列百姓拜偶像離棄神">
+    <defs>
+      <linearGradient id="apostasySkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a100c"/>
+        <stop offset="60%" stop-color="#2a1810"/>
+        <stop offset="100%" stop-color="#1a100c"/>
+      </linearGradient>
+      <radialGradient id="idolGlowG" cx="50%" cy="40%" r="30%">
+        <stop offset="0%" stop-color="rgba(224,96,112,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Sky -->
+    <rect width="1440" height="500" fill="url(#apostasySkyG)"/>
+    <!-- Ominous dark glow -->
+    <ellipse cx="720" cy="200" rx="400" ry="150" fill="url(#idolGlowG)"/>
+    <!-- Ground -->
+    <rect y="380" width="1440" height="120" fill="#1a100c"/>
+    <!-- Golden calf idol on pedestal (center) -->
+    <rect x="680" y="310" width="80" height="30" rx="3" fill="#5a4030" stroke="#6a5040" stroke-width="1"/>
+    <rect x="690" y="300" width="60" height="14" rx="2" fill="#4a3020"/>
+    <!-- Calf body -->
+    <ellipse cx="720" cy="270" rx="30" ry="22" fill="#8a6a30" stroke="#a07a40" stroke-width="1"/>
+    <!-- Calf head -->
+    <ellipse cx="745" cy="255" rx="14" ry="12" fill="#8a6a30" stroke="#a07a40" stroke-width="1"/>
+    <!-- Calf horns -->
+    <path d="M740,245 Q738,232 742,225" stroke="#a07a40" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M752,245 Q754,232 750,225" stroke="#a07a40" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Calf legs -->
+    <rect x="700" y="288" width="6" height="22" fill="#7a5a28" rx="2"/>
+    <rect x="710" y="288" width="6" height="22" fill="#7a5a28" rx="2"/>
+    <rect x="728" y="288" width="6" height="22" fill="#7a5a28" rx="2"/>
+    <rect x="738" y="288" width="6" height="22" fill="#7a5a28" rx="2"/>
+    <!-- Calf eye -->
+    <circle cx="750" cy="253" r="2" fill="#1a100c"/>
+    <!-- Unholy fire before idol -->
+    <ellipse cx="720" cy="345" rx="25" ry="8" fill="rgba(200,80,40,.15)"/>
+    <path d="M710,345 Q715,325 720,330 Q725,320 730,345" fill="rgba(200,80,40,.2)" opacity=".6"
+          style="animation: roseGlow 2s ease-in-out infinite;"/>
+    <!-- Bowing figures (left group) -->
+    <circle cx="520" cy="330" r="10" fill="#5a4038"/>
+    <path d="M515,340 Q520,360 530,370 L510,370 Z" fill="#4a3030"/>
+    <path d="M520,340 Q525,345 530,340" stroke="#5a4038" stroke-width="3" fill="none"/>
+    <circle cx="560" cy="335" r="9" fill="#5a4038"/>
+    <path d="M555,344 Q560,362 570,370 L550,370 Z" fill="#4a3030"/>
+    <circle cx="600" cy="332" r="10" fill="#5a4038"/>
+    <path d="M595,342 Q600,360 610,370 L590,370 Z" fill="#4a3030"/>
+    <!-- Bowing figures (right group) -->
+    <circle cx="840" cy="332" r="10" fill="#5a4038"/>
+    <path d="M835,342 Q840,360 850,370 L830,370 Z" fill="#4a3030"/>
+    <circle cx="880" cy="335" r="9" fill="#5a4038"/>
+    <path d="M875,344 Q880,362 890,370 L870,370 Z" fill="#4a3030"/>
+    <circle cx="920" cy="330" r="10" fill="#5a4038"/>
+    <path d="M915,340 Q920,360 930,370 L910,370 Z" fill="#4a3030"/>
+    <!-- Broken stone tablets (left) -->
+    <rect x="350" y="340" width="35" height="45" rx="3" fill="#5a4a40" transform="rotate(-15 367 362)"/>
+    <path d="M360,345 L370,345 M360,352 L375,352 M360,359 L372,359" stroke="rgba(224,96,112,.2)" stroke-width="1"
+          transform="rotate(-15 367 362)"/>
+    <!-- Broken tablet piece (fallen) -->
+    <path d="M395,370 L415,355 L420,380 Z" fill="#4a3a30"/>
+    <path d="M400,368 L412,362" stroke="rgba(224,96,112,.15)" stroke-width="1"/>
+    <!-- Dead withered tree (right) -->
+    <rect x="1050" y="280" width="10" height="90" fill="#3a2820"/>
+    <path d="M1055,280 Q1040,260 1025,250" stroke="#3a2820" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M1055,300 Q1070,280 1085,275" stroke="#3a2820" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M1055,310 Q1035,295 1020,290" stroke="#3a2820" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Thorny vines on ground -->
+    <path d="M200,400 Q350,385 500,395 Q650,382 800,392 Q950,385 1100,395 Q1250,385 1400,400"
+          stroke="rgba(100,50,50,.25)" stroke-width="2" fill="none"/>
+    <!-- Foreground hills -->
+    <path d="M0,420 Q200,390 400,410 Q600,380 720,400 Q850,380 1050,410 Q1250,390 1440,420 L1440,500 L0,500 Z"
+          fill="#140c08"/>
+    <!-- Dark smoke wisps -->
+    <ellipse cx="720" cy="300" rx="50" ry="25" fill="rgba(80,40,40,.15)"
+             style="animation: roseGlow 3s ease-in-out infinite;"/>
+    <!-- Red warning embers -->
+    <circle cx="650" cy="350" r="2" fill="rgba(224,96,112,.35)">
+      <animate attributeName="cy" values="350;330;350" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.5;.2" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="790" cy="345" r="1.5" fill="rgba(224,96,112,.3)">
+      <animate attributeName="cy" values="345;325;345" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".15;.45;.15" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="720" cy="310" r="2.5" fill="rgba(224,96,112,.4)">
+      <animate attributeName="cy" values="310;290;310" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.55;.2" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <div class="scene-heading" id="apostasy-heading" aria-hidden="true">
+    <h2>🔥 以色列的背道</h2>
+    <p>Israel's Apostasy — Hosea 4:6</p>
+  </div>
+  <div class="scene-verse">「我的民因無知識而滅亡」— 何西阿書 4:6</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — GOD'S JUDGMENT 神的審判
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-judgment" aria-label="神的審判">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="judgment-storm-beam" aria-hidden="true"></div>
+
+  <!-- Sowing wind, reaping whirlwind — stormy scene with scattered grain -->
+  <svg id="judgment-scene-svg" viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="種風收暴風的審判">
+    <defs>
+      <radialGradient id="stormGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(224,96,112,.2)"/>
+        <stop offset="40%" stop-color="rgba(140,50,60,.08)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="stormCloudG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a2028"/>
+        <stop offset="100%" stop-color="#1a1014"/>
+      </linearGradient>
+    </defs>
+    <!-- Storm glow -->
+    <ellipse cx="200" cy="140" rx="180" ry="130" fill="url(#stormGlowG)"/>
+    <!-- Dark storm clouds -->
+    <ellipse cx="120" cy="60" rx="90" ry="35" fill="#2a1820"/>
+    <ellipse cx="200" cy="45" rx="110" ry="40" fill="#221418"/>
+    <ellipse cx="290" cy="55" rx="85" ry="32" fill="#2a1820"/>
+    <ellipse cx="160" cy="75" rx="70" ry="25" fill="#1e1218"/>
+    <ellipse cx="250" cy="70" rx="75" ry="28" fill="#1e1218"/>
+    <!-- Lightning bolt -->
+    <path d="M200,80 L190,120 L205,118 L185,170 L210,130 L195,132 L210,95 Z"
+          fill="rgba(224,96,112,.5)" stroke="rgba(255,150,160,.4)" stroke-width="1"/>
+    <path d="M200,80 L190,120 L205,118 L185,170" stroke="rgba(255,200,210,.3)" stroke-width="1" fill="none"/>
+    <!-- Whirlwind spiral (center) -->
+    <path d="M200,200 Q230,190 240,170 Q250,145 230,130 Q210,118 190,130 Q170,145 180,165 Q190,180 200,175"
+          stroke="rgba(224,96,112,.2)" stroke-width="3" fill="none" stroke-linecap="round"
+          style="animation: thornSway 4s ease-in-out infinite;"/>
+    <path d="M200,200 Q160,195 150,180 Q138,160 155,145 Q172,132 190,142 Q205,155 195,170"
+          stroke="rgba(224,96,112,.15)" stroke-width="2.5" fill="none" stroke-linecap="round"
+          style="animation: thornSway 5s ease-in-out 1s infinite;"/>
+    <!-- Scattered grain/seeds being blown -->
+    <ellipse cx="150" cy="200" rx="3" ry="5" fill="rgba(180,160,80,.3)" transform="rotate(30 150 200)"
+             style="animation: tearFall 2.5s ease-out infinite;"/>
+    <ellipse cx="240" cy="190" rx="3" ry="5" fill="rgba(180,160,80,.25)" transform="rotate(-20 240 190)"
+             style="animation: tearFall 3s ease-out .8s infinite;"/>
+    <ellipse cx="180" cy="210" rx="2.5" ry="4" fill="rgba(180,160,80,.2)" transform="rotate(45 180 210)"
+             style="animation: tearFall 3.5s ease-out 1.5s infinite;"/>
+    <ellipse cx="260" cy="205" rx="3" ry="5" fill="rgba(180,160,80,.28)" transform="rotate(-35 260 205)"
+             style="animation: tearFall 2.8s ease-out .5s infinite;"/>
+    <ellipse cx="130" cy="215" rx="2" ry="4" fill="rgba(180,160,80,.22)" transform="rotate(15 130 215)"
+             style="animation: tearFall 4s ease-out 2s infinite;"/>
+    <!-- Farmer figure sowing (being swept) -->
+    <circle cx="170" cy="250" r="10" fill="#5a4038"/>
+    <path d="M162,260 L160,310 Q166,313 172,310 L170,290 L178,310 Q184,313 188,310 L180,260 Z" fill="#4a3030"/>
+    <path d="M162,262 Q150,255 142,248" stroke="#5a4038" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M180,262 Q192,256 200,252" stroke="#5a4038" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Barren ground -->
+    <path d="M40,310 Q100,300 160,305 Q220,298 280,303 Q340,298 400,308"
+          stroke="rgba(100,60,50,.3)" stroke-width="2" fill="none"/>
+    <!-- Cracked dry earth -->
+    <path d="M100,320 L105,335 L98,350" stroke="rgba(80,40,40,.2)" stroke-width="1" fill="none"/>
+    <path d="M250,315 L255,330 L248,345" stroke="rgba(80,40,40,.2)" stroke-width="1" fill="none"/>
+    <path d="M320,318 L325,332 L318,348" stroke="rgba(80,40,40,.2)" stroke-width="1" fill="none"/>
+    <!-- Ground -->
+    <ellipse cx="200" cy="340" rx="180" ry="15" fill="rgba(26,16,20,.5)"/>
+    <!-- Storm debris -->
+    <circle cx="120" cy="170" r="1.5" fill="rgba(224,96,112,.3)">
+      <animate attributeName="opacity" values=".2;.5;.2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="280" cy="160" r="2" fill="rgba(224,96,112,.25)">
+      <animate attributeName="opacity" values=".15;.45;.15" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="150" r="1.8" fill="rgba(224,96,112,.35)">
+      <animate attributeName="opacity" values=".2;.55;.2" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <div class="scene-heading" id="judgment-heading" aria-hidden="true">
+    <h2>⚡ 神的審判</h2>
+    <p>God's Judgment — Hosea 8:7</p>
+  </div>
+  <div class="scene-verse">「他們所種的是風，所收的是暴風」— 何西阿書 8:7</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — LOVE'S CALL 慈愛的呼喚
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-love" aria-label="慈愛的呼喚">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="love-warm-light" aria-hidden="true"></div>
+
+  <!-- Parent calling child, exodus from Egypt, warm embrace -->
+  <svg id="love-scene-svg" viewBox="0 0 1440 420" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="神如父親呼喚以色列從埃及出來">
+    <defs>
+      <linearGradient id="loveSkyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a1420"/>
+        <stop offset="40%" stop-color="#2a2028"/>
+        <stop offset="70%" stop-color="#3a2830"/>
+        <stop offset="100%" stop-color="#4a303a"/>
+      </linearGradient>
+      <radialGradient id="loveGlowG" cx="50%" cy="30%" r="35%">
+        <stop offset="0%" stop-color="rgba(240,160,170,.15)"/>
+        <stop offset="50%" stop-color="rgba(224,96,112,.06)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Sky -->
+    <rect width="1440" height="420" fill="url(#loveSkyG)"/>
+    <!-- Warm divine glow -->
+    <ellipse cx="720" cy="120" rx="350" ry="120" fill="url(#loveGlowG)"/>
+    <!-- Light rays from above (God's love) -->
+    <line x1="720" y1="30" x2="520" y2="250" stroke="rgba(224,96,112,.06)" stroke-width="6"/>
+    <line x1="720" y1="30" x2="620" y2="220" stroke="rgba(224,96,112,.08)" stroke-width="5"/>
+    <line x1="720" y1="30" x2="720" y2="200" stroke="rgba(224,96,112,.1)" stroke-width="4"/>
+    <line x1="720" y1="30" x2="820" y2="220" stroke="rgba(224,96,112,.08)" stroke-width="5"/>
+    <line x1="720" y1="30" x2="920" y2="250" stroke="rgba(224,96,112,.06)" stroke-width="6"/>
+    <!-- Desert/Egypt landscape (left) -->
+    <path d="M0,300 Q100,280 200,290 Q300,275 400,285"
+          fill="none" stroke="rgba(180,140,80,.1)" stroke-width="2"/>
+    <!-- Pyramid silhouettes (far left, Egypt) -->
+    <path d="M80,310 L120,250 L160,310 Z" fill="rgba(80,60,40,.3)"/>
+    <path d="M140,310 L170,265 L200,310 Z" fill="rgba(70,50,35,.25)"/>
+    <!-- Rolling ground -->
+    <path d="M0,310 Q200,280 400,300 Q600,275 720,290 Q850,275 1050,300 Q1250,280 1440,310 L1440,420 L0,420 Z"
+          fill="#2a1c22"/>
+    <path d="M0,330 Q180,305 360,320 Q540,300 720,315 Q900,300 1080,320 Q1260,305 1440,330 L1440,420 L0,420 Z"
+          fill="#1e1418"/>
+    <!-- Parent figure (God's love, center-right, arms open) -->
+    <circle cx="780" cy="240" r="16" fill="#6a4a50"/>
+    <path d="M766,256 L763,340 Q772,344 780,340 L778,300 L790,340 Q798,344 806,340 L796,256 Z" fill="#5a3a48"/>
+    <!-- Open welcoming arms -->
+    <path d="M766,260 Q740,245 710,240" stroke="#5a3a48" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M796,260 Q820,248 845,245" stroke="#5a3a48" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="710" cy="240" r="6" fill="#6a4a50"/>
+    <circle cx="845" cy="245" r="6" fill="#6a4a50"/>
+    <!-- Child figure (Israel, walking toward parent) -->
+    <circle cx="660" cy="260" r="10" fill="#6a5050"/>
+    <path d="M653,270 L651,325 Q656,328 661,325 L659,300 L666,325 Q671,328 675,325 L669,270 Z" fill="#5a3848"/>
+    <!-- Child's arms reaching -->
+    <path d="M653,272 Q645,265 640,260" stroke="#5a3848" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M669,272 Q677,268 682,264" stroke="#5a3848" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Path between them (journey from Egypt) -->
+    <path d="M300,320 Q450,310 600,305 Q680,300 720,295"
+          stroke="rgba(224,96,112,.08)" stroke-width="3" fill="none" stroke-dasharray="8 6"/>
+    <!-- Heart glow between parent and child -->
+    <ellipse cx="720" cy="260" rx="60" ry="40" fill="rgba(224,96,112,.06)"/>
+    <!-- Small hearts floating upward -->
+    <path d="M700,220 Q698,214 702,212 Q704,210 706,212 Q710,214 708,220 L704,225 Z"
+          fill="rgba(224,96,112,.3)" style="animation: tearDrop 3s ease-in-out infinite;"/>
+    <path d="M740,210 Q738,204 742,202 Q744,200 746,202 Q750,204 748,210 L744,215 Z"
+          fill="rgba(224,96,112,.25)" style="animation: tearDrop 4s ease-in-out 1s infinite;"/>
+    <path d="M760,225 Q758,219 762,217 Q764,215 766,217 Q770,219 768,225 L764,230 Z"
+          fill="rgba(224,96,112,.2)" style="animation: tearDrop 3.5s ease-in-out .5s infinite;"/>
+    <!-- Foreground dark ground -->
+    <path d="M0,370 Q200,350 400,365 Q600,345 720,360 Q850,345 1050,365 Q1250,350 1440,370 L1440,420 L0,420 Z"
+          fill="#141014"/>
+    <!-- Warm glow particles -->
+    <circle cx="680" cy="250" r="2" fill="rgba(224,96,112,.35)">
+      <animate attributeName="cy" values="250;230;250" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.5;.2" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="760" cy="235" r="1.5" fill="rgba(224,96,112,.3)">
+      <animate attributeName="cy" values="235;215;235" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".15;.45;.15" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="720" cy="220" r="2.5" fill="rgba(224,96,112,.4)">
+      <animate attributeName="cy" values="220;200;220" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".2;.55;.2" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Distant stars of hope -->
+    <circle cx="400" cy="100" r="1.5" fill="rgba(224,96,112,.4)"/>
+    <circle cx="560" cy="80" r="1" fill="rgba(224,96,112,.3)"/>
+    <circle cx="880" cy="90" r="1.2" fill="rgba(224,96,112,.35)"/>
+    <circle cx="1040" cy="110" r="1" fill="rgba(224,96,112,.3)"/>
+  </svg>
+
+  <div class="scene-heading" id="love-heading" aria-hidden="true">
+    <h2>🕊️ 慈愛的呼喚</h2>
+    <p>Love's Call — Hosea 11:1</p>
+  </div>
+  <div class="scene-verse">「以色列年幼的時候我愛他，就從埃及召出我的兒子來」— 何西阿書 11:1</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — HEALING & RESTORATION 醫治與復興
+══════════════════════════════════════════════ -->
+<section class="scene" id="scene-healing" aria-label="醫治與復興">
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div id="healing-divine-light" aria-hidden="true"></div>
+  <div id="healing-glow" aria-hidden="true"></div>
+
+  <!-- Blooming flowers, dew drops, tree of life restored -->
+  <svg id="healing-scene-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="醫治與復興如百合花盛開">
+    <defs>
+      <radialGradient id="healingGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(240,160,170,.2)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="trunkG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6a4a3a"/>
+        <stop offset="100%" stop-color="#4a2a20"/>
+      </linearGradient>
+      <radialGradient id="lilyG" cx="40%" cy="35%" r="50%">
+        <stop offset="0%" stop-color="#f0a0aa"/>
+        <stop offset="50%" stop-color="#e06070"/>
+        <stop offset="100%" stop-color="#8a3040"/>
+      </radialGradient>
+    </defs>
+    <!-- Divine glow -->
+    <ellipse cx="200" cy="150" rx="160" ry="130" fill="url(#healingGlowG)"/>
+    <!-- Radiating healing light -->
+    <circle cx="200" cy="120" r="60" fill="none" stroke="rgba(224,96,112,.08)" stroke-width="2"
+            style="animation: heartbeat 3s ease-in-out infinite;"/>
+    <circle cx="200" cy="120" r="90" fill="none" stroke="rgba(224,96,112,.05)" stroke-width="2"
+            style="animation: heartbeat 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="120" r="120" fill="none" stroke="rgba(224,96,112,.03)" stroke-width="2"
+            style="animation: heartbeat 4s ease-in-out 1s infinite;"/>
+    <!-- Restored tree (like Lebanon cedar) -->
+    <rect x="192" y="200" width="16" height="100" fill="url(#trunkG)" rx="4"/>
+    <!-- Roots spreading -->
+    <path d="M192,295 Q175,305 160,310" stroke="#4a2a20" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M208,295 Q225,305 240,310" stroke="#4a2a20" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M198,300 Q190,312 180,318" stroke="#3a2018" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Tree canopy (lush, restored) -->
+    <ellipse cx="200" cy="175" rx="60" ry="40" fill="#2a5a28" opacity=".7"/>
+    <ellipse cx="180" cy="160" rx="40" ry="30" fill="#3a6a30" opacity=".6"/>
+    <ellipse cx="220" cy="155" rx="45" ry="35" fill="#2a5a20" opacity=".6"/>
+    <ellipse cx="200" cy="145" rx="50" ry="30" fill="#3a7a38" opacity=".5"/>
+    <!-- Olive-like branches -->
+    <path d="M170,185 Q140,175 120,180" stroke="#3a5a28" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M230,185 Q260,175 280,180" stroke="#3a5a28" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="120" cy="178" rx="12" ry="8" fill="#3a6a30" opacity=".5"/>
+    <ellipse cx="280" cy="178" rx="12" ry="8" fill="#3a6a30" opacity=".5"/>
+    <!-- Lily flowers blooming (Hosea 14:5 — "like a lily") -->
+    <!-- Lily 1 (left) -->
+    <line x1="140" y1="320" x2="140" y2="270" stroke="#3a6a28" stroke-width="2"/>
+    <path d="M130,270 Q135,258 140,255 Q145,258 150,270 Q140,268 130,270 Z" fill="url(#lilyG)" opacity=".8"
+          style="animation: bloomPulse 3s ease-in-out infinite;"/>
+    <ellipse cx="140" cy="262" rx="3" ry="4" fill="rgba(255,220,180,.4)"/>
+    <path d="M140,275 Q130,280 125,278" stroke="#3a5a28" stroke-width="1.5" fill="none"/>
+    <ellipse cx="124" cy="277" rx="6" ry="4" fill="#3a6a28" opacity=".5" transform="rotate(-20 124 277)"/>
+    <!-- Lily 2 (right) -->
+    <line x1="260" y1="315" x2="260" y2="265" stroke="#3a6a28" stroke-width="2"/>
+    <path d="M250,265 Q255,253 260,250 Q265,253 270,265 Q260,263 250,265 Z" fill="url(#lilyG)" opacity=".75"
+          style="animation: bloomPulse 3.5s ease-in-out .5s infinite;"/>
+    <ellipse cx="260" cy="257" rx="3" ry="4" fill="rgba(255,220,180,.4)"/>
+    <path d="M260,270 Q270,275 275,273" stroke="#3a5a28" stroke-width="1.5" fill="none"/>
+    <ellipse cx="276" cy="272" rx="6" ry="4" fill="#3a6a28" opacity=".5" transform="rotate(20 276 272)"/>
+    <!-- Lily 3 (center-left) -->
+    <line x1="170" y1="325" x2="172" y2="280" stroke="#3a6a28" stroke-width="2"/>
+    <path d="M162,280 Q167,268 172,265 Q177,268 182,280 Q172,278 162,280 Z" fill="url(#lilyG)" opacity=".7"
+          style="animation: bloomPulse 4s ease-in-out 1s infinite;"/>
+    <ellipse cx="172" cy="273" rx="2.5" ry="3.5" fill="rgba(255,220,180,.35)"/>
+    <!-- Lily 4 (center-right) -->
+    <line x1="230" y1="322" x2="228" y2="275" stroke="#3a6a28" stroke-width="2"/>
+    <path d="M218,275 Q223,263 228,260 Q233,263 238,275 Q228,273 218,275 Z" fill="url(#lilyG)" opacity=".7"
+          style="animation: bloomPulse 3s ease-in-out 1.5s infinite;"/>
+    <ellipse cx="228" cy="268" rx="2.5" ry="3.5" fill="rgba(255,220,180,.35)"/>
+    <!-- Dew drops -->
+    <ellipse cx="155" cy="170" rx="2" ry="3" fill="rgba(200,220,240,.4)"
+             style="animation: tearDrop 4s ease-in-out infinite;"/>
+    <ellipse cx="240" cy="165" rx="1.5" ry="2.5" fill="rgba(200,220,240,.35)"
+             style="animation: tearDrop 5s ease-in-out 1s infinite;"/>
+    <ellipse cx="195" cy="155" rx="2" ry="3" fill="rgba(200,220,240,.3)"
+             style="animation: tearDrop 4.5s ease-in-out .5s infinite;"/>
+    <ellipse cx="130" cy="275" rx="1.5" ry="2.5" fill="rgba(200,220,240,.3)"
+             style="animation: tearDrop 3.5s ease-in-out 2s infinite;"/>
+    <ellipse cx="270" cy="268" rx="1.5" ry="2.5" fill="rgba(200,220,240,.25)"
+             style="animation: tearDrop 4s ease-in-out 1.5s infinite;"/>
+    <!-- Small wildflowers at base -->
+    <circle cx="110" cy="325" r="3" fill="rgba(224,96,112,.3)"/>
+    <circle cx="115" cy="322" r="2.5" fill="rgba(240,160,170,.25)"/>
+    <circle cx="290" cy="320" r="3" fill="rgba(224,96,112,.25)"/>
+    <circle cx="295" cy="317" r="2.5" fill="rgba(240,160,170,.2)"/>
+    <circle cx="180" cy="335" r="2" fill="rgba(224,96,112,.2)"/>
+    <circle cx="220" cy="332" r="2.5" fill="rgba(240,160,170,.2)"/>
+    <!-- Ground -->
+    <ellipse cx="200" cy="345" rx="160" ry="12" fill="rgba(26,16,20,.4)"/>
+    <!-- Green grass sprouting -->
+    <line x1="100" y1="340" x2="98" y2="328" stroke="#3a6a28" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="108" y1="338" x2="107" y2="326" stroke="#2a5a20" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="300" y1="338" x2="302" y2="326" stroke="#3a6a28" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="308" y1="336" x2="309" y2="325" stroke="#2a5a20" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Fragrance / blessing particles -->
+    <circle cx="175" cy="240" r="2" fill="rgba(224,96,112,.4)">
+      <animate attributeName="opacity" values=".2;.6;.2" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="230" cy="230" r="1.5" fill="rgba(224,96,112,.35)">
+      <animate attributeName="opacity" values=".15;.5;.15" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="210" r="2" fill="rgba(240,160,170,.4)">
+      <animate attributeName="opacity" values=".2;.65;.2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="155" cy="220" r="1.5" fill="rgba(224,96,112,.3)">
+      <animate attributeName="opacity" values=".1;.5;.1" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="215" r="1.8" fill="rgba(240,160,170,.35)">
+      <animate attributeName="opacity" values=".15;.55;.15" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <div class="scene-heading" id="healing-heading" aria-hidden="true">
+    <h2>🌸 醫治與復興</h2>
+    <p>Healing &amp; Restoration — Hosea 14:4</p>
+  </div>
+  <div class="scene-verse">「我必醫治他們背道的病，甘心愛他們」— 何西阿書 14:4</div>
+</section>
+
+</body>
+</html>
