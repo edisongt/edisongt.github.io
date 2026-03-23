@@ -1,0 +1,315 @@
+:host {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+}
+
+/* ── Sky ── */
+#sky { position: fixed; inset: 0; z-index: 0; }
+
+/* ── Stars canvas ── */
+#stars { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+
+/* ── Sun ── */
+#sun {
+  position: fixed; z-index: 5; pointer-events: none;
+  transform: translate(-50%, -50%); border-radius: 50%;
+  width: clamp(46px, 6.5vw, 84px); height: clamp(46px, 6.5vw, 84px);
+}
+
+/* ── Moon ── */
+#moon {
+  position: fixed; z-index: 5; pointer-events: none;
+  transform: translate(-50%, -50%); border-radius: 50%;
+  width: clamp(34px, 5vw, 64px); height: clamp(34px, 5vw, 64px);
+}
+
+/* ── Scene container ── */
+#scene { position: fixed; inset: 0; z-index: 10; }
+
+/* ── Background mountains ── */
+#mountains { position: absolute; bottom: 0; left: 0; width: 100%; height: 45%; z-index: 1; }
+
+/* ── Tree wrappers ── */
+.tree-wrap {
+  position: absolute; bottom: 20%;
+  height: clamp(260px, 54vh, 500px);
+  z-index: 3; cursor: pointer;
+
+  svg { height: 100%; width: auto; display: block; }
+}
+
+#life-wrap {
+  left: 3%;
+  filter: drop-shadow(0 0 22px rgba(109, 255, 210, .5));
+  transition: filter .4s;
+
+  &:hover { filter: drop-shadow(0 0 46px rgba(109, 255, 210, .95)); }
+}
+
+#know-wrap {
+  right: 3%;
+  filter: drop-shadow(0 0 22px rgba(200, 160, 0, .5));
+  transition: filter .4s;
+
+  &:hover { filter: drop-shadow(0 0 46px rgba(255, 215, 0, .95)); }
+}
+
+/* ── Tree labels ── */
+.tree-label {
+  display: block; text-align: center;
+  font-size: clamp(0.95rem, 2vw, 1.3rem); font-weight: 700;
+  letter-spacing: .12em; margin-top: 5px;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, .9);
+}
+
+.life-color { color: rgba(109, 255, 210, .95); }
+.know-color { color: rgba(255, 215, 0, .95); }
+
+/* ── Large single ivory rotating cube ── */
+#people-wrap {
+  position: absolute; top: 6%; left: 50%; transform: translateX(-50%);
+  z-index: 1; pointer-events: none;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+.cube-grid {
+  animation: cubeFloat 4s ease-in-out infinite;
+  display: flex; align-items: center; justify-content: center;
+}
+
+@keyframes cubeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.cube-wrap {
+  --sz: clamp(80px, 11.2vw, 144px);
+  width: var(--sz); height: var(--sz);
+  perspective: 1200px;
+}
+
+.cube-3d {
+  width: 100%; height: 100%;
+  position: relative; transform-style: preserve-3d;
+  animation: spinAll 10s linear infinite;
+
+  .face {
+    position: absolute; width: 100%; height: 100%;
+    background: rgba(255, 255, 240, 0.97);
+    border: 2px solid rgba(200, 190, 140, 0.70);
+    box-shadow: inset 0 0 18px rgba(220, 210, 160, .35), 0 0 8px rgba(200, 190, 130, .30);
+    backface-visibility: visible;
+  }
+
+  .front  { transform: translateZ(calc(var(--sz) / 2)); }
+  .back   { transform: rotateY(180deg) translateZ(calc(var(--sz) / 2)); }
+  .left   { transform: rotateY(-90deg) translateZ(calc(var(--sz) / 2)); }
+  .right  { transform: rotateY(90deg)  translateZ(calc(var(--sz) / 2)); }
+  .top    { transform: rotateX(90deg)  translateZ(calc(var(--sz) / 2)); }
+  .bottom { transform: rotateX(-90deg) translateZ(calc(var(--sz) / 2)); }
+}
+
+@keyframes spinAll {
+  0%   { transform: rotateX(0deg)   rotateY(0deg)   rotateZ(0deg); }
+  100% { transform: rotateX(360deg) rotateY(540deg) rotateZ(180deg); }
+}
+
+/* ── Deer by the river ── */
+#deer-wrap {
+  position: absolute; bottom: 19%; left: 22%;
+  z-index: 3; pointer-events: none;
+  width: clamp(70px, 10vw, 130px);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .65));
+  animation: deerBob 5s ease-in-out infinite;
+}
+
+@keyframes deerBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ── White dove flying ── */
+#dove-wrap {
+  position: absolute; top: 10%; left: 0;
+  z-index: 4; pointer-events: none;
+  width: clamp(44px, 6.5vw, 88px);
+  animation: doveFly 26s linear infinite;
+}
+
+#dove-svg {
+  width: 100%; height: auto;
+  filter: drop-shadow(0 2px 8px rgba(180, 210, 255, .60));
+  animation: doveFlap 0.55s ease-in-out infinite;
+}
+
+@keyframes doveFly {
+  0%    { transform: translateX(-10vw) translateY(0)     scaleX(1); }
+  47%   { transform: translateX(108vw) translateY(-6vh)  scaleX(1); }
+  50%   { transform: translateX(108vw) translateY(-6vh)  scaleX(-1); }
+  97%   { transform: translateX(-10vw) translateY(0)     scaleX(-1); }
+  100%  { transform: translateX(-10vw) translateY(0)     scaleX(1); }
+}
+
+@keyframes doveFlap {
+  0%, 100% { transform: scaleY(1)    rotate(-2deg); }
+  50%      { transform: scaleY(0.82) rotate(2deg); }
+}
+
+/* ── Eagle soaring in the sky ── */
+#eagle-wrap {
+  position: absolute; top: 8%; left: 0;
+  z-index: 4; pointer-events: none;
+  width: clamp(70px, 10vw, 130px);
+  animation: eagleFly 42s linear infinite;
+}
+
+#eagle-svg {
+  width: 100%; height: auto;
+  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, .45));
+  animation: eagleFlap 0.9s ease-in-out infinite;
+}
+
+@keyframes eagleFly {
+  0%    { transform: translateX(110vw) translateY(0)     scaleX(-1); }
+  47%   { transform: translateX(-15vw) translateY(7vh)   scaleX(-1); }
+  50%   { transform: translateX(-15vw) translateY(7vh)   scaleX(1); }
+  97%   { transform: translateX(110vw) translateY(0)     scaleX(1); }
+  100%  { transform: translateX(110vw) translateY(0)     scaleX(-1); }
+}
+
+@keyframes eagleFlap {
+  0%, 100% { transform: scaleY(1)    rotate(-4deg); }
+  50%      { transform: scaleY(0.70) rotate(4deg); }
+}
+
+#river-label {
+  position: absolute; bottom: 23%; left: 50%; transform: translateX(-50%);
+  z-index: 3; color: rgba(180, 225, 255, .88);
+  font-size: clamp(0.78rem, 1.6vw, 1.05rem);
+  font-style: italic; letter-spacing: .18em;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .8), 0 0 24px rgba(80, 160, 255, .55);
+  pointer-events: none; white-space: nowrap;
+}
+
+/* ── Ground / River SVG ── */
+#ground-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 38%; z-index: 2; }
+
+@keyframes riverShimmer { 0%, 100% { opacity: .82; } 50% { opacity: .95; } }
+
+#river-main { animation: riverShimmer 5s ease-in-out infinite; }
+
+/* ── Fireflies ── */
+.ff {
+  position: absolute; width: 5px; height: 5px;
+  border-radius: 50%; background: rgba(255, 255, 195, .9);
+  pointer-events: none; z-index: 5;
+}
+
+@keyframes ffMove {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(var(--a), var(--b)); }
+  60%  { transform: translate(var(--c), var(--d)); }
+  100% { transform: translate(var(--e), var(--f)); }
+}
+
+@keyframes ffGlow {
+  0%, 100% { opacity: .08; box-shadow: 0 0 3px 1px rgba(255, 255, 180, .15); }
+  50%      { opacity: 1;   box-shadow: 0 0 9px 5px rgba(255, 255, 180, .9); }
+}
+
+/* ── Leaf / Apple particles ── */
+.leaf-p {
+  position: absolute; border-radius: 55% 10% 55% 10%;
+  pointer-events: none; z-index: 6; opacity: 0;
+  animation: leafFall var(--dur, 5s) ease-in forwards;
+}
+
+.apple-p {
+  position: absolute; border-radius: 50% 50% 55% 45%;
+  pointer-events: none; z-index: 6;
+  width: 14px; height: 15px;
+  background: radial-gradient(circle at 32% 28%, #ff9999, #dc2626, #7f1d1d);
+  animation: appleFall var(--dur, 3.5s) cubic-bezier(.25, 0, 1, 1) forwards;
+}
+
+@keyframes leafFall {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0; }
+  12%  { opacity: 1; }
+  85%  { opacity: .7; }
+  100% { transform: translate(var(--dx, 50px), var(--dy, 110px)) rotate(var(--rot, 380deg)) scale(.35); opacity: 0; }
+}
+
+@keyframes appleFall {
+  0%   { transform: translateX(var(--dx, 0)) translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateX(var(--dx, 0)) translateY(var(--dy, 160px)) rotate(var(--rot, 210deg)); opacity: 0; }
+}
+
+/* ── Tree sway ── */
+.sway-l { animation: swayL 7s ease-in-out infinite; transform-origin: 50% 96%; }
+.sway-r { animation: swayR 9s ease-in-out infinite; transform-origin: 50% 96%; }
+
+@keyframes swayL { 0%, 100% { transform: rotate(-1.8deg); } 50% { transform: rotate(1.8deg); } }
+@keyframes swayR { 0%, 100% { transform: rotate(1.8deg); }  50% { transform: rotate(-1.8deg); } }
+
+/* ── Overlay ── */
+#overlay {
+  position: fixed; bottom: 3.5rem; left: 0; right: 0; z-index: 20;
+  pointer-events: none; display: flex; flex-direction: column;
+  align-items: center; gap: .15rem; text-align: center; color: #fff;
+  padding: 0.3rem 1rem;
+
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: .35em;
+    font-size: clamp(0.55rem, 0.9vw, 0.72rem); opacity: .65;
+  }
+
+  h1 {
+    font-size: clamp(1.2rem, 2.5vw, 2rem); line-height: 1.05;
+    text-shadow: 0 2px 32px rgba(0, 0, 0, .9), 0 0 60px rgba(109, 255, 210, .25);
+  }
+
+  .tag {
+    font-size: clamp(0.6rem, 1.1vw, 0.82rem); opacity: .78;
+    text-shadow: 0 1px 16px rgba(0, 0, 0, .8); max-width: 560px;
+  }
+}
+
+/* ── Hint ── */
+#hint {
+  position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+  color: rgba(255, 255, 255, .5); font-size: clamp(0.85rem, 1.5vw, 1rem); z-index: 20;
+  pointer-events: none; text-align: center; white-space: nowrap;
+  animation: hintPulse 3s ease-in-out infinite;
+}
+
+@keyframes hintPulse { 0%, 100% { opacity: .3; } 50% { opacity: .75; } }
+
+/* ── Rainbow ── */
+#rainbow-svg {
+  position: absolute; top: 2%; left: 0; width: 100%; height: 52%;
+  z-index: 2; pointer-events: none;
+}
+
+/* ── Animals & Flower on the grass ── */
+.animal-wrap {
+  position: absolute; z-index: 3; pointer-events: none;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, .52));
+}
+
+#flower-wrap   { bottom: 21%; left: 33%; width: clamp(22px, 3vw,   42px);  animation: deerBob  4s   ease-in-out infinite; }
+#lamb-wrap     { bottom: 20%; left: 39%; width: clamp(44px, 6vw,   80px);  animation: deerBob  5.5s ease-in-out -1s    infinite; }
+#cow-wrap      { bottom: 20%; left: 45%; width: clamp(60px, 9vw,  116px);  animation: deerBob  6s   ease-in-out -2s    infinite; }
+#chicken-wrap  { bottom: 21%; left: 52%; width: clamp(30px, 4vw,   54px);  animation: deerBob  3.5s ease-in-out -0.5s  infinite; }
+#cat-wrap      { bottom: 20%; left: 58%; width: clamp(38px, 5.5vw, 74px);  animation: deerBob  4.5s ease-in-out -1.5s  infinite; }
+#dog-wrap      { bottom: 20%; left: 64%; width: clamp(46px, 7vw,   92px);  animation: deerBob  5s   ease-in-out -3s    infinite; }
+#elephant-wrap { bottom: 20%; left: 70%; width: clamp(62px, 9vw,  118px);  animation: deerBob  7s   ease-in-out -2s    infinite; }
+#lion-wrap     { bottom: 20%; left: 77%; width: clamp(54px, 8vw,  106px);  animation: deerBob  6.5s ease-in-out -1s    infinite; }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .sway-l, .sway-r, .ff, .animal-wrap, #eagle-wrap, #dove-wrap { animation: none !important; }
+}
