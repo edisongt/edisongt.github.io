@@ -1,0 +1,269 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #2a1c4a 0%, #4a2d6a 30%, #5a3580 65%, #7040a0 100%);
+    }
+
+#intro-orb {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #f0e0ff, #c8a0f0 40%, #9b70db 75%, #5a3580);
+      box-shadow: 0 0 55px rgba(155,112,219,.6), 0 0 110px rgba(106,61,154,.3);
+      z-index: 4;
+      animation: introGlow 4s ease-in-out infinite;
+    }
+
+@keyframes introGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(155,112,219,.6), 0 0 110px rgba(106,61,154,.3); }
+      50%      { box-shadow: 0 0 80px rgba(180,140,240,.85), 0 0 160px rgba(130,90,200,.5); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#9b70db 0%,#d8b4fe 45%,#6a3d9a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(200,170,240,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(170,140,210,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-solomon {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — SOLOMON'S WISDOM  所羅門的智慧
+    ══════════════════════════════════════════════ */
+
+#scene-wisdom {
+      background: linear-gradient(180deg, #1a1440 0%, #2a2060 55%, #3a2878 100%);
+    }
+
+#wisdom-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 35%;
+      background: linear-gradient(180deg,#1a1428 0%,#0e0a1a 55%,#060410 100%);
+      z-index: 5;
+    }
+
+#wisdom-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(155,112,219,.25) 0%, rgba(106,61,154,.1) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#wisdom-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 7;
+    }
+
+#wisdom-heading h2 {
+      color: #9b70db;
+      text-shadow: 0 0 22px rgba(155,112,219,.6);
+    }
+
+#wisdom-heading p { color: rgba(200,170,240,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — BUILDING THE TEMPLE  建造聖殿
+    ══════════════════════════════════════════════ */
+
+#scene-temple {
+      background: linear-gradient(180deg, #3a2850 0%, #4a3060 45%, #5a4028 100%);
+    }
+
+#temple-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,50vw,600px); height: 40vh;
+      background: radial-gradient(ellipse at 50% 70%, rgba(200,180,80,.18) 0%, rgba(180,160,60,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#temple-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 5;
+    }
+
+#temple-heading h2 {
+      background: linear-gradient(120deg,#e8c040 0%,#fff0a0 50%,#9b70db 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#temple-heading p { color: rgba(230,210,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — QUEEN OF SHEBA  示巴女王來訪
+    ══════════════════════════════════════════════ */
+
+#scene-sheba {
+      background: linear-gradient(180deg, #3a2840 0%, #5a3860 35%, #6a4838 70%, #7a5830 100%);
+    }
+
+#sheba-glow {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(80px,14vw,160px); height: clamp(80px,14vw,160px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, #fffff0, #ffe860 40%, #d4a020 75%, #a07800);
+      box-shadow: 0 0 70px rgba(255,220,60,.6), 0 0 150px rgba(200,160,0,.3);
+      z-index: 5;
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+#sheba-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 4; }
+
+#sheba-heading h2 {
+      background: linear-gradient(120deg,#ffd700 0%,#fff4b0 50%,#9b70db 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#sheba-heading p { color: rgba(230,210,160,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — KINGDOM DIVIDED  國度分裂
+    ══════════════════════════════════════════════ */
+
+#scene-division {
+      background: linear-gradient(180deg, #2a1c4a 0%, #4a2040 55%, #5a2020 100%);
+    }
+
+#division-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 3; }
+
+#division-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 50vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(155,112,219,.14) 0%, rgba(90,30,30,.1) 45%, transparent 70%);
+      z-index: 4; pointer-events: none;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#division-heading h2 {
+      background: linear-gradient(120deg,#9b70db 0%,#ff8080 50%,#6a3d9a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#division-heading p { color: rgba(200,160,180,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — MOUNT CARMEL  迦密山對決
+    ══════════════════════════════════════════════ */
+
+#scene-carmel {
+      background: linear-gradient(180deg, #1a1020 0%, #2a1830 50%, #3a1818 100%);
+    }
+
+#carmel-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#1a1418 0%,#0e0a0c 55%,#060406 100%);
+      z-index: 5;
+    }
+
+#carmel-ground::before {
+      content: '';
+      position: absolute; top: -18%; left: 0; width: 100%; height: 30%;
+      background: radial-gradient(ellipse 30% 40% at 25% 80%, #2a2018 0%, transparent 70%),
+                  radial-gradient(ellipse 25% 35% at 65% 70%, #2a1a18 0%, transparent 65%),
+                  radial-gradient(ellipse 20% 30% at 88% 90%, #2a2018 0%, transparent 60%);
+    }
+
+#fire-glow {
+      position: absolute; bottom: 32%; left: 50%; transform: translateX(-50%);
+      width: 28vw; height: 14vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,120,20,.3) 0%, rgba(200,60,10,.12) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+@keyframes fireDescend {
+      0%   { opacity: 0; transform: translateY(-60px) scaleY(0.3); }
+      30%  { opacity: 1; transform: translateY(-20px) scaleY(0.8); }
+      60%  { opacity: 1; transform: translateY(0) scaleY(1); }
+      100% { opacity: .7; transform: translateY(0) scaleY(1.05); }
+    }
+
+#elijah-figure {
+      position: absolute; bottom: 30%; left: 38%; z-index: 9;
+      width: clamp(38px,5vw,65px);
+      animation: gentleSway 5s ease-in-out infinite;
+    }
+
+#altar-svg {
+      position: absolute; bottom: 28%; left: 50%; z-index: 8;
+      width: clamp(60px,8vw,110px);
+    }
+
+#carmel-heading h2 {
+      background: linear-gradient(120deg,#ff6020 0%,#ffd060 50%,#9b70db 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#carmel-heading p { color: rgba(255,180,120,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

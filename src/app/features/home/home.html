@@ -1,0 +1,583 @@
+<!-- 1. Sky gradient (JS-animated) -->
+<div id="sky"></div>
+
+<!-- 2. Stars canvas -->
+<canvas id="stars"></canvas>
+
+<!-- 2b. Breeze particles canvas (daytime) -->
+<canvas id="breeze" style="position:fixed;inset:0;z-index:2;pointer-events:none;"></canvas>
+
+<!-- 4. Scene -->
+<div id="scene">
+
+  <!-- 3. Sun & Moon -->
+  <div id="sun"></div>
+  <div id="moon"></div>
+
+  <!-- Background mountains -->
+  <svg id="mountains" viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="mg1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#183a22"/><stop offset="100%" stop-color="#0a2215"/>
+      </linearGradient>
+      <linearGradient id="mg2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#265c32"/><stop offset="100%" stop-color="#0d3018"/>
+      </linearGradient>
+    </defs>
+    <path d="M0 400 L0 260 Q150 145,300 195 Q450 245,600 155 Q750 65,900 145
+             Q1050 225,1200 155 Q1320 95,1440 185 L1440 400 Z"
+          fill="url(#mg1)" opacity=".65"/>
+    <path d="M0 400 L0 320 Q200 248,380 285 Q560 322,720 268
+             Q880 214,1060 268 Q1240 322,1440 285 L1440 400 Z"
+          fill="url(#mg2)" opacity=".78"/>
+  </svg>
+
+  <!-- Rainbow in the sky -->
+  <svg id="rainbow-svg" viewBox="0 0 1440 560" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="rbBlur"><feGaussianBlur stdDeviation="3.5"/></filter>
+    </defs>
+    <g filter="url(#rbBlur)" opacity="0.72">
+      <path d="M0 560 Q720 -80 1440 560" fill="none" stroke="hsl(0,82%,56%)"    stroke-width="30"/>
+      <path d="M30 560 Q720 -52 1410 560"  fill="none" stroke="hsl(28,90%,58%)"  stroke-width="25"/>
+      <path d="M60 560 Q720 -26 1380 560"  fill="none" stroke="hsl(55,92%,60%)"  stroke-width="25"/>
+      <path d="M90 560 Q720  -4 1350 560"  fill="none" stroke="hsl(110,74%,48%)" stroke-width="23"/>
+      <path d="M120 560 Q720  16 1320 560" fill="none" stroke="hsl(215,80%,58%)" stroke-width="23"/>
+      <path d="M150 560 Q720  34 1290 560" fill="none" stroke="hsl(248,75%,60%)" stroke-width="22"/>
+      <path d="M180 560 Q720  50 1260 560" fill="none" stroke="hsl(290,70%,62%)" stroke-width="21"/>
+    </g>
+  </svg>
+
+  <!-- ══════════════════════════════════════════════
+       LIFE TREE  生命樹  (left)
+  ══════════════════════════════════════════════ -->
+  <div class="tree-wrap" id="life-wrap" role="img" aria-label="Tree of Life">
+    <svg viewBox="0 0 220 420" xmlns="http://www.w3.org/2000/svg" class="sway-l">
+      <defs>
+        <radialGradient id="lg1" cx="32%" cy="28%">
+          <stop offset="0%"   stop-color="#d4fff2"/>
+          <stop offset="38%"  stop-color="#6dffd2"/>
+          <stop offset="72%"  stop-color="#2db87c"/>
+          <stop offset="100%" stop-color="#0d5c36"/>
+        </radialGradient>
+        <radialGradient id="lg2" cx="30%" cy="25%">
+          <stop offset="0%"   stop-color="#baffea"/>
+          <stop offset="45%"  stop-color="#46d27c"/>
+          <stop offset="85%"  stop-color="#1b6f46"/>
+        </radialGradient>
+        <radialGradient id="lgGlow" cx="50%" cy="50%">
+          <stop offset="0%"   stop-color="#6dffd2" stop-opacity=".55"/>
+          <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="lgRoot" cx="50%" cy="40%">
+          <stop offset="0%"   stop-color="#ffd700" stop-opacity=".6"/>
+          <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="lgFruit" cx="30%" cy="28%">
+          <stop offset="0%"   stop-color="#fffde7"/>
+          <stop offset="50%"  stop-color="#ffd700"/>
+          <stop offset="100%" stop-color="#ff9800"/>
+        </radialGradient>
+        <linearGradient id="ltk1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#9b6040"/>
+          <stop offset="60%"  stop-color="#7a4c2d"/>
+          <stop offset="100%" stop-color="#5a3820"/>
+        </linearGradient>
+        <linearGradient id="ltk2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#c88060"/>
+          <stop offset="100%" stop-color="#9b6040"/>
+        </linearGradient>
+        <filter id="lgBlur"><feGaussianBlur stdDeviation="4"/></filter>
+      </defs>
+
+      <!-- Root glow -->
+      <ellipse cx="110" cy="412" rx="72" ry="16" fill="url(#lgRoot)" filter="url(#lgBlur)"/>
+
+      <!-- Surface roots -->
+      <path d="M103 408 C88 400,66 398,50 406"  stroke="#5a3820" stroke-width="8"  fill="none" stroke-linecap="round" opacity=".8"/>
+      <path d="M117 408 C132 400,154 398,170 406" stroke="#5a3820" stroke-width="8"  fill="none" stroke-linecap="round" opacity=".8"/>
+      <path d="M108 414 C100 408,88 410,80 418"   stroke="#5a3820" stroke-width="6"  fill="none" stroke-linecap="round" opacity=".6"/>
+      <path d="M112 414 C120 408,132 410,140 418"  stroke="#5a3820" stroke-width="6"  fill="none" stroke-linecap="round" opacity=".6"/>
+
+      <!-- Single trunk -->
+      <path d="M102 415 C97 360,93 318,97 272 C91 242,87 202,96 162 C100 143,106 123,110 106
+               C114 123,120 143,124 162 C133 202,129 242,123 272 C127 318,123 360,118 415 Z"
+            fill="url(#ltk1)"/>
+      <!-- Highlight strip -->
+      <path d="M110 415 C108 358,107 316,109 270 C107 240,107 200,109 162 C110 143,110 123,110 106"
+            stroke="url(#ltk2)" stroke-width="7" fill="none" stroke-linecap="round" opacity=".55"/>
+
+      <!-- Lower branches -->
+      <path d="M99 258 C78 242,56 230,36 210"   stroke="#7a4c2d" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <path d="M121 258 C142 242,164 230,184 210" stroke="#7a4c2d" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <!-- Upper branches -->
+      <path d="M97 200 C76 180,56 160,40 132"   stroke="#7a4c2d" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M123 200 C144 180,164 160,180 132" stroke="#7a4c2d" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <!-- Slender top branches -->
+      <path d="M103 155 C90 134,80 112,76 90"   stroke="#8a5c3d" stroke-width="7"  fill="none" stroke-linecap="round"/>
+      <path d="M117 155 C130 134,140 112,144 90"  stroke="#8a5c3d" stroke-width="7"  fill="none" stroke-linecap="round"/>
+
+      <!-- Glow aura -->
+      <ellipse cx="110" cy="140" rx="95" ry="108" fill="url(#lgGlow)" filter="url(#lgBlur)"/>
+
+      <!-- Canopy — outer -->
+      <circle cx="36"  cy="206" r="40" fill="url(#lg2)" opacity=".68"/>
+      <circle cx="184" cy="206" r="40" fill="url(#lg2)" opacity=".68"/>
+      <circle cx="40"  cy="126" r="32" fill="url(#lg2)" opacity=".64"/>
+      <circle cx="180" cy="126" r="32" fill="url(#lg2)" opacity=".64"/>
+      <!-- Canopy — mid -->
+      <ellipse cx="110" cy="206" rx="78" ry="68" fill="url(#lg1)" opacity=".86"/>
+      <circle cx="70"  cy="160" r="50" fill="url(#lg1)" opacity=".82"/>
+      <circle cx="150" cy="160" r="50" fill="url(#lg1)" opacity=".82"/>
+      <!-- Canopy — upper -->
+      <ellipse cx="110" cy="108" rx="67" ry="63" fill="url(#lg1)" opacity=".92"/>
+      <circle cx="75"  cy="88"  r="40" fill="url(#lg1)" opacity=".86"/>
+      <circle cx="145" cy="88"  r="40" fill="url(#lg1)" opacity=".86"/>
+      <!-- Crown -->
+      <ellipse cx="110" cy="50" rx="44" ry="42" fill="url(#lg1)" opacity=".9"/>
+
+      <!-- Golden fruits of life -->
+      <circle cx="82"  cy="102" r="8" fill="url(#lgFruit)"/>
+      <circle cx="138" cy="92"  r="7" fill="url(#lgFruit)"/>
+      <circle cx="107" cy="62"  r="7" fill="url(#lgFruit)"/>
+      <circle cx="127" cy="133" r="6" fill="url(#lgFruit)" opacity=".9"/>
+      <circle cx="92"  cy="152" r="6" fill="url(#lgFruit)" opacity=".85"/>
+      <circle cx="136" cy="166" r="5" fill="url(#lgFruit)" opacity=".8"/>
+    </svg>
+    <span class="tree-label life-color">Tree of Life</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       KNOWLEDGE TREE  善惡知識樹  (right)
+  ══════════════════════════════════════════════ -->
+  <div class="tree-wrap" id="know-wrap" role="img" aria-label="Tree of Knowledge">
+    <svg viewBox="0 0 220 420" xmlns="http://www.w3.org/2000/svg" class="sway-r">
+      <defs>
+        <radialGradient id="kg1" cx="32%" cy="28%">
+          <stop offset="0%"   stop-color="#fff0a0"/>
+          <stop offset="40%"  stop-color="#ffd700"/>
+          <stop offset="75%"  stop-color="#b8860b"/>
+          <stop offset="100%" stop-color="#6b4c00"/>
+        </radialGradient>
+        <radialGradient id="kg2" cx="30%" cy="25%">
+          <stop offset="0%"   stop-color="#ffe566"/>
+          <stop offset="45%"  stop-color="#cfa000"/>
+          <stop offset="85%"  stop-color="#7a5c00"/>
+        </radialGradient>
+        <radialGradient id="kgGlow" cx="50%" cy="50%">
+          <stop offset="0%"   stop-color="#ffd700" stop-opacity=".6"/>
+          <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="kgApple" cx="32%" cy="26%">
+          <stop offset="0%"   stop-color="#ff9999"/>
+          <stop offset="50%"  stop-color="#dc2626"/>
+          <stop offset="90%"  stop-color="#7f1d1d"/>
+        </radialGradient>
+        <linearGradient id="ktk1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#3a1c10"/>
+          <stop offset="60%"  stop-color="#2a1008"/>
+          <stop offset="100%" stop-color="#1a0804"/>
+        </linearGradient>
+        <linearGradient id="ktk2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#6b3c28"/>
+          <stop offset="100%" stop-color="#4a2c18"/>
+        </linearGradient>
+        <filter id="kgBlur"><feGaussianBlur stdDeviation="4"/></filter>
+      </defs>
+
+      <!-- Root shadow -->
+      <ellipse cx="110" cy="412" rx="68" ry="15" fill="rgba(0,0,0,.55)" filter="url(#kgBlur)"/>
+
+      <!-- Gnarled roots -->
+      <path d="M100 408 C85 400,63 398,46 406"   stroke="#3a1c10" stroke-width="9"  fill="none" stroke-linecap="round" opacity=".9"/>
+      <path d="M120 408 C135 400,157 398,174 406"  stroke="#3a1c10" stroke-width="9"  fill="none" stroke-linecap="round" opacity=".9"/>
+      <path d="M107 414 C99 408,87 410,78 418"    stroke="#3a1c10" stroke-width="7"  fill="none" stroke-linecap="round" opacity=".7"/>
+      <path d="M113 414 C121 408,133 410,142 418"  stroke="#3a1c10" stroke-width="7"  fill="none" stroke-linecap="round" opacity=".7"/>
+
+      <!-- Single twisted trunk -->
+      <path d="M100 415 C88 358,82 316,90 270 C84 238,79 198,88 158 C92 138,98 118,106 104
+               C113 118,119 138,131 158 C140 198,135 238,129 270 C137 316,131 358,120 415 Z"
+            fill="url(#ktk1)"/>
+      <!-- Highlight strip -->
+      <path d="M110 415 C107 358,104 316,107 270 C104 240,103 200,107 158 C109 138,109 118,110 104"
+            stroke="url(#ktk2)" stroke-width="6" fill="none" stroke-linecap="round" opacity=".5"/>
+      <!-- Twist scar detail -->
+      <path d="M107 304 C101 288,116 272,110 258" stroke="#7a3c24" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/>
+
+      <!-- Lower gnarled branches -->
+      <path d="M97 265 C76 247,53 234,32 212"    stroke="#3a1c10" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <path d="M123 265 C144 247,167 234,188 212"  stroke="#3a1c10" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <!-- Upper branches -->
+      <path d="M94 200 C73 180,52 158,36 130"    stroke="#3a1c10" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M126 200 C147 180,168 158,184 130"  stroke="#3a1c10" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <!-- Twigs -->
+      <path d="M32 212 C22 198,18 183,24 173"    stroke="#3a1c10" stroke-width="6"  fill="none" stroke-linecap="round"/>
+      <path d="M32 212 C28 197,35 184,30 169"    stroke="#3a1c10" stroke-width="5"  fill="none" stroke-linecap="round"/>
+      <path d="M188 212 C198 198,202 183,196 173"  stroke="#3a1c10" stroke-width="6"  fill="none" stroke-linecap="round"/>
+      <path d="M36 130 C28 117,30 102,38 93"     stroke="#3a1c10" stroke-width="6"  fill="none" stroke-linecap="round"/>
+      <path d="M184 130 C192 117,190 102,182 93"   stroke="#3a1c10" stroke-width="6"  fill="none" stroke-linecap="round"/>
+
+      <!-- Gold glow aura -->
+      <ellipse cx="110" cy="132" rx="92" ry="102" fill="url(#kgGlow)" filter="url(#kgBlur)"/>
+
+      <!-- Canopy — outer -->
+      <circle cx="32"  cy="208" r="37" fill="url(#kg2)" opacity=".65"/>
+      <circle cx="188" cy="208" r="37" fill="url(#kg2)" opacity=".65"/>
+      <circle cx="36"  cy="124" r="30" fill="url(#kg2)" opacity=".62"/>
+      <circle cx="184" cy="124" r="30" fill="url(#kg2)" opacity=".62"/>
+      <!-- Canopy — mid -->
+      <ellipse cx="110" cy="204" rx="74" ry="64" fill="url(#kg1)" opacity=".84"/>
+      <circle cx="70"  cy="158" r="48" fill="url(#kg1)" opacity=".80"/>
+      <circle cx="150" cy="158" r="48" fill="url(#kg1)" opacity=".80"/>
+      <!-- Canopy — upper -->
+      <ellipse cx="110" cy="106" rx="64" ry="60" fill="url(#kg1)" opacity=".90"/>
+      <circle cx="75"  cy="86"  r="38" fill="url(#kg1)" opacity=".84"/>
+      <circle cx="145" cy="86"  r="38" fill="url(#kg1)" opacity=".84"/>
+      <!-- Crown -->
+      <ellipse cx="110" cy="50" rx="42" ry="40" fill="url(#kg1)" opacity=".88"/>
+
+      <!-- Forbidden apples -->
+      <circle cx="78"  cy="104" r="9"  fill="url(#kgApple)"/>
+      <line x1="78" y1="95"  x2="80" y2="89"  stroke="#2d4a1d" stroke-width="2" stroke-linecap="round"/>
+      <path d="M80 89 Q83 85,86 87"  stroke="#2d4a1d" stroke-width="1.5" fill="none"/>
+
+      <circle cx="140" cy="92"  r="8"  fill="url(#kgApple)"/>
+      <line x1="140" y1="84" x2="142" y2="78"  stroke="#2d4a1d" stroke-width="2" stroke-linecap="round"/>
+      <path d="M142 78 Q145 74,148 76"  stroke="#2d4a1d" stroke-width="1.5" fill="none"/>
+
+      <circle cx="106" cy="66"  r="8"  fill="url(#kgApple)"/>
+      <line x1="106" y1="58"  x2="108" y2="52"  stroke="#2d4a1d" stroke-width="2" stroke-linecap="round"/>
+
+      <circle cx="130" cy="132" r="7"  fill="url(#kgApple)" opacity=".92"/>
+      <line x1="130" y1="125" x2="132" y2="119"  stroke="#2d4a1d" stroke-width="1.5" stroke-linecap="round"/>
+
+      <circle cx="88"  cy="150" r="7"  fill="url(#kgApple)" opacity=".88"/>
+      <circle cx="158" cy="150" r="6"  fill="url(#kgApple)" opacity=".85"/>
+      <circle cx="60"  cy="112" r="7"  fill="url(#kgApple)" opacity=".82"/>
+      <circle cx="165" cy="114" r="6"  fill="url(#kgApple)" opacity=".80"/>
+
+      <!-- Serpent on trunk -->
+      <path d="M118 290 Q134 268,126 252 Q118 238,128 224"
+            stroke="#1a3a0a" stroke-width="6" fill="none" stroke-linecap="round" opacity=".65"/>
+      <ellipse cx="129" cy="221" rx="6" ry="4" fill="#1a3a0a" opacity=".65"/>
+      <circle cx="131" cy="220" r="1.8" fill="#ff3333" opacity=".85"/>
+      <circle cx="127" cy="220" r="1.8" fill="#ff3333" opacity=".85"/>
+    </svg>
+    <span class="tree-label know-color">Tree of Knowledge</span>
+  </div>
+
+  <!-- Ground + River SVG -->
+  <svg id="ground-svg" viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#2a7a3a"/>
+        <stop offset="30%"  stop-color="#1a5a2a"/>
+        <stop offset="100%" stop-color="#0a2a10"/>
+      </linearGradient>
+      <linearGradient id="rg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#60b0ff" stop-opacity=".75"/>
+        <stop offset="100%" stop-color="#2060b0" stop-opacity=".5"/>
+      </linearGradient>
+    </defs>
+    <!-- Main ground -->
+    <path d="M0 400 L0 118 Q120 78,240 98 Q360 118,480 88
+             Q600 58,720 78 Q840 98,960 72 Q1080 48,1200 88
+             Q1320 128,1440 98 L1440 400 Z"
+          fill="url(#gg)"/>
+    <!-- River of Living Water -->
+    <path id="river-main"
+          d="M0 168 Q360 150,720 163 Q1080 176,1440 160
+             L1440 208 Q1080 222,720 210 Q360 198,0 212 Z"
+          fill="url(#rg)" opacity=".82"/>
+    <!-- River shimmer highlight -->
+    <path d="M0 176 Q360 162,720 172 Q1080 182,1440 168"
+          stroke="rgba(200,240,255,.55)" stroke-width="3.5" fill="none"/>
+    <!-- Ripple highlights -->
+    <ellipse cx="360"  cy="185" rx="75" ry="7"  fill="rgba(210,240,255,.30)"/>
+    <ellipse cx="720"  cy="183" rx="80" ry="8"  fill="rgba(210,240,255,.35)"/>
+    <ellipse cx="1080" cy="180" rx="70" ry="7"  fill="rgba(210,240,255,.28)"/>
+    <!-- Grass tufts -->
+    <path d="M198 116 Q200 106,204 116" stroke="#4aaa5a" stroke-width="3" fill="none"/>
+    <path d="M207 114 Q210 104,213 114" stroke="#4aaa5a" stroke-width="3" fill="none"/>
+    <path d="M596 72  Q598 62, 602 72"  stroke="#4aaa5a" stroke-width="3" fill="none"/>
+    <path d="M848 80  Q850 70, 854 80"  stroke="#4aaa5a" stroke-width="3" fill="none"/>
+    <path d="M1098 94 Q1100 84,1104 94" stroke="#4aaa5a" stroke-width="3" fill="none"/>
+  </svg>
+
+  <!-- Fireflies container -->
+  <div id="fireflies" style="position:absolute;inset:0;pointer-events:none;z-index:5;"></div>
+
+  <!-- Floating auto-rotating 3D cube -->
+  <div id="people-wrap">
+    <div class="cube-grid" id="cube-grid"></div>
+  </div>
+
+  <!-- Leaf / apple particle container -->
+  <div id="particles" style="position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden;"></div>
+
+  <!-- Deer drinking by the River -->
+  <div id="deer-wrap">
+    <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <ellipse cx="70" cy="58" rx="28" ry="17" fill="#8B6B2A"/>
+      <ellipse cx="70" cy="68" rx="22" ry="7" fill="#c49540" opacity="0.35"/>
+      <path d="M48 54 Q36 62, 27 76" stroke="#8B6B2A" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <ellipse cx="23" cy="80" rx="13" ry="10" fill="#8B6B2A" transform="rotate(-25,23,80)"/>
+      <ellipse cx="14" cy="86" rx="8" ry="5" fill="#9B7B3A"/>
+      <ellipse cx="11" cy="88" rx="3.5" ry="2" fill="#5a3015"/>
+      <circle cx="27" cy="76" r="2.8" fill="#1a0e00"/>
+      <circle cx="26.5" cy="75.5" r="0.9" fill="rgba(255,255,255,0.55)"/>
+      <path d="M31 70 Q25 58, 30 51" stroke="#8B6B2A" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M31 70 Q27 60, 31 53" stroke="#c49040" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M36 64 Q31 52, 25 43" stroke="#5a3010" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M25 43 Q20 36, 15 30" stroke="#5a3010" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M25 43 Q18 40, 15 43" stroke="#5a3010" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M36 64 Q43 53, 49 47" stroke="#5a3010" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M49 47 Q53 41, 51 35" stroke="#5a3010" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M52 72 L50 95" stroke="#7a5a1a" stroke-width="7" stroke-linecap="round"/>
+      <path d="M64 75 L63 96" stroke="#7a5a1a" stroke-width="7" stroke-linecap="round"/>
+      <path d="M82 74 L84 96" stroke="#7a5a1a" stroke-width="7" stroke-linecap="round"/>
+      <path d="M93 71 L96 93" stroke="#7a5a1a" stroke-width="7" stroke-linecap="round"/>
+      <ellipse cx="96" cy="50" rx="9" ry="7" fill="#d4b060" transform="rotate(15,96,50)"/>
+      <ellipse cx="14" cy="94" rx="11" ry="3" fill="none" stroke="rgba(140,200,255,0.7)" stroke-width="1.5"/>
+      <ellipse cx="14" cy="94" rx="18" ry="5" fill="none" stroke="rgba(140,200,255,0.38)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- White dove flying -->
+  <div id="dove-wrap">
+    <svg id="dove-svg" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 32 Q28 7, 2 16 Q23 26, 50 32 Z" fill="white" opacity="0.95"/>
+      <path d="M50 32 Q72 7, 98 16 Q77 26, 50 32 Z" fill="white" opacity="0.95"/>
+      <path d="M50 32 Q32 17, 12 20" stroke="rgba(200,215,255,0.50)" stroke-width="1" fill="none"/>
+      <path d="M50 32 Q68 17, 88 20" stroke="rgba(200,215,255,0.50)" stroke-width="1" fill="none"/>
+      <ellipse cx="52" cy="38" rx="18" ry="8" fill="white"/>
+      <circle cx="66" cy="29" r="7" fill="white"/>
+      <path d="M72 28 L82 30 L72 33 Z" fill="#e8c040"/>
+      <circle cx="68" cy="27" r="2" fill="#2a1a2a"/>
+      <circle cx="67.5" cy="26.5" r="0.7" fill="rgba(255,255,255,0.65)"/>
+      <path d="M36 40 Q18 50, 11 47 Q22 42, 36 40 Z" fill="white"/>
+      <path d="M36 40 Q15 54, 7 51 Q18 46, 36 40 Z" fill="rgba(230,238,255,0.82)"/>
+    </svg>
+  </div>
+
+  <!-- Eagle soaring -->
+  <div id="eagle-wrap" role="img" aria-label="Eagle soaring in the sky">
+    <svg id="eagle-svg" viewBox="0 0 160 80" xmlns="http://www.w3.org/2000/svg">
+      <path d="M80 40 Q55 5, 10 14 Q22 22, 35 20 Q16 30, 0 42 Q18 37, 38 34 Q20 46, 4 56 Q26 46, 80 40 Z" fill="#6b4218"/>
+      <path d="M80 40 Q105 5, 150 14 Q138 22, 125 20 Q144 30, 160 42 Q142 37, 122 34 Q140 46, 156 56 Q134 46, 80 40 Z" fill="#6b4218"/>
+      <path d="M80 40 Q58 18, 22 18" stroke="rgba(140,90,35,0.45)" stroke-width="2" fill="none"/>
+      <path d="M80 40 Q102 18, 138 18" stroke="rgba(140,90,35,0.45)" stroke-width="2" fill="none"/>
+      <ellipse cx="82" cy="48" rx="22" ry="10" fill="#6b4218"/>
+      <circle cx="100" cy="36" r="10" fill="#f8f8f0"/>
+      <path d="M109 34 Q119 33 118 38 Q114 42 109 40 Z" fill="#dda020"/>
+      <circle cx="104" cy="33" r="2.8" fill="#1a0800"/>
+      <circle cx="103.5" cy="32.5" r="0.9" fill="rgba(255,255,255,0.70)"/>
+      <path d="M62 52 Q42 62, 35 68 Q48 58, 62 52 Z" fill="#f0f0e8" opacity="0.9"/>
+      <path d="M62 52 Q38 65, 30 72 Q44 62, 62 52 Z" fill="rgba(220,225,240,0.75)"/>
+    </svg>
+  </div>
+
+  <!-- Flower -->
+  <div id="flower-wrap" class="animal-wrap">
+    <svg viewBox="0 0 50 70" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <line x1="25" y1="38" x2="25" y2="68" stroke="#3a8a3a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M25 54 Q15 48 13 40" stroke="#3a8a3a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M25 48 Q35 42 37 34" stroke="#3a8a3a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <g transform="translate(25,25)">
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(45)"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(90)"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(135)"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(225)"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(270)"/>
+        <ellipse cx="0" cy="-13" rx="4.5" ry="8" fill="#fffde7" transform="rotate(315)"/>
+        <circle cx="0" cy="0" r="8" fill="#ffcc00"/>
+        <circle cx="0" cy="0" r="5" fill="#ff9900"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Lamb -->
+  <div id="lamb-wrap" class="animal-wrap">
+    <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <circle cx="52" cy="48" r="22" fill="white"/>
+      <circle cx="35" cy="40" r="14" fill="white"/>
+      <circle cx="69" cy="40" r="14" fill="white"/>
+      <circle cx="52" cy="31" r="16" fill="white"/>
+      <ellipse cx="24" cy="37" rx="13" ry="10" fill="#f5f0e8"/>
+      <ellipse cx="15" cy="28" rx="5" ry="8" fill="#f0cfc0" transform="rotate(-15,15,28)"/>
+      <circle cx="21" cy="36" r="2.2" fill="#1a0e00"/>
+      <circle cx="20.5" cy="35.5" r="0.8" fill="rgba(255,255,255,0.6)"/>
+      <ellipse cx="13" cy="41" rx="5" ry="3.5" fill="#e8c5aa"/>
+      <line x1="38" y1="67" x2="36" y2="86" stroke="#c8b898" stroke-width="6" stroke-linecap="round"/>
+      <line x1="49" y1="69" x2="48" y2="86" stroke="#c8b898" stroke-width="6" stroke-linecap="round"/>
+      <line x1="59" y1="69" x2="59" y2="86" stroke="#c8b898" stroke-width="6" stroke-linecap="round"/>
+      <line x1="70" y1="67" x2="72" y2="86" stroke="#c8b898" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Cow -->
+  <div id="cow-wrap" class="animal-wrap">
+    <svg viewBox="0 0 130 95" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <ellipse cx="70" cy="55" rx="38" ry="24" fill="white"/>
+      <ellipse cx="60" cy="45" rx="18" ry="14" fill="#1a1a1a" opacity="0.82"/>
+      <ellipse cx="88" cy="60" rx="13" ry="10" fill="#1a1a1a" opacity="0.72"/>
+      <ellipse cx="70" cy="76" rx="14" ry="8" fill="#f0bfb0"/>
+      <path d="M38 52 Q27 46 22 42" stroke="white" stroke-width="16" fill="none" stroke-linecap="round"/>
+      <ellipse cx="15" cy="37" rx="16" ry="12" fill="white"/>
+      <ellipse cx="5" cy="27" rx="6" ry="9" fill="#f0d8c0"/>
+      <path d="M12 27 Q8 19 5 17"  stroke="#c8a070" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M22 27 Q26 19 28 17" stroke="#c8a070" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="7" cy="43" rx="9" ry="7" fill="#e8c0a0"/>
+      <circle cx="5"  cy="44" r="2" fill="#c07060"/>
+      <circle cx="9"  cy="44" r="2" fill="#c07060"/>
+      <circle cx="18" cy="33" r="2.5" fill="#1a0e00"/>
+      <circle cx="17.5" cy="32.5" r="0.9" fill="rgba(255,255,255,0.6)"/>
+      <line x1="44" y1="76" x2="42" y2="90" stroke="#c8b898" stroke-width="7" stroke-linecap="round"/>
+      <line x1="58" y1="78" x2="57" y2="90" stroke="#c8b898" stroke-width="7" stroke-linecap="round"/>
+      <line x1="82" y1="78" x2="82" y2="90" stroke="#c8b898" stroke-width="7" stroke-linecap="round"/>
+      <line x1="96" y1="76" x2="98" y2="90" stroke="#c8b898" stroke-width="7" stroke-linecap="round"/>
+      <path d="M106 50 Q118 42 114 32" stroke="#c8b898" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="114" cy="30" rx="5" ry="7" fill="#c8b898"/>
+    </svg>
+  </div>
+
+  <!-- Chicken -->
+  <div id="chicken-wrap" class="animal-wrap">
+    <svg viewBox="0 0 65 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <ellipse cx="33" cy="52" rx="20" ry="16" fill="white"/>
+      <path d="M22 50 Q20 44 27 40" stroke="rgba(190,190,190,0.65)" stroke-width="2" fill="none"/>
+      <path d="M51 46 Q62 36 60 26" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M51 46 Q64 40 63 29" stroke="rgba(220,220,220,0.78)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M19 44 Q16 37 17 31" stroke="white" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <circle cx="17" cy="25" r="12" fill="white"/>
+      <path d="M12 15 Q14 7 17 15 Q20 7 23 15" fill="#dd2222"/>
+      <ellipse cx="10" cy="31" rx="4" ry="5" fill="#dd2222"/>
+      <path d="M8 25 L1 27 L8 30 Z" fill="#ffaa00"/>
+      <circle cx="20" cy="23" r="3" fill="#1a0e00"/>
+      <circle cx="19.5" cy="22.5" r="1" fill="rgba(255,255,255,0.65)"/>
+      <line x1="27" y1="67" x2="23" y2="77" stroke="#ffaa00" stroke-width="4" stroke-linecap="round"/>
+      <line x1="39" y1="67" x2="43" y2="77" stroke="#ffaa00" stroke-width="4" stroke-linecap="round"/>
+      <path d="M23 77 L19 79 M23 77 L23 81 M23 77 L27 79" stroke="#ffaa00" stroke-width="2" stroke-linecap="round"/>
+      <path d="M43 77 L39 79 M43 77 L43 81 M43 77 L47 79" stroke="#ffaa00" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Cat -->
+  <div id="cat-wrap" class="animal-wrap">
+    <svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <ellipse cx="40" cy="62" rx="22" ry="20" fill="#d4a060"/>
+      <path d="M60 68 Q80 55 78 40 Q76 28 68 30" stroke="#d4a060" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <rect x="32" y="36" width="16" height="16" rx="4" fill="#d4a060"/>
+      <circle cx="40" cy="28" r="18" fill="#d4a060"/>
+      <path d="M26 17 L22 4  L35 14 Z" fill="#d4a060"/>
+      <path d="M28 17 L26 7  L34 14 Z" fill="#e8b878" opacity="0.7"/>
+      <path d="M54 17 L58 4  L45 14 Z" fill="#d4a060"/>
+      <path d="M52 17 L54 7  L46 14 Z" fill="#e8b878" opacity="0.7"/>
+      <ellipse cx="32" cy="26" rx="5"  ry="4"   fill="#66aa44"/>
+      <ellipse cx="32" cy="26" rx="2"  ry="3.5" fill="#1a0e00"/>
+      <circle  cx="31" cy="25" r="1.2" fill="rgba(255,255,255,0.65)"/>
+      <ellipse cx="48" cy="26" rx="5"  ry="4"   fill="#66aa44"/>
+      <ellipse cx="48" cy="26" rx="2"  ry="3.5" fill="#1a0e00"/>
+      <circle  cx="47" cy="25" r="1.2" fill="rgba(255,255,255,0.65)"/>
+      <path d="M37 32 L40 35 L43 32 Q40 30 37 32 Z" fill="#e07080"/>
+      <line x1="16" y1="32" x2="33" y2="34" stroke="rgba(255,255,255,0.68)" stroke-width="1.2"/>
+      <line x1="16" y1="35" x2="33" y2="35" stroke="rgba(255,255,255,0.68)" stroke-width="1.2"/>
+      <line x1="47" y1="34" x2="64" y2="32" stroke="rgba(255,255,255,0.68)" stroke-width="1.2"/>
+      <line x1="47" y1="35" x2="64" y2="35" stroke="rgba(255,255,255,0.68)" stroke-width="1.2"/>
+      <line x1="28" y1="79" x2="26" y2="88" stroke="#c8903a" stroke-width="7" stroke-linecap="round"/>
+      <line x1="36" y1="81" x2="35" y2="88" stroke="#c8903a" stroke-width="7" stroke-linecap="round"/>
+      <line x1="46" y1="81" x2="46" y2="88" stroke="#c8903a" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="79" x2="56" y2="88" stroke="#c8903a" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Dog -->
+  <div id="dog-wrap" class="animal-wrap">
+    <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <ellipse cx="54" cy="58" rx="30" ry="20" fill="#c8a060"/>
+      <path d="M82 54 Q96 40 91 28" stroke="#c8a060" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M30 50 Q24 42 24 34" stroke="#c8a060" stroke-width="15" fill="none" stroke-linecap="round"/>
+      <circle cx="22" cy="26" r="16" fill="#c8a060"/>
+      <path d="M12 20 Q4 30 8 42 Q14 35 16 24 Z" fill="#b08848"/>
+      <path d="M32 20 Q40 30 36 42 Q30 35 28 24 Z" fill="#b08848"/>
+      <ellipse cx="18" cy="32" rx="9" ry="7" fill="#d4b070"/>
+      <ellipse cx="18" cy="29" rx="5" ry="3.5" fill="#2a1a10"/>
+      <circle  cx="16.5" cy="28.5" r="1" fill="rgba(255,255,255,0.5)"/>
+      <circle cx="28" cy="22" r="3"   fill="#3a2a00"/>
+      <circle cx="27.5" cy="21.5" r="1" fill="rgba(255,255,255,0.65)"/>
+      <ellipse cx="18" cy="37" rx="4" ry="3" fill="#e05060"/>
+      <line x1="34" y1="74" x2="32" y2="87" stroke="#b09050" stroke-width="7" stroke-linecap="round"/>
+      <line x1="46" y1="76" x2="45" y2="87" stroke="#b09050" stroke-width="7" stroke-linecap="round"/>
+      <line x1="64" y1="76" x2="64" y2="87" stroke="#b09050" stroke-width="7" stroke-linecap="round"/>
+      <line x1="76" y1="74" x2="78" y2="87" stroke="#b09050" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Elephant -->
+  <div id="elephant-wrap" class="animal-wrap">
+    <svg viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <ellipse cx="78" cy="58" rx="46" ry="30" fill="#a0a0b8"/>
+      <circle cx="30" cy="50" r="27" fill="#a0a0b8"/>
+      <ellipse cx="10" cy="47" rx="18" ry="26" fill="#909090" opacity="0.80"/>
+      <ellipse cx="12" cy="47" rx="13" ry="20" fill="#b8aab0" opacity="0.55"/>
+      <path d="M14 62 Q2 72 6 86 Q10 96 20 94" stroke="#a0a0b8" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <ellipse cx="20" cy="94" rx="8" ry="5" fill="#909090"/>
+      <path d="M19 64 Q9 70 5 78" stroke="#fffff0" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.9"/>
+      <circle cx="28" cy="42" r="4"   fill="#1a1a2a"/>
+      <circle cx="27"  cy="41" r="1.5" fill="rgba(255,255,255,0.65)"/>
+      <path d="M122 56 Q134 48 130 36" stroke="#909090" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="130" cy="34" rx="4" ry="6" fill="#888888"/>
+      <rect x="44" y="83" width="16" height="14" rx="6" fill="#909090"/>
+      <rect x="64" y="85" width="16" height="12" rx="6" fill="#909090"/>
+      <rect x="92" y="85" width="16" height="12" rx="6" fill="#909090"/>
+      <rect x="112" y="83" width="16" height="14" rx="6" fill="#909090"/>
+    </svg>
+  </div>
+
+  <!-- Lion -->
+  <div id="lion-wrap" class="animal-wrap">
+    <svg viewBox="0 0 120 95" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <ellipse cx="70" cy="62" rx="38" ry="22" fill="#d4a040"/>
+      <path d="M106 58 Q120 44 115 32" stroke="#d4a040" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <ellipse cx="115" cy="30" rx="8" ry="10" fill="#c09030"/>
+      <circle cx="32" cy="48" r="27" fill="#c09030" opacity="0.85"/>
+      <circle cx="32" cy="48" r="21" fill="#a07020"/>
+      <circle cx="32" cy="48" r="16" fill="#d4a050"/>
+      <circle cx="18" cy="33" r="7" fill="#c09030"/>
+      <circle cx="18" cy="33" r="4" fill="#d4a050"/>
+      <circle cx="46" cy="33" r="7" fill="#c09030"/>
+      <circle cx="46" cy="33" r="4" fill="#d4a050"/>
+      <ellipse cx="24" cy="44" rx="5"   ry="4.5" fill="#c8a020"/>
+      <ellipse cx="24" cy="44" rx="2.5" ry="4"   fill="#1a1000"/>
+      <circle  cx="23" cy="43" r="1.2" fill="rgba(255,255,255,0.65)"/>
+      <ellipse cx="40" cy="44" rx="5"   ry="4.5" fill="#c8a020"/>
+      <ellipse cx="40" cy="44" rx="2.5" ry="4"   fill="#1a1000"/>
+      <circle  cx="39" cy="43" r="1.2" fill="rgba(255,255,255,0.65)"/>
+      <path d="M28 52 L32 55 L36 52 Q32 49 28 52 Z" fill="#c06080"/>
+      <path d="M26 56 Q32 60 38 56" stroke="#c06080" stroke-width="1.5" fill="none"/>
+      <line x1="9"  y1="52" x2="24" y2="53" stroke="rgba(255,255,255,0.60)" stroke-width="1.2"/>
+      <line x1="9"  y1="55" x2="24" y2="54" stroke="rgba(255,255,255,0.60)" stroke-width="1.2"/>
+      <line x1="40" y1="53" x2="55" y2="52" stroke="rgba(255,255,255,0.60)" stroke-width="1.2"/>
+      <line x1="40" y1="54" x2="55" y2="55" stroke="rgba(255,255,255,0.60)" stroke-width="1.2"/>
+      <line x1="48" y1="80" x2="46" y2="92" stroke="#c09030" stroke-width="8" stroke-linecap="round"/>
+      <line x1="60" y1="82" x2="59" y2="92" stroke="#c09030" stroke-width="8" stroke-linecap="round"/>
+      <line x1="82" y1="82" x2="82" y2="92" stroke="#c09030" stroke-width="8" stroke-linecap="round"/>
+      <line x1="94" y1="80" x2="96" y2="92" stroke="#c09030" stroke-width="8" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+</div><!-- /#scene -->
+
+<!-- Text overlay -->
+<div id="overlay">
+  <h1>Module of Eden</h1>
+  <p class="tag">The Source of Life, the Realm of Good &amp; Evil — An Eternal Cycle of Light and Dark</p>
+</div>
+
+<!-- Interaction hint -->
+<div id="hint">🌿 Click the Tree of Life or the Tree of Knowledge to interact 🍎</div>
+
+<!-- Navigation Dropdown Menu -->
+<app-nav-dropdown />

@@ -1,0 +1,304 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Zechariah-specific keyframes ── */
+
+@keyframes horsePrance {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      25%     { transform: translateY(-6px) rotate(.5deg); }
+      50%     { transform: translateY(0) rotate(0deg); }
+      75%     { transform: translateY(-4px) rotate(-.5deg); }
+    }
+
+@keyframes visionGlow {
+      0%,100% { opacity: .3; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .6; transform: translateX(-50%) scale(1.08); }
+    }
+
+@keyframes robePurify {
+      0%,100% { opacity: .6; filter: brightness(1); }
+      50%      { opacity: 1;  filter: brightness(1.3); }
+    }
+
+@keyframes lampGlow {
+      0%,100% { opacity: .5; filter: brightness(1)   drop-shadow(0 0 6px rgba(255,200,80,.3)); }
+      50%      { opacity: 1;  filter: brightness(1.2) drop-shadow(0 0 14px rgba(255,200,80,.5)); }
+    }
+
+@keyframes donkeyWalk {
+      0%,100% { transform: translateX(0) translateY(0); }
+      25%     { transform: translateX(3px) translateY(-2px); }
+      50%     { transform: translateX(0) translateY(0); }
+      75%     { transform: translateX(-3px) translateY(-2px); }
+    }
+
+@keyframes waterFlow {
+      0%   { transform: translateX(0); opacity: .5; }
+      50%  { transform: translateX(8px); opacity: .8; }
+      100% { transform: translateX(0); opacity: .5; }
+    }
+
+@keyframes myrtleRustle {
+      0%,100% { transform: rotate(-1.5deg); }
+      50%      { transform: rotate(1.5deg); }
+    }
+
+@keyframes angelHover {
+      0%,100% { transform: translateY(0); opacity: .7; }
+      50%      { transform: translateY(-8px); opacity: 1; }
+    }
+
+@keyframes sunriseGlow {
+      0%,100% { opacity: .4; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleX(1.1); }
+    }
+
+@keyframes palmWave {
+      0%,100% { transform: rotate(-3deg); }
+      50%      { transform: rotate(3deg); }
+    }
+
+@keyframes starPulse {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #10141a 0%, #141a22 40%, #1a2230 70%, #10141a 100%);
+    }
+
+#intro-myrtle-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(80,128,176,.12) 0%, rgba(40,70,110,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: starPulse 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#5080b0 0%,#8ab4d8 45%,#2a4a6a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(80,128,176,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(80,128,176,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-horses-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — NIGHT VISIONS 夜間的異象
+    ══════════════════════════════════════════════ */
+
+#scene-visions {
+      background: linear-gradient(180deg, #080c12 0%, #101820 40%, #182030 70%, #080c12 100%);
+    }
+
+#visions-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(80,128,176,.15) 0%, rgba(40,60,90,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#visions-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 8s ease-in-out infinite;
+    }
+
+#visions-heading h2 {
+      color: #5080b0;
+      text-shadow: 0 0 22px rgba(80,128,176,.5);
+    }
+
+#visions-heading p { color: rgba(80,128,176,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — JOSHUA THE HIGH PRIEST 大祭司約書亞
+    ══════════════════════════════════════════════ */
+
+#scene-joshua {
+      background: linear-gradient(180deg, #0e1218 0%, #1a2030 40%, #242e40 70%, #141a24 100%);
+    }
+
+#joshua-purify-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(80,128,176,.2) 0%, rgba(60,100,150,.08) 45%, transparent 70%);
+      z-index: 3;
+      animation: robePurify 3s ease-in-out infinite;
+    }
+
+#joshua-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+
+#joshua-heading h2 {
+      color: #7aa8d0;
+      text-shadow: 0 0 22px rgba(80,128,176,.6);
+    }
+
+#joshua-heading p { color: rgba(100,150,200,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — GOLDEN LAMPSTAND 金燈臺
+    ══════════════════════════════════════════════ */
+
+#scene-lampstand {
+      background: linear-gradient(180deg, #12140e 0%, #1c1e14 40%, #24261a 70%, #1a1c10 100%);
+    }
+
+#lampstand-warm-glow {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(120px,20vw,300px); height: 100%;
+      background: linear-gradient(180deg,rgba(255,220,120,0) 0%,rgba(200,170,60,.15) 30%,rgba(180,140,40,.25) 65%,transparent 100%);
+      z-index: 3; filter: blur(12px);
+      animation: lampGlow 3s ease-in-out infinite;
+    }
+
+#lampstand-scene-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#lampstand-heading h2 {
+      color: #c4a040;
+      text-shadow: 0 0 18px rgba(200,170,60,.5);
+    }
+
+#lampstand-heading p { color: rgba(180,150,60,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — KING ON A DONKEY 騎驢的君王
+    ══════════════════════════════════════════════ */
+
+#scene-king {
+      background: linear-gradient(180deg, #141210 0%, #1e1c18 35%, #2a2820 60%, #3a3528 85%, #2a2820 100%);
+    }
+
+#king-welcome-light {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(80,128,176,.15) 0%, rgba(60,100,140,.06) 50%, transparent 75%);
+      z-index: 3;
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+
+#king-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#king-heading h2 {
+      background: linear-gradient(120deg,#5a7a9a 0%,#8ab4d8 50%,#3a5a7a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#king-heading p { color: rgba(80,128,176,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — LIVING WATERS 活水湧流
+    ══════════════════════════════════════════════ */
+
+#scene-waters {
+      background: linear-gradient(180deg, #10141a 0%, #182430 40%, #203040 70%, #283848 100%);
+    }
+
+#waters-sunrise-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,200,120,0) 0%,rgba(200,160,80,.3) 25%,rgba(80,128,176,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: sunriseGlow 2.5s ease-in-out infinite;
+    }
+
+#waters-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(80,128,176,.08) 0%, rgba(40,80,120,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#waters-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,45vw,600px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#waters-heading h2 {
+      background: linear-gradient(120deg,#5080b0 0%,#90c8e8 50%,#2a4a6a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#waters-heading p { color: rgba(80,140,200,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

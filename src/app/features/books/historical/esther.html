@@ -1,0 +1,480 @@
+<app-back-button />
+<app-nav-dots [scenes]="scenes" />
+
+<section class="scene" id="scene-intro" aria-label="以斯帖記 — 開場">
+  <app-starfield />
+
+  <div id="intro-orb" aria-hidden="true"></div>
+  
+    <div id="intro-title">
+      <h1>以斯帖記</h1>
+      <p>Book of Esther</p>
+      <span class="sub">王后 · 陰謀 · 勇氣 · 逆轉 · 拯救</span>
+    </div>
+  
+    <!-- Persian palace landscape -->
+    <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1030"/>
+          <stop offset="50%" stop-color="#1c0c20"/>
+          <stop offset="100%" stop-color="#0c0410"/>
+        </linearGradient>
+        <linearGradient id="hill1G" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5a2858"/>
+          <stop offset="100%" stop-color="#1a0c1a"/>
+        </linearGradient>
+        <linearGradient id="hill2G" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3e1840"/>
+          <stop offset="100%" stop-color="#100810"/>
+        </linearGradient>
+        <linearGradient id="groundG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1428"/>
+          <stop offset="100%" stop-color="#0a040a"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1440" height="420" fill="url(#skyG)"/>
+      <!-- Distant rose hills -->
+      <path d="M0 320 Q180 240 360 280 Q540 220 720 260 Q900 200 1080 260 Q1260 220 1440 280 L1440 420 L0 420 Z"
+            fill="url(#hill2G)" opacity=".6"/>
+      <!-- Nearer hills with palace silhouette -->
+      <path d="M0 360 Q200 310 400 330 L440 330 L440 280 L460 260 L480 280 L480 330 Q500 320 540 330
+            L540 290 L560 270 L580 290 L580 330 Q700 300 720 270 L740 250 L760 270 Q780 300 800 330
+            Q900 310 1000 330 L1000 290 L1020 270 L1040 290 L1040 330 Q1200 310 1440 340 L1440 420 L0 420 Z"
+            fill="url(#hill1G)"/>
+      <!-- Ground -->
+      <rect x="0" y="360" width="1440" height="60" fill="url(#groundG)"/>
+      <!-- Palace glow on horizon -->
+      <ellipse cx="720" cy="280" rx="400" ry="50" fill="rgba(199,125,186,.08)"/>
+    </svg>
+  
+    <!-- Esther figure in royal dress -->
+    <svg id="intro-esther" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="以斯帖 — Esther in royal dress">
+      <title>以斯帖 — Queen Esther standing in royal attire</title>
+      <!-- Head -->
+      <circle cx="30" cy="16" r="12" fill="#8a6838"/>
+      <!-- Hair -->
+      <path d="M18,14 Q22,4 30,2 Q38,4 42,14 L42,22 Q38,18 30,16 Q22,18 18,22 Z" fill="#2a1808"/>
+      <!-- Veil -->
+      <path d="M18,12 Q30,0 42,12 L44,28 Q30,22 16,28 Z" fill="rgba(199,125,186,.4)"/>
+      <!-- Face detail -->
+      <circle cx="26" cy="14" r="1.2" fill="#4a3020"/>
+      <circle cx="34" cy="14" r="1.2" fill="#4a3020"/>
+      <!-- Royal dress -->
+      <path d="M20,28 Q14,55 8,100 Q16,105 24,100 Q27,75 30,58 Q33,75 36,100 Q44,105 52,100 Q46,55 40,28 Z"
+            fill="#8a4080"/>
+      <!-- Dress overlay/sash -->
+      <path d="M22,30 Q30,28 38,30 L37,48 Q30,46 23,48 Z" fill="#c77dba" opacity=".6"/>
+      <!-- Belt -->
+      <line x1="20" y1="48" x2="40" y2="48" stroke="#d4a020" stroke-width="2"/>
+      <!-- Feet -->
+      <ellipse cx="22" cy="102" rx="7" ry="3" fill="#5a3028"/>
+      <ellipse cx="38" cy="102" rx="7" ry="3" fill="#5a3028"/>
+    </svg>
+
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-queen" aria-label="以斯帖被立為后 — Esther Becomes Queen">
+  <app-starfield />
+
+  <div id="queen-ground" aria-hidden="true"></div>
+    <div id="queen-glow" aria-hidden="true"></div>
+  
+    <!-- Throne room scene -->
+    <svg id="queen-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="以斯帖被加冕為王后 — Esther crowned as queen">
+      <title>以斯帖被立為后 — The king places the royal crown on Esther's head</title>
+      <defs>
+        <linearGradient id="throneG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#d4a020"/>
+          <stop offset="50%" stop-color="#a07818"/>
+          <stop offset="100%" stop-color="#6a5010"/>
+        </linearGradient>
+        <linearGradient id="curtainLG" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#6a2060"/>
+          <stop offset="100%" stop-color="#3a1030"/>
+        </linearGradient>
+        <linearGradient id="curtainRG" x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6a2060"/>
+          <stop offset="100%" stop-color="#3a1030"/>
+        </linearGradient>
+        <linearGradient id="floorTG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1028"/>
+          <stop offset="100%" stop-color="#100810"/>
+        </linearGradient>
+      </defs>
+      <!-- Floor -->
+      <rect x="0" y="380" width="1440" height="120" fill="url(#floorTG)"/>
+      <!-- Royal curtain left -->
+      <path d="M0 0 Q80 20 120 0 L120 360 Q80 380 0 360 Z" fill="url(#curtainLG)"/>
+      <path d="M120 0 Q160 40 180 0 L180 340 Q160 360 120 340 Z" fill="url(#curtainLG)" opacity=".7"/>
+      <!-- Royal curtain right -->
+      <path d="M1440 0 Q1360 20 1320 0 L1320 360 Q1360 380 1440 360 Z" fill="url(#curtainRG)"/>
+      <path d="M1320 0 Q1280 40 1260 0 L1260 340 Q1280 360 1320 340 Z" fill="url(#curtainRG)" opacity=".7"/>
+      <!-- Throne platform -->
+      <rect x="580" y="320" width="280" height="20" rx="3" fill="#8a6830"/>
+      <rect x="560" y="340" width="320" height="15" rx="3" fill="#6a5020"/>
+      <rect x="540" y="355" width="360" height="25" fill="#4a3818"/>
+      <!-- Throne chair -->
+      <rect x="640" y="220" width="160" height="110" rx="5" fill="url(#throneG)"/>
+      <!-- Throne back -->
+      <path d="M650,220 Q720,160 790,220" fill="#d4a020" stroke="#b08818" stroke-width="2"/>
+      <!-- Throne armrests -->
+      <rect x="630" y="280" width="20" height="50" rx="4" fill="#b08818"/>
+      <rect x="790" y="280" width="20" height="50" rx="4" fill="#b08818"/>
+      <!-- King figure (seated) -->
+      <circle cx="720" cy="252" r="14" fill="#7a5828"/>
+      <!-- King crown -->
+      <path d="M706,242 L710,230 L716,238 L720,226 L724,238 L730,230 L734,242 Z" fill="#ffd700"/>
+      <!-- King robe -->
+      <path d="M706,264 Q700,290 698,320 Q710,324 720,320 Q730,324 742,320 Q740,290 734,264 Z" fill="#4a2060"/>
+      <!-- King arm extending crown -->
+      <path d="M706,275 Q680,270 660,262" stroke="#7a5828" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Crown being placed -->
+      <path d="M648,254 L652,242 L658,250 L662,238 L666,250 L672,242 L676,254 Z"
+            fill="#ffd700" style="animation:scepterGlow 3s ease-in-out infinite;"/>
+      <!-- Esther kneeling -->
+      <circle cx="660" cy="340" r="11" fill="#8a6838"/>
+      <!-- Esther hair -->
+      <path d="M649,336 Q654,328 660,326 Q666,328 671,336 L671,344 Q666,340 660,338 Q654,340 649,344 Z" fill="#2a1808"/>
+      <!-- Esther dress (kneeling) -->
+      <path d="M650,350 Q645,370 640,390 Q650,394 660,390 Q670,394 680,390 Q675,370 670,350 Z" fill="#8a4080"/>
+      <!-- Esther sash -->
+      <path d="M652,352 Q660,350 668,352 L667,360 Q660,358 653,360 Z" fill="#c77dba" opacity=".5"/>
+      <!-- Glow around crown -->
+      <ellipse cx="662" cy="248" rx="25" ry="18" fill="none"
+               stroke="rgba(255,215,0,.15)" stroke-width="6"
+               style="animation:breathe 2.5s ease-in-out infinite;"/>
+      <!-- Courtiers watching -->
+      <circle cx="400" cy="370" r="5" fill="rgba(100,70,90,.6)"/>
+      <circle cx="430" cy="374" r="4.5" fill="rgba(100,70,90,.55)"/>
+      <circle cx="460" cy="372" r="5" fill="rgba(100,70,90,.6)"/>
+      <circle cx="980" cy="372" r="5" fill="rgba(100,70,90,.6)"/>
+      <circle cx="1010" cy="370" r="4.5" fill="rgba(100,70,90,.55)"/>
+      <circle cx="1040" cy="374" r="5" fill="rgba(100,70,90,.6)"/>
+    </svg>
+
+  <app-scene-heading title="👑 以斯帖被立為后" subtitle="Esther Becomes Queen — Esther 2" id="queen-heading" />
+  <app-scene-verse text="「王愛以斯帖過於愛眾女，就把王后的冠冕戴在她頭上」— 以斯帖記 2:17" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-plot" aria-label="哈曼的陰謀 — Haman's Plot">
+  <app-starfield />
+
+  <div id="plot-shadow" aria-hidden="true"></div>
+  
+    <!-- Haman scheming scene -->
+    <svg id="plot-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="哈曼密謀滅絕猶大人 — Haman plotting to destroy the Jews">
+      <title>哈曼的陰謀 — Haman schemes to destroy all Jews in Persia</title>
+      <defs>
+        <linearGradient id="darkFloorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a0a14"/>
+          <stop offset="100%" stop-color="#100408"/>
+        </linearGradient>
+        <linearGradient id="scrollG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#d4c8a0"/>
+          <stop offset="50%" stop-color="#b0a078"/>
+          <stop offset="100%" stop-color="#8a7850"/>
+        </linearGradient>
+      </defs>
+      <!-- Dark floor -->
+      <rect x="0" y="380" width="1440" height="120" fill="url(#darkFloorG)"/>
+      <!-- Shadow over palace walls -->
+      <rect x="0" y="200" width="1440" height="200" fill="rgba(10,4,8,.4)"/>
+      <!-- Palace wall -->
+      <rect x="0" y="200" width="1440" height="10" fill="rgba(80,30,40,.3)"/>
+      <!-- Columns -->
+      <rect x="200" y="200" width="30" height="200" fill="rgba(60,20,30,.5)" rx="3"/>
+      <rect x="500" y="200" width="30" height="200" fill="rgba(60,20,30,.5)" rx="3"/>
+      <rect x="900" y="200" width="30" height="200" fill="rgba(60,20,30,.5)" rx="3"/>
+      <rect x="1200" y="200" width="30" height="200" fill="rgba(60,20,30,.5)" rx="3"/>
+      <!-- Haman figure (scheming) -->
+      <circle cx="720" cy="320" r="14" fill="#5a4020"/>
+      <!-- Haman hat (tall) -->
+      <path d="M708,310 L720,280 L732,310 Z" fill="#4a1820"/>
+      <!-- Haman robe -->
+      <path d="M706,332 Q700,360 696,395 Q706,400 720,396 Q734,400 744,395 Q740,360 734,332 Z" fill="#4a1820"/>
+      <!-- Haman hands rubbing together -->
+      <path d="M706,340 Q690,350 688,345" stroke="#5a4020" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M734,340 Q750,350 752,345" stroke="#5a4020" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="720" cy="348" rx="12" ry="6" fill="rgba(90,64,32,.5)"/>
+      <!-- Evil decree scroll -->
+      <rect x="630" y="360" width="80" height="50" rx="4" fill="url(#scrollG)" opacity=".8"/>
+      <line x1="640" y1="372" x2="700" y2="372" stroke="rgba(80,30,20,.4)" stroke-width="1.5"/>
+      <line x1="640" y1="380" x2="700" y2="380" stroke="rgba(80,30,20,.4)" stroke-width="1.5"/>
+      <line x1="640" y1="388" x2="690" y2="388" stroke="rgba(80,30,20,.4)" stroke-width="1.5"/>
+      <line x1="640" y1="396" x2="700" y2="396" stroke="rgba(80,30,20,.4)" stroke-width="1.5"/>
+      <!-- Scroll roll left -->
+      <ellipse cx="630" cy="385" rx="6" ry="25" fill="#c8b880"/>
+      <!-- Scroll roll right -->
+      <ellipse cx="710" cy="385" rx="6" ry="25" fill="#c8b880"/>
+      <!-- Gallows in background -->
+      <line x1="1060" y1="200" x2="1060" y2="380" stroke="rgba(80,50,30,.4)" stroke-width="6"/>
+      <line x1="1060" y1="220" x2="1120" y2="220" stroke="rgba(80,50,30,.4)" stroke-width="5"/>
+      <line x1="1120" y1="220" x2="1120" y2="260" stroke="rgba(80,50,30,.3)" stroke-width="3"/>
+      <!-- Support beam -->
+      <line x1="1060" y1="250" x2="1100" y2="220" stroke="rgba(80,50,30,.3)" stroke-width="3"/>
+      <!-- Sinister red glow -->
+      <ellipse cx="720" cy="360" rx="120" ry="60" fill="rgba(180,30,30,.06)"/>
+      <!-- Shadow figure looming -->
+      <ellipse cx="720" cy="395" rx="80" ry="8" fill="rgba(0,0,0,.2)"/>
+    </svg>
+
+  <app-scene-heading title="😈 哈曼的陰謀" subtitle="Haman's Plot — Esther 3" id="plot-heading" />
+  <app-scene-verse text="「哈曼要滅絕所有的猶大人」— 以斯帖記 3:6" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-courage" aria-label="以斯帖的勇氣 — Esther's Courage">
+  <app-starfield />
+
+  <div id="courage-glow" aria-hidden="true"></div>
+  
+    <!-- Esther approaching throne -->
+    <svg id="courage-svg" viewBox="0 0 1440 600" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="以斯帖勇敢地走進王的內院 — Esther bravely approaches the throne room">
+      <title>以斯帖的勇氣 — Esther risks her life to approach the king unsummoned</title>
+      <defs>
+        <linearGradient id="throneRoomG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1030"/>
+          <stop offset="50%" stop-color="#1a0820"/>
+          <stop offset="100%" stop-color="#0c0410"/>
+        </linearGradient>
+        <linearGradient id="scepterG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffd700"/>
+          <stop offset="50%" stop-color="#d4a020"/>
+          <stop offset="100%" stop-color="#a07818"/>
+        </linearGradient>
+      </defs>
+      <!-- Throne room floor -->
+      <rect x="0" y="420" width="1440" height="180" fill="url(#throneRoomG)"/>
+      <!-- Carpet runner -->
+      <rect x="300" y="420" width="840" height="180" fill="rgba(138,64,128,.08)"/>
+      <line x1="300" y1="420" x2="300" y2="600" stroke="rgba(199,125,186,.15)" stroke-width="2"/>
+      <line x1="1140" y1="420" x2="1140" y2="600" stroke="rgba(199,125,186,.15)" stroke-width="2"/>
+      <!-- Grand columns -->
+      <rect x="250" y="140" width="40" height="300" fill="rgba(80,40,70,.4)" rx="4"/>
+      <rect x="450" y="140" width="35" height="300" fill="rgba(80,40,70,.35)" rx="4"/>
+      <rect x="950" y="140" width="35" height="300" fill="rgba(80,40,70,.35)" rx="4"/>
+      <rect x="1150" y="140" width="40" height="300" fill="rgba(80,40,70,.4)" rx="4"/>
+      <!-- Dramatic light rays from throne -->
+      <line x1="900" y1="280" x2="600" y2="500" stroke="rgba(255,215,0,.04)" stroke-width="40"/>
+      <line x1="900" y1="280" x2="750" y2="500" stroke="rgba(255,215,0,.06)" stroke-width="30"/>
+      <line x1="900" y1="280" x2="1050" y2="500" stroke="rgba(255,215,0,.04)" stroke-width="40"/>
+      <!-- King on throne (right side) -->
+      <rect x="840" y="310" width="120" height="80" rx="4" fill="rgba(160,120,30,.3)"/>
+      <path d="M850,310 Q900,270 950,310" fill="rgba(180,140,40,.25)"/>
+      <circle cx="900" cy="300" r="13" fill="#7a5828"/>
+      <!-- King crown -->
+      <path d="M887,290 L891,278 L897,286 L900,274 L903,286 L909,278 L913,290 Z" fill="#ffd700"/>
+      <!-- King robe -->
+      <path d="M888,312 Q884,340 882,370 Q892,374 900,370 Q908,374 918,370 Q916,340 912,312 Z" fill="#4a2060"/>
+      <!-- Golden scepter extended -->
+      <line x1="884" y1="330" x2="740" y2="360" stroke="url(#scepterG)" stroke-width="5" stroke-linecap="round"
+            style="animation:scepterGlow 3s ease-in-out infinite;"/>
+      <!-- Scepter tip orb -->
+      <circle cx="740" cy="360" r="6" fill="#ffd700" style="animation:scepterGlow 3s ease-in-out infinite;"/>
+      <!-- Esther approaching (left side) -->
+      <circle cx="580" cy="380" r="12" fill="#8a6838"/>
+      <!-- Esther hair -->
+      <path d="M568,376 Q574,368 580,366 Q586,368 592,376 L592,384 Q586,380 580,378 Q574,380 568,384 Z" fill="#2a1808"/>
+      <!-- Esther royal robes -->
+      <path d="M568,390 Q562,416 556,448 Q566,454 580,448 Q594,454 604,448 Q598,416 592,390 Z" fill="#8a4080"/>
+      <!-- Esther sash -->
+      <path d="M570,394 Q580,392 590,394 L589,404 Q580,402 571,404 Z" fill="#c77dba" opacity=".5"/>
+      <!-- Esther hands forward (reaching toward scepter) -->
+      <path d="M592,400 Q620,390 650,380" stroke="#8a6838" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Light between scepter and Esther -->
+      <ellipse cx="700" cy="370" rx="50" ry="25" fill="rgba(255,215,0,.06)"/>
+      <!-- Guards on sides -->
+      <circle cx="320" cy="400" r="6" fill="rgba(80,50,60,.5)"/>
+      <line x1="318" y1="394" x2="316" y2="378" stroke="rgba(140,120,100,.3)" stroke-width="2"/>
+      <circle cx="1100" cy="400" r="6" fill="rgba(80,50,60,.5)"/>
+      <line x1="1102" y1="394" x2="1104" y2="378" stroke="rgba(140,120,100,.3)" stroke-width="2"/>
+    </svg>
+
+  <app-scene-heading title="💪 以斯帖的勇氣" subtitle="Esther's Courage — Esther 4–5" id="courage-heading" />
+  <app-scene-verse text="「我若死就死吧！」— 以斯帖記 4:16" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-reversal" aria-label="命運逆轉 — The Reversal">
+  <app-starfield />
+
+  <div id="reversal-glow" aria-hidden="true"></div>
+  
+    <!-- Banquet scene with reversal -->
+    <svg id="reversal-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="以斯帖在筵席上揭露哈曼 — Esther exposes Haman at the banquet">
+      <title>命運逆轉 — Esther reveals Haman's plot at the royal banquet</title>
+      <defs>
+        <linearGradient id="banquetFloorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1028"/>
+          <stop offset="100%" stop-color="#120610"/>
+        </linearGradient>
+        <linearGradient id="tableG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6a4020"/>
+          <stop offset="100%" stop-color="#3a2010"/>
+        </linearGradient>
+      </defs>
+      <!-- Floor -->
+      <rect x="0" y="380" width="1440" height="120" fill="url(#banquetFloorG)"/>
+      <!-- Banquet table -->
+      <rect x="400" y="330" width="640" height="20" rx="3" fill="url(#tableG)"/>
+      <!-- Table legs -->
+      <rect x="420" y="350" width="12" height="40" fill="#4a2810"/>
+      <rect x="1008" y="350" width="12" height="40" fill="#4a2810"/>
+      <!-- Table cloth -->
+      <path d="M400,330 Q420,325 440,330" fill="rgba(138,64,128,.2)"/>
+      <path d="M1000,330 Q1020,325 1040,330" fill="rgba(138,64,128,.2)"/>
+      <!-- Goblets and plates on table -->
+      <ellipse cx="520" cy="328" rx="10" ry="4" fill="rgba(200,160,40,.3)"/>
+      <ellipse cx="600" cy="326" rx="8" ry="3" fill="rgba(180,140,40,.25)"/>
+      <ellipse cx="720" cy="328" rx="10" ry="4" fill="rgba(200,160,40,.3)"/>
+      <ellipse cx="840" cy="326" rx="8" ry="3" fill="rgba(180,140,40,.25)"/>
+      <ellipse cx="920" cy="328" rx="10" ry="4" fill="rgba(200,160,40,.3)"/>
+      <!-- Candelabra -->
+      <line x1="660" y1="328" x2="660" y2="300" stroke="#b08818" stroke-width="3"/>
+      <circle cx="660" cy="296" r="5" fill="rgba(255,200,60,.5)"/>
+      <ellipse cx="660" cy="296" rx="12" ry="8" fill="rgba(255,200,60,.08)"/>
+      <line x1="780" y1="328" x2="780" y2="300" stroke="#b08818" stroke-width="3"/>
+      <circle cx="780" cy="296" r="5" fill="rgba(255,200,60,.5)"/>
+      <ellipse cx="780" cy="296" rx="12" ry="8" fill="rgba(255,200,60,.08)"/>
+      <!-- King standing in anger (right) -->
+      <circle cx="920" cy="290" r="13" fill="#7a5828"/>
+      <path d="M907,280 L911,268 L917,276 L920,264 L923,276 L929,268 L933,280 Z" fill="#ffd700"/>
+      <path d="M908,302 Q904,330 900,360 Q910,366 920,360 Q930,366 940,360 Q936,330 932,302 Z" fill="#4a2060"/>
+      <!-- King angry gesture (arm raised) -->
+      <path d="M932,310 Q948,296 955,282" stroke="#7a5828" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <!-- Esther pointing at Haman (center-left) -->
+      <circle cx="580" cy="300" r="11" fill="#8a6838"/>
+      <path d="M569,296 Q574,288 580,286 Q586,288 591,296 L591,304 Q586,300 580,298 Q574,300 569,304 Z" fill="#2a1808"/>
+      <path d="M570,310 Q565,336 560,365 Q570,370 580,365 Q590,370 600,365 Q595,336 590,310 Z" fill="#8a4080"/>
+      <!-- Esther arm pointing -->
+      <path d="M590,318 Q640,310 680,306" stroke="#8a6838" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Pointing finger -->
+      <circle cx="682" cy="305" r="3" fill="#8a6838"/>
+      <!-- Haman cowering (center-right) -->
+      <circle cx="760" cy="340" r="12" fill="#5a4020"/>
+      <path d="M748,332 L760,310 L772,332 Z" fill="#4a1820"/>
+      <!-- Haman crouching/cowering body -->
+      <path d="M749,350 Q746,370 744,392 Q752,396 760,392 Q768,396 776,392 Q774,370 771,350 Z" fill="#4a1820"/>
+      <!-- Haman arms up defensively -->
+      <path d="M749,354 Q736,344 730,336" stroke="#5a4020" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M771,354 Q784,344 790,336" stroke="#5a4020" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Dramatic tension line -->
+      <ellipse cx="720" cy="340" rx="100" ry="40" fill="rgba(199,125,186,.04)"/>
+    </svg>
+
+  <app-scene-heading title="⚖ 命運逆轉" subtitle="The Reversal — Esther 7" id="reversal-heading" />
+  <app-scene-verse text="「人就把哈曼掛在他為末底改所預備的木架上」— 以斯帖記 7:10" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-purim" aria-label="普珥節 — The Feast of Purim">
+  <app-starfield />
+
+  <div id="purim-ground" aria-hidden="true"></div>
+    <div id="purim-glow" aria-hidden="true"></div>
+  
+    <!-- Celebration scene -->
+    <svg id="purim-svg" viewBox="0 0 1440 600" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="猶大人歡慶普珥節 — The Jews celebrate the Feast of Purim">
+      <title>普珥節 — The joyful celebration of Purim with feasting and gift-giving</title>
+      <defs>
+        <linearGradient id="festFloorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a1830"/>
+          <stop offset="100%" stop-color="#1a0c18"/>
+        </linearGradient>
+        <linearGradient id="festTableG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7a5030"/>
+          <stop offset="100%" stop-color="#4a2818"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground / floor -->
+      <rect x="0" y="440" width="1440" height="160" fill="url(#festFloorG)"/>
+      <!-- Feast tables -->
+      <rect x="200" y="400" width="400" height="14" rx="3" fill="url(#festTableG)"/>
+      <rect x="840" y="400" width="400" height="14" rx="3" fill="url(#festTableG)"/>
+      <!-- Table legs -->
+      <rect x="220" y="414" width="10" height="30" fill="#4a2818"/>
+      <rect x="580" y="414" width="10" height="30" fill="#4a2818"/>
+      <rect x="860" y="414" width="10" height="30" fill="#4a2818"/>
+      <rect x="1220" y="414" width="10" height="30" fill="#4a2818"/>
+      <!-- Food and goblets on tables -->
+      <ellipse cx="300" cy="398" rx="14" ry="5" fill="rgba(200,160,40,.3)"/>
+      <ellipse cx="400" cy="396" rx="10" ry="4" fill="rgba(180,80,60,.3)"/>
+      <ellipse cx="500" cy="398" rx="12" ry="5" fill="rgba(200,160,40,.25)"/>
+      <ellipse cx="940" cy="398" rx="14" ry="5" fill="rgba(200,160,40,.3)"/>
+      <ellipse cx="1040" cy="396" rx="10" ry="4" fill="rgba(180,80,60,.3)"/>
+      <ellipse cx="1140" cy="398" rx="12" ry="5" fill="rgba(200,160,40,.25)"/>
+      <!-- Mordecai in royal robes (center) -->
+      <circle cx="720" cy="360" r="14" fill="#6b4e14"/>
+      <!-- Mordecai crown/turban -->
+      <path d="M706,352 Q720,338 734,352 L734,358 Q720,352 706,358 Z" fill="#4a2060"/>
+      <path d="M710,352 Q720,344 730,352" stroke="#ffd700" stroke-width="2" fill="none"/>
+      <!-- Mordecai royal robe -->
+      <path d="M706,372 Q700,400 694,440 Q708,446 720,440 Q732,446 746,440 Q740,400 734,372 Z" fill="#4a2060"/>
+      <!-- Royal sash -->
+      <line x1="706" y1="388" x2="734" y2="388" stroke="#ffd700" stroke-width="2.5"/>
+      <!-- Chain of gold -->
+      <ellipse cx="720" cy="378" rx="10" ry="4" fill="none" stroke="#d4a020" stroke-width="1.5"/>
+      <!-- Dancing figures (left group) -->
+      <circle cx="140" cy="400" r="6" fill="rgba(160,100,140,.6)"/>
+      <path d="M134,406 Q130,424 128,445 Q134,448 140,445 Q146,448 152,445 Q150,424 146,406 Z" fill="rgba(140,80,120,.5)"/>
+      <path d="M134,412 Q124,406 118,400" stroke="rgba(160,100,140,.4)" stroke-width="3" fill="none"/>
+      <path d="M146,412 Q156,406 162,400" stroke="rgba(160,100,140,.4)" stroke-width="3" fill="none"/>
+  
+      <circle cx="180" cy="396" r="5.5" fill="rgba(140,90,130,.6)"/>
+      <path d="M174,402 Q171,418 168,440 Q174,443 180,440 Q186,443 192,440 Q189,418 186,402 Z" fill="rgba(120,70,110,.5)"/>
+      <path d="M174,408 Q166,400 160,394" stroke="rgba(140,90,130,.4)" stroke-width="3" fill="none"/>
+      <path d="M186,408 Q194,400 200,394" stroke="rgba(140,90,130,.4)" stroke-width="3" fill="none"/>
+      <!-- Dancing figures (right group) -->
+      <circle cx="1280" cy="398" r="6" fill="rgba(160,100,140,.6)"/>
+      <path d="M1274,404 Q1270,422 1268,444 Q1274,447 1280,444 Q1286,447 1292,444 Q1290,422 1286,404 Z" fill="rgba(140,80,120,.5)"/>
+      <path d="M1274,410 Q1264,404 1258,398" stroke="rgba(160,100,140,.4)" stroke-width="3" fill="none"/>
+      <path d="M1286,410 Q1296,404 1302,398" stroke="rgba(160,100,140,.4)" stroke-width="3" fill="none"/>
+  
+      <circle cx="1320" cy="394" r="5.5" fill="rgba(140,90,130,.6)"/>
+      <path d="M1314,400 Q1311,416 1308,438 Q1314,441 1320,438 Q1326,441 1332,438 Q1329,416 1326,400 Z" fill="rgba(120,70,110,.5)"/>
+      <!-- People exchanging gifts -->
+      <circle cx="460" cy="430" r="5" fill="rgba(140,100,120,.5)"/>
+      <circle cx="510" cy="432" r="5" fill="rgba(140,100,120,.5)"/>
+      <!-- Gift box between them -->
+      <rect x="478" y="426" width="14" height="12" rx="2" fill="rgba(199,125,186,.4)"/>
+      <line x1="485" y1="426" x2="485" y2="438" stroke="rgba(255,215,0,.4)" stroke-width="1.5"/>
+      <line x1="478" y1="432" x2="492" y2="432" stroke="rgba(255,215,0,.4)" stroke-width="1.5"/>
+      <!-- More gift exchange (right) -->
+      <circle cx="1000" cy="432" r="5" fill="rgba(140,100,120,.5)"/>
+      <circle cx="1050" cy="430" r="5" fill="rgba(140,100,120,.5)"/>
+      <rect x="1018" y="424" width="14" height="12" rx="2" fill="rgba(199,125,186,.4)"/>
+      <line x1="1025" y1="424" x2="1025" y2="436" stroke="rgba(255,215,0,.4)" stroke-width="1.5"/>
+      <line x1="1018" y1="430" x2="1032" y2="430" stroke="rgba(255,215,0,.4)" stroke-width="1.5"/>
+      <!-- Celebration particles / confetti -->
+      <circle cx="300" cy="340" r="2" fill="rgba(255,200,80,.4)"/>
+      <circle cx="500" cy="320" r="2.5" fill="rgba(199,125,186,.4)"/>
+      <circle cx="700" cy="310" r="2" fill="rgba(255,215,0,.35)"/>
+      <circle cx="900" cy="330" r="2.5" fill="rgba(199,125,186,.4)"/>
+      <circle cx="1100" cy="320" r="2" fill="rgba(255,200,80,.4)"/>
+      <circle cx="400" cy="310" r="1.5" fill="rgba(240,192,232,.3)"/>
+      <circle cx="600" cy="300" r="2" fill="rgba(255,215,0,.3)"/>
+      <circle cx="800" cy="325" r="1.5" fill="rgba(240,192,232,.3)"/>
+      <circle cx="1000" cy="310" r="2" fill="rgba(255,215,0,.3)"/>
+      <circle cx="1200" cy="335" r="1.5" fill="rgba(240,192,232,.3)"/>
+      <!-- Joyful glow -->
+      <ellipse cx="720" cy="400" rx="300" ry="60" fill="rgba(255,200,80,.04)"/>
+    </svg>
+
+  <app-scene-heading title="🎉 普珥節" subtitle="The Feast of Purim — Esther 9" id="purim-heading" />
+  <app-scene-verse text="「猶大人脫離仇敵得平安，轉憂為喜，轉悲為樂」— 以斯帖記 9:22" />
+</section>

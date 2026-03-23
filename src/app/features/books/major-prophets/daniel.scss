@@ -1,0 +1,285 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Scene-specific keyframes ── */
+
+@keyframes introGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(200,160,48,.6), 0 0 110px rgba(180,140,30,.3); }
+      50%      { box-shadow: 0 0 80px rgba(220,180,60,.85), 0 0 160px rgba(200,160,48,.5); }
+    }
+
+@keyframes fireFlicker {
+      0%   { transform: scaleY(1) scaleX(1); opacity: .7; }
+      25%  { transform: scaleY(1.08) scaleX(.96); opacity: .9; }
+      50%  { transform: scaleY(.95) scaleX(1.04); opacity: .8; }
+      75%  { transform: scaleY(1.05) scaleX(.98); opacity: 1; }
+      100% { transform: scaleY(1) scaleX(1); opacity: .7; }
+    }
+
+@keyframes lionBreathe {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-2px) scale(1.02); }
+    }
+
+@keyframes stoneStrike {
+      0%,100% { transform: translate(0,0) scale(1); opacity: .8; }
+      50%      { transform: translate(-2px,-3px) scale(1.06); opacity: 1; }
+    }
+
+@keyframes cloudDrift {
+      0%   { transform: translateX(0); }
+      50%  { transform: translateX(15px); }
+      100% { transform: translateX(0); }
+    }
+
+@keyframes starRise {
+      0%,100% { opacity: .5; transform: translateY(0) scale(1); }
+      50%      { opacity: 1;  transform: translateY(-8px) scale(1.1); }
+    }
+
+@keyframes gloryShine {
+      0%,100% { filter: drop-shadow(0 0 8px rgba(255,220,100,.5)); transform: scale(1); }
+      50%      { filter: drop-shadow(0 0 24px rgba(255,220,100,.9)); transform: scale(1.06); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #14181e 0%, #1a2028 30%, #222838 65%, #2a3040 100%);
+    }
+
+#intro-orb {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fff8e0, #e8c860 40%, #c8a030 75%, #6a5018);
+      box-shadow: 0 0 55px rgba(200,160,48,.6), 0 0 110px rgba(180,140,30,.3);
+      z-index: 4;
+      animation: introGlow 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#c8a030 0%,#f0d870 45%,#a08020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(200,170,80,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(180,150,60,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-prophet {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — THE FIERY FURNACE  火窯試煉
+    ══════════════════════════════════════════════ */
+
+#scene-furnace {
+      background: linear-gradient(180deg, #2a1008 0%, #4a1808 40%, #6a2810 70%, #4a1808 100%);
+    }
+
+#furnace-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 35%;
+      background: linear-gradient(180deg,#2a1008 0%,#180804 55%,#0a0402 100%);
+      z-index: 5;
+    }
+
+#furnace-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,120,30,.25) 0%, rgba(255,80,20,.1) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#furnace-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 7;
+    }
+
+#furnace-heading h2 {
+      color: #ff8830;
+      text-shadow: 0 0 22px rgba(255,136,48,.6);
+    }
+
+#furnace-heading p { color: rgba(255,180,120,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — THE LION'S DEN  獅子坑
+    ══════════════════════════════════════════════ */
+
+#scene-lions {
+      background: linear-gradient(180deg, #14181e 0%, #1e2420 40%, #282e24 65%, #1e2418 100%);
+    }
+
+#lions-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: clamp(120px,25vw,300px); height: 30vh;
+      background: radial-gradient(ellipse, rgba(200,160,48,.12) 0%, rgba(180,140,30,.05) 50%, transparent 70%);
+      z-index: 4;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#lions-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 5;
+    }
+
+#lions-heading h2 {
+      background: linear-gradient(120deg,#d0a040 0%,#c8a030 50%,#d0a040 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#lions-heading p { color: rgba(200,180,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — THE GREAT STATUE  巨像異象
+    ══════════════════════════════════════════════ */
+
+#scene-statue {
+      background: linear-gradient(180deg, #141020 0%, #1e1830 40%, #282040 65%, #1e1830 100%);
+    }
+
+#statue-shadow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,50vw,600px); height: 40vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(140,100,200,.1) 0%, rgba(100,70,160,.04) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#statue-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 5;
+    }
+
+#statue-heading h2 {
+      background: linear-gradient(120deg,#a088c0 0%,#c8b0e0 50%,#8068a0 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#statue-heading p { color: rgba(180,160,200,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — THE SON OF MAN  人子異象
+    ══════════════════════════════════════════════ */
+
+#scene-sonofman {
+      background: linear-gradient(180deg, #14181e 0%, #1a2838 35%, #283848 65%, #3a5060 100%);
+    }
+
+#sonofman-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 45vw; height: 20vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,240,180,.18) 0%, rgba(255,220,120,.07) 50%, transparent 72%);
+      z-index: 4;
+      animation: glowPulse 3.5s ease-in-out infinite;
+    }
+
+#sonofman-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 5;
+    }
+
+#sonofman-heading h2 {
+      background: linear-gradient(120deg,#ffd860 0%,#fff0a0 50%,#c8a030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#sonofman-heading p { color: rgba(220,210,170,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — THE ETERNAL KINGDOM  永恆國度
+    ══════════════════════════════════════════════ */
+
+#scene-kingdom {
+      background: linear-gradient(180deg, #141828 0%, #1a2040 35%, #2a3060 65%, #4a5080 100%);
+    }
+
+#kingdom-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#1a2040 0%,#141828 55%,#0c1018 100%);
+      z-index: 5;
+    }
+
+#kingdom-glow {
+      position: absolute; bottom: 32%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 16vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,240,180,.2) 0%, rgba(255,220,120,.08) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#kingdom-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 7;
+    }
+
+#kingdom-heading h2 {
+      background: linear-gradient(120deg,#ffd060 0%,#ffe880 50%,#c8a030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#kingdom-heading p { color: rgba(220,210,170,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

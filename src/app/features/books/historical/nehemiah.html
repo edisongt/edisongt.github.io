@@ -1,0 +1,609 @@
+<app-back-button />
+<app-nav-dots [scenes]="scenes" />
+
+<section class="scene" id="scene-intro" aria-label="尼希米記 — 開場">
+  <app-starfield />
+
+  <div id="intro-orb" aria-hidden="true"></div>
+  
+    <div id="intro-title">
+      <h1>尼希米記</h1>
+      <p>Book of Nehemiah</p>
+      <span class="sub">禱告 · 重建 · 抵擋 · 律法 · 聖約</span>
+    </div>
+  
+    <!-- Jerusalem walls/ruins silhouette -->
+    <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2218"/>
+          <stop offset="50%" stop-color="#1a1610"/>
+          <stop offset="100%" stop-color="#0e0c08"/>
+        </linearGradient>
+        <linearGradient id="ruinG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5a4e40"/>
+          <stop offset="100%" stop-color="#1a1610"/>
+        </linearGradient>
+        <linearGradient id="groundG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2218"/>
+          <stop offset="100%" stop-color="#0e0c08"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1440" height="420" fill="url(#skyG)"/>
+      <!-- Distant broken walls / hills -->
+      <path d="M0 340 Q100 310 200 320 L220 280 L240 320 Q360 300 480 310 L500 260 L510 270 L530 310 Q650 290 720 300 L740 240 L760 300 Q880 280 960 290 L980 250 L1000 290 Q1120 300 1200 310 L1220 270 L1240 310 Q1360 300 1440 320 L1440 420 L0 420 Z"
+            fill="url(#ruinG)" opacity=".6"/>
+      <!-- Nearer ruins -->
+      <path d="M0 370 Q120 330 240 350 L260 300 L280 310 L300 350 Q420 330 540 340 L560 290 L575 310 L590 340 Q700 320 800 335 L815 280 L830 290 L845 335 Q960 320 1080 330 L1100 285 L1120 330 Q1280 320 1440 340 L1440 420 L0 420 Z"
+            fill="url(#ruinG)"/>
+      <!-- Ground -->
+      <rect x="0" y="360" width="1440" height="60" fill="url(#groundG)"/>
+      <!-- Warm glow on horizon -->
+      <ellipse cx="720" cy="310" rx="500" ry="50" fill="rgba(139,125,107,.08)"/>
+    </svg>
+  
+    <!-- Nehemiah figure looking toward ruins -->
+    <svg id="intro-nehemiah" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="尼希米望向廢墟 — Nehemiah looking toward the ruins of Jerusalem">
+      <title>尼希米望向廢墟 — Nehemiah gazing at the ruined walls</title>
+      <!-- Head -->
+      <circle cx="30" cy="16" r="12" fill="#6b4e14"/>
+      <!-- Head covering -->
+      <path d="M18,14 Q30,2 42,14 L42,20 Q30,14 18,20 Z" fill="#5a4e40"/>
+      <path d="M20,14 Q30,8 40,14" stroke="#8b7d6b" stroke-width="2" fill="none"/>
+      <!-- Beard -->
+      <path d="M24,24 Q30,34 36,24 Q34,40 30,42 Q26,40 24,24 Z" fill="#5a4020" opacity=".85"/>
+      <!-- Robe (cup bearer garments) -->
+      <path d="M20,30 Q14,60 12,95 Q18,98 24,95 Q26,75 30,60 Q34,75 36,95 Q42,98 48,95 Q46,60 40,30 Z"
+            fill="#6a5a48"/>
+      <!-- Sash -->
+      <line x1="20" y1="45" x2="40" y2="45" stroke="#8b7d6b" stroke-width="2.5"/>
+      <!-- Right arm at side -->
+      <path d="M40,34 Q46,50 44,62" stroke="#6b4e14" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <!-- Left hand shielding eyes, looking into distance -->
+      <path d="M20,34 Q12,28 10,22" stroke="#6b4e14" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <!-- Feet -->
+      <ellipse cx="22" cy="97" rx="7" ry="3" fill="#3d2200"/>
+      <ellipse cx="38" cy="97" rx="7" ry="3" fill="#3d2200"/>
+    </svg>
+
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-prayer" aria-label="尼希米的禱告 — Nehemiah's Prayer">
+  <app-starfield />
+
+  <!-- Moon -->
+    <div id="prayer-moonlight" aria-hidden="true"></div>
+  
+    <!-- Nehemiah kneeling by window with moonlight -->
+    <svg id="prayer-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="尼希米跪下禱告 — Nehemiah kneeling in prayer by a window">
+      <title>尼希米的禱告 — Nehemiah weeping and praying before the God of heaven</title>
+      <defs>
+        <linearGradient id="palaceFloorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2430"/>
+          <stop offset="100%" stop-color="#14121a"/>
+        </linearGradient>
+        <linearGradient id="palaceWallG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2838"/>
+          <stop offset="100%" stop-color="#1a1824"/>
+        </linearGradient>
+        <linearGradient id="moonBeamG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(200,200,240,.15)"/>
+          <stop offset="100%" stop-color="rgba(200,200,240,.02)"/>
+        </linearGradient>
+      </defs>
+      <!-- Palace floor -->
+      <rect x="0" y="380" width="1440" height="120" fill="url(#palaceFloorG)"/>
+      <!-- Palace wall -->
+      <rect x="0" y="100" width="1440" height="280" fill="url(#palaceWallG)" opacity=".5"/>
+      <!-- Window arch (right side, where moon shines through) -->
+      <path d="M1000,140 Q1060,100 1120,140 L1120,320 L1000,320 Z" fill="rgba(15,15,30,.8)"
+            stroke="rgba(100,100,140,.3)" stroke-width="3"/>
+      <!-- Moonlight beam through window -->
+      <polygon points="1000,320 1120,320 850,500 650,500" fill="url(#moonBeamG)"/>
+      <!-- Window bars -->
+      <line x1="1040" y1="140" x2="1040" y2="320" stroke="rgba(80,80,110,.4)" stroke-width="2"/>
+      <line x1="1080" y1="130" x2="1080" y2="320" stroke="rgba(80,80,110,.4)" stroke-width="2"/>
+      <!-- Palace columns in background -->
+      <rect x="200" y="120" width="20" height="270" fill="rgba(50,45,60,.4)" rx="3"/>
+      <rect x="400" y="120" width="20" height="270" fill="rgba(50,45,60,.3)" rx="3"/>
+      <!-- Column capitals -->
+      <rect x="195" y="115" width="30" height="12" fill="rgba(60,55,70,.4)" rx="2"/>
+      <rect x="395" y="115" width="30" height="12" fill="rgba(60,55,70,.3)" rx="2"/>
+      <!-- Nehemiah kneeling figure -->
+      <!-- Head -->
+      <circle cx="720" cy="320" r="16" fill="#6b4e14"/>
+      <!-- Head covering -->
+      <path d="M704,318 Q720,304 736,318 L736,326 Q720,320 704,326 Z" fill="#5a4e40"/>
+      <!-- Tears -->
+      <circle cx="712" cy="326" r="2" fill="rgba(150,180,220,.6)"/>
+      <circle cx="710" cy="332" r="1.5" fill="rgba(150,180,220,.4)"/>
+      <!-- Beard -->
+      <path d="M712,332 Q720,344 728,332 Q726,352 720,356 Q714,352 712,332 Z" fill="#5a4020" opacity=".8"/>
+      <!-- Kneeling body/robe -->
+      <path d="M708,338 Q700,370 695,400 Q710,406 725,400 Q730,370 732,338 Z" fill="#6a5a48"/>
+      <!-- Knees on ground -->
+      <ellipse cx="700" cy="400" rx="14" ry="6" fill="#5a4a38"/>
+      <ellipse cx="730" cy="400" rx="14" ry="6" fill="#5a4a38"/>
+      <!-- Arms raised in prayer -->
+      <path d="M708,345 Q690,330 685,310" stroke="#6b4e14" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M732,345 Q750,330 755,310" stroke="#6b4e14" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Hands together in prayer -->
+      <circle cx="685" cy="308" r="4" fill="#6b4e14"/>
+      <circle cx="755" cy="308" r="4" fill="#6b4e14"/>
+      <!-- Cup on the ground nearby -->
+      <path d="M800,392 Q805,380 810,392 Z" fill="#c8a840" opacity=".6"/>
+      <ellipse cx="805" cy="392" rx="6" ry="2" fill="#c8a840" opacity=".5"/>
+      <!-- Palace background detail — distant arched doorway -->
+      <path d="M580,180 Q610,150 640,180 L640,390 L580,390 Z" fill="rgba(20,18,28,.6)"
+            stroke="rgba(80,75,90,.2)" stroke-width="2"/>
+    </svg>
+
+  <app-scene-heading title="🙏 尼希米的禱告" subtitle="Nehemiah's Prayer — Nehemiah 1" id="prayer-heading" />
+  <app-scene-verse text="「我聽見這話，就坐下哭泣，在天上的神面前禱告」— 尼希米記 1:4" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-wall" aria-label="重建城牆 — Rebuilding the Wall">
+  <app-starfield />
+
+  <div id="wall-dust-glow" aria-hidden="true"></div>
+  
+    <!-- Workers building wall -->
+    <svg id="wall-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="工人重建耶路撒冷城牆 — Workers rebuilding the wall of Jerusalem">
+      <title>重建城牆 — The people rise up to rebuild the walls of Jerusalem</title>
+      <defs>
+        <linearGradient id="wallStoneG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8a7a5a"/>
+          <stop offset="50%" stop-color="#6a5a3a"/>
+          <stop offset="100%" stop-color="#4a3a20"/>
+        </linearGradient>
+        <linearGradient id="scaffoldG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6a5030"/>
+          <stop offset="100%" stop-color="#3d2a10"/>
+        </linearGradient>
+        <linearGradient id="earthFloorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a3020"/>
+          <stop offset="100%" stop-color="#1a1408"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground -->
+      <rect x="0" y="400" width="1440" height="100" fill="url(#earthFloorG)"/>
+      <!-- Half-built wall — left section (taller, more complete) -->
+      <rect x="180" y="200" width="90" height="200" fill="url(#wallStoneG)" rx="2"/>
+      <!-- Brick lines left -->
+      <line x1="180" y1="230" x2="270" y2="230" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="180" y1="260" x2="270" y2="260" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="180" y1="290" x2="270" y2="290" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="180" y1="320" x2="270" y2="320" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="180" y1="350" x2="270" y2="350" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="180" y1="380" x2="270" y2="380" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="225" y1="200" x2="225" y2="400" stroke="rgba(60,50,30,.3)" stroke-width="1"/>
+      <!-- Half-built wall — centre section (shorter, being built) -->
+      <rect x="400" y="280" width="100" height="120" fill="url(#wallStoneG)" rx="2"
+            style="animation: wallBuild 5s ease-in-out infinite;"/>
+      <line x1="400" y1="310" x2="500" y2="310" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="400" y1="340" x2="500" y2="340" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="400" y1="370" x2="500" y2="370" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="450" y1="280" x2="450" y2="400" stroke="rgba(60,50,30,.3)" stroke-width="1"/>
+      <!-- Stone being placed on top -->
+      <rect x="420" y="270" width="30" height="15" fill="#9a8a6a" rx="2" opacity=".8"
+            style="animation: wallBuild 5s ease-in-out .5s infinite;"/>
+      <!-- Gap in wall (being repaired) -->
+      <rect x="620" y="320" width="80" height="80" fill="url(#wallStoneG)" rx="2" opacity=".7"/>
+      <line x1="620" y1="350" x2="700" y2="350" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="620" y1="380" x2="700" y2="380" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <!-- Right wall section (taller) -->
+      <rect x="850" y="220" width="90" height="180" fill="url(#wallStoneG)" rx="2"/>
+      <line x1="850" y1="250" x2="940" y2="250" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="850" y1="280" x2="940" y2="280" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="850" y1="310" x2="940" y2="310" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="850" y1="340" x2="940" y2="340" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="850" y1="370" x2="940" y2="370" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="895" y1="220" x2="895" y2="400" stroke="rgba(60,50,30,.3)" stroke-width="1"/>
+      <!-- Far right wall -->
+      <rect x="1100" y="260" width="80" height="140" fill="url(#wallStoneG)" rx="2"/>
+      <line x1="1100" y1="290" x2="1180" y2="290" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="1100" y1="320" x2="1180" y2="320" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="1100" y1="350" x2="1180" y2="350" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <line x1="1100" y1="380" x2="1180" y2="380" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+      <!-- Scaffolding on centre section -->
+      <line x1="380" y1="260" x2="380" y2="400" stroke="#5a4020" stroke-width="3"/>
+      <line x1="520" y1="260" x2="520" y2="400" stroke="#5a4020" stroke-width="3"/>
+      <line x1="380" y1="280" x2="520" y2="280" stroke="#5a4020" stroke-width="2.5"/>
+      <line x1="380" y1="340" x2="520" y2="340" stroke="#5a4020" stroke-width="2.5"/>
+      <!-- Cross bracing -->
+      <line x1="380" y1="280" x2="520" y2="340" stroke="#5a4020" stroke-width="1.5" opacity=".6"/>
+      <!-- Scaffolding on gap section -->
+      <line x1="600" y1="300" x2="600" y2="400" stroke="#5a4020" stroke-width="3"/>
+      <line x1="720" y1="300" x2="720" y2="400" stroke="#5a4020" stroke-width="3"/>
+      <line x1="600" y1="320" x2="720" y2="320" stroke="#5a4020" stroke-width="2.5"/>
+      <!-- Worker figures -->
+      <!-- Worker 1 — on scaffolding, placing stone -->
+      <circle cx="450" cy="260" r="6" fill="#6b4e14"/>
+      <path d="M444,265 Q442,280 440,295 Q444,298 448,295 Q450,283 452,295 Q456,298 460,295 Q458,280 456,265 Z" fill="#7a6a50"/>
+      <!-- Worker 2 — carrying stones on ground -->
+      <circle cx="560" cy="378" r="5" fill="#6b4e14"/>
+      <path d="M555,382 Q553,395 551,405 Q555,407 559,405 Q560,397 561,405 Q565,407 569,405 Q567,395 565,382 Z" fill="#6a5a48"/>
+      <rect x="548" y="374" width="14" height="10" fill="#8a7a5a" rx="2"/>
+      <!-- Worker 3 — at gap section -->
+      <circle cx="660" cy="300" r="6" fill="#6b4e14"/>
+      <path d="M654,305 Q652,320 650,335 Q654,338 658,335 Q660,323 662,335 Q666,338 670,335 Q668,320 666,305 Z" fill="#7a6a50"/>
+      <!-- Worker 4 — on right section -->
+      <circle cx="900" cy="200" r="6" fill="#6b4e14"/>
+      <path d="M894,205 Q892,220 890,235 Q894,238 898,235 Q900,223 902,235 Q906,238 910,235 Q908,220 906,205 Z" fill="#6a5a48"/>
+      <!-- Nehemiah overseeing (larger, central) -->
+      <circle cx="760" cy="365" r="8" fill="#6b4e14"/>
+      <path d="M752,372 Q749,393 746,410 Q752,413 758,410 Q760,396 762,410 Q768,413 774,410 Q771,393 768,372 Z" fill="#5a4e40"/>
+      <!-- Nehemiah's arm pointing -->
+      <path d="M768,378 Q785,370 795,365" stroke="#6b4e14" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Loose stones on ground -->
+      <ellipse cx="340" cy="410" rx="10" ry="6" fill="rgba(120,100,70,.4)"/>
+      <ellipse cx="780" cy="415" rx="8" ry="5" fill="rgba(110,90,65,.35)"/>
+      <ellipse cx="1050" cy="408" rx="12" ry="7" fill="rgba(130,110,80,.4)"/>
+      <!-- Dust particles -->
+      <ellipse cx="460" cy="290" rx="40" ry="12" fill="rgba(180,160,120,.06)"/>
+      <ellipse cx="670" cy="330" rx="30" ry="10" fill="rgba(180,160,120,.05)"/>
+    </svg>
+
+  <app-scene-heading title="🧱 重建城牆" subtitle="Rebuilding the Wall — Nehemiah 2–3" id="wall-heading" />
+  <app-scene-verse text="「我們起來建造吧！」— 尼希米記 2:18" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-opposition" aria-label="仇敵的攔阻 — Opposition from Enemies">
+  <app-starfield />
+
+  <div id="opposition-glow" aria-hidden="true"></div>
+  
+    <!-- Workers with swords and tools, enemies outside -->
+    <svg id="opposition-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="工人一手拿兵器一手做工 — Workers holding weapons and tools">
+      <title>仇敵的攔阻 — The workers build with swords at their sides while enemies mock</title>
+      <defs>
+        <linearGradient id="darkWallG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6a5a4a"/>
+          <stop offset="50%" stop-color="#4a3a2a"/>
+          <stop offset="100%" stop-color="#2a2018"/>
+        </linearGradient>
+        <linearGradient id="darkGroundG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1818"/>
+          <stop offset="100%" stop-color="#140c0c"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground -->
+      <rect x="0" y="400" width="1440" height="100" fill="url(#darkGroundG)"/>
+      <!-- Wall under construction (centre) -->
+      <rect x="400" y="220" width="640" height="180" fill="url(#darkWallG)" rx="2"/>
+      <!-- Brick lines -->
+      <line x1="400" y1="250" x2="1040" y2="250" stroke="rgba(60,40,30,.4)" stroke-width="1"/>
+      <line x1="400" y1="280" x2="1040" y2="280" stroke="rgba(60,40,30,.4)" stroke-width="1"/>
+      <line x1="400" y1="310" x2="1040" y2="310" stroke="rgba(60,40,30,.4)" stroke-width="1"/>
+      <line x1="400" y1="340" x2="1040" y2="340" stroke="rgba(60,40,30,.4)" stroke-width="1"/>
+      <line x1="400" y1="370" x2="1040" y2="370" stroke="rgba(60,40,30,.4)" stroke-width="1"/>
+      <line x1="550" y1="220" x2="550" y2="400" stroke="rgba(60,40,30,.3)" stroke-width="1"/>
+      <line x1="720" y1="220" x2="720" y2="400" stroke="rgba(60,40,30,.3)" stroke-width="1"/>
+      <line x1="890" y1="220" x2="890" y2="400" stroke="rgba(60,40,30,.3)" stroke-width="1"/>
+      <!-- Watchman on wall (left) -->
+      <circle cx="430" cy="200" r="7" fill="#6b4e14"/>
+      <path d="M423,206 Q421,222 419,238 Q423,240 427,238 Q429,224 431,238 Q435,240 439,238 Q437,222 435,206 Z" fill="#6a5a48"/>
+      <!-- Watchman spear -->
+      <line x1="440" y1="195" x2="440" y2="240" stroke="#8a8a8a" stroke-width="2" stroke-linecap="round"/>
+      <polygon points="440,192 437,200 443,200" fill="#a0a0a0"/>
+      <!-- Watchman on wall (right) -->
+      <circle cx="1010" cy="200" r="7" fill="#6b4e14"/>
+      <path d="M1003,206 Q1001,222 999,238 Q1003,240 1007,238 Q1009,224 1011,238 Q1015,240 1019,238 Q1017,222 1015,206 Z" fill="#6a5a48"/>
+      <line x1="1020" y1="195" x2="1020" y2="240" stroke="#8a8a8a" stroke-width="2" stroke-linecap="round"/>
+      <polygon points="1020,192 1017,200 1023,200" fill="#a0a0a0"/>
+      <!-- Worker 1 — tool in one hand, sword in other -->
+      <circle cx="550" cy="375" r="7" fill="#6b4e14"/>
+      <path d="M543,381 Q541,396 539,410 Q543,412 547,410 Q549,398 551,410 Q555,412 559,410 Q557,396 555,381 Z" fill="#7a6a50"/>
+      <!-- Trowel in right hand -->
+      <line x1="558" y1="385" x2="572" y2="378" stroke="#8a7a5a" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Sword at left side -->
+      <line x1="540" y1="382" x2="536" y2="412" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round"/>
+      <line x1="534" y1="382" x2="546" y2="382" stroke="#808080" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Worker 2 — hammer and sword -->
+      <circle cx="700" cy="372" r="7" fill="#6b4e14"/>
+      <path d="M693,378 Q691,393 689,408 Q693,410 697,408 Q699,396 701,408 Q705,410 709,408 Q707,393 705,378 Z" fill="#6a5a48"/>
+      <!-- Hammer raised -->
+      <line x1="708" y1="375" x2="720" y2="360" stroke="#5a4020" stroke-width="2.5" stroke-linecap="round"/>
+      <rect x="718" y="355" width="8" height="6" fill="#6a6a6a" rx="1"/>
+      <!-- Sword on belt -->
+      <line x1="690" y1="380" x2="686" y2="410" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round"/>
+      <!-- Worker 3 — carrying stones with sword -->
+      <circle cx="850" cy="370" r="7" fill="#6b4e14"/>
+      <path d="M843,376 Q841,391 839,406 Q843,408 847,406 Q849,394 851,406 Q855,408 859,406 Q857,391 855,376 Z" fill="#7a6a50"/>
+      <rect x="838" y="368" width="14" height="10" fill="#8a7a5a" rx="2"/>
+      <line x1="860" y1="378" x2="864" y2="408" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round"/>
+      <!-- Enemies / mockers outside wall (left side) -->
+      <!-- Sanballat -->
+      <circle cx="200" cy="375" r="7" fill="rgba(120,60,50,.7)"/>
+      <path d="M193,381 Q191,396 189,410 Q193,412 197,410 Q199,398 201,410 Q205,412 209,410 Q207,396 205,381 Z" fill="rgba(100,40,35,.6)"/>
+      <!-- Raised fist (mocking) -->
+      <path d="M208,378 Q218,368 222,360" stroke="rgba(120,60,50,.6)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <!-- Tobiah -->
+      <circle cx="260" cy="378" r="6" fill="rgba(110,55,45,.65)"/>
+      <path d="M254,383 Q252,396 250,408 Q254,410 258,408 Q260,397 262,408 Q266,410 270,408 Q268,396 266,383 Z" fill="rgba(90,35,30,.55)"/>
+      <!-- Geshem -->
+      <circle cx="150" cy="380" r="6" fill="rgba(110,55,45,.6)"/>
+      <path d="M144,385 Q142,398 140,410 Q144,412 148,410 Q150,400 152,410 Q156,412 160,410 Q158,398 156,385 Z" fill="rgba(90,35,30,.5)"/>
+      <!-- Enemies on right side -->
+      <circle cx="1250" cy="376" r="6.5" fill="rgba(120,60,50,.65)"/>
+      <path d="M1243,382 Q1241,396 1239,408 Q1243,410 1247,408 Q1249,398 1251,408 Q1255,410 1259,408 Q1257,396 1255,382 Z" fill="rgba(100,40,35,.55)"/>
+      <circle cx="1310" cy="380" r="6" fill="rgba(110,55,45,.6)"/>
+      <path d="M1304,385 Q1302,398 1300,410 Q1304,412 1308,410 Q1310,400 1312,410 Q1316,412 1320,410 Q1318,398 1316,385 Z" fill="rgba(90,35,30,.5)"/>
+      <!-- Tension lines / angry marks -->
+      <line x1="225" y1="355" x2="230" y2="350" stroke="rgba(200,80,60,.3)" stroke-width="2"/>
+      <line x1="232" y1="355" x2="237" y2="350" stroke="rgba(200,80,60,.3)" stroke-width="2"/>
+      <line x1="1270" y1="358" x2="1275" y2="353" stroke="rgba(200,80,60,.3)" stroke-width="2"/>
+      <line x1="1277" y1="358" x2="1282" y2="353" stroke="rgba(200,80,60,.3)" stroke-width="2"/>
+      <!-- Red ominous glow around enemies -->
+      <ellipse cx="200" cy="390" rx="80" ry="30" fill="rgba(160,40,30,.06)"/>
+      <ellipse cx="1280" cy="390" rx="80" ry="30" fill="rgba(160,40,30,.06)"/>
+    </svg>
+
+  <app-scene-heading title="⚔ 仇敵的攔阻" subtitle="Opposition — Nehemiah 4" id="opposition-heading" />
+  <app-scene-verse text="「我們禱告我們的神，又派人看守，晝夜防備」— 尼希米記 4:9" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-law" aria-label="宣讀律法 — Reading the Law">
+  <app-starfield />
+
+  <div id="law-glow" aria-hidden="true"></div>
+  
+    <!-- Ezra reading scroll on platform, crowd below -->
+    <svg id="law-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="以斯拉站在木臺上宣讀律法 — Ezra reading the Law on a wooden platform">
+      <title>宣讀律法 — Ezra reads the Law of Moses to all the people</title>
+      <defs>
+        <linearGradient id="woodG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7a5a30"/>
+          <stop offset="50%" stop-color="#5a4020"/>
+          <stop offset="100%" stop-color="#3a2a10"/>
+        </linearGradient>
+        <linearGradient id="scrollG" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#e8d8b0"/>
+          <stop offset="50%" stop-color="#f0e8c8"/>
+          <stop offset="100%" stop-color="#d8c8a0"/>
+        </linearGradient>
+        <linearGradient id="gatherFloorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a3018"/>
+          <stop offset="100%" stop-color="#1a1408"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground / plaza floor -->
+      <rect x="0" y="380" width="1440" height="120" fill="url(#gatherFloorG)"/>
+      <!-- Wooden platform / podium -->
+      <rect x="620" y="240" width="200" height="160" fill="url(#woodG)" rx="3"/>
+      <!-- Platform planks -->
+      <line x1="620" y1="270" x2="820" y2="270" stroke="rgba(50,35,15,.4)" stroke-width="1"/>
+      <line x1="620" y1="300" x2="820" y2="300" stroke="rgba(50,35,15,.4)" stroke-width="1"/>
+      <line x1="620" y1="330" x2="820" y2="330" stroke="rgba(50,35,15,.4)" stroke-width="1"/>
+      <line x1="620" y1="360" x2="820" y2="360" stroke="rgba(50,35,15,.4)" stroke-width="1"/>
+      <!-- Platform legs -->
+      <rect x="630" y="400" width="12" height="30" fill="#4a3218"/>
+      <rect x="798" y="400" width="12" height="30" fill="#4a3218"/>
+      <!-- Platform railing -->
+      <line x1="618" y1="240" x2="618" y2="400" stroke="#6a4a28" stroke-width="4"/>
+      <line x1="822" y1="240" x2="822" y2="400" stroke="#6a4a28" stroke-width="4"/>
+      <line x1="618" y1="250" x2="822" y2="250" stroke="#6a4a28" stroke-width="3"/>
+      <!-- Steps on right side -->
+      <rect x="822" y="340" width="40" height="60" fill="#5a4020" rx="2"/>
+      <rect x="842" y="370" width="40" height="30" fill="#4a3218" rx="2"/>
+      <!-- Ezra standing on platform -->
+      <circle cx="720" cy="200" r="12" fill="#6b4e14"/>
+      <!-- Head covering -->
+      <path d="M708,198 Q720,186 732,198 L732,206 Q720,200 708,206 Z" fill="#e8e0d0"/>
+      <!-- Beard (priestly, long) -->
+      <path d="M712,210 Q720,226 728,210 Q726,238 720,242 Q714,238 712,210 Z" fill="#8a8a8a" opacity=".8"/>
+      <!-- Robe (priestly white/cream) -->
+      <path d="M710,218 Q704,240 700,265 Q708,268 716,265 Q718,248 720,238 Q722,248 724,265 Q732,268 740,265 Q736,240 730,218 Z"
+            fill="#e0d8c0"/>
+      <!-- Scroll held open in both hands -->
+      <rect x="690" y="220" width="60" height="8" fill="url(#scrollG)" rx="4"
+            style="filter:drop-shadow(0 0 6px rgba(200,180,120,.4));"/>
+      <!-- Scroll rolls at ends -->
+      <circle cx="690" cy="224" r="5" fill="#d8c8a0" stroke="#b0a080" stroke-width="1"/>
+      <circle cx="750" cy="224" r="5" fill="#d8c8a0" stroke="#b0a080" stroke-width="1"/>
+      <!-- Text lines on scroll -->
+      <line x1="698" y1="222" x2="742" y2="222" stroke="rgba(80,60,30,.3)" stroke-width="1"/>
+      <line x1="700" y1="225" x2="740" y2="225" stroke="rgba(80,60,30,.3)" stroke-width="1"/>
+      <!-- Arms holding scroll -->
+      <path d="M710,222 Q700,218 692,222" stroke="#6b4e14" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M730,222 Q740,218 748,222" stroke="#6b4e14" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Divine glow around scroll -->
+      <ellipse cx="720" cy="224" rx="45" ry="20" fill="none"
+               stroke="rgba(200,180,100,.1)" stroke-width="6"
+               style="animation:breathe 2.5s ease-in-out infinite;"/>
+      <!-- Crowd of listening people (rows) -->
+      <!-- Row 1 (closest) -->
+      <circle cx="400" cy="400" r="5" fill="rgba(100,80,50,.65)"/>
+      <circle cx="430" cy="398" r="4.5" fill="rgba(100,80,50,.6)"/>
+      <circle cx="460" cy="402" r="5" fill="rgba(100,80,50,.65)"/>
+      <circle cx="490" cy="399" r="4.5" fill="rgba(100,80,50,.6)"/>
+      <circle cx="520" cy="401" r="5" fill="rgba(100,80,50,.65)"/>
+      <circle cx="550" cy="398" r="4.5" fill="rgba(100,80,50,.6)"/>
+      <circle cx="580" cy="403" r="5" fill="rgba(100,80,50,.65)"/>
+      <circle cx="880" cy="401" r="5" fill="rgba(100,80,50,.65)"/>
+      <circle cx="910" cy="398" r="4.5" fill="rgba(100,80,50,.6)"/>
+      <circle cx="940" cy="402" r="5" fill="rgba(100,80,50,.65)"/>
+      <circle cx="970" cy="399" r="4.5" fill="rgba(100,80,50,.6)"/>
+      <circle cx="1000" cy="401" r="5" fill="rgba(100,80,50,.65)"/>
+      <circle cx="1030" cy="398" r="4.5" fill="rgba(100,80,50,.6)"/>
+      <circle cx="1060" cy="403" r="5" fill="rgba(100,80,50,.65)"/>
+      <!-- Row 2 (further back) -->
+      <circle cx="380" cy="418" r="4" fill="rgba(90,70,45,.5)"/>
+      <circle cx="410" cy="416" r="3.5" fill="rgba(90,70,45,.45)"/>
+      <circle cx="440" cy="420" r="4" fill="rgba(90,70,45,.5)"/>
+      <circle cx="470" cy="417" r="3.5" fill="rgba(90,70,45,.45)"/>
+      <circle cx="500" cy="419" r="4" fill="rgba(90,70,45,.5)"/>
+      <circle cx="530" cy="416" r="3.5" fill="rgba(90,70,45,.45)"/>
+      <circle cx="560" cy="421" r="4" fill="rgba(90,70,45,.5)"/>
+      <circle cx="590" cy="418" r="3.5" fill="rgba(90,70,45,.45)"/>
+      <circle cx="860" cy="419" r="4" fill="rgba(90,70,45,.5)"/>
+      <circle cx="890" cy="416" r="3.5" fill="rgba(90,70,45,.45)"/>
+      <circle cx="920" cy="420" r="4" fill="rgba(90,70,45,.5)"/>
+      <circle cx="950" cy="417" r="3.5" fill="rgba(90,70,45,.45)"/>
+      <circle cx="980" cy="419" r="4" fill="rgba(90,70,45,.5)"/>
+      <circle cx="1010" cy="416" r="3.5" fill="rgba(90,70,45,.45)"/>
+      <circle cx="1040" cy="421" r="4" fill="rgba(90,70,45,.5)"/>
+      <circle cx="1070" cy="418" r="3.5" fill="rgba(90,70,45,.45)"/>
+      <!-- Row 3 (furthest) -->
+      <circle cx="360" cy="436" r="3" fill="rgba(80,60,40,.35)"/>
+      <circle cx="390" cy="434" r="2.5" fill="rgba(80,60,40,.3)"/>
+      <circle cx="420" cy="438" r="3" fill="rgba(80,60,40,.35)"/>
+      <circle cx="450" cy="435" r="2.5" fill="rgba(80,60,40,.3)"/>
+      <circle cx="480" cy="437" r="3" fill="rgba(80,60,40,.35)"/>
+      <circle cx="510" cy="434" r="2.5" fill="rgba(80,60,40,.3)"/>
+      <circle cx="540" cy="439" r="3" fill="rgba(80,60,40,.35)"/>
+      <circle cx="920" cy="437" r="3" fill="rgba(80,60,40,.35)"/>
+      <circle cx="950" cy="434" r="2.5" fill="rgba(80,60,40,.3)"/>
+      <circle cx="980" cy="438" r="3" fill="rgba(80,60,40,.35)"/>
+      <circle cx="1010" cy="435" r="2.5" fill="rgba(80,60,40,.3)"/>
+      <circle cx="1040" cy="437" r="3" fill="rgba(80,60,40,.35)"/>
+      <circle cx="1070" cy="434" r="2.5" fill="rgba(80,60,40,.3)"/>
+    </svg>
+
+  <app-scene-heading title="📖 宣讀律法" subtitle="Reading the Law — Nehemiah 8" id="law-heading" />
+  <app-scene-verse text="「眾民側耳而聽…使百姓明白律法」— 尼希米記 8:3,7" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-covenant" aria-label="重立聖約 — Covenant Renewal">
+  <app-starfield />
+
+  <div id="covenant-glow" aria-hidden="true"></div>
+  
+    <!-- Large scroll with seal, people raising hands, altar, Nehemiah leading -->
+    <svg id="covenant-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="百姓重立聖約 — The people renew the covenant">
+      <title>重立聖約 — Nehemiah leads the people in renewing the covenant with God</title>
+      <defs>
+        <linearGradient id="covenantFloorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2230"/>
+          <stop offset="100%" stop-color="#141018"/>
+        </linearGradient>
+        <linearGradient id="altarG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7a6a5a"/>
+          <stop offset="50%" stop-color="#5a4a3a"/>
+          <stop offset="100%" stop-color="#3a2a1a"/>
+        </linearGradient>
+        <linearGradient id="bigScrollG" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#d8c8a0"/>
+          <stop offset="50%" stop-color="#f0e8d0"/>
+          <stop offset="100%" stop-color="#c8b890"/>
+        </linearGradient>
+      </defs>
+      <!-- Floor -->
+      <rect x="0" y="380" width="1440" height="120" fill="url(#covenantFloorG)"/>
+      <!-- Stone altar (centre-left) -->
+      <rect x="560" y="300" width="80" height="100" fill="url(#altarG)" rx="3"/>
+      <!-- Altar texture -->
+      <line x1="560" y1="330" x2="640" y2="330" stroke="rgba(60,50,35,.4)" stroke-width="1"/>
+      <line x1="560" y1="360" x2="640" y2="360" stroke="rgba(60,50,35,.4)" stroke-width="1"/>
+      <!-- Fire on altar -->
+      <path d="M585,298 Q590,275 600,268 Q610,275 615,298" fill="rgba(220,160,40,.5)"/>
+      <path d="M590,298 Q595,280 600,274 Q605,280 610,298" fill="rgba(255,200,60,.4)"/>
+      <path d="M595,298 Q600,285 605,298" fill="rgba(255,240,100,.3)"/>
+      <!-- Fire glow -->
+      <ellipse cx="600" cy="290" rx="30" ry="20" fill="rgba(255,180,40,.08)"/>
+      <!-- Large covenant scroll (right of altar) -->
+      <rect x="700" y="220" width="100" height="180" fill="url(#bigScrollG)" rx="5"
+            style="filter:drop-shadow(0 2px 12px rgba(200,180,120,.3));"/>
+      <!-- Scroll roll tops -->
+      <ellipse cx="750" cy="220" rx="55" ry="8" fill="#c8b890" stroke="#a09870" stroke-width="1"/>
+      <ellipse cx="750" cy="400" rx="55" ry="8" fill="#c8b890" stroke="#a09870" stroke-width="1"/>
+      <!-- Text lines on scroll -->
+      <line x1="715" y1="250" x2="785" y2="250" stroke="rgba(80,60,30,.3)" stroke-width="1.5"/>
+      <line x1="720" y1="265" x2="780" y2="265" stroke="rgba(80,60,30,.25)" stroke-width="1.5"/>
+      <line x1="715" y1="280" x2="785" y2="280" stroke="rgba(80,60,30,.3)" stroke-width="1.5"/>
+      <line x1="720" y1="295" x2="780" y2="295" stroke="rgba(80,60,30,.25)" stroke-width="1.5"/>
+      <line x1="715" y1="310" x2="785" y2="310" stroke="rgba(80,60,30,.3)" stroke-width="1.5"/>
+      <line x1="720" y1="325" x2="780" y2="325" stroke="rgba(80,60,30,.25)" stroke-width="1.5"/>
+      <line x1="715" y1="340" x2="785" y2="340" stroke="rgba(80,60,30,.3)" stroke-width="1.5"/>
+      <line x1="720" y1="355" x2="780" y2="355" stroke="rgba(80,60,30,.25)" stroke-width="1.5"/>
+      <line x1="715" y1="370" x2="785" y2="370" stroke="rgba(80,60,30,.3)" stroke-width="1.5"/>
+      <!-- Wax seal on scroll -->
+      <circle cx="750" cy="385" r="10" fill="#8b4040" stroke="#6a3030" stroke-width="1.5"
+              style="filter:drop-shadow(0 0 4px rgba(140,60,60,.4));"/>
+      <text x="750" y="389" fill="rgba(255,200,200,.5)" font-size="8" text-anchor="middle" font-weight="700">約</text>
+      <!-- Scroll glow -->
+      <rect x="695" y="215" width="110" height="190" rx="8" fill="none"
+            stroke="rgba(200,180,120,.08)" stroke-width="6"
+            style="animation:breathe 3.5s ease-in-out infinite;"/>
+      <!-- Nehemiah figure (leading ceremony, left of altar) -->
+      <circle cx="500" cy="335" r="10" fill="#6b4e14"/>
+      <path d="M490,343 Q486,368 482,395 Q490,398 498,395 Q500,378 502,395 Q510,398 518,395 Q514,368 510,343 Z"
+            fill="#5a4e40"/>
+      <!-- Nehemiah's arm raised -->
+      <path d="M510,350 Q525,335 530,320" stroke="#6b4e14" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Nehemiah's other arm toward scroll -->
+      <path d="M490,350 Q480,360 475,368" stroke="#6b4e14" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Sash -->
+      <line x1="492" y1="358" x2="512" y2="358" stroke="#8b7d6b" stroke-width="2"/>
+      <!-- People raising hands in oath (left group) -->
+      <circle cx="260" cy="380" r="5" fill="rgba(100,80,55,.6)"/>
+      <path d="M256,374 Q252,366 250,358" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M264,374 Q268,366 270,358" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="310" cy="382" r="4.5" fill="rgba(100,80,55,.55)"/>
+      <path d="M306,376 Q302,368 300,360" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M314,376 Q318,368 320,360" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="360" cy="378" r="5" fill="rgba(100,80,55,.6)"/>
+      <path d="M356,372 Q352,364 350,356" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M364,372 Q368,364 370,356" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="410" cy="384" r="4.5" fill="rgba(100,80,55,.55)"/>
+      <path d="M406,378 Q402,370 400,362" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M414,378 Q418,370 420,362" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- People raising hands (right group) -->
+      <circle cx="880" cy="380" r="5" fill="rgba(100,80,55,.6)"/>
+      <path d="M876,374 Q872,366 870,358" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M884,374 Q888,366 890,358" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="930" cy="382" r="4.5" fill="rgba(100,80,55,.55)"/>
+      <path d="M926,376 Q922,368 920,360" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M934,376 Q938,368 940,360" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="980" cy="378" r="5" fill="rgba(100,80,55,.6)"/>
+      <path d="M976,372 Q972,364 970,356" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M984,372 Q988,364 990,356" stroke="rgba(100,80,55,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="1030" cy="384" r="4.5" fill="rgba(100,80,55,.55)"/>
+      <path d="M1026,378 Q1022,370 1020,362" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M1034,378 Q1038,370 1040,362" stroke="rgba(100,80,55,.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- Second row of people -->
+      <circle cx="240" cy="400" r="4" fill="rgba(85,68,45,.45)"/>
+      <circle cx="290" cy="402" r="3.5" fill="rgba(85,68,45,.4)"/>
+      <circle cx="340" cy="398" r="4" fill="rgba(85,68,45,.45)"/>
+      <circle cx="390" cy="401" r="3.5" fill="rgba(85,68,45,.4)"/>
+      <circle cx="440" cy="399" r="4" fill="rgba(85,68,45,.45)"/>
+      <circle cx="850" cy="400" r="4" fill="rgba(85,68,45,.45)"/>
+      <circle cx="900" cy="402" r="3.5" fill="rgba(85,68,45,.4)"/>
+      <circle cx="950" cy="398" r="4" fill="rgba(85,68,45,.45)"/>
+      <circle cx="1000" cy="401" r="3.5" fill="rgba(85,68,45,.4)"/>
+      <circle cx="1050" cy="399" r="4" fill="rgba(85,68,45,.45)"/>
+      <circle cx="1100" cy="402" r="3.5" fill="rgba(85,68,45,.4)"/>
+      <!-- Third row -->
+      <circle cx="220" cy="418" r="3" fill="rgba(75,58,38,.3)"/>
+      <circle cx="270" cy="420" r="2.5" fill="rgba(75,58,38,.25)"/>
+      <circle cx="320" cy="416" r="3" fill="rgba(75,58,38,.3)"/>
+      <circle cx="370" cy="419" r="2.5" fill="rgba(75,58,38,.25)"/>
+      <circle cx="420" cy="417" r="3" fill="rgba(75,58,38,.3)"/>
+      <circle cx="830" cy="418" r="3" fill="rgba(75,58,38,.3)"/>
+      <circle cx="880" cy="420" r="2.5" fill="rgba(75,58,38,.25)"/>
+      <circle cx="930" cy="416" r="3" fill="rgba(75,58,38,.3)"/>
+      <circle cx="980" cy="419" r="2.5" fill="rgba(75,58,38,.25)"/>
+      <circle cx="1030" cy="417" r="3" fill="rgba(75,58,38,.3)"/>
+      <circle cx="1080" cy="420" r="2.5" fill="rgba(75,58,38,.25)"/>
+    </svg>
+
+  <app-scene-heading title="✍ 重立聖約" subtitle="Covenant Renewal — Nehemiah 10" id="covenant-heading" />
+  <app-scene-verse text="「我們起誓遵行神藉摩西所傳的律法」— 尼希米記 10:29" />
+</section>

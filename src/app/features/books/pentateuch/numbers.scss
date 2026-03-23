@@ -1,0 +1,305 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes crackGlow {
+      0%,100% { opacity: .5; filter: brightness(1);   }
+      50%      { opacity: 1;  filter: brightness(1.4); }
+    }
+
+@keyframes driftSlow {
+      0%   { transform: translateX(0)   scale(1);    }
+      100% { transform: translateX(-4%) scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #0e0e54 0%, #493870 55%, #955b00 100%);
+    }
+
+#intro-cloud-pillar {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      z-index: 4; width: clamp(60px,10vw,130px);
+      animation: cloudPillarPulse 4.5s ease-in-out infinite;
+    }
+
+@keyframes cloudPillarPulse {
+      0%,100% { opacity: .75; transform: translateX(-50%) scale(1);    }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.06); }
+    }
+
+#intro-title {
+      position: absolute; top: 36%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#d2a24c 0%,#f5d98a 45%,#c07a20 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(240,210,140,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(200,170,100,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-desert { position: absolute; bottom: 0; left: 0; width: 100%; height: 48%; z-index: 5; }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — CENSUS & CAMP  數點人民
+    ══════════════════════════════════════════════ */
+
+#scene-census {
+      background: linear-gradient(180deg, #382a62 0%, #625737 55%, #856b00 100%);
+    }
+
+#camp-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#3d2e08 0%,#261800 55%,#100a00 100%);
+      z-index: 5;
+    }
+
+#camp-ground::before {
+      content: '';
+      position: absolute; top: -18%; left: 0; width: 100%; height: 32%;
+      background: radial-gradient(ellipse 30% 40% at 25% 80%, #4a3008 0%, transparent 70%),
+                  radial-gradient(ellipse 25% 35% at 65% 70%, #3d2800 0%, transparent 65%),
+                  radial-gradient(ellipse 20% 30% at 88% 90%, #4a3008 0%, transparent 60%);
+    }
+
+#camp-svg {
+      position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(220px,42vw,520px);
+    }
+
+.banner-sway { animation: bannerSway 3s ease-in-out infinite; }
+
+@keyframes bannerSway {
+      0%,100% { transform: rotate(-2deg); }
+      50%      { transform: rotate(2deg);  }
+    }
+
+#census-heading h2 {
+      color: #d4a843;
+      text-shadow: 0 0 22px rgba(210,168,67,.6);
+    }
+
+#census-heading p { color: rgba(210,180,100,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — TWELVE SPIES  十二探子
+    ══════════════════════════════════════════════ */
+
+#scene-spies {
+      background: linear-gradient(180deg, #1c3870 0%, #348834 50%, #4c871d 100%);
+    }
+
+#spies-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 32%;
+      background: linear-gradient(180deg,#2a5a12 0%,#1a3c08 50%,#0e2400 100%);
+      z-index: 5;
+    }
+
+#spies-hills { position: absolute; bottom: 20%; left: 0; width: 100%; height: 50%; z-index: 4; }
+
+#spies-svg {
+      position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(150px,28vw,380px);
+    }
+
+#grape-glow {
+      position: absolute; bottom: 38%; left: 50%; transform: translateX(-50%);
+      width: 22vw; height: 16vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(120,40,160,.25) 0%, rgba(80,20,120,.08) 50%, transparent 72%);
+      z-index: 7;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#spies-heading h2 {
+      color: #7acc52;
+      text-shadow: 0 0 22px rgba(100,200,60,.6);
+    }
+
+#spies-heading p { color: rgba(140,210,100,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — KORAH'S REBELLION  可拉的叛變
+    ══════════════════════════════════════════════ */
+
+#scene-korah {
+      background: linear-gradient(180deg, #460e2a 0%, #952e2e 50%, #7e001c 100%);
+    }
+
+#korah-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 38%;
+      background: linear-gradient(180deg,#3d2200 0%,#261400 50%,#0e0800 100%);
+      z-index: 5;
+    }
+
+#earth-crack {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,40vw,520px);
+    }
+
+#crack-glow {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,60,0,.35) 0%, rgba(180,20,0,.12) 50%, transparent 72%);
+      z-index: 6;
+      animation: crackGlow 1.8s ease-in-out infinite;
+    }
+
+#korah-smoke {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 55% at 50% 80%, rgba(40,0,0,.65) 0%, transparent 72%);
+      z-index: 9;
+      animation: driftSlow 7s ease-in-out infinite alternate;
+    }
+
+.falling-person {
+      position: absolute; z-index: 10;
+      animation: personFall var(--spd,3s) ease-in var(--delay,0s) infinite;
+    }
+
+@keyframes personFall {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+      60%  { opacity: .8; }
+      100% { transform: translateY(26vh) rotate(var(--rot,18deg)); opacity: 0; }
+    }
+
+#korah-heading h2 {
+      color: #cc3300;
+      text-shadow: 0 0 28px rgba(200,40,0,.8), 0 0 60px rgba(140,0,0,.4);
+      animation: korahPulse 2s ease-in-out infinite;
+    }
+
+@keyframes korahPulse {
+      0%,100% { text-shadow: 0 0 28px rgba(200,40,0,.8), 0 0 60px rgba(140,0,0,.4); }
+      50%      { text-shadow: 0 0 48px rgba(255,60,0,1), 0 0 100px rgba(200,0,0,.6); }
+    }
+
+#korah-heading p { color: rgba(255,120,80,.5); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — BRONZE SERPENT  銅蛇
+    ══════════════════════════════════════════════ */
+
+#scene-serpent {
+      background: linear-gradient(180deg, #2a1c46 0%, #685334 50%, #896700 100%);
+    }
+
+#serpent-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 28%;
+      background: linear-gradient(180deg,#4a3818 0%,#2e2008 50%,#140e02 100%);
+      z-index: 5;
+    }
+
+#serpent-svg {
+      position: absolute; bottom: 26%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(70px,12vw,170px);
+    }
+
+#serpent-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 20vw; height: 32vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,195,0,.3) 0%, rgba(200,150,0,.1) 50%, transparent 72%);
+      z-index: 7;
+      animation: serpentGlowPulse 2.5s ease-in-out infinite;
+    }
+
+@keyframes serpentGlowPulse {
+      0%,100% { opacity: .6; transform: translateX(-50%) scale(1);    }
+      50%      { opacity: 1;  transform: translateX(-50%) scale(1.12); }
+    }
+
+.looker {
+      position: absolute; bottom: 28%; z-index: 9;
+    }
+
+#serpent-heading h2 {
+      background: linear-gradient(120deg,#c89030 0%,#f5d88a 50%,#b87a18 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#serpent-heading p { color: rgba(220,180,80,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — TOWARD THE PROMISED LAND  望向應許之地
+    ══════════════════════════════════════════════ */
+
+#scene-promised {
+      background: linear-gradient(180deg, #2a1c62 0%, #493f68 40%, #4d7c27 100%);
+    }
+
+#promised-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 3; }
+
+#sunrise-glow {
+      position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
+      width: clamp(120px,30vw,380px); height: clamp(60px,15vw,190px);
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,220,100,.55) 0%, rgba(255,170,50,.2) 45%, transparent 72%);
+      z-index: 4;
+      animation: sunrisePulse 4s ease-in-out infinite;
+    }
+
+@keyframes sunrisePulse {
+      0%,100% { opacity: .6; transform: translateX(-50%) scale(1);    }
+      50%      { opacity: 1;  transform: translateX(-50%) scale(1.08); }
+    }
+
+#figures-svg {
+      position: absolute; bottom: 42%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(90px,16vw,200px);
+    }
+
+#promised-heading h2 {
+      background: linear-gradient(120deg,#8acc52 0%,#e8f5a0 50%,#60a030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#promised-heading p { color: rgba(160,220,100,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

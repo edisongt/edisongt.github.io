@@ -1,0 +1,257 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #4a9878 0%, #68b888 40%, #c8c090 100%);
+    }
+
+#intro-orb {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: clamp(55px,9vw,110px); height: clamp(55px,9vw,110px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 38%, #e8ffe8, #80e0a0 35%, #50c878 65%, #2a8a50);
+      box-shadow: 0 0 60px rgba(80,200,120,.6), 0 0 120px rgba(160,220,140,.25);
+      z-index: 4;
+      animation: orbGlow 4s ease-in-out infinite;
+    }
+
+@keyframes orbGlow {
+      0%,100% { box-shadow: 0 0 60px rgba(80,200,120,.6), 0 0 120px rgba(160,220,140,.25); }
+      50%      { box-shadow: 0 0 90px rgba(80,200,120,.85), 0 0 180px rgba(160,220,140,.4); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#50c878 0%,#d0ffe0 45%,#2a8a50 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(80,200,120,.85); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(42,138,80,.7); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 48%; z-index: 5; }
+
+#intro-solomon {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(70px,10vw,130px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — WISDOM CALLS  智慧的呼喚
+    ══════════════════════════════════════════════ */
+
+#scene-wisdom {
+      background: linear-gradient(180deg, #c8a868 0%, #e0c880 40%, #d8c898 100%);
+    }
+
+#wisdom-glow {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: 35vw; height: 35vh;
+      background: radial-gradient(ellipse, rgba(255,240,180,.35) 0%, rgba(255,220,120,.1) 50%, transparent 72%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#wisdom-city-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; z-index: 4; }
+
+#wisdom-figure {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(120px,18vw,260px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#wisdom-heading h2 {
+      background: linear-gradient(120deg,#50c878 0%,#d0ffe0 50%,#2a8a50 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#wisdom-heading p { color: rgba(42,100,60,.6); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — TWO PATHS  兩條道路
+    ══════════════════════════════════════════════ */
+
+#scene-paths {
+      background: linear-gradient(180deg, #78c8a0 0%, #a0d8b8 40%, #e0d8b0 100%);
+    }
+
+#paths-sun {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      width: clamp(55px,8vw,100px); height: clamp(55px,8vw,100px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fffbe0, #ffe080 40%, #f0c040 75%, #c8a030);
+      box-shadow: 0 0 50px rgba(240,200,80,.5), 0 0 100px rgba(200,180,60,.25);
+      z-index: 4;
+      animation: orbGlow 4.5s ease-in-out infinite;
+    }
+
+#paths-scene-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 4; }
+
+#paths-heading h2 {
+      background: linear-gradient(120deg,#2a8a50 0%,#a0ffc0 50%,#50c878 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#paths-heading p { color: rgba(42,100,60,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — FATHER'S INSTRUCTION  父親的教訓
+    ══════════════════════════════════════════════ */
+
+#scene-instruction {
+      background: linear-gradient(180deg, #c8a060 0%, #e0c880 45%, #d8c490 100%);
+    }
+
+#instruction-lamp-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 30vw; height: 35vh;
+      background: radial-gradient(ellipse, rgba(255,220,120,.3) 0%, rgba(255,200,80,.08) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#instruction-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#instruction-heading h2 {
+      background: linear-gradient(120deg,#50c878 0%,#c0ffe0 50%,#2a8a50 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#instruction-heading p { color: rgba(60,90,50,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — ANT AND DILIGENCE  勤勞的螞蟻
+    ══════════════════════════════════════════════ */
+
+#scene-ant {
+      background: linear-gradient(180deg, #88c880 0%, #b0d890 40%, #e8d898 100%);
+    }
+
+#ant-sunshine {
+      position: absolute; top: 5%; right: 15%;
+      width: clamp(50px,8vw,100px); height: clamp(50px,8vw,100px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fffee0, #ffe870 40%, #f0c830 75%, #c0a020);
+      box-shadow: 0 0 60px rgba(240,200,40,.6), 0 0 120px rgba(220,180,40,.3);
+      z-index: 4;
+      animation: orbGlow 4s ease-in-out infinite;
+    }
+
+#ant-field-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 4; }
+
+#ant-scene-svg {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(180px,28vw,380px);
+      animation: gentleSway 5s ease-in-out infinite;
+    }
+
+#ant-heading h2 {
+      background: linear-gradient(120deg,#2a8a50 0%,#a0ffc0 50%,#50c878 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#ant-heading p { color: rgba(50,90,40,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — VIRTUOUS WOMAN  才德的婦人
+    ══════════════════════════════════════════════ */
+
+#scene-virtuous {
+      background: linear-gradient(180deg, #d0a860 0%, #78c890 50%, #e0a8a0 100%);
+    }
+
+#virtuous-sunrise {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 20%, rgba(255,220,140,.2) 0%, rgba(255,200,120,.06) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#virtuous-crown {
+      position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
+      z-index: 6; width: clamp(40px,6vw,80px);
+      animation: floatY 4s ease-in-out infinite;
+    }
+
+#virtuous-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,32vw,420px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+#virtuous-heading h2 {
+      background: linear-gradient(120deg,#50c878 0%,#ffe0f0 50%,#c87850 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#virtuous-heading p { color: rgba(80,120,60,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

@@ -1,0 +1,284 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #462a70 0%, #685334 30%, #7e5a18 65%, #916928 100%);
+    }
+
+#intro-moon {
+      position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
+      width: clamp(50px,8vw,100px); height: clamp(50px,8vw,100px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 38%, #fffbe8, #e8c060 40%, #c4a040 75%, #8b6914);
+      box-shadow: 0 0 50px rgba(218,165,32,.6), 0 0 100px rgba(196,160,64,.25);
+      z-index: 4;
+      animation: moonGlow 4s ease-in-out infinite;
+    }
+
+@keyframes moonGlow {
+      0%,100% { box-shadow: 0 0 50px rgba(218,165,32,.6), 0 0 100px rgba(196,160,64,.25); }
+      50%      { box-shadow: 0 0 75px rgba(232,192,96,.85), 0 0 150px rgba(218,165,32,.4); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#daa520 0%,#fff4b0 45%,#c4a040 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(232,192,96,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(196,160,64,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-figures {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(70px,10vw,130px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — NAOMI'S JOURNEY  拿俄米歸回
+    ══════════════════════════════════════════════ */
+
+#scene-naomi {
+      background: linear-gradient(180deg, #382a62 0%, #7d4d26 55%, #885413 100%);
+    }
+
+#naomi-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#3a2a10 0%,#201408 55%,#0c0a04 100%);
+      z-index: 5;
+    }
+
+#naomi-ground::before {
+      content: '';
+      position: absolute; top: -18%; left: 0; width: 100%; height: 30%;
+      background: radial-gradient(ellipse 30% 40% at 25% 80%, #4a3a14 0%, transparent 70%),
+                  radial-gradient(ellipse 25% 35% at 65% 70%, #3d2e0e 0%, transparent 65%),
+                  radial-gradient(ellipse 20% 30% at 88% 90%, #4a3a14 0%, transparent 60%);
+    }
+
+#sunset-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(218,165,32,.18) 0%, rgba(196,160,64,.06) 50%, transparent 72%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#naomi-scene-svg {
+      position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#naomi-heading h2 {
+      color: #daa520;
+      text-shadow: 0 0 22px rgba(218,165,32,.7);
+    }
+
+#naomi-heading p { color: rgba(232,192,96,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — GLEANING  拾穗
+    ══════════════════════════════════════════════ */
+
+#scene-gleaning {
+      background: linear-gradient(180deg, #463870 0%, #6f532e 45%, #815c12 100%);
+    }
+
+#gleaning-sun {
+      position: absolute; top: 12%; left: 65%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fffbe0, #e8c060 40%, #c4a040 75%, #8b6914);
+      box-shadow: 0 0 55px rgba(218,165,32,.7), 0 0 110px rgba(196,160,64,.3);
+      z-index: 4;
+      animation: moonGlow 4.5s ease-in-out infinite;
+    }
+
+#gleaning-field { position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 4; }
+
+#ruth-gleaning {
+      position: absolute; bottom: 32%; left: 38%; z-index: 9;
+      width: clamp(40px,6vw,80px);
+      animation: gentleSway 5s ease-in-out infinite;
+    }
+
+#gleaning-heading h2 {
+      background: linear-gradient(120deg,#daa520 0%,#fff4b0 50%,#c4a040 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#gleaning-heading p { color: rgba(232,192,96,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — THRESHING FLOOR  打穀場
+    ══════════════════════════════════════════════ */
+
+#scene-threshing {
+      background: linear-gradient(180deg, #2a1c54 0%, #4d3073 45%, #785325 100%);
+    }
+
+#threshing-moonlight {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 20%, rgba(232,192,96,.12) 0%, rgba(196,160,64,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#threshing-floor-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; z-index: 4; }
+
+#threshing-figures {
+      position: absolute; bottom: 26%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(100px,16vw,220px);
+      animation: floatY 6s ease-in-out infinite;
+    }
+
+#threshing-moon {
+      position: absolute; top: 10%; right: 15%;
+      width: clamp(35px,5vw,65px); height: clamp(35px,5vw,65px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 60% 35%, #fffbe8, #e8c060 50%, #c4a040);
+      box-shadow: 0 0 40px rgba(232,192,96,.5), 0 0 80px rgba(218,165,32,.2);
+      z-index: 4;
+      animation: moonGlow 5s ease-in-out infinite;
+    }
+
+#threshing-heading h2 {
+      background: linear-gradient(120deg,#c4a040 0%,#fff4b0 50%,#8b6914 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#threshing-heading p { color: rgba(196,160,64,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — REDEMPTION  救贖
+    ══════════════════════════════════════════════ */
+
+#scene-redemption {
+      background: linear-gradient(180deg, #382a46 0%, #72502e 55%, #7c5321 100%);
+    }
+
+#redemption-gate { position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 4; }
+
+#gate-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: 30vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(218,165,32,.14) 0%, rgba(196,160,64,.05) 45%, transparent 70%);
+      z-index: 5; pointer-events: none;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#redemption-heading h2 {
+      background: linear-gradient(120deg,#daa520 0%,#fff4b0 50%,#c4a040 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#redemption-heading p { color: rgba(232,192,96,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — LINEAGE  家譜·盼望
+    ══════════════════════════════════════════════ */
+
+#scene-lineage {
+      background: linear-gradient(180deg, #2a1c46 0%, #492a7d 50%, #6b592c 100%);
+    }
+
+#lineage-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(20px,4vw,55px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,255,220,0) 0%,rgba(232,192,96,.4) 25%,rgba(218,165,32,.65) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: divinePulse 2.5s ease-in-out infinite;
+    }
+
+@keyframes divinePulse {
+      0%,100% { opacity: .5; height: 44%; }
+      50%      { opacity: 1;  height: 54%; }
+    }
+
+#lineage-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(218,165,32,.1) 0%, rgba(196,160,64,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#lineage-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(140px,22vw,300px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#lineage-heading h2 {
+      background: linear-gradient(120deg,#c4a040 0%,#fff4e0 50%,#daa520 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#lineage-heading p { color: rgba(232,192,96,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

@@ -1,0 +1,284 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Jonah-specific keyframes ── */
+
+@keyframes waveRoll {
+      0%,100% { transform: translateX(0) translateY(0); }
+      25%      { transform: translateX(10px) translateY(-6px); }
+      50%      { transform: translateX(0) translateY(2px); }
+      75%      { transform: translateX(-10px) translateY(-4px); }
+    }
+
+@keyframes shipRock {
+      0%,100% { transform: rotate(-3deg) translateY(0);   }
+      50%      { transform: rotate(3deg)  translateY(-8px); }
+    }
+
+@keyframes bubbleRise {
+      0%   { transform: translateY(0) scale(1); opacity: .6; }
+      50%  { transform: translateY(-40px) scale(1.2); opacity: .3; }
+      100% { transform: translateY(-80px) scale(1.4); opacity: 0; }
+    }
+
+@keyframes lightRays {
+      0%,100% { opacity: .3; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: .6; transform: translateX(-50%) scaleX(1.1); }
+    }
+
+@keyframes vineGrow {
+      0%,100% { transform: scaleY(1) translateY(0); opacity: .8; }
+      50%      { transform: scaleY(1.05) translateY(-3px); opacity: 1; }
+    }
+
+@keyframes sunriseGlow {
+      0%,100% { opacity: .4; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scale(1.08); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #0a1018 0%, #101820 40%, #14202c 70%, #182838 100%);
+    }
+
+#intro-ocean-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(32,144,160,.12) 0%, rgba(20,100,120,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#2090a0 0%,#60d0e0 45%,#186878 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(32,144,160,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(32,144,160,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-fish-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(80px,12vw,140px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#intro-waves-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — FLEEING TO TARSHISH 逃往他施
+    ══════════════════════════════════════════════ */
+
+#scene-fleeing {
+      background: linear-gradient(180deg, #0e1620 0%, #162030 40%, #1a2838 70%, #101820 100%);
+    }
+
+#fleeing-sky-glow {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 35vh;
+      background: radial-gradient(ellipse, rgba(32,144,160,.10) 0%, rgba(20,80,100,.04) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+#fleeing-sea {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#0e2030 0%,#081420 55%,#060e18 100%);
+      z-index: 5;
+    }
+
+#fleeing-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 8s ease-in-out infinite;
+    }
+
+#fleeing-heading h2 {
+      color: #2090a0;
+      text-shadow: 0 0 22px rgba(32,144,160,.5);
+    }
+
+#fleeing-heading p { color: rgba(32,144,160,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — THE GREAT STORM 暴風之海
+    ══════════════════════════════════════════════ */
+
+#scene-storm {
+      background: linear-gradient(180deg, #080c14 0%, #0c1420 40%, #142030 70%, #0a1018 100%);
+    }
+
+#storm-flash-glow {
+      position: absolute; top: 5%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(180,200,220,.12) 0%, rgba(100,140,180,.04) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 2.5s ease-in-out infinite;
+    }
+
+#storm-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+
+#storm-heading h2 {
+      color: #70b8c8;
+      text-shadow: 0 0 22px rgba(32,144,160,.6);
+    }
+
+#storm-heading p { color: rgba(120,180,200,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — IN THE BELLY OF THE FISH 大魚之腹
+    ══════════════════════════════════════════════ */
+
+#scene-belly {
+      background: linear-gradient(180deg, #060c14 0%, #0a1420 40%, #0e1828 70%, #081018 100%);
+    }
+
+#belly-deep-glow {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 50%, rgba(32,144,160,.08) 0%, rgba(16,80,100,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#belly-figure-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(260px,40vw,550px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#belly-heading h2 {
+      color: #1a7888;
+      text-shadow: 0 0 18px rgba(32,144,160,.5);
+    }
+
+#belly-heading p { color: rgba(32,144,160,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — NINEVEH REPENTS 尼尼微悔改
+    ══════════════════════════════════════════════ */
+
+#scene-repent {
+      background: linear-gradient(180deg, #101820 0%, #182430 35%, #1e2c3a 60%, #243040 85%, #2a3848 100%);
+    }
+
+#repent-light {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(32,144,160,.15) 0%, rgba(20,100,120,.06) 50%, transparent 75%);
+      z-index: 3;
+      animation: lightRays 4s ease-in-out infinite;
+    }
+
+#repent-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#repent-heading h2 {
+      background: linear-gradient(120deg,#2090a0 0%,#80d0e0 50%,#186878 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#repent-heading p { color: rgba(32,144,160,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — GOD'S MERCY 神的憐憫
+    ══════════════════════════════════════════════ */
+
+#scene-mercy {
+      background: linear-gradient(180deg, #101820 0%, #1a2838 40%, #243848 70%, #2e4858 100%);
+    }
+
+#mercy-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,240,200,0) 0%,rgba(32,144,160,.3) 25%,rgba(32,144,160,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: sunriseGlow 2.5s ease-in-out infinite;
+    }
+
+#mercy-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(32,144,160,.08) 0%, rgba(20,100,120,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#mercy-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#mercy-heading h2 {
+      background: linear-gradient(120deg,#2090a0 0%,#a0e8f0 50%,#186878 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#mercy-heading p { color: rgba(32,144,160,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

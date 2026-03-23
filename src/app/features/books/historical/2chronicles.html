@@ -1,0 +1,500 @@
+<app-back-button />
+<app-nav-dots [scenes]="scenes" />
+
+<section class="scene" id="scene-intro" aria-label="歷代志下 — 開場">
+  <app-starfield />
+
+  <div id="intro-orb" aria-hidden="true"></div>
+  
+    <div id="intro-title">
+      <h1>歷代志下</h1>
+      <p>Book of 2 Chronicles</p>
+      <span class="sub">聖殿 · 復興 · 修殿 · 悔改 · 被擄</span>
+    </div>
+  
+    <!-- Gentle hills landscape -->
+    <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a2a40"/>
+          <stop offset="50%" stop-color="#102040"/>
+          <stop offset="100%" stop-color="#081420"/>
+        </linearGradient>
+        <linearGradient id="hill1G" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a5070"/>
+          <stop offset="100%" stop-color="#0e1e30"/>
+        </linearGradient>
+        <linearGradient id="hill2G" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a4060"/>
+          <stop offset="100%" stop-color="#081420"/>
+        </linearGradient>
+        <linearGradient id="groundG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a3048"/>
+          <stop offset="100%" stop-color="#060e18"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1440" height="420" fill="url(#skyG)"/>
+      <!-- Distant blue-green hills -->
+      <path d="M0 320 Q180 240 360 280 Q540 220 720 260 Q900 200 1080 260 Q1260 220 1440 280 L1440 420 L0 420 Z"
+            fill="url(#hill2G)" opacity=".6"/>
+      <!-- Nearer hills -->
+      <path d="M0 360 Q200 280 400 310 Q600 250 720 210 Q840 250 1040 300 Q1240 270 1440 320 L1440 420 L0 420 Z"
+            fill="url(#hill1G)"/>
+      <!-- Ground -->
+      <rect x="0" y="340" width="1440" height="80" fill="url(#groundG)"/>
+      <!-- Horizon glow -->
+      <ellipse cx="720" cy="240" rx="500" ry="60" fill="rgba(74,128,180,.1)"/>
+    </svg>
+  
+    <!-- Solomon standing near temple outline -->
+    <svg id="intro-solomon" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="所羅門王站在聖殿前 — Solomon standing near the temple">
+      <title>所羅門王站在聖殿前 — Solomon near the temple outline</title>
+      <!-- Temple outline behind Solomon -->
+      <rect x="55" y="20" width="40" height="55" fill="none" stroke="rgba(74,128,180,.35)" stroke-width="1.5" rx="1"/>
+      <path d="M53,20 L75,5 L97,20" fill="none" stroke="rgba(74,128,180,.35)" stroke-width="1.5"/>
+      <rect x="68" y="48" width="14" height="27" fill="rgba(74,128,180,.15)" rx="1"/>
+      <!-- Pillars -->
+      <line x1="58" y1="20" x2="58" y2="75" stroke="rgba(74,128,180,.25)" stroke-width="2"/>
+      <line x1="92" y1="20" x2="92" y2="75" stroke="rgba(74,128,180,.25)" stroke-width="2"/>
+      <!-- Solomon figure -->
+      <circle cx="28" cy="18" r="11" fill="#6b4e14"/>
+      <!-- Crown -->
+      <path d="M17,14 L22,6 L28,12 L34,6 L39,14" fill="#c8a030" stroke="#a08020" stroke-width="1"/>
+      <!-- Robe -->
+      <path d="M18,30 Q12,60 10,100 Q16,103 22,100 Q24,75 28,60 Q32,75 34,100 Q40,103 46,100 Q44,60 38,30 Z"
+            fill="#2a5080"/>
+      <!-- Royal sash -->
+      <path d="M21,34 Q28,32 35,34 L34,48 Q28,46 22,48 Z" fill="#4a80b4" opacity=".7"/>
+      <!-- Feet -->
+      <ellipse cx="20" cy="102" rx="6" ry="3" fill="#3d2200"/>
+      <ellipse cx="36" cy="102" rx="6" ry="3" fill="#3d2200"/>
+    </svg>
+
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-dedication" aria-label="聖殿落成 — Temple Dedication">
+  <app-starfield />
+
+  <div id="dedication-fire-glow" aria-hidden="true"></div>
+  
+    <!-- Grand temple with fire descending, cloud of glory -->
+    <svg id="dedication-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="聖殿落成，火從天降 — Fire descends from heaven upon the temple">
+      <title>聖殿落成 — Fire descends and the cloud of glory fills the temple</title>
+      <defs>
+        <linearGradient id="templeWallG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c8b080"/>
+          <stop offset="50%" stop-color="#a08860"/>
+          <stop offset="100%" stop-color="#6a5830"/>
+        </linearGradient>
+        <linearGradient id="fireG" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#ff4400"/>
+          <stop offset="40%" stop-color="#ff8800"/>
+          <stop offset="80%" stop-color="#ffcc00"/>
+          <stop offset="100%" stop-color="#fffff0"/>
+        </linearGradient>
+        <linearGradient id="groundDG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2818"/>
+          <stop offset="100%" stop-color="#0e0c08"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground -->
+      <rect x="0" y="400" width="1440" height="100" fill="url(#groundDG)"/>
+      <!-- Temple body -->
+      <rect x="520" y="200" width="400" height="200" fill="url(#templeWallG)" rx="2"/>
+      <!-- Temple roof -->
+      <path d="M500,200 L720,120 L940,200 Z" fill="#a09070"/>
+      <!-- Pillars -->
+      <rect x="540" y="200" width="20" height="200" fill="#b0a080" rx="2"/>
+      <rect x="620" y="200" width="20" height="200" fill="#b0a080" rx="2"/>
+      <rect x="800" y="200" width="20" height="200" fill="#b0a080" rx="2"/>
+      <rect x="880" y="200" width="20" height="200" fill="#b0a080" rx="2"/>
+      <!-- Temple door -->
+      <rect x="680" y="280" width="80" height="120" fill="#3a3020" rx="3"/>
+      <ellipse cx="720" cy="280" rx="40" ry="20" fill="#4a4030"/>
+      <!-- Fire descending from heaven -->
+      <path d="M700,20 Q690,60 710,100 Q700,130 720,160 Q740,130 730,100 Q750,60 740,20 Z"
+            fill="url(#fireG)" opacity=".85" style="animation:divineFire 2s ease-in-out infinite;"/>
+      <path d="M710,40 Q705,70 715,95 Q720,110 725,95 Q735,70 730,40 Z"
+            fill="#fffff0" opacity=".5" style="animation:divineFire 2s ease-in-out .3s infinite;"/>
+      <!-- Fire glow on altar -->
+      <ellipse cx="720" cy="170" rx="60" ry="20" fill="rgba(255,150,40,.2)"/>
+      <!-- Cloud of glory -->
+      <ellipse cx="720" cy="250" rx="180" ry="60" fill="rgba(255,255,240,.08)"/>
+      <ellipse cx="700" cy="260" rx="120" ry="40" fill="rgba(255,255,240,.06)"/>
+      <ellipse cx="750" cy="240" rx="100" ry="35" fill="rgba(255,255,240,.05)"/>
+      <!-- Solomon kneeling with arms raised -->
+      <circle cx="720" cy="370" r="8" fill="#6b4e14"/>
+      <path d="M712,378 Q710,390 708,400 Q714,402 720,398 Q726,402 732,400 Q730,390 728,378 Z" fill="#2a5080"/>
+      <!-- Raised arms -->
+      <line x1="712" y1="380" x2="698" y2="360" stroke="#6b4e14" stroke-width="3" stroke-linecap="round"/>
+      <line x1="728" y1="380" x2="742" y2="360" stroke="#6b4e14" stroke-width="3" stroke-linecap="round"/>
+      <!-- Worshippers on sides -->
+      <circle cx="580" cy="390" r="5" fill="rgba(100,80,50,.6)"/>
+      <circle cx="600" cy="392" r="4.5" fill="rgba(100,80,50,.55)"/>
+      <circle cx="560" cy="394" r="5" fill="rgba(100,80,50,.5)"/>
+      <circle cx="860" cy="390" r="5" fill="rgba(100,80,50,.6)"/>
+      <circle cx="840" cy="392" r="4.5" fill="rgba(100,80,50,.55)"/>
+      <circle cx="880" cy="394" r="5" fill="rgba(100,80,50,.5)"/>
+      <!-- Altar glow -->
+      <ellipse cx="720" cy="380" rx="30" ry="15" fill="none"
+               stroke="rgba(255,200,40,.12)" stroke-width="6"
+               style="animation:breathe 2.5s ease-in-out infinite;"/>
+    </svg>
+
+  <app-scene-heading title="🔥 聖殿落成" subtitle="Temple Dedication — 2 Chronicles 7" id="dedication-heading" />
+  <app-scene-verse text="「所羅門祈禱已畢，就有火從天上降下來」— 歷代志下 7:1" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-jehoshaphat" aria-label="約沙法的戰役 — Jehoshaphat's Victory">
+  <app-starfield />
+
+  <div id="jehoshaphat-glow" aria-hidden="true"></div>
+  
+    <!-- Singers marching, enemy in confusion, Jehoshaphat leading -->
+    <svg id="jehoshaphat-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="詩班在軍前歌唱 — Singers marching before the army, enemies in confusion">
+      <title>約沙法的戰役 — Choir marches ahead of the army as enemies fall into confusion</title>
+      <defs>
+        <linearGradient id="battleGroundG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2040"/>
+          <stop offset="100%" stop-color="#0e0818"/>
+        </linearGradient>
+        <linearGradient id="hillBG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#302848"/>
+          <stop offset="100%" stop-color="#181028"/>
+        </linearGradient>
+      </defs>
+      <!-- Background hills -->
+      <path d="M0 300 Q200 240 400 280 Q600 220 800 260 Q1000 230 1200 270 Q1350 250 1440 280 L1440 500 L0 500 Z"
+            fill="url(#hillBG)" opacity=".5"/>
+      <!-- Ground -->
+      <rect x="0" y="380" width="1440" height="120" fill="url(#battleGroundG)"/>
+      <!-- Path / road -->
+      <path d="M100 420 Q400 400 720 410 Q1040 400 1340 420 L1340 440 Q1040 420 720 430 Q400 420 100 440 Z"
+            fill="rgba(60,50,80,.3)"/>
+      <!-- King Jehoshaphat (larger, leading) -->
+      <circle cx="360" cy="368" r="9" fill="#6b4e14"/>
+      <path d="M351,376 Q348,395 346,410 Q352,413 358,410 Q360,395 360,385 Q360,395 362,410 Q368,413 374,410 Q372,395 369,376 Z"
+            fill="#3050a0"/>
+      <!-- Crown -->
+      <path d="M352,362 L356,355 L360,360 L364,355 L368,362" fill="#c8a030" stroke="#a08020" stroke-width=".8"/>
+      <!-- Raised scepter -->
+      <line x1="374" y1="378" x2="384" y2="352" stroke="#c8a030" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Singers / choir (front group) -->
+      <circle cx="440" cy="375" r="5" fill="rgba(120,100,160,.7)"/>
+      <circle cx="460" cy="377" r="5" fill="rgba(120,100,160,.65)"/>
+      <circle cx="480" cy="374" r="5" fill="rgba(120,100,160,.7)"/>
+      <circle cx="500" cy="378" r="4.5" fill="rgba(120,100,160,.6)"/>
+      <circle cx="520" cy="375" r="5" fill="rgba(120,100,160,.65)"/>
+      <!-- Musical notes floating -->
+      <text x="450" y="358" font-size="14" fill="rgba(200,180,255,.4)" style="animation:floatY 3s ease-in-out infinite;">♪</text>
+      <text x="475" y="352" font-size="12" fill="rgba(200,180,255,.35)" style="animation:floatY 3s ease-in-out .5s infinite;">♫</text>
+      <text x="505" y="356" font-size="13" fill="rgba(200,180,255,.4)" style="animation:floatY 3s ease-in-out 1s infinite;">♪</text>
+      <!-- Army behind singers -->
+      <circle cx="560" cy="380" r="4" fill="rgba(80,70,100,.5)"/>
+      <circle cx="575" cy="378" r="4" fill="rgba(80,70,100,.5)"/>
+      <circle cx="590" cy="382" r="4" fill="rgba(80,70,100,.45)"/>
+      <circle cx="605" cy="379" r="4" fill="rgba(80,70,100,.5)"/>
+      <circle cx="620" cy="381" r="3.5" fill="rgba(80,70,100,.45)"/>
+      <!-- Spears behind army -->
+      <line x1="562" y1="380" x2="565" y2="355" stroke="rgba(140,140,160,.3)" stroke-width="1.5"/>
+      <line x1="577" y1="378" x2="580" y2="353" stroke="rgba(140,140,160,.3)" stroke-width="1.5"/>
+      <line x1="607" y1="379" x2="610" y2="354" stroke="rgba(140,140,160,.3)" stroke-width="1.5"/>
+      <!-- Enemy armies in confusion (right side, scattered/falling) -->
+      <circle cx="900" cy="385" r="5" fill="rgba(120,50,50,.5)" transform="rotate(20,900,385)"/>
+      <circle cx="930" cy="395" r="5" fill="rgba(120,50,50,.45)" transform="rotate(-30,930,395)"/>
+      <circle cx="960" cy="388" r="4.5" fill="rgba(120,50,50,.5)" transform="rotate(40,960,388)"/>
+      <circle cx="990" cy="398" r="5" fill="rgba(120,50,50,.4)" transform="rotate(-15,990,398)"/>
+      <circle cx="1020" cy="392" r="4" fill="rgba(120,50,50,.4)" transform="rotate(25,1020,392)"/>
+      <!-- Fallen enemy weapons -->
+      <line x1="920" y1="398" x2="940" y2="405" stroke="rgba(160,80,80,.3)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="970" y1="400" x2="985" y2="410" stroke="rgba(160,80,80,.3)" stroke-width="2" stroke-linecap="round"/>
+      <!-- Confusion dust -->
+      <ellipse cx="960" cy="400" rx="100" ry="20" fill="rgba(140,100,120,.08)"/>
+      <!-- Divine light from above -->
+      <path d="M680,0 L700,200 L740,200 L760,0 Z" fill="rgba(200,180,255,.04)"/>
+      <path d="M700,0 L710,180 L730,180 L740,0 Z" fill="rgba(220,200,255,.03)"/>
+    </svg>
+
+  <app-scene-heading title="🎺 約沙法的戰役" subtitle="Jehoshaphat's Victory — 2 Chronicles 20" id="jehoshaphat-heading" />
+  <app-scene-verse text="「你們不要懼怕，因為勝敗不在乎你們，乃在乎神」— 歷代志下 20:15" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-repair" aria-label="約阿施修殿 — Joash Repairs the Temple">
+  <app-starfield />
+
+  <div id="repair-glow" aria-hidden="true"></div>
+  
+    <!-- Workers repairing temple, scaffolding, collection chest -->
+    <svg id="repair-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="工人修復聖殿 — Workers repairing the temple walls">
+      <title>約阿施修殿 — Workers repair the temple with scaffolding and a collection chest at the gate</title>
+      <defs>
+        <linearGradient id="repairWallG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#a09070"/>
+          <stop offset="50%" stop-color="#806840"/>
+          <stop offset="100%" stop-color="#504020"/>
+        </linearGradient>
+        <linearGradient id="repairGroundG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a3020"/>
+          <stop offset="100%" stop-color="#1a1408"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground -->
+      <rect x="0" y="390" width="1440" height="110" fill="url(#repairGroundG)"/>
+      <!-- Temple wall (partially damaged) -->
+      <rect x="480" y="180" width="480" height="210" fill="url(#repairWallG)" rx="2"/>
+      <!-- Brick lines -->
+      <line x1="480" y1="210" x2="960" y2="210" stroke="rgba(60,50,30,.3)" stroke-width="1"/>
+      <line x1="480" y1="240" x2="960" y2="240" stroke="rgba(60,50,30,.3)" stroke-width="1"/>
+      <line x1="480" y1="270" x2="960" y2="270" stroke="rgba(60,50,30,.3)" stroke-width="1"/>
+      <line x1="480" y1="300" x2="960" y2="300" stroke="rgba(60,50,30,.3)" stroke-width="1"/>
+      <line x1="480" y1="330" x2="960" y2="330" stroke="rgba(60,50,30,.3)" stroke-width="1"/>
+      <line x1="480" y1="360" x2="960" y2="360" stroke="rgba(60,50,30,.3)" stroke-width="1"/>
+      <!-- Damaged gap in wall -->
+      <path d="M840,180 L850,220 L870,200 L880,240 L860,260 L880,280 L860,300 L880,330 L860,360 L840,390 L960,390 L960,180 Z"
+            fill="url(#repairGroundG)" opacity=".5"/>
+      <!-- Scaffolding -->
+      <line x1="850" y1="180" x2="850" y2="390" stroke="#6a5a30" stroke-width="3"/>
+      <line x1="920" y1="180" x2="920" y2="390" stroke="#6a5a30" stroke-width="3"/>
+      <line x1="840" y1="230" x2="930" y2="230" stroke="#6a5a30" stroke-width="2"/>
+      <line x1="840" y1="290" x2="930" y2="290" stroke="#6a5a30" stroke-width="2"/>
+      <line x1="840" y1="350" x2="930" y2="350" stroke="#6a5a30" stroke-width="2"/>
+      <!-- Cross braces -->
+      <line x1="850" y1="230" x2="920" y2="290" stroke="#5a4a28" stroke-width="1.5"/>
+      <line x1="920" y1="230" x2="850" y2="290" stroke="#5a4a28" stroke-width="1.5"/>
+      <!-- Worker on scaffolding -->
+      <circle cx="885" cy="270" r="6" fill="#6b4e14"/>
+      <path d="M879,276 Q878,288 876,298 Q880,300 884,298 Q886,290 886,284 Q886,290 888,298 Q892,300 894,298 Q892,288 891,276 Z"
+            fill="#8a7a50"/>
+      <!-- Worker with tool -->
+      <line x1="894" y1="278" x2="908" y2="264" stroke="#4a4040" stroke-width="2" stroke-linecap="round"/>
+      <!-- Worker on ground -->
+      <circle cx="780" cy="376" r="6" fill="#6b4e14"/>
+      <path d="M774,382 Q773,394 771,404 Q775,406 779,404 Q780,396 780,390 Q780,396 781,404 Q785,406 789,404 Q787,394 786,382 Z"
+            fill="#7a6a40"/>
+      <!-- Carrying stones -->
+      <rect x="792" y="380" width="14" height="10" fill="#a09070" rx="1"/>
+      <!-- Collection chest at gate -->
+      <rect x="400" y="360" width="50" height="30" fill="#5a3a20" rx="2"
+            style="filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));"/>
+      <rect x="405" y="356" width="40" height="6" fill="#7a5a30" rx="1"/>
+      <!-- Slot in chest -->
+      <line x1="418" y1="358" x2="432" y2="358" stroke="#3a2010" stroke-width="2"/>
+      <!-- Coins near chest -->
+      <circle cx="410" cy="388" r="3" fill="rgba(200,180,60,.5)"/>
+      <circle cx="418" cy="386" r="2.5" fill="rgba(200,180,60,.45)"/>
+      <circle cx="440" cy="389" r="2.8" fill="rgba(200,180,60,.5)"/>
+      <!-- Young King Joash (smaller, directing) -->
+      <circle cx="360" cy="372" r="7" fill="#6b4e14"/>
+      <path d="M353,378 Q351,394 349,406 Q354,408 359,406 Q360,396 360,388 Q360,396 361,406 Q366,408 371,406 Q369,394 367,378 Z"
+            fill="#2a5080"/>
+      <!-- Small crown -->
+      <path d="M354,367 L357,362 L360,366 L363,362 L366,367" fill="#c8a030" stroke="#a08020" stroke-width=".6"/>
+      <!-- Pointing arm -->
+      <line x1="367" y1="380" x2="390" y2="372" stroke="#6b4e14" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+
+  <app-scene-heading title="🔨 約阿施修殿" subtitle="Joash Repairs the Temple — 2 Chronicles 24" id="repair-heading" />
+  <app-scene-verse text="「工人操作，漸漸修復神的殿」— 歷代志下 24:13" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-revival" aria-label="希西家的復興 — Hezekiah's Revival">
+  <app-starfield />
+
+  <div id="revival-sunrise" aria-hidden="true"></div>
+  
+    <!-- Temple doors open, people streaming in, sunrise -->
+    <svg id="revival-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="聖殿門大開，百姓湧入 — Temple doors flung open, people streaming in">
+      <title>希西家的復興 — Temple doors open wide as people stream in for worship at sunrise</title>
+      <defs>
+        <linearGradient id="revivalSkyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a2040"/>
+          <stop offset="40%" stop-color="#3a4060"/>
+          <stop offset="80%" stop-color="#6a5840"/>
+          <stop offset="100%" stop-color="#8a6830"/>
+        </linearGradient>
+        <linearGradient id="revivalWallG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#b0a080"/>
+          <stop offset="100%" stop-color="#6a5830"/>
+        </linearGradient>
+        <linearGradient id="sunriseG" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="rgba(255,200,80,.4)"/>
+          <stop offset="50%" stop-color="rgba(255,160,60,.15)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </linearGradient>
+        <linearGradient id="revivalGroundG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a3428"/>
+          <stop offset="100%" stop-color="#1a1410"/>
+        </linearGradient>
+      </defs>
+      <!-- Sky -->
+      <rect x="0" y="0" width="1440" height="500" fill="url(#revivalSkyG)"/>
+      <!-- Sunrise behind temple -->
+      <ellipse cx="720" cy="200" rx="300" ry="150" fill="url(#sunriseG)"/>
+      <ellipse cx="720" cy="200" rx="180" ry="90" fill="rgba(255,220,100,.08)"/>
+      <!-- Ground -->
+      <rect x="0" y="380" width="1440" height="120" fill="url(#revivalGroundG)"/>
+      <!-- Temple front -->
+      <rect x="560" y="180" width="320" height="200" fill="url(#revivalWallG)" rx="2"/>
+      <!-- Roof -->
+      <path d="M540,180 L720,100 L900,180 Z" fill="#907850"/>
+      <!-- Pillars -->
+      <rect x="575" y="180" width="16" height="200" fill="#c0a878" rx="2"/>
+      <rect x="849" y="180" width="16" height="200" fill="#c0a878" rx="2"/>
+      <!-- Open doors (angled outward) -->
+      <rect x="640" y="260" width="35" height="120" fill="#5a4828" rx="1"
+            transform="rotate(-25,640,320)"/>
+      <rect x="765" y="260" width="35" height="120" fill="#5a4828" rx="1"
+            transform="rotate(25,800,320)"/>
+      <!-- Light from doorway -->
+      <rect x="675" y="260" width="90" height="120" fill="rgba(255,240,200,.12)" rx="1"
+            style="animation:gatePulse 3s ease-in-out infinite;"/>
+      <!-- Altar inside (visible through door) -->
+      <rect x="700" y="310" width="40" height="20" fill="#8a7a58" rx="1"/>
+      <ellipse cx="720" cy="305" rx="15" ry="8" fill="rgba(255,180,40,.2)"/>
+      <!-- Priests at altar -->
+      <circle cx="695" cy="340" r="4" fill="rgba(230,220,200,.6)"/>
+      <circle cx="745" cy="342" r="4" fill="rgba(230,220,200,.6)"/>
+      <!-- People streaming toward temple (left group) -->
+      <circle cx="400" cy="390" r="5" fill="rgba(100,90,70,.6)"/>
+      <circle cx="420" cy="388" r="4.5" fill="rgba(100,90,70,.55)"/>
+      <circle cx="440" cy="392" r="5" fill="rgba(100,90,70,.6)"/>
+      <circle cx="460" cy="389" r="4.5" fill="rgba(100,90,70,.55)"/>
+      <circle cx="480" cy="391" r="5" fill="rgba(100,90,70,.6)"/>
+      <circle cx="500" cy="387" r="4.5" fill="rgba(100,90,70,.55)"/>
+      <circle cx="520" cy="390" r="5" fill="rgba(100,90,70,.5)"/>
+      <circle cx="540" cy="388" r="4" fill="rgba(100,90,70,.5)"/>
+      <!-- People streaming (right group) -->
+      <circle cx="900" cy="391" r="5" fill="rgba(100,90,70,.6)"/>
+      <circle cx="920" cy="389" r="4.5" fill="rgba(100,90,70,.55)"/>
+      <circle cx="940" cy="392" r="5" fill="rgba(100,90,70,.6)"/>
+      <circle cx="960" cy="388" r="4.5" fill="rgba(100,90,70,.55)"/>
+      <circle cx="980" cy="390" r="5" fill="rgba(100,90,70,.5)"/>
+      <circle cx="1000" cy="392" r="4" fill="rgba(100,90,70,.5)"/>
+      <!-- People closer to door -->
+      <circle cx="620" cy="386" r="5" fill="rgba(110,100,80,.6)"/>
+      <circle cx="640" cy="388" r="4.5" fill="rgba(110,100,80,.55)"/>
+      <circle cx="800" cy="387" r="5" fill="rgba(110,100,80,.6)"/>
+      <circle cx="820" cy="389" r="4.5" fill="rgba(110,100,80,.55)"/>
+      <!-- Sun rays -->
+      <line x1="720" y1="130" x2="720" y2="60" stroke="rgba(255,220,100,.12)" stroke-width="3"/>
+      <line x1="660" y1="140" x2="620" y2="70" stroke="rgba(255,220,100,.08)" stroke-width="2"/>
+      <line x1="780" y1="140" x2="820" y2="70" stroke="rgba(255,220,100,.08)" stroke-width="2"/>
+    </svg>
+
+  <app-scene-heading title="🕊 希西家的復興" subtitle="Hezekiah's Revival — 2 Chronicles 30" id="revival-heading" />
+  <app-scene-verse text="「你們歸向耶和華，他必轉向你們」— 歷代志下 30:9" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-exile" aria-label="被擄巴比倫 — Exile to Babylon">
+  <app-starfield />
+
+  <div id="exile-fire-glow" aria-hidden="true"></div>
+  
+    <!-- Burning temple, broken walls, people in chains walking to Babylon -->
+    <svg id="exile-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="聖殿焚燒，百姓被擄 — The temple burns and the people are taken to Babylon">
+      <title>被擄巴比倫 — The Chaldeans burn the temple and the people march in chains toward Babylon</title>
+      <defs>
+        <linearGradient id="exileGroundG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1810"/>
+          <stop offset="100%" stop-color="#0a0400"/>
+        </linearGradient>
+        <linearGradient id="burnG" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#cc3300"/>
+          <stop offset="40%" stop-color="#ff6600"/>
+          <stop offset="80%" stop-color="#ff9900"/>
+          <stop offset="100%" stop-color="#ffcc44"/>
+        </linearGradient>
+        <linearGradient id="ruinWallG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6a5a40"/>
+          <stop offset="100%" stop-color="#2a2010"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground -->
+      <rect x="0" y="390" width="1440" height="110" fill="url(#exileGroundG)"/>
+      <!-- Distant Babylon silhouette (right horizon) -->
+      <rect x="1200" y="340" width="30" height="50" fill="rgba(40,30,20,.4)" rx="1"/>
+      <rect x="1240" y="330" width="25" height="60" fill="rgba(40,30,20,.35)" rx="1"/>
+      <rect x="1275" y="345" width="20" height="45" fill="rgba(40,30,20,.3)" rx="1"/>
+      <path d="M1195,340 L1215,325 L1235,340" fill="rgba(40,30,20,.3)"/>
+      <path d="M1235,330 L1252,318 L1270,330" fill="rgba(40,30,20,.25)"/>
+      <!-- Ruined temple walls -->
+      <rect x="300" y="230" width="60" height="160" fill="url(#ruinWallG)" rx="1"/>
+      <rect x="440" y="260" width="50" height="130" fill="url(#ruinWallG)" rx="1" opacity=".8"/>
+      <rect x="560" y="250" width="55" height="140" fill="url(#ruinWallG)" rx="1" opacity=".85"/>
+      <!-- Jagged broken top edges -->
+      <path d="M300,230 L310,220 L320,235 L335,215 L350,230 L360,225" fill="url(#ruinWallG)"/>
+      <path d="M440,260 L450,248 L460,255 L475,245 L490,258" fill="url(#ruinWallG)" opacity=".8"/>
+      <path d="M560,250 L572,238 L580,248 L592,235 L600,242 L615,250" fill="url(#ruinWallG)" opacity=".85"/>
+      <!-- Rubble on ground -->
+      <rect x="380" y="385" width="18" height="12" fill="rgba(100,80,50,.4)" rx="2" transform="rotate(15,389,391)"/>
+      <rect x="500" y="382" width="22" height="14" fill="rgba(100,80,50,.35)" rx="2" transform="rotate(-10,511,389)"/>
+      <rect x="420" y="388" width="15" height="10" fill="rgba(100,80,50,.3)" rx="1" transform="rotate(25,427,393)"/>
+      <!-- Flames on ruins -->
+      <path d="M320,230 Q315,200 325,170 Q330,200 335,230"
+            fill="url(#burnG)" opacity=".7" style="animation:divineFire 1.5s ease-in-out infinite;"/>
+      <path d="M460,260 Q455,235 465,210 Q470,235 475,260"
+            fill="url(#burnG)" opacity=".6" style="animation:divineFire 1.5s ease-in-out .4s infinite;"/>
+      <path d="M580,250 Q575,220 585,190 Q590,220 595,250"
+            fill="url(#burnG)" opacity=".65" style="animation:divineFire 1.5s ease-in-out .8s infinite;"/>
+      <!-- Smoke -->
+      <ellipse cx="340" cy="160" rx="40" ry="20" fill="rgba(80,60,40,.15)"/>
+      <ellipse cx="470" cy="195" rx="35" ry="18" fill="rgba(80,60,40,.12)"/>
+      <ellipse cx="590" cy="175" rx="38" ry="19" fill="rgba(80,60,40,.13)"/>
+      <!-- Fire glow on ground -->
+      <ellipse cx="450" cy="380" rx="180" ry="25" fill="rgba(255,100,20,.06)"/>
+      <!-- Chain line connecting captives -->
+      <line x1="720" y1="385" x2="1100" y2="385" stroke="rgba(100,80,60,.35)" stroke-width="2"
+            stroke-dasharray="8,4"/>
+      <!-- People walking in line (captives) -->
+      <circle cx="740" cy="376" r="5" fill="rgba(100,80,50,.6)"/>
+      <path d="M735,381 Q734,394 733,404 Q737,405 740,404 Q741,396 741,390 Q741,396 742,404 Q745,405 748,404 Q747,394 745,381 Z"
+            fill="rgba(80,60,40,.5)"/>
+      <circle cx="790" cy="378" r="5" fill="rgba(100,80,50,.55)"/>
+      <path d="M785,383 Q784,396 783,404 Q787,405 790,404 Q791,396 791,392 Q791,396 792,404 Q795,405 798,404 Q797,396 795,383 Z"
+            fill="rgba(80,60,40,.45)"/>
+      <circle cx="840" cy="377" r="4.5" fill="rgba(100,80,50,.55)"/>
+      <path d="M836,382 Q835,394 834,402 Q837,403 840,402 Q841,395 841,390 Q841,395 842,402 Q845,403 848,402 Q847,394 845,382 Z"
+            fill="rgba(80,60,40,.45)"/>
+      <circle cx="890" cy="378" r="5" fill="rgba(100,80,50,.5)"/>
+      <path d="M885,383 Q884,396 883,404 Q887,405 890,404 Q891,396 891,392 Q891,396 892,404 Q895,405 898,404 Q897,396 895,383 Z"
+            fill="rgba(80,60,40,.4)"/>
+      <circle cx="940" cy="376" r="4.5" fill="rgba(100,80,50,.5)"/>
+      <path d="M936,381 Q935,394 934,402 Q937,403 940,402 Q941,395 941,390 Q941,395 942,402 Q945,403 948,402 Q947,394 945,381 Z"
+            fill="rgba(80,60,40,.4)"/>
+      <circle cx="990" cy="378" r="4" fill="rgba(100,80,50,.45)"/>
+      <circle cx="1040" cy="377" r="3.5" fill="rgba(100,80,50,.4)"/>
+      <circle cx="1090" cy="379" r="3" fill="rgba(100,80,50,.35)"/>
+      <!-- Chain links on captives -->
+      <circle cx="765" cy="385" r="3" fill="none" stroke="rgba(120,100,70,.4)" stroke-width="1.5"/>
+      <circle cx="815" cy="385" r="3" fill="none" stroke="rgba(120,100,70,.4)" stroke-width="1.5"/>
+      <circle cx="865" cy="385" r="3" fill="none" stroke="rgba(120,100,70,.4)" stroke-width="1.5"/>
+      <circle cx="915" cy="385" r="3" fill="none" stroke="rgba(120,100,70,.4)" stroke-width="1.5"/>
+      <circle cx="965" cy="385" r="3" fill="none" stroke="rgba(120,100,70,.35)" stroke-width="1.5"/>
+      <!-- Guard with spear -->
+      <circle cx="700" cy="372" r="6" fill="rgba(80,40,30,.6)"/>
+      <path d="M694,378 Q693,394 692,406 Q696,408 700,406 Q701,396 701,388 Q701,396 702,406 Q706,408 710,406 Q709,394 706,378 Z"
+            fill="rgba(60,30,20,.5)"/>
+      <line x1="710" y1="374" x2="714" y2="348" stroke="rgba(140,120,80,.5)" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M711,350 L714,340 L717,350" fill="rgba(140,120,80,.4)"/>
+    </svg>
+
+  <app-scene-heading title="⛓ 被擄巴比倫" subtitle="Exile to Babylon — 2 Chronicles 36" id="exile-heading" />
+  <app-scene-verse text="「迦勒底人焚燒神的殿，拆毀耶路撒冷的城牆」— 歷代志下 36:19" />
+</section>

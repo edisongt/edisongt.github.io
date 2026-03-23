@@ -1,0 +1,298 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Zephaniah-specific keyframes ── */
+
+@keyframes vortexSpin {
+      0%   { transform: translateX(-50%) rotate(0deg); }
+      100% { transform: translateX(-50%) rotate(360deg); }
+    }
+
+@keyframes trumpetBlast {
+      0%,100% { opacity: .4; transform: scale(1); }
+      50%      { opacity: .9; transform: scale(1.12); }
+    }
+
+@keyframes fireFlicker {
+      0%,100% { opacity: .6; transform: scaleY(1) scaleX(1); }
+      25%     { opacity: .9; transform: scaleY(1.1) scaleX(.95); }
+      50%     { opacity: .5; transform: scaleY(.9) scaleX(1.05); }
+      75%     { opacity: .8; transform: scaleY(1.05) scaleX(.98); }
+    }
+
+@keyframes searchLight {
+      0%,100% { opacity: .3; transform: translateX(-50%) scaleY(1); }
+      50%      { opacity: .6; transform: translateX(-50%) scaleY(1.1); }
+    }
+
+@keyframes shelterPulse {
+      0%,100% { opacity: .5; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .8; transform: translateX(-50%) scale(1.06); }
+    }
+
+@keyframes joyRadiate {
+      0%,100% { opacity: .5; transform: translateX(-50%) scale(1); }
+      50%      { opacity: 1;  transform: translateX(-50%) scale(1.1); }
+    }
+
+@keyframes noteFloat {
+      0%   { transform: translateY(0) rotate(0deg); opacity: .6; }
+      50%  { transform: translateY(-18px) rotate(8deg); opacity: .9; }
+      100% { transform: translateY(0) rotate(0deg); opacity: .6; }
+    }
+
+@keyframes emberGlow {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+@keyframes smokeRise {
+      0%   { transform: translateY(0) scaleX(1); opacity: .5; }
+      50%  { transform: translateY(-40px) scaleX(1.3); opacity: .25; }
+      100% { transform: translateY(-80px) scaleX(1.6); opacity: 0; }
+    }
+
+@keyframes dawnGrow {
+      0%,100% { opacity: .4; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleX(1.1); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #1a1410 0%, #221a14 40%, #2a2018 70%, #1a1410 100%);
+    }
+
+#intro-ember-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(160,82,45,.12) 0%, rgba(120,50,20,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: emberGlow 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#a0522d 0%,#d4956b 45%,#6b3a1a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(160,82,45,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(160,82,45,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-trumpet-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(80px,10vw,140px);
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — JUDGMENT ON ALL EARTH 全地的審判
+    ══════════════════════════════════════════════ */
+
+#scene-judgment {
+      background: linear-gradient(180deg, #0e0a08 0%, #1a1210 40%, #221810 70%, #0e0a08 100%);
+    }
+
+#judgment-vortex-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(160,82,45,.15) 0%, rgba(80,40,20,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#judgment-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 8s ease-in-out infinite;
+    }
+
+#judgment-heading h2 {
+      color: #a0522d;
+      text-shadow: 0 0 22px rgba(160,82,45,.5);
+    }
+
+#judgment-heading p { color: rgba(160,82,45,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — THE GREAT DAY OF THE LORD 耶和華的大日
+    ══════════════════════════════════════════════ */
+
+#scene-greatday {
+      background: linear-gradient(180deg, #1a0c08 0%, #3a1a10 40%, #4a2010 70%, #2a1008 100%);
+    }
+
+#greatday-fire-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(200,80,30,.2) 0%, rgba(160,60,20,.08) 45%, transparent 70%);
+      z-index: 3;
+      animation: fireFlicker 3s ease-in-out infinite;
+    }
+
+#greatday-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+
+#greatday-heading h2 {
+      color: #c45a30;
+      text-shadow: 0 0 22px rgba(200,80,40,.6);
+    }
+
+#greatday-heading p { color: rgba(200,100,60,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — SEEK THE LORD 尋求耶和華
+    ══════════════════════════════════════════════ */
+
+#scene-seek {
+      background: linear-gradient(180deg, #14120e 0%, #1c1a14 40%, #22201a 70%, #1a1810 100%);
+    }
+
+#seek-light-beam {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(80px,12vw,200px); height: 100%;
+      background: linear-gradient(180deg,rgba(255,220,160,0) 0%,rgba(200,160,80,.15) 30%,rgba(160,82,45,.25) 65%,transparent 100%);
+      z-index: 3; filter: blur(12px);
+      animation: searchLight 3s ease-in-out infinite;
+    }
+
+#seek-figure-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#seek-heading h2 {
+      color: #c49060;
+      text-shadow: 0 0 18px rgba(160,82,45,.5);
+    }
+
+#seek-heading p { color: rgba(160,120,80,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — THE HUMBLE REMNANT 謙卑的餘民
+    ══════════════════════════════════════════════ */
+
+#scene-remnant {
+      background: linear-gradient(180deg, #141210 0%, #1e1c18 35%, #2a2820 60%, #3a3528 85%, #2a2820 100%);
+    }
+
+#remnant-shelter-light {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(160,82,45,.15) 0%, rgba(140,70,30,.06) 50%, transparent 75%);
+      z-index: 3;
+      animation: shelterPulse 4s ease-in-out infinite;
+    }
+
+#remnant-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#remnant-heading h2 {
+      background: linear-gradient(120deg,#8a6a4a 0%,#d4a070 50%,#6a4a2a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#remnant-heading p { color: rgba(160,120,80,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — GOD SINGS WITH JOY 神的歡喜歌唱
+    ══════════════════════════════════════════════ */
+
+#scene-joy {
+      background: linear-gradient(180deg, #1e1a14 0%, #2a2418 40%, #3a3020 70%, #44382a 100%);
+    }
+
+#joy-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,220,160,0) 0%,rgba(200,160,80,.3) 25%,rgba(160,82,45,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: joyRadiate 2.5s ease-in-out infinite;
+    }
+
+#joy-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(160,82,45,.08) 0%, rgba(120,60,30,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#joy-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(180px,28vw,380px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#joy-heading h2 {
+      background: linear-gradient(120deg,#a0522d 0%,#e8c080 50%,#6b3a1a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#joy-heading p { color: rgba(160,120,80,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

@@ -1,0 +1,277 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #4a8eaa 0%, #6bb8a8 35%, #a8d4a0 65%, #d4c090 100%);
+    }
+
+#intro-sun {
+      position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
+      width: clamp(50px,8vw,100px); height: clamp(50px,8vw,100px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 38%, #e0fff6, #5cbdaa 40%, #3a9a88 75%, #1a6a5a);
+      box-shadow: 0 0 50px rgba(92,189,170,.6), 0 0 100px rgba(72,200,180,.25);
+      z-index: 4;
+      animation: orbGlow 4s ease-in-out infinite;
+    }
+
+@keyframes orbGlow {
+      0%,100% { box-shadow: 0 0 50px rgba(92,189,170,.6), 0 0 100px rgba(72,200,180,.25); }
+      50%      { box-shadow: 0 0 75px rgba(92,189,170,.85), 0 0 150px rgba(72,200,180,.4); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#2a7a6a 0%,#b0f0e0 45%,#5cbdaa 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(42,122,106,.85); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(92,189,170,.7); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-figures {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(70px,10vw,130px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — PROSPERITY  約伯的豐盛
+    ══════════════════════════════════════════════ */
+
+#scene-prosperity {
+      background: linear-gradient(180deg, #7ec8b0 0%, #c8d880 35%, #e8d880 65%, #88c070 100%);
+    }
+
+#prosperity-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#68a858 0%,#4a8840 55%,#306828 100%);
+      z-index: 5;
+    }
+
+#prosperity-ground::before {
+      content: '';
+      position: absolute; top: -18%; left: 0; width: 100%; height: 30%;
+      background: radial-gradient(ellipse 30% 40% at 25% 80%, #78b868 0%, transparent 70%),
+                  radial-gradient(ellipse 25% 35% at 65% 70%, #68a858 0%, transparent 65%),
+                  radial-gradient(ellipse 20% 30% at 88% 90%, #78b868 0%, transparent 60%);
+    }
+
+#prosperity-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(92,189,170,.18) 0%, rgba(72,200,180,.06) 50%, transparent 72%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#prosperity-scene-svg {
+      position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(260px,38vw,520px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#prosperity-heading h2 {
+      color: #1a6a5a;
+      text-shadow: 0 0 22px rgba(92,189,170,.5);
+    }
+
+#prosperity-heading p { color: rgba(42,122,106,.65); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — SUFFERING  約伯的苦難
+    ══════════════════════════════════════════════ */
+
+#scene-suffering {
+      background: linear-gradient(180deg, #8a7aa0 0%, #7a6878 35%, #5a6878 65%, #3a5868 100%);
+    }
+
+#suffering-sky { position: absolute; top: 0; left: 0; width: 100%; height: 55%; z-index: 2; }
+
+#suffering-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%;
+      background: linear-gradient(180deg,#5a5048 0%,#3a3028 55%,#2a2018 100%);
+      z-index: 5;
+    }
+
+#suffering-scene-svg {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: floatY 6s ease-in-out infinite;
+    }
+
+#suffering-heading h2 {
+      background: linear-gradient(120deg,#c06040 0%,#ffc0a0 50%,#a05030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#suffering-heading p { color: rgba(220,160,130,.65); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — THREE FRIENDS  三友辯論
+    ══════════════════════════════════════════════ */
+
+#scene-friends {
+      background: linear-gradient(180deg, #c0b898 0%, #d8c8a0 35%, #c8b080 65%, #a89870 100%);
+    }
+
+#friends-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 35%;
+      background: linear-gradient(180deg,#b09870 0%,#8a7858 55%,#6a5a40 100%);
+      z-index: 5;
+    }
+
+#friends-scene-svg {
+      position: absolute; bottom: 26%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(240px,35vw,480px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#friends-heading h2 {
+      background: linear-gradient(120deg,#6a5a30 0%,#d4c090 50%,#8a7a50 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#friends-heading p { color: rgba(106,90,48,.65); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — GOD SPEAKS  神從旋風中回答
+    ══════════════════════════════════════════════ */
+
+#scene-whirlwind {
+      background: linear-gradient(180deg, #6aa8d0 0%, #90c8e8 35%, #e0f0ff 65%, #a0d8f0 100%);
+    }
+
+#whirlwind-vortex {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 60%;
+      z-index: 5;
+    }
+
+#whirlwind-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(20px,4vw,55px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(92,189,170,.4) 25%,rgba(92,189,170,.65) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: divinePulse 2.5s ease-in-out infinite;
+    }
+
+@keyframes divinePulse {
+      0%,100% { opacity: .5; height: 44%; }
+      50%      { opacity: 1;  height: 54%; }
+    }
+
+#whirlwind-figure {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(40px,6vw,80px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#whirlwind-heading h2 {
+      background: linear-gradient(120deg,#1a5a80 0%,#b0e8ff 50%,#2a7aa0 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#whirlwind-heading p { color: rgba(26,90,128,.6); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — RESTORATION  約伯的復興
+    ══════════════════════════════════════════════ */
+
+#scene-restoration {
+      background: linear-gradient(180deg, #e8c870 0%, #c8d898 35%, #88c8a8 65%, #60b898 100%);
+    }
+
+#restoration-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(20px,4vw,55px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,255,220,0) 0%,rgba(232,200,112,.4) 25%,rgba(92,189,170,.65) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: divinePulse 2.5s ease-in-out infinite;
+    }
+
+#restoration-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(92,189,170,.15) 0%, rgba(72,200,180,.06) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#restoration-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,40vw,540px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#restoration-heading h2 {
+      background: linear-gradient(120deg,#2a7a5a 0%,#e0ffe8 50%,#5cbdaa 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#restoration-heading p { color: rgba(42,122,90,.6); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

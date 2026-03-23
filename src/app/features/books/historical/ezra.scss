@@ -1,0 +1,258 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Scene-specific keyframes ── */
+
+@keyframes introGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(112,128,144,.6), 0 0 110px rgba(176,196,222,.3); }
+      50%      { box-shadow: 0 0 80px rgba(140,160,180,.85), 0 0 160px rgba(176,196,222,.5); }
+    }
+
+@keyframes decreeShine {
+      0%,100% { filter: brightness(1) drop-shadow(0 0 8px rgba(218,165,32,.3)); }
+      50%      { filter: brightness(1.2) drop-shadow(0 0 16px rgba(218,165,32,.6)); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #1a1e24 0%, #2a3040 30%, #3a4458 65%, #4a5870 100%);
+    }
+
+#intro-orb {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #e8eef8, #b0c4de 40%, #708090 75%, #4a5870);
+      box-shadow: 0 0 55px rgba(112,128,144,.6), 0 0 110px rgba(176,196,222,.3);
+      z-index: 4;
+      animation: introGlow 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#708090 0%,#b0c4de 45%,#4a6070 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(176,196,222,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(112,128,144,.6); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-ezra {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — CYRUS'S DECREE  古列的詔書
+    ══════════════════════════════════════════════ */
+
+#scene-decree {
+      background: linear-gradient(180deg, #1a1820 0%, #2a2430 40%, #3a3040 70%, #4a3a30 100%);
+    }
+
+#decree-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#2a2018 0%,#1a1408 55%,#0e0a04 100%);
+      z-index: 5;
+    }
+
+#decree-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 40vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(218,165,32,.12) 0%, rgba(180,140,40,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#decree-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 7;
+    }
+
+#decree-heading h2 {
+      color: #daa520;
+      text-shadow: 0 0 22px rgba(218,165,32,.6);
+    }
+
+#decree-heading p { color: rgba(218,200,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — RETURN FROM EXILE  歸回故土
+    ══════════════════════════════════════════════ */
+
+#scene-return {
+      background: linear-gradient(180deg, #1a1e24 0%, #2a2820 35%, #4a3e28 65%, #6a5830 100%);
+    }
+
+#return-sun {
+      position: absolute; top: 16%; left: 72%;
+      width: clamp(70px,12vw,140px); height: clamp(70px,12vw,140px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, #fffff0, #ffe880 40%, #e0a020 75%, #a07010);
+      box-shadow: 0 0 60px rgba(255,200,60,.7), 0 0 130px rgba(255,160,20,.35);
+      z-index: 4;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#return-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+
+#return-heading h2 {
+      background: linear-gradient(120deg,#c8a040 0%,#ffe8a0 50%,#a08030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#return-heading p { color: rgba(200,180,120,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — TEMPLE FOUNDATION  立聖殿根基
+    ══════════════════════════════════════════════ */
+
+#scene-foundation {
+      background: linear-gradient(180deg, #1a1e24 0%, #2a2820 35%, #3a3428 65%, #4a4030 100%);
+    }
+
+#foundation-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(160,140,100,.2) 0%, rgba(120,100,70,.08) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#foundation-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 7;
+    }
+
+#foundation-heading h2 {
+      background: linear-gradient(120deg,#8a7a5a 0%,#d0c0a0 50%,#6a5a3a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#foundation-heading p { color: rgba(180,160,120,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — TEMPLE COMPLETED  聖殿落成
+    ══════════════════════════════════════════════ */
+
+#scene-complete {
+      background: linear-gradient(180deg, #1a1e24 0%, #2a2818 35%, #4a4020 65%, #6a5828 100%);
+    }
+
+#complete-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,45vw,550px); height: 50vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(218,180,60,.15) 0%, rgba(180,140,40,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#complete-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 72%; z-index: 5;
+    }
+
+#complete-heading h2 {
+      background: linear-gradient(120deg,#daa520 0%,#fff4b0 50%,#b08820 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#complete-heading p { color: rgba(220,200,120,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — EZRA'S REFORM  以斯拉的改革
+    ══════════════════════════════════════════════ */
+
+#scene-reform {
+      background: linear-gradient(180deg, #10141a 0%, #1a2030 40%, #24304a 70%, #2a3858 100%);
+    }
+
+#reform-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 28%;
+      background: linear-gradient(180deg,#1a1e28 0%,#101418 55%,#080a0e 100%);
+      z-index: 5;
+    }
+
+#reform-glow {
+      position: absolute; bottom: 32%; left: 42%; transform: translateX(-50%);
+      width: 25vw; height: 14vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(112,128,144,.25) 0%, rgba(80,100,120,.1) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#reform-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 7;
+    }
+
+#reform-heading h2 {
+      background: linear-gradient(120deg,#708090 0%,#b0c4de 50%,#4a6070 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#reform-heading p { color: rgba(176,196,222,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

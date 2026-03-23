@@ -1,0 +1,427 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #141441 0%, #24309c 40%, #30269a 100%);
+    }
+
+#intro-orb {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,130px); height: clamp(60px,10vw,130px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fffef0, #ffe580 35%, #ffc800 65%, #c89800);
+      box-shadow: 0 0 60px rgba(255,225,100,.7), 0 0 140px rgba(255,200,50,.3), 0 0 250px rgba(255,180,0,.12);
+      z-index: 4;
+      animation: orbGlow 4s ease-in-out infinite;
+    }
+
+@keyframes orbGlow {
+      0%,100% { box-shadow: 0 0 60px rgba(255,225,100,.7), 0 0 140px rgba(255,200,50,.3), 0 0 250px rgba(255,180,0,.12); }
+      50%      { box-shadow: 0 0 90px rgba(255,225,100,1), 0 0 200px rgba(255,200,50,.5), 0 0 350px rgba(255,180,0,.22); }
+    }
+
+#intro-rays {
+      position: absolute; top: 0; left: 0; width: 100%; height: 65%; z-index: 3;
+      background: radial-gradient(ellipse 35% 55% at 50% 35%, rgba(255,240,180,.12) 0%, transparent 70%);
+      animation: glowPulse 5s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 42%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#ffd700 0%,#fff4b0 45%,#ff9f1c 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(255,240,180,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(220,200,140,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-void {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 38%; z-index: 2;
+      background: linear-gradient(180deg, transparent 0%, rgba(5,5,20,.95) 60%, #02020a 100%);
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — SEVEN DAYS OF CREATION  七日創造
+    ══════════════════════════════════════════════ */
+
+#scene-creation {
+      background: linear-gradient(180deg, #0e0ea8 0%, #1c3a9a 35%, #2864c8 60%, #376edc 80%, #214986 100%);
+    }
+
+#creation-sky { position: absolute; inset: 0; z-index: 2; }
+
+#creation-sun {
+      position: absolute; top: 16%; right: 22%;
+      width: clamp(50px,8vw,100px); height: clamp(50px,8vw,100px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fffbe8, #ffd54f 50%, #ff9800);
+      box-shadow: 0 0 50px rgba(255,200,50,.7), 0 0 120px rgba(255,165,0,.3);
+      z-index: 6;
+      animation: sunPulse 5s ease-in-out infinite;
+    }
+
+@keyframes sunPulse {
+      0%,100% { box-shadow: 0 0 50px rgba(255,200,50,.7), 0 0 120px rgba(255,165,0,.3); }
+      50%      { box-shadow: 0 0 80px rgba(255,200,50,1), 0 0 180px rgba(255,165,0,.5); }
+    }
+
+#creation-moon {
+      position: absolute; top: 20%; left: 18%;
+      width: clamp(30px,5vw,60px); height: clamp(30px,5vw,60px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 55% 40%, #e8e8f0, #c0c0d8 60%, #8888aa);
+      box-shadow: 0 0 28px rgba(200,210,240,.6), 0 0 60px rgba(180,190,220,.2);
+      z-index: 6;
+    }
+
+#creation-moon::after {
+      content: '';
+      position: absolute; top: 12%; left: 28%;
+      width: 65%; height: 72%;
+      border-radius: 50%;
+      background: #0a1538;
+    }
+
+#creation-waters {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg, rgba(20,60,120,.9) 0%, rgba(8,30,70,.95) 50%, #020c1e 100%);
+      z-index: 5;
+    }
+
+#creation-waters::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 200%; height: 8px;
+      background: repeating-linear-gradient(90deg,
+        transparent, transparent 32px,
+        rgba(100,180,255,.2) 32px, rgba(100,180,255,.2) 64px);
+      animation: waveRipple 3s linear infinite;
+    }
+
+@keyframes waveRipple {
+      from { transform: translateX(0);   }
+      to   { transform: translateX(-50%); }
+    }
+
+#creation-land {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 18%; z-index: 6;
+    }
+
+#creation-heading h2 {
+      background: linear-gradient(120deg,#ffd700 0%,#80d0ff 50%,#4caf50 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#creation-heading p { color: rgba(180,220,255,.6); }
+
+.bird {
+      position: absolute; z-index: 8;
+      animation: birdFly var(--spd,6s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes birdFly {
+      0%   { transform: translate(0,0); }
+      25%  { transform: translate(4vw,-1vh); }
+      50%  { transform: translate(8vw,0); }
+      75%  { transform: translate(4vw,1vh); }
+      100% { transform: translate(0,0); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — GARDEN OF EDEN  伊甸園
+    ══════════════════════════════════════════════ */
+
+#scene-eden {
+      background: linear-gradient(180deg, #1ba035 0%, #219935 40%, #22913e 70%, #218d42 100%);
+    }
+
+#eden-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 32%;
+      background: linear-gradient(180deg, #1a5c28 0%, #124a1e 40%, #0a3214 100%);
+      z-index: 5;
+    }
+
+#eden-ground::before {
+      content: '';
+      position: absolute; top: -6px; left: 0; width: 100%; height: 12px;
+      background: radial-gradient(ellipse 15% 100% at 15% 50%, #2a8838 0%, transparent 70%),
+                  radial-gradient(ellipse 10% 100% at 40% 50%, #248830 0%, transparent 65%),
+                  radial-gradient(ellipse 12% 100% at 65% 50%, #2a9038 0%, transparent 60%),
+                  radial-gradient(ellipse 10% 100% at 88% 50%, #228530 0%, transparent 70%);
+    }
+
+#eden-river {
+      position: absolute; bottom: 12%; left: 0; width: 100%; height: 8%; z-index: 7; overflow: hidden;
+    }
+
+#eden-river-water {
+      width: 200%; height: 100%;
+      background: linear-gradient(90deg,
+        rgba(60,160,220,.7), rgba(100,200,240,.8), rgba(40,140,210,.7),
+        rgba(80,190,235,.8), rgba(60,160,220,.7));
+      background-size: 50% 100%;
+      animation: riverFlow 4s linear infinite;
+    }
+
+@keyframes riverFlow { from{background-position:0% 50%} to{background-position:100% 50%} }
+
+#eden-river::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(90deg, transparent,rgba(180,230,255,.3),transparent,rgba(180,230,255,.2),transparent);
+      z-index: 1;
+    }
+
+#eden-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 8; }
+
+.eden-flower {
+      position: absolute; z-index: 9;
+      animation: floatY 4s ease-in-out var(--delay,0s) infinite;
+    }
+
+#eden-heading h2 {
+      color: #4caf50;
+      text-shadow: 0 0 25px rgba(76,175,80,.7), 0 0 55px rgba(40,120,40,.4);
+    }
+
+#eden-heading p { color: rgba(140,220,150,.6); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — THE FALL  犯罪墮落
+    ══════════════════════════════════════════════ */
+
+#scene-fall {
+      background: linear-gradient(180deg, #411441 0%, #6d2c57 45%, #742c50 70%, #461c38 100%);
+    }
+
+#fall-darkness {
+      position: absolute; inset: 0; z-index: 2;
+      background: radial-gradient(ellipse 70% 55% at 50% 40%, transparent 0%, rgba(0,0,0,.65) 100%);
+    }
+
+#fall-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 28%;
+      background: linear-gradient(180deg, #1a1008 0%, #0d0804 50%, #060302 100%);
+      z-index: 5;
+    }
+
+#fall-tree-svg {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,16vw,220px);
+    }
+
+#fruit-glow {
+      position: absolute; bottom: 42%; left: 50%; transform: translateX(-50%);
+      width: 18vw; height: 12vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,40,40,.3) 0%, rgba(200,0,0,.1) 50%, transparent 72%);
+      z-index: 7;
+      animation: fruitGlowPulse 2s ease-in-out infinite;
+    }
+
+@keyframes fruitGlowPulse {
+      0%,100% { opacity: .6; transform: translateX(-50%) scale(1);    }
+      50%      { opacity: 1;  transform: translateX(-50%) scale(1.15); }
+    }
+
+#fall-heading h2 {
+      color: #cc2200;
+      text-shadow: 0 0 30px rgba(200,30,0,.8), 0 0 65px rgba(140,0,0,.5);
+      animation: fallPulse 2s ease-in-out infinite;
+    }
+
+@keyframes fallPulse {
+      0%,100% { text-shadow: 0 0 30px rgba(200,30,0,.8), 0 0 65px rgba(140,0,0,.5); }
+      50%      { text-shadow: 0 0 55px rgba(255,50,0,1), 0 0 110px rgba(200,0,0,.7); }
+    }
+
+#fall-heading p { color: rgba(255,140,120,.55); }
+
+@keyframes snakeSlither {
+      0%,100% { transform: translateX(-50%) rotate(-1deg); }
+      50%      { transform: translateX(-50%) rotate(1deg);  }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — NOAH'S ARK  挪亞方舟
+    ══════════════════════════════════════════════ */
+
+#scene-noah {
+      background: linear-gradient(180deg, #3c3c78 0%, #414173 35%, #5555a0 65%, #3c3c78 100%);
+    }
+
+#noah-stormsky {
+      position: absolute; top: 0; left: 0; width: 100%; height: 55%;
+      background: radial-gradient(ellipse 80% 60% at 50% 20%, rgba(40,40,65,.9) 0%, transparent 80%);
+      z-index: 2;
+    }
+
+#noah-water {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 38%;
+      background: linear-gradient(180deg, rgba(25,50,90,.95) 0%, rgba(15,30,65,.98) 50%, #080818 100%);
+      z-index: 5; overflow: hidden;
+    }
+
+#noah-water::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 200%; height: 10px;
+      background: repeating-linear-gradient(90deg,
+        transparent, transparent 36px,
+        rgba(120,180,255,.18) 36px, rgba(120,180,255,.18) 72px);
+      animation: waveRipple 3.5s linear infinite;
+    }
+
+#ark-svg {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(140px,26vw,340px);
+      animation: arkBob 5s ease-in-out infinite;
+    }
+
+@keyframes arkBob {
+      0%,100% { transform: translateX(-50%) translateY(0)    rotate(-.5deg); }
+      50%      { transform: translateX(-50%) translateY(-8px) rotate(.5deg);  }
+    }
+
+.raindrop {
+      position: absolute; z-index: 4;
+      width: 1.5px;
+      background: linear-gradient(180deg, transparent, rgba(160,200,255,.5));
+      animation: rainFall var(--spd,1s) linear var(--delay,0s) infinite;
+    }
+
+@keyframes rainFall {
+      0%   { transform: translateY(-20px); opacity: 0; }
+      10%  { opacity: 1; }
+      100% { transform: translateY(100vh); opacity: .15; }
+    }
+
+#rainbow-svg {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 10; width: clamp(180px,40vw,500px);
+      opacity: .65;
+      animation: rainbowFade 6s ease-in-out infinite;
+    }
+
+@keyframes rainbowFade {
+      0%,100% { opacity: .5; }
+      50%      { opacity: .8; }
+    }
+
+#dove-svg {
+      position: absolute; top: 22%; right: 18%;
+      z-index: 11; width: clamp(32px,5vw,65px);
+      animation: doveFloat 5s ease-in-out infinite;
+    }
+
+@keyframes doveFloat {
+      0%,100% { transform: translateY(0) translateX(0);    }
+      30%      { transform: translateY(-10px) translateX(8px); }
+      70%      { transform: translateY(-5px) translateX(-5px); }
+    }
+
+#noah-heading h2 {
+      background: linear-gradient(120deg,#6ea8fe 0%,#a0cfff 50%,#6ea8fe 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#noah-heading p { color: rgba(130,180,240,.6); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — TOWER OF BABEL  巴別塔
+    ══════════════════════════════════════════════ */
+
+#scene-babel {
+      background: linear-gradient(180deg, #381c7e 0%, #473178 45%, #4b3278 70%, #412c83 100%);
+    }
+
+#babel-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 22%;
+      background: linear-gradient(180deg, #3a2a18 0%, #241808 50%, #120c04 100%);
+      z-index: 5;
+    }
+
+#babel-divine-light {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(30px,6vw,80px); height: 48%;
+      background: linear-gradient(180deg,rgba(255,255,220,.55) 0%,rgba(255,240,160,.3) 40%,rgba(255,215,0,.15) 70%,transparent 100%);
+      z-index: 9; filter: blur(12px);
+      animation: babelLightPulse 2.5s ease-in-out infinite;
+    }
+
+@keyframes babelLightPulse {
+      0%,100% { opacity: .45; width: clamp(30px,5.5vw,75px); }
+      50%      { opacity: .9;  width: clamp(38px,7vw,95px); }
+    }
+
+#tower-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,18vw,260px);
+    }
+
+.babel-person {
+      position: absolute; bottom: 18%; z-index: 7;
+      animation: scatter var(--spd,4s) ease-in-out var(--delay,0s) infinite alternate;
+    }
+
+@keyframes scatter {
+      0%   { transform: translateX(0) translateY(0); opacity: .75; }
+      100% { transform: translateX(var(--dx,30px)) translateY(var(--dy,0px)); opacity: .4; }
+    }
+
+#babel-heading h2 {
+      background: linear-gradient(120deg,#ffd700 0%,#ff9f1c 50%,#ffd700 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+#babel-heading p { color: rgba(255,210,120,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

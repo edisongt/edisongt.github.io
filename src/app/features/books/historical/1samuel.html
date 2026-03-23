@@ -1,0 +1,619 @@
+<app-back-button />
+<app-nav-dots [scenes]="scenes" />
+
+<section class="scene" id="scene-intro" aria-label="撒母耳記上 — 開場">
+  <app-starfield />
+
+  <div id="intro-glow" aria-hidden="true"></div>
+  
+    <div id="intro-title">
+      <h1>撒母耳記上</h1>
+      <p>First Book of Samuel</p>
+      <span class="sub">呼召 · 先知 · 君王 · 膏立 · 信心</span>
+    </div>
+  
+    <!-- Temple silhouette landscape -->
+    <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2a7a"/>
+          <stop offset="50%" stop-color="#1a1a50"/>
+          <stop offset="100%" stop-color="#0a0a28"/>
+        </linearGradient>
+        <linearGradient id="hillG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1e1e4a"/>
+          <stop offset="100%" stop-color="#0c0c24"/>
+        </linearGradient>
+        <linearGradient id="templeG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a3a6a"/>
+          <stop offset="100%" stop-color="#1a1a3a"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1440" height="420" fill="url(#skyG)"/>
+      <!-- Distant hills -->
+      <path d="M0 340 Q200 280 400 310 Q600 260 800 290 Q1000 240 1200 300 Q1360 270 1440 310 L1440 420 L0 420 Z"
+            fill="url(#hillG)" opacity=".6"/>
+      <!-- Ground -->
+      <rect x="0" y="350" width="1440" height="70" fill="#0c0c24"/>
+      <!-- Tabernacle / Temple silhouette -->
+      <rect x="640" y="240" width="160" height="110" fill="url(#templeG)"/>
+      <polygon points="640,240 720,180 800,240" fill="#3a3a6a"/>
+      <!-- Temple pillars -->
+      <rect x="660" y="260" width="12" height="90" rx="2" fill="#2a2a5a"/>
+      <rect x="770" y="260" width="12" height="90" rx="2" fill="#2a2a5a"/>
+      <!-- Temple entrance -->
+      <rect x="695" y="290" width="50" height="60" rx="3" fill="#12122e"/>
+      <!-- Temple lamp glow -->
+      <ellipse cx="720" cy="250" rx="40" ry="30" fill="rgba(255,220,100,.08)"/>
+      <!-- Glow on horizon -->
+      <ellipse cx="720" cy="320" rx="300" ry="40" fill="rgba(80,100,200,.1)"/>
+    </svg>
+  
+    <!-- Young Samuel praying silhouette -->
+    <svg id="intro-samuel" viewBox="0 0 50 90" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="年幼的撒母耳禱告 — Young Samuel praying">
+      <title>年幼的撒母耳禱告 — Young Samuel praying at the temple</title>
+      <!-- Head -->
+      <circle cx="25" cy="14" r="10" fill="#4a4a80"/>
+      <!-- Hair -->
+      <path d="M15,12 Q25,4 35,12 L34,16 Q25,10 16,16 Z" fill="#3a3a6a"/>
+      <!-- Robe -->
+      <path d="M18,24 Q13,45 12,72 Q17,75 22,72 Q24,55 25,45 Q26,55 28,72 Q33,75 38,72 Q37,45 32,24 Z"
+            fill="#5a5a9a"/>
+      <!-- Arms folded in prayer -->
+      <path d="M18,30 Q14,38 20,42 Q25,44 30,42 Q36,38 32,30" stroke="#4a4a80" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <!-- Kneeling legs -->
+      <path d="M16,72 Q14,80 18,84 Q22,82 22,72" fill="#4a4a70"/>
+      <path d="M28,72 Q28,82 32,84 Q36,80 34,72" fill="#4a4a70"/>
+    </svg>
+
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-birth" aria-label="撒母耳出生 — Samuel's Birth and Call">
+  <app-starfield />
+
+  <!-- Temple floor -->
+    <div id="birth-ground" aria-hidden="true"></div>
+  
+    <!-- Lamp glow -->
+    <div id="birth-lamp-glow" aria-hidden="true"></div>
+  
+    <!-- Divine light from above -->
+    <div id="birth-divine-light" aria-hidden="true"></div>
+  
+    <!-- Temple interior with sleeping Samuel -->
+    <svg id="birth-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="撒母耳在聖殿中聽見神的呼召 — Samuel hearing God's call in the temple">
+      <title>撒母耳在聖殿中聽見神的呼召 — Young Samuel hearing God's call at night</title>
+      <defs>
+        <linearGradient id="lampG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffd700"/>
+          <stop offset="100%" stop-color="#b8860b"/>
+        </linearGradient>
+        <radialGradient id="lampGlowG" cx="50%" cy="30%">
+          <stop offset="0%" stop-color="rgba(255,220,100,.6)"/>
+          <stop offset="50%" stop-color="rgba(255,200,60,.15)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+        <linearGradient id="divineLightG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(180,200,255,.5)"/>
+          <stop offset="50%" stop-color="rgba(140,160,255,.2)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </linearGradient>
+      </defs>
+  
+      <!-- Temple pillars -->
+      <rect x="30" y="20" width="18" height="260" rx="4" fill="#2a2a5a" opacity=".7"/>
+      <rect x="352" y="20" width="18" height="260" rx="4" fill="#2a2a5a" opacity=".7"/>
+      <!-- Temple arch -->
+      <path d="M30,20 Q200,-30 370,20" stroke="#3a3a6a" stroke-width="8" fill="none" opacity=".5"/>
+  
+      <!-- Temple lamp (menorah style) -->
+      <rect x="175" y="55" width="50" height="8" rx="2" fill="url(#lampG)"/>
+      <rect x="195" y="35" width="10" height="20" rx="2" fill="url(#lampG)"/>
+      <!-- Lamp flame -->
+      <ellipse cx="200" cy="28" rx="6" ry="10" fill="rgba(255,200,60,.9)"
+               style="animation: breathe 1.5s ease-in-out infinite;"/>
+      <ellipse cx="200" cy="26" rx="3" ry="6" fill="rgba(255,255,210,.95)"/>
+      <!-- Lamp glow -->
+      <ellipse cx="200" cy="50" rx="60" ry="45" fill="url(#lampGlowG)"/>
+  
+      <!-- Divine light beam from above right -->
+      <path d="M320,0 L280,120 L340,120 Z" fill="url(#divineLightG)" opacity=".6"
+            style="animation: breathe 2.5s ease-in-out infinite;"/>
+      <path d="M330,0 L300,100 L350,100 Z" fill="rgba(200,210,255,.15)"
+            style="animation: breathe 2.5s ease-in-out .5s infinite;"/>
+  
+      <!-- Sleeping mat -->
+      <rect x="100" y="230" width="90" height="12" rx="4" fill="#3a3060"/>
+      <rect x="95" y="225" width="20" height="18" rx="6" fill="#4a4070"/>
+  
+      <!-- Young Samuel lying down, eyes open -->
+      <circle cx="145" cy="210" r="13" fill="#6a5a4a"/>
+      <!-- Hair -->
+      <path d="M132,207 Q145,198 158,207 L157,212 Q145,206 133,212 Z" fill="#4a3a2a"/>
+      <!-- Eyes open (hearing the call) -->
+      <circle cx="140" cy="210" r="2" fill="#fff"/>
+      <circle cx="150" cy="210" r="2" fill="#fff"/>
+      <circle cx="140" cy="210" r="1" fill="#222"/>
+      <circle cx="150" cy="210" r="1" fill="#222"/>
+      <!-- Body under blanket -->
+      <path d="M130,220 Q120,240 115,260 Q145,270 185,260 Q180,240 160,220 Z" fill="#4a4a8a" opacity=".8"/>
+      <!-- Small hand reaching out -->
+      <path d="M160,225 Q170,220 175,215" stroke="#6a5a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+      <!-- Faint divine text / voice visualization -->
+      <text x="310" y="80" fill="rgba(180,200,255,.25)" font-size="10" font-weight="600" letter-spacing=".1em">撒母耳</text>
+      <text x="300" y="100" fill="rgba(180,200,255,.18)" font-size="8" letter-spacing=".1em">Samuel...</text>
+    </svg>
+
+  <app-scene-heading title="🕯 撒母耳出生" subtitle="Samuel's Birth &amp; Call — 1 Samuel 1–3" id="birth-heading" />
+  <app-scene-verse text="「耶和華啊，請說，僕人敬聽」— 撒母耳記上 3:9" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-ark" aria-label="約櫃被擄 — The Ark Captured">
+  <app-starfield />
+
+  <!-- Oppressive darkness overlay -->
+    <div id="ark-darkness" aria-hidden="true"></div>
+  
+    <!-- Fading golden glow from the ark -->
+    <div id="ark-glow" aria-hidden="true"></div>
+  
+    <!-- Ark being carried away -->
+    <svg id="ark-svg" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="約櫃被非利士人擄走 — The Ark captured by the Philistines">
+      <title>約櫃被非利士人擄走 — The Ark of the Covenant being carried away</title>
+      <defs>
+        <linearGradient id="arkGoldG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffd700"/>
+          <stop offset="50%" stop-color="#daa520"/>
+          <stop offset="100%" stop-color="#8b6914"/>
+        </linearGradient>
+        <linearGradient id="arkBodyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#b8860b"/>
+          <stop offset="60%" stop-color="#8b6914"/>
+          <stop offset="100%" stop-color="#6b4e14"/>
+        </linearGradient>
+        <radialGradient id="arkRadG" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="rgba(255,215,0,.3)"/>
+          <stop offset="60%" stop-color="rgba(255,180,0,.08)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+  
+      <!-- Ground -->
+      <rect x="0" y="280" width="500" height="70" fill="#1a1428" opacity=".6"/>
+  
+      <!-- Carrying poles -->
+      <line x1="100" y1="200" x2="400" y2="200" stroke="#6b4e14" stroke-width="5" stroke-linecap="round"/>
+  
+      <!-- Ark body -->
+      <rect x="180" y="170" width="140" height="80" rx="4" fill="url(#arkBodyG)"
+            style="filter:drop-shadow(0 4px 16px rgba(180,130,0,.4));"/>
+      <!-- Ark gold rim top -->
+      <rect x="175" y="165" width="150" height="10" rx="3" fill="url(#arkGoldG)"/>
+      <!-- Ark gold rim bottom -->
+      <rect x="175" y="248" width="150" height="8" rx="3" fill="url(#arkGoldG)" opacity=".7"/>
+      <!-- Decorative band -->
+      <rect x="185" y="195" width="130" height="6" rx="2" fill="rgba(255,215,0,.3)"/>
+  
+      <!-- Cherubim on top (left) -->
+      <path d="M210,165 Q205,140 215,130 Q220,125 225,130 L225,165"
+            fill="#daa520" opacity=".8"/>
+      <!-- Wing left cherub -->
+      <path d="M210,140 Q190,130 200,120 Q210,115 215,130" fill="#daa520" opacity=".6"/>
+      <path d="M225,140 Q235,125 245,135 Q240,145 225,140" fill="#daa520" opacity=".6"/>
+  
+      <!-- Cherubim on top (right) -->
+      <path d="M275,165 Q270,140 280,130 Q285,125 290,130 L290,165"
+            fill="#daa520" opacity=".8"/>
+      <!-- Wing right cherub -->
+      <path d="M275,140 Q260,125 265,120 Q275,115 280,130" fill="#daa520" opacity=".6"/>
+      <path d="M290,140 Q300,125 310,135 Q305,145 290,140" fill="#daa520" opacity=".6"/>
+  
+      <!-- Fading glow around ark -->
+      <ellipse cx="250" cy="210" rx="100" ry="70" fill="url(#arkRadG)"
+               style="animation: breathe 3s ease-in-out infinite;"/>
+  
+      <!-- Philistine soldier (left, carrying) -->
+      <circle cx="120" cy="155" r="12" fill="#4a3030"/>
+      <!-- Helmet -->
+      <path d="M108,152 Q120,140 132,152 L130,148 Q120,136 110,148 Z" fill="#5a4040"/>
+      <rect x="119" y="136" width="3" height="12" fill="#5a4040"/>
+      <!-- Body -->
+      <path d="M112,167 Q108,190 106,230 Q112,233 118,230 Q120,210 120,195 Q120,210 122,230 Q128,233 134,230 Q132,190 128,167 Z"
+            fill="#5a3a3a"/>
+      <!-- Arms reaching to pole -->
+      <path d="M128,172 Q135,185 140,195" stroke="#4a3030" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M112,172 Q108,185 105,195" stroke="#4a3030" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Feet -->
+      <ellipse cx="112" cy="232" rx="6" ry="3" fill="#3a2020"/>
+      <ellipse cx="126" cy="232" rx="6" ry="3" fill="#3a2020"/>
+  
+      <!-- Philistine soldier (right, carrying) -->
+      <circle cx="380" cy="155" r="12" fill="#4a3030"/>
+      <!-- Helmet -->
+      <path d="M368,152 Q380,140 392,152 L390,148 Q380,136 370,148 Z" fill="#5a4040"/>
+      <rect x="379" y="136" width="3" height="12" fill="#5a4040"/>
+      <!-- Body -->
+      <path d="M372,167 Q368,190 366,230 Q372,233 378,230 Q380,210 380,195 Q380,210 382,230 Q388,233 394,230 Q392,190 388,167 Z"
+            fill="#5a3a3a"/>
+      <!-- Arms reaching to pole -->
+      <path d="M372,172 Q365,185 360,195" stroke="#4a3030" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M388,172 Q395,185 400,195" stroke="#4a3030" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Feet -->
+      <ellipse cx="374" cy="232" rx="6" ry="3" fill="#3a2020"/>
+      <ellipse cx="386" cy="232" rx="6" ry="3" fill="#3a2020"/>
+  
+      <!-- Eli figure fallen in background -->
+      <circle cx="60" cy="250" r="10" fill="#5a5040"/>
+      <path d="M50,258 Q45,275 55,290 Q60,292 70,290 Q75,275 70,258 Z" fill="#6a6050" opacity=".7"/>
+      <!-- Eli's staff broken -->
+      <line x1="40" y1="260" x2="55" y2="290" stroke="#4a3a20" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="42" y1="262" x2="30" y2="275" stroke="#4a3a20" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+
+  <app-scene-heading title="📦 約櫃被擄" subtitle="The Ark Captured — 1 Samuel 4–6" id="ark-heading" />
+  <app-scene-verse text="「榮耀離開以色列了」— 撒母耳記上 4:21" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-saul" aria-label="掃羅受膏 — Saul Anointed as King">
+  <app-starfield />
+
+  <!-- Divine light -->
+    <div id="saul-divine-light" aria-hidden="true"></div>
+  
+    <!-- Ground -->
+    <div id="saul-ground" aria-hidden="true"></div>
+  
+    <!-- Samuel anointing Saul -->
+    <svg id="saul-svg" viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="撒母耳膏掃羅為王 — Samuel anointing Saul as king">
+      <title>撒母耳膏掃羅為王 — Samuel pouring oil on Saul's head</title>
+      <defs>
+        <linearGradient id="oilG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(255,215,0,.9)"/>
+          <stop offset="100%" stop-color="rgba(180,140,0,.5)"/>
+        </linearGradient>
+        <radialGradient id="anointGlowG" cx="50%" cy="20%">
+          <stop offset="0%" stop-color="rgba(200,200,255,.35)"/>
+          <stop offset="50%" stop-color="rgba(160,160,255,.1)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+  
+      <!-- Divine glow behind scene -->
+      <ellipse cx="170" cy="100" rx="120" ry="140" fill="url(#anointGlowG)"
+               style="animation: breathe 3s ease-in-out infinite;"/>
+  
+      <!-- Samuel (shorter, elderly, on left) -->
+      <!-- Head -->
+      <circle cx="100" cy="120" r="16" fill="#6a5a3a"/>
+      <!-- Head covering -->
+      <path d="M84,118 Q100,104 116,118 L115,125 Q100,118 85,125 Z" fill="#4a3a2a"/>
+      <!-- Beard -->
+      <path d="M90,132 Q100,148 110,132 Q107,158 100,162 Q93,158 90,132 Z" fill="#7a6a50" opacity=".85"/>
+      <!-- Robe -->
+      <path d="M88,140 Q82,180 78,250 Q86,254 94,250 Q96,215 100,195 Q104,215 106,250 Q114,254 122,250 Q118,180 112,140 Z"
+            fill="#6a6a9a"/>
+      <!-- Right arm raised with oil horn -->
+      <path d="M112,148 Q130,125 145,108" stroke="#6a5a3a" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Oil horn/flask -->
+      <path d="M140,100 Q145,95 150,100 L148,112 Q145,115 142,112 Z" fill="#8b7355"/>
+      <!-- Oil drops falling -->
+      <ellipse cx="145" cy="120" rx="2" ry="4" fill="url(#oilG)"
+               style="animation: floatY 1.5s ease-in-out infinite;"/>
+      <ellipse cx="148" cy="128" rx="1.5" ry="3" fill="url(#oilG)" opacity=".7"
+               style="animation: floatY 1.5s ease-in-out .3s infinite;"/>
+      <ellipse cx="143" cy="135" rx="1" ry="2.5" fill="url(#oilG)" opacity=".5"
+               style="animation: floatY 1.5s ease-in-out .6s infinite;"/>
+      <!-- Left arm -->
+      <path d="M88,148 Q78,160 74,170" stroke="#6a5a3a" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Feet -->
+      <ellipse cx="90" cy="253" rx="7" ry="3" fill="#3a2a1a"/>
+      <ellipse cx="110" cy="253" rx="7" ry="3" fill="#3a2a1a"/>
+  
+      <!-- Saul (tall, kneeling but still tall, on right) -->
+      <!-- Head -->
+      <circle cx="190" cy="105" r="18" fill="#6a5040"/>
+      <!-- Hair -->
+      <path d="M172,102 Q190,88 208,102 L207,108 Q190,98 173,108 Z" fill="#4a3020"/>
+      <!-- Crown points (being anointed as king) -->
+      <polygon points="178,90 182,80 186,90" fill="rgba(255,215,0,.5)"/>
+      <polygon points="186,88 190,76 194,88" fill="rgba(255,215,0,.6)"/>
+      <polygon points="194,90 198,80 202,90" fill="rgba(255,215,0,.5)"/>
+      <!-- Oil on head (golden shimmer) -->
+      <ellipse cx="190" cy="95" rx="16" ry="8" fill="rgba(255,215,0,.2)"
+               style="animation: breathe 2s ease-in-out infinite;"/>
+      <!-- Face detail -->
+      <circle cx="184" cy="105" r="2" fill="#3a2a1a"/>
+      <circle cx="196" cy="105" r="2" fill="#3a2a1a"/>
+      <!-- Beard (short) -->
+      <path d="M180,115 Q190,126 200,115 Q197,132 190,135 Q183,132 180,115 Z" fill="#5a4030" opacity=".7"/>
+      <!-- Robe (kneeling) -->
+      <path d="M174,138 Q168,175 166,220 Q172,224 180,220 Q184,200 190,185 Q196,200 200,220 Q208,224 214,220 Q212,175 206,138 Z"
+            fill="#5a5a8a"/>
+      <!-- Broad shoulders (Saul was notably tall) -->
+      <path d="M168,138 Q160,140 155,145" stroke="#5a5a8a" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M212,138 Q220,140 225,145" stroke="#5a5a8a" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <!-- Arms at sides in reverence -->
+      <path d="M170,145 Q160,170 158,190" stroke="#6a5040" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M210,145 Q220,170 222,190" stroke="#6a5040" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Kneeling legs -->
+      <path d="M172,220 Q168,240 175,255 Q182,252 180,220" fill="#4a4a70"/>
+      <path d="M200,220 Q200,252 207,255 Q214,240 208,220" fill="#4a4a70"/>
+  
+      <!-- Ground line -->
+      <line x1="50" y1="260" x2="250" y2="260" stroke="rgba(100,90,140,.3)" stroke-width="2"/>
+    </svg>
+
+  <app-scene-heading title="👑 掃羅受膏" subtitle="Saul Anointed King — 1 Samuel 9–10" id="saul-heading" />
+  <app-scene-verse text="「耶和華膏你作他產業的君」— 撒母耳記上 10:1" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-david" aria-label="大衛與歌利亞 — David and Goliath">
+  <app-starfield />
+
+  <!-- Valley dust glow -->
+    <div id="david-dust-glow" aria-hidden="true"></div>
+  
+    <!-- Valley of Elah landscape -->
+    <svg id="david-valley" viewBox="0 0 1440 550" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="以拉谷 — The Valley of Elah">
+      <title>以拉谷戰場 — The Valley of Elah battlefield</title>
+      <defs>
+        <linearGradient id="valleyHillL" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2840"/>
+          <stop offset="100%" stop-color="#14122a"/>
+        </linearGradient>
+        <linearGradient id="valleyHillR" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2840"/>
+          <stop offset="100%" stop-color="#14122a"/>
+        </linearGradient>
+        <linearGradient id="valleyFloor" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1e1c30"/>
+          <stop offset="100%" stop-color="#0c0a1a"/>
+        </linearGradient>
+      </defs>
+      <!-- Valley floor -->
+      <rect x="0" y="400" width="1440" height="150" fill="url(#valleyFloor)"/>
+      <!-- Left hill (Israelite camp) -->
+      <path d="M0 550 L0 300 Q180 200 360 260 Q480 320 600 400 L600 550 Z"
+            fill="url(#valleyHillL)"/>
+      <!-- Right hill (Philistine camp) -->
+      <path d="M840 550 L840 400 Q960 320 1080 260 Q1260 200 1440 300 L1440 550 Z"
+            fill="url(#valleyHillR)"/>
+      <!-- Tiny camp elements left (Israelite tents) -->
+      <polygon points="200,300 215,275 230,300" fill="rgba(80,80,120,.4)"/>
+      <polygon points="250,320 265,295 280,320" fill="rgba(80,80,120,.35)"/>
+      <!-- Tiny camp elements right (Philistine tents) -->
+      <polygon points="1200,300 1215,275 1230,300" fill="rgba(100,60,60,.4)"/>
+      <polygon points="1160,320 1175,295 1190,320" fill="rgba(100,60,60,.35)"/>
+      <!-- Dust in valley -->
+      <ellipse cx="720" cy="420" rx="300" ry="30" fill="rgba(160,140,110,.06)"/>
+      <!-- Labels -->
+      <text x="300" y="360" fill="rgba(120,130,180,.2)" font-size="16" font-weight="600"
+            text-anchor="middle" letter-spacing=".1em">以色列營</text>
+      <text x="1140" y="360" fill="rgba(160,100,100,.2)" font-size="16" font-weight="600"
+            text-anchor="middle" letter-spacing=".1em">非利士營</text>
+    </svg>
+  
+    <!-- David vs Goliath -->
+    <svg id="david-svg" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="大衛面對歌利亞巨人 — David facing the giant Goliath">
+      <title>大衛用機弦對抗歌利亞 — David with his sling facing Goliath</title>
+      <defs>
+        <linearGradient id="goliathArmorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5a5a6a"/>
+          <stop offset="50%" stop-color="#3a3a4a"/>
+          <stop offset="100%" stop-color="#2a2a3a"/>
+        </linearGradient>
+        <radialGradient id="slingGlowG" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="rgba(140,180,255,.4)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+  
+      <!-- Ground line -->
+      <line x1="20" y1="295" x2="480" y2="295" stroke="rgba(80,70,100,.3)" stroke-width="2"/>
+      <!-- Small stones on ground -->
+      <circle cx="180" cy="290" r="3" fill="rgba(120,110,100,.4)"/>
+      <circle cx="200" cy="292" r="2" fill="rgba(120,110,100,.3)"/>
+      <circle cx="165" cy="293" r="2.5" fill="rgba(120,110,100,.35)"/>
+  
+      <!-- ═══ DAVID (small, left side) ═══ -->
+      <!-- Head -->
+      <circle cx="130" cy="210" r="12" fill="#7a6040"/>
+      <!-- Hair (youthful, reddish) -->
+      <path d="M118,207 Q130,196 142,207 L141,213 Q130,205 119,213 Z" fill="#8a5030"/>
+      <!-- Face (youthful) -->
+      <circle cx="126" cy="210" r="1.5" fill="#3a2a1a"/>
+      <circle cx="134" cy="210" r="1.5" fill="#3a2a1a"/>
+      <!-- Determined expression -->
+      <path d="M125,216 Q130,218 135,216" stroke="#5a4030" stroke-width="1" fill="none"/>
+      <!-- Shepherd's tunic (simple) -->
+      <path d="M120,222 Q116,250 114,288 Q120,291 126,288 Q128,268 130,255 Q132,268 134,288 Q140,291 146,288 Q144,250 140,222 Z"
+            fill="#8a7a5a"/>
+      <!-- Right arm raised with sling -->
+      <path d="M140,228 Q155,210 165,195" stroke="#7a6040" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Sling -->
+      <path d="M165,195 Q175,185 170,175" stroke="#5a4020" stroke-width="2" fill="none"/>
+      <path d="M165,195 Q160,182 170,175" stroke="#5a4020" stroke-width="2" fill="none"/>
+      <!-- Stone in sling -->
+      <circle cx="170" cy="175" r="4" fill="#8a8070"/>
+      <!-- Sling glow -->
+      <ellipse cx="170" cy="178" rx="12" ry="10" fill="url(#slingGlowG)"
+               style="animation: breathe 1.5s ease-in-out infinite;"/>
+      <!-- Left arm with shepherd's bag -->
+      <path d="M120,228 Q112,240 110,252" stroke="#7a6040" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="108" cy="255" rx="6" ry="8" fill="#6a5030"/>
+      <!-- Feet -->
+      <ellipse cx="122" cy="290" rx="6" ry="3" fill="#5a4020"/>
+      <ellipse cx="138" cy="290" rx="6" ry="3" fill="#5a4020"/>
+  
+      <!-- ═══ GOLIATH (huge, right side) ═══ -->
+      <!-- Head (much higher) -->
+      <circle cx="370" cy="100" r="22" fill="#5a4a40"/>
+      <!-- Helmet -->
+      <path d="M348,96 Q370,70 392,96 L390,88 Q370,62 350,88 Z" fill="#5a5a6a"/>
+      <!-- Helmet crest -->
+      <rect x="367" y="60" width="6" height="22" rx="2" fill="#6a6a7a"/>
+      <!-- Angry eyes -->
+      <circle cx="362" cy="100" r="3" fill="#aa3030"/>
+      <circle cx="378" cy="100" r="3" fill="#aa3030"/>
+      <circle cx="362" cy="100" r="1.5" fill="#330000"/>
+      <circle cx="378" cy="100" r="1.5" fill="#330000"/>
+      <!-- Beard -->
+      <path d="M356,112 Q370,130 384,112 Q380,140 370,145 Q360,140 356,112 Z" fill="#4a3a30" opacity=".8"/>
+  
+      <!-- Armor (scaled/chainmail) -->
+      <path d="M346,145 Q335,195 330,270 Q342,276 356,270 Q362,230 370,205 Q378,230 384,270 Q398,276 410,270 Q405,195 394,145 Z"
+            fill="url(#goliathArmorG)"/>
+      <!-- Armor scale pattern -->
+      <path d="M348,170 Q370,165 392,170" stroke="rgba(120,120,140,.3)" stroke-width="1.5" fill="none"/>
+      <path d="M346,190 Q370,185 394,190" stroke="rgba(120,120,140,.3)" stroke-width="1.5" fill="none"/>
+      <path d="M344,210 Q370,205 396,210" stroke="rgba(120,120,140,.3)" stroke-width="1.5" fill="none"/>
+      <path d="M342,230 Q370,225 398,230" stroke="rgba(120,120,140,.3)" stroke-width="1.5" fill="none"/>
+      <!-- Belt -->
+      <rect x="340" y="240" width="60" height="8" rx="2" fill="#4a3a2a"/>
+      <!-- Skirt armor -->
+      <path d="M342,248 L338,280 Q370,285 402,280 L398,248 Z" fill="#4a4a5a"/>
+  
+      <!-- Arms -->
+      <!-- Right arm with huge spear -->
+      <path d="M394,155 Q420,170 435,190" stroke="#5a4a40" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <!-- Giant spear -->
+      <line x1="430" y1="50" x2="445" y2="290" stroke="#4a3a2a" stroke-width="5" stroke-linecap="round"/>
+      <!-- Spear head -->
+      <polygon points="425,50 430,30 435,50" fill="#7a7a8a"/>
+      <!-- Left arm with shield -->
+      <path d="M346,155 Q320,170 310,185" stroke="#5a4a40" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <!-- Shield -->
+      <ellipse cx="305" cy="200" rx="22" ry="30" fill="#4a4a5a" stroke="#5a5a6a" stroke-width="2"/>
+      <ellipse cx="305" cy="200" rx="8" ry="10" fill="#5a5a6a"/>
+  
+      <!-- Legs (massive) -->
+      <path d="M350,280 Q348,295 350,295" stroke="#5a5a6a" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M390,280 Q392,295 390,295" stroke="#5a5a6a" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <!-- Feet (with greaves) -->
+      <ellipse cx="350" cy="295" rx="10" ry="4" fill="#4a4a5a"/>
+      <ellipse cx="390" cy="295" rx="10" ry="4" fill="#4a4a5a"/>
+  
+      <!-- Size comparison lines (subtle) -->
+      <line x1="130" y1="290" x2="130" y2="198" stroke="rgba(140,180,255,.08)" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="370" y1="295" x2="370" y2="60" stroke="rgba(255,100,100,.08)" stroke-width="1" stroke-dasharray="3,3"/>
+    </svg>
+
+  <app-scene-heading title="⚔ 大衛與歌利亞" subtitle="David and Goliath — 1 Samuel 17" id="david-heading" />
+  <app-scene-verse text="「我來攻擊你，是靠萬軍之耶和華的名」— 撒母耳記上 17:45" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-fall" aria-label="掃羅的墮落 — Saul's Fall">
+  <app-starfield />
+
+  <!-- Dark mist -->
+    <div id="fall-dark-mist" aria-hidden="true"></div>
+  
+    <!-- Red ominous glow -->
+    <div id="fall-red-glow" aria-hidden="true"></div>
+  
+    <!-- Dark mountain of Gilboa -->
+    <svg id="fall-mountain" viewBox="0 0 1440 550" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="基利波山 — Mount Gilboa">
+      <title>基利波山 — 掃羅最終之地 — Mount Gilboa, Saul's final place</title>
+      <defs>
+        <linearGradient id="fallMtnG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1e1030"/>
+          <stop offset="50%" stop-color="#120820"/>
+          <stop offset="100%" stop-color="#080410"/>
+        </linearGradient>
+      </defs>
+      <!-- Distant ridge -->
+      <path d="M0 550 L0 420 Q300 360 600 390 Q900 360 1200 380 Q1360 370 1440 400 L1440 550 Z"
+            fill="#0a0610" opacity=".5"/>
+      <!-- Main dark mountain -->
+      <path d="M0 550 L200 550 Q480 400 720 180 Q960 400 1240 550 L1440 550 Z"
+            fill="url(#fallMtnG)"/>
+      <!-- Dark rock strata -->
+      <path d="M480 420 Q600 370 720 340 Q840 370 960 420"
+            stroke="rgba(40,20,50,.35)" stroke-width="2" fill="none"/>
+      <path d="M400 490 Q560 440 720 410 Q880 440 1040 490"
+            stroke="rgba(40,20,50,.25)" stroke-width="1.5" fill="none"/>
+      <!-- Eerie red light on mountain -->
+      <ellipse cx="720" cy="300" rx="200" ry="80" fill="rgba(120,30,30,.06)"/>
+    </svg>
+  
+    <!-- Fallen crown and spear scene -->
+    <svg id="fall-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="掃羅之死 — 墮落的王冠和斷矛 — Saul's death: fallen crown and broken spear">
+      <title>掃羅之死 — 基利波山上墮落的王冠 — The fallen crown on Mount Gilboa</title>
+      <defs>
+        <linearGradient id="crownG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#daa520"/>
+          <stop offset="100%" stop-color="#8b6914"/>
+        </linearGradient>
+        <radialGradient id="bloodG" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="rgba(140,20,20,.3)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+  
+      <!-- Dark ground -->
+      <rect x="0" y="220" width="400" height="80" fill="rgba(20,10,30,.5)" rx="2"/>
+  
+      <!-- Spear stuck in ground at angle -->
+      <line x1="280" y1="40" x2="260" y2="220" stroke="#4a3a2a" stroke-width="5" stroke-linecap="round"/>
+      <!-- Spear head -->
+      <polygon points="275,40 280,20 285,40" fill="#6a6a7a"/>
+      <!-- Spear glow (moonlight reflection) -->
+      <line x1="280" y1="42" x2="262" y2="180" stroke="rgba(150,150,200,.08)" stroke-width="8"/>
+  
+      <!-- Fallen crown on ground -->
+      <ellipse cx="150" cy="225" rx="30" ry="10" fill="url(#crownG)" opacity=".8"
+               style="filter:drop-shadow(0 2px 8px rgba(180,130,0,.3));"/>
+      <!-- Crown points (bent/damaged) -->
+      <polygon points="125,225 130,210 135,225" fill="#daa520" opacity=".7"/>
+      <polygon points="138,223 143,205 148,223" fill="#daa520" opacity=".8"/>
+      <polygon points="150,222 155,203 160,222" fill="#daa520" opacity=".8"/>
+      <polygon points="162,223 167,208 172,223" fill="#daa520" opacity=".7"/>
+      <!-- Crown jewel -->
+      <circle cx="150" cy="218" r="3" fill="#4a2080" opacity=".7"/>
+      <!-- Crown shadow -->
+      <ellipse cx="150" cy="232" rx="35" ry="6" fill="rgba(0,0,0,.3)"/>
+  
+      <!-- Fallen Saul figure (lying) -->
+      <circle cx="100" cy="195" r="14" fill="#5a4a40" opacity=".7"/>
+      <!-- Body -->
+      <path d="M86,207 Q80,230 90,250 Q110,260 140,250 Q150,230 114,207 Z" fill="#4a4060" opacity=".6"/>
+      <!-- Arm outstretched -->
+      <path d="M114,215 Q130,218 145,222" stroke="#5a4a40" stroke-width="4" fill="none" stroke-linecap="round" opacity=".6"/>
+  
+      <!-- Blood stain (subtle) -->
+      <ellipse cx="120" cy="240" rx="25" ry="8" fill="url(#bloodG)"/>
+  
+      <!-- Broken shield nearby -->
+      <ellipse cx="320" cy="230" rx="18" ry="24" fill="#3a3a4a" opacity=".5" transform="rotate(25,320,230)"/>
+      <line x1="310" y1="215" x2="330" y2="245" stroke="rgba(80,80,100,.3)" stroke-width="1.5"/>
+  
+      <!-- Dark birds (vultures) in sky -->
+      <path d="M50,60 Q55,55 60,60 Q65,55 70,60" stroke="rgba(40,30,50,.5)" stroke-width="1.5" fill="none"/>
+      <path d="M320,40 Q325,35 330,40 Q335,35 340,40" stroke="rgba(40,30,50,.4)" stroke-width="1.5" fill="none"/>
+      <path d="M180,30 Q185,25 190,30 Q195,25 200,30" stroke="rgba(40,30,50,.35)" stroke-width="1.5" fill="none"/>
+  
+      <!-- Moon (pale, ominous) -->
+      <circle cx="340" cy="50" r="20" fill="rgba(180,170,200,.12)"/>
+      <circle cx="345" cy="48" r="17" fill="rgba(10,5,20,.9)"/>
+    </svg>
+
+  <app-scene-heading title="💀 掃羅的墮落" subtitle="Saul's Fall — 1 Samuel 28, 31" id="fall-heading" />
+  <app-scene-verse text="「掃羅死了，他三個兒子…都死了」— 撒母耳記上 31:6" />
+</section>

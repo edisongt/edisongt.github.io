@@ -1,0 +1,586 @@
+<app-back-button />
+<app-nav-dots [scenes]="scenes" />
+
+<section class="scene" id="scene-intro" aria-label="路得記 — 開場">
+  <app-starfield />
+
+  <div id="intro-moon" aria-hidden="true"></div>
+  
+    <div id="intro-title">
+      <h1>路得記</h1>
+      <p>Book of Ruth</p>
+      <span class="sub">忠誠 · 愛 · 救贖 · 收割 · 盼望</span>
+    </div>
+  
+    <!-- Golden wheat fields under moonlight -->
+    <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1e08"/>
+          <stop offset="50%" stop-color="#1a1206"/>
+          <stop offset="100%" stop-color="#0c0a04"/>
+        </linearGradient>
+        <linearGradient id="hillG1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4a3a14"/>
+          <stop offset="100%" stop-color="#1a1008"/>
+        </linearGradient>
+        <linearGradient id="hillG2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a2e10"/>
+          <stop offset="100%" stop-color="#120c04"/>
+        </linearGradient>
+        <linearGradient id="fieldG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5a4a18"/>
+          <stop offset="50%" stop-color="#3a2e0e"/>
+          <stop offset="100%" stop-color="#0a0804"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1440" height="420" fill="url(#skyG)"/>
+      <!-- Distant rolling hills -->
+      <path d="M0 320 Q180 260 360 290 Q540 240 720 270 Q900 220 1080 280 Q1260 250 1440 300 L1440 420 L0 420 Z"
+            fill="url(#hillG2)" opacity=".6"/>
+      <!-- Nearer hills -->
+      <path d="M0 350 Q200 280 400 320 Q600 270 800 310 Q1000 260 1200 300 Q1350 280 1440 330 L1440 420 L0 420 Z"
+            fill="url(#hillG1)"/>
+      <!-- Golden wheat field -->
+      <rect x="0" y="340" width="1440" height="80" fill="url(#fieldG)"/>
+      <!-- Wheat stalks across the field -->
+      <g stroke="#8b6914" stroke-width="1.5" stroke-linecap="round" opacity=".5">
+        <line x1="80" y1="340" x2="78" y2="310"/><ellipse cx="78" cy="306" rx="3" ry="6" fill="#c4a040" opacity=".4"/>
+        <line x1="160" y1="345" x2="158" y2="312"/><ellipse cx="158" cy="308" rx="3" ry="6" fill="#c4a040" opacity=".35"/>
+        <line x1="260" y1="342" x2="262" y2="308"/><ellipse cx="262" cy="304" rx="3" ry="6" fill="#daa520" opacity=".4"/>
+        <line x1="380" y1="348" x2="377" y2="315"/><ellipse cx="377" cy="311" rx="3" ry="6" fill="#c4a040" opacity=".38"/>
+        <line x1="500" y1="340" x2="502" y2="306"/><ellipse cx="502" cy="302" rx="3" ry="6" fill="#daa520" opacity=".42"/>
+        <line x1="620" y1="344" x2="618" y2="310"/><ellipse cx="618" cy="306" rx="3" ry="6" fill="#c4a040" opacity=".36"/>
+        <line x1="740" y1="342" x2="742" y2="308"/><ellipse cx="742" cy="304" rx="3" ry="6" fill="#e8c060" opacity=".4"/>
+        <line x1="860" y1="346" x2="858" y2="314"/><ellipse cx="858" cy="310" rx="3" ry="6" fill="#c4a040" opacity=".38"/>
+        <line x1="980" y1="341" x2="982" y2="307"/><ellipse cx="982" cy="303" rx="3" ry="6" fill="#daa520" opacity=".42"/>
+        <line x1="1100" y1="345" x2="1098" y2="312"/><ellipse cx="1098" cy="308" rx="3" ry="6" fill="#c4a040" opacity=".36"/>
+        <line x1="1220" y1="343" x2="1222" y2="309"/><ellipse cx="1222" cy="305" rx="3" ry="6" fill="#e8c060" opacity=".4"/>
+        <line x1="1340" y1="347" x2="1338" y2="313"/><ellipse cx="1338" cy="309" rx="3" ry="6" fill="#c4a040" opacity=".35"/>
+      </g>
+      <!-- Moonlight glow on horizon -->
+      <ellipse cx="720" cy="260" rx="500" ry="50" fill="rgba(218,165,32,.08)"/>
+    </svg>
+  
+    <!-- Two women walking together -->
+    <svg id="intro-figures" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="兩位婦人同行 — Two women walking together">
+      <title>路得與拿俄米同行 — Ruth and Naomi walking together</title>
+      <!-- Naomi (left, older) -->
+      <circle cx="35" cy="18" r="10" fill="#7a6540"/>
+      <path d="M25,16 Q35,6 45,16 L45,22 Q35,18 25,22 Z" fill="#5a4830"/>
+      <path d="M28,28 Q22,55 20,90 Q26,93 32,90 Q34,70 35,58 Q36,70 38,90 Q44,93 50,90 Q48,55 42,28 Z"
+            fill="#8b7355"/>
+      <!-- Walking stick -->
+      <line x1="20" y1="90" x2="18" y2="28" stroke="#4a3210" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="30" cy="92" rx="6" ry="2.5" fill="#3d2800"/>
+      <ellipse cx="40" cy="92" rx="6" ry="2.5" fill="#3d2800"/>
+  
+      <!-- Ruth (right, younger) -->
+      <circle cx="80" cy="16" r="10" fill="#8b6e4e"/>
+      <path d="M70,14 Q80,4 90,14 L90,24 Q80,18 70,24 Z" fill="#6b5030"/>
+      <!-- Veil flowing -->
+      <path d="M90,14 Q95,20 92,35 Q88,28 85,24" fill="#7a6040" opacity=".6"/>
+      <path d="M73,28 Q67,55 65,90 Q71,93 77,90 Q79,70 80,58 Q81,70 83,90 Q89,93 95,90 Q93,55 87,28 Z"
+            fill="#a08060"/>
+      <ellipse cx="75" cy="92" rx="6" ry="2.5" fill="#3d2800"/>
+      <ellipse cx="85" cy="92" rx="6" ry="2.5" fill="#3d2800"/>
+  
+      <!-- Clasped hands between them -->
+      <ellipse cx="57" cy="55" rx="5" ry="3" fill="#8b6e4e" opacity=".7"/>
+    </svg>
+
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-naomi" aria-label="拿俄米歸回 — Naomi's Return to Bethlehem">
+  <app-starfield />
+
+  <!-- Sunset glow on the road -->
+    <div id="sunset-glow" aria-hidden="true"></div>
+  
+    <!-- Desert road ground -->
+    <div id="naomi-ground" aria-hidden="true"></div>
+  
+    <!-- Three women on a road — Orpah turning back -->
+    <svg id="naomi-scene-svg" viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="路上三位婦人，俄珥巴轉身離去 — Three women on a road, Orpah turning back">
+      <title>拿俄米、路得與俄珥巴在路上 — Naomi, Ruth, and Orpah on the road</title>
+      <defs>
+        <linearGradient id="roadG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4a3a18"/>
+          <stop offset="100%" stop-color="#2a1e0c"/>
+        </linearGradient>
+        <radialGradient id="sunsetRG" cx="50%" cy="20%">
+          <stop offset="0%" stop-color="rgba(218,165,32,.3)"/>
+          <stop offset="60%" stop-color="rgba(196,160,64,.08)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Sunset sky glow -->
+      <ellipse cx="200" cy="60" rx="180" ry="80" fill="url(#sunsetRG)"/>
+      <!-- Distant Bethlehem silhouette (right) -->
+      <rect x="310" y="160" width="25" height="40" rx="2" fill="#3d2e14" opacity=".4"/>
+      <rect x="340" y="150" width="20" height="50" rx="2" fill="#3d2e14" opacity=".35"/>
+      <rect x="365" y="165" width="18" height="35" rx="2" fill="#3d2e14" opacity=".3"/>
+      <!-- Small dome -->
+      <ellipse cx="322" cy="160" rx="14" ry="8" fill="#3d2e14" opacity=".4"/>
+      <!-- Road -->
+      <path d="M0 230 Q100 220 200 210 Q300 200 400 195 L400 260 L0 260 Z" fill="url(#roadG)" opacity=".6"/>
+      <!-- Rolling landscape -->
+      <path d="M0 200 Q80 170 160 185 Q240 165 320 180 Q380 170 400 178 L400 230 L0 230 Z"
+            fill="#3a2a10" opacity=".5"/>
+  
+      <!-- Orpah (left, turning back, walking away) -->
+      <g opacity=".65">
+        <circle cx="80" cy="138" r="12" fill="#7a6540"/>
+        <path d="M68,136 Q80,124 92,136 L92,144 Q80,138 68,144 Z" fill="#5a4830"/>
+        <!-- Veil blowing -->
+        <path d="M68,136 Q62,142 60,155 Q66,148 70,142" fill="#6b5030" opacity=".5"/>
+        <!-- Robe -->
+        <path d="M72,150 Q66,175 64,210 Q70,213 76,210 Q78,190 80,178 Q82,190 84,210 Q90,213 96,210 Q94,175 88,150 Z"
+              fill="#8b7355"/>
+        <!-- Walking direction: facing left (back to Moab) -->
+        <path d="M72,158 Q60,155 52,150" stroke="#7a6540" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="73" cy="212" rx="6" ry="2.5" fill="#3d2800"/>
+        <ellipse cx="87" cy="212" rx="6" ry="2.5" fill="#3d2800"/>
+        <!-- Tear drop -->
+        <ellipse cx="74" cy="144" rx="1.5" ry="2" fill="rgba(180,200,220,.5)"/>
+      </g>
+  
+      <!-- Naomi (center, elderly) -->
+      <circle cx="200" cy="130" r="13" fill="#7a6540"/>
+      <path d="M187,128 Q200,116 213,128 L213,136 Q200,130 187,136 Z" fill="#4a3820"/>
+      <!-- Elderly lines -->
+      <path d="M193,135 Q200,148 207,135 Q204,158 200,162 Q196,158 193,135 Z" fill="#8a7a5a" opacity=".3"/>
+      <path d="M190,142 Q184,170 182,220 Q188,223 194,220 Q196,198 200,182 Q204,198 206,220 Q212,223 218,220 Q216,170 210,142 Z"
+            fill="#7a6a4a"/>
+      <!-- Walking stick -->
+      <line x1="182" y1="220" x2="178" y2="148" stroke="#3d2200" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="192" cy="222" rx="6" ry="2.5" fill="#3d2800"/>
+      <ellipse cx="208" cy="222" rx="6" ry="2.5" fill="#3d2800"/>
+  
+      <!-- Ruth (right, holding Naomi's arm — devoted) -->
+      <circle cx="260" cy="128" r="12" fill="#8b6e4e"/>
+      <path d="M248,126 Q260,114 272,126 L272,136 Q260,128 248,136 Z" fill="#6b5030"/>
+      <!-- Veil -->
+      <path d="M272,126 Q278,132 275,148 Q270,140 267,134" fill="#7a6040" opacity=".5"/>
+      <path d="M252,140 Q246,168 244,220 Q250,223 256,220 Q258,198 260,182 Q262,198 264,220 Q270,223 276,220 Q274,168 268,140 Z"
+            fill="#a08060"/>
+      <!-- Arm reaching toward Naomi -->
+      <path d="M252,148 Q238,142 224,145" stroke="#8b6e4e" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="253" cy="222" rx="6" ry="2.5" fill="#3d2800"/>
+      <ellipse cx="267" cy="222" rx="6" ry="2.5" fill="#3d2800"/>
+    </svg>
+
+  <app-scene-heading title="🛤 拿俄米歸回" subtitle="Naomi's Return — Ruth 1" id="naomi-heading" />
+  <app-scene-verse text="「你的國就是我的國，你的神就是我的神」— 路得記 1:16" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-gleaning" aria-label="拾穗 — Gleaning in Boaz's Field">
+  <app-starfield />
+
+  <!-- Golden sun -->
+    <div id="gleaning-sun" aria-hidden="true"></div>
+  
+    <!-- Wheat field landscape -->
+    <svg id="gleaning-field" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="波阿斯的麥田 — Boaz's wheat field">
+      <title>金色麥田 — Golden wheat field at harvest</title>
+      <defs>
+        <linearGradient id="fieldBG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a2e10"/>
+          <stop offset="50%" stop-color="#5a4a18"/>
+          <stop offset="100%" stop-color="#2a1e08"/>
+        </linearGradient>
+        <linearGradient id="wheatRowG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c4a040"/>
+          <stop offset="100%" stop-color="#8b6914"/>
+        </linearGradient>
+      </defs>
+      <!-- Field base -->
+      <path d="M0 280 Q360 230 720 250 Q1080 220 1440 260 L1440 500 L0 500 Z" fill="url(#fieldBG)"/>
+      <!-- Golden light across field -->
+      <ellipse cx="900" cy="280" rx="500" ry="80" fill="rgba(218,165,32,.1)"/>
+      <!-- Wheat rows — dense, layered -->
+      <g stroke="#c4a040" stroke-width="1.8" stroke-linecap="round" opacity=".6">
+        <!-- Row 1 -->
+        <line x1="50" y1="290" x2="48" y2="255"/><ellipse cx="48" cy="250" rx="4" ry="8" fill="#daa520" opacity=".5"/>
+        <line x1="100" y1="285" x2="102" y2="248"/><ellipse cx="102" cy="243" rx="4" ry="8" fill="#e8c060" opacity=".45"/>
+        <line x1="150" y1="288" x2="148" y2="252"/><ellipse cx="148" cy="247" rx="4" ry="8" fill="#c4a040" opacity=".5"/>
+        <line x1="220" y1="282" x2="222" y2="245"/><ellipse cx="222" cy="240" rx="4" ry="8" fill="#daa520" opacity=".48"/>
+        <line x1="300" y1="278" x2="298" y2="240"/><ellipse cx="298" cy="235" rx="4" ry="8" fill="#e8c060" opacity=".5"/>
+        <line x1="380" y1="275" x2="382" y2="238"/><ellipse cx="382" cy="233" rx="4" ry="8" fill="#c4a040" opacity=".45"/>
+        <line x1="460" y1="270" x2="458" y2="232"/><ellipse cx="458" cy="227" rx="4" ry="8" fill="#daa520" opacity=".5"/>
+        <line x1="540" y1="266" x2="542" y2="228"/><ellipse cx="542" cy="223" rx="4" ry="8" fill="#e8c060" opacity=".48"/>
+        <line x1="620" y1="262" x2="618" y2="225"/><ellipse cx="618" cy="220" rx="4" ry="8" fill="#c4a040" opacity=".5"/>
+        <line x1="700" y1="258" x2="702" y2="220"/><ellipse cx="702" cy="215" rx="4" ry="8" fill="#daa520" opacity=".45"/>
+        <line x1="800" y1="254" x2="798" y2="216"/><ellipse cx="798" cy="211" rx="4" ry="8" fill="#e8c060" opacity=".5"/>
+        <line x1="900" y1="248" x2="902" y2="210"/><ellipse cx="902" cy="205" rx="4" ry="8" fill="#c4a040" opacity=".48"/>
+        <line x1="1000" y1="244" x2="998" y2="206"/><ellipse cx="998" cy="201" rx="4" ry="8" fill="#daa520" opacity=".5"/>
+        <line x1="1100" y1="250" x2="1102" y2="212"/><ellipse cx="1102" cy="207" rx="4" ry="8" fill="#e8c060" opacity=".45"/>
+        <line x1="1200" y1="254" x2="1198" y2="216"/><ellipse cx="1198" cy="211" rx="4" ry="8" fill="#c4a040" opacity=".5"/>
+        <line x1="1300" y1="256" x2="1302" y2="218"/><ellipse cx="1302" cy="213" rx="4" ry="8" fill="#daa520" opacity=".48"/>
+        <line x1="1400" y1="258" x2="1398" y2="220"/><ellipse cx="1398" cy="215" rx="4" ry="8" fill="#e8c060" opacity=".5"/>
+      </g>
+      <!-- Wheat sheaves (bundles) -->
+      <g opacity=".45">
+        <path d="M900 340 Q895 310 900 290 Q905 310 910 340 Z" fill="#c4a040"/>
+        <path d="M895 340 Q886 315 890 295 Q898 315 905 340 Z" fill="#8b6914"/>
+        <path d="M905 340 Q914 315 910 295 Q902 315 895 340 Z" fill="#daa520"/>
+        <ellipse cx="900" cy="288" rx="12" ry="5" fill="#e8c060" opacity=".6"/>
+  
+        <path d="M1150 360 Q1145 330 1150 310 Q1155 330 1160 360 Z" fill="#c4a040"/>
+        <path d="M1145 360 Q1136 335 1140 315 Q1148 335 1155 360 Z" fill="#8b6914"/>
+        <path d="M1155 360 Q1164 335 1160 315 Q1152 335 1145 360 Z" fill="#daa520"/>
+        <ellipse cx="1150" cy="308" rx="12" ry="5" fill="#e8c060" opacity=".6"/>
+      </g>
+    </svg>
+  
+    <!-- Ruth bending to glean -->
+    <svg id="ruth-gleaning" viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="路得在田間拾穗 — Ruth gleaning in the field">
+      <title>路得拾穗 — Ruth bending to pick up grain</title>
+      <!-- Head (bent forward) -->
+      <circle cx="50" cy="22" r="11" fill="#8b6e4e"/>
+      <!-- Veil/head covering -->
+      <path d="M39,20 Q50,10 61,20 L61,28 Q50,22 39,28 Z" fill="#6b5030"/>
+      <path d="M61,20 Q66,28 63,42 Q58,34 55,28" fill="#7a6040" opacity=".5"/>
+      <!-- Robe (bent posture) -->
+      <path d="M42,32 Q30,50 22,80 Q28,84 34,82 Q38,65 44,52 Q48,65 52,82 Q58,84 64,80 Q60,50 54,32 Z"
+            fill="#a08060"/>
+      <!-- Arm reaching down to pick grain -->
+      <path d="M42,38 Q30,55 20,72" stroke="#8b6e4e" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Hand with grain -->
+      <ellipse cx="18" cy="74" rx="4" ry="3" fill="#8b6e4e"/>
+      <line x1="16" y1="70" x2="14" y2="62" stroke="#c4a040" stroke-width="1.5" stroke-linecap="round"/>
+      <ellipse cx="14" cy="59" rx="2.5" ry="5" fill="#daa520" opacity=".7"/>
+      <!-- Other arm holding gathered grain -->
+      <path d="M54,38 Q62,42 66,48" stroke="#8b6e4e" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="68" cy="50" rx="3" ry="2.5" fill="#8b6e4e"/>
+      <!-- Bundle of grain in arm -->
+      <g transform="translate(64,34) rotate(-20)">
+        <line x1="0" y1="0" x2="0" y2="-18" stroke="#c4a040" stroke-width="1.2"/>
+        <line x1="3" y1="2" x2="3" y2="-16" stroke="#daa520" stroke-width="1.2"/>
+        <line x1="-3" y1="1" x2="-3" y2="-15" stroke="#8b6914" stroke-width="1.2"/>
+        <ellipse cx="0" cy="-20" rx="3" ry="5" fill="#e8c060" opacity=".6"/>
+        <ellipse cx="3" cy="-18" rx="2.5" ry="4.5" fill="#daa520" opacity=".5"/>
+        <ellipse cx="-3" cy="-17" rx="2.5" ry="4.5" fill="#c4a040" opacity=".55"/>
+      </g>
+      <!-- Feet -->
+      <ellipse cx="32" cy="84" rx="6" ry="2.5" fill="#3d2800"/>
+      <ellipse cx="54" cy="84" rx="6" ry="2.5" fill="#3d2800"/>
+    </svg>
+
+  <app-scene-heading title="🌾 拾穗" subtitle="Gleaning in the Field — Ruth 2" id="gleaning-heading" />
+  <app-scene-verse text="「她恰巧到了以利米勒本族的人波阿斯那塊田裡」— 路得記 2:3" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-threshing" aria-label="打穀場 — The Threshing Floor">
+  <app-starfield />
+
+  <!-- Moonlight shaft -->
+    <div id="threshing-moonlight" aria-hidden="true"></div>
+  
+    <!-- Moon -->
+    <div id="threshing-moon" aria-hidden="true"></div>
+  
+    <!-- Threshing floor ground -->
+    <svg id="threshing-floor-svg" viewBox="0 0 1440 400" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="threshFloorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1e10"/>
+          <stop offset="100%" stop-color="#0c0806"/>
+        </linearGradient>
+        <radialGradient id="moonlightFloorG" cx="50%" cy="20%">
+          <stop offset="0%" stop-color="rgba(232,192,96,.12)"/>
+          <stop offset="60%" stop-color="rgba(196,160,64,.04)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Floor -->
+      <ellipse cx="720" cy="180" rx="600" ry="120" fill="url(#threshFloorG)"/>
+      <!-- Moonlight pool on floor -->
+      <ellipse cx="720" cy="170" rx="300" ry="70" fill="url(#moonlightFloorG)"/>
+      <!-- Grain piles -->
+      <ellipse cx="500" cy="200" rx="60" ry="25" fill="#3a2e14" opacity=".6"/>
+      <ellipse cx="500" cy="195" rx="50" ry="18" fill="#4a3a18" opacity=".5"/>
+      <ellipse cx="940" cy="210" rx="55" ry="22" fill="#3a2e14" opacity=".6"/>
+      <ellipse cx="940" cy="205" rx="45" ry="16" fill="#4a3a18" opacity=".5"/>
+      <!-- Large central grain pile -->
+      <ellipse cx="720" cy="240" rx="90" ry="35" fill="#3a2e14" opacity=".5"/>
+      <ellipse cx="720" cy="234" rx="75" ry="26" fill="#4a3a18" opacity=".45"/>
+      <ellipse cx="720" cy="228" rx="55" ry="18" fill="#5a4a20" opacity=".35"/>
+      <!-- Scattered grain -->
+      <circle cx="600" cy="230" r="2" fill="#c4a040" opacity=".3"/>
+      <circle cx="650" cy="245" r="1.5" fill="#daa520" opacity=".25"/>
+      <circle cx="780" cy="235" r="2" fill="#c4a040" opacity=".3"/>
+      <circle cx="830" cy="250" r="1.5" fill="#daa520" opacity=".25"/>
+      <!-- Ground extends to bottom -->
+      <rect x="0" y="280" width="1440" height="120" fill="#0c0806"/>
+    </svg>
+  
+    <!-- Ruth at Boaz's feet -->
+    <svg id="threshing-figures" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="路得在打穀場波阿斯腳前 — Ruth at Boaz's feet on the threshing floor">
+      <title>打穀場夜晚 — Ruth at the threshing floor at night</title>
+      <defs>
+        <radialGradient id="figureGlowG" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="rgba(232,192,96,.15)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Gentle glow around scene -->
+      <ellipse cx="100" cy="110" rx="90" ry="55" fill="url(#figureGlowG)"/>
+      <!-- Boaz (lying/reclining, left) -->
+      <circle cx="65" cy="95" r="12" fill="#6b4e28"/>
+      <path d="M53,93 Q65,83 77,93 L77,100 Q65,95 53,100 Z" fill="#4a3818"/>
+      <!-- Beard -->
+      <path d="M58,102 Q65,112 72,102 Q69,120 65,124 Q61,120 58,102 Z" fill="#7a6540" opacity=".7"/>
+      <!-- Body reclining -->
+      <path d="M55,108 Q45,125 40,155 Q50,158 60,155 Q62,140 65,130 Q68,140 70,155 Q80,158 90,155 Q85,125 75,108 Z"
+            fill="#7a6040"/>
+      <!-- Blanket/covering -->
+      <path d="M38,140 Q65,132 92,140 Q90,158 65,162 Q40,158 38,140 Z" fill="#5a4a28" opacity=".6"/>
+      <ellipse cx="55" cy="158" rx="7" ry="3" fill="#3d2800"/>
+      <ellipse cx="75" cy="158" rx="7" ry="3" fill="#3d2800"/>
+  
+      <!-- Ruth (kneeling at his feet, right) -->
+      <circle cx="140" cy="88" r="11" fill="#8b6e4e"/>
+      <path d="M129,86 Q140,76 151,86 L151,94 Q140,88 129,94 Z" fill="#6b5030"/>
+      <!-- Veil -->
+      <path d="M151,86 Q156,94 153,108 Q148,100 145,94" fill="#7a6040" opacity=".5"/>
+      <!-- Kneeling robe -->
+      <path d="M133,100 Q128,120 126,150 Q132,153 138,150 Q139,135 140,125 Q141,135 142,150 Q148,153 154,150 Q152,120 147,100 Z"
+            fill="#a08060"/>
+      <!-- Arms reaching forward humbly -->
+      <path d="M133,108 Q118,118 105,125" stroke="#8b6e4e" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="103" cy="126" rx="3.5" ry="2.5" fill="#8b6e4e"/>
+      <ellipse cx="135" cy="152" rx="6" ry="2.5" fill="#3d2800"/>
+      <ellipse cx="145" cy="152" rx="6" ry="2.5" fill="#3d2800"/>
+    </svg>
+
+  <app-scene-heading title="🌙 打穀場" subtitle="The Threshing Floor — Ruth 3" id="threshing-heading" />
+  <app-scene-verse text="「求你用你的衣襟遮蓋我，因為你是我一個至近的親屬」— 路得記 3:9" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-redemption" aria-label="救贖 — Boaz Redeems Ruth">
+  <app-starfield />
+
+  <!-- Golden glow -->
+    <div id="gate-glow" aria-hidden="true"></div>
+  
+    <!-- City gate and elders -->
+    <svg id="redemption-gate" viewBox="0 0 1440 550" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="波阿斯在城門口贖回路得 — Boaz redeeming Ruth at the city gate">
+      <title>城門口救贖 — Redemption at the city gate</title>
+      <defs>
+        <linearGradient id="gateWallG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4a3a1e"/>
+          <stop offset="100%" stop-color="#2a1e0c"/>
+        </linearGradient>
+        <linearGradient id="gateArchG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a2e14"/>
+          <stop offset="100%" stop-color="#1a1208"/>
+        </linearGradient>
+        <linearGradient id="gateFloorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1e10"/>
+          <stop offset="100%" stop-color="#0c0806"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground -->
+      <rect x="0" y="380" width="1440" height="170" fill="url(#gateFloorG)"/>
+      <!-- Left wall -->
+      <rect x="0" y="120" width="480" height="280" fill="url(#gateWallG)"/>
+      <!-- Right wall -->
+      <rect x="960" y="120" width="480" height="280" fill="url(#gateWallG)"/>
+      <!-- Gate arch -->
+      <path d="M480 400 L480 180 Q720 60 960 180 L960 400 Z" fill="url(#gateArchG)"/>
+      <!-- Inner arch shadow -->
+      <path d="M520 400 L520 200 Q720 100 920 200 L920 400 Z" fill="#1a1208" opacity=".5"/>
+      <!-- Stone texture -->
+      <line x1="0" y1="180" x2="480" y2="180" stroke="rgba(80,60,20,.2)" stroke-width="1"/>
+      <line x1="0" y1="240" x2="480" y2="240" stroke="rgba(80,60,20,.2)" stroke-width="1"/>
+      <line x1="0" y1="300" x2="480" y2="300" stroke="rgba(80,60,20,.2)" stroke-width="1"/>
+      <line x1="960" y1="180" x2="1440" y2="180" stroke="rgba(80,60,20,.2)" stroke-width="1"/>
+      <line x1="960" y1="240" x2="1440" y2="240" stroke="rgba(80,60,20,.2)" stroke-width="1"/>
+      <line x1="960" y1="300" x2="1440" y2="300" stroke="rgba(80,60,20,.2)" stroke-width="1"/>
+      <!-- Keystone -->
+      <path d="M700 90 L720 70 L740 90 Z" fill="#5a4a24" opacity=".6"/>
+  
+      <!-- Light through the gate -->
+      <ellipse cx="720" cy="300" rx="150" ry="80" fill="rgba(218,165,32,.08)"/>
+  
+      <!-- Boaz (center-left, standing tall) -->
+      <g>
+        <circle cx="640" cy="300" r="14" fill="#6b4e28"/>
+        <path d="M626,298 Q640,286 654,298 L654,306 Q640,300 626,306 Z" fill="#4a3818"/>
+        <path d="M633,308 Q640,320 647,308 Q644,332 640,336 Q636,332 633,308 Z" fill="#7a6540" opacity=".7"/>
+        <path d="M630,318 Q624,348 622,400 Q628,403 634,400 Q636,378 640,362 Q644,378 646,400 Q652,403 658,400 Q656,348 650,318 Z"
+              fill="#8b7040"/>
+        <!-- Right arm extended (offering/declaring) -->
+        <path d="M650,326 Q664,316 672,308" stroke="#6b4e28" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <ellipse cx="632" cy="402" rx="7" ry="3" fill="#3d2800"/>
+        <ellipse cx="648" cy="402" rx="7" ry="3" fill="#3d2800"/>
+      </g>
+  
+      <!-- Sandal on ground (symbol of land transfer) -->
+      <path d="M700 398 Q710 392 720 394 Q725 396 722 402 Q715 406 705 404 Q698 402 700 398 Z"
+            fill="#5a3a18" stroke="#3d2200" stroke-width="1"/>
+      <path d="M704 400 Q710 396 716 397" stroke="#3d2200" stroke-width=".8" fill="none"/>
+  
+      <!-- Elders seated (left group) -->
+      <g opacity=".7">
+        <!-- Elder 1 -->
+        <circle cx="340" cy="335" r="10" fill="#5a4a28"/>
+        <rect x="328" y="345" width="24" height="30" rx="3" fill="#4a3a1e"/>
+        <rect x="322" y="365" width="36" height="18" rx="2" fill="#3a2e14"/>
+        <!-- Elder 2 -->
+        <circle cx="390" cy="338" r="9" fill="#5a4a28"/>
+        <rect x="380" y="347" width="20" height="28" rx="3" fill="#4a3a1e"/>
+        <rect x="374" y="367" width="32" height="16" rx="2" fill="#3a2e14"/>
+        <!-- Elder 3 -->
+        <circle cx="280" cy="340" r="9" fill="#5a4a28"/>
+        <rect x="270" y="349" width="20" height="28" rx="3" fill="#4a3a1e"/>
+        <rect x="264" y="369" width="32" height="16" rx="2" fill="#3a2e14"/>
+      </g>
+  
+      <!-- Elders seated (right group) -->
+      <g opacity=".7">
+        <!-- Elder 4 -->
+        <circle cx="810" cy="335" r="10" fill="#5a4a28"/>
+        <rect x="798" y="345" width="24" height="30" rx="3" fill="#4a3a1e"/>
+        <rect x="792" y="365" width="36" height="18" rx="2" fill="#3a2e14"/>
+        <!-- Elder 5 -->
+        <circle cx="860" cy="338" r="9" fill="#5a4a28"/>
+        <rect x="850" y="347" width="20" height="28" rx="3" fill="#4a3a1e"/>
+        <rect x="844" y="367" width="32" height="16" rx="2" fill="#3a2e14"/>
+        <!-- Elder 6 -->
+        <circle cx="910" cy="340" r="9" fill="#5a4a28"/>
+        <rect x="900" y="349" width="20" height="28" rx="3" fill="#4a3a1e"/>
+        <rect x="894" y="369" width="32" height="16" rx="2" fill="#3a2e14"/>
+      </g>
+  
+      <!-- Ruth (behind Boaz, modest) -->
+      <g opacity=".8">
+        <circle cx="580" cy="310" r="11" fill="#8b6e4e"/>
+        <path d="M569,308 Q580,298 591,308 L591,316 Q580,310 569,316 Z" fill="#6b5030"/>
+        <path d="M591,308 Q596,316 593,328 Q588,320 585,314" fill="#7a6040" opacity=".5"/>
+        <path d="M573,320 Q568,348 566,400 Q572,403 578,400 Q580,378 580,362 Q580,378 582,400 Q588,403 594,400 Q592,348 587,320 Z"
+              fill="#a08060"/>
+        <ellipse cx="574" cy="402" rx="6" ry="2.5" fill="#3d2800"/>
+        <ellipse cx="586" cy="402" rx="6" ry="2.5" fill="#3d2800"/>
+      </g>
+    </svg>
+
+  <app-scene-heading title="⚖ 救贖" subtitle="Redemption at the Gate — Ruth 4:1-12" id="redemption-heading" />
+  <app-scene-verse text="「我也買了瑪倫的妻摩押女子路得為妻」— 路得記 4:10" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-lineage" aria-label="家譜·盼望 — Lineage and Hope">
+  <app-starfield />
+
+  <!-- Divine golden light beam -->
+    <div id="lineage-divine-light" aria-hidden="true"></div>
+  
+    <!-- Warm ambient glow -->
+    <div id="lineage-glow" aria-hidden="true"></div>
+  
+    <!-- Family scene: Ruth, Boaz, and baby Obed -->
+    <svg id="lineage-scene-svg" viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="路得、波阿斯與嬰孩俄備得 — Ruth, Boaz, and baby Obed">
+      <title>家譜·盼望 — The lineage of David begins with Obed</title>
+      <defs>
+        <radialGradient id="hopeGlowG" cx="50%" cy="40%">
+          <stop offset="0%" stop-color="rgba(232,192,96,.25)"/>
+          <stop offset="50%" stop-color="rgba(218,165,32,.08)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+        <radialGradient id="babyGlowG" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="rgba(255,245,200,.3)"/>
+          <stop offset="50%" stop-color="rgba(232,192,96,.1)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+  
+      <!-- Warm background glow -->
+      <ellipse cx="140" cy="160" rx="130" ry="140" fill="url(#hopeGlowG)"/>
+  
+      <!-- Boaz (left, standing proud) -->
+      <circle cx="80" cy="80" r="16" fill="#6b4e28"/>
+      <path d="M64,78 Q80,64 96,78 L96,86 Q80,80 64,86 Z" fill="#4a3818"/>
+      <!-- Beard -->
+      <path d="M72,88 Q80,102 88,88 Q85,114 80,118 Q75,114 72,88 Z" fill="#7a6540" opacity=".75"/>
+      <!-- Robe -->
+      <path d="M68,100 Q60,140 56,210 Q64,214 72,210 Q75,180 80,160 Q85,180 88,210 Q96,214 104,210 Q100,140 92,100 Z"
+            fill="#8b7040"/>
+      <!-- Arm around Ruth's shoulder -->
+      <path d="M92,108 Q110,100 125,108" stroke="#6b4e28" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <!-- Left arm at side -->
+      <path d="M68,108 Q60,120 56,135" stroke="#6b4e28" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="70" cy="213" rx="8" ry="3" fill="#3d2800"/>
+      <ellipse cx="90" cy="213" rx="8" ry="3" fill="#3d2800"/>
+  
+      <!-- Ruth (right, holding baby) -->
+      <circle cx="170" cy="78" r="14" fill="#8b6e4e"/>
+      <path d="M156,76 Q170,64 184,76 L184,86 Q170,78 156,86 Z" fill="#6b5030"/>
+      <!-- Veil flowing -->
+      <path d="M184,76 Q190,84 187,100 Q182,92 179,86" fill="#7a6040" opacity=".5"/>
+      <!-- Robe -->
+      <path d="M160,92 Q153,130 150,210 Q158,214 166,210 Q168,178 170,158 Q172,178 174,210 Q182,214 190,210 Q187,130 180,92 Z"
+            fill="#a08060"/>
+      <!-- Arms cradling baby -->
+      <path d="M160,100 Q148,120 142,135" stroke="#8b6e4e" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M180,100 Q185,115 182,135" stroke="#8b6e4e" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="164" cy="213" rx="8" ry="3" fill="#3d2800"/>
+      <ellipse cx="180" cy="213" rx="8" ry="3" fill="#3d2800"/>
+  
+      <!-- Baby Obed (center, in Ruth's arms) -->
+      <ellipse cx="160" cy="132" rx="22" ry="12" fill="#d4c490" opacity=".7"/>
+      <circle cx="160" cy="122" r="8" fill="#c4a080"/>
+      <!-- Baby glow -->
+      <ellipse cx="160" cy="128" rx="28" ry="18" fill="url(#babyGlowG)"/>
+      <!-- Swaddling -->
+      <ellipse cx="160" cy="136" rx="16" ry="8" fill="#ede0c0" opacity=".5"/>
+  
+      <!-- Golden lineage light rays from baby -->
+      <line x1="160" y1="128" x2="130" y2="60" stroke="rgba(218,165,32,.12)" stroke-width="6"/>
+      <line x1="160" y1="128" x2="190" y2="60" stroke="rgba(218,165,32,.12)" stroke-width="6"/>
+      <line x1="160" y1="128" x2="160" y2="50" stroke="rgba(218,165,32,.15)" stroke-width="4"/>
+  
+      <!-- Lineage text (subtle, like genealogy) -->
+      <text x="140" y="248" fill="rgba(218,165,32,.3)" font-size="11" font-weight="600"
+            text-anchor="middle" letter-spacing=".12em">俄備得 · Obed</text>
+      <text x="140" y="268" fill="rgba(196,160,64,.2)" font-size="9" font-weight="500"
+            text-anchor="middle" letter-spacing=".1em">耶西 · Jesse</text>
+      <text x="140" y="288" fill="rgba(232,192,96,.35)" font-size="13" font-weight="700"
+            text-anchor="middle" letter-spacing=".14em">大衛 · David</text>
+      <!-- Connecting lines -->
+      <line x1="140" y1="252" x2="140" y2="258" stroke="rgba(218,165,32,.2)" stroke-width="1"/>
+      <line x1="140" y1="272" x2="140" y2="278" stroke="rgba(218,165,32,.2)" stroke-width="1"/>
+  
+      <!-- Naomi holding baby (right side, joyful) -->
+      <g opacity=".6" transform="translate(210,90)">
+        <circle cx="0" cy="0" r="11" fill="#7a6540"/>
+        <path d="M-11,-2 Q0,-12 11,-2 L11,5 Q0,0 -11,5 Z" fill="#5a4830"/>
+        <path d="M-7,10 Q-12,35 -14,80 Q-8,83 -2,80 Q0,62 0,50 Q0,62 2,80 Q8,83 14,80 Q12,35 7,10 Z"
+              fill="#7a6a4a"/>
+        <ellipse cx="-4" cy="82" rx="5" ry="2" fill="#3d2800"/>
+        <ellipse cx="6" cy="82" rx="5" ry="2" fill="#3d2800"/>
+        <!-- Hands extended in joy -->
+        <path d="M-7,18 Q-16,24 -20,30" stroke="#7a6540" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M7,18 Q16,24 20,30" stroke="#7a6540" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </g>
+    </svg>
+
+  <app-scene-heading title="👶 家譜·盼望" subtitle="Lineage and Hope — Ruth 4:13-22" id="lineage-heading" />
+  <app-scene-verse text="「拿俄米得了孩子…給他起名叫俄備得；俄備得是耶西的父，耶西是大衛的父」— 路得記 4:17" />
+</section>

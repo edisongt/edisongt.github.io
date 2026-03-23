@@ -1,0 +1,288 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #2222ab 0%, #2b2b9b 30%, #4040dc 65%, #4c4cdc 100%);
+    }
+
+#intro-glow {
+      position: absolute; top: 16%; left: 50%; transform: translateX(-50%);
+      width: clamp(70px,12vw,140px); height: clamp(70px,12vw,140px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #e0e0ff, #8090dd 40%, #4a5aaa 75%, #3a3a8a);
+      box-shadow: 0 0 55px rgba(100,120,220,.7), 0 0 110px rgba(80,100,200,.3);
+      z-index: 4;
+      animation: introGlow 4s ease-in-out infinite;
+    }
+
+@keyframes introGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(100,120,220,.7), 0 0 110px rgba(80,100,200,.3); }
+      50%      { box-shadow: 0 0 80px rgba(130,150,255,.95), 0 0 160px rgba(100,120,240,.5); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#8090dd 0%,#c0c8ff 45%,#6070cc 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(180,190,255,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(150,160,220,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-samuel {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — SAMUEL'S BIRTH  撒母耳出生
+    ══════════════════════════════════════════════ */
+
+#scene-birth {
+      background: linear-gradient(180deg, #1c1cb6 0%, #29299e 55%, #3c3cb9 100%);
+    }
+
+#birth-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#2a2a50 0%,#161630 55%,#0a0a1e 100%);
+      z-index: 5;
+    }
+
+#birth-lamp-glow {
+      position: absolute; top: 28%; left: 50%; transform: translateX(-50%);
+      width: 30vw; height: 30vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,220,100,.2) 0%, rgba(255,200,60,.08) 40%, transparent 70%);
+      z-index: 6;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#birth-divine-light {
+      position: absolute; top: 5%; left: 50%; transform: translateX(-50%);
+      width: clamp(20px,4vw,50px); height: 45%;
+      background: linear-gradient(180deg,rgba(255,255,220,0) 0%,rgba(200,210,255,.4) 30%,rgba(160,180,255,.65) 65%,transparent 100%);
+      z-index: 7; filter: blur(12px);
+      animation: divinePulse 2.5s ease-in-out infinite;
+    }
+
+@keyframes divinePulse {
+      0%,100% { opacity: .5; height: 40%; }
+      50%      { opacity: 1;  height: 50%; }
+    }
+
+#birth-svg {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 10; width: clamp(180px,30vw,400px);
+      animation: floatY 6s ease-in-out infinite;
+    }
+
+#birth-heading h2 {
+      color: #8898ee;
+      text-shadow: 0 0 22px rgba(100,130,220,.7);
+    }
+
+#birth-heading p { color: rgba(160,175,240,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — ARK CAPTURED  約櫃被擄
+    ══════════════════════════════════════════════ */
+
+#scene-ark {
+      background: linear-gradient(180deg, #382a62 0%, #493a6d 55%, #493870 100%);
+    }
+
+#ark-darkness {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 70%, transparent 30%, rgba(0,0,0,.5) 80%);
+      z-index: 4;
+    }
+
+#ark-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 25vw; height: 20vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,200,50,.25) 0%, rgba(255,180,0,.08) 50%, transparent 72%);
+      z-index: 5;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#ark-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 10; width: clamp(200px,35vw,480px);
+    }
+
+#ark-heading h2 {
+      background: linear-gradient(120deg,#cc8844 0%,#886644 50%,#664422 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#ark-heading p { color: rgba(180,150,120,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — SAUL ANOINTED  掃羅受膏
+    ══════════════════════════════════════════════ */
+
+#scene-saul {
+      background: linear-gradient(180deg, #2626a4 0%, #2f2a97 45%, #4b3cc8 100%);
+    }
+
+#saul-divine-light {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 25%, rgba(160,150,255,.18) 0%, rgba(130,120,200,.06) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#saul-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 28%;
+      background: linear-gradient(180deg,#2a2050 0%,#181040 55%,#0c0820 100%);
+      z-index: 5;
+    }
+
+#saul-svg {
+      position: absolute; bottom: 24%; left: 50%; transform: translateX(-50%);
+      z-index: 10; width: clamp(140px,22vw,300px);
+      animation: floatY 7s ease-in-out infinite;
+    }
+
+#saul-heading h2 {
+      background: linear-gradient(120deg,#9080dd 0%,#c8c0ff 50%,#6858bb 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#saul-heading p { color: rgba(170,165,220,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — DAVID AND GOLIATH  大衛與歌利亞
+    ══════════════════════════════════════════════ */
+
+#scene-david {
+      background: linear-gradient(180deg, #3f337e 0%, #3e3181 45%, #413c78 100%);
+    }
+
+#david-valley { position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 3; }
+
+#david-dust-glow {
+      position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(200,180,140,.12) 0%, rgba(180,160,120,.04) 60%, transparent 80%);
+      z-index: 4;
+    }
+
+#david-svg {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 10; width: clamp(220px,38vw,520px);
+    }
+
+#david-heading h2 {
+      background: linear-gradient(120deg,#7080cc 0%,#b0c0ff 50%,#5060aa 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#david-heading p { color: rgba(160,175,220,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — SAUL'S FALL  掃羅的墮落
+    ══════════════════════════════════════════════ */
+
+#scene-fall {
+      background: linear-gradient(180deg, #1c0e46 0%, #41218e 50%, #403080 100%);
+    }
+
+#fall-mountain { position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 3; }
+
+#fall-dark-mist {
+      position: absolute; bottom: 28%; left: 0; width: 100%; height: 22%;
+      background: linear-gradient(180deg, transparent 0%, rgba(60,40,80,.1) 40%, rgba(50,30,70,.15) 70%, transparent 100%);
+      z-index: 5;
+      animation: mistDrift 8s ease-in-out infinite alternate;
+    }
+
+@keyframes mistDrift {
+      0%   { transform: translateX(0)   scale(1);    }
+      100% { transform: translateX(-4%) scale(1.05); }
+    }
+
+#fall-red-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 25vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(180,40,40,.12) 0%, rgba(120,20,20,.05) 50%, transparent 72%);
+      z-index: 4;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#fall-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 10; width: clamp(180px,30vw,400px);
+    }
+
+#fall-heading h2 {
+      background: linear-gradient(120deg,#8060aa 0%,#c0a0cc 50%,#604080 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#fall-heading p { color: rgba(160,140,180,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

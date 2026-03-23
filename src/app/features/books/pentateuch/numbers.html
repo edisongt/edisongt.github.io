@@ -1,0 +1,526 @@
+<app-back-button />
+<app-nav-dots [scenes]="scenes" />
+
+<section class="scene" id="scene-intro" aria-label="民數記 — 開場">
+  <app-starfield />
+
+  <!-- Pillar of Cloud -->
+    <svg id="intro-cloud-pillar" viewBox="0 0 120 260" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="雲柱 — Pillar of Cloud">
+      <title>雲柱 — Pillar of Cloud guiding Israel through the wilderness</title>
+      <defs>
+        <radialGradient id="cloudPG" cx="50%" cy="40%">
+          <stop offset="0%"   stop-color="rgba(220,230,255,.85)"/>
+          <stop offset="55%"  stop-color="rgba(160,180,220,.5)"/>
+          <stop offset="100%" stop-color="rgba(100,120,180,0)"/>
+        </radialGradient>
+      </defs>
+      <!-- Cloud top -->
+      <ellipse cx="60" cy="38" rx="52" ry="35" fill="url(#cloudPG)"/>
+      <ellipse cx="40" cy="32" rx="35" ry="28" fill="rgba(200,215,255,.45)"/>
+      <ellipse cx="80" cy="32" rx="35" ry="28" fill="rgba(200,215,255,.45)"/>
+      <ellipse cx="60" cy="24" rx="32" ry="22" fill="rgba(235,240,255,.6)"/>
+      <!-- Pillar column -->
+      <rect x="38" y="55" width="44" height="195" rx="18"
+            fill="rgba(190,205,235,.2)"/>
+      <rect x="45" y="60" width="30" height="185" rx="12"
+            fill="rgba(220,232,255,.15)"/>
+      <rect x="52" y="65" width="16" height="175" rx="6"
+            fill="rgba(240,245,255,.1)"/>
+    </svg>
+  
+    <div id="intro-title">
+      <h1>民數記</h1>
+      <p>Book of Numbers</p>
+      <span class="sub">數點 · 曠野 · 探子 · 叛逆 · 銅蛇</span>
+    </div>
+  
+    <!-- Desert landscape silhouette -->
+    <svg id="intro-desert" viewBox="0 0 1440 420" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="sandG1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a2a08"/>
+          <stop offset="100%" stop-color="#0c0800"/>
+        </linearGradient>
+        <linearGradient id="duneG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4a3610"/>
+          <stop offset="100%" stop-color="#2a1a04"/>
+        </linearGradient>
+      </defs>
+      <!-- Sand base -->
+      <rect x="0" y="290" width="1440" height="130" fill="url(#sandG1)"/>
+      <!-- Dunes -->
+      <path d="M0 340 Q180 255 360 290 Q540 320 720 270 Q900 230 1080 280 Q1260 310 1440 260 L1440 420 L0 420 Z"
+            fill="url(#duneG)"/>
+      <path d="M0 360 Q240 310 480 340 Q720 370 960 330 Q1200 290 1440 320 L1440 420 L0 420 Z"
+            fill="#1e1200"/>
+      <!-- Tents silhouettes in distance -->
+      <polygon points="280,310 310,278 340,310" fill="#1a1000"/>
+      <polygon points="500,300 525,274 550,300" fill="#161000"/>
+      <polygon points="900,295 930,262 960,295" fill="#181000"/>
+      <polygon points="1120,305 1145,280 1170,305" fill="#141000"/>
+      <!-- Cacti -->
+      <line x1="150" y1="310" x2="150" y2="274" stroke="#1a2400" stroke-width="4"/>
+      <line x1="150" y1="290" x2="138" y2="278" stroke="#1a2400" stroke-width="3"/>
+      <line x1="150" y1="295" x2="162" y2="282" stroke="#1a2400" stroke-width="3"/>
+      <line x1="1290" y1="305" x2="1290" y2="270" stroke="#1a2400" stroke-width="4"/>
+      <line x1="1290" y1="286" x2="1278" y2="274" stroke="#1a2400" stroke-width="3"/>
+      <line x1="1290" y1="290" x2="1302" y2="278" stroke="#1a2400" stroke-width="3"/>
+    </svg>
+
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-census" aria-label="數點人民 — The Census and Camp of Israel">
+  <app-starfield />
+
+  <!-- Desert ground -->
+    <div id="camp-ground" aria-hidden="true"></div>
+  
+    <!-- Aerial camp layout -->
+    <svg id="camp-svg" viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="以色列營地佈局 — Camp of Israel arrangement">
+      <title>以色列營地佈局 — The twelve tribes camped around the Tabernacle</title>
+      <defs>
+        <linearGradient id="tabG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c8a050"/>
+          <stop offset="100%" stop-color="#8a6828"/>
+        </linearGradient>
+        <filter id="campGlow">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Faint glow around tabernacle -->
+      <ellipse cx="200" cy="180" rx="55" ry="40" fill="rgba(255,215,80,.12)" filter="url(#campGlow)"/>
+      <!-- Tabernacle (central rectangle) -->
+      <rect x="170" y="155" width="60" height="50" rx="4" fill="url(#tabG)" stroke="#a08030" stroke-width="2"
+            style="filter:drop-shadow(0 0 12px rgba(255,200,60,.5));"/>
+      <rect x="178" y="162" width="44" height="36" rx="2" fill="rgba(255,240,180,.18)"/>
+      <!-- Courtyard -->
+      <rect x="152" y="140" width="96" height="80" rx="3" fill="none" stroke="rgba(200,170,80,.35)" stroke-width="1.5" stroke-dasharray="4 3"/>
+  
+      <!-- EAST banners (Judah, Issachar, Zebulun) — top -->
+      <rect x="175" y="48" width="16" height="28" rx="2" fill="#cc2222" class="banner-sway"/>
+      <rect x="195" y="44" width="16" height="32" rx="2" fill="#dd3333" class="banner-sway" style="animation-delay:.2s;"/>
+      <rect x="215" y="50" width="16" height="26" rx="2" fill="#bb1818" class="banner-sway" style="animation-delay:.4s;"/>
+      <line x1="183" y1="76" x2="183" y2="48" stroke="#8a6828" stroke-width="1.5"/>
+      <line x1="203" y1="76" x2="203" y2="44" stroke="#8a6828" stroke-width="1.5"/>
+      <line x1="223" y1="76" x2="223" y2="50" stroke="#8a6828" stroke-width="1.5"/>
+  
+      <!-- SOUTH banners (Reuben, Simeon, Gad) — right -->
+      <rect x="315" y="155" width="28" height="16" rx="2" fill="#2266cc" class="banner-sway" style="animation-delay:.1s;"/>
+      <rect x="318" y="175" width="32" height="16" rx="2" fill="#3377dd" class="banner-sway" style="animation-delay:.3s;"/>
+      <rect x="312" y="195" width="26" height="16" rx="2" fill="#1855bb" class="banner-sway" style="animation-delay:.5s;"/>
+      <line x1="315" y1="163" x2="343" y2="163" stroke="#8a6828" stroke-width="1.5"/>
+      <line x1="318" y1="183" x2="350" y2="183" stroke="#8a6828" stroke-width="1.5"/>
+      <line x1="312" y1="203" x2="338" y2="203" stroke="#8a6828" stroke-width="1.5"/>
+  
+      <!-- WEST banners (Ephraim, Manasseh, Benjamin) — bottom -->
+      <rect x="175" y="282" width="16" height="28" rx="2" fill="#22aa44" class="banner-sway" style="animation-delay:.15s;"/>
+      <rect x="195" y="278" width="16" height="32" rx="2" fill="#33bb55" class="banner-sway" style="animation-delay:.35s;"/>
+      <rect x="215" y="284" width="16" height="26" rx="2" fill="#189938" class="banner-sway" style="animation-delay:.55s;"/>
+      <line x1="183" y1="282" x2="183" y2="310" stroke="#8a6828" stroke-width="1.5"/>
+      <line x1="203" y1="278" x2="203" y2="310" stroke="#8a6828" stroke-width="1.5"/>
+      <line x1="223" y1="284" x2="223" y2="310" stroke="#8a6828" stroke-width="1.5"/>
+  
+      <!-- NORTH banners (Dan, Asher, Naphtali) — left -->
+      <rect x="58" y="155" width="28" height="16" rx="2" fill="#aa8822" class="banner-sway" style="animation-delay:.25s;"/>
+      <rect x="54" y="175" width="32" height="16" rx="2" fill="#bb9933" class="banner-sway" style="animation-delay:.45s;"/>
+      <rect x="60" y="195" width="26" height="16" rx="2" fill="#997718" class="banner-sway" style="animation-delay:.6s;"/>
+      <line x1="58" y1="163" x2="86" y2="163" stroke="#8a6828" stroke-width="1.5"/>
+      <line x1="54" y1="183" x2="86" y2="183" stroke="#8a6828" stroke-width="1.5"/>
+      <line x1="60" y1="203" x2="86" y2="203" stroke="#8a6828" stroke-width="1.5"/>
+  
+      <!-- Directional labels -->
+      <text x="200" y="30" text-anchor="middle" fill="rgba(255,220,130,.5)" font-size="11" letter-spacing=".1em">東 East</text>
+      <text x="200" y="340" text-anchor="middle" fill="rgba(255,220,130,.5)" font-size="11" letter-spacing=".1em">西 West</text>
+      <text x="375" y="185" text-anchor="middle" fill="rgba(255,220,130,.5)" font-size="11" letter-spacing=".1em">南 South</text>
+      <text x="25" y="185" text-anchor="middle" fill="rgba(255,220,130,.5)" font-size="11" letter-spacing=".1em">北 North</text>
+    </svg>
+
+  <app-scene-heading title="🏕 數點人民" subtitle="The Census and Camp of Israel — Numbers 1–2" id="census-heading" />
+  <app-scene-verse text="「以色列人要各歸自己的纛下」— 民數記 2:2" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-spies" aria-label="十二探子 — The Twelve Spies">
+  <app-starfield />
+
+  <!-- Green hills -->
+    <svg id="spies-hills" viewBox="0 0 1440 400" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="hillG1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a5a18"/>
+          <stop offset="100%" stop-color="#143008"/>
+        </linearGradient>
+        <linearGradient id="hillG2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1e4812"/>
+          <stop offset="100%" stop-color="#0e2406"/>
+        </linearGradient>
+      </defs>
+      <!-- Distant hills -->
+      <path d="M0 400 L0 280 Q200 170 420 230 Q650 290 880 200 Q1100 130 1300 210 L1440 180 L1440 400 Z"
+            fill="url(#hillG2)" opacity=".6"/>
+      <!-- Foreground hills -->
+      <path d="M0 400 L0 310 Q240 220 480 280 Q720 330 960 250 Q1200 190 1440 260 L1440 400 Z"
+            fill="url(#hillG1)"/>
+    </svg>
+  
+    <!-- Lush ground -->
+    <div id="spies-ground" aria-hidden="true"></div>
+  
+    <!-- Grape glow -->
+    <div id="grape-glow" aria-hidden="true"></div>
+  
+    <!-- Two spies carrying grape cluster -->
+    <svg id="spies-svg" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="兩個探子扛葡萄 — Two spies carrying a massive grape cluster">
+      <title>兩個探子扛葡萄 — Two spies carrying the enormous grape cluster from Canaan</title>
+      <!-- The pole -->
+      <line x1="50" y1="95" x2="270" y2="95" stroke="#6b4420" stroke-width="5" stroke-linecap="round"/>
+  
+      <!-- Giant grape cluster hanging from pole -->
+      <line x1="160" y1="95" x2="160" y2="112" stroke="#3a5a20" stroke-width="2"/>
+      <!-- Leaves -->
+      <path d="M140,100 Q150,88 160,95 Q155,102 140,100 Z" fill="#4a7a2a"/>
+      <path d="M180,100 Q170,88 160,95 Q165,102 180,100 Z" fill="#3a6a1e"/>
+      <!-- Grapes (large cluster) -->
+      <circle cx="148" cy="122" r="10" fill="#5a1878"/>
+      <circle cx="168" cy="120" r="11" fill="#6a2090"/>
+      <circle cx="158" cy="135" r="10" fill="#4e1468"/>
+      <circle cx="142" cy="140" r="9"  fill="#5a1878"/>
+      <circle cx="174" cy="138" r="10" fill="#6a2090"/>
+      <circle cx="160" cy="152" r="9"  fill="#521670"/>
+      <circle cx="148" cy="156" r="8"  fill="#4a1260"/>
+      <circle cx="172" cy="154" r="8"  fill="#5e1a82"/>
+      <circle cx="160" cy="168" r="7"  fill="#421058"/>
+      <!-- Grape sheen -->
+      <circle cx="150" cy="119" r="3" fill="rgba(255,255,255,.18)"/>
+      <circle cx="170" cy="117" r="3" fill="rgba(255,255,255,.15)"/>
+      <circle cx="160" cy="132" r="2.5" fill="rgba(255,255,255,.12)"/>
+  
+      <!-- Left spy (walking right, carrying pole on shoulder) -->
+      <!-- Head -->
+      <circle cx="72" cy="68" r="12" fill="#8b6914"/>
+      <!-- Head cloth -->
+      <path d="M60,66 Q72,54 84,66 L84,74 Q72,68 60,74 Z" fill="#b89850"/>
+      <!-- Body / robe -->
+      <path d="M63,80 Q58,105 55,130 Q62,134 68,130 Q70,112 72,100 Q74,112 76,130 Q82,134 88,130 Q85,105 80,80 Z"
+            fill="#8b7355"/>
+      <!-- Arm holding pole -->
+      <path d="M80,84 Q88,82 92,88 L90,95" stroke="#8b6914" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <!-- Legs -->
+      <path d="M64,130 Q60,148 58,158" stroke="#6b5540" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M78,130 Q82,148 84,158" stroke="#6b5540" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Sandals -->
+      <ellipse cx="57" cy="160" rx="7" ry="3" fill="#3d2200"/>
+      <ellipse cx="85" cy="160" rx="7" ry="3" fill="#3d2200"/>
+  
+      <!-- Right spy (walking left, carrying pole on shoulder) -->
+      <!-- Head -->
+      <circle cx="248" cy="68" r="12" fill="#8b6914"/>
+      <!-- Head cloth -->
+      <path d="M236,66 Q248,54 260,66 L260,74 Q248,68 236,74 Z" fill="#a08540"/>
+      <!-- Body / robe -->
+      <path d="M239,80 Q234,105 231,130 Q238,134 244,130 Q246,112 248,100 Q250,112 252,130 Q258,134 264,130 Q261,105 256,80 Z"
+            fill="#7a6548"/>
+      <!-- Arm holding pole -->
+      <path d="M239,84 Q231,82 228,88 L230,95" stroke="#8b6914" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <!-- Legs -->
+      <path d="M240,130 Q236,148 234,158" stroke="#6b5540" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M254,130 Q258,148 260,158" stroke="#6b5540" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Sandals -->
+      <ellipse cx="233" cy="160" rx="7" ry="3" fill="#3d2200"/>
+      <ellipse cx="261" cy="160" rx="7" ry="3" fill="#3d2200"/>
+  
+      <!-- Pomegranates on ground -->
+      <circle cx="40" cy="195" r="8" fill="#aa2222"/>
+      <path d="M36,187 L40,182 L44,187" fill="#4a2200"/>
+      <circle cx="290" cy="200" r="7" fill="#bb2828"/>
+      <path d="M286,193 L290,188 L294,193" fill="#4a2200"/>
+  
+      <!-- Figs on ground -->
+      <ellipse cx="110" cy="200" rx="6" ry="8" fill="#4a2850"/>
+      <ellipse cx="220" cy="198" rx="5" ry="7" fill="#3e2045"/>
+    </svg>
+
+  <app-scene-heading title="🍇 十二探子" subtitle="The Twelve Spies — Numbers 13" id="spies-heading" />
+  <app-scene-verse text="「那地果然是流奶與蜜之地」— 民數記 13:27" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-korah" aria-label="可拉的叛變 — Korah's Rebellion">
+  <app-starfield />
+
+  <!-- Desert ground -->
+    <div id="korah-ground" aria-hidden="true"></div>
+  
+    <!-- Dark smoke from above -->
+    <div id="korah-smoke" aria-hidden="true"></div>
+  
+    <!-- Red glow from crack -->
+    <div id="crack-glow" aria-hidden="true"></div>
+  
+    <!-- Earth cracking open -->
+    <svg id="earth-crack" viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="地裂開吞人 — The earth opens and swallows the rebels">
+      <title>地裂開吞人 — The ground cracking open during Korah's rebellion</title>
+      <defs>
+        <linearGradient id="crackFireG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(255,100,0,.9)"/>
+          <stop offset="50%" stop-color="rgba(200,30,0,.7)"/>
+          <stop offset="100%" stop-color="rgba(80,0,0,.4)"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground surface (left) -->
+      <path d="M0,80 L160,80 L175,95 L180,80 L190,100 L200,60"
+            fill="none" stroke="#5a3a10" stroke-width="3"/>
+      <path d="M0,80 L160,80 L175,95 L180,80 L190,100 L200,60 L200,200 L0,200 Z"
+            fill="#3d2800"/>
+      <!-- Ground surface (right) -->
+      <path d="M240,60 L250,100 L260,80 L265,95 L280,80 L440,80"
+            fill="none" stroke="#5a3a10" stroke-width="3"/>
+      <path d="M240,60 L250,100 L260,80 L265,95 L280,80 L440,80 L440,200 L240,200 Z"
+            fill="#3d2800"/>
+      <!-- The crack / abyss -->
+      <path d="M200,60 L190,100 L180,80 L175,95 L160,80 L170,140 L185,200 L195,170 L200,200
+               L220,200 L245,200 L250,170 L255,200 L270,200 L280,140 L280,80 L265,95 L260,80 L250,100 L240,60 Z"
+            fill="url(#crackFireG)"/>
+      <!-- Fire licks from the crack -->
+      <ellipse cx="210" cy="120" rx="12" ry="30" fill="rgba(255,180,0,.6)"
+               style="animation:crackGlow 1.2s ease-in-out infinite;"/>
+      <ellipse cx="230" cy="110" rx="8" ry="24" fill="rgba(255,120,0,.5)"
+               style="animation:crackGlow 1s ease-in-out .3s infinite;"/>
+      <ellipse cx="220" cy="140" rx="14" ry="22" fill="rgba(255,60,0,.4)"
+               style="animation:crackGlow 1.5s ease-in-out .6s infinite;"/>
+      <!-- Rock debris -->
+      <rect x="178" y="75" width="8" height="6" rx="1" fill="#5a3a10" transform="rotate(15 182 78)"/>
+      <rect x="254" y="72" width="10" height="5" rx="1" fill="#4a2e08" transform="rotate(-12 259 74)"/>
+      <rect x="195" y="90" width="6" height="5" rx="1" fill="#6a4418" transform="rotate(28 198 92)"/>
+      <rect x="238" y="88" width="7" height="4" rx="1" fill="#5a3a10" transform="rotate(-20 241 90)"/>
+    </svg>
+  
+    <!-- Falling people -->
+    <svg class="falling-person" style="--spd:3.2s;--delay:0s;--rot:22deg; left:44%; top:38%;"
+         viewBox="0 0 28 55" width="clamp(18px,2.5vw,32px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="14" cy="8" r="7" fill="#8b6914"/>
+      <path d="M8,16 Q5,32 4,46 Q10,48 14,45 Q18,48 24,46 Q23,32 20,16 Z" fill="#6b5540"/>
+      <path d="M8,20 Q2,16 0,10" stroke="#8b6914" stroke-width="3" fill="none"/>
+      <path d="M20,20 Q26,16 28,10" stroke="#8b6914" stroke-width="3" fill="none"/>
+    </svg>
+    <svg class="falling-person" style="--spd:3.8s;--delay:.6s;--rot:-18deg; left:52%; top:36%;"
+         viewBox="0 0 28 55" width="clamp(16px,2.2vw,28px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="14" cy="8" r="7" fill="#8b6914"/>
+      <path d="M8,16 Q5,32 4,46 Q10,48 14,45 Q18,48 24,46 Q23,32 20,16 Z" fill="#7a6548"/>
+      <path d="M8,20 Q2,16 0,10" stroke="#8b6914" stroke-width="3" fill="none"/>
+      <path d="M20,20 Q26,16 28,10" stroke="#8b6914" stroke-width="3" fill="none"/>
+    </svg>
+    <svg class="falling-person" style="--spd:4.2s;--delay:1.1s;--rot:30deg; left:48%; top:40%;"
+         viewBox="0 0 28 55" width="clamp(14px,2vw,26px)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="14" cy="8" r="7" fill="#8b6914"/>
+      <path d="M8,16 Q5,32 4,46 Q10,48 14,45 Q18,48 24,46 Q23,32 20,16 Z" fill="#8b7355"/>
+      <path d="M8,20 Q2,16 0,10" stroke="#8b6914" stroke-width="3" fill="none"/>
+      <path d="M20,20 Q26,16 28,10" stroke="#8b6914" stroke-width="3" fill="none"/>
+    </svg>
+
+  <app-scene-heading title="🔥 可拉的叛變" subtitle="Korah's Rebellion — Numbers 16" id="korah-heading" />
+  <app-scene-verse text="「地開了口，把他們吞下去」— 民數記 16:32" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-serpent" aria-label="銅蛇 — The Bronze Serpent">
+  <app-starfield />
+
+  <!-- Desert ground -->
+    <div id="serpent-ground" aria-hidden="true"></div>
+  
+    <!-- Golden glow around serpent -->
+    <div id="serpent-glow" aria-hidden="true"></div>
+  
+    <!-- Bronze serpent on a pole -->
+    <svg id="serpent-svg" viewBox="0 0 100 260" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="銅蛇掛在杆子上 — The Bronze Serpent on a pole">
+      <title>銅蛇掛在杆子上 — Moses' bronze serpent lifted on a pole</title>
+      <defs>
+        <linearGradient id="bronzeG" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#d4a030"/>
+          <stop offset="50%" stop-color="#c08828"/>
+          <stop offset="100%" stop-color="#a06c18"/>
+        </linearGradient>
+        <filter id="serpGlow">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Pole -->
+      <line x1="50" y1="40" x2="50" y2="250" stroke="#6b4c20" stroke-width="6" stroke-linecap="round"/>
+      <!-- Crossbar -->
+      <line x1="30" y1="50" x2="70" y2="50" stroke="#6b4c20" stroke-width="4.5" stroke-linecap="round"/>
+      <!-- Serpent body coiling around pole & crossbar -->
+      <path d="M50,42 Q65,48 68,56 Q70,68 58,72 Q46,76 42,88 Q38,100 50,108
+               Q62,116 58,128 Q54,140 50,148 Q46,156 42,164"
+            stroke="url(#bronzeG)" stroke-width="7" fill="none" stroke-linecap="round"
+            filter="url(#serpGlow)"/>
+      <!-- Serpent head (at top of crossbar) -->
+      <ellipse cx="50" cy="38" rx="8" ry="6" fill="#d4a030" filter="url(#serpGlow)"/>
+      <circle cx="46" cy="36" r="1.8" fill="#2a1800"/>
+      <circle cx="54" cy="36" r="1.8" fill="#2a1800"/>
+      <!-- Forked tongue -->
+      <path d="M50,32 L48,26 M50,32 L52,26" stroke="#c07020" stroke-width="1.2" fill="none"/>
+      <!-- Serpent tail -->
+      <path d="M42,164 Q38,172 36,180 Q34,188 38,192"
+            stroke="url(#bronzeG)" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Golden radiance lines -->
+      <line x1="50" y1="30" x2="50" y2="12" stroke="rgba(255,215,80,.35)" stroke-width="1.5"/>
+      <line x1="30" y1="38" x2="14" y2="28" stroke="rgba(255,215,80,.25)" stroke-width="1.5"/>
+      <line x1="70" y1="38" x2="86" y2="28" stroke="rgba(255,215,80,.25)" stroke-width="1.5"/>
+      <line x1="26" y1="55" x2="10" y2="55" stroke="rgba(255,215,80,.2)" stroke-width="1.5"/>
+      <line x1="74" y1="55" x2="90" y2="55" stroke="rgba(255,215,80,.2)" stroke-width="1.5"/>
+    </svg>
+  
+    <!-- People looking up at the serpent -->
+    <svg class="looker" style="left:22%;" viewBox="0 0 40 70" width="clamp(28px,4vw,48px)"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="20" cy="10" r="8" fill="#8b6914"/>
+      <path d="M12,20 Q8,38 6,55 Q12,58 16,55 Q18,42 20,34 Q22,42 24,55 Q28,58 34,55 Q32,38 28,20 Z" fill="#8b7355"/>
+      <path d="M14,24 Q8,18 4,8" stroke="#8b6914" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M26,24 Q32,18 36,8" stroke="#8b6914" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    </svg>
+    <svg class="looker" style="left:34%;" viewBox="0 0 40 70" width="clamp(24px,3.5vw,42px)"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="20" cy="10" r="8" fill="#8b6914"/>
+      <path d="M12,20 Q8,38 6,55 Q12,58 16,55 Q18,42 20,34 Q22,42 24,55 Q28,58 34,55 Q32,38 28,20 Z" fill="#7a6548"/>
+      <path d="M14,24 Q6,16 2,6" stroke="#8b6914" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M26,24 Q34,16 38,6" stroke="#8b6914" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    </svg>
+    <svg class="looker" style="right:32%;" viewBox="0 0 40 70" width="clamp(26px,3.8vw,45px)"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="20" cy="10" r="8" fill="#8b6914"/>
+      <path d="M12,20 Q8,38 6,55 Q12,58 16,55 Q18,42 20,34 Q22,42 24,55 Q28,58 34,55 Q32,38 28,20 Z" fill="#6b5540"/>
+      <path d="M14,24 Q8,18 4,8" stroke="#8b6914" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M26,24 Q32,18 36,8" stroke="#8b6914" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    </svg>
+    <svg class="looker" style="right:20%;" viewBox="0 0 40 70" width="clamp(22px,3.2vw,38px)"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="20" cy="10" r="8" fill="#8b6914"/>
+      <path d="M12,20 Q8,38 6,55 Q12,58 16,55 Q18,42 20,34 Q22,42 24,55 Q28,58 34,55 Q32,38 28,20 Z" fill="#8b7355"/>
+      <path d="M14,24 Q6,16 2,6" stroke="#8b6914" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M26,24 Q34,16 38,6" stroke="#8b6914" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    </svg>
+
+  <app-scene-heading title="🐍 銅蛇" subtitle="The Bronze Serpent — Numbers 21" id="serpent-heading" />
+  <app-scene-verse text="「摩西造了一條銅蛇，掛在杆子上」— 民數記 21:9" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-promised" aria-label="望向應許之地 — Toward the Promised Land">
+  <app-starfield />
+
+  <!-- Sunrise glow -->
+    <div id="sunrise-glow" aria-hidden="true"></div>
+  
+    <!-- Landscape: hilltop, valley, rivers -->
+    <svg id="promised-landscape" viewBox="0 0 1440 600" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="從山頂望向應許之地 — View of the Promised Land from a hilltop">
+      <title>從山頂望向應許之地 — Moses and Joshua gazing at the Promised Land</title>
+      <defs>
+        <linearGradient id="skyDawnG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a1028"/>
+          <stop offset="40%" stop-color="#2a1838"/>
+          <stop offset="70%" stop-color="#6a3a28"/>
+          <stop offset="100%" stop-color="#c87830"/>
+        </linearGradient>
+        <linearGradient id="landG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4a8a28"/>
+          <stop offset="50%" stop-color="#2a6018"/>
+          <stop offset="100%" stop-color="#1a3c0a"/>
+        </linearGradient>
+        <linearGradient id="hilltopG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5a4020"/>
+          <stop offset="100%" stop-color="#3a2810"/>
+        </linearGradient>
+      </defs>
+      <!-- Dawn sky -->
+      <rect width="1440" height="600" fill="url(#skyDawnG)"/>
+      <!-- Sun/sunrise disc -->
+      <circle cx="720" cy="260" r="52" fill="rgba(255,210,80,.7)"
+              style="filter:drop-shadow(0 0 40px rgba(255,200,60,.8));"/>
+      <circle cx="720" cy="260" r="32" fill="rgba(255,240,160,.9)"/>
+      <!-- Distant promised land (green valley) -->
+      <path d="M0 600 L0 380 Q200 320 420 350 Q650 370 880 330 Q1100 300 1300 340 L1440 320 L1440 600 Z"
+            fill="url(#landG)" opacity=".7"/>
+      <!-- Closer green land with golden tones -->
+      <path d="M0 600 L0 410 Q180 365 380 390 Q600 420 820 375 Q1040 340 1260 380 L1440 360 L1440 600 Z"
+            fill="#3a7a1a"/>
+      <!-- Rivers winding through land -->
+      <path d="M520 410 Q580 380 620 400 Q680 430 740 390 Q800 360 860 385"
+            stroke="rgba(100,180,255,.45)" stroke-width="4" fill="none"/>
+      <path d="M280 440 Q340 415 400 435 Q460 455 520 430"
+            stroke="rgba(100,180,255,.35)" stroke-width="3" fill="none"/>
+      <path d="M920 400 Q980 375 1040 395 Q1100 420 1160 390"
+            stroke="rgba(100,180,255,.3)" stroke-width="3" fill="none"/>
+      <!-- Hilltop (foreground, where Moses & Joshua stand) -->
+      <path d="M480 600 Q600 440 720 420 Q840 440 960 600 Z"
+            fill="url(#hilltopG)"/>
+      <path d="M480 600 Q600 460 720 440 Q840 460 960 600 Z"
+            fill="#4a3018" opacity=".5"/>
+      <!-- Rock details on hilltop -->
+      <ellipse cx="640" cy="520" rx="22" ry="10" fill="#5a4020" opacity=".5"/>
+      <ellipse cx="800" cy="530" rx="18" ry="8" fill="#4a3418" opacity=".4"/>
+      <!-- Trees in the promised land (distant) -->
+      <circle cx="360" cy="395" r="12" fill="#2a5a12" opacity=".6"/>
+      <circle cx="580" cy="388" r="10" fill="#2a5a12" opacity=".5"/>
+      <circle cx="850" cy="378" r="11" fill="#2a5a12" opacity=".5"/>
+      <circle cx="1080" cy="385" r="13" fill="#2a5a12" opacity=".6"/>
+    </svg>
+  
+    <!-- Moses and Joshua figures on hilltop -->
+    <svg id="figures-svg" viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="摩西與約書亞在山頂 — Moses and Joshua on the hilltop">
+      <title>摩西與約書亞 — Moses and Joshua gazing toward the Promised Land</title>
+      <!-- Moses (left, older, with staff) -->
+      <!-- Head -->
+      <circle cx="50" cy="18" r="12" fill="#8b6914"/>
+      <!-- Head covering -->
+      <path d="M38,16 Q50,4 62,16 L62,24 Q50,18 38,24 Z" fill="#6b5030"/>
+      <!-- Beard (longer, older) -->
+      <path d="M42,26 Q50,42 58,26 Q54,48 50,50 Q46,48 42,26 Z" fill="#aaa094" opacity=".8"/>
+      <!-- Robe -->
+      <path d="M40,32 Q35,58 32,88 Q38,92 44,88 Q46,72 50,58 Q54,72 56,88 Q62,92 68,88 Q65,58 60,32 Z"
+            fill="#8b7355"/>
+      <!-- Arms (one pointing forward) -->
+      <path d="M40,38 Q30,32 24,22" stroke="#8b6914" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M60,40 Q78,36 92,32" stroke="#8b6914" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <!-- Staff -->
+      <line x1="26" y1="22" x2="22" y2="92" stroke="#3d2200" stroke-width="3" stroke-linecap="round"/>
+      <!-- Legs -->
+      <path d="M42,88 Q38,104 36,114" stroke="#6b5540" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M58,88 Q62,104 64,114" stroke="#6b5540" stroke-width="5" fill="none" stroke-linecap="round"/>
+  
+      <!-- Joshua (right, younger) -->
+      <!-- Head -->
+      <circle cx="115" cy="22" r="11" fill="#8b6914"/>
+      <!-- Head band -->
+      <path d="M104,20 Q115,10 126,20 L126,26 Q115,20 104,26 Z" fill="#a07830"/>
+      <!-- Body -->
+      <path d="M106,34 Q102,56 100,84 Q106,88 110,84 Q112,68 115,56 Q118,68 120,84 Q124,88 130,84 Q128,56 124,34 Z"
+            fill="#7a6548"/>
+      <!-- Arms (looking forward) -->
+      <path d="M106,40 Q98,34 92,26" stroke="#8b6914" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M124,40 Q132,36 140,34" stroke="#8b6914" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Legs -->
+      <path d="M108,84 Q104,100 102,110" stroke="#6b5540" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M122,84 Q126,100 128,110" stroke="#6b5540" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  
+      <!-- Divine glow around both -->
+      <ellipse cx="82" cy="60" rx="62" ry="50" fill="none"
+               stroke="rgba(255,218,78,.1)" stroke-width="10"/>
+    </svg>
+
+  <app-scene-heading title="🌅 望向應許之地" subtitle="Toward the Promised Land — Numbers 27, 36" id="promised-heading" />
+  <app-scene-verse text="「你上這亞巴琳山，觀看我所賜給以色列人的地」— 民數記 27:12" />
+</section>
