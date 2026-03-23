@@ -1,1 +1,0 @@
-import{ma as i,ta as n,ua as a,va as o}from"./chunk-MPFDUBCP.js";var s=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=i({type:t,selectors:[["app-wiki"]],decls:2,vars:0,template:function(e,r){e&1&&(n(0,"p"),o(1,"Wiki works"),a())},encapsulation:2,changeDetection:0})};export{s as Wiki};

@@ -1,1 +1,0 @@
-import{ma as n,ta as o,ua as a,va as m}from"./chunk-MPFDUBCP.js";var i=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=n({type:t,selectors:[["app-home"]],decls:2,vars:0,template:function(e,r){e&1&&(o(0,"p"),m(1,"Home works - Garden of Eden"),a())},encapsulation:2,changeDetection:0})};export{i as Home};
