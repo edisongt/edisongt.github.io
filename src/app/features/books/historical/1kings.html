@@ -1,0 +1,540 @@
+<app-back-button />
+<app-nav-dots [scenes]="scenes" />
+
+<section class="scene" id="scene-intro" aria-label="列王紀上 — 開場">
+  <app-starfield />
+
+  <div id="intro-orb" aria-hidden="true"></div>
+  
+    <div id="intro-title">
+      <h1>列王紀上</h1>
+      <p>Book of 1 Kings</p>
+      <span class="sub">智慧 · 聖殿 · 分裂 · 先知 · 審判</span>
+    </div>
+  
+    <!-- Rolling hills landscape -->
+    <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1c4a"/>
+          <stop offset="50%" stop-color="#1e1238"/>
+          <stop offset="100%" stop-color="#0e0820"/>
+        </linearGradient>
+        <linearGradient id="hill1G" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4a3060"/>
+          <stop offset="100%" stop-color="#1a1028"/>
+        </linearGradient>
+        <linearGradient id="hill2G" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2d4a38"/>
+          <stop offset="100%" stop-color="#0e1a12"/>
+        </linearGradient>
+        <linearGradient id="groundG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a1828"/>
+          <stop offset="100%" stop-color="#080610"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1440" height="420" fill="url(#skyG)"/>
+      <!-- Distant purple hills -->
+      <path d="M0 320 Q180 240 360 280 Q540 220 720 260 Q900 200 1080 260 Q1260 220 1440 280 L1440 420 L0 420 Z"
+            fill="url(#hill2G)" opacity=".6"/>
+      <!-- Nearer hills -->
+      <path d="M0 360 Q200 280 400 310 Q600 250 720 210 Q840 250 1040 300 Q1240 270 1440 320 L1440 420 L0 420 Z"
+            fill="url(#hill1G)"/>
+      <!-- Ground -->
+      <rect x="0" y="340" width="1440" height="80" fill="url(#groundG)"/>
+      <!-- Horizon glow -->
+      <ellipse cx="720" cy="240" rx="500" ry="60" fill="rgba(155,112,219,.1)"/>
+    </svg>
+  
+    <!-- Solomon figure sitting on throne -->
+    <svg id="intro-solomon" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="所羅門坐在寶座上 — Solomon seated on his throne">
+      <title>所羅門王 — King Solomon on his royal throne</title>
+      <!-- Throne back -->
+      <rect x="10" y="30" width="40" height="60" rx="3" fill="#4a2870" opacity=".7"/>
+      <rect x="14" y="34" width="32" height="4" rx="1" fill="#9b70db" opacity=".4"/>
+      <!-- Head -->
+      <circle cx="30" cy="20" r="12" fill="#6b4e14"/>
+      <!-- Crown -->
+      <path d="M20,14 L22,4 L26,12 L30,2 L34,12 L38,4 L40,14 Z" fill="#ffd700"/>
+      <circle cx="30" cy="6" r="2" fill="#9b70db"/>
+      <!-- Robe -->
+      <path d="M20,32 Q16,55 14,80 Q20,84 26,80 Q28,65 30,55 Q32,65 34,80 Q40,84 46,80 Q44,55 40,32 Z"
+            fill="#5a3580"/>
+      <!-- Royal sash -->
+      <line x1="20" y1="45" x2="40" y2="45" stroke="#ffd700" stroke-width="2"/>
+      <!-- Scepter in right hand -->
+      <line x1="44" y1="40" x2="48" y2="10" stroke="#d4a020" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="48" cy="8" r="3" fill="#ffd700"/>
+      <!-- Throne seat -->
+      <rect x="8" y="78" width="44" height="8" rx="2" fill="#3a1860"/>
+      <!-- Throne legs -->
+      <rect x="10" y="86" width="6" height="18" rx="1" fill="#3a1860"/>
+      <rect x="44" y="86" width="6" height="18" rx="1" fill="#3a1860"/>
+      <!-- Feet -->
+      <ellipse cx="24" cy="82" rx="6" ry="2.5" fill="#3d2200"/>
+      <ellipse cx="36" cy="82" rx="6" ry="2.5" fill="#3d2200"/>
+    </svg>
+
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-wisdom" aria-label="所羅門的智慧 — Solomon's Wisdom">
+  <app-starfield />
+
+  <div id="wisdom-ground" aria-hidden="true"></div>
+    <div id="wisdom-glow" aria-hidden="true"></div>
+  
+    <!-- Solomon's judgment scene -->
+    <svg id="wisdom-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="所羅門審判兩個母親 — Solomon judges the two mothers">
+      <title>所羅門的智慧 — Solomon's wise judgment between two women claiming a child</title>
+      <defs>
+        <linearGradient id="throneFloorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2040"/>
+          <stop offset="100%" stop-color="#100a1a"/>
+        </linearGradient>
+        <linearGradient id="throneG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6a4090"/>
+          <stop offset="50%" stop-color="#4a2870"/>
+          <stop offset="100%" stop-color="#2a1848"/>
+        </linearGradient>
+      </defs>
+      <!-- Floor -->
+      <rect x="0" y="380" width="1440" height="120" fill="url(#throneFloorG)"/>
+      <!-- Throne platform steps -->
+      <rect x="580" y="300" width="280" height="20" rx="2" fill="#3a2060"/>
+      <rect x="610" y="280" width="220" height="20" rx="2" fill="#4a2870"/>
+      <rect x="640" y="260" width="160" height="20" rx="2" fill="#5a3580"/>
+      <!-- Throne -->
+      <rect x="680" y="180" width="80" height="80" rx="4" fill="url(#throneG)"/>
+      <rect x="676" y="175" width="88" height="10" rx="2" fill="#9b70db"/>
+      <!-- Throne armrests -->
+      <rect x="670" y="210" width="12" height="50" rx="2" fill="#4a2870"/>
+      <rect x="758" y="210" width="12" height="50" rx="2" fill="#4a2870"/>
+      <!-- Solomon on throne -->
+      <circle cx="720" cy="200" r="12" fill="#6b4e14"/>
+      <!-- Crown -->
+      <path d="M710,194 L712,184 L716,192 L720,182 L724,192 L728,184 L730,194 Z" fill="#ffd700"/>
+      <!-- Robe -->
+      <path d="M710,212 Q706,235 704,258 Q710,262 716,258 Q718,242 720,230 Q722,242 724,258 Q730,262 736,258 Q734,235 730,212 Z"
+            fill="#5a3580"/>
+      <!-- Scepter -->
+      <line x1="736" y1="218" x2="750" y2="195" stroke="#d4a020" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="750" cy="193" r="3" fill="#ffd700"/>
+      <!-- Left woman (pleading) -->
+      <circle cx="520" cy="340" r="9" fill="#6b4e14"/>
+      <path d="M511,348 Q508,372 506,395 Q512,398 518,395 Q520,378 522,365 Q524,378 526,395 Q532,398 538,395 Q536,372 529,348 Z"
+            fill="#8a4040"/>
+      <!-- Right arm raised (pleading) -->
+      <path d="M529,352 Q545,338 550,330" stroke="#6b4e14" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Right woman (defending) -->
+      <circle cx="920" cy="340" r="9" fill="#6b4e14"/>
+      <path d="M911,348 Q908,372 906,395 Q912,398 918,395 Q920,378 922,365 Q924,378 926,395 Q932,398 938,395 Q936,372 929,348 Z"
+            fill="#406080"/>
+      <!-- Left arm raised -->
+      <path d="M911,352 Q895,338 890,330" stroke="#6b4e14" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Baby between them -->
+      <ellipse cx="720" cy="375" rx="10" ry="6" fill="#f0d8b0"/>
+      <circle cx="720" cy="367" r="5" fill="#f0d8b0"/>
+      <!-- Swaddling cloth -->
+      <ellipse cx="720" cy="378" rx="12" ry="8" fill="rgba(240,230,210,.4)"/>
+      <!-- Court observers -->
+      <circle cx="380" cy="385" r="4" fill="rgba(100,80,60,.5)"/>
+      <circle cx="400" cy="382" r="3.5" fill="rgba(100,80,60,.45)"/>
+      <circle cx="420" cy="387" r="4" fill="rgba(100,80,60,.5)"/>
+      <circle cx="1020" cy="385" r="4" fill="rgba(100,80,60,.5)"/>
+      <circle cx="1040" cy="382" r="3.5" fill="rgba(100,80,60,.45)"/>
+      <circle cx="1060" cy="387" r="4" fill="rgba(100,80,60,.5)"/>
+      <!-- Light beam from above (divine wisdom) -->
+      <line x1="720" y1="80" x2="650" y2="360" stroke="rgba(200,180,255,.06)" stroke-width="40"/>
+      <line x1="720" y1="80" x2="790" y2="360" stroke="rgba(200,180,255,.06)" stroke-width="40"/>
+      <line x1="720" y1="80" x2="720" y2="360" stroke="rgba(220,200,255,.08)" stroke-width="20"/>
+      <!-- Pillars -->
+      <rect x="300" y="180" width="20" height="220" rx="3" fill="rgba(80,60,100,.4)"/>
+      <rect x="1120" y="180" width="20" height="220" rx="3" fill="rgba(80,60,100,.4)"/>
+      <rect x="296" y="175" width="28" height="10" rx="2" fill="rgba(100,80,120,.3)"/>
+      <rect x="1116" y="175" width="28" height="10" rx="2" fill="rgba(100,80,120,.3)"/>
+    </svg>
+
+  <app-scene-heading title="🕯 所羅門的智慧" subtitle="Solomon's Wisdom — 1 Kings 3" id="wisdom-heading" />
+  <app-scene-verse text="「求你賜我智慧，可以判斷你的民」— 列王紀上 3:9" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-temple" aria-label="建造聖殿 — Building the Temple">
+  <app-starfield />
+
+  <div id="temple-glow" aria-hidden="true"></div>
+  
+    <!-- Temple construction scene -->
+    <svg id="temple-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="所羅門聖殿 — Solomon's Temple with pillars Jachin and Boaz">
+      <title>建造聖殿 — The grand temple of Solomon with its pillars and golden roof</title>
+      <defs>
+        <linearGradient id="templeWallG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8a7a5a"/>
+          <stop offset="50%" stop-color="#6a5a3a"/>
+          <stop offset="100%" stop-color="#3a3020"/>
+        </linearGradient>
+        <linearGradient id="roofGoldG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffe860"/>
+          <stop offset="50%" stop-color="#d4a020"/>
+          <stop offset="100%" stop-color="#a07010"/>
+        </linearGradient>
+        <linearGradient id="pillarG" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#b0a070"/>
+          <stop offset="50%" stop-color="#8a7a5a"/>
+          <stop offset="100%" stop-color="#6a5a3a"/>
+        </linearGradient>
+        <linearGradient id="templeFloorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a2a18"/>
+          <stop offset="100%" stop-color="#1a1008"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground -->
+      <rect x="0" y="400" width="1440" height="100" fill="url(#templeFloorG)"/>
+      <!-- Temple foundation steps -->
+      <rect x="380" y="380" width="680" height="20" rx="2" fill="#5a4a30"/>
+      <rect x="400" y="360" width="640" height="20" rx="2" fill="#6a5a3a"/>
+      <rect x="420" y="340" width="600" height="20" rx="2" fill="#7a6a4a"/>
+      <!-- Temple main wall -->
+      <rect x="460" y="160" width="520" height="180" fill="url(#templeWallG)" rx="2"/>
+      <!-- Golden roof (triangular pediment) -->
+      <path d="M440,160 L720,60 L1000,160 Z" fill="url(#roofGoldG)"
+            style="filter:drop-shadow(0 0 12px rgba(255,200,40,.4));"/>
+      <!-- Roof ridge ornament -->
+      <circle cx="720" cy="80" r="8" fill="#ffd700" style="filter:drop-shadow(0 0 6px rgba(255,200,40,.6));"/>
+      <!-- Pillar Jachin (right) -->
+      <rect x="920" y="170" width="28" height="170" fill="url(#pillarG)" rx="3"/>
+      <rect x="916" y="165" width="36" height="10" rx="2" fill="#a09060"/>
+      <rect x="916" y="335" width="36" height="10" rx="2" fill="#a09060"/>
+      <!-- Pillar capital (lily) -->
+      <ellipse cx="934" cy="162" rx="14" ry="6" fill="#c8a840"/>
+      <!-- Pillar Boaz (left) -->
+      <rect x="492" y="170" width="28" height="170" fill="url(#pillarG)" rx="3"/>
+      <rect x="488" y="165" width="36" height="10" rx="2" fill="#a09060"/>
+      <rect x="488" y="335" width="36" height="10" rx="2" fill="#a09060"/>
+      <!-- Pillar capital (lily) -->
+      <ellipse cx="506" cy="162" rx="14" ry="6" fill="#c8a840"/>
+      <!-- Pillar labels -->
+      <text x="506" y="250" fill="rgba(255,220,100,.3)" font-size="10" font-weight="700"
+            text-anchor="middle" letter-spacing=".08em">波阿斯</text>
+      <text x="934" y="250" fill="rgba(255,220,100,.3)" font-size="10" font-weight="700"
+            text-anchor="middle" letter-spacing=".08em">雅斤</text>
+      <!-- Temple doorway -->
+      <rect x="660" y="200" width="120" height="140" rx="3" fill="#2a1a08"/>
+      <path d="M660,200 Q720,180 780,200" fill="#8a6a20" opacity=".6"/>
+      <!-- Inner glow from Holy of Holies -->
+      <ellipse cx="720" cy="270" rx="40" ry="50" fill="rgba(255,220,100,.08)"/>
+      <!-- Wall decorations (cherubim patterns) -->
+      <path d="M480,200 Q490,190 500,200" stroke="rgba(200,180,80,.2)" stroke-width="1.5" fill="none"/>
+      <path d="M520,200 Q530,190 540,200" stroke="rgba(200,180,80,.2)" stroke-width="1.5" fill="none"/>
+      <path d="M900,200 Q910,190 920,200" stroke="rgba(200,180,80,.2)" stroke-width="1.5" fill="none"/>
+      <path d="M940,200 Q950,190 960,200" stroke="rgba(200,180,80,.2)" stroke-width="1.5" fill="none"/>
+      <!-- Workers/builders -->
+      <circle cx="360" cy="385" r="5" fill="rgba(100,80,50,.7)"/>
+      <line x1="365" y1="383" x2="380" y2="375" stroke="rgba(140,120,80,.5)" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="340" cy="388" r="4.5" fill="rgba(100,80,50,.65)"/>
+      <circle cx="1080" cy="385" r="5" fill="rgba(100,80,50,.7)"/>
+      <line x1="1075" y1="383" x2="1060" y2="370" stroke="rgba(140,120,80,.5)" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="1100" cy="388" r="4.5" fill="rgba(100,80,50,.65)"/>
+      <!-- Stone blocks being placed -->
+      <rect x="320" y="370" width="16" height="12" rx="1" fill="rgba(130,110,80,.4)"/>
+      <rect x="1100" y="370" width="16" height="12" rx="1" fill="rgba(130,110,80,.4)"/>
+      <!-- Golden temple glow -->
+      <ellipse cx="720" cy="120" rx="300" ry="40" fill="rgba(255,220,100,.06)"/>
+    </svg>
+
+  <app-scene-heading title="🏛 建造聖殿" subtitle="Building the Temple — 1 Kings 6" id="temple-heading" />
+  <app-scene-verse text="「所羅門建造耶和華的殿，七年才完工」— 列王紀上 6:38" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-sheba" aria-label="示巴女王來訪 — The Queen of Sheba visits Solomon">
+  <app-starfield />
+
+  <!-- Warm sun glow -->
+    <div id="sheba-glow" aria-hidden="true"></div>
+  
+    <!-- Sheba caravan scene -->
+    <svg id="sheba-svg" viewBox="0 0 1440 550" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="示巴女王的駱駝商隊 — The Queen of Sheba's camel caravan with treasures">
+      <title>示巴女王來訪 — The Queen of Sheba arrives with camels and gifts</title>
+      <defs>
+        <linearGradient id="desertG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5a4020"/>
+          <stop offset="50%" stop-color="#3a2a14"/>
+          <stop offset="100%" stop-color="#1a1008"/>
+        </linearGradient>
+        <linearGradient id="palaceG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6a5040"/>
+          <stop offset="100%" stop-color="#3a2818"/>
+        </linearGradient>
+      </defs>
+      <!-- Desert terrain -->
+      <path d="M0 420 Q300 370 600 400 Q900 360 1200 390 Q1380 380 1440 410 L1440 550 L0 550 Z"
+            fill="url(#desertG)"/>
+      <!-- Distant sand dunes -->
+      <path d="M0 400 Q200 350 400 380 Q600 330 800 370 Q1000 340 1200 370 Q1380 355 1440 380 L1440 450 L0 450 Z"
+            fill="rgba(80,60,30,.3)"/>
+      <!-- Palace in background (right side) -->
+      <rect x="1050" y="280" width="200" height="140" fill="url(#palaceG)" rx="2"/>
+      <path d="M1030,280 L1150,200 L1270,280 Z" fill="rgba(160,130,80,.5)"/>
+      <rect x="1120" y="310" width="60" height="110" rx="2" fill="#2a1808"/>
+      <!-- Palace towers -->
+      <rect x="1050" y="260" width="25" height="40" rx="1" fill="rgba(100,80,50,.6)"/>
+      <rect x="1225" y="260" width="25" height="40" rx="1" fill="rgba(100,80,50,.6)"/>
+      <!-- Camel 1 (front) -->
+      <ellipse cx="400" cy="390" rx="30" ry="18" fill="#8a7050"/>
+      <ellipse cx="400" cy="378" rx="8" ry="12" fill="#8a7050"/>
+      <circle cx="385" cy="365" r="8" fill="#7a6040"/>
+      <line x1="390" y1="405" x2="388" y2="430" stroke="#6a5030" stroke-width="3"/>
+      <line x1="410" y1="405" x2="412" y2="430" stroke="#6a5030" stroke-width="3"/>
+      <!-- Treasure packs on camel 1 -->
+      <rect x="388" y="368" width="24" height="14" rx="2" fill="#d4a020" opacity=".7"/>
+      <!-- Camel 2 -->
+      <ellipse cx="300" cy="400" rx="28" ry="16" fill="#7a6040"/>
+      <ellipse cx="300" cy="388" rx="7" ry="11" fill="#7a6040"/>
+      <circle cx="286" cy="376" r="7" fill="#6a5030"/>
+      <line x1="290" y1="414" x2="288" y2="436" stroke="#5a4020" stroke-width="3"/>
+      <line x1="310" y1="414" x2="312" y2="436" stroke="#5a4020" stroke-width="3"/>
+      <rect x="288" y="378" width="22" height="12" rx="2" fill="#c89020" opacity=".6"/>
+      <!-- Camel 3 (distant) -->
+      <ellipse cx="210" cy="408" rx="24" ry="14" fill="#6a5030" opacity=".6"/>
+      <circle cx="198" cy="396" r="6" fill="#5a4020" opacity=".6"/>
+      <line x1="202" y1="420" x2="200" y2="438" stroke="#5a4020" stroke-width="2.5" opacity=".5"/>
+      <line x1="218" y1="420" x2="220" y2="438" stroke="#5a4020" stroke-width="2.5" opacity=".5"/>
+      <!-- Queen of Sheba figure (walking ahead of caravan) -->
+      <circle cx="520" cy="378" r="9" fill="#6b4e14"/>
+      <!-- Crown/headpiece -->
+      <path d="M513,374 L515,366 L520,372 L525,366 L527,374 Z" fill="#ffd700"/>
+      <!-- Royal robe -->
+      <path d="M513,386 Q510,408 508,430 Q514,433 520,430 Q522,415 524,404 Q526,415 528,430 Q534,433 540,430 Q538,408 527,386 Z"
+            fill="#8a2060"/>
+      <!-- Trailing cape -->
+      <path d="M527,386 Q540,400 545,430" stroke="#6a1848" stroke-width="3" fill="none" opacity=".5"/>
+      <!-- Attendant figures -->
+      <circle cx="480" cy="395" r="5" fill="rgba(100,80,50,.6)"/>
+      <circle cx="460" cy="398" r="4.5" fill="rgba(100,80,50,.55)"/>
+      <circle cx="550" cy="392" r="5" fill="rgba(100,80,50,.6)"/>
+      <!-- Treasure chest on ground -->
+      <rect x="560" y="415" width="20" height="14" rx="2" fill="#c89020" opacity=".5"/>
+      <rect x="600" y="418" width="16" height="12" rx="1" fill="#b08018" opacity=".45"/>
+      <!-- Jewels/gems scattered -->
+      <circle cx="585" cy="425" r="3" fill="rgba(155,112,219,.4)"/>
+      <circle cx="625" cy="422" r="2.5" fill="rgba(220,60,60,.35)"/>
+      <circle cx="570" cy="420" r="2" fill="rgba(60,180,120,.35)"/>
+    </svg>
+
+  <app-scene-heading title="👑 示巴女王來訪" subtitle="The Queen of Sheba — 1 Kings 10" id="sheba-heading" />
+  <app-scene-verse text="「你的智慧和你的福分越過我所聽見的風聲」— 列王紀上 10:7" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-division" aria-label="國度分裂 — The Kingdom Divided">
+  <app-starfield />
+
+  <div id="division-glow" aria-hidden="true"></div>
+  
+    <!-- Torn robe and divided kingdom -->
+    <svg id="division-svg" viewBox="0 0 1440 600" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="先知撕裂外衣，國度一分為二 — The prophet tears a garment; the kingdom divides">
+      <title>國度分裂 — The kingdom of Israel is torn in two</title>
+      <defs>
+        <linearGradient id="leftSideG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a2060"/>
+          <stop offset="100%" stop-color="#1a1030"/>
+        </linearGradient>
+        <linearGradient id="rightSideG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5a2020"/>
+          <stop offset="100%" stop-color="#2a1010"/>
+        </linearGradient>
+        <linearGradient id="robeLeftG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7050a0"/>
+          <stop offset="100%" stop-color="#4a3070"/>
+        </linearGradient>
+        <linearGradient id="robeRightG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#a05050"/>
+          <stop offset="100%" stop-color="#703030"/>
+        </linearGradient>
+      </defs>
+      <!-- Split ground — left purple, right red -->
+      <rect x="0" y="380" width="720" height="220" fill="url(#leftSideG)"/>
+      <rect x="720" y="380" width="720" height="220" fill="url(#rightSideG)"/>
+      <!-- Crack/division line down center -->
+      <path d="M720 100 Q715 200 725 300 Q718 400 722 500 Q720 550 720 600"
+            stroke="rgba(255,255,255,.1)" stroke-width="3" fill="none"/>
+      <path d="M720 100 Q717 180 723 260 Q716 360 724 440 Q719 520 720 600"
+            stroke="rgba(255,200,100,.06)" stroke-width="12" fill="none"/>
+      <!-- Torn robe in center -->
+      <!-- Left half of robe -->
+      <path d="M660,200 Q640,280 630,350 Q650,380 680,360 Q700,300 710,240 Z"
+            fill="url(#robeLeftG)" opacity=".9"/>
+      <path d="M710,240 Q712,280 714,320 Q710,350 708,360" stroke="rgba(200,180,240,.3)" stroke-width="1" fill="none"/>
+      <!-- Right half of robe -->
+      <path d="M780,200 Q800,280 810,350 Q790,380 760,360 Q740,300 730,240 Z"
+            fill="url(#robeRightG)" opacity=".9"/>
+      <path d="M730,240 Q728,280 726,320 Q730,350 732,360" stroke="rgba(240,180,180,.3)" stroke-width="1" fill="none"/>
+      <!-- Torn fibers between halves -->
+      <line x1="710" y1="250" x2="730" y2="248" stroke="rgba(200,180,150,.2)" stroke-width="1"/>
+      <line x1="712" y1="280" x2="728" y2="278" stroke="rgba(200,180,150,.2)" stroke-width="1"/>
+      <line x1="708" y1="310" x2="732" y2="308" stroke="rgba(200,180,150,.15)" stroke-width="1"/>
+      <line x1="710" y1="340" x2="730" y2="338" stroke="rgba(200,180,150,.1)" stroke-width="1"/>
+      <!-- Left crown (Judah — purple) -->
+      <path d="M360,290 L365,270 L375,285 L385,268 L395,285 L405,270 L410,290 Z" fill="#9b70db"/>
+      <rect x="360" y="290" width="50" height="8" rx="2" fill="#7050a0"/>
+      <circle cx="385" cy="278" r="3" fill="#ffd700"/>
+      <!-- Right crown (Israel — red) -->
+      <path d="M1030,290 L1035,270 L1045,285 L1055,268 L1065,285 L1075,270 L1080,290 Z" fill="#cc4444"/>
+      <rect x="1030" y="290" width="50" height="8" rx="2" fill="#a03030"/>
+      <circle cx="1055" cy="278" r="3" fill="#ffd700"/>
+      <!-- Left group of people (Judah) -->
+      <circle cx="320" cy="400" r="5" fill="rgba(120,90,160,.6)"/>
+      <circle cx="340" cy="396" r="4.5" fill="rgba(120,90,160,.55)"/>
+      <circle cx="360" cy="402" r="5" fill="rgba(120,90,160,.6)"/>
+      <circle cx="380" cy="398" r="4.5" fill="rgba(120,90,160,.55)"/>
+      <circle cx="400" cy="404" r="5" fill="rgba(120,90,160,.5)"/>
+      <circle cx="420" cy="400" r="4" fill="rgba(120,90,160,.45)"/>
+      <circle cx="440" cy="396" r="5" fill="rgba(120,90,160,.5)"/>
+      <!-- Right group of people (Israel) -->
+      <circle cx="1000" cy="400" r="5" fill="rgba(160,80,80,.6)"/>
+      <circle cx="1020" cy="396" r="4.5" fill="rgba(160,80,80,.55)"/>
+      <circle cx="1040" cy="402" r="5" fill="rgba(160,80,80,.6)"/>
+      <circle cx="1060" cy="398" r="4.5" fill="rgba(160,80,80,.55)"/>
+      <circle cx="1080" cy="404" r="5" fill="rgba(160,80,80,.5)"/>
+      <circle cx="1100" cy="400" r="4" fill="rgba(160,80,80,.45)"/>
+      <circle cx="1120" cy="396" r="5" fill="rgba(160,80,80,.5)"/>
+      <!-- Labels -->
+      <text x="380" y="360" fill="rgba(155,112,219,.4)" font-size="18" font-weight="700"
+            text-anchor="middle" letter-spacing=".1em">猶大 Judah</text>
+      <text x="1060" y="360" fill="rgba(200,80,80,.4)" font-size="18" font-weight="700"
+            text-anchor="middle" letter-spacing=".1em">以色列 Israel</text>
+      <!-- Sorrowful glow -->
+      <ellipse cx="720" cy="300" rx="80" ry="100" fill="none"
+               stroke="rgba(255,200,100,.06)" stroke-width="10"
+               style="animation:breathe 4s ease-in-out infinite;"/>
+    </svg>
+
+  <app-scene-heading title="💔 國度分裂" subtitle="The Kingdom Divided — 1 Kings 12" id="division-heading" />
+  <app-scene-verse text="「我必從他兒子的手裡將國奪回」— 列王紀上 11:35" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-carmel" aria-label="迦密山對決 — Fire on Mount Carmel">
+  <app-starfield />
+
+  <!-- Desert ground -->
+    <div id="carmel-ground" aria-hidden="true"></div>
+  
+    <!-- Fire glow -->
+    <div id="fire-glow" aria-hidden="true"></div>
+  
+    <!-- Elijah with raised arms -->
+    <svg id="elijah-figure" viewBox="0 0 60 110" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="以利亞舉手禱告 — Elijah with arms raised in prayer">
+      <title>以利亞 — The prophet Elijah calling down fire from heaven</title>
+      <!-- Head -->
+      <circle cx="30" cy="14" r="11" fill="#6b4e14"/>
+      <!-- Wild hair -->
+      <path d="M19,10 Q15,4 20,2 Q25,0 30,2 Q35,0 40,2 Q45,4 41,10" fill="#3a2a10"/>
+      <!-- Beard (wild, prophetic) -->
+      <path d="M23,22 Q30,38 37,22 Q34,48 30,55 Q26,48 23,22 Z" fill="#4a3a18" opacity=".85"/>
+      <!-- Rough robe -->
+      <path d="M20,28 Q15,55 12,85 Q18,88 24,85 Q27,68 30,55 Q33,68 36,85 Q42,88 48,85 Q45,55 40,28 Z"
+            fill="#6a5a30"/>
+      <!-- Leather belt -->
+      <line x1="18" y1="42" x2="42" y2="42" stroke="#4a3018" stroke-width="3"/>
+      <!-- Right arm raised high -->
+      <path d="M40,34 Q50,18 54,4" stroke="#6b4e14" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <!-- Left arm raised high -->
+      <path d="M20,34 Q10,18 6,4" stroke="#6b4e14" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <!-- Feet -->
+      <ellipse cx="22" cy="88" rx="6" ry="3" fill="#3d2200"/>
+      <ellipse cx="38" cy="88" rx="6" ry="3" fill="#3d2200"/>
+      <!-- Prophet's aura -->
+      <ellipse cx="30" cy="50" rx="24" ry="42" fill="none"
+               stroke="rgba(255,120,20,.08)" stroke-width="8"/>
+    </svg>
+  
+    <!-- Altar with fire -->
+    <svg id="altar-svg" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="祭壇與從天降下的火 — Altar with fire descending from heaven">
+      <title>迦密山的祭壇 — The altar on Mount Carmel consumed by fire from the LORD</title>
+      <defs>
+        <linearGradient id="altarStoneG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7a7a6a"/>
+          <stop offset="50%" stop-color="#5a5a4a"/>
+          <stop offset="100%" stop-color="#3a3a2a"/>
+        </linearGradient>
+        <linearGradient id="fireG" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#ff4400"/>
+          <stop offset="40%" stop-color="#ff8800"/>
+          <stop offset="70%" stop-color="#ffcc00"/>
+          <stop offset="100%" stop-color="#ffff80"/>
+        </linearGradient>
+      </defs>
+      <!-- Altar stones -->
+      <rect x="20" y="75" width="60" height="40" rx="3" fill="url(#altarStoneG)"
+            style="filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));"/>
+      <!-- Stone texture -->
+      <line x1="20" y1="85" x2="80" y2="85" stroke="rgba(60,60,50,.3)" stroke-width="1"/>
+      <line x1="20" y1="95" x2="80" y2="95" stroke="rgba(60,60,50,.3)" stroke-width="1"/>
+      <line x1="20" y1="105" x2="80" y2="105" stroke="rgba(60,60,50,.3)" stroke-width="1"/>
+      <line x1="50" y1="75" x2="50" y2="115" stroke="rgba(60,60,50,.2)" stroke-width="1"/>
+      <!-- Wood on altar -->
+      <line x1="25" y1="73" x2="75" y2="73" stroke="#5a4020" stroke-width="4" stroke-linecap="round"/>
+      <line x1="30" y1="69" x2="70" y2="69" stroke="#4a3418" stroke-width="3" stroke-linecap="round"/>
+      <!-- Fire descending from heaven -->
+      <path d="M50,0 Q30,20 35,40 Q25,50 40,60 Q35,65 45,72 Q50,68 55,72 Q65,65 60,60 Q75,50 65,40 Q70,20 50,0 Z"
+            fill="url(#fireG)" opacity=".8"
+            style="animation: fireDescend 3s ease-out infinite; transform-origin: 50px 40px;"/>
+      <!-- Fire glow -->
+      <ellipse cx="50" cy="50" rx="35" ry="25" fill="rgba(255,150,30,.15)"/>
+      <!-- Sparks -->
+      <circle cx="35" cy="30" r="2" fill="rgba(255,200,50,.6)"/>
+      <circle cx="65" cy="25" r="1.5" fill="rgba(255,220,80,.5)"/>
+      <circle cx="42" cy="15" r="1.5" fill="rgba(255,200,50,.4)"/>
+      <circle cx="58" cy="18" r="2" fill="rgba(255,180,40,.5)"/>
+      <!-- Fire beam from sky -->
+      <line x1="50" y1="0" x2="50" y2="-40" stroke="rgba(255,200,80,.15)" stroke-width="14"/>
+      <!-- Water trench around altar -->
+      <path d="M12,115 Q50,125 88,115" stroke="rgba(60,100,160,.3)" stroke-width="3" fill="none"/>
+      <!-- Water being consumed (steam) -->
+      <ellipse cx="20" cy="108" rx="8" ry="4" fill="rgba(200,200,220,.08)"/>
+      <ellipse cx="80" cy="108" rx="8" ry="4" fill="rgba(200,200,220,.08)"/>
+    </svg>
+  
+    <!-- Mountain silhouette background -->
+    <svg style="position:absolute;bottom:28%;left:0;width:100%;height:40%;z-index:3;pointer-events:none;"
+         viewBox="0 0 1440 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0 300 L0 200 Q200 100 500 140 Q720 60 900 120 Q1100 80 1300 150 Q1400 180 1440 200 L1440 300 Z"
+            fill="rgba(30,20,20,.6)"/>
+      <path d="M0 300 L0 240 Q300 180 600 210 Q800 170 1000 200 Q1200 180 1440 220 L1440 300 Z"
+            fill="rgba(20,14,14,.7)"/>
+    </svg>
+  
+    <!-- Fallen prophets of Baal (small prostrate figures) -->
+    <svg style="position:absolute;bottom:26%;right:15%;z-index:7;width:clamp(80px,12vw,160px);"
+         viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="倒下的巴力先知 — Fallen prophets of Baal">
+      <title>巴力的先知 — The defeated prophets of Baal</title>
+      <!-- Prostrate figures -->
+      <ellipse cx="20" cy="28" rx="12" ry="5" fill="rgba(80,50,40,.5)"/>
+      <circle cx="10" cy="26" r="4" fill="rgba(80,50,40,.5)"/>
+      <ellipse cx="55" cy="30" rx="14" ry="5" fill="rgba(80,50,40,.45)"/>
+      <circle cx="43" cy="28" r="4" fill="rgba(80,50,40,.45)"/>
+      <ellipse cx="90" cy="28" rx="12" ry="5" fill="rgba(80,50,40,.4)"/>
+      <circle cx="80" cy="26" r="4" fill="rgba(80,50,40,.4)"/>
+      <ellipse cx="110" cy="32" rx="10" ry="4" fill="rgba(80,50,40,.35)"/>
+      <circle cx="102" cy="30" r="3.5" fill="rgba(80,50,40,.35)"/>
+    </svg>
+
+  <app-scene-heading title="🔥 迦密山對決" subtitle="Fire on Mount Carmel — 1 Kings 18" id="carmel-heading" />
+  <app-scene-verse text="「於是耶和華降下火來」— 列王紀上 18:38" />
+</section>

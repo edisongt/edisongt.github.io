@@ -1,0 +1,340 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #461c7e 0%, #8e372c 30%, #a64a00 65%, #a14f00 100%);
+    }
+
+#intro-crown-glow {
+      position: absolute; top: 16%; left: 50%; transform: translateX(-50%);
+      width: clamp(80px,12vw,150px); height: clamp(80px,12vw,150px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fff8e0, #daa520 40%, #b8860b 75%, #8b6508);
+      box-shadow: 0 0 55px rgba(218,165,32,.7), 0 0 110px rgba(184,134,11,.3);
+      z-index: 4;
+      animation: crownGlow 4s ease-in-out infinite;
+    }
+
+@keyframes crownGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(218,165,32,.7), 0 0 110px rgba(184,134,11,.3); }
+      50%      { box-shadow: 0 0 80px rgba(218,165,32,.95), 0 0 160px rgba(184,134,11,.5); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#daa520 0%,#fff4b0 45%,#b8860b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(218,165,32,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(184,134,11,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-throne {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(60px,8vw,110px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — DAVID BECOMES KING  大衛登基
+    ══════════════════════════════════════════════ */
+
+#scene-coronation {
+      background: linear-gradient(180deg, #381c62 0%, #854229 55%, #a05000 100%);
+    }
+
+#coronation-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#3a2200 0%,#201000 55%,#0c0600 100%);
+      z-index: 5;
+    }
+
+#coronation-ground::before {
+      content: '';
+      position: absolute; top: -18%; left: 0; width: 100%; height: 30%;
+      background: radial-gradient(ellipse 30% 40% at 25% 80%, #4a2e08 0%, transparent 70%),
+                  radial-gradient(ellipse 25% 35% at 65% 70%, #3d2600 0%, transparent 65%),
+                  radial-gradient(ellipse 20% 30% at 88% 90%, #4a2e08 0%, transparent 60%);
+    }
+
+#coronation-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 36vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(218,165,32,.35) 0%, rgba(184,134,11,.12) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 2s ease-in-out infinite;
+    }
+
+#david-throne-svg {
+      position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(80px,12vw,160px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+.crowd-person {
+      position: absolute; bottom: 26%; z-index: 7;
+      border-radius: 38% 38% 0 0;
+      background: rgba(40,20,5,.85);
+    }
+
+.crowd-person::before {
+      content: ''; position: absolute; top: -38%; left: 50%; transform: translateX(-50%);
+      width: 58%; height: 42%; background: rgba(40,20,5,.85); border-radius: 50%;
+    }
+
+#coronation-heading h2 {
+      color: #daa520;
+      text-shadow: 0 0 22px rgba(218,165,32,.7);
+    }
+
+#coronation-heading p { color: rgba(218,165,32,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — ARK TO JERUSALEM  約櫃進耶路撒冷
+    ══════════════════════════════════════════════ */
+
+#scene-ark {
+      background: linear-gradient(180deg, #432885 0%, #451b90 45%, #ab4500 100%);
+    }
+
+#ark-divine-light {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 25%, rgba(218,165,32,.18) 0%, rgba(184,134,11,.06) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#ark-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 28%;
+      background: linear-gradient(180deg,#3a2600 0%,#1a1000 55%,#0a0500 100%);
+      z-index: 5;
+    }
+
+#ark-svg {
+      position: absolute; bottom: 26%; left: 50%; transform: translateX(-50%);
+      z-index: 10; width: clamp(100px,16vw,220px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#david-dancing {
+      position: absolute; bottom: 26%; left: 35%; z-index: 9;
+      width: clamp(40px,5vw,70px);
+      animation: danceSway 1.2s ease-in-out infinite;
+    }
+
+@keyframes danceSway {
+      0%,100% { transform: rotate(-6deg) translateY(0);   }
+      25%      { transform: rotate(4deg)  translateY(-8px); }
+      50%      { transform: rotate(-4deg) translateY(-2px); }
+      75%      { transform: rotate(6deg)  translateY(-10px);}
+    }
+
+#ark-heading h2 {
+      background: linear-gradient(120deg,#daa520 0%,#fff4b0 50%,#b8860b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#ark-heading p { color: rgba(218,165,32,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — BATHSHEBA  拔示巴事件
+    ══════════════════════════════════════════════ */
+
+#scene-bathsheba {
+      background: linear-gradient(180deg, #381c46 0%, #54306c 55%, #952e2e 100%);
+    }
+
+#bathsheba-palace { position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 3; }
+
+#bathsheba-moon {
+      position: absolute; top: 10%; right: 15%;
+      width: clamp(40px,5vw,70px); height: clamp(40px,5vw,70px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff8f0, #e0d8c0 60%, #c0b898);
+      box-shadow: 0 0 30px rgba(255,250,230,.25), 0 0 80px rgba(255,245,200,.1);
+      z-index: 4;
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+#nathan-prophet {
+      position: absolute; bottom: 34%; left: 38%; z-index: 9;
+      width: clamp(35px,4.5vw,60px);
+      animation: gentleSway 4s ease-in-out infinite;
+    }
+
+#david-rooftop {
+      position: absolute; bottom: 42%; right: 36%; z-index: 9;
+      width: clamp(30px,4vw,55px);
+    }
+
+#guilt-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 50vh;
+      background: radial-gradient(ellipse at 50% 60%, rgba(139,0,0,.16) 0%, rgba(139,0,0,.06) 45%, transparent 70%);
+      z-index: 4; pointer-events: none;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#bathsheba-heading h2 {
+      background: linear-gradient(120deg,#daa520 0%,#fff4b0 30%,#8b0000 70%,#cc2222 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#bathsheba-heading p { color: rgba(255,200,130,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — ABSALOM'S REBELLION  押沙龍叛亂
+    ══════════════════════════════════════════════ */
+
+#scene-absalom {
+      background: linear-gradient(180deg, #2a0e62 0%, #412c83 35%, #8e372c 70%, #62462a 100%);
+    }
+
+#absalom-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 4; }
+
+#absalom-red-sky {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(250px,50vw,600px); height: 35vh;
+      background: radial-gradient(ellipse at 50% 40%, rgba(139,0,0,.2) 0%, rgba(139,0,0,.06) 50%, transparent 70%);
+      z-index: 2; pointer-events: none;
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+#absalom-rider {
+      position: absolute; bottom: 38%; right: 28%; z-index: 9;
+      width: clamp(55px,7vw,100px);
+      animation: gentleSway 4s ease-in-out infinite;
+    }
+
+#david-weeping {
+      position: absolute; bottom: 36%; left: 22%; z-index: 9;
+      width: clamp(35px,5vw,62px);
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#absalom-heading h2 {
+      background: linear-gradient(120deg,#8b0000 0%,#cc4444 50%,#daa520 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#absalom-heading p { color: rgba(200,160,130,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — GOD'S COVENANT  神的約
+    ══════════════════════════════════════════════ */
+
+#scene-covenant {
+      background: linear-gradient(180deg, #1c0e46 0%, #3a1d9a 50%, #3b2f87 100%);
+    }
+
+#covenant-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 3; }
+
+#covenant-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(30px,5vw,70px); height: 55%;
+      background: linear-gradient(180deg,rgba(255,255,220,0) 0%,rgba(218,165,32,.5) 25%,rgba(218,165,32,.78) 65%,transparent 100%);
+      z-index: 6; filter: blur(12px);
+      animation: divinePulse 2.5s ease-in-out infinite;
+    }
+
+@keyframes divinePulse {
+      0%,100% { opacity: .5; height: 44%; }
+      50%      { opacity: 1;  height: 54%; }
+    }
+
+#covenant-glow-wide {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 15%, rgba(218,165,32,.2) 0%, rgba(184,134,11,.06) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#covenant-cloud {
+      position: absolute; top: 6%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(140px,28vw,360px);
+      animation: cloudGlow 4.5s ease-in-out infinite;
+    }
+
+@keyframes cloudGlow {
+      0%,100% { opacity: .75; transform: translateX(-50%) scale(1);    }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.05); }
+    }
+
+#david-covenant {
+      position: absolute; bottom: 38%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(40px,5vw,68px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+#covenant-heading h2 {
+      background: linear-gradient(120deg,#daa520 0%,#fff4e0 50%,#b8860b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#covenant-heading p { color: rgba(218,190,140,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

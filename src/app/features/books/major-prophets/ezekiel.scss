@@ -1,0 +1,283 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Scene-specific keyframes ── */
+
+@keyframes introGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(58,170,122,.6), 0 0 110px rgba(40,120,80,.3); }
+      50%      { box-shadow: 0 0 80px rgba(80,200,140,.85), 0 0 160px rgba(58,170,122,.5); }
+    }
+
+@keyframes wheelSpin {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+@keyframes wingFlap {
+      0%,100% { transform: scaleX(1) rotate(0deg); }
+      25%      { transform: scaleX(1.08) rotate(2deg); }
+      75%      { transform: scaleX(.94) rotate(-2deg); }
+    }
+
+@keyframes boneRise {
+      0%,100% { transform: translateY(0); opacity: .7; }
+      50%      { transform: translateY(-6px); opacity: 1; }
+    }
+
+@keyframes windSwirl {
+      0%   { transform: rotate(0deg) scale(1); opacity: .3; }
+      50%  { transform: rotate(180deg) scale(1.1); opacity: .5; }
+      100% { transform: rotate(360deg) scale(1); opacity: .3; }
+    }
+
+@keyframes waterFlow {
+      0%   { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -60; }
+    }
+
+@keyframes gloryShine {
+      0%,100% { filter: drop-shadow(0 0 8px rgba(255,220,100,.5)); transform: scale(1); }
+      50%      { filter: drop-shadow(0 0 24px rgba(255,220,100,.9)); transform: scale(1.06); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #141e28 0%, #1a2e38 30%, #1e3840 65%, #244848 100%);
+    }
+
+#intro-orb {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #e0ffe8, #7ae8a8 40%, #3aaa7a 75%, #1a5040);
+      box-shadow: 0 0 55px rgba(58,170,122,.6), 0 0 110px rgba(40,120,80,.3);
+      z-index: 4;
+      animation: introGlow 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#3aaa7a 0%,#80e8b8 45%,#2a7a5a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(120,220,170,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(80,180,130,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-prophet {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — THE LIVING CREATURES  四活物異象
+    ══════════════════════════════════════════════ */
+
+#scene-creatures {
+      background: linear-gradient(180deg, #2a1808 0%, #4a3018 40%, #6a4820 70%, #4a3010 100%);
+    }
+
+#creatures-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 35%;
+      background: linear-gradient(180deg,#2a1808 0%,#180c04 55%,#0a0402 100%);
+      z-index: 5;
+    }
+
+#creatures-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,200,80,.2) 0%, rgba(200,160,40,.08) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#creatures-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 7;
+    }
+
+#creatures-heading h2 {
+      color: #ffd060;
+      text-shadow: 0 0 22px rgba(255,208,96,.6);
+    }
+
+#creatures-heading p { color: rgba(220,190,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — THE WATCHMAN  守望者
+    ══════════════════════════════════════════════ */
+
+#scene-watchman {
+      background: linear-gradient(180deg, #141e28 0%, #1e3040 40%, #283848 65%, #1e2838 100%);
+    }
+
+#watchman-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: clamp(120px,25vw,300px); height: 30vh;
+      background: radial-gradient(ellipse, rgba(58,170,122,.12) 0%, rgba(40,120,80,.05) 50%, transparent 70%);
+      z-index: 4;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#watchman-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 5;
+    }
+
+#watchman-heading h2 {
+      background: linear-gradient(120deg,#80c8a0 0%,#3aaa7a 50%,#80c8a0 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#watchman-heading p { color: rgba(160,210,180,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — THE DRY BONES  枯骨復生
+    ══════════════════════════════════════════════ */
+
+#scene-bones {
+      background: linear-gradient(180deg, #1a1810 0%, #2a2418 40%, #3a3020 65%, #2a2418 100%);
+    }
+
+#bones-shadow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,50vw,600px); height: 40vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(58,170,122,.1) 0%, rgba(40,100,70,.04) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#bones-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 5;
+    }
+
+#bones-heading h2 {
+      background: linear-gradient(120deg,#c0a870 0%,#e0d0a0 50%,#a08850 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#bones-heading p { color: rgba(200,190,160,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — THE NEW TEMPLE  新聖殿
+    ══════════════════════════════════════════════ */
+
+#scene-temple {
+      background: linear-gradient(180deg, #141e28 0%, #1a3040 35%, #2a5060 65%, #3a7080 100%);
+    }
+
+#temple-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 45vw; height: 20vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(58,170,122,.18) 0%, rgba(40,140,100,.07) 50%, transparent 72%);
+      z-index: 4;
+      animation: glowPulse 3.5s ease-in-out infinite;
+    }
+
+#temple-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 5;
+    }
+
+#temple-heading h2 {
+      background: linear-gradient(120deg,#60c0a0 0%,#80e8c8 50%,#3aaa7a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#temple-heading p { color: rgba(160,220,200,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — GOD'S GLORY RETURNS  神榮耀歸回
+    ══════════════════════════════════════════════ */
+
+#scene-glory {
+      background: linear-gradient(180deg, #2a2810 0%, #4a4020 35%, #6a5830 65%, #8a7040 100%);
+    }
+
+#glory-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#3a3018 0%,#241c10 55%,#141008 100%);
+      z-index: 5;
+    }
+
+#glory-glow {
+      position: absolute; bottom: 32%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 16vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,255,200,.2) 0%, rgba(255,220,120,.08) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#glory-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 7;
+    }
+
+#glory-heading h2 {
+      background: linear-gradient(120deg,#ffd060 0%,#ffe880 50%,#3aaa7a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#glory-heading p { color: rgba(220,210,170,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

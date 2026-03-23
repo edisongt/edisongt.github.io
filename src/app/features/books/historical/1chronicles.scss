@@ -1,0 +1,251 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #2a2010 0%, #4a3518 30%, #5a4020 65%, #6a4c28 100%);
+    }
+
+#intro-orb {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fff8e0, #cd7f32 40%, #8a5520 75%, #4a2a10);
+      box-shadow: 0 0 55px rgba(205,127,50,.6), 0 0 110px rgba(138,85,32,.3);
+      z-index: 4;
+      animation: introGlow 4s ease-in-out infinite;
+    }
+
+@keyframes introGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(205,127,50,.6), 0 0 110px rgba(138,85,32,.3); }
+      50%      { box-shadow: 0 0 80px rgba(220,160,70,.85), 0 0 160px rgba(180,120,50,.5); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#cd7f32 0%,#ffd090 45%,#8a5520 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(220,180,120,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(200,160,100,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-scribe {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — GENEALOGIES  家譜
+    ══════════════════════════════════════════════ */
+
+#scene-genealogy {
+      background: linear-gradient(180deg, #2a2010 0%, #3a2e18 40%, #4a3820 70%, #3a2a14 100%);
+    }
+
+#genealogy-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 50vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(205,127,50,.12) 0%, rgba(138,85,32,.05) 45%, transparent 70%);
+      z-index: 2; pointer-events: none;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#genealogy-svg {
+      position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%);
+      width: 80%; max-width: 900px; height: 60%; z-index: 5;
+    }
+
+@keyframes scrollUnfurl {
+      0%   { transform: scaleY(.85); opacity: .7; }
+      50%  { transform: scaleY(1);   opacity: 1;  }
+      100% { transform: scaleY(.85); opacity: .7; }
+    }
+
+#genealogy-heading h2 {
+      color: #cd7f32;
+      text-shadow: 0 0 22px rgba(205,127,50,.6);
+    }
+
+#genealogy-heading p { color: rgba(220,180,120,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — DAVID BECOMES KING  大衛作王
+    ══════════════════════════════════════════════ */
+
+#scene-king {
+      background: linear-gradient(180deg, #1c2040 0%, #2a3060 35%, #4a3828 70%, #5a4020 100%);
+    }
+
+#king-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,45vw,550px); height: 45vh;
+      background: radial-gradient(ellipse at 50% 40%, rgba(205,127,50,.18) 0%, rgba(100,80,180,.06) 50%, transparent 70%);
+      z-index: 2; pointer-events: none;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#king-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 5;
+    }
+
+#king-heading h2 {
+      background: linear-gradient(120deg,#cd7f32 0%,#ffe0a0 50%,#8a5520 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#king-heading p { color: rgba(200,180,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — ARK TO JERUSALEM  約櫃入耶路撒冷
+    ══════════════════════════════════════════════ */
+
+#scene-ark {
+      background: linear-gradient(180deg, #3a2a10 0%, #5a4020 35%, #6a4c28 65%, #7a5830 100%);
+    }
+
+#ark-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 35vw; height: 16vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,215,0,.2) 0%, rgba(205,127,50,.08) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#ark-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 7;
+    }
+
+#ark-heading h2 {
+      background: linear-gradient(120deg,#ffd700 0%,#fff4b0 50%,#cd7f32 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#ark-heading p { color: rgba(255,220,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — PREPARING THE TEMPLE  預備建殿
+    ══════════════════════════════════════════════ */
+
+#scene-prepare {
+      background: linear-gradient(180deg, #2a2010 0%, #3a3018 40%, #4a3820 70%, #5a4428 100%);
+    }
+
+#prepare-glow {
+      position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,42vw,520px); height: 48vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(205,127,50,.14) 0%, rgba(138,85,32,.06) 45%, transparent 70%);
+      z-index: 2; pointer-events: none;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#prepare-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 5;
+    }
+
+#prepare-heading h2 {
+      background: linear-gradient(120deg,#cd7f32 0%,#ffe0a0 50%,#8a5520 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#prepare-heading p { color: rgba(220,180,120,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — DAVID'S PRAYER  大衛的禱告
+    ══════════════════════════════════════════════ */
+
+#scene-prayer {
+      background: linear-gradient(180deg, #1a1830 0%, #2a2848 40%, #3a2a20 70%, #4a3828 100%);
+    }
+
+#prayer-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#2a2010 0%,#1a1408 55%,#0e0a04 100%);
+      z-index: 5;
+    }
+
+#prayer-light {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      width: 30vw; height: 60vh;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,215,0,.15) 0%, rgba(205,127,50,.06) 40%, transparent 70%);
+      z-index: 6; pointer-events: none;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#prayer-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      width: 85%; max-width: 1000px; height: 55%; z-index: 8;
+    }
+
+#prayer-heading h2 {
+      background: linear-gradient(120deg,#cd7f32 0%,#ffd090 50%,#8a5520 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#prayer-heading p { color: rgba(200,170,120,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

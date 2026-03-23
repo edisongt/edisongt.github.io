@@ -1,0 +1,294 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #1c4638 0%, #2e784a 30%, #357745 65%, #419855 100%);
+    }
+
+#intro-sun {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fffff0, #a0e8a0 40%, #4a8c5e 75%, #2d5a3a);
+      box-shadow: 0 0 55px rgba(102,204,102,.6), 0 0 110px rgba(74,140,94,.3);
+      z-index: 4;
+      animation: sunGlow 4s ease-in-out infinite;
+    }
+
+@keyframes sunGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(102,204,102,.6), 0 0 110px rgba(74,140,94,.3); }
+      50%      { box-shadow: 0 0 80px rgba(120,220,120,.85), 0 0 160px rgba(80,180,80,.5); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#66cc66 0%,#c8ffc8 45%,#4a8c5e 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(160,230,180,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(120,200,140,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-joshua {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — CROSSING JORDAN  渡約旦河
+    ══════════════════════════════════════════════ */
+
+#scene-crossing {
+      background: linear-gradient(180deg, #1c3846 0%, #1d5f74 55%, #1f8150 100%);
+    }
+
+#crossing-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 35%;
+      background: linear-gradient(180deg,#1a2e20 0%,#0e1a10 55%,#060c08 100%);
+      z-index: 5;
+    }
+
+#crossing-river-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(80,160,220,.25) 0%, rgba(60,130,200,.1) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#crossing-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 7;
+    }
+
+#crossing-heading h2 {
+      color: #66cc66;
+      text-shadow: 0 0 22px rgba(102,204,102,.6);
+    }
+
+#crossing-heading p { color: rgba(160,220,180,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — JERICHO  耶利哥城
+    ══════════════════════════════════════════════ */
+
+#scene-jericho {
+      background: linear-gradient(180deg, #462a38 0%, #824628 45%, #81501f 100%);
+    }
+
+#jericho-dust-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,50vw,600px); height: 40vh;
+      background: radial-gradient(ellipse at 50% 70%, rgba(200,160,80,.18) 0%, rgba(180,140,60,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#jericho-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 5;
+    }
+
+@keyframes wallCrumble {
+      0%,80% { transform: translateY(0) rotate(0); opacity: 1; }
+      90%     { transform: translateY(8px) rotate(3deg); opacity: .7; }
+      100%    { transform: translateY(18px) rotate(6deg); opacity: .4; }
+    }
+
+#jericho-heading h2 {
+      background: linear-gradient(120deg,#e8a040 0%,#ffe8a0 50%,#cc6600 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#jericho-heading p { color: rgba(230,200,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — CONQUEST  征服迦南
+    ══════════════════════════════════════════════ */
+
+#scene-conquest {
+      background: linear-gradient(180deg, #1c1c46 0%, #392e89 35%, #686820 70%, #5f741d 100%);
+    }
+
+#conquest-sun {
+      position: absolute; top: 18%; left: 40%; transform: translateX(-50%);
+      width: clamp(80px,14vw,160px); height: clamp(80px,14vw,160px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, #fffff0, #ffe860 40%, #e0a000 75%, #a06800);
+      box-shadow: 0 0 70px rgba(255,220,60,.8), 0 0 150px rgba(255,180,0,.4);
+      z-index: 5;
+      animation: frozenSun 5s ease-in-out infinite;
+    }
+
+@keyframes frozenSun {
+      0%,100% { box-shadow: 0 0 70px rgba(255,220,60,.8), 0 0 150px rgba(255,180,0,.4); }
+      50%      { box-shadow: 0 0 100px rgba(255,240,80,1), 0 0 200px rgba(255,200,20,.6); }
+    }
+
+#conquest-moon {
+      position: absolute; top: 22%; right: 18%;
+      width: clamp(40px,6vw,70px); height: clamp(40px,6vw,70px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 45% 40%, #f0f0ff, #c8c8e8 50%, #8888b0);
+      box-shadow: 0 0 30px rgba(200,200,240,.5), 0 0 60px rgba(180,180,220,.25);
+      z-index: 5;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#conquest-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 4; }
+
+#conquest-heading h2 {
+      background: linear-gradient(120deg,#ffd700 0%,#fff4b0 50%,#66cc66 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#conquest-heading p { color: rgba(220,230,160,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — DIVISION OF LAND  分配土地
+    ══════════════════════════════════════════════ */
+
+#scene-division {
+      background: linear-gradient(180deg, #204141 0%, #30734d 55%, #456f3c 100%);
+    }
+
+#division-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 3; }
+
+#division-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 50vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(74,140,94,.14) 0%, rgba(45,90,58,.06) 45%, transparent 70%);
+      z-index: 4; pointer-events: none;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#division-heading h2 {
+      background: linear-gradient(120deg,#4a8c5e 0%,#a0f0b0 50%,#2d5a3a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#division-heading p { color: rgba(160,220,170,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — FAREWELL  約書亞的告別
+    ══════════════════════════════════════════════ */
+
+#scene-farewell {
+      background: linear-gradient(180deg, #1c2a46 0%, #2c596b 50%, #356b50 100%);
+    }
+
+#farewell-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#1a2a18 0%,#0e1608 55%,#060a04 100%);
+      z-index: 5;
+    }
+
+#farewell-ground::before {
+      content: '';
+      position: absolute; top: -18%; left: 0; width: 100%; height: 30%;
+      background: radial-gradient(ellipse 30% 40% at 25% 80%, #2a3e22 0%, transparent 70%),
+                  radial-gradient(ellipse 25% 35% at 65% 70%, #223a1a 0%, transparent 65%),
+                  radial-gradient(ellipse 20% 30% at 88% 90%, #2a3e22 0%, transparent 60%);
+    }
+
+#memorial-glow {
+      position: absolute; bottom: 32%; left: 50%; transform: translateX(-50%);
+      width: 28vw; height: 14vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(74,140,94,.3) 0%, rgba(45,90,58,.12) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#joshua-farewell {
+      position: absolute; bottom: 30%; left: 38%; z-index: 9;
+      width: clamp(38px,5vw,65px);
+      animation: gentleSway 5s ease-in-out infinite;
+    }
+
+#memorial-stone {
+      position: absolute; bottom: 28%; left: 52%; z-index: 8;
+      width: clamp(30px,4vw,55px);
+    }
+
+.crowd-person {
+      position: absolute; bottom: 26%; z-index: 7;
+      border-radius: 38% 38% 0 0;
+      background: rgba(20,40,20,.85);
+    }
+
+.crowd-person::before {
+      content: ''; position: absolute; top: -38%; left: 50%; transform: translateX(-50%);
+      width: 58%; height: 42%; background: rgba(20,40,20,.85); border-radius: 50%;
+    }
+
+#farewell-heading h2 {
+      background: linear-gradient(120deg,#66cc66 0%,#d0ffd0 50%,#4a8c5e 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#farewell-heading p { color: rgba(160,220,170,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

@@ -1,0 +1,256 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Scene-specific keyframes ── */
+
+@keyframes introGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(199,125,186,.6), 0 0 110px rgba(138,64,128,.3); }
+      50%      { box-shadow: 0 0 80px rgba(220,150,210,.85), 0 0 160px rgba(180,100,170,.5); }
+    }
+
+@keyframes scepterGlow {
+      0%,100% { filter: drop-shadow(0 0 6px rgba(255,215,0,.4)); }
+      50%      { filter: drop-shadow(0 0 14px rgba(255,215,0,.8)); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #2a1828 0%, #3e2844 30%, #543060 65%, #6a407a 100%);
+    }
+
+#intro-orb {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fff0f8, #e8a0d0 40%, #a05090 75%, #6a3060);
+      box-shadow: 0 0 55px rgba(199,125,186,.6), 0 0 110px rgba(138,64,128,.3);
+      z-index: 4;
+      animation: introGlow 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#c77dba 0%,#f0c0e8 45%,#8a4080 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(220,160,210,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(190,130,180,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-esther {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — ESTHER BECOMES QUEEN  以斯帖被立為后
+    ══════════════════════════════════════════════ */
+
+#scene-queen {
+      background: linear-gradient(180deg, #3e1840 0%, #5a2860 40%, #7a3888 70%, #6a3070 100%);
+    }
+
+#queen-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 35%;
+      background: linear-gradient(180deg,#2a1028 0%,#18081a 55%,#0a040c 100%);
+      z-index: 5;
+    }
+
+#queen-glow {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,215,0,.2) 0%, rgba(200,170,40,.08) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#queen-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 7;
+    }
+
+#queen-heading h2 {
+      color: #e8b840;
+      text-shadow: 0 0 22px rgba(232,184,64,.6);
+    }
+
+#queen-heading p { color: rgba(220,180,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — HAMAN'S PLOT  哈曼的陰謀
+    ══════════════════════════════════════════════ */
+
+#scene-plot {
+      background: linear-gradient(180deg, #1a0a10 0%, #30101a 40%, #4a1820 65%, #2a0a14 100%);
+    }
+
+#plot-shadow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,50vw,600px); height: 40vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(180,40,40,.12) 0%, rgba(120,20,20,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#plot-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 5;
+    }
+
+#plot-heading h2 {
+      background: linear-gradient(120deg,#cc3030 0%,#ff8080 50%,#aa2020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#plot-heading p { color: rgba(220,140,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — ESTHER'S COURAGE  以斯帖的勇氣
+    ══════════════════════════════════════════════ */
+
+#scene-courage {
+      background: linear-gradient(180deg, #1a1020 0%, #2e1840 35%, #4a2860 65%, #6a5020 100%);
+    }
+
+#courage-glow {
+      position: absolute; bottom: 35%; left: 55%; transform: translateX(-50%);
+      width: clamp(120px,25vw,300px); height: 30vh;
+      background: radial-gradient(ellipse, rgba(255,215,0,.18) 0%, rgba(200,170,40,.06) 50%, transparent 70%);
+      z-index: 4;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#courage-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 5;
+    }
+
+#courage-heading h2 {
+      background: linear-gradient(120deg,#c77dba 0%,#ffd700 50%,#c77dba 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#courage-heading p { color: rgba(220,180,200,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — THE REVERSAL  命運逆轉
+    ══════════════════════════════════════════════ */
+
+#scene-reversal {
+      background: linear-gradient(180deg, #1a1020 0%, #2e1838 40%, #4a2050 70%, #3e1840 100%);
+    }
+
+#reversal-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 45vw; height: 20vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(199,125,186,.15) 0%, rgba(138,64,128,.06) 50%, transparent 72%);
+      z-index: 4;
+      animation: glowPulse 3.5s ease-in-out infinite;
+    }
+
+#reversal-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 5;
+    }
+
+#reversal-heading h2 {
+      background: linear-gradient(120deg,#c77dba 0%,#f0c0e8 50%,#8a4080 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#reversal-heading p { color: rgba(200,160,190,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — PURIM  普珥節
+    ══════════════════════════════════════════════ */
+
+#scene-purim {
+      background: linear-gradient(180deg, #3e2040 0%, #6a3870 35%, #8a5040 65%, #a06830 100%);
+    }
+
+#purim-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#2a1828 0%,#1a0c18 55%,#0c040a 100%);
+      z-index: 5;
+    }
+
+#purim-glow {
+      position: absolute; bottom: 32%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 16vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,200,80,.2) 0%, rgba(220,160,40,.08) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#purim-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 7;
+    }
+
+#purim-heading h2 {
+      background: linear-gradient(120deg,#ffd700 0%,#ffe880 50%,#c77dba 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#purim-heading p { color: rgba(230,200,160,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

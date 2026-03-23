@@ -1,0 +1,295 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Mark-specific keyframes ── */
+
+@keyframes lionFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);   }
+      50%      { transform: translateX(-50%) translateY(-10px); }
+    }
+
+@keyframes doveDescend {
+      0%,100% { transform: translateY(0) rotate(0deg); opacity: .7; }
+      50%     { transform: translateY(8px) rotate(2deg); opacity: 1; }
+    }
+
+@keyframes waveRoll {
+      0%,100% { transform: translateX(0) scaleY(1); }
+      25%     { transform: translateX(5px) scaleY(1.04); }
+      50%     { transform: translateX(0) scaleY(.96); }
+      75%     { transform: translateX(-5px) scaleY(1.02); }
+    }
+
+@keyframes healGlow {
+      0%,100% { opacity: .4; transform: scale(1); }
+      50%     { opacity: .9; transform: scale(1.08); }
+    }
+
+@keyframes waterRipple {
+      0%,100% { opacity: .3; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: .6; transform: translateX(-50%) scaleX(1.15); }
+    }
+
+@keyframes prayerSway {
+      0%,100% { transform: rotate(0deg) translateY(0); }
+      50%     { transform: rotate(-1.5deg) translateY(-3px); }
+    }
+
+@keyframes tombLight {
+      0%,100% { opacity: .5; transform: scale(1); }
+      50%      { opacity: 1;  transform: scale(1.1); }
+    }
+
+@keyframes raysExpand {
+      0%,100% { opacity: .3; transform: translateX(-50%) scaleX(1) scaleY(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleX(1.12) scaleY(1.06); }
+    }
+
+@keyframes emberGlow {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+@keyframes leafSway {
+      0%,100% { transform: rotate(-3deg); }
+      50%     { transform: rotate(3deg); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #1a1210 0%, #221816 40%, #2a1e1a 70%, #1a1210 100%);
+    }
+
+#intro-ember-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(208,96,64,.12) 0%, rgba(180,70,50,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: emberGlow 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#d06040 0%,#f0a080 45%,#8a3020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(208,96,64,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(208,96,64,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-lion-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,14vw,180px);
+      animation: lionFloat 5s ease-in-out infinite;
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — BAPTISM & WILDERNESS 受洗與曠野
+    ══════════════════════════════════════════════ */
+
+#scene-baptism {
+      background: linear-gradient(180deg, #0e0c0a 0%, #1a1210 40%, #221816 70%, #0e0c0a 100%);
+    }
+
+#baptism-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(208,96,64,.15) 0%, rgba(120,50,30,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#baptism-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+
+#baptism-heading h2 {
+      color: #d06040;
+      text-shadow: 0 0 22px rgba(208,96,64,.5);
+    }
+
+#baptism-heading p { color: rgba(208,96,64,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — MIRACLES & HEALING 神蹟與醫治
+    ══════════════════════════════════════════════ */
+
+#scene-miracles {
+      background: linear-gradient(180deg, #1a100e 0%, #2a1818 40%, #3a2420 70%, #2a1814 100%);
+    }
+
+#miracles-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(208,96,64,.2) 0%, rgba(160,60,40,.08) 45%, transparent 70%);
+      z-index: 3;
+      animation: healGlow 3s ease-in-out infinite;
+    }
+
+#miracles-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+
+#miracles-heading h2 {
+      color: #e07050;
+      text-shadow: 0 0 22px rgba(208,96,64,.6);
+    }
+
+#miracles-heading p { color: rgba(224,112,80,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — THE SERVANT KING 僕人君王
+    ══════════════════════════════════════════════ */
+
+#scene-servant {
+      background: linear-gradient(180deg, #14100e 0%, #1c1614 40%, #22201e 70%, #1a1612 100%);
+    }
+
+#servant-light-beam {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(80px,12vw,200px); height: 100%;
+      background: linear-gradient(180deg,rgba(255,220,160,0) 0%,rgba(220,160,100,.12) 30%,rgba(208,96,64,.2) 65%,transparent 100%);
+      z-index: 3; filter: blur(12px);
+      animation: waterRipple 3s ease-in-out infinite;
+    }
+
+#servant-scene-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#servant-heading h2 {
+      color: #c09060;
+      text-shadow: 0 0 18px rgba(208,96,64,.5);
+    }
+
+#servant-heading p { color: rgba(192,144,96,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — GETHSEMANE 客西馬尼園
+    ══════════════════════════════════════════════ */
+
+#scene-gethsemane {
+      background: linear-gradient(180deg, #141210 0%, #1e1a18 35%, #2a2620 60%, #1e1a14 85%, #141210 100%);
+    }
+
+#gethsemane-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(208,96,64,.12) 0%, rgba(160,60,40,.05) 50%, transparent 75%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#gethsemane-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#gethsemane-heading h2 {
+      background: linear-gradient(120deg,#8a6a50 0%,#d4a080 50%,#6a4030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#gethsemane-heading p { color: rgba(180,120,80,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — RESURRECTION 復活
+    ══════════════════════════════════════════════ */
+
+#scene-risen {
+      background: linear-gradient(180deg, #1e1814 0%, #2a2018 40%, #3a2820 70%, #443028 100%);
+    }
+
+#risen-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,220,160,0) 0%,rgba(240,180,100,.3) 25%,rgba(208,96,64,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: tombLight 2.5s ease-in-out infinite;
+    }
+
+#risen-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(208,96,64,.08) 0%, rgba(160,60,40,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#risen-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(220px,32vw,440px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#risen-heading h2 {
+      background: linear-gradient(120deg,#d06040 0%,#f0c080 50%,#8a3020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#risen-heading p { color: rgba(208,120,80,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

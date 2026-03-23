@@ -1,0 +1,341 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #461c7e 0%, #682860 30%, #a64a00 65%, #a14f00 100%);
+    }
+
+#intro-sun {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fff8e0, #ffb740 40%, #d47800 75%, #a04800);
+      box-shadow: 0 0 55px rgba(255,160,40,.7), 0 0 110px rgba(255,120,0,.3);
+      z-index: 4;
+      animation: sunGlow 4s ease-in-out infinite;
+    }
+
+@keyframes sunGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(255,160,40,.7), 0 0 110px rgba(255,120,0,.3); }
+      50%      { box-shadow: 0 0 80px rgba(255,180,60,.95), 0 0 160px rgba(255,140,20,.5); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#ffb347 0%,#fff4b0 45%,#ff8c1c 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(255,220,160,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(220,180,120,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-moses {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — MOSES' FAREWELL  摩西的告別
+    ══════════════════════════════════════════════ */
+
+#scene-farewell {
+      background: linear-gradient(180deg, #381c62 0%, #854229 55%, #a05000 100%);
+    }
+
+#farewell-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#3a2200 0%,#201000 55%,#0c0600 100%);
+      z-index: 5;
+    }
+
+#farewell-ground::before {
+      content: '';
+      position: absolute; top: -18%; left: 0; width: 100%; height: 30%;
+      background: radial-gradient(ellipse 30% 40% at 25% 80%, #4a2e08 0%, transparent 70%),
+                  radial-gradient(ellipse 25% 35% at 65% 70%, #3d2600 0%, transparent 65%),
+                  radial-gradient(ellipse 20% 30% at 88% 90%, #4a2e08 0%, transparent 60%);
+    }
+
+#campfire-glow {
+      position: absolute; bottom: 26%; left: 50%; transform: translateX(-50%);
+      width: 32vw; height: 16vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,130,20,.35) 0%, rgba(255,80,0,.12) 50%, transparent 72%);
+      z-index: 6;
+      animation: campfireGlow 1.5s ease-in-out infinite;
+    }
+
+@keyframes campfireGlow {
+      0%,100% { opacity: .7; transform: translateX(-50%) scale(1);    }
+      50%      { opacity: 1;  transform: translateX(-50%) scale(1.14); }
+    }
+
+#campfire-svg {
+      position: absolute; bottom: 26%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(50px,7vw,90px);
+    }
+
+@keyframes flicker {
+      0%    { transform: scaleX(1)    scaleY(1)    rotate(-2deg); opacity: 1;    }
+      25%   { transform: scaleX(.9)   scaleY(1.1)  rotate(1deg);              }
+      50%   { transform: scaleX(1.05) scaleY(.92)  rotate(-1deg); opacity: .93; }
+      75%   { transform: scaleX(.92)  scaleY(1.06) rotate(2deg);              }
+      100%  { transform: scaleX(1.03) scaleY(1.1)  rotate(-3deg); opacity: .88; }
+    }
+
+#moses-farewell {
+      position: absolute; bottom: 30%; left: 42%; z-index: 9;
+      width: clamp(38px,5vw,65px);
+      animation: gentleSway 5s ease-in-out infinite;
+    }
+
+.crowd-person {
+      position: absolute; bottom: 26%; z-index: 7;
+      border-radius: 38% 38% 0 0;
+      background: rgba(40,20,5,.85);
+    }
+
+.crowd-person::before {
+      content: ''; position: absolute; top: -38%; left: 50%; transform: translateX(-50%);
+      width: 58%; height: 42%; background: rgba(40,20,5,.85); border-radius: 50%;
+    }
+
+#farewell-heading h2 {
+      color: #ffb347;
+      text-shadow: 0 0 22px rgba(255,160,40,.7);
+    }
+
+#farewell-heading p { color: rgba(255,200,130,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — THE SHEMA  示瑪
+    ══════════════════════════════════════════════ */
+
+#scene-shema {
+      background: linear-gradient(180deg, #432885 0%, #451b90 45%, #ab4500 100%);
+    }
+
+#shema-divine-light {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 25%, rgba(255,215,0,.18) 0%, rgba(255,180,60,.06) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#shema-text {
+      position: absolute; top: 38%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 20; white-space: nowrap;
+      animation: shemaPulse 3.5s ease-in-out infinite;
+    }
+
+@keyframes shemaPulse {
+      0%,100% { opacity: .7; letter-spacing: .08em; }
+      50%      { opacity: 1;  letter-spacing: .16em; }
+    }
+
+#shema-text .shema-main {
+      font-size: clamp(1rem,2.8vw,2rem); font-weight: 800;
+      color: rgba(255,225,100,.95);
+      text-shadow: 0 0 30px rgba(255,200,0,.85), 0 0 65px rgba(255,160,0,.45);
+    }
+
+#shema-text .shema-en {
+      display: block; margin-top: .5rem;
+      font-size: clamp(.7rem,1.3vw,.92rem); color: rgba(255,230,160,.5);
+      letter-spacing: .1em; text-shadow: none;
+    }
+
+#shema-scroll {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      z-index: 10; width: clamp(120px,20vw,260px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#shema-heading h2 {
+      background: linear-gradient(120deg,#ffd700 0%,#fff4b0 50%,#ffb347 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#shema-heading p { color: rgba(255,220,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — BLESSINGS AND CURSES  祝福與咒詛
+    ══════════════════════════════════════════════ */
+
+#scene-blessings {
+      background: linear-gradient(180deg, #381c46 0%, #54306c 55%, #543838 100%);
+    }
+
+#blessings-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 68%; z-index: 3; }
+
+#bless-glow-left {
+      position: absolute; top: 15%; left: 12%; width: 35vw; height: 55vh;
+      background: radial-gradient(ellipse at 50% 60%, rgba(255,200,50,.14) 0%, rgba(255,180,30,.05) 45%, transparent 70%);
+      z-index: 4; pointer-events: none;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#curse-glow-right {
+      position: absolute; top: 15%; right: 12%; width: 35vw; height: 55vh;
+      background: radial-gradient(ellipse at 50% 60%, rgba(180,30,30,.16) 0%, rgba(120,0,0,.06) 45%, transparent 70%);
+      z-index: 4; pointer-events: none;
+      animation: breathe 4s ease-in-out 1s infinite;
+    }
+
+#blessings-heading h2 {
+      background: linear-gradient(120deg,#ffd700 0%,#fff4b0 30%,#cc2200 70%,#ff4444 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#blessings-heading p { color: rgba(255,200,130,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — MOSES VIEWS THE PROMISED LAND
+    ══════════════════════════════════════════════ */
+
+#scene-view {
+      background: linear-gradient(180deg, #2a0e62 0%, #412c83 35%, #467038 70%, #49881f 100%);
+    }
+
+#view-sunrise {
+      position: absolute; top: 22%; left: 58%; transform: translateX(-50%);
+      width: clamp(70px,12vw,140px); height: clamp(70px,12vw,140px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, #fffbe0, #ffc940 40%, #e08a00 75%, #a05000);
+      box-shadow: 0 0 60px rgba(255,180,40,.7), 0 0 130px rgba(255,130,0,.35);
+      z-index: 5;
+      animation: sunGlow 4.5s ease-in-out infinite;
+    }
+
+#view-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 4; }
+
+#moses-nebo {
+      position: absolute; bottom: 48%; left: 30%; z-index: 9;
+      width: clamp(35px,5vw,62px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+#view-heading h2 {
+      background: linear-gradient(120deg,#ffb347 0%,#fff4b0 50%,#66cc66 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#view-heading p { color: rgba(200,230,160,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — DEATH OF MOSES  摩西之死
+    ══════════════════════════════════════════════ */
+
+#scene-death {
+      background: linear-gradient(180deg, #1c0e46 0%, #3a1d9a 50%, #3b2f87 100%);
+    }
+
+#death-mountain { position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 3; }
+
+#death-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(20px,4vw,55px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,255,220,0) 0%,rgba(255,245,200,.5) 25%,rgba(255,220,120,.78) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: divinePulse 2.5s ease-in-out infinite;
+    }
+
+@keyframes divinePulse {
+      0%,100% { opacity: .5; height: 44%; }
+      50%      { opacity: 1;  height: 54%; }
+    }
+
+#death-mist {
+      position: absolute; bottom: 28%; left: 0; width: 100%; height: 22%;
+      background: linear-gradient(180deg, transparent 0%, rgba(180,180,220,.08) 40%, rgba(160,160,200,.12) 70%, transparent 100%);
+      z-index: 5;
+      animation: mistDrift 8s ease-in-out infinite alternate;
+    }
+
+@keyframes mistDrift {
+      0%   { transform: translateX(0)   scale(1);    }
+      100% { transform: translateX(-4%) scale(1.05); }
+    }
+
+#death-cloud {
+      position: absolute; top: 6%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(140px,28vw,360px);
+      animation: cloudGlow 4.5s ease-in-out infinite;
+    }
+
+@keyframes cloudGlow {
+      0%,100% { opacity: .75; transform: translateX(-50%) scale(1);    }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.05); }
+    }
+
+#death-heading h2 {
+      background: linear-gradient(120deg,#c0a0ff 0%,#fff4e0 50%,#ffd700 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#death-heading p { color: rgba(200,190,235,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

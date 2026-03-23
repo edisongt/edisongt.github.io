@@ -1,0 +1,292 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Matthew-specific keyframes ── */
+
+@keyframes crownFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);   }
+      50%      { transform: translateX(-50%) translateY(-10px); }
+    }
+
+@keyframes raysRotate {
+      0%   { transform: translateX(-50%) rotate(0deg);   }
+      100% { transform: translateX(-50%) rotate(360deg); }
+    }
+
+@keyframes seedFall {
+      0%   { transform: translateY(0); opacity: .7; }
+      50%  { transform: translateY(30px); opacity: .4; }
+      100% { transform: translateY(60px); opacity: 0; }
+    }
+
+@keyframes radianceGrow {
+      0%,100% { opacity: .5; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.15); }
+    }
+
+@keyframes crossGlow {
+      0%,100% { opacity: .4; }
+      50%      { opacity: .8; }
+    }
+
+@keyframes lightBurst {
+      0%,100% { opacity: .5; transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;  transform: translateX(-50%) scale(1.12); }
+    }
+
+@keyframes missionPulse {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.06); }
+    }
+
+@keyframes goldenEmber {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+@keyframes smokeRise {
+      0%   { transform: translateY(0) scaleX(1); opacity: .5; }
+      50%  { transform: translateY(-40px) scaleX(1.3); opacity: .25; }
+      100% { transform: translateY(-80px) scaleX(1.6); opacity: 0; }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #181810 0%, #201c10 40%, #282014 70%, #181810 100%);
+    }
+
+#intro-royal-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(200,160,48,.12) 0%, rgba(160,120,30,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: goldenEmber 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#c8a030 0%,#f0d870 45%,#8a6a10 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(200,160,48,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(200,160,48,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-crown-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,12vw,160px);
+      animation: crownFloat 5s ease-in-out infinite;
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — SERMON ON THE MOUNT 登山寶訓
+    ══════════════════════════════════════════════ */
+
+#scene-sermon {
+      background: linear-gradient(180deg, #0e0c08 0%, #181810 40%, #201c10 70%, #0e0c08 100%);
+    }
+
+#sermon-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(200,160,48,.15) 0%, rgba(140,100,20,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#sermon-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#sermon-heading h2 {
+      color: #c8a030;
+      text-shadow: 0 0 22px rgba(200,160,48,.5);
+    }
+
+#sermon-heading p { color: rgba(200,160,48,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — PARABLES OF THE KINGDOM 天國的比喻
+    ══════════════════════════════════════════════ */
+
+#scene-parables {
+      background: linear-gradient(180deg, #10120a 0%, #1a1e10 40%, #222818 70%, #181c10 100%);
+    }
+
+#parables-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(140,180,60,.12) 0%, rgba(200,160,48,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#parables-scene-svg {
+      position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+#parables-heading h2 {
+      color: #a0b840;
+      text-shadow: 0 0 22px rgba(160,184,64,.5);
+    }
+
+#parables-heading p { color: rgba(160,180,60,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — TRANSFIGURATION 登山變像
+    ══════════════════════════════════════════════ */
+
+#scene-transfig {
+      background: linear-gradient(180deg, #14120e 0%, #1e1c18 35%, #2a2820 60%, #3a3828 85%, #2a2820 100%);
+    }
+
+#transfig-radiance {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(255,240,180,.1) 0%, rgba(200,160,48,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: radianceGrow 4s ease-in-out infinite;
+    }
+
+#transfig-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#transfig-heading h2 {
+      background: linear-gradient(120deg,#c8a030 0%,#fff0a0 50%,#8a6a10 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#transfig-heading p { color: rgba(200,180,100,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — THE CROSS 十字架
+    ══════════════════════════════════════════════ */
+
+#scene-cross {
+      background: linear-gradient(180deg, #0a0808 0%, #141010 40%, #1a1414 70%, #0e0a0a 100%);
+    }
+
+#cross-dark-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(120,40,40,.12) 0%, rgba(60,20,20,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: crossGlow 5s ease-in-out infinite;
+    }
+
+#cross-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+
+#cross-heading h2 {
+      color: #a06040;
+      text-shadow: 0 0 22px rgba(160,80,60,.5);
+    }
+
+#cross-heading p { color: rgba(160,100,80,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — GREAT COMMISSION 大使命
+    ══════════════════════════════════════════════ */
+
+#scene-commission {
+      background: linear-gradient(180deg, #181810 0%, #202018 40%, #2a2820 70%, #343028 100%);
+    }
+
+#commission-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,240,160,0) 0%,rgba(220,180,80,.3) 25%,rgba(200,160,48,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: lightBurst 2.5s ease-in-out infinite;
+    }
+
+#commission-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(200,160,48,.08) 0%, rgba(160,120,30,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#commission-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(180px,28vw,380px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#commission-heading h2 {
+      background: linear-gradient(120deg,#c8a030 0%,#f0d870 50%,#8a6a10 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#commission-heading p { color: rgba(200,160,80,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

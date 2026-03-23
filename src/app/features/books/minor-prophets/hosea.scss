@@ -1,0 +1,295 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Hosea-specific keyframes ── */
+
+@keyframes heartPulse {
+      0%,100% { transform: translateX(-50%) scale(1);   opacity: .7; }
+      50%      { transform: translateX(-50%) scale(1.06); opacity: 1;  }
+    }
+
+@keyframes crackSpread {
+      0%   { stroke-dashoffset: 80; opacity: 0; }
+      50%  { opacity: .6; }
+      100% { stroke-dashoffset: 0; opacity: .4; }
+    }
+
+@keyframes stormFlash {
+      0%,90%,100% { opacity: 0; }
+      92%          { opacity: .6; }
+      94%          { opacity: 0; }
+      96%          { opacity: .4; }
+    }
+
+@keyframes warmDescent {
+      0%,100% { opacity: .4; transform: translateX(-50%) scaleY(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleY(1.1); }
+    }
+
+@keyframes bloomGrow {
+      0%,100% { opacity: .5; transform: scale(1);    }
+      50%      { opacity: .8; transform: scale(1.05); }
+    }
+
+@keyframes dawnGrow {
+      0%,100% { opacity: .4; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleX(1.1); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #1a1014 0%, #221820 40%, #2a1c24 70%, #30222a 100%);
+    }
+
+#intro-rose-glow {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(224,96,112,.12) 0%, rgba(180,60,80,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: heartPulse 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#e06070 0%,#f0a0a8 45%,#c04858 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(224,160,168,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(224,96,112,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-heart-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(80px,12vw,140px);
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — THE UNFAITHFUL WIFE 不忠的妻子
+    ══════════════════════════════════════════════ */
+
+#scene-unfaithful {
+      background: linear-gradient(180deg, #28202a 0%, #3a2a34 40%, #2e2228 70%, #1e181c 100%);
+    }
+
+#unfaithful-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#2a2024 0%,#1a1418 55%,#0e0c0e 100%);
+      z-index: 5;
+    }
+
+#unfaithful-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 35vh;
+      background: radial-gradient(ellipse, rgba(224,96,112,.10) 0%, rgba(180,60,80,.04) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+#unfaithful-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,35vw,500px);
+      animation: gentleSway 8s ease-in-out infinite;
+    }
+
+#unfaithful-heading h2 {
+      color: #e06070;
+      text-shadow: 0 0 22px rgba(224,96,112,.5);
+    }
+
+#unfaithful-heading p { color: rgba(224,160,168,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — GOD'S CASE AGAINST ISRAEL 控訴以色列
+    ══════════════════════════════════════════════ */
+
+#scene-accusation {
+      background: linear-gradient(180deg, #1e1620 0%, #2a2030 40%, #342838 70%, #221a26 100%);
+    }
+
+#accusation-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 35vh;
+      background: radial-gradient(ellipse, rgba(180,140,200,.10) 0%, rgba(140,100,160,.04) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#accusation-scene-svg {
+      position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(180px,30vw,420px);
+      animation: floatY 6s ease-in-out infinite;
+    }
+
+#accusation-heading h2 {
+      color: #c080c0;
+      text-shadow: 0 0 22px rgba(180,100,180,.5);
+    }
+
+#accusation-heading p { color: rgba(180,140,200,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — JUDGMENT COMING 審判將臨
+    ══════════════════════════════════════════════ */
+
+#scene-judgment {
+      background: linear-gradient(180deg, #181218 0%, #2a1820 40%, #3a2028 70%, #201018 100%);
+    }
+
+#judgment-storm-glow {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(224,96,112,.15) 0%, rgba(180,60,80,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#judgment-flash {
+      position: absolute; inset: 0;
+      background: rgba(224,200,220,.06);
+      z-index: 2;
+      animation: stormFlash 5s ease-in-out infinite;
+    }
+
+#judgment-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+
+#judgment-heading h2 {
+      color: #d04050;
+      text-shadow: 0 0 22px rgba(208,64,80,.6);
+    }
+
+#judgment-heading p { color: rgba(224,120,130,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — GOD'S UNCHANGING LOVE 神不變的愛
+    ══════════════════════════════════════════════ */
+
+#scene-love {
+      background: linear-gradient(180deg, #1a1420 0%, #241c2a 35%, #302838 60%, #3a3040 85%, #443848 100%);
+    }
+
+#love-warm-light {
+      position: absolute; top: 5%; left: 50%; transform: translateX(-50%);
+      width: clamp(20px,4vw,50px); height: 55%;
+      background: linear-gradient(180deg,rgba(255,220,180,0) 0%,rgba(240,180,140,.25) 25%,rgba(224,160,120,.4) 65%,transparent 100%);
+      z-index: 6; filter: blur(12px);
+      animation: warmDescent 3s ease-in-out infinite;
+    }
+
+#love-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(240,180,140,.10) 0%, rgba(224,140,100,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#love-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(150px,22vw,300px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#love-heading h2 {
+      background: linear-gradient(120deg,#e06070 0%,#f0c0a0 50%,#c04858 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#love-heading p { color: rgba(240,180,160,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — RETURN AND RESTORATION 回轉與復興
+    ══════════════════════════════════════════════ */
+
+#scene-return {
+      background: linear-gradient(180deg, #1e1822 0%, #2a2430 40%, #38303e 70%, #443a4a 100%);
+    }
+
+#return-dawn-light {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(240,180,160,.15) 0%, rgba(224,140,120,.06) 50%, transparent 75%);
+      z-index: 3;
+      animation: dawnGrow 4s ease-in-out infinite;
+    }
+
+#return-bloom-glow {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 25vh;
+      background: radial-gradient(ellipse, rgba(160,200,120,.08) 0%, rgba(120,180,80,.03) 50%, transparent 70%);
+      z-index: 3;
+      animation: bloomGrow 5s ease-in-out infinite;
+    }
+
+#return-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#return-heading h2 {
+      background: linear-gradient(120deg,#e06070 0%,#a0d080 50%,#c04858 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#return-heading p { color: rgba(200,180,160,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

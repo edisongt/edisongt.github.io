@@ -1,0 +1,289 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Habakkuk-specific keyframes ── */
+
+@keyframes questionFloat {
+      0%,100% { transform: translateY(0) rotate(-3deg); opacity: .5; }
+      50%      { transform: translateY(-18px) rotate(3deg); opacity: .8; }
+    }
+
+@keyframes dustDrift {
+      0%   { transform: translateX(0) translateY(0); opacity: .4; }
+      50%  { transform: translateX(30px) translateY(-10px); opacity: .2; }
+      100% { transform: translateX(60px) translateY(-5px); opacity: 0; }
+    }
+
+@keyframes towerPulse {
+      0%,100% { opacity: .6; }
+      50%      { opacity: .9; }
+    }
+
+@keyframes flamePillar {
+      0%,100% { transform: scaleY(1); opacity: .6; }
+      50%      { transform: scaleY(1.12); opacity: .9; }
+    }
+
+@keyframes sunriseGlow {
+      0%,100% { opacity: .4; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleX(1.1); }
+    }
+
+@keyframes deerPrance {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #10101a 0%, #16162a 40%, #1c1c34 70%, #22223e 100%);
+    }
+
+#intro-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(112,112,176,.12) 0%, rgba(80,80,140,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#7070b0 0%,#a0a0d0 45%,#505080 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(160,160,200,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(112,112,176,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-scroll-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(60px,8vw,100px);
+    }
+
+#intro-hills-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — THE PROPHET'S QUESTION 先知的質問
+    ══════════════════════════════════════════════ */
+
+#scene-question {
+      background: linear-gradient(180deg, #18182a 0%, #22223a 40%, #2a2a44 70%, #1a1a2e 100%);
+    }
+
+#question-sky-glow {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 35vh;
+      background: radial-gradient(ellipse, rgba(112,112,176,.12) 0%, rgba(80,80,140,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+#question-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 25%;
+      background: linear-gradient(180deg,#1e1e30 0%,#14141e 55%,#0e0e18 100%);
+      z-index: 5;
+    }
+
+#question-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,35vw,450px);
+      animation: gentleSway 8s ease-in-out infinite;
+    }
+
+#question-heading h2 {
+      color: #8888c0;
+      text-shadow: 0 0 22px rgba(112,112,176,.5);
+    }
+
+#question-heading p { color: rgba(160,160,200,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — GOD'S ANSWER 神的回答
+    ══════════════════════════════════════════════ */
+
+#scene-answer {
+      background: linear-gradient(180deg, #1a1420 0%, #2a1e30 40%, #3a2838 70%, #2a1820 100%);
+    }
+
+#answer-dust-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(140,100,80,.15) 0%, rgba(100,70,50,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#answer-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+
+#answer-heading h2 {
+      color: #b08060;
+      text-shadow: 0 0 22px rgba(176,128,96,.5);
+    }
+
+#answer-heading p { color: rgba(180,140,110,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — ON THE WATCHTOWER 守望樓上
+    ══════════════════════════════════════════════ */
+
+#scene-watchtower {
+      background: linear-gradient(180deg, #12121e 0%, #1a1a2e 40%, #22223a 70%, #1a1a28 100%);
+    }
+
+#watchtower-moonlight {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 20%, rgba(112,112,176,.08) 0%, rgba(80,80,140,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#watchtower-scene-svg {
+      position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(160px,25vw,340px);
+      animation: floatY 6s ease-in-out infinite;
+    }
+
+#watchtower-moon {
+      position: absolute; top: 10%; right: 18%;
+      width: clamp(30px,4vw,55px); height: clamp(30px,4vw,55px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 60% 35%, #d0d0f0, #8888b8 50%, #6060a0);
+      box-shadow: 0 0 40px rgba(112,112,176,.3), 0 0 80px rgba(80,80,140,.15);
+      z-index: 4;
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+#watchtower-heading h2 {
+      color: #8888c0;
+      text-shadow: 0 0 18px rgba(112,112,176,.5);
+    }
+
+#watchtower-heading p { color: rgba(140,140,190,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — FIVE WOES 禍哉五訓
+    ══════════════════════════════════════════════ */
+
+#scene-woes {
+      background: linear-gradient(180deg, #1a1220 0%, #2a1a30 40%, #3a2240 70%, #2a1828 100%);
+    }
+
+#woes-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(112,112,176,.12) 0%, rgba(80,80,140,.05) 50%, transparent 75%);
+      z-index: 3;
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+
+#woes-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#woes-heading h2 {
+      color: #a070a0;
+      text-shadow: 0 0 22px rgba(160,112,160,.5);
+    }
+
+#woes-heading p { color: rgba(180,140,180,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — THE PROPHET'S PRAYER 先知的禱告
+    ══════════════════════════════════════════════ */
+
+#scene-prayer {
+      background: linear-gradient(180deg, #14142a 0%, #1e1e38 35%, #2a2848 60%, #3a3860 85%, #4a4870 100%);
+    }
+
+#prayer-sunrise {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(220,180,100,.15) 0%, rgba(200,160,80,.06) 50%, transparent 75%);
+      z-index: 3;
+      animation: sunriseGlow 4s ease-in-out infinite;
+    }
+
+#prayer-joy-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,255,220,0) 0%,rgba(220,200,120,.3) 25%,rgba(200,180,100,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: glowPulse 2.5s ease-in-out infinite;
+    }
+
+#prayer-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#prayer-heading h2 {
+      background: linear-gradient(120deg,#7070b0 0%,#e0d8b0 50%,#7070b0 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#prayer-heading p { color: rgba(180,170,130,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

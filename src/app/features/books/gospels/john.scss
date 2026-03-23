@@ -1,0 +1,297 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── John-specific keyframes ── */
+
+@keyframes eagleFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);   }
+      50%      { transform: translateX(-50%) translateY(-10px); }
+    }
+
+@keyframes lightDescend {
+      0%,100% { opacity: .5; transform: translateX(-50%) scaleY(1); }
+      50%      { opacity: .9; transform: translateX(-50%) scaleY(1.08); }
+    }
+
+@keyframes waterRise {
+      0%   { transform: translateY(0); opacity: .7; }
+      50%  { transform: translateY(-30px); opacity: .4; }
+      100% { transform: translateY(-60px); opacity: 0; }
+    }
+
+@keyframes lampGlow {
+      0%,100% { opacity: .5; transform: scale(1); }
+      50%      { opacity: 1;  transform: scale(1.1); }
+    }
+
+@keyframes staffSway {
+      0%,100% { transform: rotate(-1deg); }
+      50%      { transform: rotate(1deg); }
+    }
+
+@keyframes tombLight {
+      0%,100% { opacity: .4; transform: translateX(-50%) scale(1); }
+      50%      { opacity: 1;  transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes goldenDrop {
+      0%   { transform: translateY(0); opacity: .6; }
+      50%  { transform: translateY(20px); opacity: .3; }
+      100% { transform: translateY(40px); opacity: 0; }
+    }
+
+@keyframes radiate {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+@keyframes ripple {
+      0%,100% { transform: scaleX(1); opacity: .4; }
+      50%      { transform: scaleX(1.12); opacity: .7; }
+    }
+
+@keyframes ascend {
+      0%,100% { transform: translateY(0); opacity: .7; }
+      50%      { transform: translateY(-8px); opacity: 1; }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #141018 0%, #1c1818 40%, #24201a 70%, #141018 100%);
+    }
+
+#intro-golden-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(224,168,64,.12) 0%, rgba(180,130,40,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: radiate 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#e0a840 0%,#f0d080 45%,#b08020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(224,168,64,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(224,168,64,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-eagle-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,12vw,160px);
+      animation: eagleFloat 5s ease-in-out infinite;
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — THE WORD BECAME FLESH 道成肉身
+    ══════════════════════════════════════════════ */
+
+#scene-word {
+      background: linear-gradient(180deg, #0e0a10 0%, #141018 40%, #1c1818 70%, #0e0a10 100%);
+    }
+
+#word-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(224,168,64,.15) 0%, rgba(180,130,40,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#word-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+#word-heading h2 {
+      color: #e0a840;
+      text-shadow: 0 0 22px rgba(224,168,64,.5);
+    }
+
+#word-heading p { color: rgba(224,168,64,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — LIVING WATER 活水
+    ══════════════════════════════════════════════ */
+
+#scene-water {
+      background: linear-gradient(180deg, #10101a 0%, #181820 40%, #1a1828 70%, #121218 100%);
+    }
+
+#water-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(100,180,220,.12) 0%, rgba(224,168,64,.08) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#water-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+
+#water-heading h2 {
+      color: #70c0e0;
+      text-shadow: 0 0 22px rgba(100,180,220,.5);
+    }
+
+#water-heading p { color: rgba(140,200,230,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — LIGHT OF THE WORLD 世界的光
+    ══════════════════════════════════════════════ */
+
+#scene-light {
+      background: linear-gradient(180deg, #0e0a0e 0%, #1a1418 40%, #22181c 70%, #141010 100%);
+    }
+
+#light-beam {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(80px,12vw,200px); height: 100%;
+      background: linear-gradient(180deg,rgba(255,220,100,0) 0%,rgba(224,168,64,.2) 30%,rgba(224,168,64,.35) 65%,transparent 100%);
+      z-index: 3; filter: blur(12px);
+      animation: lightDescend 3s ease-in-out infinite;
+    }
+
+#light-scene-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: floatY 6s ease-in-out infinite;
+    }
+
+#light-heading h2 {
+      color: #e0a840;
+      text-shadow: 0 0 22px rgba(224,168,64,.6);
+    }
+
+#light-heading p { color: rgba(224,168,64,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — THE GOOD SHEPHERD 好牧人
+    ══════════════════════════════════════════════ */
+
+#scene-shepherd {
+      background: linear-gradient(180deg, #141018 0%, #1e1828 35%, #242030 60%, #1a1820 100%);
+    }
+
+#shepherd-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(224,168,64,.12) 0%, rgba(180,130,40,.05) 50%, transparent 75%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#shepherd-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#shepherd-heading h2 {
+      background: linear-gradient(120deg,#c09030 0%,#f0d080 50%,#a07020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#shepherd-heading p { color: rgba(224,168,64,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — RESURRECTION & LIFE 復活與生命
+    ══════════════════════════════════════════════ */
+
+#scene-resurrection {
+      background: linear-gradient(180deg, #1a1420 0%, #241c28 40%, #2e2430 70%, #3a2c38 100%);
+    }
+
+#resurrection-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,220,100,0) 0%,rgba(240,200,80,.3) 25%,rgba(224,168,64,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: tombLight 2.5s ease-in-out infinite;
+    }
+
+#resurrection-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(224,168,64,.08) 0%, rgba(180,130,40,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#resurrection-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(180px,28vw,380px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#resurrection-heading h2 {
+      background: linear-gradient(120deg,#e0a840 0%,#fff0c0 50%,#b08020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#resurrection-heading p { color: rgba(224,168,64,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

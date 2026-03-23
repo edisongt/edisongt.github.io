@@ -1,0 +1,257 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Scene-specific keyframes ── */
+
+@keyframes introGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(192,96,90,.6), 0 0 110px rgba(138,48,48,.3); }
+      50%      { box-shadow: 0 0 80px rgba(210,120,110,.85), 0 0 160px rgba(160,60,60,.5); }
+    }
+
+@keyframes fireChariot {
+      0%,100% { filter: brightness(1) drop-shadow(0 0 8px rgba(255,120,30,.5)); }
+      50%      { filter: brightness(1.3) drop-shadow(0 0 16px rgba(255,180,60,.8)); }
+    }
+
+@keyframes templeBlaze {
+      0%,100% { opacity: .6; }
+      33%      { opacity: 1;  }
+      66%      { opacity: .4; }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #2a1420 0%, #5a2030 30%, #783040 65%, #963848 100%);
+    }
+
+#intro-orb {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fff0e8, #e08070 40%, #963848 75%, #5a2030);
+      box-shadow: 0 0 55px rgba(192,96,90,.6), 0 0 110px rgba(138,48,48,.3);
+      z-index: 4;
+      animation: introGlow 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#c0605a 0%,#ffb0a0 45%,#8a3030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(255,180,170,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(200,140,130,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-prophet {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(40px,5vw,70px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — ELIJAH ASCENDS  以利亞升天
+    ══════════════════════════════════════════════ */
+
+#scene-chariot {
+      background: linear-gradient(180deg, #1a1028 0%, #4a2020 35%, #783830 70%, #2a1a18 100%);
+    }
+
+#chariot-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#2a1a14 0%,#1a0e0a 55%,#0a0604 100%);
+      z-index: 5;
+    }
+
+#chariot-fire-glow {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 20vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,140,40,.2) 0%, rgba(255,80,20,.08) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#chariot-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 80%; z-index: 7;
+    }
+
+#chariot-heading h2 {
+      background: linear-gradient(120deg,#ff8040 0%,#ffe0a0 50%,#c04020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#chariot-heading p { color: rgba(255,200,160,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — ELISHA'S MIRACLES  以利沙的神蹟
+    ══════════════════════════════════════════════ */
+
+#scene-miracles {
+      background: linear-gradient(180deg, #1a2a30 0%, #2a4a48 40%, #305858 70%, #2a4040 100%);
+    }
+
+#miracles-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 40vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(100,180,180,.12) 0%, rgba(60,140,140,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#miracles-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 5;
+    }
+
+#miracles-heading h2 {
+      background: linear-gradient(120deg,#60b0a0 0%,#c0fff0 50%,#308878 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#miracles-heading p { color: rgba(160,220,210,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — FALL OF ISRAEL  以色列亡國
+    ══════════════════════════════════════════════ */
+
+#scene-fall {
+      background: linear-gradient(180deg, #1a1018 0%, #2a1820 35%, #3a2028 70%, #1a0c10 100%);
+    }
+
+#fall-dust-glow {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,50vw,600px); height: 35vh;
+      background: radial-gradient(ellipse at 50% 70%, rgba(160,80,60,.15) 0%, rgba(120,60,40,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#fall-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; z-index: 5;
+    }
+
+#fall-heading h2 {
+      background: linear-gradient(120deg,#a04040 0%,#ffa080 50%,#602020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#fall-heading p { color: rgba(220,160,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — HEZEKIAH'S PRAYER  希西家的禱告
+    ══════════════════════════════════════════════ */
+
+#scene-prayer {
+      background: linear-gradient(180deg, #0a0e24 0%, #14203a 35%, #1a2848 70%, #0e1830 100%);
+    }
+
+#prayer-divine-glow {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: 30vw; height: 18vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(200,200,255,.15) 0%, rgba(150,150,220,.06) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3.5s ease-in-out infinite;
+    }
+
+#prayer-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 5;
+    }
+
+#prayer-heading h2 {
+      background: linear-gradient(120deg,#6080cc 0%,#c0d0ff 50%,#304080 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#prayer-heading p { color: rgba(160,180,230,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — FALL OF JERUSALEM  耶路撒冷陷落
+    ══════════════════════════════════════════════ */
+
+#scene-exile {
+      background: linear-gradient(180deg, #1a0a08 0%, #3a1810 35%, #4a2018 70%, #1a0a06 100%);
+    }
+
+#exile-fire-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,45vw,550px); height: 40vh;
+      background: radial-gradient(ellipse at 50% 60%, rgba(255,100,30,.18) 0%, rgba(200,60,20,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: templeBlaze 3s ease-in-out infinite;
+    }
+
+#exile-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; z-index: 5;
+    }
+
+#exile-heading h2 {
+      background: linear-gradient(120deg,#e06030 0%,#ffe060 50%,#a03010 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#exile-heading p { color: rgba(255,180,120,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

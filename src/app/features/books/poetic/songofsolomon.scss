@@ -1,0 +1,296 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #c87898 0%, #d8a0b0 40%, #e8c8b0 100%);
+    }
+
+#intro-orb {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 38%, #ffe8f0, #f0a0b8 40%, #e07898 75%, #c85878);
+      box-shadow: 0 0 60px rgba(232,140,165,.7), 0 0 120px rgba(220,100,140,.3);
+      z-index: 4;
+      animation: roseGlow 4s ease-in-out infinite;
+    }
+
+@keyframes roseGlow {
+      0%,100% { box-shadow: 0 0 60px rgba(232,140,165,.6), 0 0 120px rgba(220,100,140,.25); }
+      50%      { box-shadow: 0 0 90px rgba(240,160,185,.85), 0 0 170px rgba(232,140,165,.4); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#e88ca5 0%,#fff0f4 45%,#d4607a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(180,60,90,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(160,50,80,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-figures {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(80px,12vw,150px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — THE BELOVED  良人的愛慕
+    ══════════════════════════════════════════════ */
+
+#scene-beloved {
+      background: linear-gradient(180deg, #e0a8b8 0%, #c8d8a0 45%, #f0d890 100%);
+    }
+
+#beloved-garden-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; z-index: 4;
+    }
+
+#beloved-bride {
+      position: absolute; bottom: 30%; left: 42%; z-index: 9;
+      width: clamp(50px,7vw,90px);
+      animation: gentleSway 5s ease-in-out infinite;
+    }
+
+#beloved-deer {
+      position: absolute; bottom: 34%; right: 18%; z-index: 7;
+      width: clamp(40px,5vw,70px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#beloved-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: 45vw; height: 35vh;
+      background: radial-gradient(ellipse, rgba(240,200,140,.2) 0%, rgba(255,220,180,.08) 50%, transparent 72%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#beloved-heading h2 {
+      color: #b03860;
+      text-shadow: 0 0 22px rgba(180,60,100,.5);
+    }
+
+#beloved-heading p { color: rgba(140,40,70,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — GARDEN OF LOVE  愛的花園
+    ══════════════════════════════════════════════ */
+
+#scene-garden {
+      background: linear-gradient(180deg, #88c888 0%, #e0a0c0 45%, #f0d880 100%);
+    }
+
+#garden-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 62%; z-index: 4;
+    }
+
+#garden-fountain {
+      position: absolute; bottom: 32%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(60px,9vw,110px);
+      animation: floatY 4s ease-in-out infinite;
+    }
+
+#garden-glow {
+      position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+      width: 35vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(200,240,200,.18) 0%, rgba(220,180,220,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#garden-heading h2 {
+      background: linear-gradient(120deg,#c06888 0%,#fff0f4 50%,#88a840 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#garden-heading p { color: rgba(100,60,80,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — SEEKING THE BELOVED  尋找良人
+    ══════════════════════════════════════════════ */
+
+#scene-seeking {
+      background: linear-gradient(180deg, #a888c0 0%, #7898c8 45%, #d8b080 100%);
+    }
+
+#seeking-city-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 58%; z-index: 4;
+    }
+
+#seeking-woman {
+      position: absolute; bottom: 28%; left: 35%; z-index: 9;
+      width: clamp(40px,6vw,75px);
+      animation: gentleSway 5.5s ease-in-out infinite;
+    }
+
+#seeking-moon {
+      position: absolute; top: 10%; right: 18%;
+      width: clamp(40px,6vw,75px); height: clamp(40px,6vw,75px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 55% 35%, #fffef0, #f0e8c0 50%, #d8c890);
+      box-shadow: 0 0 50px rgba(240,230,180,.6), 0 0 100px rgba(220,210,160,.25);
+      z-index: 4;
+      animation: roseGlow 5s ease-in-out infinite;
+    }
+
+#seeking-moonbeam {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,400px); height: 100%;
+      background: radial-gradient(ellipse 50% 60% at 65% 18%, rgba(240,230,180,.1) 0%, rgba(220,210,160,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#seeking-heading h2 {
+      background: linear-gradient(120deg,#c8a0d0 0%,#fff8f0 50%,#d8b080 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#seeking-heading p { color: rgba(100,70,120,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — THE WEDDING  婚禮盛典
+    ══════════════════════════════════════════════ */
+
+#scene-wedding {
+      background: linear-gradient(180deg, #e8c070 0%, #e0a0b0 45%, #f8f0e0 100%);
+    }
+
+#wedding-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; z-index: 4;
+    }
+
+#wedding-couple {
+      position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(80px,12vw,160px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#wedding-glow {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(240,200,100,.2) 0%, rgba(240,180,160,.08) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#wedding-heading h2 {
+      background: linear-gradient(120deg,#c08030 0%,#fff4e0 50%,#e88ca5 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#wedding-heading p { color: rgba(160,100,60,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — ETERNAL LOVE  堅貞的愛
+    ══════════════════════════════════════════════ */
+
+#scene-eternal {
+      background: linear-gradient(180deg, #e8c078 0%, #e0a0b0 40%, #a0c8e0 100%);
+    }
+
+#eternal-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 4;
+    }
+
+#eternal-couple {
+      position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(90px,14vw,180px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+#eternal-flame {
+      position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
+      z-index: 6; width: clamp(40px,6vw,80px);
+      animation: flameDance 2s ease-in-out infinite;
+    }
+
+@keyframes flameDance {
+      0%,100% { transform: translateX(-50%) scaleY(1) scaleX(1); }
+      25%      { transform: translateX(-50%) scaleY(1.08) scaleX(.95); }
+      50%      { transform: translateX(-50%) scaleY(1.15) scaleX(.92); }
+      75%      { transform: translateX(-50%) scaleY(1.05) scaleX(.97); }
+    }
+
+#eternal-glow {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 45vh;
+      background: radial-gradient(ellipse, rgba(240,180,100,.18) 0%, rgba(232,140,165,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#eternal-heading h2 {
+      background: linear-gradient(120deg,#e88ca5 0%,#fff0f0 50%,#e8c070 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#eternal-heading p { color: rgba(180,80,100,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

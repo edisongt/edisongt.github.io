@@ -1,0 +1,318 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Malachi-specific keyframes ── */
+
+@keyframes messengerFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);   }
+      50%      { transform: translateX(-50%) translateY(-10px); }
+    }
+
+@keyframes altarCrumble {
+      0%,100% { transform: translateY(0) rotate(0deg); opacity: .7; }
+      25%     { transform: translateY(-2px) rotate(.5deg); opacity: .8; }
+      50%     { transform: translateY(1px) rotate(-.5deg); opacity: .6; }
+      75%     { transform: translateY(-1px) rotate(.3deg); opacity: .75; }
+    }
+
+@keyframes fireRefine {
+      0%,100% { opacity: .6; transform: scaleY(1) scaleX(1); }
+      25%     { opacity: .9; transform: scaleY(1.12) scaleX(.94); }
+      50%     { opacity: .5; transform: scaleY(.88) scaleX(1.06); }
+      75%     { opacity: .85; transform: scaleY(1.06) scaleX(.97); }
+    }
+
+@keyframes sparkRise {
+      0%   { transform: translateY(0); opacity: .7; }
+      50%  { transform: translateY(-30px); opacity: .4; }
+      100% { transform: translateY(-60px); opacity: 0; }
+    }
+
+@keyframes grainPour {
+      0%,100% { opacity: .4; transform: translateX(-50%) scaleY(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleY(1.12); }
+    }
+
+@keyframes blessingFall {
+      0%   { transform: translateY(0); opacity: .6; }
+      50%  { transform: translateY(20px); opacity: .3; }
+      100% { transform: translateY(40px); opacity: 0; }
+    }
+
+@keyframes bookGlow {
+      0%,100% { opacity: .5; transform: translateX(-50%) scale(1); }
+      50%      { opacity: .9; transform: translateX(-50%) scale(1.08); }
+    }
+
+@keyframes pageShimmer {
+      0%,100% { filter: brightness(1); opacity: .7; }
+      50%      { filter: brightness(1.3); opacity: 1; }
+    }
+
+@keyframes sunRise {
+      0%,100% { opacity: .5; transform: translateX(-50%) scale(1); }
+      50%      { opacity: 1;  transform: translateX(-50%) scale(1.12); }
+    }
+
+@keyframes wingSpread {
+      0%,100% { transform: scaleX(1); opacity: .6; }
+      50%      { transform: scaleX(1.08); opacity: .9; }
+    }
+
+@keyframes calfLeap {
+      0%,100% { transform: translateY(0); }
+      40%      { transform: translateY(-14px); }
+      60%      { transform: translateY(-14px); }
+    }
+
+@keyframes emberGlow {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+@keyframes smokeRise {
+      0%   { transform: translateY(0) scaleX(1); opacity: .5; }
+      50%  { transform: translateY(-40px) scaleX(1.3); opacity: .25; }
+      100% { transform: translateY(-80px) scaleX(1.6); opacity: 0; }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #1a1018 0%, #221820 40%, #2a1e28 70%, #1a1018 100%);
+    }
+
+#intro-ember-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(160,64,128,.12) 0%, rgba(120,40,90,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: emberGlow 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#a04080 0%,#d490b8 45%,#6b1a50 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(160,64,128,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(160,64,128,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-messenger-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(80px,10vw,140px);
+      animation: messengerFloat 5s ease-in-out infinite;
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — BROKEN COVENANT 破壞的約
+    ══════════════════════════════════════════════ */
+
+#scene-covenant {
+      background: linear-gradient(180deg, #0e0a10 0%, #1a1018 40%, #221820 70%, #0e0a10 100%);
+    }
+
+#covenant-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(160,64,128,.15) 0%, rgba(80,30,60,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#covenant-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: altarCrumble 6s ease-in-out infinite;
+    }
+
+#covenant-heading h2 {
+      color: #a04080;
+      text-shadow: 0 0 22px rgba(160,64,128,.5);
+    }
+
+#covenant-heading p { color: rgba(160,64,128,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — REFINER'S FIRE 煉金之人的火
+    ══════════════════════════════════════════════ */
+
+#scene-refiner {
+      background: linear-gradient(180deg, #1a0c14 0%, #3a1828 40%, #4a1830 70%, #2a1020 100%);
+    }
+
+#refiner-fire-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(200,60,100,.2) 0%, rgba(160,40,80,.08) 45%, transparent 70%);
+      z-index: 3;
+      animation: fireRefine 3s ease-in-out infinite;
+    }
+
+#refiner-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+
+#refiner-heading h2 {
+      color: #c45a80;
+      text-shadow: 0 0 22px rgba(200,60,100,.6);
+    }
+
+#refiner-heading p { color: rgba(200,80,120,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — BRING THE TITHE 十分之一
+    ══════════════════════════════════════════════ */
+
+#scene-tithe {
+      background: linear-gradient(180deg, #14100e 0%, #1c1818 40%, #22201e 70%, #1a1814 100%);
+    }
+
+#tithe-light-beam {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(80px,12vw,200px); height: 100%;
+      background: linear-gradient(180deg,rgba(255,220,160,0) 0%,rgba(200,140,80,.15) 30%,rgba(160,64,128,.25) 65%,transparent 100%);
+      z-index: 3; filter: blur(12px);
+      animation: grainPour 3s ease-in-out infinite;
+    }
+
+#tithe-scene-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#tithe-heading h2 {
+      color: #c49060;
+      text-shadow: 0 0 18px rgba(160,64,128,.5);
+    }
+
+#tithe-heading p { color: rgba(160,120,80,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — BOOK OF REMEMBRANCE 記念冊
+    ══════════════════════════════════════════════ */
+
+#scene-remember {
+      background: linear-gradient(180deg, #141018 0%, #1e1828 35%, #2a2438 60%, #3a3048 85%, #2a2438 100%);
+    }
+
+#remember-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(160,64,128,.15) 0%, rgba(140,50,100,.06) 50%, transparent 75%);
+      z-index: 3;
+      animation: bookGlow 4s ease-in-out infinite;
+    }
+
+#remember-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#remember-heading h2 {
+      background: linear-gradient(120deg,#8a5a7a 0%,#d4a0c0 50%,#6a3a5a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#remember-heading p { color: rgba(160,100,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — SUN OF RIGHTEOUSNESS 公義的日頭
+    ══════════════════════════════════════════════ */
+
+#scene-sun {
+      background: linear-gradient(180deg, #1e1820 0%, #2a2028 40%, #3a2830 70%, #44303a 100%);
+    }
+
+#sun-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(255,220,160,0) 0%,rgba(200,160,80,.3) 25%,rgba(160,64,128,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: sunRise 2.5s ease-in-out infinite;
+    }
+
+#sun-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(160,64,128,.08) 0%, rgba(120,40,80,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#sun-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(180px,28vw,380px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#sun-heading h2 {
+      background: linear-gradient(120deg,#a04080 0%,#e8c080 50%,#6b1a50 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#sun-heading p { color: rgba(160,100,140,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

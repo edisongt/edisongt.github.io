@@ -1,0 +1,294 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Micah-specific keyframes ── */
+
+@keyframes mountainMelt {
+      0%,100% { transform: scaleY(1) translateY(0); opacity: .8; }
+      50%      { transform: scaleY(.92) translateY(8px); opacity: .6; }
+    }
+
+@keyframes scalesPulse {
+      0%,100% { transform: rotate(-2deg); }
+      50%      { transform: rotate(2deg); }
+    }
+
+@keyframes starGlow {
+      0%,100% { opacity: .6; transform: scale(1); }
+      50%      { opacity: 1;  transform: scale(1.2); }
+    }
+
+@keyframes swordTransform {
+      0%,100% { opacity: .7; transform: rotate(0deg); }
+      50%      { opacity: 1;  transform: rotate(2deg); }
+    }
+
+@keyframes waveWash {
+      0%   { transform: translateX(0); }
+      50%  { transform: translateX(15px); }
+      100% { transform: translateX(0); }
+    }
+
+@keyframes mercyLight {
+      0%,100% { opacity: .4; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: .7; transform: translateX(-50%) scaleX(1.1); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #0e140e 0%, #141a14 40%, #1a221a 70%, #1e281e 100%);
+    }
+
+#intro-sage-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(106,154,106,.12) 0%, rgba(80,120,80,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#6a9a6a 0%,#a0c8a0 45%,#4a7a4a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(160,200,160,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(106,154,106,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-mountain-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+#intro-scales-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(60px,8vw,100px);
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — JUDGMENT ON SAMARIA 審判撒馬利亞
+    ══════════════════════════════════════════════ */
+
+#scene-judgment {
+      background: linear-gradient(180deg, #1a1e1a 0%, #2a3028 40%, #22281e 70%, #141a14 100%);
+    }
+
+#judgment-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#2a2820 0%,#1a1814 55%,#0e0c0a 100%);
+      z-index: 5;
+    }
+
+#judgment-sky-glow {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 35vh;
+      background: radial-gradient(ellipse, rgba(106,154,106,.12) 0%, rgba(80,100,70,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+#judgment-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 8s ease-in-out infinite;
+    }
+
+#judgment-heading h2 {
+      color: #8aaa8a;
+      text-shadow: 0 0 22px rgba(106,154,106,.5);
+    }
+
+#judgment-heading p { color: rgba(160,200,160,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — WHAT GOD REQUIRES 神所要的
+    ══════════════════════════════════════════════ */
+
+#scene-require {
+      background: linear-gradient(180deg, #121a12 0%, #1e2e1e 40%, #2a3a2a 70%, #1a261a 100%);
+    }
+
+#require-heart-glow {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(106,154,106,.2) 0%, rgba(80,130,80,.08) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#require-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: floatY 6s ease-in-out infinite;
+    }
+
+#require-heading h2 {
+      color: #7aba7a;
+      text-shadow: 0 0 22px rgba(106,154,106,.6);
+    }
+
+#require-heading p { color: rgba(140,200,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — PROPHECY OF BETHLEHEM 伯利恆的預言
+    ══════════════════════════════════════════════ */
+
+#scene-bethlehem {
+      background: linear-gradient(180deg, #0e120e 0%, #141e14 40%, #1a241a 70%, #1e281e 100%);
+    }
+
+#bethlehem-starlight {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 20%, rgba(220,220,160,.08) 0%, rgba(180,180,120,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#bethlehem-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#bethlehem-star {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: clamp(30px,4vw,55px); height: clamp(30px,4vw,55px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, #f0f0c0, #d0d0a0 50%, #a0a080);
+      box-shadow: 0 0 40px rgba(220,220,160,.4), 0 0 80px rgba(180,180,120,.2);
+      z-index: 4;
+      animation: starGlow 3s ease-in-out infinite;
+    }
+
+#bethlehem-heading h2 {
+      background: linear-gradient(120deg,#8aaa8a 0%,#d0d8a0 50%,#6a9a6a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#bethlehem-heading p { color: rgba(180,200,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — SWORDS INTO PLOWSHARES 刀打成犁頭
+    ══════════════════════════════════════════════ */
+
+#scene-peace {
+      background: linear-gradient(180deg, #141e14 0%, #1e301e 35%, #2a3e2a 60%, #345034 85%, #3e5a3e 100%);
+    }
+
+#peace-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(106,154,106,.15) 0%, rgba(80,120,80,.06) 50%, transparent 75%);
+      z-index: 3;
+      animation: mercyLight 4s ease-in-out infinite;
+    }
+
+#peace-scene-svg {
+      position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(240px,38vw,520px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#peace-heading h2 {
+      background: linear-gradient(120deg,#8aaa8a 0%,#b0d8a0 50%,#6a9a6a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#peace-heading p { color: rgba(160,200,140,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — FORGIVENESS AND MERCY 赦免與憐憫
+    ══════════════════════════════════════════════ */
+
+#scene-mercy {
+      background: linear-gradient(180deg, #1a221a 0%, #223022 40%, #2a3a2a 70%, #344834 100%);
+    }
+
+#mercy-divine-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(220,255,220,0) 0%,rgba(140,200,140,.3) 25%,rgba(120,180,120,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: mercyLight 2.5s ease-in-out infinite;
+    }
+
+#mercy-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(106,154,106,.08) 0%, rgba(80,120,80,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#mercy-scene-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(260px,42vw,600px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#mercy-heading h2 {
+      background: linear-gradient(120deg,#8aaa8a 0%,#c0e8b0 50%,#6a9a6a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#mercy-heading p { color: rgba(140,200,140,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

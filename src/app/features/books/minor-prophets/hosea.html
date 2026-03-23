@@ -1,0 +1,429 @@
+<app-back-button />
+<app-nav-dots [scenes]="scenes" />
+
+<section class="scene" id="scene-intro" aria-label="何西阿書 — 開場">
+  <app-starfield />
+
+  <div id="intro-rose-glow" aria-hidden="true"></div>
+  
+    <div id="intro-title">
+      <h1>何西阿書</h1>
+      <p>Hosea</p>
+      <span class="sub">不忠 · 審判 · 愛 · 救贖 · 回轉</span>
+    </div>
+  
+    <!-- Broken heart with faint rose glow -->
+    <svg id="intro-heart-svg" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet"
+         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="破碎的心">
+      <!-- Heart glow -->
+      <ellipse cx="100" cy="110" rx="60" ry="55" fill="rgba(224,96,112,.06)"/>
+      <!-- Left half of heart -->
+      <path d="M100,170 Q60,130 30,90 Q10,60 30,40 Q50,20 75,40 Q90,55 100,70"
+            fill="rgba(224,96,112,.35)" stroke="rgba(224,96,112,.5)" stroke-width="1.5"/>
+      <!-- Right half of heart (shifted slightly to show break) -->
+      <path d="M100,170 Q140,130 170,90 Q190,60 170,40 Q150,20 125,40 Q110,55 100,70"
+            fill="rgba(224,96,112,.30)" stroke="rgba(224,96,112,.45)" stroke-width="1.5"
+            transform="translate(3,2)"/>
+      <!-- Crack line down the middle -->
+      <path d="M100,68 L97,90 L103,105 L98,125 L104,145 L100,170"
+            stroke="rgba(224,96,112,.6)" stroke-width="2" fill="none"
+            stroke-dasharray="80" style="animation: crackSpread 4s ease-out infinite;"/>
+      <!-- Faint glow particles -->
+      <circle cx="80" cy="60" r="2" fill="rgba(224,96,112,.3)" style="animation: floatY 4s ease-in-out infinite;"/>
+      <circle cx="125" cy="55" r="1.5" fill="rgba(224,96,112,.25)" style="animation: floatY 5s ease-in-out 1s infinite;"/>
+      <circle cx="100" cy="40" r="1.8" fill="rgba(224,96,112,.2)" style="animation: floatY 4.5s ease-in-out .5s infinite;"/>
+    </svg>
+
+  <app-scene-verse text="「你去娶淫婦為妻」— 何西阿書 1:2" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-unfaithful" aria-label="不忠的妻子">
+  <app-starfield />
+
+  <div id="unfaithful-glow" aria-hidden="true"></div>
+    <div id="unfaithful-ground" aria-hidden="true"></div>
+  
+    <!-- Woman figure turning away, broken covenant ring -->
+    <svg id="unfaithful-scene-svg" viewBox="0 0 400 350" preserveAspectRatio="xMidYMid meet"
+         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="不忠的妻子轉身離去">
+      <defs>
+        <linearGradient id="covenantG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(224,96,112,.4)"/>
+          <stop offset="100%" stop-color="rgba(180,60,80,.1)"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground shadow -->
+      <ellipse cx="200" cy="310" rx="140" ry="12" fill="rgba(30,20,24,.5)"/>
+      <!-- Standing figure (faithful husband — left side, reaching out) -->
+      <!-- Head -->
+      <circle cx="130" cy="120" r="18" fill="#5a4858"/>
+      <path d="M112,117 Q130,100 148,117 L148,125 Q130,110 112,125 Z" fill="#3a3040"/>
+      <!-- Body -->
+      <path d="M118,138 Q112,180 108,280 Q118,285 128,280 Q130,220 132,190
+               Q134,220 136,280 Q146,285 156,280 Q150,180 144,138 Z"
+            fill="#3a3040"/>
+      <!-- Arm reaching out toward wife -->
+      <path d="M144,145 Q170,135 200,130" stroke="#4a3848" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <circle cx="200" cy="130" r="5" fill="#5a4858"/>
+  
+      <!-- Woman figure (turning away — right side) -->
+      <!-- Head (turned away) -->
+      <circle cx="280" cy="115" r="17" fill="#6a4a58"/>
+      <!-- Hair flowing away -->
+      <path d="M297,110 Q310,105 320,115 Q315,120 305,118 Q300,115 297,110" fill="#4a2838" opacity=".7"/>
+      <!-- Body walking away -->
+      <path d="M268,132 Q262,175 258,275 Q268,280 278,275 Q280,215 282,185
+               Q284,215 286,275 Q296,280 306,275 Q300,175 294,132 Z"
+            fill="#4a2838"/>
+      <!-- Cloak blowing -->
+      <path d="M294,140 Q310,155 315,180 Q312,170 305,155 Q300,145 294,140"
+            fill="#3a1828" opacity=".6"/>
+  
+      <!-- Broken covenant ring between them -->
+      <ellipse cx="205" cy="250" rx="18" ry="18" fill="none" stroke="rgba(224,96,112,.4)" stroke-width="3"
+               stroke-dasharray="12 8"/>
+      <!-- Ring crack -->
+      <path d="M195,235 L198,250 L192,265" stroke="rgba(224,96,112,.5)" stroke-width="2" fill="none"/>
+      <!-- Ring half fallen -->
+      <path d="M210,240 Q225,248 218,265" stroke="rgba(224,96,112,.3)" stroke-width="2.5" fill="none"/>
+  
+      <!-- Fading connection line -->
+      <line x1="155" y1="130" x2="260" y2="125" stroke="rgba(224,96,112,.15)" stroke-width="1.5"
+            stroke-dasharray="6 6"/>
+  
+      <!-- Sorrow particles -->
+      <circle cx="170" cy="100" r="1.5" fill="rgba(224,96,112,.25)" style="animation: floatY 4s ease-in-out infinite;"/>
+      <circle cx="240" cy="95" r="1" fill="rgba(224,96,112,.2)" style="animation: floatY 5s ease-in-out 1s infinite;"/>
+    </svg>
+
+  <app-scene-heading title="💔 不忠的妻子" subtitle="The Unfaithful Wife — Hosea 1-3" id="unfaithful-heading" />
+  <app-scene-verse text="「你去娶淫婦為妻」— 何西阿書 1:2" />
+</section>
+
+<section class="scene" id="scene-accusation" aria-label="控訴以色列">
+  <app-starfield />
+
+  <div id="accusation-glow" aria-hidden="true"></div>
+  
+    <!-- Scales of justice, cracked tablets -->
+    <svg id="accusation-scene-svg" viewBox="0 0 360 340" preserveAspectRatio="xMidYMid meet"
+         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="公義的天秤與破裂的法版">
+      <defs>
+        <linearGradient id="tabletG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5a4860"/>
+          <stop offset="100%" stop-color="#3a2840"/>
+        </linearGradient>
+      </defs>
+      <!-- Scale pillar -->
+      <rect x="176" y="60" width="8" height="200" fill="#4a3a50" rx="2"/>
+      <rect x="172" y="260" width="16" height="8" rx="3" fill="#4a3a50"/>
+      <!-- Scale beam -->
+      <line x1="80" y1="80" x2="280" y2="100" stroke="#6a5a70" stroke-width="4" stroke-linecap="round"/>
+      <!-- Balance pivot -->
+      <circle cx="180" cy="60" r="8" fill="#5a4a60" stroke="#6a5a70" stroke-width="2"/>
+      <!-- Left pan (tilted up — empty of truth) -->
+      <path d="M50,120 L110,120 L100,130 L60,130 Z" fill="#5a4a60" opacity=".7"/>
+      <line x1="80" y1="80" x2="65" y2="120" stroke="#6a5a70" stroke-width="1.5"/>
+      <line x1="80" y1="80" x2="95" y2="120" stroke="#6a5a70" stroke-width="1.5"/>
+      <!-- Right pan (tilted down — heavy with sin) -->
+      <path d="M240,140 L300,140 L290,150 L250,150 Z" fill="#5a4a60" opacity=".7"/>
+      <line x1="270" y1="100" x2="255" y2="140" stroke="#6a5a70" stroke-width="1.5"/>
+      <line x1="270" y1="100" x2="285" y2="140" stroke="#6a5a70" stroke-width="1.5"/>
+      <!-- Dark weight on right pan -->
+      <rect x="258" y="125" width="24" height="15" rx="3" fill="#3a1828" opacity=".6"/>
+  
+      <!-- Cracked tablet left -->
+      <rect x="60" y="170" width="60" height="80" rx="5" fill="url(#tabletG)"/>
+      <line x1="70" y1="185" x2="110" y2="185" stroke="rgba(224,96,112,.25)" stroke-width="1.5"/>
+      <line x1="70" y1="200" x2="110" y2="200" stroke="rgba(224,96,112,.25)" stroke-width="1.5"/>
+      <line x1="70" y1="215" x2="105" y2="215" stroke="rgba(224,96,112,.25)" stroke-width="1.5"/>
+      <line x1="70" y1="230" x2="100" y2="230" stroke="rgba(224,96,112,.25)" stroke-width="1.5"/>
+      <!-- Crack through left tablet -->
+      <path d="M85,170 L88,195 L82,215 L90,250" stroke="rgba(224,96,112,.5)" stroke-width="2" fill="none"/>
+  
+      <!-- Cracked tablet right -->
+      <rect x="240" y="175" width="60" height="80" rx="5" fill="url(#tabletG)" transform="rotate(5 270 215)"/>
+      <line x1="250" y1="192" x2="290" y2="192" stroke="rgba(224,96,112,.25)" stroke-width="1.5" transform="rotate(5 270 215)"/>
+      <line x1="250" y1="207" x2="290" y2="207" stroke="rgba(224,96,112,.25)" stroke-width="1.5" transform="rotate(5 270 215)"/>
+      <line x1="250" y1="222" x2="285" y2="222" stroke="rgba(224,96,112,.25)" stroke-width="1.5" transform="rotate(5 270 215)"/>
+      <!-- Crack through right tablet -->
+      <path d="M270,175 L265,200 L275,225 L268,255" stroke="rgba(224,96,112,.5)" stroke-width="2" fill="none"
+            transform="rotate(5 270 215)"/>
+  
+      <!-- Broken fragment on ground -->
+      <path d="M160,280 L175,275 L180,290 L165,295 Z" fill="#4a3850" opacity=".5" transform="rotate(-15 170 285)"/>
+  
+      <!-- Faint judgment aura -->
+      <ellipse cx="180" cy="160" rx="100" ry="80" fill="rgba(180,100,180,.04)"/>
+    </svg>
+
+  <app-scene-heading title="⚖️ 控訴以色列" subtitle="God's Case Against Israel — Hosea 4-8" id="accusation-heading" />
+  <app-scene-verse text="「這地上無誠實，無良善，無人認識神」— 何西阿書 4:1" />
+</section>
+
+<section class="scene" id="scene-judgment" aria-label="審判將臨">
+  <app-starfield />
+
+  <div id="judgment-storm-glow" aria-hidden="true"></div>
+    <div id="judgment-flash" aria-hidden="true"></div>
+  
+    <!-- Dark storm clouds, lightning, whirlwind -->
+    <svg id="judgment-scene-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="暴風審判">
+      <defs>
+        <linearGradient id="stormSkyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#201018"/>
+          <stop offset="60%" stop-color="#2a1820"/>
+          <stop offset="100%" stop-color="#180c14"/>
+        </linearGradient>
+        <radialGradient id="lightningGlowG" cx="50%" cy="30%" r="40%">
+          <stop offset="0%" stop-color="rgba(224,180,200,.12)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Sky -->
+      <rect width="1440" height="500" fill="url(#stormSkyG)"/>
+      <!-- Dark ground -->
+      <rect y="380" width="1440" height="120" fill="#120a10"/>
+      <!-- Storm clouds -->
+      <ellipse cx="300" cy="80" rx="220" ry="60" fill="#2a1a24" opacity=".8"/>
+      <ellipse cx="720" cy="60" rx="300" ry="70" fill="#321e2a" opacity=".9"/>
+      <ellipse cx="1100" cy="90" rx="250" ry="55" fill="#2a1a24" opacity=".75"/>
+      <ellipse cx="500" cy="120" rx="180" ry="45" fill="#281820" opacity=".7"/>
+      <ellipse cx="950" cy="110" rx="200" ry="50" fill="#2e1c26" opacity=".8"/>
+      <!-- Lightning bolt left -->
+      <path d="M400,100 L410,160 L395,165 L415,240 L400,245 L430,340"
+            stroke="rgba(224,180,200,.5)" stroke-width="3" fill="none"
+            style="animation: stormFlash 4s ease-in-out infinite;"/>
+      <!-- Lightning bolt center -->
+      <path d="M720,70 L735,150 L715,155 L740,250 L720,255 L750,380"
+            stroke="rgba(240,200,220,.6)" stroke-width="3.5" fill="none"
+            style="animation: stormFlash 5s ease-in-out 1.5s infinite;"/>
+      <!-- Lightning bolt right -->
+      <path d="M1050,90 L1060,170 L1045,175 L1070,270 L1055,275 L1080,380"
+            stroke="rgba(224,180,200,.45)" stroke-width="2.5" fill="none"
+            style="animation: stormFlash 4.5s ease-in-out 3s infinite;"/>
+      <!-- Lightning glow -->
+      <ellipse cx="720" cy="200" rx="200" ry="120" fill="url(#lightningGlowG)"
+               style="animation: stormFlash 5s ease-in-out 1.5s infinite;"/>
+      <!-- Wind-swept grain (sow the wind) -->
+      <g style="animation: gentleSway 2s ease-in-out infinite;">
+        <line x1="200" y1="380" x2="180" y2="350" stroke="rgba(180,140,100,.25)" stroke-width="2"/>
+        <line x1="250" y1="380" x2="225" y2="345" stroke="rgba(180,140,100,.2)" stroke-width="2"/>
+        <line x1="320" y1="380" x2="295" y2="348" stroke="rgba(180,140,100,.22)" stroke-width="2"/>
+      </g>
+      <g style="animation: gentleSway 2.5s ease-in-out .5s infinite;">
+        <line x1="1100" y1="380" x2="1080" y2="350" stroke="rgba(180,140,100,.25)" stroke-width="2"/>
+        <line x1="1160" y1="380" x2="1135" y2="345" stroke="rgba(180,140,100,.2)" stroke-width="2"/>
+        <line x1="1220" y1="380" x2="1195" y2="348" stroke="rgba(180,140,100,.22)" stroke-width="2"/>
+      </g>
+      <!-- Whirlwind spiral hints -->
+      <path d="M680,300 Q700,280 720,290 Q740,300 730,320 Q720,330 700,325"
+            stroke="rgba(224,96,112,.15)" stroke-width="2" fill="none"
+            style="animation: gentleSway 3s ease-in-out infinite;"/>
+      <path d="M690,290 Q720,265 740,280 Q755,295 740,315"
+            stroke="rgba(224,96,112,.1)" stroke-width="1.5" fill="none"
+            style="animation: gentleSway 3.5s ease-in-out 1s infinite;"/>
+      <!-- Scattered debris -->
+      <rect x="500" y="390" width="18" height="6" rx="1" fill="#2a1820" opacity=".5" transform="rotate(-10 509 393)"/>
+      <rect x="900" y="395" width="14" height="5" rx="1" fill="#2a1820" opacity=".4" transform="rotate(12 907 397)"/>
+    </svg>
+
+  <app-scene-heading title="⛈️ 審判將臨" subtitle="Judgment Coming — Hosea 8-10" id="judgment-heading" />
+  <app-scene-verse text="「他們所種的是風，所收的是暴風」— 何西阿書 8:7" />
+</section>
+
+<section class="scene" id="scene-love" aria-label="神不變的愛">
+  <app-starfield />
+
+  <div id="love-warm-light" aria-hidden="true"></div>
+    <div id="love-glow" aria-hidden="true"></div>
+  
+    <!-- Parent holding child silhouette, warm light from above -->
+    <svg id="love-scene-svg" viewBox="0 0 240 340" preserveAspectRatio="xMidYMid meet"
+         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="父親抱著孩子">
+      <defs>
+        <linearGradient id="loveLightG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(240,180,140,.2)"/>
+          <stop offset="100%" stop-color="rgba(224,140,120,.02)"/>
+        </linearGradient>
+        <radialGradient id="loveGlowG" cx="50%" cy="20%" r="50%">
+          <stop offset="0%" stop-color="rgba(240,180,160,.15)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Warm glow from above -->
+      <ellipse cx="120" cy="50" rx="80" ry="60" fill="url(#loveGlowG)"/>
+      <!-- Light beam from heaven -->
+      <path d="M100,0 L80,120 L160,120 L140,0 Z" fill="url(#loveLightG)" opacity=".5"/>
+      <!-- Faint rays -->
+      <line x1="120" y1="10" x2="60" y2="100" stroke="rgba(240,180,140,.06)" stroke-width="4"/>
+      <line x1="120" y1="10" x2="180" y2="100" stroke="rgba(240,180,140,.06)" stroke-width="4"/>
+      <line x1="120" y1="10" x2="120" y2="120" stroke="rgba(240,180,140,.08)" stroke-width="3"/>
+      <!-- Ground -->
+      <ellipse cx="120" cy="300" rx="80" ry="10" fill="rgba(30,20,24,.6)"/>
+      <!-- Parent figure (standing, holding child) -->
+      <!-- Head -->
+      <circle cx="115" cy="130" r="20" fill="#6a4858"/>
+      <!-- Hair/hood -->
+      <path d="M95,127 Q115,108 135,127 L135,137 Q115,120 95,137 Z" fill="#4a2838"/>
+      <!-- Body -->
+      <path d="M103,150 Q96,190 92,270 Q102,275 112,270 Q114,220 116,195
+               Q118,220 120,270 Q130,275 140,270 Q134,190 128,150 Z"
+            fill="#4a2838"/>
+      <!-- Arms cradling child -->
+      <path d="M103,155 Q90,165 85,180 Q82,195 88,205 Q95,210 105,205"
+            stroke="#5a3848" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M128,155 Q140,165 145,180 Q148,195 142,205 Q135,210 125,205"
+            stroke="#5a3848" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Child figure (small, nestled in arms) -->
+      <circle cx="115" cy="185" r="12" fill="#7a5868"/>
+      <!-- Child body -->
+      <ellipse cx="115" cy="205" rx="10" ry="15" fill="#6a4858"/>
+      <!-- Child's small hands holding parent -->
+      <circle cx="100" cy="195" r="3" fill="#7a5868"/>
+      <circle cx="130" cy="195" r="3" fill="#7a5868"/>
+      <!-- Warm heart glow between parent and child -->
+      <ellipse cx="115" cy="190" rx="25" ry="20" fill="rgba(224,96,112,.06)"/>
+      <!-- Light particles descending -->
+      <circle cx="100" cy="80" r="2" fill="rgba(240,180,140,.35)">
+        <animate attributeName="cy" values="60;100;60" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".2;.5;.2" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="140" cy="70" r="1.5" fill="rgba(240,180,140,.3)">
+        <animate attributeName="cy" values="50;90;50" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".15;.45;.15" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="120" cy="60" r="2.5" fill="rgba(240,180,140,.4)">
+        <animate attributeName="cy" values="40;85;40" dur="3.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".2;.55;.2" dur="3.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="90" cy="90" r="1" fill="rgba(240,180,140,.25)">
+        <animate attributeName="cy" values="70;110;70" dur="4.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".1;.35;.1" dur="4.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="150" cy="85" r="1.8" fill="rgba(240,180,140,.3)">
+        <animate attributeName="cy" values="65;105;65" dur="3.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".15;.4;.15" dur="3.8s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Love aura -->
+      <ellipse cx="115" cy="200" rx="50" ry="60" fill="rgba(224,96,112,.04)"/>
+    </svg>
+
+  <app-scene-heading title="❤️ 神不變的愛" subtitle="God's Unchanging Love — Hosea 11" id="love-heading" />
+  <app-scene-verse text="「我怎能捨棄你？」— 何西阿書 11:8" />
+</section>
+
+<section class="scene" id="scene-return" aria-label="回轉與復興">
+  <app-starfield />
+
+  <div id="return-dawn-light" aria-hidden="true"></div>
+    <div id="return-bloom-glow" aria-hidden="true"></div>
+  
+    <!-- Blooming garden, dawn light, flowers growing -->
+    <svg id="return-scene-svg" viewBox="0 0 1440 420" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="盛開的花園與黎明曙光">
+      <defs>
+        <linearGradient id="dawnSkyHG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#221a26"/>
+          <stop offset="40%" stop-color="#302430"/>
+          <stop offset="70%" stop-color="#3a2e3a"/>
+          <stop offset="100%" stop-color="#504048"/>
+        </linearGradient>
+        <linearGradient id="dawnHorizonHG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(240,180,160,.15)"/>
+          <stop offset="100%" stop-color="rgba(224,140,120,.03)"/>
+        </linearGradient>
+        <radialGradient id="dawnGlowHG" cx="50%" cy="85%" r="40%">
+          <stop offset="0%" stop-color="rgba(240,180,160,.25)"/>
+          <stop offset="50%" stop-color="rgba(224,140,120,.08)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Sky -->
+      <rect width="1440" height="420" fill="url(#dawnSkyHG)"/>
+      <!-- Horizon glow -->
+      <rect y="280" width="1440" height="140" fill="url(#dawnHorizonHG)"/>
+      <!-- Dawn radial glow -->
+      <ellipse cx="720" cy="320" rx="500" ry="120" fill="url(#dawnGlowHG)"/>
+      <!-- Sun rising -->
+      <circle cx="720" cy="310" r="30" fill="rgba(240,180,160,.2)">
+        <animate attributeName="r" values="28;35;28" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="720" cy="310" r="18" fill="rgba(255,200,180,.15)"/>
+      <!-- Light rays -->
+      <line x1="720" y1="310" x2="620" y2="180" stroke="rgba(240,180,160,.06)" stroke-width="8"/>
+      <line x1="720" y1="310" x2="680" y2="160" stroke="rgba(240,180,160,.08)" stroke-width="6"/>
+      <line x1="720" y1="310" x2="720" y2="140" stroke="rgba(240,180,160,.1)" stroke-width="5"/>
+      <line x1="720" y1="310" x2="760" y2="160" stroke="rgba(240,180,160,.08)" stroke-width="6"/>
+      <line x1="720" y1="310" x2="820" y2="180" stroke="rgba(240,180,160,.06)" stroke-width="8"/>
+      <!-- Green hills -->
+      <path d="M0,360 Q200,290 400,330 Q600,280 720,300 Q850,280 1050,330 Q1250,290 1440,360 L1440,420 L0,420 Z"
+            fill="#1e2418"/>
+      <path d="M0,380 Q180,340 360,365 Q540,340 720,355 Q900,340 1080,365 Q1260,340 1440,380 L1440,420 L0,420 Z"
+            fill="#162010"/>
+      <!-- Flowers blooming — rose-colored -->
+      <g style="animation: bloomGrow 4s ease-in-out infinite;">
+        <!-- Flower 1 -->
+        <line x1="300" y1="380" x2="300" y2="345" stroke="rgba(100,160,80,.4)" stroke-width="2"/>
+        <circle cx="300" cy="340" r="6" fill="rgba(224,96,112,.5)"/>
+        <circle cx="300" cy="340" r="3" fill="rgba(240,160,160,.4)"/>
+      </g>
+      <g style="animation: bloomGrow 4.5s ease-in-out .8s infinite;">
+        <!-- Flower 2 -->
+        <line x1="520" y1="370" x2="520" y2="330" stroke="rgba(100,160,80,.35)" stroke-width="2"/>
+        <circle cx="520" cy="325" r="7" fill="rgba(224,96,112,.45)"/>
+        <circle cx="520" cy="325" r="3.5" fill="rgba(240,160,160,.35)"/>
+      </g>
+      <g style="animation: bloomGrow 5s ease-in-out 1.5s infinite;">
+        <!-- Flower 3 -->
+        <line x1="720" y1="365" x2="720" y2="320" stroke="rgba(100,160,80,.4)" stroke-width="2.5"/>
+        <circle cx="720" cy="315" r="8" fill="rgba(224,96,112,.5)"/>
+        <circle cx="720" cy="315" r="4" fill="rgba(240,160,160,.4)"/>
+        <!-- Petals -->
+        <circle cx="712" cy="310" r="4" fill="rgba(224,96,112,.3)"/>
+        <circle cx="728" cy="310" r="4" fill="rgba(224,96,112,.3)"/>
+        <circle cx="720" cy="306" r="4" fill="rgba(224,96,112,.3)"/>
+      </g>
+      <g style="animation: bloomGrow 4.2s ease-in-out .5s infinite;">
+        <!-- Flower 4 -->
+        <line x1="920" y1="370" x2="920" y2="335" stroke="rgba(100,160,80,.35)" stroke-width="2"/>
+        <circle cx="920" cy="330" r="6" fill="rgba(224,96,112,.45)"/>
+        <circle cx="920" cy="330" r="3" fill="rgba(240,160,160,.35)"/>
+      </g>
+      <g style="animation: bloomGrow 4.8s ease-in-out 2s infinite;">
+        <!-- Flower 5 -->
+        <line x1="1140" y1="375" x2="1140" y2="340" stroke="rgba(100,160,80,.4)" stroke-width="2"/>
+        <circle cx="1140" cy="335" r="7" fill="rgba(224,96,112,.5)"/>
+        <circle cx="1140" cy="335" r="3.5" fill="rgba(240,160,160,.4)"/>
+      </g>
+      <!-- Leaves/greenery -->
+      <ellipse cx="310" cy="360" rx="12" ry="4" fill="rgba(100,160,80,.2)" transform="rotate(-20 310 360)"/>
+      <ellipse cx="530" cy="350" rx="10" ry="3" fill="rgba(100,160,80,.18)" transform="rotate(15 530 350)"/>
+      <ellipse cx="910" cy="355" rx="11" ry="3.5" fill="rgba(100,160,80,.2)" transform="rotate(-10 910 355)"/>
+      <!-- Lily symbolism (Hosea 14:5 — blossom like a lily) -->
+      <g style="animation: bloomGrow 5s ease-in-out 1s infinite;">
+        <line x1="400" y1="375" x2="400" y2="335" stroke="rgba(120,180,100,.35)" stroke-width="2"/>
+        <ellipse cx="400" cy="328" rx="5" ry="10" fill="rgba(255,255,240,.2)"/>
+        <ellipse cx="395" cy="332" rx="4" ry="8" fill="rgba(255,255,240,.15)" transform="rotate(-15 395 332)"/>
+        <ellipse cx="405" cy="332" rx="4" ry="8" fill="rgba(255,255,240,.15)" transform="rotate(15 405 332)"/>
+      </g>
+      <g style="animation: bloomGrow 5.5s ease-in-out 2.5s infinite;">
+        <line x1="1040" y1="370" x2="1040" y2="330" stroke="rgba(120,180,100,.35)" stroke-width="2"/>
+        <ellipse cx="1040" cy="323" rx="5" ry="10" fill="rgba(255,255,240,.2)"/>
+        <ellipse cx="1035" cy="327" rx="4" ry="8" fill="rgba(255,255,240,.15)" transform="rotate(-15 1035 327)"/>
+        <ellipse cx="1045" cy="327" rx="4" ry="8" fill="rgba(255,255,240,.15)" transform="rotate(15 1045 327)"/>
+      </g>
+      <!-- Dew drops (Hosea 14:5) -->
+      <circle cx="310" cy="350" r="1.5" fill="rgba(200,220,240,.35)"/>
+      <circle cx="530" cy="340" r="1" fill="rgba(200,220,240,.3)"/>
+      <circle cx="730" cy="330" r="1.8" fill="rgba(200,220,240,.4)"/>
+      <circle cx="925" cy="345" r="1.2" fill="rgba(200,220,240,.3)"/>
+      <!-- Renewal aura -->
+      <ellipse cx="720" cy="340" rx="200" ry="40" fill="rgba(224,96,112,.04)"/>
+    </svg>
+
+  <app-scene-heading title="🌸 回轉與復興" subtitle="Return and Restoration — Hosea 14" id="return-heading" />
+  <app-scene-verse text="「以色列啊，你要歸向耶和華你的神」— 何西阿書 14:1" />
+</section>

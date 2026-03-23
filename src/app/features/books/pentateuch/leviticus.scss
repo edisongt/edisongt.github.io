@@ -1,0 +1,352 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes fireFlicker {
+      0%    { transform: scaleX(1)    scaleY(1)    rotate(-2deg); opacity: 1;    }
+      25%   { transform: scaleX(.9)   scaleY(1.1)  rotate(1deg);              }
+      50%   { transform: scaleX(1.05) scaleY(.92)  rotate(-1deg); opacity: .93; }
+      75%   { transform: scaleX(.92)  scaleY(1.06) rotate(2deg);              }
+      100%  { transform: scaleX(1.03) scaleY(1.1)  rotate(-3deg); opacity: .88; }
+    }
+
+@keyframes smokeRise {
+      0%   { transform: translateY(0) scale(1);   opacity: .5;  }
+      50%  { transform: translateY(-22px) scale(1.2); opacity: .3; }
+      100% { transform: translateY(-48px) scale(1.5); opacity: 0;  }
+    }
+
+@keyframes incenseDrift {
+      0%   { transform: translateX(0) translateY(0); opacity: .35; }
+      33%  { transform: translateX(6px) translateY(-18px); opacity: .25; }
+      66%  { transform: translateX(-4px) translateY(-36px); opacity: .12; }
+      100% { transform: translateX(2px) translateY(-55px); opacity: 0; }
+    }
+
+@keyframes divinePulse {
+      0%,100% { opacity: .55; }
+      50%      { opacity: 1;   }
+    }
+
+@keyframes gentleFloat {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-8px); }
+    }
+
+@keyframes rayPulse {
+      0%,100% { opacity: .12; }
+      50%      { opacity: .32; }
+    }
+
+@keyframes candleGlow {
+      0%,100% { opacity: .7; filter: brightness(1);    }
+      50%      { opacity: 1;  filter: brightness(1.25); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #0e0e54 0%, #493870 55%, #955b00 100%);
+    }
+
+#intro-glow {
+      position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
+      width: clamp(50px,8vw,100px); height: clamp(50px,8vw,100px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff8e0, #ffc850 45%, #b87800);
+      box-shadow: 0 0 55px rgba(255,195,0,.65), 0 0 110px rgba(255,165,0,.25);
+      z-index: 4;
+      animation: sacredGlow 4s ease-in-out infinite;
+    }
+
+@keyframes sacredGlow {
+      0%,100% { box-shadow: 0 0 55px rgba(255,195,0,.65), 0 0 110px rgba(255,165,0,.25); }
+      50%      { box-shadow: 0 0 80px rgba(255,200,50,.9), 0 0 160px rgba(255,170,0,.4); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#ffc850 0%,#fff4b0 45%,#e8a020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(255,220,140,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(220,190,110,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-altar { position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%); z-index: 5; }
+
+#intro-altar-glow {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      width: 30vw; height: 14vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,160,30,.3) 0%, rgba(255,100,0,.1) 50%, transparent 72%);
+      z-index: 4;
+      animation: glowPulse 2.5s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — THE FIVE OFFERINGS  五大祭
+    ══════════════════════════════════════════════ */
+
+#scene-offerings {
+      background: linear-gradient(180deg, #411d3a 0%, #a05000 55%, #a34d00 100%);
+    }
+
+#offerings-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 28%;
+      background: linear-gradient(180deg,#3d2200 0%,#261400 55%,#100a00 100%);
+      z-index: 5;
+    }
+
+#offerings-ground::before {
+      content: '';
+      position: absolute; top: -18%; left: 0; width: 100%; height: 30%;
+      background: radial-gradient(ellipse 30% 40% at 30% 80%, #4a2e08 0%, transparent 70%),
+                  radial-gradient(ellipse 25% 35% at 70% 70%, #3d2600 0%, transparent 65%);
+    }
+
+#altar-fire-glow {
+      position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%);
+      width: 35vw; height: 16vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,140,0,.4) 0%, rgba(255,80,0,.14) 50%, transparent 72%);
+      z-index: 6;
+      animation: altarFireGlow 1.4s ease-in-out infinite;
+    }
+
+@keyframes altarFireGlow {
+      0%,100% { opacity: .7; transform: translateX(-50%) scale(1);    }
+      50%      { opacity: 1;  transform: translateX(-50%) scale(1.18); }
+    }
+
+#altar-svg {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,16vw,220px);
+    }
+
+#smoke-particles {
+      position: absolute; bottom: 52%; left: 50%; transform: translateX(-50%);
+      z-index: 7; pointer-events: none;
+    }
+
+.smoke {
+      position: absolute; border-radius: 50%;
+      background: rgba(180,160,140,.2);
+      animation: smokeRise var(--spd,3s) ease-out var(--delay,0s) infinite;
+    }
+
+#offering-list {
+      position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 20; text-align: center; pointer-events: none;
+      font-size: clamp(.72rem,1.3vw,.92rem); color: rgba(255,200,100,.6);
+      letter-spacing: .1em; line-height: 1.8;
+      animation: fadeUpIn 2s ease-out .6s both;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — THE PRIESTHOOD  祭司制度
+    ══════════════════════════════════════════════ */
+
+#scene-priesthood {
+      background: linear-gradient(180deg, #2a1c62 0%, #4d2281 50%, #4c2f75 100%);
+    }
+
+#priesthood-glow {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 40vw; height: 40vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,195,0,.18) 0%, rgba(255,160,0,.06) 50%, transparent 72%);
+      z-index: 3;
+      animation: divinePulse 3s ease-in-out infinite;
+    }
+
+#aaron-svg {
+      position: absolute; bottom: 14%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(90px,14vw,200px);
+      animation: gentleFloat 5s ease-in-out infinite;
+    }
+
+#priesthood-heading h2 {
+      background: linear-gradient(120deg,#ffc850 0%,#fff4b0 50%,#e8a020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#priesthood-heading p { color: rgba(255,210,120,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — DAY OF ATONEMENT  贖罪日
+    ══════════════════════════════════════════════ */
+
+#scene-atonement {
+      background: linear-gradient(180deg, #141441 0%, #382362 50%, #462a7e 100%);
+    }
+
+#atonement-curtain-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 12vw; height: 48vh; max-width: 140px;
+      background: linear-gradient(180deg,rgba(255,230,120,0) 0%,rgba(255,210,80,.45) 30%,rgba(255,180,0,.7) 60%,rgba(255,230,120,0) 100%);
+      z-index: 5; filter: blur(14px);
+      animation: divinePulse 2.5s ease-in-out infinite;
+    }
+
+#tabernacle-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,36vw,500px);
+    }
+
+#priest-entering {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(40px,5vw,70px);
+      animation: gentleFloat 6s ease-in-out infinite;
+    }
+
+.incense-smoke {
+      position: absolute; z-index: 10; pointer-events: none;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,220,140,.25);
+      animation: incenseDrift var(--spd,4s) ease-out var(--delay,0s) infinite;
+    }
+
+#atonement-heading h2 {
+      color: rgba(255,220,140,.9);
+      text-shadow: 0 0 32px rgba(255,195,0,.6), 0 0 70px rgba(200,150,0,.3);
+    }
+
+#atonement-heading p { color: rgba(255,220,140,.5); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — HOLINESS CODE  聖潔律例
+    ══════════════════════════════════════════════ */
+
+#scene-holiness {
+      background: linear-gradient(180deg, #1c0e54 0%, #462882 50%, #492c7c 100%);
+    }
+
+#holiness-rays {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; height: 100%; z-index: 2; pointer-events: none;
+      overflow: hidden;
+    }
+
+.light-ray {
+      position: absolute; top: -10%; left: 50%;
+      width: 3px; height: 120%;
+      background: linear-gradient(180deg, rgba(255,215,0,0) 0%, rgba(255,215,0,.15) 30%, rgba(255,215,0,.08) 70%, rgba(255,215,0,0) 100%);
+      transform-origin: top center;
+      animation: rayPulse var(--spd,4s) ease-in-out var(--delay,0s) infinite;
+    }
+
+#holiness-text {
+      position: absolute; top: 38%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 20; max-width: 90vw;
+    }
+
+#holiness-text .zh {
+      font-size: clamp(1.2rem,3.5vw,2.8rem); font-weight: 800;
+      color: rgba(255,220,100,.95);
+      text-shadow: 0 0 30px rgba(255,200,50,.8), 0 0 70px rgba(255,170,0,.4);
+      letter-spacing: .08em; line-height: 1.5;
+      animation: divinePulse 3s ease-in-out infinite;
+    }
+
+#holiness-text .en {
+      display: block; margin-top: .8rem;
+      font-size: clamp(.72rem,1.4vw,.95rem);
+      color: rgba(255,230,160,.45); letter-spacing: .14em;
+      animation: fadeUpIn 2s ease-out .8s both;
+    }
+
+#holiness-heading h2 {
+      background: linear-gradient(120deg,#ffc850 0%,#fff4b0 50%,#e8a020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#holiness-heading p { color: rgba(255,210,120,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — FEASTS OF THE LORD  耶和華的節期
+    ══════════════════════════════════════════════ */
+
+#scene-feasts {
+      background: linear-gradient(180deg, #1c0e70 0%, #3b2491 50%, #452b80 100%);
+    }
+
+#feasts-glow {
+      position: absolute; top: 45%; left: 50%; transform: translate(-50%,-50%);
+      width: 50vw; height: 35vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,195,0,.15) 0%, rgba(255,160,0,.05) 55%, transparent 72%);
+      z-index: 3;
+      animation: divinePulse 3.5s ease-in-out infinite;
+    }
+
+#menorah-svg {
+      position: absolute; bottom: 16%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(120px,20vw,280px);
+      animation: gentleFloat 5.5s ease-in-out infinite;
+    }
+
+#shofar-svg {
+      position: absolute; bottom: 22%; left: 18%; z-index: 8;
+      width: clamp(60px,9vw,120px);
+      animation: gentleFloat 4.5s ease-in-out .5s infinite;
+    }
+
+#wheat-svg {
+      position: absolute; bottom: 20%; right: 16%; z-index: 8;
+      width: clamp(50px,8vw,110px);
+      animation: gentleFloat 5s ease-in-out 1s infinite;
+    }
+
+#feasts-heading h2 {
+      background: linear-gradient(120deg,#ffc850 0%,#fff4b0 50%,#e8a020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#feasts-heading p { color: rgba(255,210,120,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

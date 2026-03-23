@@ -1,0 +1,618 @@
+<app-back-button />
+<app-nav-dots [scenes]="scenes" />
+
+<section class="scene" id="scene-intro" aria-label="以賽亞書 — 開場">
+  <app-starfield />
+
+  <div id="intro-orb" aria-hidden="true"></div>
+  
+    <div id="intro-title">
+      <h1>以賽亞書</h1>
+      <p>Book of Isaiah</p>
+      <span class="sub">聖潔 · 預言 · 受苦 · 安慰 · 盼望</span>
+    </div>
+  
+    <!-- Mountain landscape with night sky -->
+    <svg id="intro-landscape" viewBox="0 0 1440 420" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a2040"/>
+          <stop offset="50%" stop-color="#141830"/>
+          <stop offset="100%" stop-color="#0c1020"/>
+        </linearGradient>
+        <linearGradient id="hill1G" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a3868"/>
+          <stop offset="100%" stop-color="#0c1020"/>
+        </linearGradient>
+        <linearGradient id="hill2G" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1e2850"/>
+          <stop offset="100%" stop-color="#080c18"/>
+        </linearGradient>
+        <linearGradient id="groundG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a2040"/>
+          <stop offset="100%" stop-color="#080c18"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1440" height="420" fill="url(#skyG)"/>
+      <!-- Distant blue mountains -->
+      <path d="M0 340 Q120 280 240 310 Q360 250 480 290 Q600 220 720 260 Q840 200 960 250 Q1080 210 1200 260 Q1320 230 1440 280 L1440 420 L0 420 Z"
+            fill="url(#hill2G)" opacity=".6"/>
+      <!-- Nearer mountains with peaks -->
+      <path d="M0 380 Q100 340 200 360 Q300 310 400 340 L480 280 L520 310 L560 260 L600 300
+            Q660 280 720 250 L760 270 L800 240 L840 280 Q920 300 1000 330
+            Q1100 310 1200 340 L1260 300 L1300 330 Q1380 320 1440 350 L1440 420 L0 420 Z"
+            fill="url(#hill1G)"/>
+      <!-- Ground -->
+      <rect x="0" y="380" width="1440" height="40" fill="url(#groundG)"/>
+      <!-- Prophecy glow on horizon -->
+      <ellipse cx="720" cy="280" rx="400" ry="50" fill="rgba(74,111,165,.08)"/>
+    </svg>
+  
+    <!-- Isaiah prophet figure -->
+    <svg id="intro-prophet" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="先知以賽亞 — Prophet Isaiah standing">
+      <title>先知以賽亞 — Prophet Isaiah in prophetic robes</title>
+      <!-- Head -->
+      <circle cx="30" cy="16" r="12" fill="#8a6838"/>
+      <!-- Hair/beard -->
+      <path d="M18,14 Q22,4 30,2 Q38,4 42,14 L42,22 Q38,18 30,16 Q22,18 18,22 Z" fill="#3a2010"/>
+      <path d="M22,24 Q26,32 30,34 Q34,32 38,24" fill="#3a2010" opacity=".6"/>
+      <!-- Head covering -->
+      <path d="M16,14 Q30,-2 44,14 L46,28 Q30,20 14,28 Z" fill="rgba(74,111,165,.5)"/>
+      <!-- Face detail -->
+      <circle cx="26" cy="14" r="1.2" fill="#4a3020"/>
+      <circle cx="34" cy="14" r="1.2" fill="#4a3020"/>
+      <!-- Prophetic robe -->
+      <path d="M20,28 Q14,55 8,100 Q16,105 24,100 Q27,75 30,58 Q33,75 36,100 Q44,105 52,100 Q46,55 40,28 Z"
+            fill="#3a5080"/>
+      <!-- Robe sash -->
+      <path d="M22,30 Q30,28 38,30 L37,48 Q30,46 23,48 Z" fill="#4a6fa5" opacity=".6"/>
+      <!-- Belt -->
+      <line x1="20" y1="48" x2="40" y2="48" stroke="#a0b8d0" stroke-width="2"/>
+      <!-- Scroll in hand -->
+      <rect x="42" y="40" width="8" height="20" rx="3" fill="#d4c8a0" opacity=".7"/>
+      <!-- Feet -->
+      <ellipse cx="22" cy="102" rx="7" ry="3" fill="#5a3028"/>
+      <ellipse cx="38" cy="102" rx="7" ry="3" fill="#5a3028"/>
+    </svg>
+
+  <app-scene-verse text="「聖哉！聖哉！聖哉！萬軍之耶和華」— 以賽亞書 6:3" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-calling" aria-label="先知蒙召 — The Calling of Isaiah">
+  <app-starfield />
+
+  <div id="calling-ground" aria-hidden="true"></div>
+    <div id="calling-glow" aria-hidden="true"></div>
+  
+    <!-- Temple throne room with seraphim -->
+    <svg id="calling-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="以賽亞看見主坐在高高的寶座上 — Isaiah's vision of God's throne">
+      <title>先知蒙召 — Isaiah sees the Lord on His throne, with seraphim and burning coals</title>
+      <defs>
+        <linearGradient id="templeFloorG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a2810"/>
+          <stop offset="100%" stop-color="#1a1408"/>
+        </linearGradient>
+        <linearGradient id="throneG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffd700"/>
+          <stop offset="50%" stop-color="#c8a020"/>
+          <stop offset="100%" stop-color="#8a7018"/>
+        </linearGradient>
+        <linearGradient id="pillarG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#a08040"/>
+          <stop offset="100%" stop-color="#5a4020"/>
+        </linearGradient>
+        <radialGradient id="gloryG" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(255,240,180,.3)"/>
+          <stop offset="50%" stop-color="rgba(255,200,80,.1)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Temple floor -->
+      <rect x="0" y="380" width="1440" height="120" fill="url(#templeFloorG)"/>
+      <!-- Temple walls / warm golden tone -->
+      <rect x="0" y="100" width="1440" height="280" fill="rgba(60,40,20,.3)"/>
+      <!-- Grand pillars -->
+      <rect x="180" y="100" width="45" height="300" fill="url(#pillarG)" rx="5"/>
+      <rect x="420" y="100" width="40" height="300" fill="url(#pillarG)" rx="5" opacity=".8"/>
+      <rect x="980" y="100" width="40" height="300" fill="url(#pillarG)" rx="5" opacity=".8"/>
+      <rect x="1215" y="100" width="45" height="300" fill="url(#pillarG)" rx="5"/>
+      <!-- Divine glory light -->
+      <ellipse cx="720" cy="200" rx="350" ry="200" fill="url(#gloryG)"/>
+      <!-- Throne (high and lifted up) -->
+      <rect x="660" y="180" width="120" height="90" rx="6" fill="url(#throneG)"/>
+      <path d="M660,180 Q720,130 780,180" fill="#ffd700" stroke="#c8a020" stroke-width="2"/>
+      <!-- Throne steps -->
+      <rect x="640" y="270" width="160" height="12" rx="2" fill="#a08030"/>
+      <rect x="620" y="282" width="200" height="12" rx="2" fill="#8a7028"/>
+      <rect x="600" y="294" width="240" height="14" rx="2" fill="#6a5820"/>
+      <!-- Light rays from throne -->
+      <line x1="720" y1="180" x2="400" y2="400" stroke="rgba(255,240,180,.06)" stroke-width="40"/>
+      <line x1="720" y1="180" x2="600" y2="420" stroke="rgba(255,240,180,.08)" stroke-width="30"/>
+      <line x1="720" y1="180" x2="840" y2="420" stroke="rgba(255,240,180,.08)" stroke-width="30"/>
+      <line x1="720" y1="180" x2="1040" y2="400" stroke="rgba(255,240,180,.06)" stroke-width="40"/>
+      <!-- Seraph (left) with six wings -->
+      <g style="animation:seraphWing 4s ease-in-out infinite;">
+        <!-- Upper wings (covering face) -->
+        <path d="M500,180 Q520,150 540,170 Q530,190 510,200 Z" fill="rgba(255,200,80,.35)"/>
+        <path d="M540,170 Q560,150 580,180 Q570,200 550,200 Z" fill="rgba(255,200,80,.3)"/>
+        <!-- Middle wings (flying) -->
+        <path d="M480,210 Q500,190 530,200 Q510,220 490,230 Z" fill="rgba(255,220,100,.25)"/>
+        <path d="M580,200 Q600,190 620,210 Q600,230 580,230 Z" fill="rgba(255,220,100,.25)"/>
+        <!-- Lower wings (covering feet) -->
+        <path d="M510,230 Q530,260 520,290 Q500,280 490,250 Z" fill="rgba(255,200,80,.2)"/>
+        <path d="M560,230 Q540,260 550,290 Q570,280 580,250 Z" fill="rgba(255,200,80,.2)"/>
+        <!-- Body glow -->
+        <ellipse cx="540" cy="210" rx="20" ry="25" fill="rgba(255,240,180,.12)"/>
+      </g>
+      <!-- Seraph (right) with six wings -->
+      <g style="animation:seraphWing 4s ease-in-out 1s infinite;">
+        <path d="M860,180 Q880,150 900,170 Q890,190 870,200 Z" fill="rgba(255,200,80,.35)"/>
+        <path d="M900,170 Q920,150 940,180 Q930,200 910,200 Z" fill="rgba(255,200,80,.3)"/>
+        <path d="M840,210 Q860,190 890,200 Q870,220 850,230 Z" fill="rgba(255,220,100,.25)"/>
+        <path d="M940,200 Q960,190 980,210 Q960,230 940,230 Z" fill="rgba(255,220,100,.25)"/>
+        <path d="M870,230 Q890,260 880,290 Q860,280 850,250 Z" fill="rgba(255,200,80,.2)"/>
+        <path d="M920,230 Q900,260 910,290 Q930,280 940,250 Z" fill="rgba(255,200,80,.2)"/>
+        <ellipse cx="900" cy="210" rx="20" ry="25" fill="rgba(255,240,180,.12)"/>
+      </g>
+      <!-- Altar with burning coal -->
+      <rect x="680" y="340" width="80" height="40" rx="4" fill="#8a6830"/>
+      <rect x="690" y="330" width="60" height="15" rx="3" fill="#a07830"/>
+      <!-- Fire on altar -->
+      <ellipse cx="720" cy="330" rx="22" ry="10" fill="rgba(255,120,30,.4)"
+               style="animation:coalGlow 2s ease-in-out infinite;"/>
+      <ellipse cx="720" cy="324" rx="14" ry="8" fill="rgba(255,180,60,.3)"/>
+      <!-- Smoke rising -->
+      <ellipse cx="720" cy="280" rx="60" ry="30" fill="rgba(180,160,140,.06)"/>
+      <ellipse cx="710" cy="250" rx="40" ry="20" fill="rgba(180,160,140,.04)"/>
+      <!-- Isaiah prostrate (bottom-left) -->
+      <circle cx="380" cy="370" r="10" fill="#8a6838"/>
+      <path d="M370,378 Q365,395 360,410 Q370,416 380,412 Q390,416 400,410 Q395,395 390,378 Z" fill="#3a5080"/>
+      <!-- Isaiah bowing forward -->
+      <path d="M380,380 Q400,380 410,376" stroke="#8a6838" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Tongs with coal approaching -->
+      <line x1="660" y1="340" x2="420" y2="372" stroke="#8a7030" stroke-width="3"/>
+      <circle cx="420" cy="372" r="5" fill="rgba(255,120,30,.6)"
+              style="animation:coalGlow 2s ease-in-out infinite;"/>
+    </svg>
+
+  <app-scene-heading title="🔥 先知蒙召" subtitle="The Calling of Isaiah — Isaiah 6" id="calling-heading" />
+  <app-scene-verse text="「我在這裡，請差遣我！」— 以賽亞書 6:8" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-immanuel" aria-label="以馬內利預言 — Immanuel Prophecy">
+  <app-starfield />
+
+  <div id="immanuel-glow" aria-hidden="true"></div>
+  
+    <!-- Night sky with bright star over Bethlehem -->
+    <svg id="immanuel-svg" viewBox="0 0 1440 600" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="伯利恆之星照耀夜空 — The star of Bethlehem shining over the city">
+      <title>以馬內利預言 — The prophecy of Immanuel, a bright star shines over Bethlehem</title>
+      <defs>
+        <linearGradient id="nightSkyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0c1020"/>
+          <stop offset="60%" stop-color="#1a2040"/>
+          <stop offset="100%" stop-color="#24305a"/>
+        </linearGradient>
+        <linearGradient id="bethGroundG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2040"/>
+          <stop offset="100%" stop-color="#141020"/>
+        </linearGradient>
+        <radialGradient id="starRadG" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(255,255,220,1)"/>
+          <stop offset="30%" stop-color="rgba(255,255,180,.6)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Night sky background -->
+      <rect x="0" y="0" width="1440" height="600" fill="url(#nightSkyG)"/>
+      <!-- Bright star of prophecy -->
+      <g style="animation:starShine 3s ease-in-out infinite;">
+        <ellipse cx="720" cy="120" rx="60" ry="60" fill="url(#starRadG)"/>
+        <!-- Star cross beams -->
+        <line x1="720" y1="60" x2="720" y2="180" stroke="rgba(255,255,220,.4)" stroke-width="2"/>
+        <line x1="660" y1="120" x2="780" y2="120" stroke="rgba(255,255,220,.4)" stroke-width="2"/>
+        <!-- Star diamond points -->
+        <path d="M720,80 L724,116 L720,120 L716,116 Z" fill="rgba(255,255,255,.8)"/>
+        <path d="M720,160 L724,124 L720,120 L716,124 Z" fill="rgba(255,255,255,.8)"/>
+        <path d="M680,120 L716,116 L720,120 L716,124 Z" fill="rgba(255,255,255,.8)"/>
+        <path d="M760,120 L724,116 L720,120 L724,124 Z" fill="rgba(255,255,255,.8)"/>
+        <!-- Star center -->
+        <circle cx="720" cy="120" r="6" fill="#fffff0"/>
+      </g>
+      <!-- Light beam from star to city -->
+      <path d="M720,150 L680,420 L760,420 Z" fill="rgba(255,255,200,.04)"/>
+      <!-- Ground / hills -->
+      <path d="M0 440 Q200 410 400 430 Q600 400 800 420 Q1000 400 1200 420 Q1350 410 1440 430 L1440 600 L0 600 Z"
+            fill="url(#bethGroundG)"/>
+      <!-- Bethlehem city silhouette -->
+      <!-- Buildings cluster -->
+      <rect x="560" y="400" width="40" height="40" fill="#2a2448"/>
+      <rect x="600" y="390" width="35" height="50" fill="#302850"/>
+      <rect x="635" y="395" width="50" height="45" fill="#282248"/>
+      <rect x="685" y="385" width="30" height="55" fill="#2e2650"/>
+      <rect x="715" y="392" width="45" height="48" fill="#282248"/>
+      <rect x="760" y="398" width="35" height="42" fill="#2a2448"/>
+      <rect x="795" y="402" width="40" height="38" fill="#302850"/>
+      <!-- Domes and towers -->
+      <ellipse cx="580" cy="400" rx="20" ry="10" fill="#302850"/>
+      <rect x="616" y="370" width="8" height="20" fill="#302850"/>
+      <circle cx="620" cy="368" r="5" fill="#2e2650"/>
+      <rect x="698" y="365" width="8" height="20" fill="#302850"/>
+      <circle cx="702" cy="363" r="5" fill="#2e2650"/>
+      <ellipse cx="750" cy="392" rx="18" ry="8" fill="#282248"/>
+      <!-- Window lights -->
+      <rect x="568" y="412" width="4" height="5" rx="1" fill="rgba(255,200,80,.3)"/>
+      <rect x="582" y="418" width="4" height="5" rx="1" fill="rgba(255,200,80,.25)"/>
+      <rect x="610" y="406" width="4" height="5" rx="1" fill="rgba(255,200,80,.3)"/>
+      <rect x="624" y="410" width="4" height="5" rx="1" fill="rgba(255,200,80,.2)"/>
+      <rect x="650" y="412" width="4" height="5" rx="1" fill="rgba(255,200,80,.25)"/>
+      <rect x="670" y="408" width="4" height="5" rx="1" fill="rgba(255,200,80,.3)"/>
+      <rect x="694" y="404" width="4" height="5" rx="1" fill="rgba(255,200,80,.2)"/>
+      <rect x="724" y="410" width="4" height="5" rx="1" fill="rgba(255,200,80,.3)"/>
+      <rect x="770" y="414" width="4" height="5" rx="1" fill="rgba(255,200,80,.25)"/>
+      <rect x="806" y="416" width="4" height="5" rx="1" fill="rgba(255,200,80,.2)"/>
+      <!-- Distant hills -->
+      <path d="M0 450 Q100 435 200 445 Q300 430 400 440 Q500 425 560 440" fill="rgba(30,20,50,.5)"/>
+      <path d="M835 440 Q950 425 1100 435 Q1250 420 1440 440 L1440 600 L835 600 Z" fill="rgba(30,20,50,.5)"/>
+      <!-- Olive trees -->
+      <line x1="300" y1="440" x2="300" y2="420" stroke="#3a3020" stroke-width="3"/>
+      <circle cx="300" cy="415" r="12" fill="rgba(40,60,30,.4)"/>
+      <line x1="1120" y1="438" x2="1120" y2="418" stroke="#3a3020" stroke-width="3"/>
+      <circle cx="1120" cy="413" r="12" fill="rgba(40,60,30,.4)"/>
+      <!-- Shepherds watching (small figures) -->
+      <circle cx="200" cy="448" r="4" fill="rgba(100,80,60,.5)"/>
+      <circle cx="230" cy="446" r="3.5" fill="rgba(100,80,60,.45)"/>
+      <line x1="240" y1="440" x2="248" y2="420" stroke="rgba(100,80,60,.3)" stroke-width="2"/>
+    </svg>
+
+  <app-scene-heading title="⭐ 以馬內利預言" subtitle="Immanuel Prophecy — Isaiah 7:14" id="immanuel-heading" />
+  <app-scene-verse text="「必有童女懷孕生子，給他起名叫以馬內利」— 以賽亞書 7:14" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-servant" aria-label="受苦的僕人 — The Suffering Servant">
+  <app-starfield />
+
+  <div id="servant-shadow" aria-hidden="true"></div>
+  
+    <!-- Storm sky, lonely path, suffering figure -->
+    <svg id="servant-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="受苦的僕人背負重擔 — The Suffering Servant bearing our burdens">
+      <title>受苦的僕人 — The Servant wounded for our transgressions, bearing suffering on a lonely path</title>
+      <defs>
+        <linearGradient id="stormSkyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a0c10"/>
+          <stop offset="40%" stop-color="#2a1420"/>
+          <stop offset="100%" stop-color="#1a1020"/>
+        </linearGradient>
+        <linearGradient id="darkPathG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1828"/>
+          <stop offset="100%" stop-color="#0c0810"/>
+        </linearGradient>
+      </defs>
+      <!-- Storm sky -->
+      <rect x="0" y="0" width="1440" height="300" fill="url(#stormSkyG)"/>
+      <!-- Storm clouds -->
+      <ellipse cx="300" cy="80" rx="200" ry="60" fill="rgba(40,20,30,.5)"/>
+      <ellipse cx="500" cy="60" rx="180" ry="55" fill="rgba(50,25,35,.45)"/>
+      <ellipse cx="900" cy="70" rx="220" ry="65" fill="rgba(40,20,30,.5)"/>
+      <ellipse cx="1150" cy="90" rx="190" ry="50" fill="rgba(50,25,35,.4)"/>
+      <ellipse cx="720" cy="100" rx="250" ry="70" fill="rgba(35,18,28,.4)"/>
+      <!-- Lightning suggestion -->
+      <path d="M600,40 L610,80 L605,82 L618,130" stroke="rgba(180,160,200,.08)" stroke-width="2" fill="none"/>
+      <!-- Ground / path -->
+      <path d="M0 340 Q200 330 400 340 Q600 320 800 335 Q1000 325 1200 340 Q1350 330 1440 345 L1440 500 L0 500 Z"
+            fill="url(#darkPathG)"/>
+      <!-- Lonely path (lighter strip) -->
+      <path d="M500 500 Q600 400 680 340 Q720 320 760 340 Q840 400 940 500 Z"
+            fill="rgba(60,40,50,.3)"/>
+      <!-- Cross silhouette on hill (background) -->
+      <line x1="720" y1="180" x2="720" y2="310" stroke="rgba(80,40,50,.25)" stroke-width="8"/>
+      <line x1="680" y1="220" x2="760" y2="220" stroke="rgba(80,40,50,.25)" stroke-width="7"/>
+      <!-- Suffering servant figure (center, hunched under burden) -->
+      <circle cx="720" cy="300" r="12" fill="#7a5838"/>
+      <!-- Bowed head -->
+      <path d="M712,304 Q720,310 728,304" stroke="#4a3020" stroke-width="1" fill="none"/>
+      <!-- Tattered robe -->
+      <path d="M708,310 Q700,340 694,380 Q706,386 720,382 Q734,386 746,380 Q740,340 732,310 Z"
+            fill="#3a2828"/>
+      <!-- Arms stretched / bearing weight -->
+      <path d="M708,316 Q690,322 680,330" stroke="#7a5838" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M732,316 Q750,322 760,330" stroke="#7a5838" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Heavy beam on shoulders -->
+      <line x1="676" y1="310" x2="764" y2="310" stroke="#5a4030" stroke-width="6" stroke-linecap="round"/>
+      <!-- Wounds / marks (subtle) -->
+      <line x1="712" y1="330" x2="714" y2="345" stroke="rgba(160,50,40,.3)" stroke-width="2"/>
+      <line x1="728" y1="332" x2="726" y2="348" stroke="rgba(160,50,40,.3)" stroke-width="2"/>
+      <line x1="720" y1="325" x2="720" y2="342" stroke="rgba(160,50,40,.25)" stroke-width="2"/>
+      <!-- Shadow beneath -->
+      <ellipse cx="720" cy="384" rx="50" ry="8" fill="rgba(0,0,0,.2)"/>
+      <!-- Scattered crowd watching (distant, faint) -->
+      <circle cx="400" cy="360" r="4" fill="rgba(80,60,70,.3)"/>
+      <circle cx="430" cy="358" r="3.5" fill="rgba(80,60,70,.25)"/>
+      <circle cx="460" cy="362" r="4" fill="rgba(80,60,70,.3)"/>
+      <circle cx="980" cy="358" r="4" fill="rgba(80,60,70,.3)"/>
+      <circle cx="1010" cy="362" r="3.5" fill="rgba(80,60,70,.25)"/>
+      <circle cx="1040" cy="356" r="4" fill="rgba(80,60,70,.3)"/>
+      <!-- Dark thorns -->
+      <path d="M690,306 L685,300 L692,302" stroke="rgba(80,40,30,.4)" stroke-width="1.5" fill="none"/>
+      <path d="M750,306 L755,300 L748,302" stroke="rgba(80,40,30,.4)" stroke-width="1.5" fill="none"/>
+      <!-- Red drops at feet -->
+      <circle cx="714" cy="378" r="2" fill="rgba(160,40,40,.2)"/>
+      <circle cx="726" cy="380" r="1.5" fill="rgba(160,40,40,.15)"/>
+      <circle cx="720" cy="382" r="2" fill="rgba(160,40,40,.2)"/>
+    </svg>
+
+  <app-scene-heading title="✝ 受苦的僕人" subtitle="The Suffering Servant — Isaiah 53" id="servant-heading" />
+  <app-scene-verse text="「他為我們的過犯受害，為我們的罪孽壓傷」— 以賽亞書 53:5" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-comfort" aria-label="安慰我民 — Comfort My People">
+  <app-starfield />
+
+  <div id="comfort-glow" aria-hidden="true"></div>
+  
+    <!-- Sunrise with eagles soaring -->
+    <svg id="comfort-svg" viewBox="0 0 1440 500" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="老鷹展翅翱翔在日出中 — Eagles soaring in the dawn sky">
+      <title>安慰我民 — Those who wait upon the Lord shall renew their strength, mounting up with wings as eagles</title>
+      <defs>
+        <linearGradient id="dawnSkyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a3868"/>
+          <stop offset="30%" stop-color="#4a6090"/>
+          <stop offset="60%" stop-color="#8a7860"/>
+          <stop offset="80%" stop-color="#c8a060"/>
+          <stop offset="100%" stop-color="#e8c880"/>
+        </linearGradient>
+        <linearGradient id="dawnHillG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a4868"/>
+          <stop offset="100%" stop-color="#1a2040"/>
+        </linearGradient>
+        <radialGradient id="sunG" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(255,220,120,1)"/>
+          <stop offset="40%" stop-color="rgba(255,200,80,.6)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Dawn sky -->
+      <rect x="0" y="0" width="1440" height="500" fill="url(#dawnSkyG)"/>
+      <!-- Rising sun -->
+      <circle cx="720" cy="340" r="60" fill="url(#sunG)"/>
+      <circle cx="720" cy="340" r="30" fill="rgba(255,240,180,.8)"/>
+      <!-- Sun rays -->
+      <line x1="720" y1="260" x2="720" y2="220" stroke="rgba(255,220,120,.2)" stroke-width="3"/>
+      <line x1="780" y1="290" x2="820" y2="260" stroke="rgba(255,220,120,.15)" stroke-width="3"/>
+      <line x1="660" y1="290" x2="620" y2="260" stroke="rgba(255,220,120,.15)" stroke-width="3"/>
+      <line x1="800" y1="340" x2="850" y2="340" stroke="rgba(255,220,120,.12)" stroke-width="3"/>
+      <line x1="640" y1="340" x2="590" y2="340" stroke="rgba(255,220,120,.12)" stroke-width="3"/>
+      <!-- Horizon glow -->
+      <ellipse cx="720" cy="360" rx="500" ry="60" fill="rgba(255,200,80,.08)"/>
+      <!-- Hills silhouette -->
+      <path d="M0 380 Q150 340 300 360 Q450 320 600 350 Q680 330 720 340
+            Q760 330 840 350 Q1000 320 1140 360 Q1300 340 1440 380 L1440 500 L0 500 Z"
+            fill="url(#dawnHillG)"/>
+      <!-- Ground -->
+      <rect x="0" y="400" width="1440" height="100" fill="rgba(26,32,64,.6)"/>
+      <!-- Eagle 1 (large, center-left, soaring high) -->
+      <g style="animation:eagleSoar 5s ease-in-out infinite;">
+        <!-- Wings spread wide -->
+        <path d="M440,200 Q470,170 520,180 Q530,190 540,200 Q530,205 520,202 Q490,195 460,204 Z"
+              fill="#3a3028"/>
+        <path d="M640,200 Q610,170 560,180 Q550,190 540,200 Q550,205 560,202 Q590,195 620,204 Z"
+              fill="#3a3028"/>
+        <!-- Body -->
+        <ellipse cx="540" cy="205" rx="12" ry="8" fill="#4a3828"/>
+        <!-- Head -->
+        <circle cx="540" cy="196" r="5" fill="#5a4030"/>
+        <!-- Beak -->
+        <path d="M540,196 L546,194 L540,198 Z" fill="#c8a040"/>
+        <!-- Tail -->
+        <path d="M540,213 Q538,225 532,230 Q540,228 548,230 Q542,225 540,213 Z" fill="#3a3028"/>
+      </g>
+      <!-- Eagle 2 (smaller, right, soaring) -->
+      <g style="animation:eagleSoar 5s ease-in-out 1.5s infinite;">
+        <path d="M880,160 Q900,140 930,148 Q938,155 940,160 Q932,163 924,161 Q906,156 890,162 Z"
+              fill="#3a3028" opacity=".7"/>
+        <path d="M1010,160 Q990,140 960,148 Q952,155 950,160 Q958,163 966,161 Q984,156 1000,162 Z"
+              fill="#3a3028" opacity=".7"/>
+        <ellipse cx="945" cy="163" rx="8" ry="5" fill="#4a3828" opacity=".7"/>
+        <circle cx="945" cy="158" r="3.5" fill="#5a4030" opacity=".7"/>
+        <path d="M945,158 L950,156 L945,160 Z" fill="#c8a040" opacity=".7"/>
+      </g>
+      <!-- Eagle 3 (smallest, far left) -->
+      <g style="animation:eagleSoar 5s ease-in-out 3s infinite;">
+        <path d="M200,240 Q215,225 235,230 Q240,236 242,240 Q236,242 230,241 Q218,237 208,242 Z"
+              fill="#3a3028" opacity=".5"/>
+        <path d="M295,240 Q280,225 260,230 Q255,236 253,240 Q259,242 265,241 Q277,237 287,242 Z"
+              fill="#3a3028" opacity=".5"/>
+        <ellipse cx="248" cy="243" rx="6" ry="4" fill="#4a3828" opacity=".5"/>
+        <circle cx="248" cy="239" r="2.5" fill="#5a4030" opacity=".5"/>
+      </g>
+      <!-- People with renewed strength (on ground) -->
+      <!-- Figure 1 (arms raised) -->
+      <circle cx="620" cy="388" r="5" fill="rgba(120,100,80,.5)"/>
+      <path d="M615,393 Q612,408 610,425 Q616,428 620,425 Q624,428 630,425 Q628,408 625,393 Z"
+            fill="rgba(74,111,165,.4)"/>
+      <path d="M615,397 Q608,388 604,380" stroke="rgba(120,100,80,.3)" stroke-width="2.5" fill="none"/>
+      <path d="M625,397 Q632,388 636,380" stroke="rgba(120,100,80,.3)" stroke-width="2.5" fill="none"/>
+      <!-- Figure 2 (running) -->
+      <circle cx="820" cy="390" r="5" fill="rgba(120,100,80,.5)"/>
+      <path d="M815,395 Q812,410 810,428 Q816,431 820,428 Q824,431 830,428 Q828,410 825,395 Z"
+            fill="rgba(74,111,165,.4)"/>
+      <path d="M815,400 Q806,398 800,400" stroke="rgba(120,100,80,.3)" stroke-width="2.5" fill="none"/>
+      <path d="M825,400 Q834,398 840,400" stroke="rgba(120,100,80,.3)" stroke-width="2.5" fill="none"/>
+      <!-- Figure 3 (walking) -->
+      <circle cx="500" cy="392" r="4.5" fill="rgba(120,100,80,.4)"/>
+      <path d="M496,396 Q494,410 492,425 Q497,428 500,425 Q503,428 508,425 Q506,410 504,396 Z"
+            fill="rgba(74,111,165,.35)"/>
+    </svg>
+
+  <app-scene-heading title="🦅 安慰我民" subtitle="Comfort My People — Isaiah 40" id="comfort-heading" />
+  <app-scene-verse text="「但那等候耶和華的，必重新得力」— 以賽亞書 40:31" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-newearth" aria-label="新天新地 — New Heaven and New Earth">
+  <app-starfield />
+
+  <div id="newearth-ground" aria-hidden="true"></div>
+    <div id="newearth-glow" aria-hidden="true"></div>
+  
+    <!-- Paradise landscape with lion and lamb -->
+    <svg id="newearth-svg" viewBox="0 0 1440 600" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="新天新地的和平景象 — The peaceable kingdom of the new creation">
+      <title>新天新地 — A radiant paradise with lion and lamb together and a flowing river</title>
+      <defs>
+        <linearGradient id="paradiseSkyG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4a6890"/>
+          <stop offset="30%" stop-color="#6a90b8"/>
+          <stop offset="60%" stop-color="#88b8d0"/>
+          <stop offset="100%" stop-color="#a8d8e8"/>
+        </linearGradient>
+        <linearGradient id="meadowG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4a8838"/>
+          <stop offset="50%" stop-color="#3a7028"/>
+          <stop offset="100%" stop-color="#2a5820"/>
+        </linearGradient>
+        <linearGradient id="riverG" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="rgba(100,180,220,.4)"/>
+          <stop offset="50%" stop-color="rgba(120,200,240,.5)"/>
+          <stop offset="100%" stop-color="rgba(100,180,220,.4)"/>
+        </linearGradient>
+        <radialGradient id="paradiseSunG" cx="50%" cy="30%" r="50%">
+          <stop offset="0%" stop-color="rgba(255,255,220,.6)"/>
+          <stop offset="50%" stop-color="rgba(255,240,180,.2)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Paradise sky -->
+      <rect x="0" y="0" width="1440" height="600" fill="url(#paradiseSkyG)"/>
+      <!-- Radiant sun/light -->
+      <ellipse cx="720" cy="100" rx="300" ry="200" fill="url(#paradiseSunG)"/>
+      <circle cx="720" cy="80" r="50" fill="rgba(255,255,220,.3)"/>
+      <!-- Distant mountains (paradise-green) -->
+      <path d="M0 300 Q180 250 360 280 Q540 220 720 250 Q900 210 1080 260 Q1260 230 1440 280 L1440 600 L0 600 Z"
+            fill="rgba(60,120,80,.2)"/>
+      <!-- Rolling green meadow -->
+      <path d="M0 380 Q200 350 400 370 Q600 340 800 360 Q1000 340 1200 365 Q1350 355 1440 375 L1440 600 L0 600 Z"
+            fill="url(#meadowG)"/>
+      <!-- Flowing river (winding path) -->
+      <path d="M720,300 Q680,340 700,380 Q740,420 710,460 Q680,500 720,540 Q760,580 740,600"
+            stroke="url(#riverG)" stroke-width="30" fill="none" stroke-linecap="round"
+            stroke-dasharray="15,5" style="animation:riverFlow 4s linear infinite;"/>
+      <path d="M720,300 Q680,340 700,380 Q740,420 710,460 Q680,500 720,540 Q760,580 740,600"
+            stroke="rgba(120,200,240,.15)" stroke-width="45" fill="none" stroke-linecap="round"/>
+      <!-- Trees -->
+      <!-- Tree left -->
+      <rect x="248" y="340" width="8" height="40" fill="#5a3820"/>
+      <circle cx="252" cy="330" r="22" fill="rgba(60,120,50,.5)"/>
+      <circle cx="240" cy="335" r="16" fill="rgba(50,110,40,.45)"/>
+      <circle cx="265" cy="332" r="18" fill="rgba(55,115,45,.48)"/>
+      <!-- Tree right -->
+      <rect x="1168" y="345" width="8" height="38" fill="#5a3820"/>
+      <circle cx="1172" cy="335" r="20" fill="rgba(60,120,50,.5)"/>
+      <circle cx="1160" cy="340" r="15" fill="rgba(50,110,40,.45)"/>
+      <circle cx="1185" cy="337" r="17" fill="rgba(55,115,45,.48)"/>
+      <!-- Fruit tree (center-left) -->
+      <rect x="448" y="348" width="6" height="35" fill="#5a3820"/>
+      <circle cx="451" cy="340" r="18" fill="rgba(50,110,40,.5)"/>
+      <!-- Fruits -->
+      <circle cx="440" cy="335" r="3" fill="rgba(220,80,60,.4)"/>
+      <circle cx="460" cy="338" r="3" fill="rgba(220,80,60,.4)"/>
+      <circle cx="448" cy="344" r="3" fill="rgba(220,80,60,.35)"/>
+      <!-- Flowers scattered -->
+      <circle cx="350" cy="378" r="3" fill="rgba(220,160,180,.5)"/>
+      <circle cx="380" cy="382" r="2.5" fill="rgba(255,220,120,.4)"/>
+      <circle cx="500" cy="374" r="3" fill="rgba(180,140,220,.4)"/>
+      <circle cx="550" cy="380" r="2.5" fill="rgba(220,160,180,.45)"/>
+      <circle cx="900" cy="372" r="3" fill="rgba(255,220,120,.4)"/>
+      <circle cx="950" cy="378" r="2.5" fill="rgba(180,140,220,.4)"/>
+      <circle cx="1050" cy="376" r="3" fill="rgba(220,160,180,.5)"/>
+      <circle cx="1100" cy="380" r="2.5" fill="rgba(255,220,120,.4)"/>
+      <!-- Lion (resting peacefully, center-right) -->
+      <!-- Lion body -->
+      <ellipse cx="820" cy="388" rx="28" ry="16" fill="#c8a040"/>
+      <!-- Lion mane -->
+      <circle cx="800" cy="380" r="16" fill="#b08830"/>
+      <circle cx="795" cy="375" r="12" fill="#c89838"/>
+      <!-- Lion head -->
+      <circle cx="798" cy="378" r="10" fill="#d4a840"/>
+      <!-- Lion face -->
+      <circle cx="794" cy="376" r="1.5" fill="#5a3020"/>
+      <circle cx="802" cy="376" r="1.5" fill="#5a3020"/>
+      <path d="M796,380 L798,382 L800,380" stroke="#5a3020" stroke-width="1" fill="none"/>
+      <!-- Lion ears -->
+      <circle cx="790" cy="370" r="3" fill="#c89838"/>
+      <circle cx="806" cy="370" r="3" fill="#c89838"/>
+      <!-- Lion tail -->
+      <path d="M848,388 Q860,380 858,370" stroke="#c8a040" stroke-width="3" fill="none"/>
+      <circle cx="858" cy="368" r="3" fill="#b08830"/>
+      <!-- Lion legs (resting) -->
+      <path d="M800,400 Q798,408 796,412" stroke="#c8a040" stroke-width="4" fill="none"/>
+      <path d="M840,400 Q842,408 844,412" stroke="#c8a040" stroke-width="4" fill="none"/>
+      <!-- Lamb (resting next to lion) -->
+      <!-- Lamb body -->
+      <ellipse cx="770" cy="394" rx="16" ry="10" fill="#e8e0d0"/>
+      <!-- Lamb wool texture -->
+      <circle cx="766" cy="390" r="5" fill="#f0ece0"/>
+      <circle cx="774" cy="388" r="5" fill="#f0ece0"/>
+      <circle cx="770" cy="394" r="4" fill="#ece4d4"/>
+      <!-- Lamb head -->
+      <circle cx="756" cy="390" r="7" fill="#e8e0d0"/>
+      <!-- Lamb face -->
+      <circle cx="753" cy="389" r="1" fill="#4a3020"/>
+      <circle cx="758" cy="389" r="1" fill="#4a3020"/>
+      <path d="M754,392 L756,393 L758,392" stroke="#8a6840" stroke-width=".8" fill="none"/>
+      <!-- Lamb ears -->
+      <path d="M750,386 Q746,384 748,388" stroke="#d8d0c0" stroke-width="2" fill="none"/>
+      <path d="M762,386 Q766,384 764,388" stroke="#d8d0c0" stroke-width="2" fill="none"/>
+      <!-- Lamb legs -->
+      <line x1="762" y1="402" x2="762" y2="410" stroke="#d8d0c0" stroke-width="2.5"/>
+      <line x1="778" y1="402" x2="778" y2="410" stroke="#d8d0c0" stroke-width="2.5"/>
+      <!-- Peaceful glow around lion and lamb -->
+      <ellipse cx="795" cy="392" rx="60" ry="30" fill="rgba(255,255,200,.06)"/>
+      <!-- Butterflies -->
+      <g style="animation:floatY 4s ease-in-out infinite;">
+        <path d="M600,330 Q604,324 608,330 Q604,336 600,330 Z" fill="rgba(200,160,220,.4)"/>
+        <path d="M608,330 Q612,324 616,330 Q612,336 608,330 Z" fill="rgba(180,140,200,.35)"/>
+      </g>
+      <g style="animation:floatY 4s ease-in-out 2s infinite;">
+        <path d="M1000,340 Q1004,334 1008,340 Q1004,346 1000,340 Z" fill="rgba(220,180,120,.4)"/>
+        <path d="M1008,340 Q1012,334 1016,340 Q1012,346 1008,340 Z" fill="rgba(200,160,100,.35)"/>
+      </g>
+      <!-- Birds in sky -->
+      <path d="M400,180 Q408,172 416,180" stroke="rgba(60,80,100,.3)" stroke-width="1.5" fill="none"/>
+      <path d="M430,170 Q436,164 442,170" stroke="rgba(60,80,100,.25)" stroke-width="1.5" fill="none"/>
+      <path d="M1000,190 Q1008,182 1016,190" stroke="rgba(60,80,100,.3)" stroke-width="1.5" fill="none"/>
+      <path d="M1030,180 Q1036,174 1042,180" stroke="rgba(60,80,100,.25)" stroke-width="1.5" fill="none"/>
+      <!-- Children playing (small, joyful figures) -->
+      <circle cx="640" cy="376" r="4" fill="rgba(160,120,100,.4)"/>
+      <path d="M637,380 Q635,392 634,400 Q637,402 640,400 Q643,402 646,400 Q645,392 643,380 Z"
+            fill="rgba(74,111,165,.3)"/>
+      <path d="M637,383 Q632,380 628,378" stroke="rgba(160,120,100,.25)" stroke-width="2" fill="none"/>
+      <path d="M643,383 Q648,380 652,378" stroke="rgba(160,120,100,.25)" stroke-width="2" fill="none"/>
+      <circle cx="660" cy="378" r="3.5" fill="rgba(160,120,100,.35)"/>
+      <path d="M657,382 Q656,392 655,398 Q658,400 660,398 Q662,400 665,398 Q664,392 663,382 Z"
+            fill="rgba(120,180,100,.3)"/>
+      <!-- Rainbow arc (very subtle) -->
+      <path d="M200,200 Q720,60 1240,200" stroke="rgba(255,100,100,.06)" stroke-width="8" fill="none"/>
+      <path d="M210,208 Q720,72 1230,208" stroke="rgba(255,200,80,.06)" stroke-width="8" fill="none"/>
+      <path d="M220,216 Q720,84 1220,216" stroke="rgba(100,200,100,.06)" stroke-width="8" fill="none"/>
+      <path d="M230,224 Q720,96 1210,224" stroke="rgba(100,150,255,.06)" stroke-width="8" fill="none"/>
+    </svg>
+
+  <app-scene-heading title="🌿 新天新地" subtitle="New Heaven and New Earth — Isaiah 65:17" id="newearth-heading" />
+  <app-scene-verse text="「看哪，我造新天新地」— 以賽亞書 65:17" />
+</section>

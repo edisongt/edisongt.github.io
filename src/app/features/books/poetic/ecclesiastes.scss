@@ -1,0 +1,260 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #b88840 0%, #d4a860 40%, #e8c888 100%);
+    }
+
+#intro-orb {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: clamp(55px,9vw,110px); height: clamp(55px,9vw,110px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 38%, #fff8e0, #f0c060 35%, #e6a040 65%, #c08030);
+      box-shadow: 0 0 60px rgba(230,160,64,.6), 0 0 120px rgba(240,200,100,.25);
+      z-index: 4;
+      animation: orbGlow 4s ease-in-out infinite;
+    }
+
+@keyframes orbGlow {
+      0%,100% { box-shadow: 0 0 60px rgba(230,160,64,.6), 0 0 120px rgba(240,200,100,.25); }
+      50%      { box-shadow: 0 0 90px rgba(230,160,64,.85), 0 0 180px rgba(240,200,100,.4); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#e6a040 0%,#fff4c0 45%,#c08030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(230,160,64,.85); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(160,100,30,.7); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 48%; z-index: 5; }
+
+#intro-preacher {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(70px,10vw,130px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — VANITY OF VANITIES  虛空的虛空
+    ══════════════════════════════════════════════ */
+
+#scene-vanity {
+      background: linear-gradient(180deg, #b0b8c8 0%, #d8c090 45%, #e8e0d0 100%);
+    }
+
+#vanity-mist {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: 40vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(255,255,255,.3) 0%, rgba(220,210,190,.1) 50%, transparent 72%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#vanity-scene-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; z-index: 4; }
+
+#vanity-figure {
+      position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(160px,22vw,320px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#vanity-heading h2 {
+      background: linear-gradient(120deg,#a08040 0%,#fff4c0 50%,#806030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#vanity-heading p { color: rgba(100,80,40,.6); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — A TIME FOR EVERYTHING  凡事都有定期
+    ══════════════════════════════════════════════ */
+
+#scene-seasons {
+      background: linear-gradient(135deg, #88c878 0%, #e0c860 35%, #d8a050 65%, #90b8d0 100%);
+    }
+
+#seasons-glow {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 30vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(255,240,180,.25) 0%, rgba(255,220,120,.08) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#seasons-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(240px,35vw,500px);
+      animation: gentleSway 8s ease-in-out infinite;
+    }
+
+#seasons-heading h2 {
+      background: linear-gradient(120deg,#806030 0%,#fff8d0 50%,#a08040 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#seasons-heading p { color: rgba(80,60,20,.6); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — UNDER THE SUN  日光之下
+    ══════════════════════════════════════════════ */
+
+#scene-sun {
+      background: linear-gradient(180deg, #68a8e0 0%, #e8e0c0 40%, #d0b878 100%);
+    }
+
+#sun-orb {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 45% 45%, #fffde8, #ffe870 40%, #f0c030 75%, #d0a020);
+      box-shadow: 0 0 60px rgba(240,200,40,.7), 0 0 140px rgba(255,220,80,.35);
+      z-index: 4;
+      animation: orbGlow 4s ease-in-out infinite;
+    }
+
+#sun-landscape-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 4; }
+
+#sun-figures-svg {
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      z-index: 9; width: clamp(200px,30vw,420px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+#sun-heading h2 {
+      background: linear-gradient(120deg,#c08020 0%,#fffae0 50%,#a07020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#sun-heading p { color: rgba(60,80,120,.6); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — WISDOM'S VALUE  智慧的價值
+    ══════════════════════════════════════════════ */
+
+#scene-wisdom {
+      background: linear-gradient(180deg, #d0a050 0%, #e8d8b0 45%, #f0e8d0 100%);
+    }
+
+#wisdom-lamp-glow {
+      position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
+      width: 30vw; height: 35vh;
+      background: radial-gradient(ellipse, rgba(255,220,120,.3) 0%, rgba(255,200,80,.08) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#wisdom-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#wisdom-heading h2 {
+      background: linear-gradient(120deg,#a07020 0%,#fff8d0 50%,#c09030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#wisdom-heading p { color: rgba(100,70,20,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — REMEMBER YOUR CREATOR  當記念造你的主
+    ══════════════════════════════════════════════ */
+
+#scene-remember {
+      background: linear-gradient(180deg, #d0a0b0 0%, #c8a8d0 35%, #e8c878 100%);
+    }
+
+#remember-sunrise {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 20%, rgba(255,220,140,.25) 0%, rgba(255,200,120,.08) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#remember-rays {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 5; width: clamp(120px,18vw,220px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#remember-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(220px,32vw,440px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+#remember-heading h2 {
+      background: linear-gradient(120deg,#c08030 0%,#ffe0c0 50%,#e6a040 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#remember-heading p { color: rgba(120,70,60,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

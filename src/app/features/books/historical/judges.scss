@@ -1,0 +1,305 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #460e2a 0%, #952e2e 30%, #8e3131 65%, #913232 100%);
+    }
+
+#intro-blood-moon {
+      position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
+      width: clamp(55px,9vw,110px); height: clamp(55px,9vw,110px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #ffd0c0, #c06040 40%, #8a3030 75%, #501818);
+      box-shadow: 0 0 50px rgba(192,96,64,.6), 0 0 120px rgba(138,48,48,.3);
+      z-index: 4;
+      animation: moonGlow 4s ease-in-out infinite;
+    }
+
+@keyframes moonGlow {
+      0%,100% { box-shadow: 0 0 50px rgba(192,96,64,.6), 0 0 120px rgba(138,48,48,.3); }
+      50%      { box-shadow: 0 0 80px rgba(192,96,64,.85), 0 0 170px rgba(138,48,48,.5); }
+    }
+
+#intro-title {
+      position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#c06040 0%,#ffd0b0 45%,#a04040 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(220,160,140,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(180,120,100,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 5; }
+
+#intro-judge {
+      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(42px,5.5vw,75px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — DEBORAH  底波拉
+    ══════════════════════════════════════════════ */
+
+#scene-deborah {
+      background: linear-gradient(180deg, #381c46 0%, #722e50 55%, #894522 100%);
+    }
+
+#deborah-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#2a1a08 0%,#160c04 55%,#0a0602 100%);
+      z-index: 5;
+    }
+
+#deborah-ground::before {
+      content: '';
+      position: absolute; top: -18%; left: 0; width: 100%; height: 30%;
+      background: radial-gradient(ellipse 30% 40% at 35% 80%, #3a2208 0%, transparent 70%),
+                  radial-gradient(ellipse 25% 35% at 75% 70%, #2e1a06 0%, transparent 65%);
+    }
+
+#deborah-light {
+      position: absolute; bottom: 28%; left: 38%; transform: translateX(-50%);
+      width: 28vw; height: 14vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(192,160,80,.2) 0%, rgba(160,120,40,.08) 50%, transparent 72%);
+      z-index: 6;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+#deborah-svg {
+      position: absolute; bottom: 28%; left: 34%; z-index: 9;
+      width: clamp(90px,14vw,180px);
+      animation: gentleSway 6s ease-in-out infinite;
+    }
+
+.army-person {
+      position: absolute; bottom: 27%; z-index: 7;
+      border-radius: 38% 38% 0 0;
+      background: rgba(60,30,15,.7);
+    }
+
+.army-person::before {
+      content: ''; position: absolute; top: -38%; left: 50%; transform: translateX(-50%);
+      width: 58%; height: 42%; background: rgba(60,30,15,.7); border-radius: 50%;
+    }
+
+#deborah-heading h2 {
+      color: #c0a060;
+      text-shadow: 0 0 22px rgba(192,160,96,.5);
+    }
+
+#deborah-heading p { color: rgba(200,170,120,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — GIDEON  基甸
+    ══════════════════════════════════════════════ */
+
+#scene-gideon {
+      background: linear-gradient(180deg, #1c0e46 0%, #3c2490 45%, #7e462a 100%);
+    }
+
+#gideon-night-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 60%;
+      background: radial-gradient(ellipse 50% 50% at 50% 40%, rgba(255,160,40,.1) 0%, rgba(255,100,20,.04) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#gideon-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 28%;
+      background: linear-gradient(180deg,#1a1008 0%,#0e0804 55%,#060402 100%);
+      z-index: 5;
+    }
+
+#gideon-svg {
+      position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%);
+      z-index: 10; width: clamp(200px,35vw,460px);
+    }
+
+@keyframes torchFlicker {
+      0%    { opacity: .85; transform: scaleY(1)    rotate(-1deg); }
+      25%   { opacity: 1;   transform: scaleY(1.08) rotate(1deg);  }
+      50%   { opacity: .9;  transform: scaleY(.95)  rotate(-2deg); }
+      75%   { opacity: 1;   transform: scaleY(1.05) rotate(0deg);  }
+      100%  { opacity: .85; transform: scaleY(1)    rotate(-1deg); }
+    }
+
+#gideon-heading h2 {
+      background: linear-gradient(120deg,#ff9040 0%,#ffe0a0 50%,#c06020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+#gideon-heading p { color: rgba(255,180,100,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — SAMSON  參孫
+    ══════════════════════════════════════════════ */
+
+#scene-samson {
+      background: linear-gradient(180deg, #2a0e46 0%, #6b285d 50%, #883434 100%);
+    }
+
+#samson-temple { position: absolute; bottom: 0; left: 0; width: 100%; height: 72%; z-index: 3; }
+
+#samson-dust {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 20vw; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(180,140,80,.12) 0%, rgba(120,80,40,.05) 50%, transparent 72%);
+      z-index: 4;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+#samson-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(140px,22vw,300px);
+      animation: samsonStrain 3s ease-in-out infinite;
+    }
+
+@keyframes samsonStrain {
+      0%,100% { transform: translateX(-50%) scale(1);    }
+      50%      { transform: translateX(-50%) scale(1.02); }
+    }
+
+#samson-heading h2 {
+      background: linear-gradient(120deg,#a04040 0%,#ffd0b0 50%,#8a3030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#samson-heading p { color: rgba(200,150,130,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — CYCLE OF SIN  罪的循環
+    ══════════════════════════════════════════════ */
+
+#scene-cycle {
+      background: linear-gradient(180deg, #412041 0%, #603060 50%, #462a38 100%);
+    }
+
+#cycle-glow {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: clamp(240px,40vw,500px); height: clamp(240px,40vw,500px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(160,64,64,.12) 0%, rgba(138,48,48,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+#cycle-svg {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      z-index: 10; width: clamp(220px,36vw,440px); height: clamp(220px,36vw,440px);
+      animation: cycleRotate 40s linear infinite;
+    }
+
+@keyframes cycleRotate {
+      from { transform: translate(-50%,-50%) rotate(0deg);   }
+      to   { transform: translate(-50%,-50%) rotate(360deg); }
+    }
+
+#cycle-labels {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      z-index: 12; width: clamp(220px,36vw,440px); height: clamp(220px,36vw,440px);
+      pointer-events: none;
+    }
+
+#cycle-heading h2 {
+      background: linear-gradient(120deg,#c06040 0%,#ffd0b0 30%,#a04040 70%,#8a3030 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#cycle-heading p { color: rgba(200,150,130,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — DARKNESS  黑暗時代
+    ══════════════════════════════════════════════ */
+
+#scene-darkness {
+      background: linear-gradient(180deg, #41162b 0%, #622a38 50%, #703838 100%);
+    }
+
+#darkness-landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 3; }
+
+#darkness-haze {
+      position: absolute; bottom: 22%; left: 0; width: 100%; height: 26%;
+      background: linear-gradient(180deg, transparent 0%, rgba(100,40,20,.06) 40%, rgba(80,30,15,.1) 70%, transparent 100%);
+      z-index: 5;
+      animation: mistDrift 9s ease-in-out infinite alternate;
+    }
+
+@keyframes mistDrift {
+      0%   { transform: translateX(0)   scale(1);    }
+      100% { transform: translateX(-4%) scale(1.05); }
+    }
+
+@keyframes fireFlicker {
+      0%,100% { opacity: .7; transform: scaleY(1);   }
+      50%      { opacity: 1;  transform: scaleY(1.1); }
+    }
+
+#darkness-heading h2 {
+      background: linear-gradient(120deg,#8a3030 0%,#c06040 50%,#602020 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#darkness-heading p { color: rgba(180,120,100,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

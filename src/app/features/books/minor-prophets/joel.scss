@@ -1,0 +1,288 @@
+:host { display: block; }
+
+.scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+@keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
+
+@keyframes shimmer {
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
+
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Joel-specific keyframes ── */
+
+@keyframes locustSwarm {
+      0%   { transform: translateX(0) translateY(0); }
+      25%  { transform: translateX(8px) translateY(-5px); }
+      50%  { transform: translateX(-4px) translateY(3px); }
+      75%  { transform: translateX(6px) translateY(-2px); }
+      100% { transform: translateX(0) translateY(0); }
+    }
+
+@keyframes darkPulse {
+      0%,100% { opacity: .5; }
+      50%      { opacity: .85; }
+    }
+
+@keyframes trumpetGlow {
+      0%,100% { opacity: .4; transform: scale(1);    }
+      50%      { opacity: .8; transform: scale(1.06); }
+    }
+
+@keyframes spiritPour {
+      0%   { transform: translateY(-10px); opacity: .3; }
+      50%  { transform: translateY(5px);  opacity: .7; }
+      100% { transform: translateY(-10px); opacity: .3; }
+    }
+
+@keyframes harvestGrow {
+      0%,100% { transform: scaleY(1); opacity: .7; }
+      50%      { transform: scaleY(1.08); opacity: 1; }
+    }
+
+@keyframes eclipseGlow {
+      0%,100% { box-shadow: 0 0 30px rgba(68,136,204,.15); }
+      50%      { box-shadow: 0 0 60px rgba(68,136,204,.35); }
+    }
+
+@keyframes rainDrop {
+      0%   { transform: translateY(0); opacity: .7; }
+      80%  { transform: translateY(70px); opacity: .3; }
+      100% { transform: translateY(80px); opacity: 0; }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #0e1218 0%, #141820 40%, #1a2030 70%, #1e2838 100%);
+    }
+
+#intro-storm-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(68,136,204,.12) 0%, rgba(40,80,140,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#intro-title {
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
+
+#intro-title h1 {
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg,#3366aa 0%,#6699dd 45%,#225588 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
+
+#intro-title p {
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(100,160,220,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
+
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(68,136,204,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-locust-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(80px,10vw,130px);
+    }
+
+#intro-landscape-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — THE LOCUST PLAGUE 蝗蟲之災
+    ══════════════════════════════════════════════ */
+
+#scene-locusts {
+      background: linear-gradient(180deg, #181c24 0%, #222830 40%, #1c2028 70%, #141820 100%);
+    }
+
+#locusts-dark-sky {
+      position: absolute; top: 0; left: 0; width: 100%; height: 50%;
+      background: linear-gradient(180deg,#10141a 0%,#1a2028 60%,#222830 100%);
+      z-index: 3;
+    }
+
+#locusts-ground {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 30%;
+      background: linear-gradient(180deg,#2a2820 0%,#1a1814 55%,#0e0c0a 100%);
+      z-index: 5;
+    }
+
+#locusts-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(300px,55vw,750px);
+    }
+
+#locusts-heading h2 {
+      color: #5a90c0;
+      text-shadow: 0 0 22px rgba(68,136,204,.5);
+    }
+
+#locusts-heading p { color: rgba(100,160,220,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — CALL TO REPENTANCE 哀哭悔改
+    ══════════════════════════════════════════════ */
+
+#scene-repentance {
+      background: linear-gradient(180deg, #14141e 0%, #1c1c2a 40%, #222230 70%, #1a1a26 100%);
+    }
+
+#repentance-glow {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 100%;
+      background: radial-gradient(ellipse 50% 65% at 50% 40%, rgba(68,136,204,.08) 0%, rgba(40,80,140,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#repentance-figure-svg {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(120px,18vw,240px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#repentance-heading h2 {
+      color: #6a9ec8;
+      text-shadow: 0 0 18px rgba(68,136,204,.5);
+    }
+
+#repentance-heading p { color: rgba(100,150,200,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — THE DAY OF THE LORD 耶和華的日子
+    ══════════════════════════════════════════════ */
+
+#scene-dayoflord {
+      background: linear-gradient(180deg, #0c0e14 0%, #141828 40%, #1a2040 70%, #101420 100%);
+    }
+
+#dayoflord-dark-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 40vh;
+      background: radial-gradient(ellipse, rgba(68,136,204,.15) 0%, rgba(30,60,100,.06) 45%, transparent 70%);
+      z-index: 3;
+      animation: darkPulse 3s ease-in-out infinite;
+    }
+
+#dayoflord-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; z-index: 5;
+    }
+
+#dayoflord-heading h2 {
+      color: #4488cc;
+      text-shadow: 0 0 22px rgba(68,136,204,.6);
+    }
+
+#dayoflord-heading p { color: rgba(80,140,200,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — OUTPOURING OF THE SPIRIT 聖靈澆灌
+    ══════════════════════════════════════════════ */
+
+#scene-spirit {
+      background: linear-gradient(180deg, #141420 0%, #1e1e30 35%, #2a2840 60%, #3a3858 85%, #4a4870 100%);
+    }
+
+#spirit-light {
+      position: absolute; top: 2%; left: 50%; transform: translateX(-50%);
+      width: clamp(18px,3vw,45px); height: 50%;
+      background: linear-gradient(180deg,rgba(140,200,255,0) 0%,rgba(68,136,204,.3) 25%,rgba(100,170,240,.5) 65%,transparent 100%);
+      z-index: 6; filter: blur(10px);
+      animation: glowPulse 2.5s ease-in-out infinite;
+    }
+
+#spirit-glow {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: clamp(200px,40vw,500px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(68,136,204,.1) 0%, rgba(40,80,140,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#spirit-scene-svg {
+      position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,30vw,400px);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+#spirit-heading h2 {
+      background: linear-gradient(120deg,#4488cc 0%,#88ccff 50%,#3366aa 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#spirit-heading p { color: rgba(100,170,230,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — RESTORATION 萬物復興
+    ══════════════════════════════════════════════ */
+
+#scene-restoration {
+      background: linear-gradient(180deg, #1a2028 0%, #1e2830 40%, #243028 70%, #2a3830 100%);
+    }
+
+#restoration-light {
+      position: absolute; top: 5%; left: 50%; transform: translateX(-50%);
+      width: 70vw; height: 35vh;
+      background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(80,180,100,.12) 0%, rgba(60,140,80,.05) 50%, transparent 75%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#restoration-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#restoration-heading h2 {
+      background: linear-gradient(120deg,#4488cc 0%,#66cc88 50%,#3366aa 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#restoration-heading p { color: rgba(80,180,120,.55); }
+
+@media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
