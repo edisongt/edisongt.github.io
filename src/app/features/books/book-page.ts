@@ -1,5 +1,7 @@
-import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 import { BookDataService } from '../../core/services/book-data.service';
 
 @Component({
@@ -10,11 +12,8 @@ import { BookDataService } from '../../core/services/book-data.service';
 export class BookPage {
   private route = inject(ActivatedRoute);
   private bookData = inject(BookDataService);
-  bookId = signal('');
-
-  constructor() {
-    this.route.params.subscribe(params => {
-      this.bookId.set(params['bookId']);
-    });
-  }
+  bookId = toSignal(
+    this.route.params.pipe(map(p => p['bookId'] as string)),
+    { initialValue: '' },
+  );
 }
