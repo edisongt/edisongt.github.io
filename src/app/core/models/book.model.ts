@@ -19,8 +19,7 @@ export type BookCategory =
   | 'poetic'
   | 'major-prophets'
   | 'minor-prophets'
-  | 'gospels'
-  | 'acts';
+  | 'gospels';
 
 export interface BookGroup {
   category: BookCategory;
