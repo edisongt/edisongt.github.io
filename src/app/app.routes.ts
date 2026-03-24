@@ -65,6 +65,9 @@ export const routes: Routes = [
   { path: 'book/luke', loadComponent: () => import('./features/books/gospels/luke').then(m => m.Luke) },
   { path: 'book/john', loadComponent: () => import('./features/books/gospels/john').then(m => m.John) },
 
+  // Acts
+  { path: 'book/acts', loadComponent: () => import('./features/books/acts/acts').then(m => m.Acts) },
+
   {
     path: '**',
     redirectTo: '',
