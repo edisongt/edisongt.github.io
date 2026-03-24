@@ -34,9 +34,6 @@ export class Home implements OnInit, OnDestroy {
   private readonly DAY_NIGHT_CYCLE_MS = 90000;
   private readonly DAWN_T = 0.24;
 
-  private readonly LIFE_COLORS = ['#d4fff2', '#6dffd2', '#2db87c', '#baffea', '#46d27c', '#a8ffd8'];
-  private readonly KNOW_COLORS = ['#7a3090', '#4a1860', '#9b50c0', '#5c3570', '#c070f0', '#3d1040'];
-
   /* Sky gradient keyframes: [t, topRGB, midRGB, botRGB] */
   private readonly SKY_KF: [number, number[], number[], number[]][] = [
     [0.00, [4, 4, 16],     [8, 8, 28],      [5, 6, 22]],
@@ -63,7 +60,6 @@ export class Home implements OnInit, OnDestroy {
     this.initBreeze();
     this.buildCube(root);
     this.buildFireflies(root);
-    this.bindTreeClicks(root);
 
     window.addEventListener('resize', this.resizeHandler);
 
@@ -307,77 +303,6 @@ export class Home implements OnInit, OnDestroy {
         --e:${r(-20, 55)}px; --f:${r(-50, -5)}px;
       `;
       ffBox.appendChild(ff);
-    }
-  }
-
-  /* ── Tree click interactions ── */
-  private bindTreeClicks(root: HTMLElement): void {
-    const particlesEl = root.querySelector('#particles') as HTMLElement;
-    const lifeWrap = root.querySelector('#life-wrap');
-    const knowWrap = root.querySelector('#know-wrap');
-
-    lifeWrap?.addEventListener('click', () => {
-      const r = lifeWrap.getBoundingClientRect();
-      const pr = particlesEl.getBoundingClientRect();
-      this.spawnLeaves(
-        particlesEl,
-        r.left + r.width * 0.5 - pr.left,
-        r.top + r.height * 0.28 - pr.top,
-        this.LIFE_COLORS,
-        22,
-      );
-    });
-
-    knowWrap?.addEventListener('click', () => {
-      const r = knowWrap.getBoundingClientRect();
-      const pr = particlesEl.getBoundingClientRect();
-      const cx = r.left + r.width * 0.5 - pr.left;
-      const cy = r.top + r.height * 0.28 - pr.top;
-      this.spawnLeaves(particlesEl, cx, cy, this.KNOW_COLORS, 16);
-      this.spawnApples(particlesEl, cx, cy, 7);
-    });
-  }
-
-  private rand(a: number, b: number): number {
-    return +(a + Math.random() * (b - a)).toFixed(1);
-  }
-
-  private spawnLeaves(
-    container: HTMLElement, cx: number, cy: number, colors: string[], count: number,
-  ): void {
-    for (let i = 0; i < count; i++) {
-      const el = document.createElement('div');
-      el.className = 'leaf-p';
-      const dur = this.rand(3.5, 6.5);
-      el.style.cssText = `
-        width:${this.rand(9, 15)}px; height:${this.rand(6, 10)}px;
-        background:${colors[Math.floor(Math.random() * colors.length)]};
-        left:${cx}px; top:${cy}px;
-        --dx:${this.rand(-90, 90)}px;
-        --dy:${this.rand(70, 170)}px;
-        --rot:${this.rand(-540, 540)}deg;
-        --dur:${dur}s;
-        animation-delay:${this.rand(0, 0.5)}s;
-      `;
-      container.appendChild(el);
-      setTimeout(() => el.remove(), (dur + 1) * 1000);
-    }
-  }
-
-  private spawnApples(container: HTMLElement, cx: number, cy: number, count: number): void {
-    for (let i = 0; i < count; i++) {
-      const el = document.createElement('div');
-      el.className = 'apple-p';
-      const dur = this.rand(2.5, 4.5);
-      el.style.cssText = `
-        left:${cx + this.rand(-30, 30)}px; top:${cy + this.rand(0, 30)}px;
-        --dx:${this.rand(-50, 50)}px;
-        --dy:${this.rand(120, 200)}px;
-        --rot:${this.rand(-240, 240)}deg;
-        --dur:${dur}s;
-      `;
-      container.appendChild(el);
-      setTimeout(() => el.remove(), (dur + 1) * 1000);
     }
   }
 }
