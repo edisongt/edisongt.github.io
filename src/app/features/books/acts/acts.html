@@ -1,0 +1,413 @@
+<app-back-button />
+<app-nav-dots [scenes]="scenes" />
+
+<section class="scene" id="scene-intro" aria-label="使徒行傳 — 開場">
+  <app-starfield />
+
+  <div id="intro-fire-glow" aria-hidden="true"></div>
+
+    <div id="intro-title">
+      <h1>使徒行傳</h1>
+      <p>Acts</p>
+      <span class="sub">聖靈 · 五旬節 · 教會 · 見證 · 宣教 · 直到地極</span>
+    </div>
+
+    <!-- Flame with dove descending -->
+    <svg id="intro-flame-svg" viewBox="0 0 160 220" preserveAspectRatio="xMidYMid meet"
+         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="聖靈之火與鴿子 — 使徒行傳的象徵">
+      <!-- Ethereal glow behind flame -->
+      <ellipse cx="80" cy="120" rx="65" ry="70" fill="rgba(224,80,48,.06)"/>
+      <circle cx="80" cy="110" r="50" fill="none" stroke="rgba(224,80,48,.1)" stroke-width="1.5"/>
+      <circle cx="80" cy="110" r="60" fill="none" stroke="rgba(224,80,48,.06)" stroke-width="1"/>
+      <!-- Light rays from above -->
+      <line x1="80" y1="30" x2="80" y2="5" stroke="rgba(255,180,60,.2)" stroke-width="2"/>
+      <line x1="80" y1="30" x2="50" y2="12" stroke="rgba(255,180,60,.15)" stroke-width="1.5"/>
+      <line x1="80" y1="30" x2="110" y2="12" stroke="rgba(255,180,60,.15)" stroke-width="1.5"/>
+      <line x1="80" y1="30" x2="30" y2="28" stroke="rgba(255,180,60,.1)" stroke-width="1"/>
+      <line x1="80" y1="30" x2="130" y2="28" stroke="rgba(255,180,60,.1)" stroke-width="1"/>
+      <!-- Dove silhouette at top -->
+      <path d="M80,35 Q72,28 60,30 Q68,22 80,20 Q92,22 100,30 Q88,28 80,35 Z"
+            fill="rgba(255,255,255,.5)" stroke="rgba(255,255,255,.3)" stroke-width=".5"/>
+      <path d="M60,30 Q50,26 42,30 Q52,24 60,30 Z" fill="rgba(255,255,255,.35)"/>
+      <path d="M100,30 Q110,26 118,30 Q108,24 100,30 Z" fill="rgba(255,255,255,.35)"/>
+      <!-- Main flame -->
+      <path d="M80,60 Q60,90 55,120 Q52,145 65,165 Q72,175 80,178 Q88,175 95,165
+               Q108,145 105,120 Q100,90 80,60 Z"
+            fill="#e05030" stroke="#c04020" stroke-width="1" opacity=".8"/>
+      <!-- Inner flame layers -->
+      <path d="M80,75 Q67,100 64,125 Q62,145 72,160 Q76,165 80,167
+               Q84,165 88,160 Q98,145 96,125 Q93,100 80,75 Z"
+            fill="#f07040" opacity=".7"/>
+      <path d="M80,90 Q72,108 70,130 Q69,148 76,158 Q78,162 80,163
+               Q82,162 84,158 Q91,148 90,130 Q88,108 80,90 Z"
+            fill="#ffa050" opacity=".6"/>
+      <path d="M80,105 Q76,118 75,135 Q74,148 78,155 Q80,158 80,158
+               Q80,158 82,155 Q86,148 85,135 Q84,118 80,105 Z"
+            fill="#ffe080" opacity=".5"/>
+      <!-- Sparks rising -->
+      <circle cx="68" cy="70" r="2" fill="rgba(255,160,60,.5)" style="animation: sparkRise 2.5s ease-out infinite;"/>
+      <circle cx="92" cy="65" r="1.5" fill="rgba(255,180,80,.45)" style="animation: sparkRise 3s ease-out .5s infinite;"/>
+      <circle cx="75" cy="55" r="1.8" fill="rgba(255,200,100,.4)" style="animation: sparkRise 2.8s ease-out 1s infinite;"/>
+      <circle cx="88" cy="58" r="1.3" fill="rgba(255,150,50,.5)" style="animation: sparkRise 3.2s ease-out 1.5s infinite;"/>
+      <circle cx="80" cy="50" r="2.2" fill="rgba(255,220,120,.35)" style="animation: sparkRise 3.5s ease-out 2s infinite;"/>
+      <!-- Ember particles -->
+      <circle cx="55" cy="100" r="1.5" fill="rgba(224,80,48,.35)" style="animation: emberFloat 3s ease-in-out infinite;"/>
+      <circle cx="105" cy="95" r="1.2" fill="rgba(224,80,48,.3)" style="animation: emberFloat 4s ease-in-out 1s infinite;"/>
+      <circle cx="48" cy="130" r="1" fill="rgba(224,80,48,.25)" style="animation: emberFloat 3.5s ease-in-out .5s infinite;"/>
+      <circle cx="112" cy="125" r="1.3" fill="rgba(224,80,48,.3)" style="animation: emberFloat 4.5s ease-in-out 2s infinite;"/>
+    </svg>
+
+    <!-- Horizon silhouette -->
+    <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="horizonG1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a1010"/>
+          <stop offset="100%" stop-color="#0e0808"/>
+        </linearGradient>
+      </defs>
+      <path d="M0,200 Q120,170 240,190 Q360,160 480,185 Q600,150 720,175
+               Q840,145 960,170 Q1080,155 1200,180 Q1320,160 1440,190
+               L1440,300 L0,300 Z"
+            fill="url(#horizonG1)"/>
+      <circle cx="300" cy="178" r="2" fill="rgba(224,80,48,.3)" style="animation: emberFloat 3s ease-in-out infinite;"/>
+      <circle cx="700" cy="165" r="1.5" fill="rgba(224,80,48,.25)" style="animation: emberFloat 4s ease-in-out 1s infinite;"/>
+      <circle cx="1100" cy="172" r="1.8" fill="rgba(224,80,48,.2)" style="animation: emberFloat 3.5s ease-in-out .5s infinite;"/>
+      <circle cx="500" cy="180" r="2" fill="rgba(224,80,48,.3)" style="animation: emberFloat 4.5s ease-in-out 2s infinite;"/>
+    </svg>
+
+  <app-scene-verse text="「但聖靈降臨在你們身上，你們就必得著能力，並要在耶路撒冷、猶太全地和撒馬利亞，直到地極，作我的見證」— 使徒行傳 1:8" />
+  <app-scroll-hint />
+</section>
+
+<section class="scene" id="scene-pentecost" aria-label="五旬節">
+  <app-starfield />
+
+  <div id="pentecost-glow" aria-hidden="true"></div>
+
+    <!-- Tongues of fire descending on gathered believers -->
+    <svg id="pentecost-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="五旬節 — 聖靈如火焰降臨在門徒身上">
+      <defs>
+        <radialGradient id="pentGlowG" cx="50%" cy="25%" r="50%">
+          <stop offset="0%" stop-color="rgba(255,120,40,.2)"/>
+          <stop offset="50%" stop-color="rgba(224,80,48,.08)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+        <linearGradient id="pentFlameG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(255,200,80,.6)"/>
+          <stop offset="50%" stop-color="rgba(240,100,40,.4)"/>
+          <stop offset="100%" stop-color="rgba(200,50,20,.1)"/>
+        </linearGradient>
+      </defs>
+      <!-- Heavenly glow -->
+      <ellipse cx="300" cy="60" rx="250" ry="80" fill="url(#pentGlowG)"/>
+      <!-- Room floor -->
+      <rect y="300" width="600" height="100" fill="#1a1210"/>
+      <ellipse cx="300" cy="300" rx="280" ry="25" fill="rgba(30,20,15,.8)"/>
+      <!-- Gathered believers (12 figures in a circle) -->
+      <!-- Back row -->
+      <ellipse cx="180" cy="310" rx="18" ry="35" fill="rgba(60,45,35,.7)"/>
+      <circle cx="180" cy="270" r="10" fill="rgba(70,55,45,.6)"/>
+      <ellipse cx="240" cy="305" rx="17" ry="33" fill="rgba(55,40,30,.7)"/>
+      <circle cx="240" cy="267" r="9" fill="rgba(65,50,40,.6)"/>
+      <ellipse cx="300" cy="302" rx="18" ry="34" fill="rgba(60,45,35,.7)"/>
+      <circle cx="300" cy="263" r="10" fill="rgba(70,55,45,.6)"/>
+      <ellipse cx="360" cy="305" rx="17" ry="33" fill="rgba(55,40,30,.7)"/>
+      <circle cx="360" cy="267" r="9" fill="rgba(65,50,40,.6)"/>
+      <ellipse cx="420" cy="310" rx="18" ry="35" fill="rgba(60,45,35,.7)"/>
+      <circle cx="420" cy="270" r="10" fill="rgba(70,55,45,.6)"/>
+      <!-- Front row -->
+      <ellipse cx="210" cy="340" rx="17" ry="32" fill="rgba(50,38,28,.7)"/>
+      <circle cx="210" cy="303" r="9" fill="rgba(62,48,38,.6)"/>
+      <ellipse cx="270" cy="338" rx="18" ry="33" fill="rgba(55,42,32,.7)"/>
+      <circle cx="270" cy="300" r="10" fill="rgba(65,50,40,.6)"/>
+      <ellipse cx="330" cy="338" rx="18" ry="33" fill="rgba(55,42,32,.7)"/>
+      <circle cx="330" cy="300" r="10" fill="rgba(65,50,40,.6)"/>
+      <ellipse cx="390" cy="340" rx="17" ry="32" fill="rgba(50,38,28,.7)"/>
+      <circle cx="390" cy="303" r="9" fill="rgba(62,48,38,.6)"/>
+      <!-- Tongues of fire above each person -->
+      <path d="M180,255 Q175,240 178,225 Q180,218 182,225 Q185,240 180,255 Z" fill="url(#pentFlameG)" style="animation: tongueFlicker 1.5s ease-in-out infinite;"/>
+      <path d="M240,252 Q235,237 238,222 Q240,215 242,222 Q245,237 240,252 Z" fill="url(#pentFlameG)" style="animation: tongueFlicker 1.8s ease-in-out .3s infinite;"/>
+      <path d="M300,248 Q295,233 298,218 Q300,210 302,218 Q305,233 300,248 Z" fill="url(#pentFlameG)" style="animation: tongueFlicker 1.6s ease-in-out .6s infinite;"/>
+      <path d="M360,252 Q355,237 358,222 Q360,215 362,222 Q365,237 360,252 Z" fill="url(#pentFlameG)" style="animation: tongueFlicker 1.7s ease-in-out .2s infinite;"/>
+      <path d="M420,255 Q415,240 418,225 Q420,218 422,225 Q425,240 420,255 Z" fill="url(#pentFlameG)" style="animation: tongueFlicker 1.9s ease-in-out .5s infinite;"/>
+      <path d="M210,288 Q205,273 208,258 Q210,250 212,258 Q215,273 210,288 Z" fill="url(#pentFlameG)" style="animation: tongueFlicker 1.6s ease-in-out .4s infinite;"/>
+      <path d="M270,285 Q265,270 268,255 Q270,248 272,255 Q275,270 270,285 Z" fill="url(#pentFlameG)" style="animation: tongueFlicker 1.8s ease-in-out .7s infinite;"/>
+      <path d="M330,285 Q325,270 328,255 Q330,248 332,255 Q335,270 330,285 Z" fill="url(#pentFlameG)" style="animation: tongueFlicker 1.5s ease-in-out .1s infinite;"/>
+      <path d="M390,288 Q385,273 388,258 Q390,250 392,258 Q395,273 390,288 Z" fill="url(#pentFlameG)" style="animation: tongueFlicker 1.7s ease-in-out .8s infinite;"/>
+      <!-- Central wind / spirit swirl -->
+      <path d="M300,30 Q250,80 280,130 Q260,160 300,180 Q340,160 320,130 Q350,80 300,30 Z"
+            fill="none" stroke="rgba(255,180,60,.12)" stroke-width="3"
+            style="animation: spiritSwirl 4s ease-in-out infinite;"/>
+      <!-- Scattered sparks -->
+      <circle cx="200" cy="200" r="2" fill="rgba(255,160,40,.4)" style="animation: sparkRise 2.5s ease-out infinite;"/>
+      <circle cx="400" cy="190" r="1.5" fill="rgba(255,180,60,.35)" style="animation: sparkRise 3s ease-out .5s infinite;"/>
+      <circle cx="150" cy="220" r="1.8" fill="rgba(255,140,30,.3)" style="animation: sparkRise 2.8s ease-out 1s infinite;"/>
+      <circle cx="450" cy="215" r="1.3" fill="rgba(255,170,50,.35)" style="animation: sparkRise 3.2s ease-out 1.5s infinite;"/>
+    </svg>
+
+  <app-scene-heading title="🔥 五旬節" subtitle="The Day of Pentecost — Acts 2" id="pentecost-heading" />
+  <app-scene-verse text="「他們就都被聖靈充滿，按著聖靈所賜的口才說起別國的話來」— 使徒行傳 2:4" />
+</section>
+
+<section class="scene" id="scene-church" aria-label="初代教會">
+  <app-starfield />
+
+  <div id="church-glow" aria-hidden="true"></div>
+
+    <!-- Early church community breaking bread -->
+    <svg id="church-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="初代教會 — 信徒一同擘餅團契">
+      <defs>
+        <radialGradient id="churchGlowG" cx="50%" cy="40%" r="45%">
+          <stop offset="0%" stop-color="rgba(255,200,100,.12)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Warm indoor glow -->
+      <ellipse cx="300" cy="200" rx="240" ry="160" fill="url(#churchGlowG)"/>
+      <!-- Ground / floor -->
+      <rect y="310" width="600" height="90" fill="#1a1410"/>
+      <!-- Central table -->
+      <rect x="200" y="260" width="200" height="12" rx="3" fill="#6a5038" stroke="#7a6048" stroke-width="1"/>
+      <rect x="220" y="272" width="8" height="40" fill="#5a4028"/>
+      <rect x="372" y="272" width="8" height="40" fill="#5a4028"/>
+      <!-- Bread on table -->
+      <ellipse cx="280" cy="256" rx="20" ry="8" fill="#d4a050" stroke="#b08030" stroke-width="1"/>
+      <path d="M265,256 Q280,248 295,256" fill="#e0b060" stroke="#c09040" stroke-width=".5"/>
+      <!-- Cup on table -->
+      <path d="M320,250 L315,258 Q325,262 335,258 L330,250 Z" fill="#8a3040" stroke="#6a2030" stroke-width=".8"/>
+      <ellipse cx="325" cy="250" rx="8" ry="3" fill="#a04050" stroke="#8a3040" stroke-width=".5"/>
+      <!-- Central lamp light -->
+      <circle cx="300" cy="180" r="8" fill="rgba(255,200,80,.5)"
+              style="animation: lampGlow 3s ease-in-out infinite;"/>
+      <circle cx="300" cy="180" r="15" fill="rgba(255,200,80,.15)"/>
+      <circle cx="300" cy="180" r="25" fill="rgba(255,180,60,.06)"/>
+      <!-- People gathered around table -->
+      <!-- Left side -->
+      <ellipse cx="160" cy="300" rx="16" ry="32" fill="rgba(70,50,35,.7)"/>
+      <circle cx="160" cy="263" r="9" fill="rgba(80,60,45,.6)"/>
+      <ellipse cx="190" cy="295" rx="15" ry="30" fill="rgba(65,48,33,.7)"/>
+      <circle cx="190" cy="260" r="8" fill="rgba(75,55,40,.6)"/>
+      <!-- Right side -->
+      <ellipse cx="440" cy="300" rx="16" ry="32" fill="rgba(70,50,35,.7)"/>
+      <circle cx="440" cy="263" r="9" fill="rgba(80,60,45,.6)"/>
+      <ellipse cx="410" cy="295" rx="15" ry="30" fill="rgba(65,48,33,.7)"/>
+      <circle cx="410" cy="260" r="8" fill="rgba(75,55,40,.6)"/>
+      <!-- Front figures -->
+      <ellipse cx="250" cy="335" rx="16" ry="30" fill="rgba(55,40,28,.7)"/>
+      <circle cx="250" cy="300" r="9" fill="rgba(68,50,38,.6)"/>
+      <ellipse cx="350" cy="335" rx="16" ry="30" fill="rgba(55,40,28,.7)"/>
+      <circle cx="350" cy="300" r="9" fill="rgba(68,50,38,.6)"/>
+      <!-- Warm particles / dust motes -->
+      <circle cx="220" cy="200" r="1.5" fill="rgba(255,200,80,.25)" style="animation: emberFloat 4s ease-in-out infinite;"/>
+      <circle cx="380" cy="190" r="1.2" fill="rgba(255,200,80,.2)" style="animation: emberFloat 5s ease-in-out 1s infinite;"/>
+      <circle cx="260" cy="170" r="1" fill="rgba(255,200,80,.2)" style="animation: emberFloat 4.5s ease-in-out .5s infinite;"/>
+      <circle cx="340" cy="175" r="1.3" fill="rgba(255,200,80,.22)" style="animation: emberFloat 5.5s ease-in-out 2s infinite;"/>
+    </svg>
+
+  <app-scene-heading title="🏠 初代教會" subtitle="The Early Church — Acts 2:42–47" id="church-heading" />
+  <app-scene-verse text="「都恆心遵守使徒的教訓，彼此交接、擘餅、祈禱」— 使徒行傳 2:42" />
+</section>
+
+<section class="scene" id="scene-stephen" aria-label="司提反殉道">
+  <app-starfield />
+
+  <div id="stephen-glow" aria-hidden="true"></div>
+
+    <!-- Stephen looking up to heaven -->
+    <svg id="stephen-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="司提反殉道 — 仰望天開了看見人子">
+      <defs>
+        <linearGradient id="stephenBeamG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(255,240,180,.4)"/>
+          <stop offset="50%" stop-color="rgba(255,200,100,.15)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </linearGradient>
+        <radialGradient id="stephenSkyG" cx="50%" cy="10%" r="40%">
+          <stop offset="0%" stop-color="rgba(255,220,120,.12)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Heaven opening - light from above -->
+      <ellipse cx="300" cy="30" rx="120" ry="40" fill="url(#stephenSkyG)"/>
+      <path d="M270,0 L260,200 L340,200 L330,0 Z" fill="url(#stephenBeamG)" opacity=".4"/>
+      <!-- Light source -->
+      <circle cx="300" cy="15" r="20" fill="rgba(255,240,180,.2)"
+              style="animation: lampGlow 3s ease-in-out infinite;"/>
+      <circle cx="300" cy="15" r="12" fill="rgba(255,245,200,.35)"/>
+      <!-- Ground -->
+      <rect y="320" width="600" height="80" fill="#141010"/>
+      <ellipse cx="300" cy="320" rx="280" ry="20" fill="rgba(25,18,15,.8)"/>
+      <!-- Stephen kneeling, face upward -->
+      <ellipse cx="300" cy="310" rx="20" ry="40" fill="rgba(80,60,45,.6)"/>
+      <circle cx="300" cy="265" r="12" fill="rgba(90,70,55,.5)"/>
+      <!-- Arms raised upward -->
+      <line x1="285" y1="285" x2="265" y2="240" stroke="rgba(90,70,55,.4)" stroke-width="4" stroke-linecap="round"/>
+      <line x1="315" y1="285" x2="335" y2="240" stroke="rgba(90,70,55,.4)" stroke-width="4" stroke-linecap="round"/>
+      <!-- Radiance on Stephen's face -->
+      <circle cx="300" cy="265" r="18" fill="rgba(255,220,120,.1)"
+              style="animation: faceGlow 3s ease-in-out infinite;"/>
+      <!-- Stones on ground -->
+      <ellipse cx="250" cy="340" rx="8" ry="5" fill="#4a3a30"/>
+      <ellipse cx="340" cy="345" rx="7" ry="4" fill="#3a2a20"/>
+      <ellipse cx="280" cy="350" rx="6" ry="4" fill="#4a3828"/>
+      <ellipse cx="360" cy="338" rx="5" ry="3.5" fill="#3a2820"/>
+      <ellipse cx="230" cy="348" rx="6" ry="3.5" fill="#443428"/>
+      <!-- Hostile figures in shadow -->
+      <ellipse cx="140" cy="330" rx="18" ry="38" fill="rgba(30,20,15,.6)"/>
+      <circle cx="140" cy="287" r="10" fill="rgba(40,28,20,.5)"/>
+      <ellipse cx="460" cy="335" rx="17" ry="36" fill="rgba(30,20,15,.5)"/>
+      <circle cx="460" cy="294" r="9" fill="rgba(40,28,20,.45)"/>
+      <ellipse cx="100" cy="340" rx="16" ry="34" fill="rgba(25,18,12,.5)"/>
+      <circle cx="100" cy="301" r="9" fill="rgba(35,25,18,.45)"/>
+      <ellipse cx="500" cy="342" rx="15" ry="32" fill="rgba(25,18,12,.45)"/>
+      <circle cx="500" cy="306" r="8" fill="rgba(35,25,18,.4)"/>
+      <!-- Golden dust descending in the beam -->
+      <circle cx="290" cy="80" r="1.5" fill="rgba(255,220,120,.35)" style="animation: goldenDescent 3s ease-in infinite;"/>
+      <circle cx="310" cy="60" r="1.2" fill="rgba(255,230,140,.3)" style="animation: goldenDescent 3.5s ease-in .5s infinite;"/>
+      <circle cx="295" cy="120" r="1.8" fill="rgba(255,210,100,.3)" style="animation: goldenDescent 2.8s ease-in 1s infinite;"/>
+      <circle cx="305" cy="100" r="1" fill="rgba(255,240,160,.25)" style="animation: goldenDescent 3.2s ease-in 1.5s infinite;"/>
+    </svg>
+
+  <app-scene-heading title="✨ 司提反殉道" subtitle="The Martyrdom of Stephen — Acts 7" id="stephen-heading" />
+  <app-scene-verse text="「我看見天開了，人子站在神的右邊」— 使徒行傳 7:56" />
+</section>
+
+<section class="scene" id="scene-conversion" aria-label="保羅歸信">
+  <app-starfield />
+
+  <div id="conversion-glow" aria-hidden="true"></div>
+
+    <!-- Saul struck by light on the road to Damascus -->
+    <svg id="conversion-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="保羅歸信 — 大馬色路上被大光照耀">
+      <defs>
+        <radialGradient id="damascusLightG" cx="50%" cy="15%" r="45%">
+          <stop offset="0%" stop-color="rgba(255,255,220,.25)"/>
+          <stop offset="30%" stop-color="rgba(255,220,120,.12)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+        <linearGradient id="roadG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a2018"/>
+          <stop offset="100%" stop-color="#1a1410"/>
+        </linearGradient>
+      </defs>
+      <!-- Blinding light from heaven -->
+      <ellipse cx="300" cy="50" rx="200" ry="80" fill="url(#damascusLightG)"/>
+      <!-- Central light beam -->
+      <path d="M250,0 L200,350 L400,350 L350,0 Z" fill="rgba(255,255,200,.06)"/>
+      <path d="M275,0 L245,320 L355,320 L325,0 Z" fill="rgba(255,240,160,.08)"/>
+      <!-- Light source -->
+      <circle cx="300" cy="25" r="35" fill="rgba(255,255,220,.15)"
+              style="animation: damascusFlash 2s ease-in-out infinite;"/>
+      <circle cx="300" cy="25" r="22" fill="rgba(255,250,200,.25)"/>
+      <circle cx="300" cy="25" r="12" fill="rgba(255,255,230,.4)"/>
+      <!-- Road / path -->
+      <path d="M0,350 Q150,330 300,340 Q450,330 600,350 L600,400 L0,400 Z" fill="url(#roadG)"/>
+      <path d="M200,360 Q300,350 400,360 L400,400 L200,400 Z" fill="#221810"/>
+      <!-- Saul fallen on the ground -->
+      <ellipse cx="300" cy="345" rx="30" ry="15" fill="rgba(80,60,40,.5)" transform="rotate(-15,300,345)"/>
+      <circle cx="280" cy="330" r="10" fill="rgba(90,68,48,.5)"/>
+      <!-- Arm shielding eyes -->
+      <line x1="285" y1="325" x2="270" y2="310" stroke="rgba(90,68,48,.4)" stroke-width="4" stroke-linecap="round"/>
+      <!-- Companions standing stunned -->
+      <ellipse cx="420" cy="340" rx="16" ry="35" fill="rgba(55,40,28,.6)"/>
+      <circle cx="420" cy="300" r="9" fill="rgba(65,48,35,.5)"/>
+      <ellipse cx="460" cy="345" rx="15" ry="33" fill="rgba(50,35,25,.55)"/>
+      <circle cx="460" cy="307" r="8" fill="rgba(60,42,30,.5)"/>
+      <!-- Damascus city silhouette in distance -->
+      <rect x="80" y="280" width="40" height="60" rx="2" fill="rgba(30,22,15,.4)"/>
+      <rect x="130" y="270" width="30" height="70" rx="2" fill="rgba(35,25,18,.35)"/>
+      <rect x="170" y="285" width="25" height="55" rx="2" fill="rgba(28,20,14,.35)"/>
+      <!-- Dome -->
+      <ellipse cx="100" cy="280" rx="22" ry="10" fill="rgba(35,25,18,.4)"/>
+      <!-- Tower -->
+      <rect x="142" y="255" width="8" height="25" fill="rgba(35,25,18,.35)"/>
+      <!-- Light rays spreading out -->
+      <line x1="300" y1="50" x2="150" y2="300" stroke="rgba(255,220,100,.06)" stroke-width="6"/>
+      <line x1="300" y1="50" x2="450" y2="300" stroke="rgba(255,220,100,.06)" stroke-width="6"/>
+      <line x1="300" y1="50" x2="100" y2="250" stroke="rgba(255,220,100,.04)" stroke-width="4"/>
+      <line x1="300" y1="50" x2="500" y2="250" stroke="rgba(255,220,100,.04)" stroke-width="4"/>
+      <!-- Dust / light particles -->
+      <circle cx="280" cy="150" r="2" fill="rgba(255,220,100,.3)" style="animation: goldenDescent 2.5s ease-in infinite;"/>
+      <circle cx="320" cy="120" r="1.5" fill="rgba(255,240,140,.25)" style="animation: goldenDescent 3s ease-in .5s infinite;"/>
+      <circle cx="260" cy="200" r="1.8" fill="rgba(255,200,80,.25)" style="animation: goldenDescent 2.8s ease-in 1s infinite;"/>
+      <circle cx="340" cy="180" r="1.3" fill="rgba(255,230,120,.2)" style="animation: goldenDescent 3.2s ease-in 1.5s infinite;"/>
+    </svg>
+
+  <app-scene-heading title="⚡ 保羅歸信" subtitle="The Conversion of Saul — Acts 9" id="conversion-heading" />
+  <app-scene-verse text="「掃羅，掃羅，你為甚麼逼迫我？」— 使徒行傳 9:4" />
+</section>
+
+<section class="scene" id="scene-mission" aria-label="福音廣傳">
+  <app-starfield />
+
+  <div id="mission-light" aria-hidden="true"></div>
+  <div id="mission-glow" aria-hidden="true"></div>
+
+    <!-- Ship sailing to distant lands / light spreading to earth's ends -->
+    <svg id="mission-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="福音廣傳 — 直到地極的使命">
+      <defs>
+        <radialGradient id="missionGlowG" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(224,80,48,.1)"/>
+          <stop offset="50%" stop-color="rgba(255,180,60,.05)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+        <linearGradient id="seaG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a2030"/>
+          <stop offset="100%" stop-color="#101820"/>
+        </linearGradient>
+      </defs>
+      <!-- World / mission glow -->
+      <ellipse cx="300" cy="200" rx="200" ry="150" fill="url(#missionGlowG)"/>
+      <!-- Sea -->
+      <path d="M0,250 Q150,240 300,250 Q450,240 600,250 L600,400 L0,400 Z" fill="url(#seaG)"/>
+      <!-- Wave crests -->
+      <path d="M0,260 Q75,252 150,260 Q225,252 300,260 Q375,252 450,260 Q525,252 600,260"
+            fill="none" stroke="rgba(100,160,200,.15)" stroke-width="2"
+            style="animation: waveRoll 4s ease-in-out infinite;"/>
+      <path d="M0,275 Q75,268 150,275 Q225,268 300,275 Q375,268 450,275 Q525,268 600,275"
+            fill="none" stroke="rgba(100,160,200,.1)" stroke-width="1.5"
+            style="animation: waveRoll 5s ease-in-out 1s infinite;"/>
+      <!-- Ship -->
+      <path d="M260,240 Q300,260 340,240 L335,250 Q300,265 265,250 Z"
+            fill="#5a4028" stroke="#6a5038" stroke-width="1"/>
+      <!-- Ship hull -->
+      <path d="M265,250 Q300,270 335,250 L330,255 Q300,272 270,255 Z" fill="#4a3420"/>
+      <!-- Mast -->
+      <line x1="300" y1="180" x2="300" y2="248" stroke="#6a5038" stroke-width="3"/>
+      <!-- Sail -->
+      <path d="M302,185 Q330,210 325,240 L302,240 Z" fill="rgba(200,180,150,.4)" stroke="rgba(180,160,130,.3)" stroke-width="1"/>
+      <path d="M298,185 Q270,210 275,240 L298,240 Z" fill="rgba(190,170,140,.35)" stroke="rgba(170,150,120,.3)" stroke-width="1"/>
+      <!-- Flag -->
+      <path d="M300,180 L300,170 L315,175 L300,180 Z" fill="rgba(224,80,48,.5)"/>
+      <!-- Standing figure on ship (Paul) -->
+      <ellipse cx="310" cy="238" rx="6" ry="14" fill="rgba(80,60,42,.5)"/>
+      <circle cx="310" cy="221" r="5" fill="rgba(90,68,48,.45)"/>
+      <!-- Light radiating outward from ship (representing gospel spreading) -->
+      <circle cx="300" cy="230" r="30" fill="none" stroke="rgba(255,180,60,.08)" stroke-width="2"
+              style="animation: missionRadiate 3s ease-in-out infinite;"/>
+      <circle cx="300" cy="230" r="55" fill="none" stroke="rgba(255,180,60,.05)" stroke-width="1.5"
+              style="animation: missionRadiate 4s ease-in-out .5s infinite;"/>
+      <circle cx="300" cy="230" r="80" fill="none" stroke="rgba(255,180,60,.03)" stroke-width="1"
+              style="animation: missionRadiate 5s ease-in-out 1s infinite;"/>
+      <!-- Distant lands silhouettes -->
+      <!-- Left coast -->
+      <path d="M0,250 Q30,235 60,245 Q80,240 100,248 L100,280 L0,280 Z" fill="rgba(25,20,15,.6)"/>
+      <!-- Right coast -->
+      <path d="M500,248 Q520,240 540,245 Q560,238 580,242 Q600,240 600,250 L600,280 L500,280 Z" fill="rgba(25,20,15,.5)"/>
+      <!-- Stars reflecting on water -->
+      <circle cx="150" cy="300" r="1" fill="rgba(200,200,255,.15)" style="animation: emberFloat 4s ease-in-out infinite;"/>
+      <circle cx="450" cy="310" r="1.2" fill="rgba(200,200,255,.12)" style="animation: emberFloat 5s ease-in-out 1s infinite;"/>
+      <circle cx="350" cy="320" r=".8" fill="rgba(200,200,255,.1)" style="animation: emberFloat 4.5s ease-in-out 2s infinite;"/>
+      <!-- Horizon glow -->
+      <ellipse cx="300" cy="250" rx="280" ry="15" fill="rgba(255,180,60,.04)"
+               style="animation: breathe 4s ease-in-out infinite;"/>
+    </svg>
+
+  <app-scene-heading title="🌍 福音廣傳" subtitle="The Gospel to the Ends of the Earth — Acts 28" id="mission-heading" />
+  <app-scene-verse text="「神的救恩，如今傳給外邦人，他們也必聽受」— 使徒行傳 28:28" />
+</section>

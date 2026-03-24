@@ -81,6 +81,9 @@ const ALL_BOOKS: BookInfo[] = [
   book('mark',    '🦁', '馬可福音',  'Gospel of Mark',    'gospels', '#d06040'),
   book('luke',    '🕊️', '路加福音',  'Gospel of Luke',    'gospels', '#5a9aaa'),
   book('john',    '🦅', '約翰福音',  'Gospel of John',    'gospels', '#e0a840'),
+
+  // Acts 使徒行傳
+  book('acts', '🔥', '使徒行傳', 'Acts of the Apostles', 'acts', '#e05030'),
 ];
 
 const GROUP_LABELS: Record<BookCategory, string> = {
@@ -90,6 +93,7 @@ const GROUP_LABELS: Record<BookCategory, string> = {
   'major-prophets': '大先知書 · Major Prophets',
   'minor-prophets': '小先知書 · Minor Prophets',
   gospels:         '福音書 · Gospels',
+  acts:            '使徒行傳 · Acts',
 };
 
 const CATEGORY_ORDER: BookCategory[] = [
@@ -99,6 +103,7 @@ const CATEGORY_ORDER: BookCategory[] = [
   'major-prophets',
   'minor-prophets',
   'gospels',
+  'acts',
 ];
 
 @Injectable({ providedIn: 'root' })
