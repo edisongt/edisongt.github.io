@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class Titus {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-elder', label: '長老的品格' },
+    { id: 'scene-doctrine', label: '純正的教導' },
+    { id: 'scene-ages', label: '各齡的呼召' },
+    { id: 'scene-grace', label: '恩典的教訓' },
+    { id: 'scene-good', label: '善行的生命' },
   ];
 }

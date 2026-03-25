@@ -1,66 +1,362 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="提多書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="提多書 — 開場">
   <app-starfield />
+
+  <div id="intro-teal-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>提多書</h1>
     <p>Epistle to Titus</p>
+    <span class="sub">長老 · 教導 · 各齡 · 恩典 · 善行 · 更新</span>
   </div>
 
+  <!-- Scroll with olive branch (Crete, order, flourishing) -->
+  <svg id="intro-scroll-svg" viewBox="0 0 160 230" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="書信卷軸與橄欖枝象徵順序與生命">
+    <ellipse cx="80" cy="115" rx="64" ry="82" fill="rgba(32,104,80,.06)"/>
+    <!-- Olive branch above scroll -->
+    <line x1="80" y1="55" x2="80" y2="10" stroke="rgba(80,160,100,.4)" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M80,38 Q68,28 65,35 Q70,44 80,38 Z" fill="rgba(80,160,100,.45)"/>
+    <path d="M80,28 Q92,18 95,25 Q90,34 80,28 Z" fill="rgba(80,160,100,.45)"/>
+    <path d="M80,20 Q70,12 68,18 Q72,26 80,20 Z" fill="rgba(80,160,100,.4)"/>
+    <!-- Olive fruit -->
+    <circle cx="78" cy="36" r="2.5" fill="rgba(48,136,80,.5)"/>
+    <circle cx="84" cy="26" r="2" fill="rgba(48,136,80,.45)"/>
+    <!-- Scroll body -->
+    <rect x="36" y="65" width="88" height="110" rx="4" fill="#1e6848" stroke="#30907a" stroke-width="1.5"/>
+    <rect x="40" y="69" width="80" height="102" rx="3" fill="#227058"/>
+    <!-- Scroll rollers -->
+    <rect x="30" y="60" width="100" height="12" rx="6" fill="#30907a" stroke="#1e6848" stroke-width="1"/>
+    <rect x="30" y="173" width="100" height="12" rx="6" fill="#30907a" stroke="#1e6848" stroke-width="1"/>
+    <!-- Text lines -->
+    <line x1="50" y1="85" x2="110" y2="85" stroke="rgba(180,255,220,.2)" stroke-width="1.5"/>
+    <line x1="50" y1="97" x2="104" y2="97" stroke="rgba(180,255,220,.15)" stroke-width="1.5"/>
+    <line x1="50" y1="109" x2="108" y2="109" stroke="rgba(180,255,220,.15)" stroke-width="1.5"/>
+    <line x1="50" y1="121" x2="96" y2="121" stroke="rgba(180,255,220,.12)" stroke-width="1.5"/>
+    <line x1="50" y1="133" x2="106" y2="133" stroke="rgba(180,255,220,.12)" stroke-width="1.5"/>
+    <line x1="50" y1="145" x2="92" y2="145" stroke="rgba(180,255,220,.1)" stroke-width="1.5"/>
+    <!-- Seal -->
+    <circle cx="80" cy="158" r="9" fill="#30907a" stroke="#50b09a" stroke-width="1"/>
+    <circle cx="80" cy="158" r="5" fill="#50c0a0"/>
+    <!-- Sparkles -->
+    <circle cx="44" cy="72" r="1.5" fill="rgba(80,192,140,.4)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="116" cy="68" r="1.2" fill="rgba(80,192,140,.35)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="80" cy="2" r="2" fill="rgba(80,192,140,.5)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="titusHorizonG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0e2018"/>
+        <stop offset="100%" stop-color="#081410"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,180 240,194 Q360,170 480,188 Q600,160 720,180
+             Q840,155 960,176 Q1080,162 1200,184 Q1320,168 1440,195
+             L1440,300 L0,300 Z"
+          fill="url(#titusHorizonG)"/>
+    <circle cx="280" cy="184" r="2" fill="rgba(48,144,96,.3)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="720" cy="170" r="1.5" fill="rgba(48,144,96,.25)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1140" cy="176" r="1.8" fill="rgba(48,144,96,.2)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「因為神救眾人的恩典已經顯明出來，教訓我們除去不敬虔的心和世俗的情慾」— 提多書 2:11-12" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="提多書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 長老的品格  Elders' Character
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-elder" aria-label="提多書 — 長老的品格">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="elder-glow" aria-hidden="true"></div>
 
+  <!-- Shepherd staff with vessel (character, blameless) -->
+  <svg id="elder-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="牧杖與水瓶象徵長老品格">
+    <defs>
+      <radialGradient id="elderGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(32,144,96,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="staffTG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#40b090"/>
+        <stop offset="100%" stop-color="#207060"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="190" rx="200" ry="140" fill="url(#elderGlowG)"/>
+    <!-- Shepherd crook -->
+    <path d="M230,320 L230,120 Q230,72 258,68 Q288,62 288,90 Q288,112 268,116"
+          fill="none" stroke="url(#staffTG)" stroke-width="12" stroke-linecap="round"/>
+    <!-- Staff grip ring -->
+    <ellipse cx="230" cy="220" rx="8" ry="5" fill="rgba(64,176,144,.3)" stroke="#40b090" stroke-width="1"/>
+    <!-- Clay vessel / pitcher (servant heart) -->
+    <path d="M360,180 Q360,150 375,140 Q398,130 415,140 Q430,150 430,175 L425,270 Q415,280 395,282 Q375,280 366,268 Z"
+          fill="rgba(32,144,96,.2)" stroke="#40b090" stroke-width="1.5"/>
+    <!-- Vessel handle -->
+    <path d="M425,155 Q445,165 445,190 Q445,215 425,220" fill="none" stroke="rgba(48,176,128,.3)" stroke-width="3" stroke-linecap="round"/>
+    <!-- Vessel opening -->
+    <ellipse cx="393" cy="140" rx="22" ry="8" fill="rgba(64,192,152,.2)" stroke="rgba(64,192,152,.3)" stroke-width="1"/>
+    <!-- Water drops from vessel -->
+    <path d="M375,290 Q372,300 375,308 Q378,316 375,322" fill="none" stroke="rgba(64,176,144,.25)" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="375" cy="325" r="3" fill="rgba(64,176,144,.2)"/>
+    <!-- Sparkles -->
+    <circle cx="240" cy="106" r="2" fill="rgba(80,208,160,.4)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="400" cy="132" r="1.5" fill="rgba(80,208,160,.35)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="258" cy="62" r="2" fill="rgba(80,208,160,.4)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="358" rx="240" ry="18" fill="rgba(4,16,10,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🌿 長老的品格" subtitle="Elders' Character — Titus 1:5-9" id="elder-heading" />
+  <app-scene-verse text="「監督既是神的管家，必須無可指責，不任性，不暴躁，不因酒滋事，不打人，不貪無義之財」— 提多書 1:7" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="提多書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 純正的教導  Sound Doctrine
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-doctrine" aria-label="提多書 — 純正的教導">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="doctrine-glow" aria-hidden="true"></div>
 
+  <!-- Open scroll with cross / anchor of truth -->
+  <svg id="doctrine-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="聖言書卷與真理錨象徵純正教導">
+    <defs>
+      <radialGradient id="doctrineGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(32,144,96,.13)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="scrollDocG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#307868"/>
+        <stop offset="100%" stop-color="#1e5040"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="210" rx="210" ry="140" fill="url(#doctrineGlowG)"/>
+    <!-- Open scroll (partially unrolled) -->
+    <path d="M180,300 L180,140 Q300,128 420,140 L420,300 Z"
+          fill="rgba(32,144,96,.12)" stroke="rgba(48,176,128,.2)" stroke-width="1.5"/>
+    <!-- Top roller -->
+    <rect x="165" y="130" width="270" height="16" rx="8" fill="url(#scrollDocG)" stroke="#40b090" stroke-width="1"/>
+    <!-- Bottom roller -->
+    <rect x="165" y="295" width="270" height="16" rx="8" fill="url(#scrollDocG)" stroke="#40b090" stroke-width="1"/>
+    <!-- Left curl -->
+    <path d="M180,140 Q165,165 172,200 Q165,235 180,260" fill="none" stroke="rgba(48,176,128,.2)" stroke-width="1.5"/>
+    <!-- Spine line -->
+    <line x1="300" y1="130" x2="300" y2="300" stroke="rgba(80,200,160,.2)" stroke-width="1.5"/>
+    <!-- Left text lines -->
+    <line x1="198" y1="158" x2="290" y2="156" stroke="rgba(180,255,220,.15)" stroke-width="1.5"/>
+    <line x1="198" y1="170" x2="288" y2="168" stroke="rgba(180,255,220,.12)" stroke-width="1.5"/>
+    <line x1="198" y1="182" x2="290" y2="180" stroke="rgba(180,255,220,.12)" stroke-width="1.5"/>
+    <line x1="198" y1="194" x2="285" y2="192" stroke="rgba(180,255,220,.1)" stroke-width="1.5"/>
+    <line x1="198" y1="206" x2="288" y2="204" stroke="rgba(180,255,220,.1)" stroke-width="1.5"/>
+    <line x1="198" y1="218" x2="286" y2="216" stroke="rgba(180,255,220,.08)" stroke-width="1.5"/>
+    <!-- Right text lines -->
+    <line x1="310" y1="158" x2="402" y2="156" stroke="rgba(180,255,220,.15)" stroke-width="1.5"/>
+    <line x1="312" y1="170" x2="400" y2="168" stroke="rgba(180,255,220,.12)" stroke-width="1.5"/>
+    <line x1="310" y1="182" x2="402" y2="180" stroke="rgba(180,255,220,.12)" stroke-width="1.5"/>
+    <line x1="314" y1="194" x2="400" y2="192" stroke="rgba(180,255,220,.1)" stroke-width="1.5"/>
+    <line x1="310" y1="206" x2="402" y2="204" stroke="rgba(180,255,220,.1)" stroke-width="1.5"/>
+    <line x1="312" y1="218" x2="400" y2="216" stroke="rgba(180,255,220,.08)" stroke-width="1.5"/>
+    <!-- Radiant light from top of scroll -->
+    <ellipse cx="300" cy="130" rx="45" ry="22" fill="rgba(64,200,152,.12)"/>
+    <line x1="300" y1="128" x2="280" y2="75" stroke="rgba(64,200,152,.1)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="300" y1="128" x2="300" y2="60" stroke="rgba(64,200,152,.14)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="300" y1="128" x2="320" y2="75" stroke="rgba(64,200,152,.1)" stroke-width="2" stroke-linecap="round"/>
+    <!-- Sparkles -->
+    <circle cx="288" cy="92" r="2" fill="rgba(80,208,160,.4)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="312" cy="80" r="1.5" fill="rgba(80,208,160,.35)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="56" r="2" fill="rgba(80,208,160,.45)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="172" cy="145" r="1.5" fill="rgba(64,192,144,.3)" style="animation: tealEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="428" cy="142" r="1.5" fill="rgba(64,192,144,.3)" style="animation: tealEmber 4s ease-in-out 1.5s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="📖 純正的教導" subtitle="Sound Doctrine — Titus 1:9-14" id="doctrine-heading" />
+  <app-scene-verse text="「堅守所教真實的道理，就能將純正的教訓勸化人，又能駁斥那些說反話的人」— 提多書 1:9" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="提多書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 各齡的呼召  All Ages Called
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-ages" aria-label="提多書 — 各齡的呼召">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="ages-glow" aria-hidden="true"></div>
 
+  <!-- Three generations: old, young, child (generational tree) -->
+  <svg id="ages-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三代同行象徵各齡的呼召">
+    <defs>
+      <radialGradient id="agesGlowG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(32,144,96,.13)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="300" cy="200" rx="220" ry="150" fill="url(#agesGlowG)"/>
+    <!-- Older figure (left, tallest) -->
+    <circle cx="180" cy="185" r="16" fill="rgba(48,160,112,.25)"/>
+    <path d="M180,201 L168,260 L192,260 Z" fill="rgba(48,160,112,.18)"/>
+    <!-- Staff for older person -->
+    <line x1="196" y1="205" x2="210" y2="280" stroke="rgba(64,192,140,.3)" stroke-width="3" stroke-linecap="round"/>
+    <!-- Middle-aged figure (centre) -->
+    <circle cx="300" cy="198" r="14" fill="rgba(48,176,128,.3)"/>
+    <path d="M300,212 L290,265 L310,265 Z" fill="rgba(48,176,128,.22)"/>
+    <!-- Young figure (right) -->
+    <circle cx="420" cy="208" r="12" fill="rgba(64,192,144,.28)"/>
+    <path d="M420,220 L411,265 L429,265 Z" fill="rgba(64,192,144,.2)"/>
+    <!-- Connection lines (unity across ages) -->
+    <path d="M195,220 Q248,235 286,225" fill="none" stroke="rgba(64,192,140,.2)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M314,225 Q358,235 408,225" fill="none" stroke="rgba(64,192,140,.2)" stroke-width="2" stroke-linecap="round"/>
+    <!-- Tree of life above them all -->
+    <line x1="300" y1="170" x2="300" y2="80" stroke="rgba(48,176,120,.3)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M300,80 Q270,55 250,65 Q260,85 300,80 Z" fill="rgba(64,192,128,.3)"/>
+    <path d="M300,80 Q330,55 350,65 Q340,85 300,80 Z" fill="rgba(64,192,128,.3)"/>
+    <path d="M300,68 Q280,44 268,52 Q275,68 300,68 Z" fill="rgba(80,208,144,.35)"/>
+    <path d="M300,68 Q320,44 332,52 Q325,68 300,68 Z" fill="rgba(80,208,144,.35)"/>
+    <path d="M300,58 Q300,36 294,44 Q290,54 300,58 Z" fill="rgba(96,224,160,.35)"/>
+    <path d="M300,58 Q300,36 306,44 Q310,54 300,58 Z" fill="rgba(96,224,160,.35)"/>
+    <!-- Fruit on tree -->
+    <circle cx="262" cy="66" r="4" fill="rgba(48,176,96,.5)"/>
+    <circle cx="338" cy="66" r="4" fill="rgba(48,176,96,.5)"/>
+    <circle cx="300" cy="42" r="4.5" fill="rgba(48,176,96,.55)"/>
+    <!-- Ground line -->
+    <line x1="80" y1="270" x2="520" y2="270" stroke="rgba(32,128,80,.2)" stroke-width="1.5"/>
+    <!-- Sparkles -->
+    <circle cx="178" cy="168" r="2" fill="rgba(80,208,160,.4)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="420" cy="192" r="1.5" fill="rgba(80,208,160,.35)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="36" r="2" fill="rgba(96,224,168,.45)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="255" cy="62" r="1.5" fill="rgba(64,192,128,.3)" style="animation: tealEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="345" cy="60" r="1.5" fill="rgba(64,192,128,.3)" style="animation: tealEmber 4s ease-in-out 1.5s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="🌳 各齡的呼召" subtitle="All Ages Called — Titus 2:1-8" id="ages-heading" />
+  <app-scene-verse text="「你當講那合乎純正之道的事；勸老年人，要有節制、端莊、自守，在信心、愛心、忍耐上都要純全」— 提多書 2:1-2" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="提多書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 恩典的教訓  Grace Teaches Us
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-grace" aria-label="提多書 — 恩典的教訓">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="grace-glow" aria-hidden="true"></div>
 
+  <!-- Dawn / sunrise (grace appeared) -->
+  <svg id="grace-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="黎明之光象徵神恩典的顯現">
+    <defs>
+      <radialGradient id="graceGlowG" cx="50%" cy="60%" r="55%">
+        <stop offset="0%" stop-color="rgba(48,176,128,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="dawnTealG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="rgba(32,160,104,.18)"/>
+        <stop offset="100%" stop-color="rgba(64,224,160,.04)"/>
+      </linearGradient>
+    </defs>
+    <!-- Dawn glow -->
+    <ellipse cx="300" cy="275" rx="260" ry="115" fill="url(#graceGlowG)"/>
+    <!-- Horizon sunrise arc -->
+    <path d="M160,275 Q218,185 300,180 Q382,185 440,275 Z" fill="url(#dawnTealG)"/>
+    <ellipse cx="300" cy="275" rx="80" ry="20" fill="rgba(64,192,140,.08)"/>
+    <!-- Sun semi-circle -->
+    <path d="M250,275 Q268,228 300,225 Q332,228 350,275 Z" fill="rgba(64,208,152,.15)"/>
+    <!-- Sun rays -->
+    <line x1="300" y1="225" x2="300" y2="145" stroke="rgba(64,192,140,.18)" stroke-width="2.5"/>
+    <line x1="300" y1="228" x2="242" y2="170" stroke="rgba(64,192,140,.14)" stroke-width="2"/>
+    <line x1="300" y1="228" x2="358" y2="170" stroke="rgba(64,192,140,.14)" stroke-width="2"/>
+    <line x1="300" y1="238" x2="205" y2="208" stroke="rgba(64,192,140,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="238" x2="395" y2="208" stroke="rgba(64,192,140,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="250" x2="165" y2="252" stroke="rgba(64,192,140,.08)" stroke-width="1.5"/>
+    <line x1="300" y1="250" x2="435" y2="252" stroke="rgba(64,192,140,.08)" stroke-width="1.5"/>
+    <!-- Figures with arms down at sides (grace received, at rest) -->
+    <circle cx="248" cy="286" r="10" fill="rgba(64,192,144,.2)"/>
+    <path d="M248,296 L240,330 L256,330 Z" fill="rgba(64,192,144,.15)"/>
+    <circle cx="352" cy="286" r="10" fill="rgba(64,192,144,.2)"/>
+    <path d="M352,296 L344,330 L360,330 Z" fill="rgba(64,192,144,.15)"/>
+    <!-- Sparkles in the dawn light -->
+    <circle cx="285" cy="168" r="2" fill="rgba(80,224,168,.45)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="315" cy="155" r="1.5" fill="rgba(80,224,168,.4)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="248" cy="188" r="1.8" fill="rgba(64,208,152,.35)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="352" cy="185" r="2" fill="rgba(64,208,152,.35)" style="animation: tealEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="🌅 恩典的教訓" subtitle="Grace Teaches Us — Titus 2:11-14" id="grace-heading" />
+  <app-scene-verse text="「因為神救眾人的恩典已經顯明出來，教訓我們除去不敬虔的心和世俗的情慾，在今世自守、公義、敬虔度日」— 提多書 2:11-12" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="提多書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 善行的生命  Life of Good Works
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-good" aria-label="提多書 — 善行的生命">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="good-glow" aria-hidden="true"></div>
+
+  <!-- Olive tree bearing fruit (good works, renewed life) -->
+  <svg id="good-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="果樹與明燈象徵善行的生命">
+    <defs>
+      <radialGradient id="goodGlowG" cx="50%" cy="45%" r="50%">
+        <stop offset="0%" stop-color="rgba(48,176,128,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="trunkG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#306850"/>
+        <stop offset="100%" stop-color="#1e4030"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="210" rx="220" ry="150" fill="url(#goodGlowG)"/>
+    <!-- Tree trunk -->
+    <rect x="284" y="230" width="32" height="130" rx="8" fill="url(#trunkG)"/>
+    <!-- Tree branches -->
+    <line x1="300" y1="230" x2="210" y2="150" stroke="rgba(48,160,104,.5)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="300" y1="230" x2="390" y2="150" stroke="rgba(48,160,104,.5)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="300" y1="210" x2="300" y2="100" stroke="rgba(48,160,104,.5)" stroke-width="5" stroke-linecap="round"/>
+    <line x1="215" y1="157" x2="175" y2="120" stroke="rgba(48,160,104,.4)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="215" y1="157" x2="215" y2="112" stroke="rgba(48,160,104,.4)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="385" y1="157" x2="425" y2="120" stroke="rgba(48,160,104,.4)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="385" y1="157" x2="385" y2="112" stroke="rgba(48,160,104,.4)" stroke-width="4" stroke-linecap="round"/>
+    <!-- Canopy foliage -->
+    <ellipse cx="300" cy="105" rx="75" ry="50" fill="rgba(48,176,104,.22)"/>
+    <ellipse cx="210" cy="115" rx="52" ry="38" fill="rgba(48,176,104,.2)"/>
+    <ellipse cx="390" cy="115" rx="52" ry="38" fill="rgba(48,176,104,.2)"/>
+    <ellipse cx="175" cy="108" rx="38" ry="28" fill="rgba(64,192,120,.18)"/>
+    <ellipse cx="425" cy="108" rx="38" ry="28" fill="rgba(64,192,120,.18)"/>
+    <!-- Fruit (olives) -->
+    <circle cx="255" cy="112" r="5" fill="rgba(48,176,96,.55)"/>
+    <circle cx="300" cy="88" r="5" fill="rgba(48,176,96,.6)"/>
+    <circle cx="345" cy="110" r="5" fill="rgba(48,176,96,.55)"/>
+    <circle cx="186" cy="108" r="4" fill="rgba(48,160,88,.5)"/>
+    <circle cx="413" cy="106" r="4" fill="rgba(48,160,88,.5)"/>
+    <circle cx="220" cy="98" r="4" fill="rgba(64,192,112,.5)"/>
+    <circle cx="380" cy="96" r="4" fill="rgba(64,192,112,.5)"/>
+    <!-- Roots (reaching into earth) -->
+    <path d="M290,355 Q272,360 260,375" fill="none" stroke="rgba(48,144,88,.3)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M310,355 Q328,360 340,375" fill="none" stroke="rgba(48,144,88,.3)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M300,358 Q300,368 300,380" fill="none" stroke="rgba(48,144,88,.25)" stroke-width="3" stroke-linecap="round"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="362" rx="180" ry="14" fill="rgba(4,16,10,.5)"/>
+    <!-- Sparkles in the canopy -->
+    <circle cx="275" cy="96" r="2" fill="rgba(96,224,160,.45)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="325" cy="88" r="1.5" fill="rgba(96,224,160,.4)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="195" cy="102" r="1.8" fill="rgba(80,208,144,.35)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="405" cy="100" r="2" fill="rgba(80,208,144,.35)" style="animation: tealEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="🫒 善行的生命" subtitle="Life of Good Works — Titus 3:8" id="good-heading" />
+  <app-scene-verse text="「這話是可信的，我也願你切切囑咐眾人，叫那些已信神的人，留心做正經事業」— 提多書 3:8" />
 </section>

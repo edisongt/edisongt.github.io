@@ -8,6 +8,7 @@
   scroll-snap-align: start;
 }
 
+/* ── Shared Keyframes ── */
 @keyframes fadeUpIn {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -18,8 +19,52 @@
   50%      { filter: brightness(1.35); }
 }
 
-#scene-1 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #16163a 50%, #0a0a2e 100%);
+@keyframes gentleSway {
+  0%,100% { transform: translateX(-50%) rotate(-1deg);  }
+  50%      { transform: translateX(-50%) rotate(1deg);   }
+}
+
+@keyframes breathe {
+  0%,100% { opacity: .6; transform: translateX(-50%) scale(1);    }
+  50%      { opacity: 1;  transform: translateX(-50%) scale(1.04); }
+}
+
+/* ── Titus-specific keyframes ── */
+
+@keyframes tealEmber {
+  0%,100% { opacity: .3; }
+  50%      { opacity: .68; }
+}
+
+@keyframes scrollFloat {
+  0%,100% { transform: translateX(-50%) translateY(0);    }
+  50%      { transform: translateX(-50%) translateY(-10px); }
+}
+
+@keyframes treeFloat {
+  0%,100% { transform: translateX(-50%) translateY(0);   }
+  50%      { transform: translateX(-50%) translateY(-6px); }
+}
+
+@keyframes dawnPulse {
+  0%,100% { opacity: .5; }
+  50%      { opacity: .85; }
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 1 — INTRO / Title
+   ══════════════════════════════════════════════ */
+
+#scene-intro {
+  background: linear-gradient(180deg, #061410 0%, #0c2018 40%, #102818 70%, #061410 100%);
+}
+
+#intro-teal-glow {
+  position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+  width: 50vw; height: 30vh;
+  background: radial-gradient(ellipse, rgba(32,144,96,.1) 0%, rgba(16,112,64,.04) 45%, transparent 70%);
+  z-index: 3;
+  animation: tealEmber 4s ease-in-out infinite;
 }
 
 #intro-title {
@@ -29,20 +74,179 @@
 
 #intro-title h1 {
   font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
-  background: linear-gradient(120deg, #b08040 0%, #d0a060 45%, #906020 100%);
+  background: linear-gradient(120deg, #30907a 0%, #50c0a0 45%, #207060 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
 }
 
 #intro-title p {
   font-size: clamp(.9rem,2vw,1.2rem);
-  color: rgba(255,255,255,.5); margin-top: .6rem; letter-spacing: .18em;
+  color: rgba(64,192,144,.7); margin-top: .6rem; letter-spacing: .18em;
   animation: fadeUpIn 2s ease-out .5s both;
 }
 
-#scene-2, #scene-3, #scene-4, #scene-5, #scene-6 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #12122a 50%, #0a0a2e 100%);
+#intro-title .sub {
+  font-size: clamp(.75rem,1.4vw,.95rem);
+  color: rgba(48,160,112,.5); margin-top: .4rem; letter-spacing: .12em;
+  animation: fadeUpIn 2s ease-out .9s both;
 }
+
+#intro-scroll-svg {
+  position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(100px,12vw,160px);
+  animation: scrollFloat 5s ease-in-out infinite;
+}
+
+#intro-horizon-svg {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 2 — ELDER  長老的品格
+   ══════════════════════════════════════════════ */
+
+#scene-elder {
+  background: linear-gradient(180deg, #040e0a 0%, #0a1c12 40%, #0e2218 70%, #040e0a 100%);
+}
+
+#elder-glow {
+  position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+  width: 50vw; height: 50vh;
+  background: radial-gradient(ellipse, rgba(32,144,96,.14) 0%, rgba(16,112,64,.06) 50%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+#elder-scene-svg {
+  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(260px,44vw,600px);
+  animation: gentleSway 9s ease-in-out infinite;
+}
+
+#elder-heading h2 {
+  color: #40b090;
+  text-shadow: 0 0 22px rgba(32,144,96,.5);
+}
+
+#elder-heading p { color: rgba(64,192,144,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 3 — DOCTRINE  純正的教導
+   ══════════════════════════════════════════════ */
+
+#scene-doctrine {
+  background: linear-gradient(180deg, #060e0a 0%, #0c1a10 40%, #101e14 70%, #060e0a 100%);
+}
+
+#doctrine-glow {
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: 55vw; height: 55vh;
+  background: radial-gradient(ellipse, rgba(32,144,96,.12) 0%, rgba(16,112,64,.05) 50%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4.5s ease-in-out infinite;
+}
+
+#doctrine-scene-svg {
+  position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(280px,50vw,700px);
+  animation: gentleSway 10s ease-in-out infinite;
+}
+
+#doctrine-heading h2 {
+  background: linear-gradient(120deg, #30907a 0%, #50c0a0 50%, #207060 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+#doctrine-heading p { color: rgba(64,192,144,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 4 — AGES  各齡的呼召
+   ══════════════════════════════════════════════ */
+
+#scene-ages {
+  background: linear-gradient(180deg, #050d0a 0%, #0b1812 35%, #101e16 60%, #121e18 85%, #0b1812 100%);
+}
+
+#ages-glow {
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: clamp(180px,36vw,480px); height: 65%;
+  background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(48,176,120,.1) 0%, rgba(24,144,80,.04) 40%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+#ages-scene-svg {
+  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(260px,44vw,600px);
+  animation: treeFloat 7s ease-in-out infinite;
+}
+
+#ages-heading h2 {
+  background: linear-gradient(120deg, #30907a 0%, #60c0a8 50%, #207060 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+#ages-heading p { color: rgba(64,192,144,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 5 — GRACE  恩典的教訓
+   ══════════════════════════════════════════════ */
+
+#scene-grace {
+  background: linear-gradient(180deg, #060e0a 0%, #0c1a10 40%, #101e14 70%, #0a1810 100%);
+}
+
+#grace-glow {
+  position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+  width: clamp(180px,36vw,480px); height: 70%;
+  background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(48,176,120,.1) 0%, rgba(24,144,80,.04) 40%, transparent 70%);
+  z-index: 3;
+  animation: dawnPulse 4s ease-in-out infinite;
+}
+
+#grace-scene-svg {
+  position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(260px,44vw,600px);
+  animation: gentleSway 8s ease-in-out infinite;
+}
+
+#grace-heading h2 {
+  color: #40c090;
+  text-shadow: 0 0 22px rgba(32,176,112,.5);
+}
+
+#grace-heading p { color: rgba(64,192,144,.5); }
+
+/* ══════════════════════════════════════════════
+     SCENE 6 — GOOD  善行的生命
+   ══════════════════════════════════════════════ */
+
+#scene-good {
+  background: linear-gradient(180deg, #071210 0%, #0d1e16 40%, #122418 70%, #0f1e16 100%);
+}
+
+#good-glow {
+  position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+  width: clamp(180px,36vw,480px); height: 70%;
+  background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(48,176,120,.1) 0%, rgba(24,144,80,.04) 40%, transparent 70%);
+  z-index: 3;
+  animation: tealEmber 4.5s ease-in-out infinite;
+}
+
+#good-scene-svg {
+  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(240px,40vw,560px);
+  animation: treeFloat 6s ease-in-out infinite;
+}
+
+#good-heading h2 {
+  background: linear-gradient(120deg, #30907a 0%, #60c0a8 50%, #207060 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+#good-heading p { color: rgba(64,192,144,.5); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

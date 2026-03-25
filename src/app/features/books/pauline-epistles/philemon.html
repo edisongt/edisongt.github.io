@@ -1,66 +1,365 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="腓利門書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="腓利門書 — 開場">
   <app-starfield />
+
+  <div id="intro-gold-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>腓利門書</h1>
     <p>Epistle to Philemon</p>
+    <span class="sub">愛 · 寬恕 · 和好 · 代求 · 弟兄 · 恩典</span>
   </div>
 
+  <!-- Letter scroll with heart seal (personal appeal, love) -->
+  <svg id="intro-scroll-svg" viewBox="0 0 160 220" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="書信卷軸與愛心印記象徵保羅的代求">
+    <ellipse cx="80" cy="110" rx="64" ry="82" fill="rgba(176,100,32,.06)"/>
+    <!-- Small dove above scroll -->
+    <path d="M80,18 Q70,10 60,14 Q65,22 72,24 Q64,26 62,34 Q72,32 78,28 L80,18 Z"
+          fill="rgba(224,180,80,.35)"/>
+    <path d="M80,18 Q90,10 100,14 Q95,22 88,24 Q96,26 98,34 Q88,32 82,28 L80,18 Z"
+          fill="rgba(224,180,80,.35)"/>
+    <circle cx="80" cy="20" r="4" fill="rgba(224,180,80,.45)"/>
+    <!-- Dove tail -->
+    <path d="M80,26 Q76,32 74,38 M80,26 Q84,32 86,38" stroke="rgba(224,180,80,.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <!-- Scroll body -->
+    <rect x="36" y="48" width="88" height="126" rx="4" fill="#8a5618" stroke="#b07830" stroke-width="1.5"/>
+    <rect x="40" y="52" width="80" height="118" rx="3" fill="#9a6220"/>
+    <!-- Scroll rollers -->
+    <rect x="30" y="43" width="100" height="12" rx="6" fill="#b07830" stroke="#8a5618" stroke-width="1"/>
+    <rect x="30" y="170" width="100" height="12" rx="6" fill="#b07830" stroke="#8a5618" stroke-width="1"/>
+    <!-- Text lines -->
+    <line x1="50" y1="68" x2="110" y2="68" stroke="rgba(255,230,160,.22)" stroke-width="1.5"/>
+    <line x1="50" y1="80" x2="104" y2="80" stroke="rgba(255,230,160,.18)" stroke-width="1.5"/>
+    <line x1="50" y1="92" x2="108" y2="92" stroke="rgba(255,230,160,.18)" stroke-width="1.5"/>
+    <line x1="50" y1="104" x2="96" y2="104" stroke="rgba(255,230,160,.15)" stroke-width="1.5"/>
+    <line x1="50" y1="116" x2="106" y2="116" stroke="rgba(255,230,160,.15)" stroke-width="1.5"/>
+    <line x1="50" y1="128" x2="92" y2="128" stroke="rgba(255,230,160,.12)" stroke-width="1.5"/>
+    <line x1="50" y1="140" x2="104" y2="140" stroke="rgba(255,230,160,.12)" stroke-width="1.5"/>
+    <line x1="50" y1="152" x2="94" y2="152" stroke="rgba(255,230,160,.1)" stroke-width="1.5"/>
+    <!-- Heart seal -->
+    <path d="M74,162 Q74,154 80,152 Q86,154 86,162 Q86,170 80,176 Q74,170 74,162 Z"
+          fill="#b07830" stroke="#d0a040" stroke-width="1"/>
+    <path d="M76,162 Q76,157 80,156 Q84,157 84,162 Q84,167 80,172 Q76,167 76,162 Z"
+          fill="#c89040"/>
+    <!-- Sparkles -->
+    <circle cx="44" cy="56" r="1.5" fill="rgba(224,176,64,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="116" cy="52" r="1.2" fill="rgba(224,176,64,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="80" cy="6" r="2" fill="rgba(240,200,80,.5)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="philemonHorizonG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1e1200"/>
+        <stop offset="100%" stop-color="#120c00"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,180 240,194 Q360,168 480,188 Q600,158 720,180
+             Q840,155 960,176 Q1080,162 1200,184 Q1320,168 1440,195
+             L1440,300 L0,300 Z"
+          fill="url(#philemonHorizonG)"/>
+    <circle cx="280" cy="184" r="2" fill="rgba(192,136,32,.3)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="720" cy="170" r="1.5" fill="rgba(192,136,32,.25)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1140" cy="176" r="1.8" fill="rgba(192,136,32,.2)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「因聽說你在主耶穌裡的信心，並你向眾聖徒的愛心」— 腓利門書 1:5" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="腓利門書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 愛與信心  Love and Faith
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-love" aria-label="腓利門書 — 愛與信心">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="love-glow" aria-hidden="true"></div>
 
+  <!-- Heart with radiating warmth (love and faith) -->
+  <svg id="love-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="愛心與光芒象徵腓利門的愛與信心">
+    <defs>
+      <radialGradient id="loveGlowG" cx="50%" cy="45%" r="48%">
+        <stop offset="0%" stop-color="rgba(192,136,32,.16)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="heartG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c09040"/>
+        <stop offset="100%" stop-color="#8a6020"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="200" rx="210" ry="150" fill="url(#loveGlowG)"/>
+    <!-- Large heart -->
+    <path d="M300,310 Q220,260 200,210 Q185,168 210,145 Q240,122 270,138 Q285,145 300,160
+             Q315,145 330,138 Q360,122 390,145 Q415,168 400,210 Q380,260 300,310 Z"
+          fill="url(#heartG)" opacity=".7" stroke="rgba(224,176,64,.4)" stroke-width="2"/>
+    <!-- Inner heart glow -->
+    <path d="M300,285 Q238,242 222,200 Q210,168 232,150 Q255,133 278,148 Q290,156 300,168
+             Q310,156 322,148 Q345,133 368,150 Q390,168 378,200 Q362,242 300,285 Z"
+          fill="rgba(224,176,64,.2)"/>
+    <!-- Radiant lines from heart -->
+    <line x1="300" y1="160" x2="300" y2="80" stroke="rgba(224,176,64,.2)" stroke-width="2.5"/>
+    <line x1="300" y1="164" x2="242" y2="104" stroke="rgba(224,176,64,.15)" stroke-width="2"/>
+    <line x1="300" y1="164" x2="358" y2="104" stroke="rgba(224,176,64,.15)" stroke-width="2"/>
+    <line x1="220" y1="190" x2="150" y2="175" stroke="rgba(224,176,64,.12)" stroke-width="1.5"/>
+    <line x1="380" y1="190" x2="450" y2="175" stroke="rgba(224,176,64,.12)" stroke-width="1.5"/>
+    <!-- Small church figures in the heart glow -->
+    <circle cx="270" cy="270" r="8" fill="rgba(224,176,64,.2)"/>
+    <circle cx="330" cy="270" r="8" fill="rgba(224,176,64,.2)"/>
+    <!-- Sparkles -->
+    <circle cx="280" cy="96" r="2" fill="rgba(240,200,80,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="320" cy="84" r="1.5" fill="rgba(240,200,80,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="72" r="2" fill="rgba(240,200,80,.45)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="154" cy="172" r="1.5" fill="rgba(208,168,56,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="446" cy="168" r="1.5" fill="rgba(208,168,56,.3)" style="animation: goldEmber 4s ease-in-out 1.5s infinite;"/>
+    <!-- Ground shadow -->
+    <ellipse cx="300" cy="362" rx="220" ry="18" fill="rgba(16,10,0,.5)"/>
+  </svg>
+
+  <app-scene-heading title="❤️ 愛與信心" subtitle="Love and Faith — Philemon 1:4-7" id="love-heading" />
+  <app-scene-verse text="「我們從你的愛心得了許多快樂、許多安慰；因為眾聖徒的心被你舒暢了」— 腓利門書 1:7" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="腓利門書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 阿尼西母  Onesimus
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-onesimus" aria-label="腓利門書 — 阿尼西母">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="onesimus-glow" aria-hidden="true"></div>
 
+  <!-- Broken chains (freedom, transformation) -->
+  <svg id="onesimus-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="斷裂的鎖鏈象徵阿尼西母的更新">
+    <defs>
+      <radialGradient id="onesimusGlowG" cx="50%" cy="45%" r="45%">
+        <stop offset="0%" stop-color="rgba(192,136,32,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="chainG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#8a6020"/>
+        <stop offset="50%" stop-color="#c08030"/>
+        <stop offset="100%" stop-color="#8a6020"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="200" rx="210" ry="150" fill="url(#onesimusGlowG)"/>
+    <!-- Chain link (left, falling) -->
+    <ellipse cx="190" cy="210" rx="30" ry="18" fill="none" stroke="url(#chainG)" stroke-width="8" transform="rotate(-25 190 210)"/>
+    <ellipse cx="148" cy="242" rx="28" ry="16" fill="none" stroke="url(#chainG)" stroke-width="8" transform="rotate(-30 148 242)"/>
+    <ellipse cx="110" cy="278" rx="26" ry="15" fill="none" stroke="url(#chainG)" stroke-width="7" transform="rotate(-25 110 278)" opacity=".6"/>
+    <!-- Chain link (right, falling) -->
+    <ellipse cx="410" cy="210" rx="30" ry="18" fill="none" stroke="url(#chainG)" stroke-width="8" transform="rotate(25 410 210)"/>
+    <ellipse cx="452" cy="242" rx="28" ry="16" fill="none" stroke="url(#chainG)" stroke-width="8" transform="rotate(30 452 242)"/>
+    <ellipse cx="490" cy="278" rx="26" ry="15" fill="none" stroke="url(#chainG)" stroke-width="7" transform="rotate(25 490 278)" opacity=".6"/>
+    <!-- Break point glow (centre) -->
+    <ellipse cx="300" cy="205" rx="45" ry="35" fill="rgba(224,176,64,.12)"/>
+    <!-- Broken centre pieces -->
+    <path d="M258,200 L285,195 L275,215 Z" fill="rgba(192,144,48,.4)" stroke="rgba(192,144,48,.3)" stroke-width="1"/>
+    <path d="M342,200 L315,195 L325,215 Z" fill="rgba(192,144,48,.4)" stroke="rgba(192,144,48,.3)" stroke-width="1"/>
+    <!-- Light burst from the break -->
+    <line x1="300" y1="195" x2="300" y2="100" stroke="rgba(240,200,80,.2)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="300" y1="200" x2="255" y2="130" stroke="rgba(240,200,80,.15)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="300" y1="200" x2="345" y2="130" stroke="rgba(240,200,80,.15)" stroke-width="2" stroke-linecap="round"/>
+    <!-- Figure rising upward (Onesimus free) -->
+    <circle cx="300" cy="145" r="14" fill="rgba(224,176,64,.25)"/>
+    <path d="M300,159 L288,192 L312,192 Z" fill="rgba(224,176,64,.18)"/>
+    <!-- Arms raised in freedom -->
+    <path d="M288,165 L272,145 M272,145 L266,132" stroke="rgba(224,176,64,.3)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M312,165 L328,145 M328,145 L334,132" stroke="rgba(224,176,64,.3)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Sparkles at break -->
+    <circle cx="292" cy="110" r="2" fill="rgba(240,200,80,.45)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="308" cy="100" r="1.5" fill="rgba(240,200,80,.4)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="280" cy="195" r="2" fill="rgba(240,200,80,.4)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="320" cy="190" r="1.8" fill="rgba(240,200,80,.38)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="362" rx="240" ry="18" fill="rgba(16,10,0,.5)"/>
+  </svg>
+
+  <app-scene-heading title="⛓️ 阿尼西母" subtitle="Onesimus — Philemon 1:10-16" id="onesimus-heading" />
+  <app-scene-verse text="「他從前與你沒有益處，但如今與你我都有益處...我打發他回你那裡去，他是我心上的人」— 腓利門書 1:11-12" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="腓利門書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 代求的心  Paul's Intercession
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-appeal" aria-label="腓利門書 — 代求的心">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="appeal-glow" aria-hidden="true"></div>
 
+  <!-- Paul's outstretched hands in appeal -->
+  <svg id="appeal-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="保羅伸出雙手代求象徵愛的懇切">
+    <defs>
+      <radialGradient id="appealGlowG" cx="50%" cy="45%" r="45%">
+        <stop offset="0%" stop-color="rgba(192,136,32,.13)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="300" cy="210" rx="210" ry="150" fill="url(#appealGlowG)"/>
+    <!-- Central figure (Paul, writing / appealing) -->
+    <circle cx="300" cy="175" r="18" fill="rgba(192,136,40,.25)"/>
+    <path d="M300,193 L282,255 L318,255 Z" fill="rgba(192,136,40,.18)"/>
+    <!-- Left arm extended -->
+    <path d="M285,200 L240,225 L210,220" fill="none" stroke="rgba(224,176,64,.3)" stroke-width="5" stroke-linecap="round"/>
+    <!-- Left open hand -->
+    <ellipse cx="205" cy="220" rx="14" ry="10" fill="rgba(192,136,40,.22)" stroke="rgba(224,176,64,.25)" stroke-width="1.5" transform="rotate(-15 205 220)"/>
+    <!-- Right arm extended -->
+    <path d="M315,200 L360,225 L390,220" fill="none" stroke="rgba(224,176,64,.3)" stroke-width="5" stroke-linecap="round"/>
+    <!-- Right open hand -->
+    <ellipse cx="395" cy="220" rx="14" ry="10" fill="rgba(192,136,40,.22)" stroke="rgba(224,176,64,.25)" stroke-width="1.5" transform="rotate(15 395 220)"/>
+    <!-- Connection: scroll being presented (appeal letter) -->
+    <rect x="258" y="255" width="84" height="60" rx="4" fill="rgba(160,104,24,.2)" stroke="rgba(192,144,40,.3)" stroke-width="1.5"/>
+    <!-- Scroll lines -->
+    <line x1="270" y1="270" x2="330" y2="270" stroke="rgba(255,230,160,.12)" stroke-width="1.5"/>
+    <line x1="270" y1="282" x2="326" y2="282" stroke="rgba(255,230,160,.1)" stroke-width="1.5"/>
+    <line x1="270" y1="294" x2="328" y2="294" stroke="rgba(255,230,160,.1)" stroke-width="1.5"/>
+    <!-- Warm light between the hands -->
+    <ellipse cx="300" cy="220" rx="95" ry="55" fill="rgba(224,176,64,.05)"/>
+    <!-- Chains on ankles (Paul in prison) -->
+    <line x1="290" y1="260" x2="275" y2="278" stroke="rgba(160,120,40,.3)" stroke-width="2"/>
+    <circle cx="269" cy="282" r="5" fill="none" stroke="rgba(160,120,40,.25)" stroke-width="2"/>
+    <line x1="310" y1="260" x2="325" y2="278" stroke="rgba(160,120,40,.3)" stroke-width="2"/>
+    <circle cx="331" cy="282" r="5" fill="none" stroke="rgba(160,120,40,.25)" stroke-width="2"/>
+    <!-- Sparkles -->
+    <circle cx="205" cy="205" r="2" fill="rgba(240,200,80,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="395" cy="205" r="1.5" fill="rgba(240,200,80,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="148" r="2" fill="rgba(240,200,80,.4)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="260" cy="230" r="1.5" fill="rgba(208,168,56,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="340" cy="228" r="1.5" fill="rgba(208,168,56,.3)" style="animation: goldEmber 4s ease-in-out 1.5s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="✉️ 代求的心" subtitle="Paul's Intercession — Philemon 1:8-19" id="appeal-heading" />
+  <app-scene-verse text="「我雖然靠著基督，在地位上可以吩咐你，然而，憑著愛心寧可求你」— 腓利門書 1:8-9" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="腓利門書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 超越主僕  More Than a Slave
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-brother" aria-label="腓利門書 — 超越主僕">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="brother-glow" aria-hidden="true"></div>
 
+  <!-- Two hands clasped in brotherhood -->
+  <svg id="brother-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="握手象徵弟兄相遇超越主僕關係">
+    <defs>
+      <radialGradient id="brotherGlowG" cx="50%" cy="45%" r="45%">
+        <stop offset="0%" stop-color="rgba(192,136,32,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="300" cy="210" rx="210" ry="150" fill="url(#brotherGlowG)"/>
+    <!-- Left arm reaching right -->
+    <path d="M90,250 L210,228" fill="none" stroke="rgba(192,136,40,.4)" stroke-width="22" stroke-linecap="round"/>
+    <!-- Left hand -->
+    <ellipse cx="225" cy="222" rx="28" ry="18" fill="rgba(176,120,32,.3)" stroke="rgba(224,176,64,.35)" stroke-width="2" transform="rotate(-10 225 222)"/>
+    <!-- Left finger details -->
+    <line x1="210" y1="215" x2="240" y2="210" stroke="rgba(224,176,64,.15)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="210" y1="222" x2="242" y2="218" stroke="rgba(224,176,64,.15)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="212" y1="230" x2="240" y2="228" stroke="rgba(224,176,64,.12)" stroke-width="2" stroke-linecap="round"/>
+    <!-- Right arm reaching left -->
+    <path d="M510,250 L390,228" fill="none" stroke="rgba(192,136,40,.4)" stroke-width="22" stroke-linecap="round"/>
+    <!-- Right hand -->
+    <ellipse cx="375" cy="222" rx="28" ry="18" fill="rgba(176,120,32,.3)" stroke="rgba(224,176,64,.35)" stroke-width="2" transform="rotate(10 375 222)"/>
+    <!-- Right finger details -->
+    <line x1="390" y1="215" x2="360" y2="210" stroke="rgba(224,176,64,.15)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="390" y1="222" x2="358" y2="218" stroke="rgba(224,176,64,.15)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="388" y1="230" x2="360" y2="228" stroke="rgba(224,176,64,.12)" stroke-width="2" stroke-linecap="round"/>
+    <!-- Clasped joint glow -->
+    <ellipse cx="300" cy="222" rx="60" ry="38" fill="rgba(224,176,64,.1)"/>
+    <!-- Cross above the clasp (in Christ) -->
+    <line x1="300" y1="155" x2="300" y2="185" stroke="rgba(240,200,80,.3)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="285" y1="165" x2="315" y2="165" stroke="rgba(240,200,80,.3)" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="300" cy="170" rx="25" ry="20" fill="rgba(224,176,64,.08)"/>
+    <!-- Small hearts around the clasp -->
+    <path d="M270,200 Q270,194 276,192 Q282,194 282,200 Q282,207 276,212 Q270,207 270,200 Z"
+          fill="rgba(224,176,64,.25)"/>
+    <path d="M318,200 Q318,194 324,192 Q330,194 330,200 Q330,207 324,212 Q318,207 318,200 Z"
+          fill="rgba(224,176,64,.25)"/>
+    <!-- Sparkles -->
+    <circle cx="278" cy="185" r="2" fill="rgba(240,200,80,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="322" cy="178" r="1.5" fill="rgba(240,200,80,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="148" r="2" fill="rgba(240,200,80,.45)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="240" cy="202" r="1.5" fill="rgba(208,168,56,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="360" cy="200" r="1.5" fill="rgba(208,168,56,.3)" style="animation: goldEmber 4s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="362" rx="240" ry="18" fill="rgba(16,10,0,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🤝 超越主僕" subtitle="More Than a Slave — Philemon 1:15-16" id="brother-heading" />
+  <app-scene-verse text="「他不再是奴僕，乃是高過奴僕，是親愛的兄弟，在肉身上和在主裡都是如此」— 腓利門書 1:16" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="腓利門書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 恩典的釋放  Grace Releases
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-grace" aria-label="腓利門書 — 恩典的釋放">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="philemon-grace-glow" aria-hidden="true"></div>
+
+  <!-- Open door with warm light (freedom, grace, welcome home) -->
+  <svg id="grace-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="敞開的門與恩光象徵恩典的釋放">
+    <defs>
+      <radialGradient id="philemonGraceGlowG" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(224,176,64,.18)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="doorFrameG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c09040"/>
+        <stop offset="100%" stop-color="#8a6020"/>
+      </linearGradient>
+    </defs>
+    <!-- Background radiance -->
+    <ellipse cx="300" cy="210" rx="220" ry="160" fill="url(#philemonGraceGlowG)"/>
+    <!-- Door frame -->
+    <rect x="220" y="90" width="160" height="240" rx="6" fill="rgba(160,112,32,.12)" stroke="url(#doorFrameG)" stroke-width="6"/>
+    <!-- Door open (ajar to the right) -->
+    <path d="M380,90 Q420,120 420,210 Q420,300 380,330 L380,90 Z"
+          fill="rgba(144,96,24,.15)" stroke="rgba(192,144,40,.35)" stroke-width="2"/>
+    <!-- Door interior (opening) - warm light inside -->
+    <rect x="226" y="96" width="148" height="228" rx="4" fill="rgba(224,176,64,.1)"/>
+    <!-- Warm light rays from the opening -->
+    <line x1="380" y1="90" x2="500" y2="50" stroke="rgba(240,200,80,.12)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="380" y1="120" x2="520" y2="100" stroke="rgba(240,200,80,.1)" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="380" y1="150" x2="530" y2="148" stroke="rgba(240,200,80,.1)" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="380" y1="210" x2="540" y2="210" stroke="rgba(240,200,80,.08)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="380" y1="270" x2="530" y2="280" stroke="rgba(240,200,80,.1)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Door handle -->
+    <circle cx="356" cy="215" r="7" fill="url(#doorFrameG)" stroke="rgba(224,176,64,.4)" stroke-width="1"/>
+    <!-- Figure approaching (silhouette of Onesimus returning) -->
+    <circle cx="300" cy="170" r="14" fill="rgba(192,136,40,.25)"/>
+    <path d="M300,184 L288,230 L312,230 Z" fill="rgba(192,136,40,.18)"/>
+    <!-- Welcome light on figure -->
+    <ellipse cx="300" cy="190" rx="30" ry="45" fill="rgba(224,176,64,.06)"/>
+    <!-- Dove of peace above door -->
+    <path d="M282,78 Q268,65 255,70 Q261,80 270,82 Q262,84 260,94 Q270,90 276,84 L282,78 Z"
+          fill="rgba(240,200,80,.3)"/>
+    <path d="M282,78 Q296,65 309,70 Q303,80 294,82 Q302,84 304,94 Q294,90 288,84 L282,78 Z"
+          fill="rgba(240,200,80,.3)"/>
+    <circle cx="282" cy="80" r="4.5" fill="rgba(240,200,80,.4)"/>
+    <!-- Sparkles -->
+    <circle cx="262" cy="110" r="2" fill="rgba(240,200,80,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="338" cy="104" r="1.5" fill="rgba(240,200,80,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="65" r="2" fill="rgba(240,200,80,.45)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="508" cy="148" r="1.5" fill="rgba(224,176,64,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="🚪 恩典的釋放" subtitle="Grace Releases — Philemon 1:20-25" id="philemon-grace-heading" />
+  <app-scene-verse text="「主的恩惠與你們心靈同在」— 腓利門書 1:25" />
 </section>

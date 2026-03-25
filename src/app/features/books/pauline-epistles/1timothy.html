@@ -1,66 +1,370 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="提摩太前書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="提摩太前書 — 開場">
   <app-starfield />
+
+  <div id="intro-amber-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>提摩太前書</h1>
     <p>First Epistle to Timothy</p>
+    <span class="sub">教會 · 禱告 · 領袖 · 敬虔 · 知足 · 愛的總歸</span>
   </div>
 
+  <!-- Scroll with a lamp (pastoral letter) -->
+  <svg id="intro-scroll-svg" viewBox="0 0 160 220" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="書信卷軸與燈台象徵牧函">
+    <ellipse cx="80" cy="110" rx="65" ry="80" fill="rgba(160,100,20,.06)"/>
+    <!-- Lamp flame above -->
+    <ellipse cx="80" cy="40" rx="28" ry="22" fill="rgba(192,140,40,.1)"/>
+    <path d="M80,12 Q88,24 85,34 Q82,40 80,42 Q78,40 75,34 Q72,24 80,12 Z"
+          fill="#c89030" opacity=".7"/>
+    <path d="M80,18 Q85,28 83,34 Q81,38 80,40 Q79,38 77,34 Q75,28 80,18 Z"
+          fill="#e0b050" opacity=".85"/>
+    <!-- Lamp base -->
+    <ellipse cx="80" cy="55" rx="18" ry="6" fill="#8a6020" stroke="#b08030" stroke-width="1"/>
+    <rect x="72" y="45" width="16" height="12" rx="3" fill="#9a7030" stroke="#b08030" stroke-width="1"/>
+    <!-- Light rays -->
+    <line x1="80" y1="12" x2="80" y2="0" stroke="rgba(192,152,48,.2)" stroke-width="1.5"/>
+    <line x1="80" y1="14" x2="58" y2="2" stroke="rgba(192,152,48,.12)" stroke-width="1"/>
+    <line x1="80" y1="14" x2="102" y2="2" stroke="rgba(192,152,48,.12)" stroke-width="1"/>
+    <!-- Scroll body -->
+    <rect x="36" y="68" width="88" height="108" rx="4" fill="#7a5818" stroke="#a07830" stroke-width="1.5"/>
+    <rect x="40" y="72" width="80" height="100" rx="3" fill="#886020"/>
+    <!-- Scroll rollers -->
+    <rect x="30" y="63" width="100" height="12" rx="6" fill="#a07830" stroke="#7a5818" stroke-width="1"/>
+    <rect x="30" y="172" width="100" height="12" rx="6" fill="#a07830" stroke="#7a5818" stroke-width="1"/>
+    <!-- Text lines -->
+    <line x1="50" y1="88" x2="110" y2="88" stroke="rgba(255,230,160,.25)" stroke-width="1.5"/>
+    <line x1="50" y1="100" x2="104" y2="100" stroke="rgba(255,230,160,.2)" stroke-width="1.5"/>
+    <line x1="50" y1="112" x2="108" y2="112" stroke="rgba(255,230,160,.2)" stroke-width="1.5"/>
+    <line x1="50" y1="124" x2="96" y2="124" stroke="rgba(255,230,160,.18)" stroke-width="1.5"/>
+    <line x1="50" y1="136" x2="106" y2="136" stroke="rgba(255,230,160,.18)" stroke-width="1.5"/>
+    <line x1="50" y1="148" x2="92" y2="148" stroke="rgba(255,230,160,.15)" stroke-width="1.5"/>
+    <!-- Wax seal -->
+    <circle cx="80" cy="162" r="9" fill="#a07830" stroke="#c09040" stroke-width="1"/>
+    <circle cx="80" cy="162" r="5" fill="#c8a040"/>
+    <!-- Sparkles -->
+    <circle cx="44" cy="76" r="1.5" fill="rgba(192,160,48,.4)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="116" cy="72" r="1.2" fill="rgba(192,160,48,.35)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="80" cy="0" r="2" fill="rgba(224,192,64,.5)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="tim1HorizonG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1e1404"/>
+        <stop offset="100%" stop-color="#120c00"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,180 240,195 Q360,172 480,190 Q600,162 720,182
+             Q840,158 960,178 Q1080,162 1200,186 Q1320,170 1440,196
+             L1440,300 L0,300 Z"
+          fill="url(#tim1HorizonG)"/>
+    <circle cx="280" cy="185" r="2" fill="rgba(176,128,32,.3)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="720" cy="172" r="1.5" fill="rgba(176,128,32,.25)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1140" cy="178" r="1.8" fill="rgba(176,128,32,.2)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「這命令的總歸就是愛；這愛是從清潔的心和無虧的良心並無偽的信心生出來的」— 提摩太前書 1:5" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="提摩太前書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 教會的秩序  Church Order
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-order" aria-label="提摩太前書 — 教會的秩序">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="order-glow" aria-hidden="true"></div>
 
+  <!-- Pillars/columns representing the church as pillar of truth -->
+  <svg id="order-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="柱石象徵教會是真理的根基">
+    <defs>
+      <radialGradient id="orderGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(176,128,32,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="pillarG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#8a6020"/>
+        <stop offset="50%" stop-color="#c09040"/>
+        <stop offset="100%" stop-color="#8a6020"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="170" rx="210" ry="130" fill="url(#orderGlowG)"/>
+    <!-- Left column -->
+    <rect x="155" y="80" width="38" height="230" rx="4" fill="url(#pillarG)"/>
+    <rect x="148" y="72" width="52" height="16" rx="3" fill="#b08030"/>
+    <rect x="148" y="300" width="52" height="16" rx="3" fill="#b08030"/>
+    <!-- Fluting on left column -->
+    <line x1="165" y1="88" x2="165" y2="298" stroke="rgba(200,160,60,.15)" stroke-width="1"/>
+    <line x1="174" y1="88" x2="174" y2="298" stroke="rgba(200,160,60,.15)" stroke-width="1"/>
+    <line x1="183" y1="88" x2="183" y2="298" stroke="rgba(200,160,60,.12)" stroke-width="1"/>
+    <!-- Right column -->
+    <rect x="407" y="80" width="38" height="230" rx="4" fill="url(#pillarG)"/>
+    <rect x="400" y="72" width="52" height="16" rx="3" fill="#b08030"/>
+    <rect x="400" y="300" width="52" height="16" rx="3" fill="#b08030"/>
+    <!-- Fluting on right column -->
+    <line x1="417" y1="88" x2="417" y2="298" stroke="rgba(200,160,60,.15)" stroke-width="1"/>
+    <line x1="426" y1="88" x2="426" y2="298" stroke="rgba(200,160,60,.15)" stroke-width="1"/>
+    <line x1="435" y1="88" x2="435" y2="298" stroke="rgba(200,160,60,.12)" stroke-width="1"/>
+    <!-- Centre column (smaller) -->
+    <rect x="278" y="110" width="44" height="200" rx="4" fill="url(#pillarG)"/>
+    <rect x="270" y="100" width="60" height="18" rx="3" fill="#b08030"/>
+    <rect x="270" y="300" width="60" height="16" rx="3" fill="#b08030"/>
+    <!-- Entablature / lintel top -->
+    <rect x="130" y="58" width="340" height="22" rx="4" fill="#9a7028" stroke="#c09040" stroke-width="1"/>
+    <!-- Pediment glow -->
+    <path d="M160,58 L300,20 L440,58 Z" fill="rgba(192,148,48,.06)" stroke="rgba(192,148,48,.15)" stroke-width="1"/>
+    <!-- Church cross atop pediment -->
+    <line x1="300" y1="12" x2="300" y2="35" stroke="rgba(224,184,72,.4)" stroke-width="3"/>
+    <line x1="290" y1="20" x2="310" y2="20" stroke="rgba(224,184,72,.4)" stroke-width="3"/>
+    <!-- Sparkles -->
+    <circle cx="220" cy="90" r="2" fill="rgba(224,184,72,.35)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="380" cy="86" r="1.5" fill="rgba(224,184,72,.3)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="22" r="2" fill="rgba(224,184,72,.45)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="240" ry="20" fill="rgba(10,8,0,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🏛️ 教會的秩序" subtitle="Church Order — 1 Tim 3:14-15" id="order-heading" />
+  <app-scene-verse text="「神的家，就是永生神的教會，乃是真理的柱石和根基」— 提摩太前書 3:15" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="提摩太前書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 代禱的呼召  Call to Prayer
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-prayer" aria-label="提摩太前書 — 代禱的呼召">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="prayer-glow" aria-hidden="true"></div>
 
+  <!-- Raised hands in prayer position -->
+  <svg id="prayer-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="舉手禱告象徵代禱的呼召">
+    <defs>
+      <radialGradient id="prayerGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(176,128,32,.13)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="300" cy="200" rx="200" ry="150" fill="url(#prayerGlowG)"/>
+    <!-- Left arm raised -->
+    <path d="M230,310 L210,220 L205,180 M210,220 L215,180"
+          stroke="rgba(200,160,60,.35)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Right arm raised -->
+    <path d="M370,310 L390,220 L395,180 M390,220 L385,180"
+          stroke="rgba(200,160,60,.35)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Left figure body -->
+    <circle cx="230" cy="320" r="12" fill="rgba(160,112,32,.2)"/>
+    <path d="M230,308 L220,340 L240,340 Z" fill="rgba(160,112,32,.15)"/>
+    <!-- Right figure body -->
+    <circle cx="370" cy="320" r="12" fill="rgba(160,112,32,.2)"/>
+    <path d="M370,308 L360,340 L380,340 Z" fill="rgba(160,112,32,.15)"/>
+    <!-- Centre figure (with arms raised, kneeling) -->
+    <circle cx="300" cy="295" r="14" fill="rgba(192,144,48,.25)"/>
+    <path d="M300,280 L280,245 L285,220 M280,245 L290,220" stroke="rgba(224,184,72,.35)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M300,280 L320,245 L315,220 M320,245 L310,220" stroke="rgba(224,184,72,.35)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Ascending prayer wisps -->
+    <path d="M285,210 Q280,185 290,160 Q298,140 295,115" fill="none" stroke="rgba(224,192,80,.12)" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M300,205 Q300,178 305,155 Q312,130 308,100" fill="none" stroke="rgba(224,192,80,.18)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M315,210 Q320,185 310,160 Q302,140 306,115" fill="none" stroke="rgba(224,192,80,.12)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Radiant light from above -->
+    <ellipse cx="300" cy="75" rx="40" ry="30" fill="rgba(224,184,72,.1)"/>
+    <!-- Sparkles ascending -->
+    <circle cx="290" cy="150" r="2" fill="rgba(224,192,80,.4)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="308" cy="130" r="1.5" fill="rgba(224,192,80,.35)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="95" r="2" fill="rgba(224,192,80,.45)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="215" cy="192" r="1.5" fill="rgba(200,160,60,.3)" style="animation: amberEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="385" cy="188" r="1.5" fill="rgba(200,160,60,.3)" style="animation: amberEmber 4s ease-in-out 1.5s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="🙏 代禱的呼召" subtitle="Call to Prayer — 1 Tim 2:1-8" id="prayer-heading" />
+  <app-scene-verse text="「我勸你第一要為萬人懇求、禱告、代求、祝謝」— 提摩太前書 2:1" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="提摩太前書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 長老與執事  Elders and Deacons
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-leader" aria-label="提摩太前書 — 長老與執事">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="leader-glow" aria-hidden="true"></div>
 
+  <!-- Shepherd staff and servant towel -->
+  <svg id="leader-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="牧杖與服事巾象徵長老與執事">
+    <defs>
+      <radialGradient id="leaderGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(176,128,32,.13)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="staffG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c09040"/>
+        <stop offset="100%" stop-color="#8a6020"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="190" rx="210" ry="140" fill="url(#leaderGlowG)"/>
+    <!-- Shepherd's crook -->
+    <path d="M240,320 L240,120 Q240,70 270,65 Q300,60 300,90 Q300,112 278,115"
+          fill="none" stroke="url(#staffG)" stroke-width="12" stroke-linecap="round"/>
+    <!-- Staff wrap detail -->
+    <path d="M240,200 Q248,198 240,194" fill="none" stroke="rgba(200,160,60,.2)" stroke-width="2"/>
+    <path d="M240,240 Q248,238 240,234" fill="none" stroke="rgba(200,160,60,.2)" stroke-width="2"/>
+    <path d="M240,280 Q248,278 240,274" fill="none" stroke="rgba(200,160,60,.2)" stroke-width="2"/>
+    <!-- Servant towel (right side) -->
+    <rect x="340" y="140" width="80" height="140" rx="5" fill="rgba(192,148,40,.2)" stroke="rgba(200,160,60,.3)" stroke-width="1.5"/>
+    <!-- Towel stripes -->
+    <line x1="340" y1="175" x2="420" y2="175" stroke="rgba(224,184,72,.2)" stroke-width="2"/>
+    <line x1="340" y1="245" x2="420" y2="245" stroke="rgba(224,184,72,.2)" stroke-width="2"/>
+    <!-- Towel fringe -->
+    <line x1="344" y1="280" x2="344" y2="295" stroke="rgba(192,148,40,.3)" stroke-width="1.5"/>
+    <line x1="352" y1="280" x2="352" y2="292" stroke="rgba(192,148,40,.25)" stroke-width="1.5"/>
+    <line x1="360" y1="280" x2="360" y2="294" stroke="rgba(192,148,40,.3)" stroke-width="1.5"/>
+    <line x1="368" y1="280" x2="368" y2="292" stroke="rgba(192,148,40,.25)" stroke-width="1.5"/>
+    <line x1="376" y1="280" x2="376" y2="295" stroke="rgba(192,148,40,.3)" stroke-width="1.5"/>
+    <line x1="384" y1="280" x2="384" y2="292" stroke="rgba(192,148,40,.25)" stroke-width="1.5"/>
+    <line x1="392" y1="280" x2="392" y2="294" stroke="rgba(192,148,40,.3)" stroke-width="1.5"/>
+    <line x1="400" y1="280" x2="400" y2="292" stroke="rgba(192,148,40,.25)" stroke-width="1.5"/>
+    <line x1="408" y1="280" x2="408" y2="295" stroke="rgba(192,148,40,.3)" stroke-width="1.5"/>
+    <line x1="416" y1="280" x2="416" y2="292" stroke="rgba(192,148,40,.25)" stroke-width="1.5"/>
+    <!-- Sparkles -->
+    <circle cx="245" cy="110" r="2" fill="rgba(224,184,72,.4)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="380" cy="142" r="1.5" fill="rgba(224,184,72,.35)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="55" r="2" fill="rgba(224,184,72,.4)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="358" rx="240" ry="18" fill="rgba(10,8,0,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🌿 長老與執事" subtitle="Elders and Deacons — 1 Tim 3:1-13" id="leader-heading" />
+  <app-scene-verse text="「人若想要得監督的職分，就是羨慕善工，這話是可信的」— 提摩太前書 3:1" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="提摩太前書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 敬虔的操練  Practice Godliness
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-godly" aria-label="提摩太前書 — 敬虔的操練">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="godly-glow" aria-hidden="true"></div>
 
+  <!-- Flame / heart and book (godly discipline) -->
+  <svg id="godly-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="心火與聖言象徵敬虔的操練">
+    <defs>
+      <radialGradient id="godlyGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(192,144,40,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="bookG2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#9a7028"/>
+        <stop offset="100%" stop-color="#6a4c18"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="200" rx="200" ry="140" fill="url(#godlyGlowG)"/>
+    <!-- Open book -->
+    <path d="M190,200 L190,310 Q300,295 300,295 Q300,295 410,310 L410,200 Q300,190 300,190 Z"
+          fill="url(#bookG2)" stroke="#b08030" stroke-width="1.5"/>
+    <!-- Book spine -->
+    <line x1="300" y1="190" x2="300" y2="295" stroke="rgba(200,160,60,.4)" stroke-width="2"/>
+    <!-- Left page lines -->
+    <line x1="208" y1="220" x2="292" y2="218" stroke="rgba(255,230,160,.15)" stroke-width="1.5"/>
+    <line x1="208" y1="232" x2="290" y2="230" stroke="rgba(255,230,160,.12)" stroke-width="1.5"/>
+    <line x1="208" y1="244" x2="292" y2="242" stroke="rgba(255,230,160,.12)" stroke-width="1.5"/>
+    <line x1="208" y1="256" x2="288" y2="254" stroke="rgba(255,230,160,.1)" stroke-width="1.5"/>
+    <line x1="208" y1="268" x2="290" y2="266" stroke="rgba(255,230,160,.1)" stroke-width="1.5"/>
+    <!-- Right page lines -->
+    <line x1="308" y1="220" x2="390" y2="218" stroke="rgba(255,230,160,.15)" stroke-width="1.5"/>
+    <line x1="310" y1="232" x2="390" y2="230" stroke="rgba(255,230,160,.12)" stroke-width="1.5"/>
+    <line x1="308" y1="244" x2="390" y2="242" stroke="rgba(255,230,160,.12)" stroke-width="1.5"/>
+    <line x1="312" y1="256" x2="390" y2="254" stroke="rgba(255,230,160,.1)" stroke-width="1.5"/>
+    <line x1="310" y1="268" x2="390" y2="266" stroke="rgba(255,230,160,.1)" stroke-width="1.5"/>
+    <!-- Heart flame above book -->
+    <path d="M280,180 Q280,160 300,158 Q320,160 320,180 Q320,195 300,208 Q280,195 280,180 Z"
+          fill="rgba(224,160,40,.3)" stroke="rgba(240,184,64,.4)" stroke-width="1.5"/>
+    <!-- Flame in heart -->
+    <path d="M300,140 Q308,156 305,168 Q302,175 300,178 Q298,175 295,168 Q292,156 300,140 Z"
+          fill="#d09030" opacity=".7"/>
+    <path d="M300,148 Q305,160 303,168 Q301,173 300,175 Q299,173 297,168 Q295,160 300,148 Z"
+          fill="#e8b048" opacity=".85"/>
+    <!-- Flame glow -->
+    <ellipse cx="300" cy="158" rx="30" ry="25" fill="rgba(224,160,40,.08)"/>
+    <!-- Sparkles -->
+    <circle cx="285" cy="145" r="2" fill="rgba(240,192,72,.4)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="315" cy="138" r="1.5" fill="rgba(240,192,72,.35)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="122" r="2" fill="rgba(240,192,72,.45)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="240" ry="18" fill="rgba(10,8,0,.5)"/>
+  </svg>
+
+  <app-scene-heading title="📖 敬虔的操練" subtitle="Practice Godliness — 1 Tim 4:7-8" id="godly-heading" />
+  <app-scene-verse text="「操練身體，益處還少；惟獨敬虔，凡事都有益處，因為有今生和來生的應許」— 提摩太前書 4:8" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="提摩太前書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 知足是大益處  Godliness with Contentment
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-content" aria-label="提摩太前書 — 知足是大益處">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="content-glow" aria-hidden="true"></div>
+
+  <!-- Simple scales balanced (contentment, not striving for wealth) -->
+  <svg id="content-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="平衡的秤象徵知足是大益處">
+    <defs>
+      <radialGradient id="contentGlowG" cx="50%" cy="45%" r="50%">
+        <stop offset="0%" stop-color="rgba(192,148,48,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="scaleG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c09040"/>
+        <stop offset="100%" stop-color="#8a6020"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="210" rx="220" ry="160" fill="url(#contentGlowG)"/>
+    <!-- Scale post -->
+    <rect x="294" y="130" width="12" height="200" rx="4" fill="url(#scaleG)"/>
+    <!-- Base -->
+    <rect x="255" y="322" width="90" height="14" rx="5" fill="#9a7028"/>
+    <ellipse cx="300" cy="329" rx="50" ry="8" fill="rgba(160,120,40,.3)"/>
+    <!-- Scale beam (balanced) -->
+    <rect x="160" y="148" width="280" height="10" rx="5" fill="url(#scaleG)"/>
+    <!-- Left scale pan (hung by chain) -->
+    <line x1="200" y1="158" x2="180" y2="210" stroke="rgba(192,152,48,.5)" stroke-width="2"/>
+    <line x1="200" y1="158" x2="220" y2="210" stroke="rgba(192,152,48,.5)" stroke-width="2"/>
+    <path d="M160,210 Q200,205 240,210 Q200,225 160,210 Z" fill="rgba(160,120,40,.3)" stroke="#c09040" stroke-width="1.5"/>
+    <!-- Left pan: heart (godliness) -->
+    <path d="M182,210 Q182,200 190,198 Q198,200 198,210 Q198,218 190,224 Q182,218 182,210 Z"
+          fill="rgba(224,176,64,.4)" stroke="rgba(240,196,80,.4)" stroke-width="1"/>
+    <!-- Right scale pan (hung by chain) -->
+    <line x1="400" y1="158" x2="380" y2="210" stroke="rgba(192,152,48,.5)" stroke-width="2"/>
+    <line x1="400" y1="158" x2="420" y2="210" stroke="rgba(192,152,48,.5)" stroke-width="2"/>
+    <path d="M360,210 Q400,205 440,210 Q400,225 360,210 Z" fill="rgba(160,120,40,.3)" stroke="#c09040" stroke-width="1.5"/>
+    <!-- Right pan: leaf/branch (contentment/life) -->
+    <path d="M390,220 Q400,205 412,210 Q406,222 390,220 Z" fill="rgba(128,176,96,.4)" stroke="rgba(160,208,120,.3)" stroke-width="1"/>
+    <line x1="390" y1="220" x2="412" y2="210" stroke="rgba(128,176,96,.3)" stroke-width="1"/>
+    <!-- Scale pivot star -->
+    <circle cx="300" cy="148" r="8" fill="rgba(224,184,72,.4)" stroke="#c09040" stroke-width="1"/>
+    <!-- Sparkles -->
+    <circle cx="175" cy="200" r="2" fill="rgba(240,200,80,.4)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="425" cy="196" r="1.5" fill="rgba(240,200,80,.35)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="120" r="2" fill="rgba(240,200,80,.45)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="248" cy="140" r="1.5" fill="rgba(208,168,56,.3)" style="animation: amberEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="355" cy="142" r="1.5" fill="rgba(208,168,56,.3)" style="animation: amberEmber 4s ease-in-out 1.5s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="⚖️ 知足是大益處" subtitle="Godliness with Contentment — 1 Tim 6:6" id="content-heading" />
+  <app-scene-verse text="「然而，敬虔加上知足的心便是大利了；因為我們沒有帶什麼到世上來，也不能帶什麼去」— 提摩太前書 6:6-7" />
 </section>

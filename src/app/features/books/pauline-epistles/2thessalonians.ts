@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class SecondThessalonians {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-endure', label: '忍耐的報賞' },
+    { id: 'scene-day', label: '主的大日' },
+    { id: 'scene-lawless', label: '不法之人' },
+    { id: 'scene-stand', label: '持守根基' },
+    { id: 'scene-faithful', label: '信實的主' },
   ];
 }
