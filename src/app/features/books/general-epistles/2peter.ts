@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class SecondPeter {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-nature', label: '神聖品性' },
+    { id: 'scene-prophecy', label: '確定的預言' },
+    { id: 'scene-false', label: '假師傅' },
+    { id: 'scene-day', label: '主的日子' },
+    { id: 'scene-grow', label: '長進恩典' },
   ];
 }
