@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class Ephesians {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-blessing', label: '屬靈的福氣' },
+    { id: 'scene-grace', label: '本乎恩因著信' },
+    { id: 'scene-unity', label: '聖靈裏的合一' },
+    { id: 'scene-church', label: '基督與教會' },
+    { id: 'scene-armor', label: '神的全副軍裝' },
   ];
 }

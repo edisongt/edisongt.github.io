@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class Galatians {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-gospel', label: '獨一的福音' },
+    { id: 'scene-faith', label: '因信稱義' },
+    { id: 'scene-freedom', label: '基督釋放的自由' },
+    { id: 'scene-fruit', label: '聖靈的果子' },
+    { id: 'scene-new', label: '新造的人' },
   ];
 }

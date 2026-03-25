@@ -1,49 +1,276 @@
 :host { display: block; }
 
 .scene {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  scroll-snap-align: start;
-}
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
 
 @keyframes fadeUpIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
 
 @keyframes shimmer {
-  0%,100% { filter: brightness(1);   }
-  50%      { filter: brightness(1.35); }
-}
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
 
-#scene-1 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #16163a 50%, #0a0a2e 100%);
-}
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── 2 Corinthians-specific keyframes ── */
+
+@keyframes tealEmber {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+@keyframes scrollFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);   }
+      50%      { transform: translateX(-50%) translateY(-10px); }
+    }
+
+@keyframes comfortSway {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+@keyframes jarGlow {
+      0%,100% { opacity: .4; }
+      50%      { opacity: .75; }
+    }
+
+@keyframes butterflyFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);    }
+      50%      { transform: translateX(-50%) translateY(-14px); }
+    }
+
+@keyframes thornPulse {
+      0%,100% { transform: translateX(-50%) rotate(-1deg);  }
+      50%      { transform: translateX(-50%) rotate(1deg);   }
+    }
+
+@keyframes cordBreathe {
+      0%,100% { opacity: .5; transform: scaleY(1);    }
+      50%      { opacity: .9; transform: scaleY(1.08); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #081a16 0%, #0e2a24 40%, #102e28 70%, #081a16 100%);
+    }
+
+#intro-teal-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(90,154,138,.12) 0%, rgba(58,122,106,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: tealEmber 4s ease-in-out infinite;
+    }
 
 #intro-title {
-  position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
-  text-align: center; z-index: 10; white-space: nowrap;
-}
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
 
 #intro-title h1 {
-  font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
-  background: linear-gradient(120deg, #5a9a8a 0%, #7abaa8 45%, #3a7a6a 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
-}
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg, #5a9a8a 0%, #7abaa8 45%, #3a7a6a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
 
 #intro-title p {
-  font-size: clamp(.9rem,2vw,1.2rem);
-  color: rgba(255,255,255,.5); margin-top: .6rem; letter-spacing: .18em;
-  animation: fadeUpIn 2s ease-out .5s both;
-}
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(122,186,168,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
 
-#scene-2, #scene-3, #scene-4, #scene-5, #scene-6 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #12122a 50%, #0a0a2e 100%);
-}
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(122,186,168,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-scroll-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,12vw,160px);
+      animation: scrollFloat 5s ease-in-out infinite;
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — COMFORT  患難中的安慰
+    ══════════════════════════════════════════════ */
+
+#scene-comfort {
+      background: linear-gradient(180deg, #061816 0%, #0c2420 40%, #102e28 70%, #061816 100%);
+    }
+
+#comfort-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(90,154,138,.15) 0%, rgba(58,122,106,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#comfort-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#comfort-heading h2 {
+      color: #7abaa8;
+      text-shadow: 0 0 22px rgba(90,154,138,.5);
+    }
+
+#comfort-heading p { color: rgba(122,186,168,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — TREASURE  瓦器裏的寶貝
+    ══════════════════════════════════════════════ */
+
+#scene-treasure {
+      background: linear-gradient(180deg, #041412 0%, #0a1e1a 40%, #0e2822 70%, #061816 100%);
+    }
+
+#treasure-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 55vw; height: 45vh;
+      background: radial-gradient(ellipse, rgba(90,154,138,.12) 0%, rgba(58,122,106,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: jarGlow 4.5s ease-in-out infinite;
+    }
+
+#treasure-scene-svg {
+      position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+#treasure-heading h2 {
+      color: #6aaa9a;
+      text-shadow: 0 0 22px rgba(90,154,138,.5);
+    }
+
+#treasure-heading p { color: rgba(106,170,154,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — NEW CREATION  新造的人
+    ══════════════════════════════════════════════ */
+
+#scene-new {
+      background: linear-gradient(180deg, #081a16 0%, #0e2a24 35%, #123028 60%, #143830 85%, #0e2a24 100%);
+    }
+
+#new-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 65%;
+      background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(160,208,196,.1) 0%, rgba(90,154,138,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#new-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,45vw,650px);
+      animation: butterflyFloat 6s ease-in-out infinite;
+    }
+
+#new-heading h2 {
+      background: linear-gradient(120deg, #7abaa8 0%, #a0d0c4 50%, #5a9a8a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#new-heading p { color: rgba(160,208,196,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — WEAKNESS  軟弱中的剛強
+    ══════════════════════════════════════════════ */
+
+#scene-weakness {
+      background: linear-gradient(180deg, #061614 0%, #0a2220 40%, #0e2a26 70%, #081a18 100%);
+    }
+
+#weakness-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(160,208,196,.14) 0%, rgba(90,154,138,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#weakness-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: thornPulse 8s ease-in-out infinite;
+    }
+
+#weakness-heading h2 {
+      color: #a0d0c4;
+      text-shadow: 0 0 22px rgba(160,208,196,.5);
+    }
+
+#weakness-heading p { color: rgba(160,208,196,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — GRACE  神恩夠用
+    ══════════════════════════════════════════════ */
+
+#scene-grace {
+      background: linear-gradient(180deg, #081a16 0%, #102e28 40%, #143830 70%, #123028 100%);
+    }
+
+#grace-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(122,186,168,.08) 0%, rgba(90,154,138,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: tealEmber 4s ease-in-out infinite;
+    }
+
+#grace-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,32vw,420px);
+      animation: cordBreathe 4s ease-in-out infinite;
+    }
+
+#grace-heading h2 {
+      background: linear-gradient(120deg, #7abaa8 0%, #a0d0c4 50%, #5a9a8a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#grace-heading p { color: rgba(122,186,168,.5); }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-}
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

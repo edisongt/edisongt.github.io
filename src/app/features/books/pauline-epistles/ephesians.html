@@ -1,66 +1,428 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="以弗所書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="以弗所書 — 開場">
   <app-starfield />
+
+  <div id="intro-royal-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>以弗所書</h1>
     <p>Epistle to the Ephesians</p>
+    <span class="sub">揀選 · 恩典 · 信心 · 合一 · 教會 · 軍裝</span>
   </div>
 
+  <!-- Temple pillars with descending light -->
+  <svg id="intro-temple-svg" viewBox="0 0 200 240" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="聖殿柱與降下的光">
+    <!-- Ethereal glow -->
+    <ellipse cx="100" cy="120" rx="80" ry="90" fill="rgba(74,128,176,.06)"/>
+    <!-- Descending light rays -->
+    <line x1="100" y1="10" x2="100" y2="60" stroke="rgba(106,160,208,.2)" stroke-width="2"/>
+    <line x1="100" y1="10" x2="55" y2="50" stroke="rgba(106,160,208,.12)" stroke-width="1.5"/>
+    <line x1="100" y1="10" x2="145" y2="50" stroke="rgba(106,160,208,.12)" stroke-width="1.5"/>
+    <line x1="100" y1="10" x2="30" y2="65" stroke="rgba(106,160,208,.08)" stroke-width="1.5"/>
+    <line x1="100" y1="10" x2="170" y2="65" stroke="rgba(106,160,208,.08)" stroke-width="1.5"/>
+    <!-- Triangular pediment -->
+    <polygon points="30,80 100,45 170,80" fill="#2a6090" stroke="#4a80b0" stroke-width="1.5"/>
+    <!-- Left pillar -->
+    <rect x="35" y="80" width="18" height="110" rx="2" fill="#4a80b0" stroke="#6aa0d0" stroke-width="1"/>
+    <rect x="33" y="78" width="22" height="8" rx="2" fill="#6aa0d0"/>
+    <rect x="33" y="185" width="22" height="8" rx="2" fill="#6aa0d0"/>
+    <!-- Right pillar -->
+    <rect x="147" y="80" width="18" height="110" rx="2" fill="#4a80b0" stroke="#6aa0d0" stroke-width="1"/>
+    <rect x="145" y="78" width="22" height="8" rx="2" fill="#6aa0d0"/>
+    <rect x="145" y="185" width="22" height="8" rx="2" fill="#6aa0d0"/>
+    <!-- Center pillar -->
+    <rect x="91" y="80" width="18" height="110" rx="2" fill="#3a6a9a" stroke="#4a80b0" stroke-width="1"/>
+    <rect x="89" y="78" width="22" height="8" rx="2" fill="#4a80b0"/>
+    <rect x="89" y="185" width="22" height="8" rx="2" fill="#4a80b0"/>
+    <!-- Base platform -->
+    <rect x="20" y="193" width="160" height="14" rx="3" fill="#2a6090" stroke="#4a80b0" stroke-width="1"/>
+    <!-- Light pool at base -->
+    <ellipse cx="100" cy="200" rx="50" ry="8" fill="rgba(74,128,176,.08)"/>
+    <!-- Sparkles -->
+    <circle cx="100" cy="25" r="2" fill="rgba(106,160,208,.5)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="60" cy="70" r="1.5" fill="rgba(106,160,208,.35)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="140" cy="68" r="1.2" fill="rgba(106,160,208,.3)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="100" cy="130" r="1" fill="rgba(106,160,208,.25)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="ephHorizonG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0e1a2a"/>
+        <stop offset="100%" stop-color="#08101e"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,175 240,190 Q360,165 480,185 Q600,155 720,178
+             Q840,150 960,172 Q1080,158 1200,182 Q1320,165 1440,192
+             L1440,300 L0,300 Z"
+          fill="url(#ephHorizonG)"/>
+    <circle cx="300" cy="180" r="2" fill="rgba(74,128,176,.3)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="168" r="1.5" fill="rgba(74,128,176,.25)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="174" r="1.8" fill="rgba(74,128,176,.2)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="182" r="2" fill="rgba(74,128,176,.3)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「願頌讚歸與我們主耶穌基督的父神！他在基督裏曾賜給我們天上各樣屬靈的福氣」— 以弗所書 1:3" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="以弗所書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 屬靈的福氣  Spiritual Blessings
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-blessing" aria-label="以弗所書 — 屬靈的福氣">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="blessing-glow" aria-hidden="true"></div>
 
+  <!-- Heavenly stars / blessings descending -->
+  <svg id="blessing-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="天上屬靈的福氣降下">
+    <defs>
+      <radialGradient id="blessingGlowG" cx="50%" cy="30%" r="50%">
+        <stop offset="0%" stop-color="rgba(74,128,176,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="blessingRayG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(128,192,224,.3)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="140" rx="220" ry="120" fill="url(#blessingGlowG)"/>
+    <!-- Heavenly arc -->
+    <path d="M100,100 Q300,20 500,100" stroke="rgba(106,160,208,.15)" stroke-width="2" fill="none"/>
+    <path d="M130,120 Q300,50 470,120" stroke="rgba(106,160,208,.1)" stroke-width="1.5" fill="none"/>
+    <!-- Descending blessing rays -->
+    <line x1="200" y1="80" x2="180" y2="280" stroke="url(#blessingRayG)" stroke-width="2"/>
+    <line x1="300" y1="50" x2="300" y2="280" stroke="url(#blessingRayG)" stroke-width="2.5"/>
+    <line x1="400" y1="80" x2="420" y2="280" stroke="url(#blessingRayG)" stroke-width="2"/>
+    <line x1="250" y1="70" x2="240" y2="260" stroke="url(#blessingRayG)" stroke-width="1.5"/>
+    <line x1="350" y1="70" x2="360" y2="260" stroke="url(#blessingRayG)" stroke-width="1.5"/>
+    <!-- Stars at the top -->
+    <polygon points="300,35 304,45 315,47 307,54 309,65 300,59 291,65 293,54 285,47 296,45"
+             fill="#80c0e0" opacity=".6"/>
+    <polygon points="200,65 203,72 210,73 205,78 206,85 200,81 194,85 195,78 190,73 197,72"
+             fill="#6aa0d0" opacity=".5"/>
+    <polygon points="400,65 403,72 410,73 405,78 406,85 400,81 394,85 395,78 390,73 397,72"
+             fill="#6aa0d0" opacity=".5"/>
+    <polygon points="150,95 152,100 158,101 154,105 155,110 150,107 145,110 146,105 142,101 148,100"
+             fill="#4a80b0" opacity=".4"/>
+    <polygon points="450,95 452,100 458,101 454,105 455,110 450,107 445,110 446,105 442,101 448,100"
+             fill="#4a80b0" opacity=".4"/>
+    <!-- Descending gift shapes (small diamonds) -->
+    <rect x="220" y="160" width="10" height="10" rx="1" fill="rgba(106,160,208,.25)" transform="rotate(45 225 165)"/>
+    <rect x="370" y="180" width="8" height="8" rx="1" fill="rgba(106,160,208,.2)" transform="rotate(45 374 184)"/>
+    <rect x="290" y="200" width="12" height="12" rx="1" fill="rgba(128,192,224,.2)" transform="rotate(45 296 206)"/>
+    <!-- Receiving figure at bottom -->
+    <g transform="translate(270,300)">
+      <ellipse cx="30" cy="0" rx="9" ry="10" fill="#7aaccc"/>
+      <path d="M18,10 Q16,35 18,55 Q24,60 30,61 Q36,60 42,55 Q44,35 42,10 Z" fill="#4a7a9a"/>
+      <!-- Arms raised upward -->
+      <path d="M18,18 Q5,0 0,-15" stroke="#4a7a9a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M42,18 Q55,0 60,-15" stroke="#4a7a9a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+    <!-- Light particles -->
+    <circle cx="250" cy="130" r="2" fill="rgba(106,160,208,.4)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="350" cy="120" r="1.8" fill="rgba(106,160,208,.35)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="90" r="2.5" fill="rgba(128,192,224,.45)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="180" cy="150" r="1.2" fill="rgba(74,128,176,.3)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="420" cy="145" r="1.5" fill="rgba(74,128,176,.3)" style="animation: blueEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="250" ry="25" fill="rgba(8,16,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="✨ 屬靈的福氣" subtitle="Spiritual Blessings — Eph 1:3-14" id="blessing-heading" />
+  <app-scene-verse text="「他從創立世界以前，在基督裏揀選了我們，使我們在他面前成為聖潔」— 以弗所書 1:4" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="以弗所書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 本乎恩因著信  By Grace Through Faith
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-grace" aria-label="以弗所書 — 本乎恩因著信">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="grace-glow" aria-hidden="true"></div>
 
+  <!-- Open hands receiving gift (grace) -->
+  <svg id="grace-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="張開的手接受恩典的禮物">
+    <defs>
+      <radialGradient id="graceGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(74,128,176,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="graceGiftG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#80c0e0"/>
+        <stop offset="100%" stop-color="#4a80b0"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="190" rx="200" ry="140" fill="url(#graceGlowG)"/>
+    <!-- Descending light to gift -->
+    <line x1="300" y1="40" x2="300" y2="130" stroke="rgba(128,192,224,.2)" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="260" y1="50" x2="280" y2="130" stroke="rgba(106,160,208,.1)" stroke-width="1.5"/>
+    <line x1="340" y1="50" x2="320" y2="130" stroke="rgba(106,160,208,.1)" stroke-width="1.5"/>
+    <!-- Gift box (grace) -->
+    <rect x="270" y="135" width="60" height="45" rx="4" fill="url(#graceGiftG)" stroke="#6aa0d0" stroke-width="1.5"/>
+    <rect x="270" y="125" width="60" height="15" rx="3" fill="#6aa0d0" stroke="#4a80b0" stroke-width="1"/>
+    <!-- Ribbon -->
+    <line x1="300" y1="125" x2="300" y2="180" stroke="#80c0e0" stroke-width="2"/>
+    <line x1="270" y1="148" x2="330" y2="148" stroke="#80c0e0" stroke-width="2"/>
+    <!-- Bow on top -->
+    <path d="M300,125 Q285,112 278,118 Q280,128 300,125 Z" fill="#80c0e0"/>
+    <path d="M300,125 Q315,112 322,118 Q320,128 300,125 Z" fill="#80c0e0"/>
+    <!-- Glow around gift -->
+    <circle cx="300" cy="155" r="50" fill="rgba(128,192,224,.06)"/>
+    <circle cx="300" cy="155" r="35" fill="rgba(128,192,224,.08)"/>
+    <!-- Left hand -->
+    <g transform="translate(160,220)">
+      <path d="M80,0 Q50,10 30,30 Q20,45 25,60 Q30,55 40,45 Q45,50 55,40 Q58,48 68,38 Q70,44 80,35 L80,0 Z"
+            fill="#7aaccc" stroke="#5a8aaa" stroke-width="1"/>
+      <path d="M25,60 Q15,75 20,90 Q25,95 35,90 Q40,85 38,75" stroke="#5a8aaa" stroke-width="1" fill="#6a9abb"/>
+    </g>
+    <!-- Right hand -->
+    <g transform="translate(360,220)">
+      <path d="M0,0 Q30,10 50,30 Q60,45 55,60 Q50,55 40,45 Q35,50 25,40 Q22,48 12,38 Q10,44 0,35 L0,0 Z"
+            fill="#7aaccc" stroke="#5a8aaa" stroke-width="1"/>
+      <path d="M55,60 Q65,75 60,90 Q55,95 45,90 Q40,85 42,75" stroke="#5a8aaa" stroke-width="1" fill="#6a9abb"/>
+    </g>
+    <!-- "Grace" particles descending -->
+    <circle cx="270" cy="100" r="2" fill="rgba(128,192,224,.35)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="330" cy="95" r="1.5" fill="rgba(128,192,224,.3)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="60" r="2.5" fill="rgba(128,192,224,.45)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="245" cy="170" r="1.2" fill="rgba(74,128,176,.3)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="355" cy="165" r="1.5" fill="rgba(74,128,176,.3)" style="animation: blueEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="250" ry="22" fill="rgba(8,16,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🎁 本乎恩因著信" subtitle="By Grace Through Faith — Eph 2:8-10" id="grace-heading" />
+  <app-scene-verse text="「你們得救是本乎恩，也因著信；這並不是出於自己，乃是神所賜的」— 以弗所書 2:8" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="以弗所書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 聖靈裏的合一  Unity in the Spirit
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-unity" aria-label="以弗所書 — 聖靈裏的合一">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="unity-glow" aria-hidden="true"></div>
 
+  <!-- Braided cord / interconnected rings -->
+  <svg id="unity-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="交織的繩與連結的環">
+    <defs>
+      <radialGradient id="unityGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(74,128,176,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="190" rx="220" ry="150" fill="url(#unityGlowG)"/>
+    <!-- Interconnected rings — unity symbol -->
+    <circle cx="230" cy="170" r="55" fill="none" stroke="#4a80b0" stroke-width="3" opacity=".7"/>
+    <circle cx="300" cy="170" r="55" fill="none" stroke="#6aa0d0" stroke-width="3" opacity=".7"/>
+    <circle cx="370" cy="170" r="55" fill="none" stroke="#80c0e0" stroke-width="3" opacity=".7"/>
+    <!-- Overlap glow -->
+    <ellipse cx="265" cy="170" rx="22" ry="40" fill="rgba(106,160,208,.06)"/>
+    <ellipse cx="335" cy="170" rx="22" ry="40" fill="rgba(128,192,224,.06)"/>
+    <!-- Braided cord below rings -->
+    <path d="M180,260 Q220,240 260,260 Q300,280 340,260 Q380,240 420,260"
+          stroke="#4a80b0" stroke-width="3" fill="none" opacity=".6"/>
+    <path d="M180,260 Q220,280 260,260 Q300,240 340,260 Q380,280 420,260"
+          stroke="#6aa0d0" stroke-width="3" fill="none" opacity=".6"/>
+    <path d="M180,260 Q220,260 260,260 Q300,260 340,260 Q380,260 420,260"
+          stroke="#80c0e0" stroke-width="2" fill="none" opacity=".4"/>
+    <!-- "One" labels in rings -->
+    <text x="230" y="175" text-anchor="middle" font-size="14" fill="rgba(106,160,208,.5)">一主</text>
+    <text x="300" y="175" text-anchor="middle" font-size="14" fill="rgba(128,192,224,.5)">一信</text>
+    <text x="370" y="175" text-anchor="middle" font-size="14" fill="rgba(160,208,240,.5)">一洗</text>
+    <!-- Community figures at bottom -->
+    <g transform="translate(200,300)">
+      <ellipse cx="15" cy="0" rx="6" ry="7" fill="#6a9abb"/>
+      <path d="M8,7 Q6,22 8,35 Q12,38 15,39 Q18,38 22,35 Q24,22 22,7 Z" fill="#4a7a9a"/>
+    </g>
+    <g transform="translate(260,295)">
+      <ellipse cx="15" cy="0" rx="7" ry="8" fill="#7aaccc"/>
+      <path d="M7,8 Q5,24 7,38 Q11,42 15,43 Q19,42 23,38 Q25,24 23,8 Z" fill="#5a8aaa"/>
+    </g>
+    <g transform="translate(320,295)">
+      <ellipse cx="15" cy="0" rx="7" ry="8" fill="#7aaccc"/>
+      <path d="M7,8 Q5,24 7,38 Q11,42 15,43 Q19,42 23,38 Q25,24 23,8 Z" fill="#5a8aaa"/>
+    </g>
+    <g transform="translate(380,300)">
+      <ellipse cx="15" cy="0" rx="6" ry="7" fill="#6a9abb"/>
+      <path d="M8,7 Q6,22 8,35 Q12,38 15,39 Q18,38 22,35 Q24,22 22,7 Z" fill="#4a7a9a"/>
+    </g>
+    <!-- Light particles -->
+    <circle cx="265" cy="140" r="2" fill="rgba(106,160,208,.4)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="335" cy="135" r="1.8" fill="rgba(128,192,224,.35)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="110" r="2.5" fill="rgba(128,192,224,.45)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="200" r="1.2" fill="rgba(74,128,176,.25)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="400" cy="195" r="1.5" fill="rgba(74,128,176,.3)" style="animation: blueEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="22" fill="rgba(8,16,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🔗 聖靈裏的合一" subtitle="Unity in the Spirit — Eph 4:1-6" id="unity-heading" />
+  <app-scene-verse text="「竭力保守聖靈所賜合而為一的心」— 以弗所書 4:3" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="以弗所書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 基督與教會  Christ and the Church
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-church" aria-label="以弗所書 — 基督與教會">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="church-glow" aria-hidden="true"></div>
 
+  <!-- Church building with bride's veil -->
+  <svg id="church-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="教會與新婦的面紗">
+    <defs>
+      <radialGradient id="churchGlowG" cx="50%" cy="35%" r="50%">
+        <stop offset="0%" stop-color="rgba(74,128,176,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="churchWallG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a80b0"/>
+        <stop offset="100%" stop-color="#2a5a80"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="220" ry="150" fill="url(#churchGlowG)"/>
+    <!-- Church building -->
+    <rect x="220" y="170" width="160" height="140" rx="3" fill="url(#churchWallG)" stroke="#6aa0d0" stroke-width="1.5"/>
+    <!-- Steeple -->
+    <polygon points="265,170 300,90 335,170" fill="#3a6a9a" stroke="#4a80b0" stroke-width="1.5"/>
+    <!-- Cross on top -->
+    <rect x="296" y="72" width="8" height="28" rx="1" fill="#80c0e0"/>
+    <rect x="289" y="80" width="22" height="6" rx="1" fill="#80c0e0"/>
+    <!-- Light from cross -->
+    <circle cx="300" cy="86" r="18" fill="rgba(128,192,224,.08)"/>
+    <!-- Door -->
+    <rect x="280" y="260" width="40" height="50" rx="3" fill="#1a3a55" stroke="#4a80b0" stroke-width="1"/>
+    <path d="M280,260 Q300,245 320,260" fill="#2a5a80" stroke="#4a80b0" stroke-width="1"/>
+    <!-- Windows -->
+    <circle cx="255" cy="210" r="12" fill="#1a3a55" stroke="#6aa0d0" stroke-width="1"/>
+    <circle cx="345" cy="210" r="12" fill="#1a3a55" stroke="#6aa0d0" stroke-width="1"/>
+    <line x1="255" y1="198" x2="255" y2="222" stroke="#4a80b0" stroke-width="1"/>
+    <line x1="243" y1="210" x2="267" y2="210" stroke="#4a80b0" stroke-width="1"/>
+    <line x1="345" y1="198" x2="345" y2="222" stroke="#4a80b0" stroke-width="1"/>
+    <line x1="333" y1="210" x2="357" y2="210" stroke="#4a80b0" stroke-width="1"/>
+    <!-- Bride's veil — flowing curves from the steeple -->
+    <path d="M300,100 Q220,140 160,220 Q140,260 150,310"
+          stroke="rgba(200,220,240,.15)" stroke-width="2" fill="none"/>
+    <path d="M300,100 Q240,130 180,200 Q160,240 165,290"
+          stroke="rgba(200,220,240,.1)" stroke-width="1.5" fill="none"/>
+    <path d="M300,100 Q380,140 440,220 Q460,260 450,310"
+          stroke="rgba(200,220,240,.15)" stroke-width="2" fill="none"/>
+    <path d="M300,100 Q360,130 420,200 Q440,240 435,290"
+          stroke="rgba(200,220,240,.1)" stroke-width="1.5" fill="none"/>
+    <!-- Veil shimmer particles -->
+    <circle cx="190" cy="220" r="1.5" fill="rgba(200,220,240,.25)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="410" cy="215" r="1.5" fill="rgba(200,220,240,.25)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="170" cy="270" r="1.2" fill="rgba(200,220,240,.2)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="430" cy="265" r="1.2" fill="rgba(200,220,240,.2)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Sparkles near cross -->
+    <circle cx="300" cy="68" r="2" fill="rgba(128,192,224,.5)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="280" cy="78" r="1.2" fill="rgba(106,160,208,.35)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="320" cy="76" r="1" fill="rgba(106,160,208,.3)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="260" ry="25" fill="rgba(8,16,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="💒 基督與教會" subtitle="Christ and the Church — Eph 5:25-32" id="church-heading" />
+  <app-scene-verse text="「丈夫也當照樣愛妻子，如同愛自己的身子」— 以弗所書 5:28" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="以弗所書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 神的全副軍裝  Full Armor of God
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-armor" aria-label="以弗所書 — 神的全副軍裝">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="armor-glow" aria-hidden="true"></div>
+
+  <!-- Shield, sword, helmet, breastplate arrangement -->
+  <svg id="armor-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="盾牌、寶劍、頭盔、護心鏡">
+    <defs>
+      <radialGradient id="armorGlowG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(74,128,176,.1)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="steelG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#80c0e0"/>
+        <stop offset="100%" stop-color="#4a80b0"/>
+      </linearGradient>
+      <linearGradient id="bladeG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#a0d8f0"/>
+        <stop offset="50%" stop-color="#80c0e0"/>
+        <stop offset="100%" stop-color="#6aa0d0"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="200" rx="220" ry="160" fill="url(#armorGlowG)"/>
+    <!-- Shield (center-left) — 信德的藤牌 -->
+    <path d="M200,130 Q200,110 230,100 L260,100 Q290,110 290,130 L290,200 Q245,250 200,200 Z"
+          fill="url(#steelG)" stroke="#6aa0d0" stroke-width="2"/>
+    <path d="M215,125 Q215,115 235,108 L255,108 Q275,115 275,125 L275,185 Q245,220 215,185 Z"
+          fill="#3a6a9a" stroke="#4a80b0" stroke-width="1"/>
+    <!-- Cross emblem on shield -->
+    <rect x="241" y="130" width="8" height="40" rx="1" fill="#80c0e0"/>
+    <rect x="230" y="143" width="30" height="6" rx="1" fill="#80c0e0"/>
+    <!-- Sword (center-right) — 聖靈的寶劍 -->
+    <rect x="355" y="80" width="8" height="180" rx="2" fill="url(#bladeG)"/>
+    <rect x="345" y="255" width="28" height="10" rx="3" fill="#6aa0d0" stroke="#4a80b0" stroke-width="1"/>
+    <rect x="353" y="265" width="12" height="30" rx="2" fill="#3a6a9a" stroke="#4a80b0" stroke-width="1"/>
+    <!-- Blade tip -->
+    <polygon points="355,80 363,80 359,60" fill="#a0d8f0"/>
+    <!-- Blade glow -->
+    <line x1="359" y1="70" x2="359" y2="250" stroke="rgba(160,208,240,.15)" stroke-width="14"/>
+    <!-- Helmet (top-right) — 救恩的頭盔 -->
+    <path d="M430,110 Q430,80 460,70 Q490,80 490,110 L490,140 Q460,155 430,140 Z"
+          fill="url(#steelG)" stroke="#6aa0d0" stroke-width="1.5"/>
+    <path d="M435,140 L485,140 L490,150 L430,150 Z" fill="#4a80b0"/>
+    <!-- Helmet visor -->
+    <rect x="445" y="115" width="30" height="8" rx="2" fill="#1a3a55"/>
+    <!-- Helmet crest -->
+    <path d="M460,70 Q460,55 465,48 Q470,55 470,70" stroke="#80c0e0" stroke-width="2" fill="none"/>
+    <!-- Breastplate (top-left) — 公義的護心鏡 -->
+    <path d="M100,120 Q100,100 130,95 L170,95 Q200,100 200,120 L200,200 Q150,230 100,200 Z"
+          fill="url(#steelG)" stroke="#6aa0d0" stroke-width="1.5"/>
+    <path d="M115,118 Q115,108 135,103 L165,103 Q185,108 185,118 L185,190 Q150,212 115,190 Z"
+          fill="#3a6a9a" stroke="#4a80b0" stroke-width="1"/>
+    <!-- Decorative lines on breastplate -->
+    <line x1="130" y1="130" x2="170" y2="130" stroke="rgba(128,192,224,.3)" stroke-width="1"/>
+    <line x1="125" y1="150" x2="175" y2="150" stroke="rgba(128,192,224,.25)" stroke-width="1"/>
+    <line x1="130" y1="170" x2="170" y2="170" stroke="rgba(128,192,224,.2)" stroke-width="1"/>
+    <!-- Connecting light lines between armor pieces -->
+    <line x1="200" y1="160" x2="245" y2="170" stroke="rgba(106,160,208,.1)" stroke-width="1"/>
+    <line x1="290" y1="165" x2="350" y2="170" stroke="rgba(106,160,208,.1)" stroke-width="1"/>
+    <line x1="370" y1="100" x2="430" y2="120" stroke="rgba(106,160,208,.1)" stroke-width="1"/>
+    <!-- Sparkle effects -->
+    <circle cx="245" cy="145" r="2.5" fill="rgba(128,192,224,.4)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="359" cy="70" r="2" fill="rgba(160,208,240,.45)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="460" cy="65" r="1.5" fill="rgba(128,192,224,.35)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="150" cy="95" r="1.8" fill="rgba(106,160,208,.3)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="300" cy="320" r="2" fill="rgba(74,128,176,.25)" style="animation: blueEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground plane -->
+    <ellipse cx="300" cy="360" rx="260" ry="25" fill="rgba(8,16,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🛡️ 神的全副軍裝" subtitle="Full Armor of God — Eph 6:10-18" id="armor-heading" />
+  <app-scene-verse text="「要穿戴神所賜的全副軍裝，就能抵擋魔鬼的詭計」— 以弗所書 6:11" />
 </section>

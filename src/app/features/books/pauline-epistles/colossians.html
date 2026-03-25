@@ -1,66 +1,373 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="歌羅西書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="歌羅西書 — 開場">
   <app-starfield />
+
+  <div id="intro-emerald-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>歌羅西書</h1>
     <p>Epistle to the Colossians</p>
+    <span class="sub">超越 · 豐盛 · 元首 · 新人 · 愛心 · 基督的道</span>
   </div>
 
+  <!-- Crown with emerald rays (Christ's supremacy) -->
+  <svg id="intro-crown-svg" viewBox="0 0 160 200" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="冠冕與翡翠光芒">
+    <!-- Ethereal glow behind crown -->
+    <ellipse cx="80" cy="100" rx="65" ry="75" fill="rgba(90,170,122,.06)"/>
+    <!-- Emerald rays emanating -->
+    <line x1="80" y1="60" x2="80" y2="10" stroke="rgba(90,170,122,.18)" stroke-width="2"/>
+    <line x1="80" y1="60" x2="35" y2="20" stroke="rgba(90,170,122,.12)" stroke-width="1.5"/>
+    <line x1="80" y1="60" x2="125" y2="20" stroke="rgba(90,170,122,.12)" stroke-width="1.5"/>
+    <line x1="80" y1="60" x2="15" y2="45" stroke="rgba(90,170,122,.08)" stroke-width="1.5"/>
+    <line x1="80" y1="60" x2="145" y2="45" stroke="rgba(90,170,122,.08)" stroke-width="1.5"/>
+    <!-- Crown body -->
+    <polygon points="40,110 50,70 65,90 80,60 95,90 110,70 120,110"
+             fill="#3a8a5a" stroke="#5aaa7a" stroke-width="1.5"/>
+    <rect x="38" y="110" width="84" height="16" rx="3" fill="#5aaa7a" stroke="#3a8a5a" stroke-width="1"/>
+    <!-- Jewels on crown -->
+    <circle cx="80" cy="85" r="5" fill="#7ac898" stroke="#5aaa7a" stroke-width="1"/>
+    <circle cx="60" cy="95" r="3.5" fill="#5aaa7a" stroke="#3a8a5a" stroke-width="1"/>
+    <circle cx="100" cy="95" r="3.5" fill="#5aaa7a" stroke="#3a8a5a" stroke-width="1"/>
+    <!-- Cross atop crown -->
+    <rect x="77" y="50" width="6" height="20" rx="1" fill="#7ac898"/>
+    <rect x="72" y="55" width="16" height="5" rx="1" fill="#7ac898"/>
+    <!-- Sparkle effects -->
+    <circle cx="45" cy="75" r="1.5" fill="rgba(122,200,152,.4)" style="animation: emeraldEmber 3s ease-in-out infinite;"/>
+    <circle cx="115" cy="72" r="1.2" fill="rgba(122,200,152,.35)" style="animation: emeraldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="80" cy="40" r="1.8" fill="rgba(122,200,152,.45)" style="animation: emeraldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="130" cy="95" r="1" fill="rgba(122,200,152,.3)" style="animation: emeraldEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="colHorizonG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0e1a14"/>
+        <stop offset="100%" stop-color="#0a1610"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,175 240,190 Q360,165 480,185 Q600,155 720,178
+             Q840,150 960,172 Q1080,158 1200,182 Q1320,165 1440,192
+             L1440,300 L0,300 Z"
+          fill="url(#colHorizonG)"/>
+    <circle cx="300" cy="180" r="2" fill="rgba(90,170,122,.3)" style="animation: emeraldEmber 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="168" r="1.5" fill="rgba(90,170,122,.25)" style="animation: emeraldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="174" r="1.8" fill="rgba(90,170,122,.2)" style="animation: emeraldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="182" r="2" fill="rgba(90,170,122,.3)" style="animation: emeraldEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「愛子是那不能看見之神的像，是首生的，在一切被造的以先」— 歌羅西書 1:15" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="歌羅西書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 基督的超越  Supremacy of Christ
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-supremacy" aria-label="歌羅西書 — 基督的超越">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="supremacy-glow" aria-hidden="true"></div>
 
+  <!-- Globe/cosmos with Christ figure above all -->
+  <svg id="supremacy-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="宇宙中基督超越萬有">
+    <defs>
+      <radialGradient id="supremacyGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(90,170,122,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="globeG" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#2a5a3a"/>
+        <stop offset="100%" stop-color="#1a3a2a"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="200" rx="220" ry="150" fill="url(#supremacyGlowG)"/>
+    <!-- Globe / cosmos -->
+    <circle cx="300" cy="240" r="90" fill="url(#globeG)" stroke="#5aaa7a" stroke-width="1.5"/>
+    <ellipse cx="300" cy="240" rx="90" ry="30" fill="none" stroke="rgba(90,170,122,.2)" stroke-width="1"/>
+    <ellipse cx="300" cy="240" rx="60" ry="90" fill="none" stroke="rgba(90,170,122,.15)" stroke-width="1"/>
+    <ellipse cx="300" cy="240" rx="30" ry="90" fill="none" stroke="rgba(90,170,122,.1)" stroke-width="1"/>
+    <!-- Orbital rings -->
+    <ellipse cx="300" cy="240" rx="120" ry="40" fill="none" stroke="rgba(122,200,152,.12)" stroke-width="1" transform="rotate(-20,300,240)"/>
+    <ellipse cx="300" cy="240" rx="130" ry="45" fill="none" stroke="rgba(122,200,152,.08)" stroke-width="1" transform="rotate(15,300,240)"/>
+    <!-- Christ figure above -->
+    <g transform="translate(275,60)">
+      <!-- Head halo -->
+      <circle cx="25" cy="20" r="25" fill="rgba(122,200,152,.08)"/>
+      <circle cx="25" cy="20" r="15" fill="rgba(122,200,152,.12)"/>
+      <!-- Head -->
+      <circle cx="25" cy="20" r="8" fill="#7ac898"/>
+      <!-- Body -->
+      <path d="M15,28 Q10,55 12,80 Q18,85 25,86 Q32,85 38,80 Q40,55 35,28 Z" fill="#5aaa7a"/>
+      <!-- Arms extended -->
+      <path d="M12,38 Q-10,35 -25,42" stroke="#5aaa7a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M38,38 Q60,35 75,42" stroke="#5aaa7a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+    <!-- Light beams from figure to globe -->
+    <line x1="300" y1="145" x2="300" y2="150" stroke="rgba(122,200,152,.25)" stroke-width="2"/>
+    <line x1="300" y1="145" x2="250" y2="190" stroke="rgba(122,200,152,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="145" x2="350" y2="190" stroke="rgba(122,200,152,.1)" stroke-width="1.5"/>
+    <!-- Stars/particles -->
+    <circle cx="200" cy="150" r="2" fill="rgba(122,200,152,.35)" style="animation: emeraldEmber 3s ease-in-out infinite;"/>
+    <circle cx="400" cy="140" r="1.5" fill="rgba(122,200,152,.3)" style="animation: emeraldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="80" r="2.5" fill="rgba(122,200,152,.4)" style="animation: emeraldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="180" cy="260" r="1.2" fill="rgba(90,170,122,.25)" style="animation: emeraldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="420" cy="250" r="1.8" fill="rgba(90,170,122,.3)" style="animation: emeraldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="250" ry="22" fill="rgba(10,20,14,.5)"/>
+  </svg>
+
+  <app-scene-heading title="👑 基督的超越" subtitle="Supremacy of Christ — Col 1:15-20" id="supremacy-heading" />
+  <app-scene-verse text="「萬有都是靠他造的，又是為他造的。他在萬有之先；萬有也靠他而立」— 歌羅西書 1:16-17" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="歌羅西書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 神本性的豐盛  Fullness of Deity
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-fullness" aria-label="歌羅西書 — 神本性的豐盛">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="fullness-glow" aria-hidden="true"></div>
 
+  <!-- Overflowing cup / vessel (fullness) -->
+  <svg id="fullness-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="滿溢的杯—神本性的豐盛">
+    <defs>
+      <radialGradient id="fullnessGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(90,170,122,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="vesselG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5aaa7a"/>
+        <stop offset="100%" stop-color="#2a6a4a"/>
+      </linearGradient>
+      <linearGradient id="overflowG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7ac898"/>
+        <stop offset="50%" stop-color="#5aaa7a"/>
+        <stop offset="100%" stop-color="rgba(90,170,122,.1)"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="200" ry="140" fill="url(#fullnessGlowG)"/>
+    <!-- Vessel / cup -->
+    <path d="M240,180 Q235,280 260,310 Q280,325 300,328 Q320,325 340,310 Q365,280 360,180 Z"
+          fill="url(#vesselG)" stroke="#7ac898" stroke-width="1.5"/>
+    <!-- Vessel rim -->
+    <ellipse cx="300" cy="180" rx="62" ry="14" fill="#5aaa7a" stroke="#7ac898" stroke-width="1.5"/>
+    <!-- Vessel inner -->
+    <ellipse cx="300" cy="180" rx="52" ry="10" fill="#3a8a5a"/>
+    <!-- Overflowing streams -->
+    <path d="M248,178 Q230,185 220,210 Q215,240 225,270" stroke="url(#overflowG)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M352,178 Q370,185 380,210 Q385,240 375,270" stroke="url(#overflowG)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M255,175 Q240,190 235,225" stroke="url(#overflowG)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M345,175 Q360,190 365,225" stroke="url(#overflowG)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Light rising from cup -->
+    <line x1="300" y1="170" x2="300" y2="80" stroke="rgba(122,200,152,.2)" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="300" y1="170" x2="260" y2="90" stroke="rgba(122,200,152,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="170" x2="340" y2="90" stroke="rgba(122,200,152,.1)" stroke-width="1.5"/>
+    <!-- Rising particles -->
+    <circle cx="290" cy="130" r="2.5" fill="rgba(122,200,152,.4)" style="animation: emeraldEmber 3s ease-in-out infinite;"/>
+    <circle cx="310" cy="110" r="2" fill="rgba(122,200,152,.35)" style="animation: emeraldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="90" r="3" fill="rgba(122,200,152,.45)" style="animation: emeraldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="275" cy="150" r="1.5" fill="rgba(90,170,122,.3)" style="animation: emeraldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="325" cy="145" r="1.8" fill="rgba(90,170,122,.35)" style="animation: emeraldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="365" rx="250" ry="22" fill="rgba(10,20,14,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🏆 神本性的豐盛" subtitle="Fullness of Deity — Col 2:9-10" id="fullness-heading" />
+  <app-scene-verse text="「因為神本性一切的豐盛都有形有體地居住在基督裏面」— 歌羅西書 2:9" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="歌羅西書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 與基督同藏  Hidden with Christ
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-hidden" aria-label="歌羅西書 — 與基督同藏">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="hidden-glow" aria-hidden="true"></div>
 
+  <!-- Treasure chest hidden within mountain/rock -->
+  <svg id="hidden-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="隱藏在磐石中的寶藏">
+    <defs>
+      <radialGradient id="hiddenGlowG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(122,200,152,.1)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="rockG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a3a30"/>
+        <stop offset="100%" stop-color="#1a2a20"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="200" rx="200" ry="150" fill="url(#hiddenGlowG)"/>
+    <!-- Mountain / rock -->
+    <polygon points="140,340 300,100 460,340" fill="url(#rockG)" stroke="#3a5a4a" stroke-width="1.5"/>
+    <polygon points="180,340 300,140 420,340" fill="#1e3028"/>
+    <!-- Rock texture lines -->
+    <line x1="230" y1="220" x2="280" y2="200" stroke="rgba(90,170,122,.1)" stroke-width="1"/>
+    <line x1="310" y1="210" x2="370" y2="230" stroke="rgba(90,170,122,.08)" stroke-width="1"/>
+    <line x1="260" y1="280" x2="340" y2="270" stroke="rgba(90,170,122,.06)" stroke-width="1"/>
+    <!-- Cave opening -->
+    <ellipse cx="300" cy="270" rx="45" ry="35" fill="#0e1a14"/>
+    <ellipse cx="300" cy="270" rx="40" ry="30" fill="#0a1410"/>
+    <!-- Treasure chest inside cave -->
+    <rect x="270" y="262" width="60" height="32" rx="3" fill="#5aaa7a" stroke="#7ac898" stroke-width="1.5"/>
+    <rect x="270" y="258" width="60" height="10" rx="3" fill="#7ac898" stroke="#5aaa7a" stroke-width="1"/>
+    <!-- Chest clasp -->
+    <rect x="296" y="270" width="8" height="10" rx="1" fill="#3a8a5a"/>
+    <circle cx="300" cy="277" r="3" fill="#a0e0b8" stroke="#5aaa7a" stroke-width="1"/>
+    <!-- Light emanating from chest -->
+    <line x1="300" y1="258" x2="300" y2="210" stroke="rgba(160,224,184,.2)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="300" y1="258" x2="265" y2="220" stroke="rgba(160,224,184,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="258" x2="335" y2="220" stroke="rgba(160,224,184,.12)" stroke-width="1.5"/>
+    <!-- Light particles from treasure -->
+    <circle cx="290" cy="240" r="2" fill="rgba(160,224,184,.4)" style="animation: emeraldEmber 3s ease-in-out infinite;"/>
+    <circle cx="310" cy="230" r="1.5" fill="rgba(160,224,184,.35)" style="animation: emeraldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="215" r="2.5" fill="rgba(160,224,184,.45)" style="animation: emeraldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="280" cy="250" r="1.2" fill="rgba(122,200,152,.3)" style="animation: emeraldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="320" cy="245" r="1.8" fill="rgba(122,200,152,.35)" style="animation: emeraldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="22" fill="rgba(10,20,14,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🏔️ 與基督同藏" subtitle="Hidden with Christ — Col 3:1-4" id="hidden-heading" />
+  <app-scene-verse text="「你們的生命與基督一同藏在神裏面」— 歌羅西書 3:3" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="歌羅西書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 穿上新人  Put on the New Self
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-newself" aria-label="歌羅西書 — 穿上新人">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="newself-glow" aria-hidden="true"></div>
 
+  <!-- Garment/robe being put on -->
+  <svg id="newself-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="穿上新人的袍子">
+    <defs>
+      <radialGradient id="newselfGlowG" cx="50%" cy="35%" r="50%">
+        <stop offset="0%" stop-color="rgba(122,200,152,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="robeG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#a0e0b8"/>
+        <stop offset="50%" stop-color="#7ac898"/>
+        <stop offset="100%" stop-color="#5aaa7a"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="220" ry="150" fill="url(#newselfGlowG)"/>
+    <!-- Robe / garment -->
+    <path d="M260,100 Q250,95 230,100 Q210,120 200,180 Q195,260 210,330
+             L300,340 L390,330
+             Q405,260 400,180 Q390,120 370,100 Q350,95 340,100
+             L320,110 Q310,115 300,118 Q290,115 280,110 Z"
+          fill="url(#robeG)" stroke="#5aaa7a" stroke-width="1.5"/>
+    <!-- Robe collar -->
+    <path d="M260,100 Q280,108 300,112 Q320,108 340,100 Q330,90 300,85 Q270,90 260,100 Z"
+          fill="#a0e0b8" stroke="#7ac898" stroke-width="1"/>
+    <!-- Robe fold lines -->
+    <path d="M270,150 Q285,200 280,280" stroke="rgba(58,138,90,.3)" stroke-width="1" fill="none"/>
+    <path d="M330,150 Q315,200 320,280" stroke="rgba(58,138,90,.3)" stroke-width="1" fill="none"/>
+    <path d="M300,118 Q300,200 300,320" stroke="rgba(58,138,90,.2)" stroke-width="1" fill="none"/>
+    <!-- Sleeves -->
+    <path d="M230,100 Q200,115 170,140 Q165,150 175,155 Q190,145 215,130" fill="#7ac898" stroke="#5aaa7a" stroke-width="1"/>
+    <path d="M370,100 Q400,115 430,140 Q435,150 425,155 Q410,145 385,130" fill="#7ac898" stroke="#5aaa7a" stroke-width="1"/>
+    <!-- Heart emblem on chest (love binds everything) -->
+    <path d="M300,175 Q290,165 283,158 Q276,148 283,140 Q290,133 300,145 Q310,133 317,140 Q324,148 317,158 Q310,165 300,175 Z"
+          fill="rgba(160,224,184,.4)" stroke="#a0e0b8" stroke-width="1"/>
+    <!-- Radiance around robe -->
+    <circle cx="300" cy="190" r="120" fill="none" stroke="rgba(122,200,152,.06)" stroke-width="1"/>
+    <circle cx="300" cy="190" r="140" fill="none" stroke="rgba(122,200,152,.04)" stroke-width="1"/>
+    <!-- Light particles -->
+    <circle cx="240" cy="140" r="2" fill="rgba(160,224,184,.35)" style="animation: emeraldEmber 3s ease-in-out infinite;"/>
+    <circle cx="360" cy="135" r="1.5" fill="rgba(160,224,184,.3)" style="animation: emeraldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="80" r="2.5" fill="rgba(160,224,184,.4)" style="animation: emeraldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="190" cy="200" r="1.2" fill="rgba(122,200,152,.25)" style="animation: emeraldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="410" cy="195" r="1.8" fill="rgba(122,200,152,.3)" style="animation: emeraldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="22" fill="rgba(10,20,14,.5)"/>
+  </svg>
+
+  <app-scene-heading title="👘 穿上新人" subtitle="Put on the New Self — Col 3:12-14" id="newself-heading" />
+  <app-scene-verse text="「在這一切之外，要存著愛心，愛心就是聯絡全德的」— 歌羅西書 3:14" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="歌羅西書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 基督的道  Word of Christ
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-word" aria-label="歌羅西書 — 基督的道">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="word-glow" aria-hidden="true"></div>
+
+  <!-- Open book with light emanating -->
+  <svg id="word-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="展開的書卷發出光芒">
+    <defs>
+      <radialGradient id="wordGlowG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(122,200,152,.1)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="bookPageG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e8f5ee"/>
+        <stop offset="100%" stop-color="#c0e0d0"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="200" rx="220" ry="150" fill="url(#wordGlowG)"/>
+    <!-- Light emanating upward from book -->
+    <line x1="300" y1="200" x2="300" y2="50" stroke="rgba(160,224,184,.2)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="300" y1="200" x2="220" y2="70" stroke="rgba(160,224,184,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="200" x2="380" y2="70" stroke="rgba(160,224,184,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="200" x2="170" y2="110" stroke="rgba(122,200,152,.07)" stroke-width="1.5"/>
+    <line x1="300" y1="200" x2="430" y2="110" stroke="rgba(122,200,152,.07)" stroke-width="1.5"/>
+    <!-- Open book — left page -->
+    <path d="M300,210 Q290,205 200,220 Q180,225 170,230 L170,310 Q180,305 200,300 Q290,285 300,290 Z"
+          fill="url(#bookPageG)" stroke="#5aaa7a" stroke-width="1.5"/>
+    <!-- Open book — right page -->
+    <path d="M300,210 Q310,205 400,220 Q420,225 430,230 L430,310 Q420,305 400,300 Q310,285 300,290 Z"
+          fill="url(#bookPageG)" stroke="#5aaa7a" stroke-width="1.5"/>
+    <!-- Book spine -->
+    <line x1="300" y1="210" x2="300" y2="290" stroke="#3a8a5a" stroke-width="2"/>
+    <!-- Text lines on left page -->
+    <line x1="195" y1="240" x2="280" y2="230" stroke="rgba(58,138,90,.3)" stroke-width="1.5"/>
+    <line x1="195" y1="252" x2="275" y2="243" stroke="rgba(58,138,90,.25)" stroke-width="1.5"/>
+    <line x1="195" y1="264" x2="270" y2="256" stroke="rgba(58,138,90,.25)" stroke-width="1.5"/>
+    <line x1="195" y1="276" x2="265" y2="269" stroke="rgba(58,138,90,.2)" stroke-width="1.5"/>
+    <!-- Text lines on right page -->
+    <line x1="320" y1="230" x2="405" y2="240" stroke="rgba(58,138,90,.3)" stroke-width="1.5"/>
+    <line x1="325" y1="243" x2="405" y2="252" stroke="rgba(58,138,90,.25)" stroke-width="1.5"/>
+    <line x1="330" y1="256" x2="405" y2="264" stroke="rgba(58,138,90,.25)" stroke-width="1.5"/>
+    <line x1="335" y1="269" x2="405" y2="276" stroke="rgba(58,138,90,.2)" stroke-width="1.5"/>
+    <!-- Light halo above book -->
+    <circle cx="300" cy="200" r="50" fill="rgba(160,224,184,.06)"/>
+    <circle cx="300" cy="200" r="30" fill="rgba(160,224,184,.08)"/>
+    <!-- Ascending light particles -->
+    <circle cx="290" cy="160" r="2" fill="rgba(160,224,184,.4)" style="animation: emeraldEmber 3s ease-in-out infinite;"/>
+    <circle cx="310" cy="130" r="1.8" fill="rgba(160,224,184,.35)" style="animation: emeraldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="80" r="2.5" fill="rgba(160,224,184,.45)" style="animation: emeraldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="270" cy="110" r="1.2" fill="rgba(122,200,152,.3)" style="animation: emeraldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="330" cy="100" r="1.5" fill="rgba(122,200,152,.35)" style="animation: emeraldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="25" fill="rgba(10,20,14,.5)"/>
+  </svg>
+
+  <app-scene-heading title="📖 基督的道" subtitle="Word of Christ — Col 3:16-17" id="word-heading" />
+  <app-scene-verse text="「當用各樣的智慧，把基督的道理豐豐富富地存在心裏」— 歌羅西書 3:16" />
 </section>

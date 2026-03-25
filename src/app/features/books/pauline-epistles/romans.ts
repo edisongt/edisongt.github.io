@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class Romans {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-gospel', label: '福音的大能' },
+    { id: 'scene-sin', label: '罪與稱義' },
+    { id: 'scene-grace', label: '恩典與盼望' },
+    { id: 'scene-spirit', label: '聖靈的生命' },
+    { id: 'scene-mercy', label: '活祭與憐憫' },
   ];
 }

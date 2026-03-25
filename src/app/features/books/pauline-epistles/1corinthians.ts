@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class FirstCorinthians {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-unity', label: '合一的呼籲' },
+    { id: 'scene-wisdom', label: '十架的智慧' },
+    { id: 'scene-body', label: '基督的身體' },
+    { id: 'scene-love', label: '愛的真諦' },
+    { id: 'scene-resurrection', label: '復活的盼望' },
   ];
 }

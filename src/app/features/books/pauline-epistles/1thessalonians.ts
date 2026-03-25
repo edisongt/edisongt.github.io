@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class FirstThessalonians {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-faith', label: '信心的榜樣' },
+    { id: 'scene-sanctify', label: '成為聖潔' },
+    { id: 'scene-encourage', label: '彼此勸慰' },
+    { id: 'scene-return', label: '主必再來' },
+    { id: 'scene-rejoice', label: '常常喜樂' },
   ];
 }

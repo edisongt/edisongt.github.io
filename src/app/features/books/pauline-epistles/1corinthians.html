@@ -1,66 +1,416 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="哥林多前書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="哥林多前書 — 開場">
   <app-starfield />
+
+  <div id="intro-teal-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>哥林多前書</h1>
     <p>First Epistle to the Corinthians</p>
+    <span class="sub">合一 · 十架 · 恩賜 · 愛 · 復活 · 教會</span>
   </div>
 
+  <!-- Letter / scroll with cross symbol -->
+  <svg id="intro-scroll-svg" viewBox="0 0 160 200" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="書信卷軸與十字架">
+    <!-- Ethereal glow behind scroll -->
+    <ellipse cx="80" cy="100" rx="65" ry="75" fill="rgba(90,138,170,.06)"/>
+    <!-- Light rays emanating -->
+    <line x1="80" y1="50" x2="80" y2="5" stroke="rgba(122,170,200,.15)" stroke-width="2"/>
+    <line x1="80" y1="50" x2="35" y2="15" stroke="rgba(122,170,200,.1)" stroke-width="1.5"/>
+    <line x1="80" y1="50" x2="125" y2="15" stroke="rgba(122,170,200,.1)" stroke-width="1.5"/>
+    <line x1="80" y1="50" x2="15" y2="40" stroke="rgba(122,170,200,.08)" stroke-width="1.5"/>
+    <line x1="80" y1="50" x2="145" y2="40" stroke="rgba(122,170,200,.08)" stroke-width="1.5"/>
+    <!-- Scroll body -->
+    <rect x="38" y="55" width="84" height="100" rx="4" fill="#3a6a8a" stroke="#5a8aaa" stroke-width="1.5"/>
+    <rect x="42" y="59" width="76" height="92" rx="3" fill="#4a7a9a"/>
+    <!-- Scroll rollers -->
+    <rect x="32" y="50" width="96" height="12" rx="6" fill="#5a8aaa" stroke="#3a6a8a" stroke-width="1"/>
+    <rect x="32" y="148" width="96" height="12" rx="6" fill="#5a8aaa" stroke="#3a6a8a" stroke-width="1"/>
+    <!-- Cross on scroll -->
+    <rect x="76" y="72" width="8" height="32" rx="1.5" fill="rgba(154,192,216,.5)"/>
+    <rect x="68" y="80" width="24" height="7" rx="1.5" fill="rgba(154,192,216,.5)"/>
+    <!-- Text lines on scroll -->
+    <line x1="52" y1="118" x2="108" y2="118" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+    <line x1="52" y1="128" x2="100" y2="128" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+    <line x1="52" y1="138" x2="106" y2="138" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+    <!-- Seal / emblem -->
+    <circle cx="80" cy="148" r="8" fill="#7aaac8" stroke="#5a8aaa" stroke-width="1"/>
+    <circle cx="80" cy="148" r="4" fill="#9ac0d8"/>
+    <!-- Sparkle effects -->
+    <circle cx="45" cy="65" r="1.5" fill="rgba(122,170,200,.4)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="115" cy="62" r="1.2" fill="rgba(122,170,200,.35)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="80" cy="35" r="1.8" fill="rgba(122,170,200,.45)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="130" cy="90" r="1" fill="rgba(122,170,200,.3)" style="animation: tealEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="horizonG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#10202e"/>
+        <stop offset="100%" stop-color="#0a1420"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,175 240,190 Q360,165 480,185 Q600,155 720,178
+             Q840,150 960,172 Q1080,158 1200,182 Q1320,165 1440,192
+             L1440,300 L0,300 Z"
+          fill="url(#horizonG1)"/>
+    <circle cx="300" cy="180" r="2" fill="rgba(90,138,170,.3)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="168" r="1.5" fill="rgba(90,138,170,.25)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="174" r="1.8" fill="rgba(90,138,170,.2)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="182" r="2" fill="rgba(90,138,170,.3)" style="animation: tealEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「神是信實的，你們原是被他所召，好與他兒子耶穌基督一同得份」— 哥林多前書 1:9" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="哥林多前書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 合一的呼籲  Call to Unity
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-unity" aria-label="哥林多前書 — 合一的呼籲">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="unity-glow" aria-hidden="true"></div>
 
+  <!-- Interlinked chains / hands forming a circle -->
+  <svg id="unity-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="合一的鏈環與手形成圓圈">
+    <defs>
+      <radialGradient id="unityGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(90,138,170,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="chainG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#7aaac8"/>
+        <stop offset="100%" stop-color="#3a6a8a"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="190" rx="220" ry="150" fill="url(#unityGlowG)"/>
+    <!-- Central circle of unity — large ring -->
+    <circle cx="300" cy="190" r="110" fill="none" stroke="rgba(90,138,170,.08)" stroke-width="30"/>
+    <circle cx="300" cy="190" r="110" fill="none" stroke="rgba(122,170,200,.12)" stroke-width="2"/>
+    <!-- Interlinked chain links around the circle -->
+    <ellipse cx="300" cy="80" rx="28" ry="14" fill="none" stroke="url(#chainG)" stroke-width="4" transform="rotate(0,300,80)"/>
+    <ellipse cx="395" cy="115" rx="28" ry="14" fill="none" stroke="url(#chainG)" stroke-width="4" transform="rotate(55,395,115)"/>
+    <ellipse cx="410" cy="210" rx="28" ry="14" fill="none" stroke="url(#chainG)" stroke-width="4" transform="rotate(90,410,210)"/>
+    <ellipse cx="365" cy="290" rx="28" ry="14" fill="none" stroke="url(#chainG)" stroke-width="4" transform="rotate(130,365,290)"/>
+    <ellipse cx="235" cy="290" rx="28" ry="14" fill="none" stroke="url(#chainG)" stroke-width="4" transform="rotate(-130,235,290)"/>
+    <ellipse cx="190" cy="210" rx="28" ry="14" fill="none" stroke="url(#chainG)" stroke-width="4" transform="rotate(-90,190,210)"/>
+    <ellipse cx="205" cy="115" rx="28" ry="14" fill="none" stroke="url(#chainG)" stroke-width="4" transform="rotate(-55,205,115)"/>
+    <!-- Hands reaching inward (stylised) -->
+    <g transform="translate(270,140)">
+      <path d="M0,10 Q10,0 20,2 Q22,5 20,10 Q25,8 28,12 Q26,16 22,14 L15,20 Q10,22 5,18 Z" fill="#9ac0d8" opacity=".5"/>
+    </g>
+    <g transform="translate(310,140) scale(-1,1) translate(-30,0)">
+      <path d="M0,10 Q10,0 20,2 Q22,5 20,10 Q25,8 28,12 Q26,16 22,14 L15,20 Q10,22 5,18 Z" fill="#9ac0d8" opacity=".5"/>
+    </g>
+    <g transform="translate(270,240) scale(1,-1) translate(0,-20)">
+      <path d="M0,10 Q10,0 20,2 Q22,5 20,10 Q25,8 28,12 Q26,16 22,14 L15,20 Q10,22 5,18 Z" fill="#9ac0d8" opacity=".4"/>
+    </g>
+    <g transform="translate(310,240) scale(-1,-1) translate(-30,-20)">
+      <path d="M0,10 Q10,0 20,2 Q22,5 20,10 Q25,8 28,12 Q26,16 22,14 L15,20 Q10,22 5,18 Z" fill="#9ac0d8" opacity=".4"/>
+    </g>
+    <!-- Cross in centre -->
+    <rect x="296" y="178" width="8" height="26" rx="2" fill="#7aaac8" opacity=".6"/>
+    <rect x="289" y="184" width="22" height="7" rx="2" fill="#7aaac8" opacity=".6"/>
+    <!-- Sparkle effects -->
+    <circle cx="300" cy="80" r="2.5" fill="rgba(122,170,200,.4)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="410" cy="210" r="2" fill="rgba(122,170,200,.35)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="190" cy="210" r="2" fill="rgba(122,170,200,.3)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="365" cy="290" r="1.5" fill="rgba(154,192,216,.25)" style="animation: tealEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="235" cy="290" r="1.8" fill="rgba(154,192,216,.3)" style="animation: tealEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground plane -->
+    <ellipse cx="300" cy="350" rx="250" ry="25" fill="rgba(10,20,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🔗 合一的呼籲" subtitle="Call to Unity — 1 Corinthians 1:10-13" id="unity-heading" />
+  <app-scene-verse text="「弟兄們，我藉我們主耶穌基督的名，勸你們都說一樣的話，你們中間也不可分黨」— 哥林多前書 1:10" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="哥林多前書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 十架的智慧  Wisdom of the Cross
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-wisdom" aria-label="哥林多前書 — 十架的智慧">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="wisdom-glow" aria-hidden="true"></div>
 
+  <!-- Cross with radiating wisdom light -->
+  <svg id="wisdom-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="十字架與智慧之光">
+    <defs>
+      <radialGradient id="wisdomGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(58,106,138,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="wisdomCrossG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#9ac0d8"/>
+        <stop offset="100%" stop-color="#5a8aaa"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="160" rx="200" ry="130" fill="url(#wisdomGlowG)"/>
+    <!-- Radiating light beams from cross centre -->
+    <line x1="300" y1="140" x2="300" y2="20" stroke="rgba(154,192,216,.2)" stroke-width="2"/>
+    <line x1="300" y1="140" x2="180" y2="50" stroke="rgba(154,192,216,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="140" x2="420" y2="50" stroke="rgba(154,192,216,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="140" x2="130" y2="100" stroke="rgba(122,170,200,.08)" stroke-width="1.5"/>
+    <line x1="300" y1="140" x2="470" y2="100" stroke="rgba(122,170,200,.08)" stroke-width="1.5"/>
+    <line x1="300" y1="140" x2="120" y2="180" stroke="rgba(122,170,200,.06)" stroke-width="1"/>
+    <line x1="300" y1="140" x2="480" y2="180" stroke="rgba(122,170,200,.06)" stroke-width="1"/>
+    <line x1="300" y1="140" x2="160" y2="260" stroke="rgba(122,170,200,.05)" stroke-width="1"/>
+    <line x1="300" y1="140" x2="440" y2="260" stroke="rgba(122,170,200,.05)" stroke-width="1"/>
+    <!-- Halo of light rings -->
+    <circle cx="300" cy="140" r="50" fill="rgba(154,192,216,.04)"/>
+    <circle cx="300" cy="140" r="80" fill="none" stroke="rgba(122,170,200,.06)" stroke-width="1"/>
+    <circle cx="300" cy="140" r="120" fill="none" stroke="rgba(122,170,200,.04)" stroke-width="1"/>
+    <!-- The Cross — central -->
+    <rect x="290" y="70" width="20" height="200" rx="4" fill="url(#wisdomCrossG)"/>
+    <rect x="235" y="125" width="130" height="18" rx="4" fill="url(#wisdomCrossG)"/>
+    <!-- Glow at intersection -->
+    <circle cx="300" cy="134" r="30" fill="rgba(154,192,216,.08)"/>
+    <circle cx="300" cy="134" r="18" fill="rgba(176,208,232,.06)"/>
+    <!-- Wisdom text symbols (書/scroll fragments around cross) -->
+    <g opacity=".35">
+      <rect x="170" y="160" width="30" height="22" rx="3" fill="#3a6a8a" stroke="#5a8aaa" stroke-width="1"/>
+      <line x1="176" y1="168" x2="194" y2="168" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+      <line x1="176" y1="174" x2="190" y2="174" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+    </g>
+    <g opacity=".3">
+      <rect x="400" y="155" width="30" height="22" rx="3" fill="#3a6a8a" stroke="#5a8aaa" stroke-width="1"/>
+      <line x1="406" y1="163" x2="424" y2="163" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+      <line x1="406" y1="169" x2="420" y2="169" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+    </g>
+    <!-- Sparkles -->
+    <circle cx="300" cy="65" r="2.5" fill="rgba(154,192,216,.45)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="230" cy="130" r="2" fill="rgba(122,170,200,.35)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="370" cy="130" r="1.8" fill="rgba(122,170,200,.3)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="80" r="1.5" fill="rgba(90,138,170,.25)" style="animation: tealEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="400" cy="80" r="1.5" fill="rgba(90,138,170,.25)" style="animation: tealEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="350" rx="250" ry="20" fill="rgba(10,20,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="✝️ 十架的智慧" subtitle="Wisdom of the Cross — 1 Corinthians 1:18-25" id="wisdom-heading" />
+  <app-scene-verse text="「因為十字架的道理，在那滅亡的人為愚拙；在我們得救的人，卻為神的大能」— 哥林多前書 1:18" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="哥林多前書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 基督的身體  Body of Christ
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-body" aria-label="哥林多前書 — 基督的身體">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="body-glow" aria-hidden="true"></div>
 
+  <!-- Multiple connected circles forming body shape -->
+  <svg id="body-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="基督身體的肢體連結">
+    <defs>
+      <radialGradient id="bodyGlowG" cx="50%" cy="30%" r="50%">
+        <stop offset="0%" stop-color="rgba(122,170,200,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="bodyNodeG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#9ac0d8"/>
+        <stop offset="100%" stop-color="#5a8aaa"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="170" rx="220" ry="150" fill="url(#bodyGlowG)"/>
+    <!-- Connection lines between nodes -->
+    <line x1="300" y1="80" x2="220" y2="150" stroke="rgba(122,170,200,.2)" stroke-width="2"/>
+    <line x1="300" y1="80" x2="380" y2="150" stroke="rgba(122,170,200,.2)" stroke-width="2"/>
+    <line x1="220" y1="150" x2="180" y2="240" stroke="rgba(122,170,200,.18)" stroke-width="2"/>
+    <line x1="380" y1="150" x2="420" y2="240" stroke="rgba(122,170,200,.18)" stroke-width="2"/>
+    <line x1="220" y1="150" x2="300" y2="200" stroke="rgba(122,170,200,.15)" stroke-width="1.5"/>
+    <line x1="380" y1="150" x2="300" y2="200" stroke="rgba(122,170,200,.15)" stroke-width="1.5"/>
+    <line x1="300" y1="200" x2="250" y2="290" stroke="rgba(122,170,200,.15)" stroke-width="1.5"/>
+    <line x1="300" y1="200" x2="350" y2="290" stroke="rgba(122,170,200,.15)" stroke-width="1.5"/>
+    <line x1="180" y1="240" x2="250" y2="290" stroke="rgba(122,170,200,.12)" stroke-width="1.5"/>
+    <line x1="420" y1="240" x2="350" y2="290" stroke="rgba(122,170,200,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="80" x2="300" y2="200" stroke="rgba(154,192,216,.15)" stroke-width="1.5"/>
+    <!-- Head node — Christ the head -->
+    <circle cx="300" cy="80" r="24" fill="url(#bodyNodeG)" stroke="#7aaac8" stroke-width="2"/>
+    <circle cx="300" cy="80" r="14" fill="rgba(176,208,232,.15)"/>
+    <!-- Cross within head node -->
+    <rect x="297" y="70" width="6" height="20" rx="1" fill="rgba(255,255,255,.3)"/>
+    <rect x="291" y="77" width="18" height="5" rx="1" fill="rgba(255,255,255,.3)"/>
+    <!-- Body member nodes -->
+    <circle cx="220" cy="150" r="18" fill="#5a8aaa" stroke="#7aaac8" stroke-width="1.5"/>
+    <circle cx="220" cy="150" r="8" fill="rgba(154,192,216,.2)"/>
+    <circle cx="380" cy="150" r="18" fill="#5a8aaa" stroke="#7aaac8" stroke-width="1.5"/>
+    <circle cx="380" cy="150" r="8" fill="rgba(154,192,216,.2)"/>
+    <circle cx="300" cy="200" r="20" fill="#4a7a9a" stroke="#7aaac8" stroke-width="1.5"/>
+    <circle cx="300" cy="200" r="10" fill="rgba(154,192,216,.15)"/>
+    <circle cx="180" cy="240" r="15" fill="#3a6a8a" stroke="#5a8aaa" stroke-width="1.5"/>
+    <circle cx="180" cy="240" r="7" fill="rgba(122,170,200,.15)"/>
+    <circle cx="420" cy="240" r="15" fill="#3a6a8a" stroke="#5a8aaa" stroke-width="1.5"/>
+    <circle cx="420" cy="240" r="7" fill="rgba(122,170,200,.15)"/>
+    <circle cx="250" cy="290" r="13" fill="#2a5a7a" stroke="#5a8aaa" stroke-width="1.5"/>
+    <circle cx="250" cy="290" r="6" fill="rgba(90,138,170,.15)"/>
+    <circle cx="350" cy="290" r="13" fill="#2a5a7a" stroke="#5a8aaa" stroke-width="1.5"/>
+    <circle cx="350" cy="290" r="6" fill="rgba(90,138,170,.15)"/>
+    <!-- Pulse rings around head -->
+    <circle cx="300" cy="80" r="35" fill="none" stroke="rgba(154,192,216,.08)" stroke-width="1"/>
+    <circle cx="300" cy="80" r="48" fill="none" stroke="rgba(154,192,216,.05)" stroke-width="1"/>
+    <!-- Light particles -->
+    <circle cx="260" cy="120" r="2" fill="rgba(154,192,216,.35)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="340" cy="120" r="1.5" fill="rgba(154,192,216,.3)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="55" r="2.5" fill="rgba(176,208,232,.4)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="160" cy="250" r="1.2" fill="rgba(122,170,200,.25)" style="animation: tealEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="440" cy="250" r="1.8" fill="rgba(122,170,200,.3)" style="animation: tealEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="260" ry="22" fill="rgba(10,20,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🫂 基督的身體" subtitle="Body of Christ — 1 Corinthians 12:12-27" id="body-heading" />
+  <app-scene-verse text="「你們就是基督的身子，並且各自作肢體」— 哥林多前書 12:27" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="哥林多前書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 愛的真諦  Love Chapter
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-love" aria-label="哥林多前書 — 愛的真諦">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="love-glow" aria-hidden="true"></div>
 
+  <!-- Heart with radiating light -->
+  <svg id="love-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="愛心與放射光芒">
+    <defs>
+      <radialGradient id="loveGlowG" cx="50%" cy="35%" r="50%">
+        <stop offset="0%" stop-color="rgba(154,192,216,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="heartG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#9ac0d8"/>
+        <stop offset="50%" stop-color="#7aaac8"/>
+        <stop offset="100%" stop-color="#5a8aaa"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="220" ry="160" fill="url(#loveGlowG)"/>
+    <!-- Radiating light beams from heart centre -->
+    <line x1="300" y1="170" x2="300" y2="30" stroke="rgba(154,192,216,.15)" stroke-width="2"/>
+    <line x1="300" y1="170" x2="180" y2="60" stroke="rgba(122,170,200,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="170" x2="420" y2="60" stroke="rgba(122,170,200,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="170" x2="130" y2="140" stroke="rgba(122,170,200,.07)" stroke-width="1.5"/>
+    <line x1="300" y1="170" x2="470" y2="140" stroke="rgba(122,170,200,.07)" stroke-width="1.5"/>
+    <line x1="300" y1="170" x2="140" y2="250" stroke="rgba(122,170,200,.06)" stroke-width="1"/>
+    <line x1="300" y1="170" x2="460" y2="250" stroke="rgba(122,170,200,.06)" stroke-width="1"/>
+    <!-- Glow rings around heart -->
+    <circle cx="300" cy="175" r="80" fill="rgba(154,192,216,.03)"/>
+    <circle cx="300" cy="175" r="60" fill="rgba(154,192,216,.04)"/>
+    <!-- Heart shape -->
+    <path d="M300,260 Q260,230 235,200 Q210,170 215,140 Q220,110 250,105
+             Q275,100 300,125 Q325,100 350,105 Q380,110 385,140
+             Q390,170 365,200 Q340,230 300,260 Z"
+          fill="url(#heartG)" stroke="#7aaac8" stroke-width="2"/>
+    <!-- Inner heart glow -->
+    <path d="M300,240 Q268,215 250,192 Q232,170 236,148 Q240,128 260,124
+             Q278,120 300,140 Q322,120 340,124 Q360,128 364,148
+             Q368,170 350,192 Q332,215 300,240 Z"
+          fill="rgba(176,208,232,.12)"/>
+    <!-- Three symbols: 信 望 愛 (faith, hope, love) -->
+    <text x="220" y="300" text-anchor="middle" font-size="18" fill="rgba(154,192,216,.45)" letter-spacing=".05em">信</text>
+    <text x="300" y="300" text-anchor="middle" font-size="22" fill="rgba(176,208,232,.6)" letter-spacing=".05em">愛</text>
+    <text x="380" y="300" text-anchor="middle" font-size="18" fill="rgba(154,192,216,.45)" letter-spacing=".05em">望</text>
+    <!-- Connecting arcs for faith-hope-love -->
+    <path d="M240,295 Q270,280 280,295" fill="none" stroke="rgba(122,170,200,.15)" stroke-width="1"/>
+    <path d="M320,295 Q330,280 360,295" fill="none" stroke="rgba(122,170,200,.15)" stroke-width="1"/>
+    <!-- Light particles -->
+    <circle cx="250" cy="130" r="2" fill="rgba(154,192,216,.4)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="350" cy="130" r="2" fill="rgba(154,192,216,.35)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="100" r="2.5" fill="rgba(176,208,232,.45)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="180" r="1.5" fill="rgba(122,170,200,.25)" style="animation: tealEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="400" cy="180" r="1.8" fill="rgba(122,170,200,.3)" style="animation: tealEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="22" fill="rgba(10,20,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="💖 愛的真諦" subtitle="Love Chapter — 1 Corinthians 13:1-13" id="love-heading" />
+  <app-scene-verse text="「如今常存的有信，有望，有愛；這三樣，其中最大的是愛」— 哥林多前書 13:13" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="哥林多前書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 復活的盼望  Hope of Resurrection
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-resurrection" aria-label="哥林多前書 — 復活的盼望">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="resurrection-glow" aria-hidden="true"></div>
+
+  <!-- Empty tomb with light bursting out -->
+  <svg id="resurrection-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="空墳墓與爆發的光芒">
+    <defs>
+      <radialGradient id="resGlowG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(154,192,216,.1)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="tombG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a6a7a"/>
+        <stop offset="100%" stop-color="#2a4a5a"/>
+      </linearGradient>
+      <linearGradient id="tombLightG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#5a8aaa"/>
+        <stop offset="40%" stop-color="#9ac0d8"/>
+        <stop offset="100%" stop-color="#d0e8f0"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="190" rx="200" ry="150" fill="url(#resGlowG)"/>
+    <!-- Rocky hillside -->
+    <path d="M100,320 Q180,260 250,270 Q280,250 300,240 Q320,250 350,270 Q420,260 500,320 L500,400 L100,400 Z"
+          fill="#1a3040" stroke="rgba(90,138,170,.2)" stroke-width="1"/>
+    <!-- Tomb entrance — dark arch -->
+    <path d="M240,320 Q240,230 300,210 Q360,230 360,320 Z"
+          fill="#0a1820" stroke="#3a6a8a" stroke-width="2"/>
+    <!-- Inner tomb darkness -->
+    <path d="M252,320 Q252,242 300,225 Q348,242 348,320 Z"
+          fill="#060e15"/>
+    <!-- Rolled-away stone -->
+    <ellipse cx="375" cy="300" rx="30" ry="40" fill="url(#tombG)" stroke="#5a8aaa" stroke-width="1.5"/>
+    <ellipse cx="375" cy="300" rx="22" ry="30" fill="#3a5a6a"/>
+    <!-- Light BURSTING from tomb -->
+    <line x1="300" y1="240" x2="300" y2="60" stroke="rgba(176,208,232,.25)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="300" y1="240" x2="200" y2="80" stroke="rgba(154,192,216,.15)" stroke-width="2"/>
+    <line x1="300" y1="240" x2="400" y2="80" stroke="rgba(154,192,216,.15)" stroke-width="2"/>
+    <line x1="300" y1="240" x2="140" y2="140" stroke="rgba(122,170,200,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="240" x2="460" y2="140" stroke="rgba(122,170,200,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="240" x2="160" y2="220" stroke="rgba(122,170,200,.07)" stroke-width="1.5"/>
+    <line x1="300" y1="240" x2="440" y2="220" stroke="rgba(122,170,200,.07)" stroke-width="1.5"/>
+    <!-- Glow at tomb opening -->
+    <ellipse cx="300" cy="260" rx="50" ry="40" fill="rgba(154,192,216,.08)"/>
+    <ellipse cx="300" cy="250" rx="30" ry="25" fill="rgba(176,208,232,.06)"/>
+    <!-- Bright core of light -->
+    <circle cx="300" cy="230" r="15" fill="rgba(208,232,240,.08)"/>
+    <circle cx="300" cy="230" r="8" fill="rgba(208,232,240,.1)"/>
+    <!-- Rising light particles -->
+    <circle cx="290" cy="180" r="2" fill="rgba(176,208,232,.4)" style="animation: tealEmber 3s ease-in-out infinite;"/>
+    <circle cx="310" cy="150" r="1.8" fill="rgba(176,208,232,.35)" style="animation: tealEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="100" r="2.5" fill="rgba(208,232,240,.45)" style="animation: tealEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="270" cy="120" r="1.2" fill="rgba(154,192,216,.3)" style="animation: tealEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="330" cy="110" r="1.5" fill="rgba(154,192,216,.35)" style="animation: tealEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground plane -->
+    <ellipse cx="300" cy="380" rx="260" ry="25" fill="rgba(10,20,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🌅 復活的盼望" subtitle="Hope of Resurrection — 1 Corinthians 15:51-58" id="resurrection-heading" />
+  <app-scene-verse text="「死被得勝吞滅。死啊！你得勝的權勢在哪裏？」— 哥林多前書 15:54-55" />
 </section>

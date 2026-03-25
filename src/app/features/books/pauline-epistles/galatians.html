@@ -1,66 +1,397 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="加拉太書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="加拉太書 — 開場">
   <app-starfield />
+
+  <div id="intro-golden-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>加拉太書</h1>
     <p>Epistle to the Galatians</p>
+    <span class="sub">自由 · 信心 · 稱義 · 聖靈 · 果子 · 新造</span>
   </div>
 
+  <!-- Broken chain links with golden light -->
+  <svg id="intro-chain-svg" viewBox="0 0 160 200" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="斷開的鎖鏈與金色光芒">
+    <!-- Ethereal golden glow -->
+    <ellipse cx="80" cy="100" rx="65" ry="75" fill="rgba(212,160,64,.06)"/>
+    <!-- Light rays -->
+    <line x1="80" y1="50" x2="80" y2="5" stroke="rgba(212,160,64,.15)" stroke-width="2"/>
+    <line x1="80" y1="50" x2="35" y2="15" stroke="rgba(212,160,64,.1)" stroke-width="1.5"/>
+    <line x1="80" y1="50" x2="125" y2="15" stroke="rgba(212,160,64,.1)" stroke-width="1.5"/>
+    <line x1="80" y1="50" x2="15" y2="40" stroke="rgba(212,160,64,.08)" stroke-width="1.5"/>
+    <line x1="80" y1="50" x2="145" y2="40" stroke="rgba(212,160,64,.08)" stroke-width="1.5"/>
+    <!-- Left chain link (broken, falling away) -->
+    <ellipse cx="55" cy="105" rx="16" ry="22" fill="none" stroke="#b08020" stroke-width="4" transform="rotate(-15,55,105)"/>
+    <rect x="38" y="94" width="12" height="8" fill="#0e0a18" transform="rotate(-15,55,105)"/>
+    <!-- Right chain link (broken, falling away) -->
+    <ellipse cx="105" cy="100" rx="16" ry="22" fill="none" stroke="#b08020" stroke-width="4" transform="rotate(15,105,100)"/>
+    <rect x="108" y="88" width="12" height="8" fill="#0e0a18" transform="rotate(15,105,100)"/>
+    <!-- Golden burst at break point -->
+    <circle cx="80" cy="100" r="12" fill="rgba(232,192,96,.15)"/>
+    <circle cx="80" cy="100" r="6" fill="rgba(232,192,96,.25)"/>
+    <!-- Sparkle effects -->
+    <circle cx="45" cy="80" r="1.5" fill="rgba(212,160,64,.4)" style="animation: goldenEmber 3s ease-in-out infinite;"/>
+    <circle cx="115" cy="78" r="1.2" fill="rgba(212,160,64,.35)" style="animation: goldenEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="80" cy="55" r="1.8" fill="rgba(212,160,64,.45)" style="animation: goldenEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="130" cy="100" r="1" fill="rgba(212,160,64,.3)" style="animation: goldenEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="horizonG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#14101a"/>
+        <stop offset="100%" stop-color="#0a0a18"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,175 240,190 Q360,165 480,185 Q600,155 720,178
+             Q840,150 960,172 Q1080,158 1200,182 Q1320,165 1440,192
+             L1440,300 L0,300 Z"
+          fill="url(#horizonG1)"/>
+    <circle cx="300" cy="180" r="2" fill="rgba(212,160,64,.3)" style="animation: goldenEmber 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="168" r="1.5" fill="rgba(212,160,64,.25)" style="animation: goldenEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="174" r="1.8" fill="rgba(212,160,64,.2)" style="animation: goldenEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="182" r="2" fill="rgba(212,160,64,.3)" style="animation: goldenEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「基督釋放了我們，叫我們得以自由。所以要站立得穩，不要再被奴僕的軛挾制」— 加拉太書 5:1" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="加拉太書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 獨一的福音  One True Gospel
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-gospel" aria-label="加拉太書 — 獨一的福音">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="gospel-glow" aria-hidden="true"></div>
 
+  <!-- Open scroll with seal/stamp -->
+  <svg id="gospel-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="展開的書卷與印記">
+    <defs>
+      <radialGradient id="gospelGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(212,160,64,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="scrollG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#d4a040"/>
+        <stop offset="100%" stop-color="#b08020"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="220" ry="150" fill="url(#gospelGlowG)"/>
+    <!-- Scroll body — unrolled -->
+    <rect x="160" y="120" width="280" height="160" rx="4" fill="#3a2a10" stroke="#d4a040" stroke-width="1.5"/>
+    <rect x="165" y="125" width="270" height="150" rx="3" fill="#4a3a18"/>
+    <!-- Left roller -->
+    <rect x="148" y="115" width="18" height="175" rx="9" fill="#d4a040" stroke="#b08020" stroke-width="1"/>
+    <!-- Right roller -->
+    <rect x="434" y="115" width="18" height="175" rx="9" fill="#d4a040" stroke="#b08020" stroke-width="1"/>
+    <!-- Text lines on scroll -->
+    <line x1="190" y1="150" x2="410" y2="150" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+    <line x1="190" y1="168" x2="390" y2="168" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+    <line x1="190" y1="186" x2="400" y2="186" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+    <line x1="190" y1="204" x2="380" y2="204" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+    <line x1="190" y1="222" x2="350" y2="222" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+    <!-- Official seal / stamp -->
+    <circle cx="360" cy="245" r="18" fill="#d4a040" stroke="#e8c060" stroke-width="1.5"/>
+    <circle cx="360" cy="245" r="11" fill="#b08020"/>
+    <circle cx="360" cy="245" r="6" fill="#e8c060"/>
+    <!-- Seal ribbon -->
+    <path d="M350,260 L345,290 L360,280 L375,290 L370,260" fill="#b08020" opacity=".6"/>
+    <!-- Light radiating from seal -->
+    <line x1="360" y1="220" x2="360" y2="195" stroke="rgba(232,192,96,.2)" stroke-width="1.5"/>
+    <line x1="380" y1="230" x2="405" y2="215" stroke="rgba(232,192,96,.15)" stroke-width="1"/>
+    <line x1="340" y1="230" x2="315" y2="215" stroke="rgba(232,192,96,.15)" stroke-width="1"/>
+    <!-- Particles -->
+    <circle cx="200" cy="140" r="2" fill="rgba(212,160,64,.35)" style="animation: goldenEmber 3s ease-in-out infinite;"/>
+    <circle cx="420" cy="135" r="1.5" fill="rgba(212,160,64,.3)" style="animation: goldenEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="110" r="2" fill="rgba(232,192,96,.4)" style="animation: goldenEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="160" cy="200" r="1.2" fill="rgba(212,160,64,.25)" style="animation: goldenEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="350" rx="250" ry="25" fill="rgba(10,10,24,.5)"/>
+  </svg>
+
+  <app-scene-heading title="📜 獨一的福音" subtitle="One True Gospel — Galatians 1:6-9" id="gospel-heading" />
+  <app-scene-verse text="「無論是我們，是天上來的使者，若傳福音給你們，與我們所傳給你們的不同，他就應當被咒詛」— 加拉太書 1:8" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="加拉太書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 因信稱義  Justified by Faith
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-faith" aria-label="加拉太書 — 因信稱義">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="faith-glow" aria-hidden="true"></div>
 
+  <!-- Cross with figure united to it -->
+  <svg id="faith-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="與基督同釘十字架">
+    <defs>
+      <radialGradient id="faithGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(176,128,32,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="crossG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d4a040"/>
+        <stop offset="100%" stop-color="#8a6020"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="160" rx="200" ry="130" fill="url(#faithGlowG)"/>
+    <!-- The cross -->
+    <rect x="292" y="60" width="16" height="240" rx="3" fill="url(#crossG)"/>
+    <rect x="240" y="110" width="120" height="14" rx="3" fill="url(#crossG)"/>
+    <!-- Halo of golden light -->
+    <circle cx="300" cy="117" r="45" fill="rgba(232,192,96,.05)"/>
+    <circle cx="300" cy="117" r="28" fill="rgba(232,192,96,.08)"/>
+    <!-- Figure merged with cross — silhouette -->
+    <circle cx="300" cy="85" r="12" fill="rgba(212,160,64,.25)" stroke="rgba(232,192,96,.3)" stroke-width="1"/>
+    <path d="M294,97 Q290,140 292,200 Q296,210 300,212 Q304,210 308,200 Q310,140 306,97 Z"
+          fill="rgba(212,160,64,.15)" stroke="rgba(232,192,96,.2)" stroke-width="1"/>
+    <!-- Arms along crossbeam -->
+    <path d="M292,115 Q270,113 245,117" stroke="rgba(232,192,96,.2)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M308,115 Q330,113 355,117" stroke="rgba(232,192,96,.2)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Light rays from cross -->
+    <line x1="300" y1="60" x2="300" y2="20" stroke="rgba(232,192,96,.2)" stroke-width="2"/>
+    <line x1="300" y1="60" x2="250" y2="30" stroke="rgba(232,192,96,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="60" x2="350" y2="30" stroke="rgba(232,192,96,.1)" stroke-width="1.5"/>
+    <line x1="240" y1="117" x2="190" y2="100" stroke="rgba(232,192,96,.08)" stroke-width="1.5"/>
+    <line x1="360" y1="117" x2="410" y2="100" stroke="rgba(232,192,96,.08)" stroke-width="1.5"/>
+    <!-- Sparkles -->
+    <circle cx="300" cy="50" r="2.5" fill="rgba(232,192,96,.4)" style="animation: goldenEmber 3s ease-in-out infinite;"/>
+    <circle cx="240" cy="105" r="1.5" fill="rgba(212,160,64,.35)" style="animation: goldenEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="360" cy="105" r="1.8" fill="rgba(212,160,64,.3)" style="animation: goldenEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="280" cy="180" r="1.2" fill="rgba(212,160,64,.25)" style="animation: goldenEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="350" rx="250" ry="20" fill="rgba(10,10,24,.5)"/>
+  </svg>
+
+  <app-scene-heading title="✝️ 因信稱義" subtitle="Justified by Faith — Galatians 2:16-20" id="faith-heading" />
+  <app-scene-verse text="「我已經與基督同釘十字架，現在活著的不再是我，乃是基督在我裏面活著」— 加拉太書 2:20" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="加拉太書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 基督釋放的自由  Freedom in Christ
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-freedom" aria-label="加拉太書 — 基督釋放的自由">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="freedom-glow" aria-hidden="true"></div>
 
+  <!-- Bird flying free from cage -->
+  <svg id="freedom-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="飛鳥從籠中釋放">
+    <defs>
+      <radialGradient id="freedomGlowG" cx="50%" cy="30%" r="50%">
+        <stop offset="0%" stop-color="rgba(212,160,64,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="cageG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5a4a30"/>
+        <stop offset="100%" stop-color="#3a2a18"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="150" rx="200" ry="130" fill="url(#freedomGlowG)"/>
+    <!-- Cage — open door -->
+    <rect x="280" y="180" width="120" height="150" rx="3" fill="none" stroke="#6a5a30" stroke-width="2.5"/>
+    <!-- Cage bars -->
+    <line x1="300" y1="180" x2="300" y2="330" stroke="#6a5a30" stroke-width="1.5"/>
+    <line x1="320" y1="180" x2="320" y2="330" stroke="#6a5a30" stroke-width="1.5"/>
+    <line x1="340" y1="180" x2="340" y2="330" stroke="#6a5a30" stroke-width="1.5"/>
+    <line x1="360" y1="180" x2="360" y2="330" stroke="#6a5a30" stroke-width="1.5"/>
+    <line x1="380" y1="180" x2="380" y2="330" stroke="#6a5a30" stroke-width="1.5"/>
+    <!-- Cage top dome -->
+    <path d="M280,180 Q340,140 400,180" fill="none" stroke="#6a5a30" stroke-width="2.5"/>
+    <!-- Open door (left side, swung open) -->
+    <path d="M280,180 L230,195 L230,310 L280,330" fill="none" stroke="#6a5a30" stroke-width="2" stroke-dasharray="4,3"/>
+    <!-- Bird flying free — above and left of cage -->
+    <g transform="translate(180,90)">
+      <!-- Body -->
+      <ellipse cx="40" cy="40" rx="22" ry="12" fill="#f0e0b0" stroke="#d4a040" stroke-width="1"/>
+      <!-- Head -->
+      <circle cx="62" cy="33" r="8" fill="#f5e8c0"/>
+      <!-- Eye -->
+      <circle cx="66" cy="31" r="1.8" fill="#5a4a20"/>
+      <!-- Beak -->
+      <polygon points="70,33 78,31 70,36" fill="#d4a040"/>
+      <!-- Left wing (up) -->
+      <path d="M25,35 Q5,10 -10,0 Q15,10 30,28 Z" fill="#e8d090" stroke="#d4a040" stroke-width=".8"/>
+      <path d="M20,30 Q-5,5 -15,-5 Q10,5 28,24 Z" fill="#f0e0b0" stroke="#d4a040" stroke-width=".5"/>
+      <!-- Right wing (up) -->
+      <path d="M55,35 Q75,10 90,0 Q65,10 50,28 Z" fill="#e8d090" stroke="#d4a040" stroke-width=".8"/>
+      <path d="M60,30 Q85,5 95,-5 Q70,5 52,24 Z" fill="#f0e0b0" stroke="#d4a040" stroke-width=".5"/>
+      <!-- Tail -->
+      <path d="M18,42 Q5,50 0,60 Q12,52 22,45 Z" fill="#e0d080"/>
+      <!-- Glow around bird -->
+      <circle cx="40" cy="35" r="35" fill="rgba(232,192,96,.06)"/>
+    </g>
+    <!-- Trail of golden light from cage to bird -->
+    <path d="M270,200 Q240,160 220,130" stroke="rgba(232,192,96,.15)" stroke-width="2" fill="none" stroke-dasharray="6,4"/>
+    <!-- Light particles along trail -->
+    <circle cx="255" cy="170" r="2" fill="rgba(232,192,96,.35)" style="animation: goldenEmber 3s ease-in-out infinite;"/>
+    <circle cx="235" cy="145" r="1.5" fill="rgba(232,192,96,.3)" style="animation: goldenEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="160" cy="80" r="2.5" fill="rgba(232,192,96,.4)" style="animation: goldenEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="140" cy="110" r="1.2" fill="rgba(212,160,64,.25)" style="animation: goldenEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="280" cy="120" r="1.8" fill="rgba(212,160,64,.3)" style="animation: goldenEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="340" cy="360" rx="200" ry="22" fill="rgba(10,10,24,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🕊️ 基督釋放的自由" subtitle="Freedom in Christ — Galatians 5:1" id="freedom-heading" />
+  <app-scene-verse text="「你們蒙召是要得自由，只是不可將你們的自由當作放縱情慾的機會」— 加拉太書 5:13" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="加拉太書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 聖靈的果子  Fruit of the Spirit
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-fruit" aria-label="加拉太書 — 聖靈的果子">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="fruit-glow" aria-hidden="true"></div>
 
+  <!-- Tree with nine fruits -->
+  <svg id="fruit-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="結有九種果子的生命樹">
+    <defs>
+      <radialGradient id="fruitGlowG" cx="50%" cy="35%" r="50%">
+        <stop offset="0%" stop-color="rgba(212,160,64,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="trunkG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8a6a30"/>
+        <stop offset="100%" stop-color="#5a4a20"/>
+      </linearGradient>
+      <radialGradient id="canopyG" cx="50%" cy="60%" r="50%">
+        <stop offset="0%" stop-color="rgba(100,140,60,.35)"/>
+        <stop offset="100%" stop-color="rgba(60,100,30,.15)"/>
+      </radialGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="170" rx="220" ry="150" fill="url(#fruitGlowG)"/>
+    <!-- Tree trunk -->
+    <path d="M290,350 Q285,280 288,220 Q292,200 300,190 Q308,200 312,220 Q315,280 310,350 Z"
+          fill="url(#trunkG)" stroke="#6a5020" stroke-width="1"/>
+    <!-- Branches -->
+    <path d="M295,240 Q260,220 220,210" stroke="#7a5a28" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M305,240 Q340,220 380,210" stroke="#7a5a28" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M293,215 Q250,180 210,165" stroke="#7a5a28" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M307,215 Q350,180 390,165" stroke="#7a5a28" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M298,200 Q280,160 260,130" stroke="#7a5a28" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M302,200 Q320,160 340,130" stroke="#7a5a28" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Canopy foliage -->
+    <ellipse cx="300" cy="160" rx="130" ry="90" fill="url(#canopyG)"/>
+    <ellipse cx="250" cy="180" rx="70" ry="50" fill="rgba(80,120,40,.2)"/>
+    <ellipse cx="350" cy="180" rx="70" ry="50" fill="rgba(80,120,40,.2)"/>
+    <ellipse cx="300" cy="130" rx="80" ry="50" fill="rgba(90,130,50,.15)"/>
+    <!-- Nine fruits — glowing golden orbs (representing 9 fruits of Spirit) -->
+    <!-- 仁愛 Love -->
+    <circle cx="230" cy="150" r="10" fill="#d4a040" opacity=".7" style="animation: goldenEmber 3s ease-in-out infinite;"/>
+    <!-- 喜樂 Joy -->
+    <circle cx="270" cy="120" r="10" fill="#e8c060" opacity=".7" style="animation: goldenEmber 3.5s ease-in-out .5s infinite;"/>
+    <!-- 和平 Peace -->
+    <circle cx="330" cy="120" r="10" fill="#d4a040" opacity=".7" style="animation: goldenEmber 4s ease-in-out 1s infinite;"/>
+    <!-- 忍耐 Patience -->
+    <circle cx="370" cy="150" r="10" fill="#e8c060" opacity=".7" style="animation: goldenEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- 恩慈 Kindness -->
+    <circle cx="220" cy="195" r="10" fill="#e8c060" opacity=".65" style="animation: goldenEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- 良善 Goodness -->
+    <circle cx="300" cy="100" r="10" fill="#d4a040" opacity=".75" style="animation: goldenEmber 3.5s ease-in-out .3s infinite;"/>
+    <!-- 信實 Faithfulness -->
+    <circle cx="380" cy="195" r="10" fill="#d4a040" opacity=".65" style="animation: goldenEmber 4s ease-in-out 1.2s infinite;"/>
+    <!-- 溫柔 Gentleness -->
+    <circle cx="255" cy="200" r="10" fill="#d4a040" opacity=".6" style="animation: goldenEmber 3s ease-in-out 2s infinite;"/>
+    <!-- 節制 Self-control -->
+    <circle cx="345" cy="200" r="10" fill="#e8c060" opacity=".6" style="animation: goldenEmber 4.5s ease-in-out .8s infinite;"/>
+    <!-- Roots -->
+    <path d="M290,350 Q270,360 240,365" stroke="#5a4a20" stroke-width="2" fill="none"/>
+    <path d="M310,350 Q330,360 360,365" stroke="#5a4a20" stroke-width="2" fill="none"/>
+    <path d="M300,355 Q300,365 300,375" stroke="#5a4a20" stroke-width="2" fill="none"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="22" fill="rgba(10,10,24,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🌳 聖靈的果子" subtitle="Fruit of the Spirit — Galatians 5:22-23" id="fruit-heading" />
+  <app-scene-verse text="「聖靈所結的果子，就是仁愛、喜樂、和平、忍耐、恩慈、良善、信實、溫柔、節制」— 加拉太書 5:22-23" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="加拉太書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 新造的人  New Creation
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-new" aria-label="加拉太書 — 新造的人">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="new-glow" aria-hidden="true"></div>
+
+  <!-- Seedling growing from old broken ground -->
+  <svg id="new-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="幼苗從破碎的舊地中長出">
+    <defs>
+      <radialGradient id="newGlowG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(212,160,64,.1)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="stemG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#5a8030"/>
+        <stop offset="100%" stop-color="#90c050"/>
+      </linearGradient>
+      <linearGradient id="leafG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#70a040"/>
+        <stop offset="100%" stop-color="#a0d060"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="200" ry="150" fill="url(#newGlowG)"/>
+    <!-- Cracked / broken old ground -->
+    <rect x="100" y="280" width="400" height="80" rx="2" fill="#2a2015"/>
+    <line x1="200" y1="280" x2="190" y2="320" stroke="#1a1510" stroke-width="2"/>
+    <line x1="250" y1="280" x2="260" y2="340" stroke="#1a1510" stroke-width="1.5"/>
+    <line x1="350" y1="280" x2="340" y2="330" stroke="#1a1510" stroke-width="2"/>
+    <line x1="400" y1="280" x2="410" y2="350" stroke="#1a1510" stroke-width="1.5"/>
+    <!-- Crack at center where seedling breaks through -->
+    <path d="M285,280 L280,290 L290,295 L282,310 L295,315 L288,330" stroke="#1a1510" stroke-width="2" fill="none"/>
+    <path d="M315,280 L320,292 L310,298 L318,312 L305,318 L312,335" stroke="#1a1510" stroke-width="2" fill="none"/>
+    <!-- Ground surface texture -->
+    <line x1="100" y1="283" x2="500" y2="283" stroke="rgba(60,50,30,.4)" stroke-width="1"/>
+    <!-- Seedling stem — rising from crack -->
+    <path d="M298,280 Q296,240 300,180 Q304,240 302,280 Z" fill="url(#stemG)" stroke="#70a040" stroke-width=".5"/>
+    <!-- Left leaf -->
+    <path d="M298,220 Q270,195 260,180 Q275,200 295,215 Z" fill="url(#leafG)" stroke="#80b050" stroke-width=".5"/>
+    <!-- Right leaf -->
+    <path d="M302,200 Q330,175 345,165 Q325,180 305,195 Z" fill="url(#leafG)" stroke="#80b050" stroke-width=".5"/>
+    <!-- Small top leaf (bud) -->
+    <path d="M300,180 Q290,165 285,155 Q295,162 300,175 Z" fill="#a0d060"/>
+    <path d="M300,180 Q310,165 315,155 Q305,162 300,175 Z" fill="#a0d060"/>
+    <!-- Golden light around seedling top -->
+    <circle cx="300" cy="170" r="30" fill="rgba(232,192,96,.06)"/>
+    <circle cx="300" cy="170" r="18" fill="rgba(232,192,96,.1)"/>
+    <!-- Light rays ascending from seedling -->
+    <line x1="300" y1="155" x2="300" y2="100" stroke="rgba(232,192,96,.15)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="300" y1="155" x2="260" y2="110" stroke="rgba(232,192,96,.08)" stroke-width="1.5"/>
+    <line x1="300" y1="155" x2="340" y2="110" stroke="rgba(232,192,96,.08)" stroke-width="1.5"/>
+    <!-- Ascending particles (new life) -->
+    <circle cx="290" cy="140" r="2" fill="rgba(232,192,96,.4)" style="animation: goldenEmber 3s ease-in-out infinite;"/>
+    <circle cx="310" cy="120" r="1.8" fill="rgba(232,192,96,.35)" style="animation: goldenEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="85" r="2.5" fill="rgba(232,192,96,.45)" style="animation: goldenEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="280" cy="100" r="1.2" fill="rgba(212,160,64,.3)" style="animation: goldenEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="320" cy="95" r="1.5" fill="rgba(212,160,64,.35)" style="animation: goldenEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground plane -->
+    <ellipse cx="300" cy="370" rx="260" ry="25" fill="rgba(10,10,24,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🌱 新造的人" subtitle="New Creation — Galatians 6:14-15" id="new-heading" />
+  <app-scene-verse text="「受割禮不受割禮都無關緊要，要緊的就是作新造的人」— 加拉太書 6:15" />
 </section>
