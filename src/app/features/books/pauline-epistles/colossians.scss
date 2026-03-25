@@ -1,49 +1,274 @@
 :host { display: block; }
 
 .scene {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  scroll-snap-align: start;
-}
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
 
 @keyframes fadeUpIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
 
 @keyframes shimmer {
-  0%,100% { filter: brightness(1);   }
-  50%      { filter: brightness(1.35); }
-}
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
 
-#scene-1 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #16163a 50%, #0a0a2e 100%);
-}
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Colossians-specific keyframes ── */
+
+@keyframes emeraldEmber {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+@keyframes crownFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);   }
+      50%      { transform: translateX(-50%) translateY(-10px); }
+    }
+
+@keyframes cosmicSway {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+@keyframes vesselRock {
+      0%,100% { transform: translateX(-50%) rotate(-1deg);  }
+      50%      { transform: translateX(-50%) rotate(1deg);   }
+    }
+
+@keyframes treasureGlow {
+      0%,100% { opacity: .4; }
+      50%      { opacity: .75; }
+    }
+
+@keyframes robeFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);    }
+      50%      { transform: translateX(-50%) translateY(-14px); }
+    }
+
+@keyframes bookGlow {
+      0%,100% { opacity: .5; transform: scaleY(1);    }
+      50%      { opacity: .9; transform: scaleY(1.08); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #0a1610 0%, #0e1a14 40%, #122018 70%, #0a1610 100%);
+    }
+
+#intro-emerald-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(90,170,122,.12) 0%, rgba(58,138,90,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: emeraldEmber 4s ease-in-out infinite;
+    }
 
 #intro-title {
-  position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
-  text-align: center; z-index: 10; white-space: nowrap;
-}
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
 
 #intro-title h1 {
-  font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
-  background: linear-gradient(120deg, #5aaa7a 0%, #7ac898 45%, #3a8a5a 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
-}
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg, #5aaa7a 0%, #7ac898 45%, #3a8a5a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
 
 #intro-title p {
-  font-size: clamp(.9rem,2vw,1.2rem);
-  color: rgba(255,255,255,.5); margin-top: .6rem; letter-spacing: .18em;
-  animation: fadeUpIn 2s ease-out .5s both;
-}
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(122,200,152,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
 
-#scene-2, #scene-3, #scene-4, #scene-5, #scene-6 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #12122a 50%, #0a0a2e 100%);
-}
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(122,200,152,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-crown-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,12vw,160px);
+      animation: crownFloat 5s ease-in-out infinite;
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — SUPREMACY  基督的超越
+    ══════════════════════════════════════════════ */
+
+#scene-supremacy {
+      background: linear-gradient(180deg, #081410 0%, #0e1e16 40%, #122418 70%, #081410 100%);
+    }
+
+#supremacy-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(90,170,122,.15) 0%, rgba(58,138,90,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#supremacy-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#supremacy-heading h2 {
+      color: #7ac898;
+      text-shadow: 0 0 22px rgba(90,170,122,.5);
+    }
+
+#supremacy-heading p { color: rgba(122,200,152,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — FULLNESS  神本性的豐盛
+    ══════════════════════════════════════════════ */
+
+#scene-fullness {
+      background: linear-gradient(180deg, #061210 0%, #0c1a14 40%, #101e18 70%, #081410 100%);
+    }
+
+#fullness-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 55vw; height: 45vh;
+      background: radial-gradient(ellipse, rgba(58,138,90,.12) 0%, rgba(42,106,74,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4.5s ease-in-out infinite;
+    }
+
+#fullness-scene-svg {
+      position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: vesselRock 8s ease-in-out infinite;
+    }
+
+#fullness-heading h2 {
+      color: #5aaa7a;
+      text-shadow: 0 0 22px rgba(58,138,90,.5);
+    }
+
+#fullness-heading p { color: rgba(90,170,122,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — HIDDEN  與基督同藏
+    ══════════════════════════════════════════════ */
+
+#scene-hidden {
+      background: linear-gradient(180deg, #0a1210 0%, #101e16 35%, #142418 60%, #182a1e 85%, #101e16 100%);
+    }
+
+#hidden-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 65%;
+      background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(122,200,152,.1) 0%, rgba(90,170,122,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#hidden-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#hidden-heading h2 {
+      background: linear-gradient(120deg, #7ac898 0%, #a0e0b8 50%, #5aaa7a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#hidden-heading p { color: rgba(122,200,152,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — NEWSELF  穿上新人
+    ══════════════════════════════════════════════ */
+
+#scene-newself {
+      background: linear-gradient(180deg, #081410 0%, #0e1e16 40%, #142820 70%, #0c1810 100%);
+    }
+
+#newself-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(122,200,152,.14) 0%, rgba(90,170,122,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#newself-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,45vw,650px);
+      animation: robeFloat 6s ease-in-out infinite;
+    }
+
+#newself-heading h2 {
+      color: #a0e0b8;
+      text-shadow: 0 0 22px rgba(122,200,152,.5);
+    }
+
+#newself-heading p { color: rgba(160,224,184,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — WORD  基督的道
+    ══════════════════════════════════════════════ */
+
+#scene-word {
+      background: linear-gradient(180deg, #0c1410 0%, #142018 40%, #1a2820 70%, #162218 100%);
+    }
+
+#word-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(122,200,152,.08) 0%, rgba(90,170,122,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: treasureGlow 4s ease-in-out infinite;
+    }
+
+#word-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,32vw,420px);
+      animation: bookGlow 4s ease-in-out infinite;
+    }
+
+#word-heading h2 {
+      background: linear-gradient(120deg, #7ac898 0%, #a0e0b8 50%, #5aaa7a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#word-heading p { color: rgba(122,200,152,.5); }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-}
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

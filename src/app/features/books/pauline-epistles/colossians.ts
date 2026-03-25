@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class Colossians {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-supremacy', label: '基督的超越' },
+    { id: 'scene-fullness', label: '神本性的豐盛' },
+    { id: 'scene-hidden', label: '與基督同藏' },
+    { id: 'scene-newself', label: '穿上新人' },
+    { id: 'scene-word', label: '基督的道' },
   ];
 }
