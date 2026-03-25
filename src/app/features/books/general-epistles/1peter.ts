@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class FirstPeter {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-hope', label: '活潑的盼望' },
+    { id: 'scene-stones', label: '活石聖殿' },
+    { id: 'scene-suffering', label: '為義受苦' },
+    { id: 'scene-trials', label: '火煉的試驗' },
+    { id: 'scene-humble', label: '謙卑交託' },
   ];
 }
