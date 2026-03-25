@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class SecondCorinthians {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-comfort', label: '患難中的安慰' },
+    { id: 'scene-treasure', label: '瓦器裏的寶貝' },
+    { id: 'scene-new', label: '新造的人' },
+    { id: 'scene-weakness', label: '軟弱中的剛強' },
+    { id: 'scene-grace', label: '神恩夠用' },
   ];
 }
