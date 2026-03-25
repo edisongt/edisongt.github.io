@@ -1,49 +1,274 @@
 :host { display: block; }
 
 .scene {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  scroll-snap-align: start;
-}
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
 
 @keyframes fadeUpIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
 
 @keyframes shimmer {
-  0%,100% { filter: brightness(1);   }
-  50%      { filter: brightness(1.35); }
-}
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
 
-#scene-1 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #16163a 50%, #0a0a2e 100%);
-}
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── 1 Corinthians-specific keyframes ── */
+
+@keyframes tealEmber {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+@keyframes letterFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);   }
+      50%      { transform: translateX(-50%) translateY(-10px); }
+    }
+
+@keyframes chainPulse {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+@keyframes crossRadiate {
+      0%,100% { transform: translateX(-50%) rotate(-1deg);  }
+      50%      { transform: translateX(-50%) rotate(1deg);   }
+    }
+
+@keyframes bodyFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);    }
+      50%      { transform: translateX(-50%) translateY(-14px); }
+    }
+
+@keyframes heartGlow {
+      0%,100% { opacity: .5; transform: scaleY(1);    }
+      50%      { opacity: .9; transform: scaleY(1.08); }
+    }
+
+@keyframes tombBurst {
+      0%,100% { opacity: .4; }
+      50%      { opacity: .75; }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #0a1420 0%, #122030 40%, #162838 70%, #0a1420 100%);
+    }
+
+#intro-teal-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(90,138,170,.12) 0%, rgba(58,106,138,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: tealEmber 4s ease-in-out infinite;
+    }
 
 #intro-title {
-  position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
-  text-align: center; z-index: 10; white-space: nowrap;
-}
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
 
 #intro-title h1 {
-  font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
-  background: linear-gradient(120deg, #5a8aaa 0%, #7aaac8 45%, #3a6a8a 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
-}
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg, #5a8aaa 0%, #7aaac8 45%, #3a6a8a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
 
 #intro-title p {
-  font-size: clamp(.9rem,2vw,1.2rem);
-  color: rgba(255,255,255,.5); margin-top: .6rem; letter-spacing: .18em;
-  animation: fadeUpIn 2s ease-out .5s both;
-}
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(122,170,200,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
 
-#scene-2, #scene-3, #scene-4, #scene-5, #scene-6 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #12122a 50%, #0a0a2e 100%);
-}
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(122,170,200,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-scroll-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,12vw,160px);
+      animation: letterFloat 5s ease-in-out infinite;
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — UNITY  合一的呼籲
+    ══════════════════════════════════════════════ */
+
+#scene-unity {
+      background: linear-gradient(180deg, #081220 0%, #10202e 40%, #162838 70%, #081220 100%);
+    }
+
+#unity-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(90,138,170,.15) 0%, rgba(58,106,138,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#unity-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#unity-heading h2 {
+      color: #7aaac8;
+      text-shadow: 0 0 22px rgba(90,138,170,.5);
+    }
+
+#unity-heading p { color: rgba(122,170,200,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — WISDOM  十架的智慧
+    ══════════════════════════════════════════════ */
+
+#scene-wisdom {
+      background: linear-gradient(180deg, #06101a 0%, #0e1c2a 40%, #142430 70%, #081220 100%);
+    }
+
+#wisdom-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 55vw; height: 45vh;
+      background: radial-gradient(ellipse, rgba(58,106,138,.12) 0%, rgba(42,90,122,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4.5s ease-in-out infinite;
+    }
+
+#wisdom-scene-svg {
+      position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: crossRadiate 8s ease-in-out infinite;
+    }
+
+#wisdom-heading h2 {
+      color: #6a9aba;
+      text-shadow: 0 0 22px rgba(58,106,138,.5);
+    }
+
+#wisdom-heading p { color: rgba(106,154,186,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — BODY  基督的身體
+    ══════════════════════════════════════════════ */
+
+#scene-body {
+      background: linear-gradient(180deg, #0a1422 0%, #122038 35%, #1a2840 60%, #1e2c48 85%, #122038 100%);
+    }
+
+#body-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 65%;
+      background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(154,192,216,.1) 0%, rgba(90,138,170,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#body-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#body-heading h2 {
+      background: linear-gradient(120deg, #7aaac8 0%, #b0d0e8 50%, #5a8aaa 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#body-heading p { color: rgba(154,192,216,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — LOVE  愛的真諦
+    ══════════════════════════════════════════════ */
+
+#scene-love {
+      background: linear-gradient(180deg, #081222 0%, #101e30 40%, #162840 70%, #0c1428 100%);
+    }
+
+#love-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(154,192,216,.14) 0%, rgba(90,138,170,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#love-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,45vw,650px);
+      animation: bodyFloat 6s ease-in-out infinite;
+    }
+
+#love-heading h2 {
+      color: #a0cae0;
+      text-shadow: 0 0 22px rgba(154,192,216,.5);
+    }
+
+#love-heading p { color: rgba(176,208,232,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — RESURRECTION  復活的盼望
+    ══════════════════════════════════════════════ */
+
+#scene-resurrection {
+      background: linear-gradient(180deg, #0c1422 0%, #142238 40%, #1c2a48 70%, #162840 100%);
+    }
+
+#resurrection-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(122,170,200,.08) 0%, rgba(90,138,170,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: tombBurst 4s ease-in-out infinite;
+    }
+
+#resurrection-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,32vw,420px);
+      animation: heartGlow 4s ease-in-out infinite;
+    }
+
+#resurrection-heading h2 {
+      background: linear-gradient(120deg, #7aaac8 0%, #b0d0e8 50%, #5a8aaa 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#resurrection-heading p { color: rgba(122,170,200,.5); }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-}
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
