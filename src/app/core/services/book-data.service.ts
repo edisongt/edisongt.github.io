@@ -4,6 +4,8 @@ import {
   BookCategory,
   BookGroup,
   SceneInfo,
+  Testament,
+  TestamentSection,
 } from '../models/book.model';
 
 const DEFAULT_SCENES: SceneInfo[] = [
@@ -83,16 +85,38 @@ const ALL_BOOKS: BookInfo[] = [
   book('john',    '🦅', '約翰福音',  'Gospel of John',    'gospels', '#e0a840'),
 
   // Acts 使徒行傳
-  book('acts', '🔥', '使徒行傳', 'Acts of the Apostles', 'gospels', '#e05030'),
+  book('acts', '🔥', '使徒行傳', 'Acts of the Apostles', 'church-history', '#e05030'),
 ];
 
 const GROUP_LABELS: Record<BookCategory, string> = {
-  pentateuch:      '摩西五經 · Pentateuch',
-  historical:      '歷史書 · Historical Books',
-  poetic:          '詩歌書 · Poetic Books',
-  'major-prophets': '大先知書 · Major Prophets',
-  'minor-prophets': '小先知書 · Minor Prophets',
-  gospels:         '福音書 · Gospels',
+  pentateuch:          '律法書 · Pentateuch',
+  historical:          '歷史書 · Historical Books',
+  poetic:              '詩歌智慧書 · Poetic Books',
+  'major-prophets':    '大先知書 · Major Prophets',
+  'minor-prophets':    '小先知書 · Minor Prophets',
+  gospels:             '四福音書 · Gospels',
+  'church-history':    '教會歷史 · Church History',
+  'pauline-epistles':  '保羅書信 · Pauline Epistles',
+  'general-epistles':  '大公書信 · General Epistles',
+  revelation:          '預言書 · Revelation',
+};
+
+const TESTAMENT_MAP: Record<BookCategory, Testament> = {
+  pentateuch:         'old',
+  historical:         'old',
+  poetic:             'old',
+  'major-prophets':   'old',
+  'minor-prophets':   'old',
+  gospels:            'new',
+  'church-history':   'new',
+  'pauline-epistles': 'new',
+  'general-epistles': 'new',
+  revelation:         'new',
+};
+
+const TESTAMENT_LABELS: Record<Testament, { label: string; count: number }> = {
+  old: { label: '舊約 · Old Testament', count: 39 },
+  new: { label: '新約 · New Testament', count: 27 },
 };
 
 const CATEGORY_ORDER: BookCategory[] = [
@@ -102,6 +126,10 @@ const CATEGORY_ORDER: BookCategory[] = [
   'major-prophets',
   'minor-prophets',
   'gospels',
+  'church-history',
+  'pauline-epistles',
+  'general-epistles',
+  'revelation',
 ];
 
 @Injectable({ providedIn: 'root' })
@@ -124,7 +152,19 @@ export class BookDataService {
     return CATEGORY_ORDER.map(category => ({
       category,
       label: GROUP_LABELS[category],
+      testament: TESTAMENT_MAP[category],
       books: this.getBooksByCategory(category),
+    }));
+  }
+
+  getTestamentSections(): TestamentSection[] {
+    const groups = this.getBookGroups();
+    const testaments: Testament[] = ['old', 'new'];
+    return testaments.map(testament => ({
+      testament,
+      label: TESTAMENT_LABELS[testament].label,
+      count: TESTAMENT_LABELS[testament].count,
+      groups: groups.filter(g => g.testament === testament && g.books.length > 0),
     }));
   }
 }

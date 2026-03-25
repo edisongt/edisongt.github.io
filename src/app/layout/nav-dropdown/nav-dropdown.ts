@@ -12,21 +12,29 @@ import { BookDataService } from '../../core/services/book-data.service';
       </button>
       @if (open()) {
         <div class="dropdown-panel">
-          @for (group of bookGroups; track group.category) {
-            <div class="book-group">
-              <h3 class="group-label">{{ group.label }}</h3>
-              <div class="book-list">
-                @for (book of group.books; track book.id) {
-                  <a
-                    class="book-link"
-                    [routerLink]="['/book', book.id]"
-                    (click)="open.set(false)"
-                  >
-                    <span class="book-emoji">{{ book.emoji }}</span>
-                    <span class="book-title">{{ book.title }}</span>
-                  </a>
-                }
+          @for (section of testamentSections; track section.testament) {
+            <div class="testament-section">
+              <div class="testament-header">
+                <span class="testament-label">{{ section.label }}</span>
+                <span class="testament-count">{{ section.count }} 卷</span>
               </div>
+              @for (group of section.groups; track group.category) {
+                <div class="book-group">
+                  <h3 class="group-label">{{ group.label }}</h3>
+                  <div class="book-list">
+                    @for (book of group.books; track book.id) {
+                      <a
+                        class="book-link"
+                        [routerLink]="['/book', book.id]"
+                        (click)="open.set(false)"
+                      >
+                        <span class="book-emoji">{{ book.emoji }}</span>
+                        <span class="book-title">{{ book.title }}</span>
+                      </a>
+                    }
+                  </div>
+                </div>
+              }
             </div>
           }
         </div>
@@ -38,6 +46,6 @@ import { BookDataService } from '../../core/services/book-data.service';
 })
 export class NavDropdown {
   private bookDataService = inject(BookDataService);
-  readonly bookGroups = this.bookDataService.getBookGroups();
+  readonly testamentSections = this.bookDataService.getTestamentSections();
   open = signal(false);
 }
