@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class James {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-trials', label: '信心與試煉' },
+    { id: 'scene-doers', label: '聽道行道' },
+    { id: 'scene-works', label: '信心與行為' },
+    { id: 'scene-tongue', label: '舌頭的力量' },
+    { id: 'scene-patience', label: '忍耐等候' },
   ];
 }

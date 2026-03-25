@@ -1,49 +1,286 @@
 :host { display: block; }
 
 .scene {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  scroll-snap-align: start;
-}
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
 
 @keyframes fadeUpIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
 
 @keyframes shimmer {
-  0%,100% { filter: brightness(1);   }
-  50%      { filter: brightness(1.35); }
-}
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
 
-#scene-1 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #16163a 50%, #0a0a2e 100%);
-}
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── James-specific keyframes ── */
+
+@keyframes greenEmber {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+@keyframes treeFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);   }
+      50%      { transform: translateX(-50%) translateY(-10px); }
+    }
+
+@keyframes gemPulse {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+@keyframes mirrorShine {
+      0%,100% { transform: translateX(-50%) rotate(-1deg);  }
+      50%      { transform: translateX(-50%) rotate(1deg);   }
+    }
+
+@keyframes fruitGrow {
+      0%   { transform: translateY(0); opacity: .5; }
+      50%  { transform: translateY(25px); opacity: .3; }
+      100% { transform: translateY(50px); opacity: 0; }
+    }
+
+@keyframes rudderFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);    }
+      50%      { transform: translateX(-50%) translateY(-14px); }
+    }
+
+@keyframes flameFlicker {
+      0%,100% { opacity: .5; transform: scaleY(1);    }
+      50%      { opacity: .9; transform: scaleY(1.08); }
+    }
+
+@keyframes sproutGlow {
+      0%,100% { opacity: .4; }
+      50%      { opacity: .75; }
+    }
+
+@keyframes sproutRise {
+      0%   { transform: translateY(0) scaleX(1); opacity: .5; }
+      50%  { transform: translateY(-40px) scaleX(1.3); opacity: .25; }
+      100% { transform: translateY(-80px) scaleX(1.6); opacity: 0; }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #0e200a 0%, #163a12 40%, #1a4016 70%, #0e200a 100%);
+    }
+
+#intro-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(106,170,90,.12) 0%, rgba(74,138,58,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: greenEmber 4s ease-in-out infinite;
+    }
 
 #intro-title {
-  position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
-  text-align: center; z-index: 10; white-space: nowrap;
-}
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
 
 #intro-title h1 {
-  font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
-  background: linear-gradient(120deg, #6aaa5a 0%, #8ac87a 45%, #4a8a3a 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
-}
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg, #6aaa5a 0%, #8ac87a 45%, #4a8a3a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
 
 #intro-title p {
-  font-size: clamp(.9rem,2vw,1.2rem);
-  color: rgba(255,255,255,.5); margin-top: .6rem; letter-spacing: .18em;
-  animation: fadeUpIn 2s ease-out .5s both;
-}
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(138,200,122,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
 
-#scene-2, #scene-3, #scene-4, #scene-5, #scene-6 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #12122a 50%, #0a0a2e 100%);
-}
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(138,200,122,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-tree-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,12vw,160px);
+      animation: treeFloat 5s ease-in-out infinite;
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — TRIALS  信心與試煉
+    ══════════════════════════════════════════════ */
+
+#scene-trials {
+      background: linear-gradient(180deg, #0a200a 0%, #14381a 40%, #1a4016 70%, #0a200a 100%);
+    }
+
+#trials-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(106,170,90,.15) 0%, rgba(74,138,58,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#trials-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#trials-heading h2 {
+      color: #8ac87a;
+      text-shadow: 0 0 22px rgba(106,170,90,.5);
+    }
+
+#trials-heading p { color: rgba(138,200,122,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — DOERS  聽道行道
+    ══════════════════════════════════════════════ */
+
+#scene-doers {
+      background: linear-gradient(180deg, #08180a 0%, #102a14 40%, #163518 70%, #0a200a 100%);
+    }
+
+#doers-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 55vw; height: 45vh;
+      background: radial-gradient(ellipse, rgba(74,138,58,.12) 0%, rgba(58,122,42,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4.5s ease-in-out infinite;
+    }
+
+#doers-scene-svg {
+      position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: mirrorShine 8s ease-in-out infinite;
+    }
+
+#doers-heading h2 {
+      color: #7aba6a;
+      text-shadow: 0 0 22px rgba(74,138,58,.5);
+    }
+
+#doers-heading p { color: rgba(122,186,106,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — WORKS  信心與行為
+    ══════════════════════════════════════════════ */
+
+#scene-works {
+      background: linear-gradient(180deg, #0c220a 0%, #164012 35%, #1e4a1a 60%, #20501a 85%, #164012 100%);
+    }
+
+#works-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 65%;
+      background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(160,240,144,.1) 0%, rgba(106,170,90,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#works-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#works-heading h2 {
+      background: linear-gradient(120deg, #8ac87a 0%, #c0f0b0 50%, #6aaa5a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#works-heading p { color: rgba(160,240,144,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — TONGUE  舌頭的力量
+    ══════════════════════════════════════════════ */
+
+#scene-tongue {
+      background: linear-gradient(180deg, #0a220a 0%, #123812 40%, #185018 70%, #0e280e 100%);
+    }
+
+#tongue-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(160,220,140,.14) 0%, rgba(106,170,90,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#tongue-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,45vw,650px);
+      animation: rudderFloat 6s ease-in-out infinite;
+    }
+
+#tongue-heading h2 {
+      color: #b0e8a0;
+      text-shadow: 0 0 22px rgba(160,220,140,.5);
+    }
+
+#tongue-heading p { color: rgba(180,240,170,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — PATIENCE  忍耐等候
+    ══════════════════════════════════════════════ */
+
+#scene-patience {
+      background: linear-gradient(180deg, #0e220a 0%, #184012 40%, #204a1a 70%, #1a4516 100%);
+    }
+
+#patience-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(140,220,120,.08) 0%, rgba(106,170,90,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: sproutGlow 4s ease-in-out infinite;
+    }
+
+#patience-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,32vw,420px);
+      animation: flameFlicker 4s ease-in-out infinite;
+    }
+
+#patience-heading h2 {
+      background: linear-gradient(120deg, #8ac87a 0%, #c0f0b0 50%, #6aaa5a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#patience-heading p { color: rgba(140,220,120,.5); }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-}
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
