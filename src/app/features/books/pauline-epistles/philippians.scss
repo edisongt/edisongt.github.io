@@ -1,49 +1,267 @@
 :host { display: block; }
 
 .scene {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  scroll-snap-align: start;
-}
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
 
 @keyframes fadeUpIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
 
 @keyframes shimmer {
-  0%,100% { filter: brightness(1);   }
-  50%      { filter: brightness(1.35); }
-}
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
 
-#scene-1 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #16163a 50%, #0a0a2e 100%);
-}
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── Philippians-specific keyframes ── */
+
+@keyframes lavenderEmber {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+@keyframes scrollFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);   }
+      50%      { transform: translateX(-50%) translateY(-10px); }
+    }
+
+@keyframes graceDescend {
+      0%   { transform: translateY(0); opacity: .5; }
+      50%  { transform: translateY(25px); opacity: .3; }
+      100% { transform: translateY(50px); opacity: 0; }
+    }
+
+@keyframes doveFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);    }
+      50%      { transform: translateX(-50%) translateY(-14px); }
+    }
+
+@keyframes peakGlow {
+      0%,100% { opacity: .4; }
+      50%      { opacity: .75; }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #0e0a1e 0%, #18143a 40%, #1c1840 70%, #0e0a1e 100%);
+    }
+
+#intro-royal-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(122,106,170,.12) 0%, rgba(90,74,138,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: lavenderEmber 4s ease-in-out infinite;
+    }
 
 #intro-title {
-  position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
-  text-align: center; z-index: 10; white-space: nowrap;
-}
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
 
 #intro-title h1 {
-  font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
-  background: linear-gradient(120deg, #7a6aaa 0%, #9a8ac8 45%, #5a4a8a 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
-}
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg, #7a6aaa 0%, #9a8ac8 45%, #5a4a8a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
 
 #intro-title p {
-  font-size: clamp(.9rem,2vw,1.2rem);
-  color: rgba(255,255,255,.5); margin-top: .6rem; letter-spacing: .18em;
-  animation: fadeUpIn 2s ease-out .5s both;
-}
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(154,138,200,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
 
-#scene-2, #scene-3, #scene-4, #scene-5, #scene-6 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #12122a 50%, #0a0a2e 100%);
-}
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(154,138,200,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-scroll-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,12vw,160px);
+      animation: scrollFloat 5s ease-in-out infinite;
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — JOY  患難中的喜樂
+    ══════════════════════════════════════════════ */
+
+#scene-joy {
+      background: linear-gradient(180deg, #0a081e 0%, #141038 40%, #1a1640 70%, #0a081e 100%);
+    }
+
+#joy-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(122,106,170,.15) 0%, rgba(90,74,138,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#joy-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#joy-heading h2 {
+      color: #9a8ac8;
+      text-shadow: 0 0 22px rgba(122,106,170,.5);
+    }
+
+#joy-heading p { color: rgba(154,138,200,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — HUMILITY  基督的謙卑
+    ══════════════════════════════════════════════ */
+
+#scene-humility {
+      background: linear-gradient(180deg, #08061a 0%, #10102a 40%, #161435 70%, #0a081e 100%);
+    }
+
+#humility-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 55vw; height: 45vh;
+      background: radial-gradient(ellipse, rgba(90,74,138,.12) 0%, rgba(70,54,110,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4.5s ease-in-out infinite;
+    }
+
+#humility-scene-svg {
+      position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: floatY 6s ease-in-out infinite;
+    }
+
+#humility-heading h2 {
+      color: #8a7ab8;
+      text-shadow: 0 0 22px rgba(90,74,138,.5);
+    }
+
+#humility-heading p { color: rgba(138,122,184,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — GOAL  向著標竿直跑
+    ══════════════════════════════════════════════ */
+
+#scene-goal {
+      background: linear-gradient(180deg, #0c0a20 0%, #161340 35%, #1e1a4a 60%, #201850 85%, #161340 100%);
+    }
+
+#goal-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 65%;
+      background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(180,164,220,.1) 0%, rgba(122,106,170,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#goal-scene-svg {
+      position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#goal-heading h2 {
+      background: linear-gradient(120deg, #9a8ac8 0%, #c0b0e0 50%, #7a6aaa 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#goal-heading p { color: rgba(180,164,220,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — PEACE  出人意外的平安
+    ══════════════════════════════════════════════ */
+
+#scene-peace {
+      background: linear-gradient(180deg, #0a0a20 0%, #121038 40%, #181550 70%, #0e0c28 100%);
+    }
+
+#peace-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(180,164,220,.14) 0%, rgba(122,106,170,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#peace-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,45vw,650px);
+      animation: doveFloat 6s ease-in-out infinite;
+    }
+
+#peace-heading h2 {
+      color: #b0a0d8;
+      text-shadow: 0 0 22px rgba(180,164,220,.5);
+    }
+
+#peace-heading p { color: rgba(200,190,230,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — STRENGTH  靠主凡事都能
+    ══════════════════════════════════════════════ */
+
+#scene-strength {
+      background: linear-gradient(180deg, #0e0a20 0%, #181440 40%, #201a50 70%, #1a1645 100%);
+    }
+
+#strength-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(154,138,200,.08) 0%, rgba(122,106,170,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: peakGlow 4s ease-in-out infinite;
+    }
+
+#strength-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,45vw,650px);
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+#strength-heading h2 {
+      background: linear-gradient(120deg, #9a8ac8 0%, #c0b0e0 50%, #7a6aaa 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#strength-heading p { color: rgba(154,138,200,.5); }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-}
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

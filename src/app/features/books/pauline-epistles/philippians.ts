@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class Philippians {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-joy', label: '患難中的喜樂' },
+    { id: 'scene-humility', label: '基督的謙卑' },
+    { id: 'scene-goal', label: '向著標竿直跑' },
+    { id: 'scene-peace', label: '出人意外的平安' },
+    { id: 'scene-strength', label: '靠主凡事都能' },
   ];
 }
