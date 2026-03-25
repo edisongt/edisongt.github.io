@@ -46,6 +46,34 @@
   scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
+.testament-section {
+  & + & {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+}
+
+.testament-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.testament-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.testament-count {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
 .book-group {
   margin-bottom: 1rem;
 

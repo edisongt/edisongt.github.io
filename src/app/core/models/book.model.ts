@@ -19,10 +19,24 @@ export type BookCategory =
   | 'poetic'
   | 'major-prophets'
   | 'minor-prophets'
-  | 'gospels';
+  | 'gospels'
+  | 'church-history'
+  | 'pauline-epistles'
+  | 'general-epistles'
+  | 'revelation';
+
+export type Testament = 'old' | 'new';
 
 export interface BookGroup {
   category: BookCategory;
   label: string;
+  testament: Testament;
   books: BookInfo[];
+}
+
+export interface TestamentSection {
+  testament: Testament;
+  label: string;
+  count: number;
+  groups: BookGroup[];
 }
