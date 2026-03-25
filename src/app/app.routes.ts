@@ -68,6 +68,34 @@ export const routes: Routes = [
   // Acts
   { path: 'book/acts', loadComponent: () => import('./features/books/acts/acts').then(m => m.Acts) },
 
+  // Pauline Epistles
+  { path: 'book/romans', loadComponent: () => import('./features/books/pauline-epistles/romans').then(m => m.Romans) },
+  { path: 'book/1corinthians', loadComponent: () => import('./features/books/pauline-epistles/1corinthians').then(m => m.FirstCorinthians) },
+  { path: 'book/2corinthians', loadComponent: () => import('./features/books/pauline-epistles/2corinthians').then(m => m.SecondCorinthians) },
+  { path: 'book/galatians', loadComponent: () => import('./features/books/pauline-epistles/galatians').then(m => m.Galatians) },
+  { path: 'book/ephesians', loadComponent: () => import('./features/books/pauline-epistles/ephesians').then(m => m.Ephesians) },
+  { path: 'book/philippians', loadComponent: () => import('./features/books/pauline-epistles/philippians').then(m => m.Philippians) },
+  { path: 'book/colossians', loadComponent: () => import('./features/books/pauline-epistles/colossians').then(m => m.Colossians) },
+  { path: 'book/1thessalonians', loadComponent: () => import('./features/books/pauline-epistles/1thessalonians').then(m => m.FirstThessalonians) },
+  { path: 'book/2thessalonians', loadComponent: () => import('./features/books/pauline-epistles/2thessalonians').then(m => m.SecondThessalonians) },
+  { path: 'book/1timothy', loadComponent: () => import('./features/books/pauline-epistles/1timothy').then(m => m.FirstTimothy) },
+  { path: 'book/2timothy', loadComponent: () => import('./features/books/pauline-epistles/2timothy').then(m => m.SecondTimothy) },
+  { path: 'book/titus', loadComponent: () => import('./features/books/pauline-epistles/titus').then(m => m.Titus) },
+  { path: 'book/philemon', loadComponent: () => import('./features/books/pauline-epistles/philemon').then(m => m.Philemon) },
+
+  // General Epistles
+  { path: 'book/hebrews', loadComponent: () => import('./features/books/general-epistles/hebrews').then(m => m.Hebrews) },
+  { path: 'book/james', loadComponent: () => import('./features/books/general-epistles/james').then(m => m.James) },
+  { path: 'book/1peter', loadComponent: () => import('./features/books/general-epistles/1peter').then(m => m.FirstPeter) },
+  { path: 'book/2peter', loadComponent: () => import('./features/books/general-epistles/2peter').then(m => m.SecondPeter) },
+  { path: 'book/1john', loadComponent: () => import('./features/books/general-epistles/1john').then(m => m.FirstJohn) },
+  { path: 'book/2john', loadComponent: () => import('./features/books/general-epistles/2john').then(m => m.SecondJohn) },
+  { path: 'book/3john', loadComponent: () => import('./features/books/general-epistles/3john').then(m => m.ThirdJohn) },
+  { path: 'book/jude', loadComponent: () => import('./features/books/general-epistles/jude').then(m => m.Jude) },
+
+  // Revelation
+  { path: 'book/revelation', loadComponent: () => import('./features/books/revelation/revelation').then(m => m.Revelation) },
+
   {
     path: '**',
     redirectTo: '',

@@ -86,6 +86,34 @@ const ALL_BOOKS: BookInfo[] = [
 
   // Acts 使徒行傳
   book('acts', '🔥', '使徒行傳', 'Acts of the Apostles', 'church-history', '#e05030'),
+
+  // Pauline Epistles 保羅書信
+  book('romans',           '📖', '羅馬書',         'Epistle to the Romans',                    'pauline-epistles', '#6a5acd'),
+  book('1corinthians',     '💌', '哥林多前書',     'First Epistle to the Corinthians',         'pauline-epistles', '#5a8aaa'),
+  book('2corinthians',     '💌', '哥林多後書',     'Second Epistle to the Corinthians',        'pauline-epistles', '#5a9a8a'),
+  book('galatians',        '⛓️', '加拉太書',       'Epistle to the Galatians',                 'pauline-epistles', '#d4a040'),
+  book('ephesians',        '🏛️', '以弗所書',       'Epistle to the Ephesians',                 'pauline-epistles', '#4a80b0'),
+  book('philippians',      '😊', '腓立比書',       'Epistle to the Philippians',               'pauline-epistles', '#7a6aaa'),
+  book('colossians',       '👑', '歌羅西書',       'Epistle to the Colossians',                'pauline-epistles', '#5aaa7a'),
+  book('1thessalonians',   '⏳', '帖撒羅尼迦前書', 'First Epistle to the Thessalonians',       'pauline-epistles', '#6080b0'),
+  book('2thessalonians',   '⏳', '帖撒羅尼迦後書', 'Second Epistle to the Thessalonians',      'pauline-epistles', '#5070a0'),
+  book('1timothy',         '📝', '提摩太前書',     'First Epistle to Timothy',                 'pauline-epistles', '#6a9a6a'),
+  book('2timothy',         '📝', '提摩太後書',     'Second Epistle to Timothy',                'pauline-epistles', '#5a8a5a'),
+  book('titus',            '🏝️', '提多書',         'Epistle to Titus',                         'pauline-epistles', '#b08040'),
+  book('philemon',         '🤝', '腓利門書',       'Epistle to Philemon',                      'pauline-epistles', '#c07050'),
+
+  // General Epistles 大公書信
+  book('hebrews',  '⛪', '希伯來書',   'Epistle to the Hebrews',     'general-epistles', '#b07040'),
+  book('james',    '🪞', '雅各書',     'Epistle of James',           'general-epistles', '#6aaa5a'),
+  book('1peter',   '🪨', '彼得前書',   'First Epistle of Peter',     'general-epistles', '#5080b0'),
+  book('2peter',   '🪨', '彼得後書',   'Second Epistle of Peter',    'general-epistles', '#4070a0'),
+  book('1john',    '❤️', '約翰一書',   'First Epistle of John',      'general-epistles', '#e0a840'),
+  book('2john',    '❤️', '約翰二書',   'Second Epistle of John',     'general-epistles', '#d09830'),
+  book('3john',    '❤️', '約翰三書',   'Third Epistle of John',      'general-epistles', '#c08820'),
+  book('jude',     '🛡️', '猶大書',     'Epistle of Jude',            'general-epistles', '#8060a0'),
+
+  // Revelation 啟示錄
+  book('revelation', '🔮', '啟示錄', 'Book of Revelation', 'revelation', '#a03060'),
 ];
 
 const GROUP_LABELS: Record<BookCategory, string> = {
