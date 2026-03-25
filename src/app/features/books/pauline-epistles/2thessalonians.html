@@ -1,66 +1,330 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="帖撒羅尼迦後書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="帖撒羅尼迦後書 — 開場">
   <app-starfield />
+
+  <div id="intro-indigo-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>帖撒羅尼迦後書</h1>
     <p>Second Epistle to the Thessalonians</p>
+    <span class="sub">忍耐 · 公義 · 審判 · 持守 · 信實 · 盼望</span>
   </div>
 
+  <!-- Scroll with stars and seal -->
+  <svg id="intro-scroll-svg" viewBox="0 0 160 220" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="書信卷軸與星光印記">
+    <ellipse cx="80" cy="110" rx="65" ry="80" fill="rgba(64,80,144,.06)"/>
+    <!-- Star cluster above scroll -->
+    <circle cx="80" cy="22" r="4" fill="rgba(96,112,192,.5)"/>
+    <circle cx="65" cy="30" r="2.5" fill="rgba(80,96,176,.4)"/>
+    <circle cx="95" cy="28" r="2" fill="rgba(80,96,176,.35)"/>
+    <circle cx="55" cy="18" r="1.5" fill="rgba(96,112,192,.3)"/>
+    <circle cx="106" cy="18" r="1.5" fill="rgba(96,112,192,.3)"/>
+    <!-- Scroll body -->
+    <rect x="36" y="60" width="88" height="110" rx="4" fill="#3a4a80" stroke="#5060a0" stroke-width="1.5"/>
+    <rect x="40" y="64" width="80" height="102" rx="3" fill="#424e8a"/>
+    <!-- Scroll rollers -->
+    <rect x="30" y="55" width="100" height="12" rx="6" fill="#5060a0" stroke="#3a4a80" stroke-width="1"/>
+    <rect x="30" y="170" width="100" height="12" rx="6" fill="#5060a0" stroke="#3a4a80" stroke-width="1"/>
+    <!-- Text lines -->
+    <line x1="50" y1="80" x2="110" y2="80" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+    <line x1="50" y1="92" x2="104" y2="92" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+    <line x1="50" y1="104" x2="108" y2="104" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+    <line x1="50" y1="116" x2="98" y2="116" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+    <line x1="50" y1="128" x2="106" y2="128" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+    <line x1="50" y1="140" x2="94" y2="140" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+    <!-- Star seal -->
+    <circle cx="80" cy="157" r="9" fill="#5060a0" stroke="#6070b0" stroke-width="1"/>
+    <circle cx="80" cy="157" r="5" fill="#7080c0"/>
+    <circle cx="80" cy="157" r="2.5" fill="#9090d0"/>
+    <!-- Sparkles -->
+    <circle cx="44" cy="68" r="1.5" fill="rgba(112,128,200,.4)" style="animation: indigoEmber 3s ease-in-out infinite;"/>
+    <circle cx="116" cy="64" r="1.2" fill="rgba(112,128,200,.35)" style="animation: indigoEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="80" cy="8" r="1.8" fill="rgba(112,128,200,.45)" style="animation: indigoEmber 3.5s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="th2HorizonG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#101630"/>
+        <stop offset="100%" stop-color="#080c20"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,178 240,192 Q360,168 480,188 Q600,158 720,180
+             Q840,152 960,174 Q1080,160 1200,184 Q1320,168 1440,194
+             L1440,300 L0,300 Z"
+          fill="url(#th2HorizonG)"/>
+    <circle cx="280" cy="182" r="2" fill="rgba(80,96,176,.3)" style="animation: indigoEmber 3s ease-in-out infinite;"/>
+    <circle cx="720" cy="170" r="1.5" fill="rgba(80,96,176,.25)" style="animation: indigoEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1150" cy="176" r="1.8" fill="rgba(80,96,176,.2)" style="animation: indigoEmber 3.5s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「我們應當為你們常常感謝神，這本是合宜的」— 帖撒羅尼迦後書 1:3" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="帖撒羅尼迦後書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 忍耐的報賞  Reward of Endurance
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-endure" aria-label="帖撒羅尼迦後書 — 忍耐的報賞">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="endure-glow" aria-hidden="true"></div>
 
+  <!-- Shield with crown of glory -->
+  <svg id="endure-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="盾牌與榮耀冠冕象徵忍耐的報賞">
+    <defs>
+      <radialGradient id="endureGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(80,96,160,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="shieldG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a5a90"/>
+        <stop offset="100%" stop-color="#2a3a60"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="200" rx="210" ry="150" fill="url(#endureGlowG)"/>
+    <!-- Shield -->
+    <path d="M300,90 L380,120 L380,230 Q380,290 300,320 Q220,290 220,230 L220,120 Z"
+          fill="url(#shieldG)" stroke="#5060a0" stroke-width="2"/>
+    <!-- Shield cross emblem -->
+    <line x1="300" y1="130" x2="300" y2="290" stroke="rgba(160,176,240,.35)" stroke-width="4"/>
+    <line x1="240" y1="190" x2="360" y2="190" stroke="rgba(160,176,240,.35)" stroke-width="4"/>
+    <!-- Crown above shield -->
+    <path d="M265,80 L275,55 L290,72 L300,48 L310,72 L325,55 L335,80 Z"
+          fill="none" stroke="#7080c0" stroke-width="2" stroke-linejoin="round"/>
+    <line x1="265" y1="80" x2="335" y2="80" stroke="#7080c0" stroke-width="2"/>
+    <!-- Crown gems -->
+    <circle cx="300" cy="52" r="4" fill="#8090d0"/>
+    <circle cx="276" cy="58" r="2.5" fill="#7080c0"/>
+    <circle cx="324" cy="58" r="2.5" fill="#7080c0"/>
+    <!-- Light rays from crown -->
+    <line x1="300" y1="48" x2="300" y2="20" stroke="rgba(128,144,208,.2)" stroke-width="1.5"/>
+    <line x1="300" y1="50" x2="275" y2="25" stroke="rgba(128,144,208,.15)" stroke-width="1"/>
+    <line x1="300" y1="50" x2="325" y2="25" stroke="rgba(128,144,208,.15)" stroke-width="1"/>
+    <!-- Sparkles -->
+    <circle cx="230" cy="130" r="2" fill="rgba(128,144,208,.35)" style="animation: indigoEmber 3s ease-in-out infinite;"/>
+    <circle cx="370" cy="125" r="1.5" fill="rgba(128,144,208,.3)" style="animation: indigoEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="32" r="2" fill="rgba(128,144,208,.4)" style="animation: indigoEmber 3.5s ease-in-out .5s infinite;"/>
+    <!-- Ground shadow -->
+    <ellipse cx="300" cy="360" rx="200" ry="18" fill="rgba(8,12,32,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🛡️ 忍耐的報賞" subtitle="Reward of Endurance — 2 Thess 1:5-10" id="endure-heading" />
+  <app-scene-verse text="「你們這受患難的人，與我們同得安息，那時主耶穌同祂有能力的天使從天上在火焰中顯現」— 帖撒羅尼迦後書 1:7" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="帖撒羅尼迦後書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 主的大日  Day of the Lord
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-day" aria-label="帖撒羅尼迦後書 — 主的大日">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="day-glow" aria-hidden="true"></div>
 
+  <!-- Dramatic light breaking through storm clouds -->
+  <svg id="day-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="主的大日——光芒穿透烏雲">
+    <defs>
+      <radialGradient id="dayGlowG" cx="50%" cy="35%" r="50%">
+        <stop offset="0%" stop-color="rgba(96,112,192,.18)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="cloudG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(48,56,96,.4)"/>
+        <stop offset="100%" stop-color="rgba(32,40,80,.15)"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="150" rx="220" ry="130" fill="url(#dayGlowG)"/>
+    <!-- Storm clouds -->
+    <ellipse cx="160" cy="140" rx="90" ry="40" fill="url(#cloudG)"/>
+    <ellipse cx="280" cy="115" rx="110" ry="45" fill="url(#cloudG)"/>
+    <ellipse cx="430" cy="135" rx="95" ry="42" fill="url(#cloudG)"/>
+    <ellipse cx="210" cy="125" rx="70" ry="32" fill="rgba(40,48,88,.3)"/>
+    <ellipse cx="380" cy="122" rx="75" ry="35" fill="rgba(40,48,88,.3)"/>
+    <!-- Dramatic light beams from above -->
+    <line x1="300" y1="60" x2="260" y2="250" stroke="rgba(128,144,208,.18)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="300" y1="60" x2="310" y2="260" stroke="rgba(128,144,208,.25)" stroke-width="10" stroke-linecap="round"/>
+    <line x1="300" y1="60" x2="340" y2="250" stroke="rgba(128,144,208,.15)" stroke-width="14" stroke-linecap="round"/>
+    <!-- Central bright point -->
+    <ellipse cx="300" cy="65" rx="25" ry="20" fill="rgba(160,176,240,.3)"/>
+    <circle cx="300" cy="65" r="8" fill="rgba(180,192,248,.5)"/>
+    <circle cx="300" cy="65" r="4" fill="rgba(210,220,255,.7)"/>
+    <!-- Ground horizon -->
+    <ellipse cx="300" cy="340" rx="280" ry="30" fill="rgba(8,12,32,.5)"/>
+    <!-- Landscape silhouette -->
+    <path d="M0,300 Q100,270 200,285 Q300,265 400,280 Q500,260 600,280 L600,400 L0,400 Z"
+          fill="rgba(10,14,28,.8)"/>
+    <!-- Sparkles in the beam -->
+    <circle cx="295" cy="120" r="2" fill="rgba(160,176,240,.5)" style="animation: indigoEmber 2.5s ease-in-out infinite;"/>
+    <circle cx="310" cy="150" r="1.5" fill="rgba(160,176,240,.4)" style="animation: indigoEmber 3.5s ease-in-out 1s infinite;"/>
+    <circle cx="285" cy="180" r="1.8" fill="rgba(160,176,240,.45)" style="animation: indigoEmber 3s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="☁️ 主的大日" subtitle="Day of the Lord — 2 Thess 2:1-12" id="day-heading" />
+  <app-scene-verse text="「不要輕易動心，也不要驚慌，無論是藉著靈、藉著道，或藉著冒我名的書信」— 帖撒羅尼迦後書 2:2" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="帖撒羅尼迦後書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 不法之人  Man of Lawlessness
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-lawless" aria-label="帖撒羅尼迦後書 — 不法之人">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="lawless-glow" aria-hidden="true"></div>
 
+  <!-- Cross driving back darkness -->
+  <svg id="lawless-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="十架之光照破黑暗">
+    <defs>
+      <radialGradient id="lawlessGlowG" cx="50%" cy="45%" r="45%">
+        <stop offset="0%" stop-color="rgba(96,112,192,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="crossG2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8090d0"/>
+        <stop offset="100%" stop-color="#5060a0"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="200" rx="200" ry="150" fill="url(#lawlessGlowG)"/>
+    <!-- Dark shadow region (left) receding -->
+    <path d="M0,0 Q160,100 120,400 L0,400 Z" fill="rgba(4,6,16,.6)"/>
+    <!-- Cross in centre -->
+    <rect x="286" y="80" width="28" height="220" rx="6" fill="url(#crossG2)"/>
+    <rect x="200" y="148" width="200" height="28" rx="6" fill="url(#crossG2)"/>
+    <!-- Cross glow -->
+    <ellipse cx="300" cy="165" rx="60" ry="50" fill="rgba(128,144,216,.12)"/>
+    <!-- Light rays emanating from cross -->
+    <line x1="300" y1="80" x2="240" y2="20" stroke="rgba(160,176,240,.15)" stroke-width="2"/>
+    <line x1="300" y1="80" x2="360" y2="20" stroke="rgba(160,176,240,.15)" stroke-width="2"/>
+    <line x1="200" y1="162" x2="120" y2="130" stroke="rgba(160,176,240,.12)" stroke-width="2"/>
+    <line x1="400" y1="162" x2="480" y2="130" stroke="rgba(160,176,240,.12)" stroke-width="2"/>
+    <!-- Sparkles near cross -->
+    <circle cx="280" cy="85" r="2" fill="rgba(160,176,240,.4)" style="animation: indigoEmber 3s ease-in-out infinite;"/>
+    <circle cx="320" cy="78" r="1.5" fill="rgba(160,176,240,.35)" style="animation: indigoEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="205" cy="155" r="1.8" fill="rgba(160,176,240,.3)" style="animation: indigoEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="395" cy="152" r="1.5" fill="rgba(160,176,240,.35)" style="animation: indigoEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="250" ry="22" fill="rgba(8,12,32,.5)"/>
+  </svg>
+
+  <app-scene-heading title="✝️ 不法之人" subtitle="Man of Lawlessness — 2 Thess 2:3-12" id="lawless-heading" />
+  <app-scene-verse text="「那時這不法的人必顯露出來，主耶穌要用口中的氣滅絕他」— 帖撒羅尼迦後書 2:8" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="帖撒羅尼迦後書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 持守根基  Hold Fast the Tradition
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-stand" aria-label="帖撒羅尼迦後書 — 持守根基">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="stand-glow" aria-hidden="true"></div>
 
+  <!-- Anchor in waves (steadfast, hold fast) -->
+  <svg id="stand-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="錨定根基象徵謹守傳統">
+    <defs>
+      <radialGradient id="standGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(64,80,144,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="anchorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7080c0"/>
+        <stop offset="100%" stop-color="#404e80"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="200" rx="200" ry="140" fill="url(#standGlowG)"/>
+    <!-- Anchor ring -->
+    <circle cx="300" cy="105" r="22" fill="none" stroke="url(#anchorG)" stroke-width="8"/>
+    <!-- Anchor shaft -->
+    <line x1="300" y1="105" x2="300" y2="290" stroke="url(#anchorG)" stroke-width="10" stroke-linecap="round"/>
+    <!-- Anchor crossbar -->
+    <line x1="240" y1="145" x2="360" y2="145" stroke="url(#anchorG)" stroke-width="8" stroke-linecap="round"/>
+    <!-- Anchor flukes -->
+    <path d="M300,290 Q265,270 245,285 Q255,305 300,290 Z" fill="url(#anchorG)"/>
+    <path d="M300,290 Q335,270 355,285 Q345,305 300,290 Z" fill="url(#anchorG)"/>
+    <!-- Rope at top -->
+    <path d="M300,83 Q310,70 320,75 Q315,62 300,60 Q285,62 280,75 Q290,70 300,83 Z"
+          fill="none" stroke="#5060a0" stroke-width="3" stroke-linecap="round"/>
+    <!-- Gentle waves below -->
+    <path d="M80,320 Q140,308 200,318 Q260,308 320,318 Q380,308 440,318 Q500,308 520,314"
+          fill="none" stroke="rgba(80,96,160,.2)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M60,340 Q140,326 220,338 Q300,326 380,338 Q460,326 540,334"
+          fill="none" stroke="rgba(80,96,160,.15)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Sparkles -->
+    <circle cx="260" cy="110" r="2" fill="rgba(128,144,208,.4)" style="animation: indigoEmber 3s ease-in-out infinite;"/>
+    <circle cx="340" cy="105" r="1.5" fill="rgba(128,144,208,.35)" style="animation: indigoEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="52" r="2" fill="rgba(128,144,208,.4)" style="animation: indigoEmber 3.5s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="⚓ 持守根基" subtitle="Hold Fast the Tradition — 2 Thess 2:15" id="stand-heading" />
+  <app-scene-verse text="「所以弟兄們，你們要站立得穩，凡所領受的教訓，不拘是我們口傳的，是信上寫的，都要謹守」— 帖撒羅尼迦後書 2:15" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="帖撒羅尼迦後書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 信實的主  The Faithful Lord
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-faithful" aria-label="帖撒羅尼迦後書 — 信實的主">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="faithful-glow" aria-hidden="true"></div>
+
+  <!-- Protective hands / guardian light -->
+  <svg id="faithful-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="守護之手與恩光象徵主的信實">
+    <defs>
+      <radialGradient id="faithfulGlowG" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(96,112,192,.18)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="handG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(128,148,216,.4)"/>
+        <stop offset="100%" stop-color="rgba(80,100,176,.2)"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="210" rx="220" ry="160" fill="url(#faithfulGlowG)"/>
+    <!-- Left cupped hand -->
+    <path d="M120,280 Q140,220 180,210 Q200,205 210,220 L205,270 Q180,285 150,295 Z"
+          fill="url(#handG)" stroke="rgba(128,148,216,.3)" stroke-width="1.5"/>
+    <path d="M120,280 Q130,260 145,250 Q158,242 170,248" fill="none" stroke="rgba(160,176,240,.2)" stroke-width="1.5"/>
+    <!-- Right cupped hand -->
+    <path d="M480,280 Q460,220 420,210 Q400,205 390,220 L395,270 Q420,285 450,295 Z"
+          fill="url(#handG)" stroke="rgba(128,148,216,.3)" stroke-width="1.5"/>
+    <path d="M480,280 Q470,260 455,250 Q442,242 430,248" fill="none" stroke="rgba(160,176,240,.2)" stroke-width="1.5"/>
+    <!-- Radiant light between hands -->
+    <ellipse cx="300" cy="230" rx="90" ry="70" fill="rgba(128,144,216,.1)"/>
+    <!-- Star of protection -->
+    <polygon points="300,145 308,168 333,168 313,183 320,208 300,193 280,208 287,183 267,168 292,168"
+             fill="rgba(160,176,240,.4)" stroke="rgba(128,144,216,.3)" stroke-width="1"/>
+    <!-- Central star glow -->
+    <circle cx="300" cy="180" r="18" fill="rgba(180,192,248,.15)"/>
+    <circle cx="300" cy="180" r="8" fill="rgba(200,210,255,.3)"/>
+    <!-- Rays from star -->
+    <line x1="300" y1="145" x2="300" y2="108" stroke="rgba(160,176,240,.2)" stroke-width="1.5"/>
+    <line x1="300" y1="148" x2="265" y2="120" stroke="rgba(160,176,240,.15)" stroke-width="1"/>
+    <line x1="300" y1="148" x2="335" y2="120" stroke="rgba(160,176,240,.15)" stroke-width="1"/>
+    <!-- Sparkles -->
+    <circle cx="270" cy="155" r="2" fill="rgba(160,176,240,.4)" style="animation: indigoEmber 3s ease-in-out infinite;"/>
+    <circle cx="330" cy="148" r="1.5" fill="rgba(160,176,240,.35)" style="animation: indigoEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="108" r="2" fill="rgba(160,176,240,.45)" style="animation: indigoEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="250" cy="220" r="1.5" fill="rgba(128,144,216,.3)" style="animation: indigoEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="350" cy="215" r="1.5" fill="rgba(128,144,216,.3)" style="animation: indigoEmber 4s ease-in-out 1.5s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="⭐ 信實的主" subtitle="The Faithful Lord — 2 Thess 3:3-5" id="faithful-heading" />
+  <app-scene-verse text="「但主是信實的，要堅固你們，保護你們脫離那惡者」— 帖撒羅尼迦後書 3:3" />
 </section>

@@ -1,66 +1,352 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="提摩太後書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="提摩太後書 — 開場">
   <app-starfield />
+
+  <div id="intro-crimson-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>提摩太後書</h1>
     <p>Second Epistle to Timothy</p>
+    <span class="sub">勇氣 · 精兵 · 聖言 · 忍耐 · 冠冕 · 跑完全程</span>
   </div>
 
+  <!-- Torch (fan the flame) -->
+  <svg id="intro-torch-svg" viewBox="0 0 160 240" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="火炬象徵重新點燃恩賜">
+    <ellipse cx="80" cy="120" rx="62" ry="90" fill="rgba(176,40,40,.05)"/>
+    <!-- Torch handle -->
+    <rect x="70" y="140" width="20" height="90" rx="5" fill="#6a2020" stroke="#902828" stroke-width="1.5"/>
+    <rect x="66" y="128" width="28" height="18" rx="4" fill="#802828" stroke="#982828" stroke-width="1"/>
+    <!-- Torch wrap lines -->
+    <line x1="68" y1="150" x2="92" y2="150" stroke="rgba(160,60,40,.3)" stroke-width="1"/>
+    <line x1="68" y1="165" x2="92" y2="165" stroke="rgba(160,60,40,.3)" stroke-width="1"/>
+    <line x1="68" y1="180" x2="92" y2="180" stroke="rgba(160,60,40,.3)" stroke-width="1"/>
+    <!-- Outer flame -->
+    <path d="M80,30 Q100,70 96,110 Q90,135 80,140 Q70,135 64,110 Q60,70 80,30 Z"
+          fill="#902020" opacity=".55"/>
+    <!-- Middle flame -->
+    <path d="M80,50 Q95,84 90,112 Q86,128 80,132 Q74,128 70,112 Q65,84 80,50 Z"
+          fill="#c03030" opacity=".65"/>
+    <!-- Inner flame core -->
+    <path d="M80,72 Q88,98 85,115 Q82,124 80,127 Q78,124 75,115 Q72,98 80,72 Z"
+          fill="#e05050" opacity=".8"/>
+    <!-- Bright tip -->
+    <path d="M80,85 Q84,102 83,114 Q81,120 80,122 Q79,120 77,114 Q76,102 80,85 Z"
+          fill="#f08080" opacity=".9"/>
+    <!-- Flame glow -->
+    <ellipse cx="80" cy="90" rx="40" ry="55" fill="rgba(192,40,40,.08)"/>
+    <!-- Sparks -->
+    <circle cx="70" cy="28" r="2.5" fill="rgba(240,100,80,.45)" style="animation: crimsonEmber 3s ease-in-out infinite;"/>
+    <circle cx="92" cy="20" r="2" fill="rgba(240,100,80,.4)" style="animation: crimsonEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="60" cy="15" r="1.5" fill="rgba(220,80,60,.35)" style="animation: crimsonEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="100" cy="12" r="1.8" fill="rgba(240,100,80,.35)" style="animation: crimsonEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="tim2HorizonG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#200808"/>
+        <stop offset="100%" stop-color="#140404"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,178 240,194 Q360,168 480,188 Q600,158 720,180
+             Q840,154 960,176 Q1080,160 1200,184 Q1320,166 1440,194
+             L1440,300 L0,300 Z"
+          fill="url(#tim2HorizonG)"/>
+    <circle cx="280" cy="184" r="2" fill="rgba(192,60,40,.3)" style="animation: crimsonEmber 3s ease-in-out infinite;"/>
+    <circle cx="720" cy="170" r="1.5" fill="rgba(192,60,40,.25)" style="animation: crimsonEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1140" cy="176" r="1.8" fill="rgba(192,60,40,.2)" style="animation: crimsonEmber 3.5s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「神賜給我們，不是膽怯的心，乃是剛強、仁愛、謹守的心」— 提摩太後書 1:7" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="提摩太後書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 不以為恥  Not Ashamed
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-ashamed" aria-label="提摩太後書 — 不以為恥">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="ashamed-glow" aria-hidden="true"></div>
 
+  <!-- High-held torch (fan the flame, do not be ashamed) -->
+  <svg id="ashamed-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="高舉火炬象徵不以福音為恥">
+    <defs>
+      <radialGradient id="ashamedGlowG" cx="50%" cy="30%" r="45%">
+        <stop offset="0%" stop-color="rgba(192,48,40,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="torchHandleG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#902828"/>
+        <stop offset="100%" stop-color="#5a1818"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="160" rx="200" ry="130" fill="url(#ashamedGlowG)"/>
+    <!-- Torch handle -->
+    <rect x="288" y="190" width="24" height="160" rx="5" fill="url(#torchHandleG)" stroke="#802020" stroke-width="1.5"/>
+    <rect x="282" y="178" width="36" height="20" rx="5" fill="#802020" stroke="#6a1818" stroke-width="1"/>
+    <!-- Outer flame (large) -->
+    <path d="M300,55 Q330,100 325,150 Q318,175 300,180 Q282,175 275,150 Q270,100 300,55 Z"
+          fill="#802020" opacity=".55"/>
+    <path d="M300,75 Q322,114 316,150 Q310,168 300,172 Q290,168 284,150 Q278,114 300,75 Z"
+          fill="#c03030" opacity=".65"/>
+    <path d="M300,100 Q314,128 310,150 Q306,162 300,166 Q294,162 290,150 Q286,128 300,100 Z"
+          fill="#e04040" opacity=".8"/>
+    <path d="M300,118 Q308,136 305,150 Q302,158 300,160 Q298,158 295,150 Q292,136 300,118 Z"
+          fill="#f07070" opacity=".9"/>
+    <!-- Flame glow ellipse -->
+    <ellipse cx="300" cy="118" rx="52" ry="70" fill="rgba(192,48,40,.08)"/>
+    <!-- Light rays from flame -->
+    <line x1="300" y1="55" x2="250" y2="18" stroke="rgba(220,80,60,.12)" stroke-width="2"/>
+    <line x1="300" y1="55" x2="350" y2="18" stroke="rgba(220,80,60,.12)" stroke-width="2"/>
+    <line x1="268" y1="75" x2="220" y2="55" stroke="rgba(220,80,60,.08)" stroke-width="1.5"/>
+    <line x1="332" y1="75" x2="380" y2="55" stroke="rgba(220,80,60,.08)" stroke-width="1.5"/>
+    <!-- Sparks ascending -->
+    <circle cx="288" cy="45" r="2" fill="rgba(240,100,80,.4)" style="animation: crimsonEmber 3s ease-in-out infinite;"/>
+    <circle cx="312" cy="36" r="1.5" fill="rgba(240,100,80,.35)" style="animation: crimsonEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="278" cy="30" r="1.8" fill="rgba(220,80,60,.3)" style="animation: crimsonEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="322" cy="28" r="1.5" fill="rgba(240,100,80,.35)" style="animation: crimsonEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground shadow -->
+    <ellipse cx="300" cy="360" rx="200" ry="18" fill="rgba(20,4,4,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🔥 不以為恥" subtitle="Not Ashamed — 2 Tim 1:6-12" id="ashamed-heading" />
+  <app-scene-verse text="「你不要以給我們的主作見證為恥，也不要以我這為主被囚的為恥；總要按神的能力，與我為福音同受苦難」— 提摩太後書 1:8" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="提摩太後書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 精兵之道  Good Soldier
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-soldier" aria-label="提摩太後書 — 精兵之道">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="soldier-glow" aria-hidden="true"></div>
 
+  <!-- Shield and sword (soldier of Christ) -->
+  <svg id="soldier-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="盾牌與劍象徵基督精兵">
+    <defs>
+      <radialGradient id="soldierGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(192,48,40,.13)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="shieldG2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#802020"/>
+        <stop offset="100%" stop-color="#4a1010"/>
+      </linearGradient>
+      <linearGradient id="swordG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c0c0d0"/>
+        <stop offset="100%" stop-color="#808090"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="200" rx="200" ry="140" fill="url(#soldierGlowG)"/>
+    <!-- Shield -->
+    <path d="M200,90 L300,70 L400,90 L400,220 Q400,290 300,320 Q200,290 200,220 Z"
+          fill="url(#shieldG2)" stroke="#902828" stroke-width="2"/>
+    <!-- Shield cross emblem -->
+    <line x1="300" y1="110" x2="300" y2="298" stroke="rgba(240,160,140,.3)" stroke-width="4"/>
+    <line x1="225" y1="170" x2="375" y2="170" stroke="rgba(240,160,140,.3)" stroke-width="4"/>
+    <!-- Shield border detail -->
+    <path d="M210,95 L300,77 L390,95 L390,218 Q390,282 300,312 Q210,282 210,218 Z"
+          fill="none" stroke="rgba(192,80,60,.2)" stroke-width="1.5"/>
+    <!-- Sword (diagonal, right) -->
+    <line x1="390" y1="80" x2="480" y2="320" stroke="url(#swordG)" stroke-width="8" stroke-linecap="round"/>
+    <!-- Sword guard -->
+    <rect x="424" y="172" width="40" height="10" rx="3" fill="#909090" stroke="#c0c0d0" stroke-width="1" transform="rotate(15 444 177)"/>
+    <!-- Sword tip shimmer -->
+    <circle cx="476" cy="315" r="4" fill="rgba(220,220,240,.3)"/>
+    <!-- Sparks / light on shield -->
+    <circle cx="230" cy="108" r="2" fill="rgba(240,120,100,.35)" style="animation: crimsonEmber 3s ease-in-out infinite;"/>
+    <circle cx="370" cy="100" r="1.5" fill="rgba(240,120,100,.3)" style="animation: crimsonEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="68" r="2" fill="rgba(240,120,100,.4)" style="animation: crimsonEmber 3.5s ease-in-out .5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="240" ry="18" fill="rgba(20,4,4,.5)"/>
+  </svg>
+
+  <app-scene-heading title="⚔️ 精兵之道" subtitle="Good Soldier — 2 Tim 2:3-4" id="soldier-heading" />
+  <app-scene-verse text="「你要和我同受苦難，好像基督耶穌的精兵。凡在軍中當兵的，不將世務纏身，好叫那招兵的人喜悅」— 提摩太後書 2:3-4" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="提摩太後書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 正確分解  Rightly Handle the Word
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-word" aria-label="提摩太後書 — 正確分解">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="word-glow" aria-hidden="true"></div>
 
+  <!-- Open Bible with light -->
+  <svg id="word-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="敞開的聖言與光芒">
+    <defs>
+      <radialGradient id="wordGlowG" cx="50%" cy="45%" r="45%">
+        <stop offset="0%" stop-color="rgba(192,48,40,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="bibleG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#802020"/>
+        <stop offset="100%" stop-color="#501010"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="220" rx="210" ry="140" fill="url(#wordGlowG)"/>
+    <!-- Bible cover (bottom) -->
+    <rect x="130" y="285" width="340" height="18" rx="5" fill="url(#bibleG)" stroke="#902828" stroke-width="1"/>
+    <!-- Left page -->
+    <path d="M140,285 L140,155 Q220,145 300,148 L300,285 Z" fill="rgba(240,230,200,.08)" stroke="rgba(220,200,160,.15)" stroke-width="1"/>
+    <!-- Right page -->
+    <path d="M460,285 L460,155 Q380,145 300,148 L300,285 Z" fill="rgba(240,230,200,.08)" stroke="rgba(220,200,160,.15)" stroke-width="1"/>
+    <!-- Left page text lines -->
+    <line x1="158" y1="172" x2="290" y2="169" stroke="rgba(255,230,200,.12)" stroke-width="1.5"/>
+    <line x1="158" y1="184" x2="288" y2="181" stroke="rgba(255,230,200,.1)" stroke-width="1.5"/>
+    <line x1="158" y1="196" x2="290" y2="193" stroke="rgba(255,230,200,.1)" stroke-width="1.5"/>
+    <line x1="158" y1="208" x2="285" y2="205" stroke="rgba(255,230,200,.08)" stroke-width="1.5"/>
+    <line x1="158" y1="220" x2="288" y2="217" stroke="rgba(255,230,200,.08)" stroke-width="1.5"/>
+    <line x1="158" y1="232" x2="290" y2="229" stroke="rgba(255,230,200,.07)" stroke-width="1.5"/>
+    <line x1="158" y1="244" x2="285" y2="241" stroke="rgba(255,230,200,.07)" stroke-width="1.5"/>
+    <line x1="158" y1="256" x2="288" y2="253" stroke="rgba(255,230,200,.06)" stroke-width="1.5"/>
+    <!-- Right page text lines -->
+    <line x1="310" y1="172" x2="442" y2="169" stroke="rgba(255,230,200,.12)" stroke-width="1.5"/>
+    <line x1="312" y1="184" x2="440" y2="181" stroke="rgba(255,230,200,.1)" stroke-width="1.5"/>
+    <line x1="310" y1="196" x2="442" y2="193" stroke="rgba(255,230,200,.1)" stroke-width="1.5"/>
+    <line x1="314" y1="208" x2="440" y2="205" stroke="rgba(255,230,200,.08)" stroke-width="1.5"/>
+    <line x1="310" y1="220" x2="442" y2="217" stroke="rgba(255,230,200,.08)" stroke-width="1.5"/>
+    <line x1="312" y1="232" x2="440" y2="229" stroke="rgba(255,230,200,.07)" stroke-width="1.5"/>
+    <line x1="310" y1="244" x2="438" y2="241" stroke="rgba(255,230,200,.07)" stroke-width="1.5"/>
+    <line x1="312" y1="256" x2="440" y2="253" stroke="rgba(255,230,200,.06)" stroke-width="1.5"/>
+    <!-- Spine -->
+    <rect x="295" y="148" width="10" height="137" rx="2" fill="url(#bibleG)" opacity=".7"/>
+    <!-- Radiant light from pages -->
+    <ellipse cx="300" cy="148" rx="50" ry="25" fill="rgba(240,160,140,.12)"/>
+    <!-- Light beams upward -->
+    <line x1="300" y1="148" x2="260" y2="80" stroke="rgba(240,120,100,.1)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="300" y1="148" x2="300" y2="68" stroke="rgba(240,120,100,.15)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="300" y1="148" x2="340" y2="80" stroke="rgba(240,120,100,.1)" stroke-width="3" stroke-linecap="round"/>
+    <!-- Sparkles -->
+    <circle cx="288" cy="100" r="2" fill="rgba(240,160,140,.4)" style="animation: crimsonEmber 3s ease-in-out infinite;"/>
+    <circle cx="312" cy="88" r="1.5" fill="rgba(240,160,140,.35)" style="animation: crimsonEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="65" r="2" fill="rgba(240,160,140,.45)" style="animation: crimsonEmber 3.5s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="📜 正確分解" subtitle="Rightly Handle the Word — 2 Tim 2:15" id="word-heading" />
+  <app-scene-verse text="「你當竭力，在神面前得蒙喜悅，作無愧的工人，按著正意分解真理的道」— 提摩太後書 2:15" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="提摩太後書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 末後的危難  Perilous Last Days
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-times" aria-label="提摩太後書 — 末後的危難">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="times-glow" aria-hidden="true"></div>
 
+  <!-- Storm clouds with single light breaking through -->
+  <svg id="times-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="末後危難——烏雲中透出的光">
+    <defs>
+      <radialGradient id="timesGlowG" cx="50%" cy="30%" r="50%">
+        <stop offset="0%" stop-color="rgba(192,48,40,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="stormCloudG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(60,16,16,.5)"/>
+        <stop offset="100%" stop-color="rgba(40,10,10,.2)"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="140" rx="230" ry="120" fill="url(#timesGlowG)"/>
+    <!-- Storm clouds -->
+    <ellipse cx="140" cy="130" rx="95" ry="42" fill="url(#stormCloudG)"/>
+    <ellipse cx="290" cy="108" rx="120" ry="50" fill="url(#stormCloudG)"/>
+    <ellipse cx="450" cy="128" rx="100" ry="44" fill="url(#stormCloudG)"/>
+    <ellipse cx="210" cy="118" rx="80" ry="36" fill="rgba(50,12,12,.4)"/>
+    <ellipse cx="380" cy="115" rx="85" ry="38" fill="rgba(50,12,12,.4)"/>
+    <!-- Single piercing light from above (the Word endures) -->
+    <line x1="300" y1="55" x2="285" y2="260" stroke="rgba(240,160,140,.2)" stroke-width="22" stroke-linecap="round"/>
+    <line x1="300" y1="55" x2="300" y2="265" stroke="rgba(240,160,140,.3)" stroke-width="12" stroke-linecap="round"/>
+    <line x1="300" y1="55" x2="315" y2="260" stroke="rgba(240,160,140,.18)" stroke-width="18" stroke-linecap="round"/>
+    <!-- Bright source point -->
+    <ellipse cx="300" cy="60" rx="22" ry="18" fill="rgba(240,140,120,.25)"/>
+    <circle cx="300" cy="60" r="7" fill="rgba(255,180,160,.5)"/>
+    <!-- Ground / dark valley -->
+    <path d="M0,310 Q100,280 200,295 Q300,272 400,290 Q500,270 600,288 L600,400 L0,400 Z"
+          fill="rgba(20,4,4,.8)"/>
+    <!-- Sparkles in the light -->
+    <circle cx="296" cy="130" r="2" fill="rgba(255,180,160,.5)" style="animation: crimsonEmber 2.5s ease-in-out infinite;"/>
+    <circle cx="305" cy="160" r="1.5" fill="rgba(255,180,160,.4)" style="animation: crimsonEmber 3.5s ease-in-out 1s infinite;"/>
+    <circle cx="292" cy="195" r="1.8" fill="rgba(255,180,160,.45)" style="animation: crimsonEmber 3s ease-in-out .5s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="⛈️ 末後的危難" subtitle="Perilous Last Days — 2 Tim 3:1-17" id="times-heading" />
+  <app-scene-verse text="「你該知道，末世必有危險的日子來到...但你所學習的、所確信的，要存在心裡」— 提摩太後書 3:1,14" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="提摩太後書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 跑完全程  Finish the Race
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-finish" aria-label="提摩太後書 — 跑完全程">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="finish-glow" aria-hidden="true"></div>
+
+  <!-- Crown of righteousness with dawn light -->
+  <svg id="finish-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="公義的冠冕與黎明象徵跑完全程">
+    <defs>
+      <radialGradient id="finishGlowG" cx="50%" cy="55%" r="50%">
+        <stop offset="0%" stop-color="rgba(192,80,60,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="crownG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#c03030"/>
+        <stop offset="100%" stop-color="#e06050"/>
+      </linearGradient>
+      <linearGradient id="dawnG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="rgba(192,64,48,.18)"/>
+        <stop offset="100%" stop-color="rgba(240,128,100,.04)"/>
+      </linearGradient>
+    </defs>
+    <!-- Dawn glow on horizon -->
+    <ellipse cx="300" cy="280" rx="260" ry="110" fill="url(#finishGlowG)"/>
+    <!-- Sun rising -->
+    <path d="M190,280 Q240,195 300,190 Q360,195 410,280 Z" fill="url(#dawnG)"/>
+    <ellipse cx="300" cy="280" rx="70" ry="18" fill="rgba(192,64,48,.1)"/>
+    <!-- Sun rays -->
+    <line x1="300" y1="190" x2="300" y2="110" stroke="rgba(220,100,80,.15)" stroke-width="2"/>
+    <line x1="300" y1="195" x2="228" y2="132" stroke="rgba(220,100,80,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="195" x2="372" y2="132" stroke="rgba(220,100,80,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="205" x2="195" y2="172" stroke="rgba(220,100,80,.08)" stroke-width="1.5"/>
+    <line x1="300" y1="205" x2="405" y2="172" stroke="rgba(220,100,80,.08)" stroke-width="1.5"/>
+    <!-- Crown floating above horizon -->
+    <path d="M240,155 L255,115 L275,135 L300,100 L325,135 L345,115 L360,155 Z"
+          fill="none" stroke="url(#crownG)" stroke-width="3" stroke-linejoin="round"/>
+    <line x1="240" y1="155" x2="360" y2="155" stroke="url(#crownG)" stroke-width="3"/>
+    <!-- Crown gems -->
+    <circle cx="300" cy="104" r="6" fill="#e06050"/>
+    <circle cx="256" cy="120" r="4" fill="#d05040"/>
+    <circle cx="344" cy="120" r="4" fill="#d05040"/>
+    <!-- Crown glow -->
+    <ellipse cx="300" cy="128" rx="70" ry="40" fill="rgba(220,80,60,.06)"/>
+    <!-- Finish ribbon / line (race metaphor) -->
+    <line x1="80" y1="280" x2="520" y2="280" stroke="rgba(220,100,80,.2)" stroke-width="2" stroke-dasharray="12,8"/>
+    <!-- Sparkles -->
+    <circle cx="282" cy="115" r="2" fill="rgba(240,120,100,.4)" style="animation: crimsonEmber 3s ease-in-out infinite;"/>
+    <circle cx="318" cy="107" r="1.5" fill="rgba(240,120,100,.35)" style="animation: crimsonEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="265" cy="135" r="2" fill="rgba(240,120,100,.35)" style="animation: crimsonEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="335" cy="132" r="1.8" fill="rgba(240,120,100,.35)" style="animation: crimsonEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="👑 跑完全程" subtitle="Finish the Race — 2 Tim 4:7-8" id="finish-heading" />
+  <app-scene-verse text="「那美好的仗我已經打過了，當跑的路我已經跑盡了，所信的道我已經守住了；從此以後，有公義的冠冕為我存留」— 提摩太後書 4:7-8" />
 </section>

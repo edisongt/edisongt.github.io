@@ -8,6 +8,7 @@
   scroll-snap-align: start;
 }
 
+/* ── Shared Keyframes ── */
 @keyframes fadeUpIn {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -18,8 +19,52 @@
   50%      { filter: brightness(1.35); }
 }
 
-#scene-1 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #16163a 50%, #0a0a2e 100%);
+@keyframes gentleSway {
+  0%,100% { transform: translateX(-50%) rotate(-1deg);  }
+  50%      { transform: translateX(-50%) rotate(1deg);   }
+}
+
+@keyframes breathe {
+  0%,100% { opacity: .6; transform: translateX(-50%) scale(1);    }
+  50%      { opacity: 1;  transform: translateX(-50%) scale(1.04); }
+}
+
+/* ── 2 Thessalonians-specific keyframes ── */
+
+@keyframes indigoEmber {
+  0%,100% { opacity: .3; }
+  50%      { opacity: .65; }
+}
+
+@keyframes scrollFloat {
+  0%,100% { transform: translateX(-50%) translateY(0);    }
+  50%      { transform: translateX(-50%) translateY(-10px); }
+}
+
+@keyframes anchorFloat {
+  0%,100% { transform: translateX(-50%) translateY(0);    }
+  50%      { transform: translateX(-50%) translateY(-8px);  }
+}
+
+@keyframes starGlow {
+  0%,100% { opacity: .5; }
+  50%      { opacity: .9; }
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 1 — INTRO / Title
+   ══════════════════════════════════════════════ */
+
+#scene-intro {
+  background: linear-gradient(180deg, #080c20 0%, #10163a 40%, #161c48 70%, #080c20 100%);
+}
+
+#intro-indigo-glow {
+  position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+  width: 50vw; height: 30vh;
+  background: radial-gradient(ellipse, rgba(64,80,144,.12) 0%, rgba(48,64,120,.05) 45%, transparent 70%);
+  z-index: 3;
+  animation: indigoEmber 4s ease-in-out infinite;
 }
 
 #intro-title {
@@ -29,20 +74,177 @@
 
 #intro-title h1 {
   font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
-  background: linear-gradient(120deg, #5070a0 0%, #7090c0 45%, #305080 100%);
+  background: linear-gradient(120deg, #5060a0 0%, #7080c0 45%, #3a4a80 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
 }
 
 #intro-title p {
   font-size: clamp(.9rem,2vw,1.2rem);
-  color: rgba(255,255,255,.5); margin-top: .6rem; letter-spacing: .18em;
+  color: rgba(112,128,200,.7); margin-top: .6rem; letter-spacing: .18em;
   animation: fadeUpIn 2s ease-out .5s both;
 }
 
-#scene-2, #scene-3, #scene-4, #scene-5, #scene-6 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #12122a 50%, #0a0a2e 100%);
+#intro-title .sub {
+  font-size: clamp(.75rem,1.4vw,.95rem);
+  color: rgba(96,112,180,.5); margin-top: .4rem; letter-spacing: .12em;
+  animation: fadeUpIn 2s ease-out .9s both;
 }
+
+#intro-scroll-svg {
+  position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(100px,12vw,160px);
+  animation: scrollFloat 5s ease-in-out infinite;
+}
+
+#intro-horizon-svg {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 2 — ENDURE  忍耐的報賞
+   ══════════════════════════════════════════════ */
+
+#scene-endure {
+  background: linear-gradient(180deg, #060a1a 0%, #0e1430 40%, #141a40 70%, #060a1a 100%);
+}
+
+#endure-glow {
+  position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+  width: 50vw; height: 50vh;
+  background: radial-gradient(ellipse, rgba(80,96,160,.15) 0%, rgba(56,72,136,.06) 50%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+#endure-scene-svg {
+  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(260px,42vw,580px);
+  animation: gentleSway 8s ease-in-out infinite;
+}
+
+#endure-heading h2 {
+  color: #7080c0;
+  text-shadow: 0 0 22px rgba(80,96,160,.5);
+}
+
+#endure-heading p { color: rgba(112,128,200,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 3 — DAY  主的大日
+   ══════════════════════════════════════════════ */
+
+#scene-day {
+  background: linear-gradient(180deg, #04081a 0%, #0c1228 40%, #10183a 70%, #080c20 100%);
+}
+
+#day-glow {
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: 55vw; height: 55vh;
+  background: radial-gradient(ellipse, rgba(96,112,192,.16) 0%, rgba(64,80,160,.06) 50%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4.5s ease-in-out infinite;
+}
+
+#day-scene-svg {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 90%; z-index: 5;
+}
+
+#day-heading h2 {
+  background: linear-gradient(120deg, #7080c0 0%, #9aaae0 50%, #5060a0 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+#day-heading p { color: rgba(128,144,208,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 4 — LAWLESS  不法之人
+   ══════════════════════════════════════════════ */
+
+#scene-lawless {
+  background: linear-gradient(180deg, #060818 0%, #0c1028 40%, #101430 70%, #060a1e 100%);
+}
+
+#lawless-glow {
+  position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+  width: 45vw; height: 50vh;
+  background: radial-gradient(ellipse, rgba(80,96,160,.13) 0%, rgba(56,72,136,.05) 50%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+#lawless-scene-svg {
+  position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(260px,42vw,580px);
+  animation: gentleSway 9s ease-in-out infinite;
+}
+
+#lawless-heading h2 {
+  color: #8090d0;
+  text-shadow: 0 0 22px rgba(96,112,192,.5);
+}
+
+#lawless-heading p { color: rgba(128,144,208,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 5 — STAND  持守根基
+   ══════════════════════════════════════════════ */
+
+#scene-stand {
+  background: linear-gradient(180deg, #070b1c 0%, #101830 35%, #161e40 60%, #181e48 85%, #101830 100%);
+}
+
+#stand-glow {
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: clamp(160px,32vw,420px); height: 65%;
+  background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(96,112,176,.1) 0%, rgba(64,80,144,.04) 40%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+#stand-scene-svg {
+  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(240px,38vw,520px);
+  animation: anchorFloat 6s ease-in-out infinite;
+}
+
+#stand-heading h2 {
+  background: linear-gradient(120deg, #7080c0 0%, #a0b0d8 50%, #5060a0 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+#stand-heading p { color: rgba(128,144,208,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 6 — FAITHFUL  信實的主
+   ══════════════════════════════════════════════ */
+
+#scene-faithful {
+  background: linear-gradient(180deg, #080c20 0%, #101830 40%, #181e40 70%, #141a38 100%);
+}
+
+#faithful-glow {
+  position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+  width: clamp(160px,32vw,420px); height: 70%;
+  background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(96,112,192,.1) 0%, rgba(64,80,160,.04) 40%, transparent 70%);
+  z-index: 3;
+  animation: starGlow 4.5s ease-in-out infinite;
+}
+
+#faithful-scene-svg {
+  position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(240px,38vw,520px);
+  animation: gentleSway 7s ease-in-out infinite;
+}
+
+#faithful-heading h2 {
+  background: linear-gradient(120deg, #7080c0 0%, #a0b0d8 50%, #5060a0 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+#faithful-heading p { color: rgba(128,144,208,.5); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

@@ -8,6 +8,7 @@
   scroll-snap-align: start;
 }
 
+/* ── Shared Keyframes ── */
 @keyframes fadeUpIn {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -18,8 +19,47 @@
   50%      { filter: brightness(1.35); }
 }
 
-#scene-1 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #16163a 50%, #0a0a2e 100%);
+@keyframes gentleSway {
+  0%,100% { transform: translateX(-50%) rotate(-1deg);  }
+  50%      { transform: translateX(-50%) rotate(1deg);   }
+}
+
+@keyframes breathe {
+  0%,100% { opacity: .6; transform: translateX(-50%) scale(1);    }
+  50%      { opacity: 1;  transform: translateX(-50%) scale(1.04); }
+}
+
+/* ── 2 Timothy-specific keyframes ── */
+
+@keyframes crimsonEmber {
+  0%,100% { opacity: .3; }
+  50%      { opacity: .7; }
+}
+
+@keyframes torchFloat {
+  0%,100% { transform: translateX(-50%) translateY(0);    }
+  50%      { transform: translateX(-50%) translateY(-10px); }
+}
+
+@keyframes crownGlow {
+  0%,100% { opacity: .5; }
+  50%      { opacity: .9; }
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 1 — INTRO / Title
+   ══════════════════════════════════════════════ */
+
+#scene-intro {
+  background: linear-gradient(180deg, #180404 0%, #220808 40%, #2a1010 70%, #180404 100%);
+}
+
+#intro-crimson-glow {
+  position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+  width: 50vw; height: 30vh;
+  background: radial-gradient(ellipse, rgba(192,48,40,.1) 0%, rgba(160,32,24,.04) 45%, transparent 70%);
+  z-index: 3;
+  animation: crimsonEmber 4s ease-in-out infinite;
 }
 
 #intro-title {
@@ -29,20 +69,177 @@
 
 #intro-title h1 {
   font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
-  background: linear-gradient(120deg, #5a8a5a 0%, #7aa87a 45%, #3a6a3a 100%);
+  background: linear-gradient(120deg, #b03030 0%, #d05040 45%, #8a2020 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
 }
 
 #intro-title p {
   font-size: clamp(.9rem,2vw,1.2rem);
-  color: rgba(255,255,255,.5); margin-top: .6rem; letter-spacing: .18em;
+  color: rgba(210,120,100,.7); margin-top: .6rem; letter-spacing: .18em;
   animation: fadeUpIn 2s ease-out .5s both;
 }
 
-#scene-2, #scene-3, #scene-4, #scene-5, #scene-6 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #12122a 50%, #0a0a2e 100%);
+#intro-title .sub {
+  font-size: clamp(.75rem,1.4vw,.95rem);
+  color: rgba(192,96,80,.5); margin-top: .4rem; letter-spacing: .12em;
+  animation: fadeUpIn 2s ease-out .9s both;
 }
+
+#intro-torch-svg {
+  position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(80px,10vw,140px);
+  animation: torchFloat 5s ease-in-out infinite;
+}
+
+#intro-horizon-svg {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 2 — ASHAMED  不以為恥
+   ══════════════════════════════════════════════ */
+
+#scene-ashamed {
+  background: linear-gradient(180deg, #140202 0%, #200606 40%, #281010 70%, #140202 100%);
+}
+
+#ashamed-glow {
+  position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+  width: 50vw; height: 55vh;
+  background: radial-gradient(ellipse, rgba(192,48,40,.14) 0%, rgba(160,32,24,.06) 50%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+#ashamed-scene-svg {
+  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(260px,42vw,580px);
+  animation: gentleSway 8s ease-in-out infinite;
+}
+
+#ashamed-heading h2 {
+  color: #d05040;
+  text-shadow: 0 0 22px rgba(192,48,40,.5);
+}
+
+#ashamed-heading p { color: rgba(210,120,100,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 3 — SOLDIER  精兵之道
+   ══════════════════════════════════════════════ */
+
+#scene-soldier {
+  background: linear-gradient(180deg, #100202 0%, #1c0808 40%, #221010 70%, #100202 100%);
+}
+
+#soldier-glow {
+  position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+  width: 50vw; height: 50vh;
+  background: radial-gradient(ellipse, rgba(192,48,40,.12) 0%, rgba(160,32,24,.05) 50%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4.5s ease-in-out infinite;
+}
+
+#soldier-scene-svg {
+  position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(280px,50vw,700px);
+  animation: gentleSway 9s ease-in-out infinite;
+}
+
+#soldier-heading h2 {
+  background: linear-gradient(120deg, #c04040 0%, #e06050 50%, #9a2828 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+#soldier-heading p { color: rgba(210,120,100,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 4 — WORD  正確分解
+   ══════════════════════════════════════════════ */
+
+#scene-word {
+  background: linear-gradient(180deg, #120202 0%, #1e0808 40%, #241010 70%, #120202 100%);
+}
+
+#word-glow {
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: 55vw; height: 55vh;
+  background: radial-gradient(ellipse, rgba(192,80,60,.12) 0%, rgba(160,48,32,.05) 50%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+#word-scene-svg {
+  position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(280px,52vw,720px);
+  animation: gentleSway 10s ease-in-out infinite;
+}
+
+#word-heading h2 {
+  color: #d06050;
+  text-shadow: 0 0 22px rgba(192,64,48,.5);
+}
+
+#word-heading p { color: rgba(210,120,100,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 5 — TIMES  末後的危難
+   ══════════════════════════════════════════════ */
+
+#scene-times {
+  background: linear-gradient(180deg, #0e0202 0%, #180606 40%, #1e0c0c 70%, #100202 100%);
+}
+
+#times-glow {
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: 55vw; height: 55vh;
+  background: radial-gradient(ellipse, rgba(192,48,40,.13) 0%, rgba(160,32,24,.05) 50%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4.5s ease-in-out infinite;
+}
+
+#times-scene-svg {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 88%; z-index: 5;
+}
+
+#times-heading h2 {
+  background: linear-gradient(120deg, #c04040 0%, #e06050 50%, #9a2828 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+#times-heading p { color: rgba(210,120,100,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 6 — FINISH  跑完全程
+   ══════════════════════════════════════════════ */
+
+#scene-finish {
+  background: linear-gradient(180deg, #140404 0%, #1e0a0a 40%, #261414 70%, #1c0808 100%);
+}
+
+#finish-glow {
+  position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+  width: clamp(180px,36vw,480px); height: 70%;
+  background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(192,80,60,.1) 0%, rgba(160,48,32,.04) 40%, transparent 70%);
+  z-index: 3;
+  animation: crownGlow 4.5s ease-in-out infinite;
+}
+
+#finish-scene-svg {
+  position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(240px,40vw,560px);
+  animation: gentleSway 7s ease-in-out infinite;
+}
+
+#finish-heading h2 {
+  background: linear-gradient(120deg, #c04040 0%, #e06050 50%, #9a2828 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+#finish-heading p { color: rgba(210,120,100,.5); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

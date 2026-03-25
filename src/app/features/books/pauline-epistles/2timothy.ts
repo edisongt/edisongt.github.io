@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class SecondTimothy {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-ashamed', label: '不以為恥' },
+    { id: 'scene-soldier', label: '精兵之道' },
+    { id: 'scene-word', label: '正確分解' },
+    { id: 'scene-times', label: '末後的危難' },
+    { id: 'scene-finish', label: '跑完全程' },
   ];
 }

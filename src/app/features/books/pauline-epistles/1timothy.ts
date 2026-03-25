@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class FirstTimothy {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-order', label: '教會的秩序' },
+    { id: 'scene-prayer', label: '代禱的呼召' },
+    { id: 'scene-leader', label: '長老與執事' },
+    { id: 'scene-godly', label: '敬虔的操練' },
+    { id: 'scene-content', label: '知足是大益處' },
   ];
 }
