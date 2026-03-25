@@ -1,66 +1,414 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="約翰一書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="約翰壹書 — 開場">
   <app-starfield />
+
+  <div id="intro-golden-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
-    <h1>約翰一書</h1>
+    <h1>約翰壹書</h1>
     <p>First Epistle of John</p>
+    <span class="sub">光 · 愛 · 真理 · 兒女 · 相交 · 永生</span>
   </div>
 
+  <!-- Radiant heart with light emanating (God is love and light) -->
+  <svg id="intro-heart-svg" viewBox="0 0 200 240" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="發光的愛心象徵神是愛與光">
+    <!-- Outer glow -->
+    <ellipse cx="100" cy="110" rx="80" ry="90" fill="rgba(224,168,64,.06)"/>
+    <!-- Light rays from heart center -->
+    <line x1="100" y1="80" x2="100" y2="20" stroke="rgba(240,200,96,.15)" stroke-width="2"/>
+    <line x1="100" y1="80" x2="50" y2="30" stroke="rgba(240,200,96,.1)" stroke-width="1.5"/>
+    <line x1="100" y1="80" x2="150" y2="30" stroke="rgba(240,200,96,.1)" stroke-width="1.5"/>
+    <line x1="100" y1="80" x2="25" y2="60" stroke="rgba(240,200,96,.08)" stroke-width="1.5"/>
+    <line x1="100" y1="80" x2="175" y2="60" stroke="rgba(240,200,96,.08)" stroke-width="1.5"/>
+    <line x1="100" y1="80" x2="15" y2="100" stroke="rgba(240,200,96,.06)" stroke-width="1"/>
+    <line x1="100" y1="80" x2="185" y2="100" stroke="rgba(240,200,96,.06)" stroke-width="1"/>
+    <!-- Heart shape -->
+    <path d="M100,180 Q70,155 50,130 Q30,105 40,80 Q50,58 75,58 Q90,58 100,75
+             Q110,58 125,58 Q150,58 160,80 Q170,105 150,130 Q130,155 100,180 Z"
+          fill="rgba(224,168,64,.12)" stroke="#e0a840" stroke-width="2"/>
+    <path d="M100,170 Q75,148 60,128 Q42,108 50,88 Q58,70 78,70 Q92,70 100,84
+             Q108,70 122,70 Q142,70 150,88 Q158,108 140,128 Q125,148 100,170 Z"
+          fill="rgba(240,200,96,.08)" stroke="rgba(240,200,96,.3)" stroke-width="1"/>
+    <!-- Inner glow -->
+    <circle cx="100" cy="115" r="25" fill="rgba(240,200,96,.06)"/>
+    <!-- Sparkle effects -->
+    <circle cx="55" cy="70" r="1.8" fill="rgba(240,200,96,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="145" cy="68" r="1.5" fill="rgba(240,200,96,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="100" cy="40" r="2" fill="rgba(240,200,96,.45)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="165" cy="100" r="1.2" fill="rgba(224,168,64,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="35" cy="105" r="1.4" fill="rgba(224,168,64,.3)" style="animation: goldEmber 3s ease-in-out 1.5s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="horizonG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a1408"/>
+        <stop offset="100%" stop-color="#0e0a04"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,175 240,190 Q360,165 480,185 Q600,155 720,178
+             Q840,150 960,172 Q1080,158 1200,182 Q1320,165 1440,192
+             L1440,300 L0,300 Z"
+          fill="url(#horizonG1)"/>
+    <circle cx="300" cy="180" r="2" fill="rgba(224,168,64,.3)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="168" r="1.5" fill="rgba(224,168,64,.25)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="174" r="1.8" fill="rgba(224,168,64,.2)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="182" r="2" fill="rgba(224,168,64,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「神就是光，在他毫無黑暗」— 約翰壹書 1:5" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="約翰一書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 神就是光  God is Light
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-light" aria-label="約翰壹書 — 神就是光">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="light-glow" aria-hidden="true"></div>
 
+  <!-- Bright sun with rays piercing through darkness -->
+  <svg id="light-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="明亮的太陽光芒穿透黑暗">
+    <defs>
+      <radialGradient id="lightGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(224,168,64,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <radialGradient id="sunCoreG" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#f0c860"/>
+        <stop offset="60%" stop-color="#e0a840"/>
+        <stop offset="100%" stop-color="#c08820"/>
+      </radialGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="220" ry="150" fill="url(#lightGlowG)"/>
+    <!-- Darkness on the sides -->
+    <rect x="0" y="0" width="120" height="400" fill="rgba(10,8,4,.4)"/>
+    <rect x="480" y="0" width="120" height="400" fill="rgba(10,8,4,.4)"/>
+    <!-- Sun body -->
+    <circle cx="300" cy="170" r="55" fill="url(#sunCoreG)" opacity=".9"/>
+    <circle cx="300" cy="170" r="45" fill="#f0c860" opacity=".6"/>
+    <circle cx="300" cy="170" r="70" fill="rgba(240,200,96,.08)"/>
+    <circle cx="300" cy="170" r="90" fill="rgba(224,168,64,.04)"/>
+    <!-- Major rays piercing through -->
+    <line x1="300" y1="170" x2="300" y2="30" stroke="rgba(240,200,96,.3)" stroke-width="3"/>
+    <line x1="300" y1="170" x2="300" y2="340" stroke="rgba(240,200,96,.2)" stroke-width="2.5"/>
+    <line x1="300" y1="170" x2="140" y2="170" stroke="rgba(240,200,96,.2)" stroke-width="2.5"/>
+    <line x1="300" y1="170" x2="460" y2="170" stroke="rgba(240,200,96,.2)" stroke-width="2.5"/>
+    <!-- Diagonal rays -->
+    <line x1="300" y1="170" x2="180" y2="60" stroke="rgba(240,200,96,.15)" stroke-width="2"/>
+    <line x1="300" y1="170" x2="420" y2="60" stroke="rgba(240,200,96,.15)" stroke-width="2"/>
+    <line x1="300" y1="170" x2="180" y2="290" stroke="rgba(240,200,96,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="170" x2="420" y2="290" stroke="rgba(240,200,96,.12)" stroke-width="1.5"/>
+    <!-- Shorter accent rays -->
+    <line x1="300" y1="170" x2="210" y2="100" stroke="rgba(224,168,64,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="170" x2="390" y2="100" stroke="rgba(224,168,64,.1)" stroke-width="1.5"/>
+    <line x1="300" y1="170" x2="210" y2="250" stroke="rgba(224,168,64,.08)" stroke-width="1"/>
+    <line x1="300" y1="170" x2="390" y2="250" stroke="rgba(224,168,64,.08)" stroke-width="1"/>
+    <!-- Light particles -->
+    <circle cx="250" cy="100" r="2.5" fill="rgba(240,200,96,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="370" cy="110" r="2" fill="rgba(240,200,96,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="60" r="3" fill="rgba(240,200,96,.45)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="200" r="1.5" fill="rgba(224,168,64,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="400" cy="210" r="1.8" fill="rgba(224,168,64,.3)" style="animation: goldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="250" ry="22" fill="rgba(10,8,4,.5)"/>
+  </svg>
+
+  <app-scene-heading title="☀️ 神就是光" subtitle="God is Light — 1 John 1:5-7" id="light-heading" />
+  <app-scene-verse text="「我們若在光明中行，如同神在光明中，就彼此相交」— 約翰壹書 1:7" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="約翰一書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 神的兒女  Children of God
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-children" aria-label="約翰壹書 — 神的兒女">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="children-glow" aria-hidden="true"></div>
 
+  <!-- Parent figure with arms reaching down to embrace smaller figures -->
+  <svg id="children-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="父親伸手擁抱兒女">
+    <defs>
+      <radialGradient id="childrenGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(192,136,32,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="parentRobeG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e0a840"/>
+        <stop offset="100%" stop-color="#a07020"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="210" ry="150" fill="url(#childrenGlowG)"/>
+    <!-- Warm light behind parent -->
+    <circle cx="300" cy="120" r="100" fill="rgba(240,200,96,.05)"/>
+    <circle cx="300" cy="120" r="60" fill="rgba(240,200,96,.07)"/>
+    <!-- Parent figure — large, protective -->
+    <circle cx="300" cy="95" r="22" fill="#e0a840" stroke="#c08820" stroke-width="1.5"/>
+    <circle cx="294" cy="92" r="2.5" fill="#604010"/>
+    <circle cx="306" cy="92" r="2.5" fill="#604010"/>
+    <path d="M295,100 Q300,104 305,100" stroke="#604010" stroke-width="1.5" fill="none"/>
+    <!-- Parent body / robe -->
+    <path d="M270,118 Q265,180 268,270 Q284,280 300,282 Q316,280 332,270 Q335,180 330,118 Z"
+          fill="url(#parentRobeG)" stroke="#c08820" stroke-width="1"/>
+    <!-- Left arm reaching down -->
+    <path d="M270,140 Q230,170 210,220 Q205,235 215,245"
+          stroke="#c08820" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="215" cy="248" r="8" fill="#e0a840"/>
+    <!-- Right arm reaching down -->
+    <path d="M330,140 Q370,170 390,220 Q395,235 385,245"
+          stroke="#c08820" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="385" cy="248" r="8" fill="#e0a840"/>
+    <!-- Child figure — left -->
+    <circle cx="220" cy="252" r="12" fill="#f0c860" stroke="#e0a840" stroke-width="1"/>
+    <circle cx="217" cy="250" r="1.5" fill="#604010"/>
+    <circle cx="223" cy="250" r="1.5" fill="#604010"/>
+    <path d="M215,256 Q220,260 225,256" stroke="#604010" stroke-width="1" fill="none"/>
+    <path d="M210,264 Q208,290 212,310 Q216,314 220,315 Q224,314 228,310 Q232,290 230,264 Z"
+          fill="#f0c860" stroke="#e0a840" stroke-width=".8"/>
+    <!-- Child figure — right -->
+    <circle cx="380" cy="255" r="11" fill="#f0c860" stroke="#e0a840" stroke-width="1"/>
+    <circle cx="377" cy="253" r="1.5" fill="#604010"/>
+    <circle cx="383" cy="253" r="1.5" fill="#604010"/>
+    <path d="M375,259 Q380,262 385,259" stroke="#604010" stroke-width="1" fill="none"/>
+    <path d="M370,266 Q368,290 371,308 Q375,312 380,313 Q385,312 389,308 Q392,290 390,266 Z"
+          fill="#f0c860" stroke="#e0a840" stroke-width=".8"/>
+    <!-- Child figure — center (smaller, between arms) -->
+    <circle cx="300" cy="260" r="10" fill="#f0c860" stroke="#e0a840" stroke-width="1"/>
+    <circle cx="297" cy="258" r="1.5" fill="#604010"/>
+    <circle cx="303" cy="258" r="1.5" fill="#604010"/>
+    <path d="M296,264 Q300,267 304,264" stroke="#604010" stroke-width="1" fill="none"/>
+    <path d="M292,270 Q290,292 293,306 Q296,310 300,311 Q304,310 307,306 Q310,292 308,270 Z"
+          fill="#f0c860" stroke="#e0a840" stroke-width=".8"/>
+    <!-- Golden sparkles -->
+    <circle cx="240" cy="150" r="2" fill="rgba(240,200,96,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="360" cy="145" r="1.8" fill="rgba(240,200,96,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="70" r="2.5" fill="rgba(240,200,96,.45)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="180" cy="200" r="1.2" fill="rgba(224,168,64,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="420" cy="195" r="1.5" fill="rgba(224,168,64,.3)" style="animation: goldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="250" ry="22" fill="rgba(10,8,4,.5)"/>
+  </svg>
+
+  <app-scene-heading title="👨‍👧‍👦 神的兒女" subtitle="Children of God — 1 John 3:1-2" id="children-heading" />
+  <app-scene-verse text="「你看父賜給我們是何等的慈愛，使我們得稱為神的兒女」— 約翰壹書 3:1" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="約翰一書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 彼此相愛  Love One Another
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-love" aria-label="約翰壹書 — 彼此相愛">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="love-glow" aria-hidden="true"></div>
 
+  <!-- Two figures embracing with warm glow between them -->
+  <svg id="love-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="兩人擁抱，金色光芒環繞">
+    <defs>
+      <radialGradient id="loveGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(224,168,64,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <radialGradient id="warmCoreG" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(240,200,96,.15)"/>
+        <stop offset="100%" stop-color="rgba(224,168,64,.02)"/>
+      </radialGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="190" rx="220" ry="150" fill="url(#loveGlowG)"/>
+    <!-- Warm glow between figures -->
+    <circle cx="300" cy="200" r="60" fill="url(#warmCoreG)"/>
+    <circle cx="300" cy="200" r="40" fill="rgba(240,200,96,.08)"/>
+    <!-- Left figure -->
+    <circle cx="250" cy="150" r="18" fill="#e0a840" stroke="#c08820" stroke-width="1.5"/>
+    <circle cx="245" cy="148" r="2" fill="#604010"/>
+    <circle cx="255" cy="148" r="2" fill="#604010"/>
+    <path d="M246,155 Q250,158 254,155" stroke="#604010" stroke-width="1.2" fill="none"/>
+    <path d="M232,170 Q228,220 232,280 Q240,288 250,290 Q260,288 268,280 Q272,220 268,170 Z"
+          fill="#c08820" stroke="#a07020" stroke-width="1"/>
+    <!-- Left figure's arm reaching right -->
+    <path d="M268,190 Q285,195 300,200"
+          stroke="#c08820" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Right figure -->
+    <circle cx="350" cy="150" r="18" fill="#e0a840" stroke="#c08820" stroke-width="1.5"/>
+    <circle cx="345" cy="148" r="2" fill="#604010"/>
+    <circle cx="355" cy="148" r="2" fill="#604010"/>
+    <path d="M346,155 Q350,158 354,155" stroke="#604010" stroke-width="1.2" fill="none"/>
+    <path d="M332,170 Q328,220 332,280 Q340,288 350,290 Q360,288 368,280 Q372,220 368,170 Z"
+          fill="#c08820" stroke="#a07020" stroke-width="1"/>
+    <!-- Right figure's arm reaching left -->
+    <path d="M332,190 Q315,195 300,200"
+          stroke="#c08820" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Small heart between them -->
+    <path d="M300,195 Q293,188 288,182 Q284,176 288,170 Q292,166 300,174 Q308,166 312,170 Q316,176 312,182 Q307,188 300,195 Z"
+          fill="#e0a840" stroke="#f0c860" stroke-width="1" opacity=".7"/>
+    <!-- Golden light surrounding the embrace -->
+    <circle cx="300" cy="195" r="80" fill="none" stroke="rgba(224,168,64,.08)" stroke-width="2"/>
+    <circle cx="300" cy="195" r="100" fill="none" stroke="rgba(224,168,64,.05)" stroke-width="1.5"/>
+    <circle cx="300" cy="195" r="120" fill="none" stroke="rgba(224,168,64,.03)" stroke-width="1"/>
+    <!-- Golden sparkles -->
+    <circle cx="230" cy="130" r="2" fill="rgba(240,200,96,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="370" cy="128" r="1.8" fill="rgba(240,200,96,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="140" r="2.5" fill="rgba(240,200,96,.45)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="210" r="1.5" fill="rgba(224,168,64,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="400" cy="215" r="1.8" fill="rgba(224,168,64,.3)" style="animation: goldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="250" ry="22" fill="rgba(10,8,4,.5)"/>
+  </svg>
+
+  <app-scene-heading title="💛 彼此相愛" subtitle="Love One Another — 1 John 4:7-12" id="love-heading" />
+  <app-scene-verse text="「親愛的弟兄啊，我們應當彼此相愛，因為愛是從神來的」— 約翰壹書 4:7" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="約翰一書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 神就是愛  God is Love
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-godlove" aria-label="約翰壹書 — 神就是愛">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="godlove-glow" aria-hidden="true"></div>
 
+  <!-- Large heart with cross inside, radiating golden warmth -->
+  <svg id="godlove-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="大愛心內有十字架散發金色溫暖">
+    <defs>
+      <radialGradient id="godloveGlowG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(224,168,64,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="heartFillG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f0c860"/>
+        <stop offset="50%" stop-color="#e0a840"/>
+        <stop offset="100%" stop-color="#c08820"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="220" ry="160" fill="url(#godloveGlowG)"/>
+    <!-- Radiating warmth rings -->
+    <circle cx="300" cy="180" r="150" fill="none" stroke="rgba(224,168,64,.06)" stroke-width="2"/>
+    <circle cx="300" cy="180" r="130" fill="none" stroke="rgba(224,168,64,.08)" stroke-width="1.5"/>
+    <circle cx="300" cy="180" r="110" fill="none" stroke="rgba(240,200,96,.1)" stroke-width="1.5"/>
+    <!-- Large heart shape -->
+    <path d="M300,310 Q240,270 190,225 Q140,180 155,130 Q170,85 215,85 Q255,85 300,125
+             Q345,85 385,85 Q430,85 445,130 Q460,180 410,225 Q360,270 300,310 Z"
+          fill="url(#heartFillG)" stroke="#c08820" stroke-width="2" opacity=".25"/>
+    <path d="M300,295 Q245,260 200,220 Q155,180 168,138 Q180,100 218,100 Q253,100 300,135
+             Q347,100 382,100 Q420,100 432,138 Q445,180 400,220 Q355,260 300,295 Z"
+          fill="rgba(240,200,96,.1)" stroke="rgba(224,168,64,.3)" stroke-width="1.5"/>
+    <!-- Cross inside the heart -->
+    <rect x="295" y="120" width="10" height="140" rx="2" fill="#e0a840" opacity=".6"/>
+    <rect x="262" y="165" width="76" height="10" rx="2" fill="#e0a840" opacity=".6"/>
+    <!-- Inner glow at cross intersection -->
+    <circle cx="300" cy="170" r="30" fill="rgba(240,200,96,.08)"/>
+    <circle cx="300" cy="170" r="18" fill="rgba(240,200,96,.1)"/>
+    <!-- Warm light rays from heart -->
+    <line x1="300" y1="90" x2="300" y2="40" stroke="rgba(240,200,96,.18)" stroke-width="2"/>
+    <line x1="200" y1="130" x2="150" y2="80" stroke="rgba(240,200,96,.1)" stroke-width="1.5"/>
+    <line x1="400" y1="130" x2="450" y2="80" stroke="rgba(240,200,96,.1)" stroke-width="1.5"/>
+    <line x1="160" y1="200" x2="100" y2="190" stroke="rgba(224,168,64,.08)" stroke-width="1"/>
+    <line x1="440" y1="200" x2="500" y2="190" stroke="rgba(224,168,64,.08)" stroke-width="1"/>
+    <!-- Golden sparkles -->
+    <circle cx="220" cy="110" r="2.5" fill="rgba(240,200,96,.45)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="380" cy="108" r="2" fill="rgba(240,200,96,.4)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="55" r="3" fill="rgba(240,200,96,.5)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="160" cy="180" r="1.5" fill="rgba(224,168,64,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="440" cy="175" r="1.8" fill="rgba(224,168,64,.35)" style="animation: goldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="22" fill="rgba(10,8,4,.5)"/>
+  </svg>
+
+  <app-scene-heading title="❤️ 神就是愛" subtitle="God is Love — 1 John 4:16-19" id="godlove-heading" />
+  <app-scene-verse text="「神就是愛；住在愛裏面的，就是住在神裏面，神也住在他裏面」— 約翰壹書 4:16" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="約翰一書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 永生的確據  Assurance of Eternal Life
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-life" aria-label="約翰壹書 — 永生的確據">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="life-glow" aria-hidden="true"></div>
+
+  <!-- Open book with golden light streaming upward, a crown above -->
+  <svg id="life-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="翻開的書發出金光，上有冠冕">
+    <defs>
+      <radialGradient id="lifeGlowG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(224,168,64,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="bookCoverG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#c08820"/>
+        <stop offset="50%" stop-color="#e0a840"/>
+        <stop offset="100%" stop-color="#c08820"/>
+      </linearGradient>
+      <linearGradient id="lightStreamG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="rgba(240,200,96,.2)"/>
+        <stop offset="100%" stop-color="rgba(240,200,96,0)"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="200" rx="220" ry="160" fill="url(#lifeGlowG)"/>
+    <!-- Light streams from book upward -->
+    <polygon points="280,220 260,40 300,30 340,40 320,220" fill="url(#lightStreamG)" opacity=".5"/>
+    <polygon points="260,215 220,60 260,50 290,215" fill="url(#lightStreamG)" opacity=".3"/>
+    <polygon points="340,215 380,60 340,50 310,215" fill="url(#lightStreamG)" opacity=".3"/>
+    <!-- Crown above the light -->
+    <polygon points="265,70 275,45 290,58 300,30 310,58 325,45 335,70"
+             fill="#e0a840" stroke="#c08820" stroke-width="1.5"/>
+    <rect x="268" y="70" width="64" height="10" rx="2" fill="#c08820" stroke="#e0a840" stroke-width="1"/>
+    <!-- Jewels on crown -->
+    <circle cx="285" cy="75" r="3" fill="#f0c860"/>
+    <circle cx="300" cy="73" r="4" fill="#f8d878"/>
+    <circle cx="315" cy="75" r="3" fill="#f0c860"/>
+    <!-- Open book — left page -->
+    <path d="M300,230 Q270,225 200,235 L200,300 Q270,290 300,295 Z"
+          fill="#f0e8d0" stroke="#c08820" stroke-width="1.5"/>
+    <!-- Open book — right page -->
+    <path d="M300,230 Q330,225 400,235 L400,300 Q330,290 300,295 Z"
+          fill="#f0e8d0" stroke="#c08820" stroke-width="1.5"/>
+    <!-- Book spine -->
+    <line x1="300" y1="228" x2="300" y2="298" stroke="#c08820" stroke-width="2"/>
+    <!-- Text lines on left page -->
+    <line x1="215" y1="250" x2="285" y2="248" stroke="rgba(160,128,60,.25)" stroke-width="1.2"/>
+    <line x1="215" y1="260" x2="280" y2="258" stroke="rgba(160,128,60,.2)" stroke-width="1.2"/>
+    <line x1="215" y1="270" x2="278" y2="268" stroke="rgba(160,128,60,.18)" stroke-width="1.2"/>
+    <line x1="215" y1="280" x2="270" y2="278" stroke="rgba(160,128,60,.15)" stroke-width="1.2"/>
+    <!-- Text lines on right page -->
+    <line x1="315" y1="248" x2="385" y2="250" stroke="rgba(160,128,60,.25)" stroke-width="1.2"/>
+    <line x1="315" y1="258" x2="380" y2="260" stroke="rgba(160,128,60,.2)" stroke-width="1.2"/>
+    <line x1="315" y1="268" x2="382" y2="270" stroke="rgba(160,128,60,.18)" stroke-width="1.2"/>
+    <line x1="315" y1="278" x2="375" y2="280" stroke="rgba(160,128,60,.15)" stroke-width="1.2"/>
+    <!-- Book cover edges -->
+    <path d="M198,234 Q195,232 195,235 L195,303 Q195,306 198,304" stroke="#a07020" stroke-width="2" fill="none"/>
+    <path d="M402,234 Q405,232 405,235 L405,303 Q405,306 402,304" stroke="#a07020" stroke-width="2" fill="none"/>
+    <!-- Golden sparkles -->
+    <circle cx="260" cy="120" r="2" fill="rgba(240,200,96,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="340" cy="115" r="1.8" fill="rgba(240,200,96,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="50" r="2.5" fill="rgba(240,200,96,.5)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="190" cy="250" r="1.2" fill="rgba(224,168,64,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="410" cy="245" r="1.5" fill="rgba(224,168,64,.3)" style="animation: goldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="365" rx="260" ry="25" fill="rgba(10,8,4,.5)"/>
+  </svg>
+
+  <app-scene-heading title="📖 永生的確據" subtitle="Assurance of Eternal Life — 1 John 5:11-13" id="life-heading" />
+  <app-scene-verse text="「神賜給我們永生，這永生也是在他兒子裏面」— 約翰壹書 5:11" />
 </section>

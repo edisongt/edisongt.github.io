@@ -1,66 +1,438 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="彼得前書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="彼得前書 — 開場">
   <app-starfield />
+
+  <div id="intro-ocean-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>彼得前書</h1>
     <p>First Epistle of Peter</p>
+    <span class="sub">盼望 · 活石 · 聖潔 · 受苦 · 試煉 · 謙卑</span>
   </div>
 
+  <!-- Anchor / shield symbolizing living hope -->
+  <svg id="intro-anchor-svg" viewBox="0 0 160 200" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="錨與盾牌象徵活潑的盼望">
+    <!-- Ethereal glow behind anchor -->
+    <ellipse cx="80" cy="100" rx="65" ry="75" fill="rgba(80,128,176,.06)"/>
+    <!-- Light rays emanating -->
+    <line x1="80" y1="45" x2="80" y2="5" stroke="rgba(112,160,208,.15)" stroke-width="2"/>
+    <line x1="80" y1="45" x2="35" y2="15" stroke="rgba(112,160,208,.1)" stroke-width="1.5"/>
+    <line x1="80" y1="45" x2="125" y2="15" stroke="rgba(112,160,208,.1)" stroke-width="1.5"/>
+    <line x1="80" y1="45" x2="15" y2="40" stroke="rgba(112,160,208,.08)" stroke-width="1.5"/>
+    <line x1="80" y1="45" x2="145" y2="40" stroke="rgba(112,160,208,.08)" stroke-width="1.5"/>
+    <!-- Anchor shaft -->
+    <rect x="76" y="50" width="8" height="90" rx="3" fill="#5080b0" stroke="#70a0d0" stroke-width="1"/>
+    <!-- Anchor ring at top -->
+    <circle cx="80" cy="45" r="12" fill="none" stroke="#70a0d0" stroke-width="3"/>
+    <circle cx="80" cy="45" r="7" fill="rgba(112,160,208,.15)"/>
+    <!-- Anchor crossbar -->
+    <rect x="55" y="85" width="50" height="8" rx="3" fill="#5080b0" stroke="#70a0d0" stroke-width="1"/>
+    <!-- Anchor flukes (curved arms) -->
+    <path d="M60,93 Q45,120 35,140 Q40,135 55,120 Q60,110 64,100" fill="none" stroke="#5080b0" stroke-width="4" stroke-linecap="round"/>
+    <path d="M100,93 Q115,120 125,140 Q120,135 105,120 Q100,110 96,100" fill="none" stroke="#5080b0" stroke-width="4" stroke-linecap="round"/>
+    <!-- Fluke tips -->
+    <circle cx="35" cy="140" r="4" fill="#70a0d0"/>
+    <circle cx="125" cy="140" r="4" fill="#70a0d0"/>
+    <!-- Shield outline behind anchor -->
+    <path d="M80,25 Q40,30 30,55 Q28,100 80,155 Q132,100 130,55 Q120,30 80,25 Z"
+          fill="none" stroke="rgba(112,160,208,.15)" stroke-width="1.5"/>
+    <!-- Sparkle effects -->
+    <circle cx="45" cy="60" r="1.5" fill="rgba(112,160,208,.4)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="115" cy="58" r="1.2" fill="rgba(112,160,208,.35)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="80" cy="30" r="1.8" fill="rgba(112,160,208,.45)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="130" cy="90" r="1" fill="rgba(112,160,208,.3)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette — ocean waves -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="horizonG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#101a2e"/>
+        <stop offset="100%" stop-color="#0a0e20"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,175 240,190 Q360,165 480,185 Q600,155 720,178
+             Q840,150 960,172 Q1080,158 1200,182 Q1320,165 1440,192
+             L1440,300 L0,300 Z"
+          fill="url(#horizonG1)"/>
+    <circle cx="300" cy="180" r="2" fill="rgba(80,128,176,.3)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="168" r="1.5" fill="rgba(80,128,176,.25)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="174" r="1.8" fill="rgba(80,128,176,.2)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="182" r="2" fill="rgba(80,128,176,.3)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「願頌讚歸與我們主耶穌基督的父神！他曾照自己的大憐憫，藉耶穌基督從死裏復活，重生了我們，叫我們有活潑的盼望」— 彼得前書 1:3" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="彼得前書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 活潑的盼望  Living Hope
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-hope" aria-label="彼得前書 — 活潑的盼望">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="hope-glow" aria-hidden="true"></div>
 
+  <!-- Sunrise over water with anchor -->
+  <svg id="hope-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="日出水面與錨象徵盼望">
+    <defs>
+      <radialGradient id="hopeGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(80,128,176,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <radialGradient id="sunriseG" cx="50%" cy="100%" r="60%">
+        <stop offset="0%" stop-color="rgba(112,160,208,.25)"/>
+        <stop offset="60%" stop-color="rgba(80,128,176,.08)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="hopeAnchorG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#70a0d0"/>
+        <stop offset="100%" stop-color="#306090"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="220" ry="150" fill="url(#hopeGlowG)"/>
+    <!-- Sun disc rising -->
+    <circle cx="300" cy="200" r="50" fill="url(#sunriseG)"/>
+    <circle cx="300" cy="200" r="35" fill="rgba(112,160,208,.12)"/>
+    <circle cx="300" cy="200" r="22" fill="rgba(112,160,208,.18)"/>
+    <!-- Sun rays -->
+    <line x1="300" y1="145" x2="300" y2="100" stroke="rgba(112,160,208,.2)" stroke-width="2"/>
+    <line x1="300" y1="145" x2="240" y2="115" stroke="rgba(112,160,208,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="145" x2="360" y2="115" stroke="rgba(112,160,208,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="145" x2="200" y2="140" stroke="rgba(112,160,208,.08)" stroke-width="1.5"/>
+    <line x1="300" y1="145" x2="400" y2="140" stroke="rgba(112,160,208,.08)" stroke-width="1.5"/>
+    <!-- Water surface / horizon line -->
+    <path d="M50,220 Q150,210 250,218 Q350,210 450,218 Q550,210 600,215" stroke="rgba(80,128,176,.3)" stroke-width="2" fill="none"/>
+    <path d="M0,230 Q100,222 200,228 Q300,220 400,228 Q500,222 600,226" stroke="rgba(80,128,176,.2)" stroke-width="1.5" fill="none"/>
+    <path d="M30,240 Q130,234 230,238 Q330,232 430,238 Q530,234 600,236" stroke="rgba(80,128,176,.12)" stroke-width="1" fill="none"/>
+    <!-- Anchor in water -->
+    <rect x="296" y="230" width="8" height="80" rx="3" fill="url(#hopeAnchorG)"/>
+    <circle cx="300" cy="225" r="10" fill="none" stroke="#70a0d0" stroke-width="2.5"/>
+    <rect x="275" y="265" width="50" height="7" rx="3" fill="url(#hopeAnchorG)"/>
+    <path d="M280,272 Q265,295 255,315 Q262,308 275,296" fill="none" stroke="#5080b0" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M320,272 Q335,295 345,315 Q338,308 325,296" fill="none" stroke="#5080b0" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="255" cy="315" r="3.5" fill="#70a0d0"/>
+    <circle cx="345" cy="315" r="3.5" fill="#70a0d0"/>
+    <!-- Water reflections -->
+    <line x1="270" y1="340" x2="330" y2="340" stroke="rgba(80,128,176,.15)" stroke-width="1"/>
+    <line x1="280" y1="350" x2="320" y2="350" stroke="rgba(80,128,176,.1)" stroke-width="1"/>
+    <!-- Light particles -->
+    <circle cx="250" cy="160" r="2" fill="rgba(112,160,208,.35)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="350" cy="155" r="1.5" fill="rgba(112,160,208,.3)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="110" r="2.5" fill="rgba(112,160,208,.4)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="200" r="1.2" fill="rgba(80,128,176,.25)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="400" cy="195" r="1.8" fill="rgba(80,128,176,.3)" style="animation: blueEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="380" rx="260" ry="22" fill="rgba(10,15,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🌅 活潑的盼望" subtitle="Living Hope — 1 Peter 1:3-5" id="hope-heading" />
+  <app-scene-verse text="「這些試煉使你們的信心既被試驗，就比那被火試驗仍然能壞的金子更顯寶貴」— 彼得前書 1:7" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="彼得前書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 活石聖殿  Living Stones
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-stones" aria-label="彼得前書 — 活石聖殿">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="stones-glow" aria-hidden="true"></div>
 
+  <!-- Living stones building into a temple -->
+  <svg id="stones-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="活石建造成為靈宮">
+    <defs>
+      <radialGradient id="stonesGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(48,96,144,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="stoneG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5080b0"/>
+        <stop offset="100%" stop-color="#306090"/>
+      </linearGradient>
+      <linearGradient id="pillarG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#70a0d0"/>
+        <stop offset="100%" stop-color="#4070a0"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="160" rx="200" ry="130" fill="url(#stonesGlowG)"/>
+    <!-- Temple roof / pediment (triangle) -->
+    <polygon points="300,60 180,150 420,150" fill="#306090" stroke="#5080b0" stroke-width="1.5"/>
+    <polygon points="300,75 200,148 400,148" fill="#3a6898"/>
+    <!-- Roof ornament -->
+    <circle cx="300" cy="95" r="12" fill="rgba(112,160,208,.15)" stroke="#70a0d0" stroke-width="1"/>
+    <circle cx="300" cy="95" r="6" fill="rgba(112,160,208,.25)"/>
+    <!-- Left pillar -->
+    <rect x="195" y="150" width="30" height="140" rx="2" fill="url(#pillarG)"/>
+    <rect x="200" y="150" width="20" height="140" fill="#5888b8"/>
+    <!-- Right pillar -->
+    <rect x="375" y="150" width="30" height="140" rx="2" fill="url(#pillarG)"/>
+    <rect x="380" y="150" width="20" height="140" fill="#5888b8"/>
+    <!-- Centre pillar -->
+    <rect x="285" y="150" width="30" height="140" rx="2" fill="url(#pillarG)" opacity=".6"/>
+    <!-- Base platform -->
+    <rect x="170" y="288" width="260" height="18" rx="3" fill="#5080b0" stroke="#70a0d0" stroke-width="1"/>
+    <!-- Living stones — stacked blocks -->
+    <rect x="180" y="305" width="55" height="28" rx="3" fill="url(#stoneG)" stroke="#70a0d0" stroke-width="1"/>
+    <rect x="240" y="305" width="50" height="28" rx="3" fill="url(#stoneG)" stroke="#70a0d0" stroke-width="1"/>
+    <rect x="295" y="305" width="60" height="28" rx="3" fill="url(#stoneG)" stroke="#70a0d0" stroke-width="1"/>
+    <rect x="360" y="305" width="55" height="28" rx="3" fill="url(#stoneG)" stroke="#70a0d0" stroke-width="1"/>
+    <!-- Second row of stones -->
+    <rect x="200" y="335" width="65" height="25" rx="3" fill="#3a6898" stroke="#5080b0" stroke-width="1"/>
+    <rect x="270" y="335" width="60" height="25" rx="3" fill="#3a6898" stroke="#5080b0" stroke-width="1"/>
+    <rect x="335" y="335" width="60" height="25" rx="3" fill="#3a6898" stroke="#5080b0" stroke-width="1"/>
+    <!-- Glow from cornerstone -->
+    <circle cx="300" cy="310" r="25" fill="rgba(112,160,208,.06)"/>
+    <circle cx="300" cy="310" r="15" fill="rgba(112,160,208,.1)"/>
+    <!-- Light particles rising from stones -->
+    <circle cx="220" cy="280" r="2" fill="rgba(112,160,208,.35)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="350" cy="275" r="1.5" fill="rgba(112,160,208,.3)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="70" r="2.5" fill="rgba(112,160,208,.4)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="250" r="1.2" fill="rgba(80,128,176,.25)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="400" cy="245" r="1.8" fill="rgba(80,128,176,.3)" style="animation: blueEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="375" rx="250" ry="20" fill="rgba(10,15,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🏛️ 活石聖殿" subtitle="Living Stones — 1 Peter 2:4-10" id="stones-heading" />
+  <app-scene-verse text="「你們來到主面前，也就像活石，被建造成為靈宮」— 彼得前書 2:5" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="彼得前書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 為義受苦  Suffering for Righteousness
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-suffering" aria-label="彼得前書 — 為義受苦">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="suffering-glow" aria-hidden="true"></div>
 
+  <!-- Figure standing firm amid storm waves -->
+  <svg id="suffering-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="風暴中堅定站立的身影">
+    <defs>
+      <radialGradient id="sufferingGlowG" cx="50%" cy="35%" r="50%">
+        <stop offset="0%" stop-color="rgba(80,128,176,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="waveG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5080b0"/>
+        <stop offset="100%" stop-color="#1a3050"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="170" rx="220" ry="150" fill="url(#sufferingGlowG)"/>
+    <!-- Storm waves — layered -->
+    <path d="M0,280 Q75,260 150,275 Q225,250 300,270 Q375,250 450,268 Q525,255 600,275 L600,400 L0,400 Z"
+          fill="url(#waveG)" opacity=".4"/>
+    <path d="M0,300 Q80,280 160,295 Q240,275 320,290 Q400,272 480,288 Q560,278 600,292 L600,400 L0,400 Z"
+          fill="#1a3050" opacity=".6"/>
+    <path d="M0,320 Q90,305 180,315 Q270,300 360,312 Q450,298 540,310 Q570,305 600,312 L600,400 L0,400 Z"
+          fill="#122440" opacity=".8"/>
+    <!-- Wave crests — white foam -->
+    <path d="M100,278 Q130,270 160,275" stroke="rgba(200,220,240,.2)" stroke-width="1.5" fill="none"/>
+    <path d="M350,270 Q380,262 410,268" stroke="rgba(200,220,240,.18)" stroke-width="1.5" fill="none"/>
+    <path d="M220,290 Q250,282 280,288" stroke="rgba(200,220,240,.15)" stroke-width="1" fill="none"/>
+    <path d="M450,286 Q475,278 500,284" stroke="rgba(200,220,240,.12)" stroke-width="1" fill="none"/>
+    <!-- Standing figure — on rock -->
+    <rect x="280" y="230" width="40" height="45" rx="3" fill="#3a5a7a"/>
+    <ellipse cx="300" cy="235" rx="18" ry="6" fill="#4a6a8a"/>
+    <!-- Figure body -->
+    <g transform="translate(282,170)">
+      <ellipse cx="18" cy="0" rx="8" ry="10" fill="#90b8d8"/>
+      <!-- Body -->
+      <path d="M8,10 Q5,30 8,55 Q13,60 18,61 Q23,60 28,55 Q31,30 28,10 Z" fill="#5080b0"/>
+      <!-- Arms raised upward -->
+      <path d="M8,20 Q-5,8 -10,0" stroke="#5080b0" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M28,20 Q41,8 46,0" stroke="#5080b0" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    </g>
+    <!-- Protective glow around figure -->
+    <circle cx="300" cy="200" r="45" fill="rgba(112,160,208,.06)"/>
+    <circle cx="300" cy="200" r="30" fill="rgba(112,160,208,.08)"/>
+    <!-- Rain / storm lines -->
+    <line x1="150" y1="80" x2="140" y2="130" stroke="rgba(80,128,176,.12)" stroke-width="1"/>
+    <line x1="200" y1="60" x2="192" y2="110" stroke="rgba(80,128,176,.1)" stroke-width="1"/>
+    <line x1="400" y1="70" x2="392" y2="120" stroke="rgba(80,128,176,.1)" stroke-width="1"/>
+    <line x1="450" y1="90" x2="442" y2="140" stroke="rgba(80,128,176,.12)" stroke-width="1"/>
+    <line x1="100" y1="100" x2="94" y2="145" stroke="rgba(80,128,176,.08)" stroke-width="1"/>
+    <line x1="500" y1="75" x2="494" y2="120" stroke="rgba(80,128,176,.08)" stroke-width="1"/>
+    <!-- Light particles -->
+    <circle cx="250" cy="190" r="2" fill="rgba(112,160,208,.35)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="350" cy="185" r="1.5" fill="rgba(112,160,208,.3)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="140" r="2.5" fill="rgba(112,160,208,.4)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="180" cy="250" r="1.2" fill="rgba(80,128,176,.25)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="420" cy="245" r="1.8" fill="rgba(80,128,176,.3)" style="animation: blueEmber 3s ease-in-out 1.5s infinite;"/>
+  </svg>
+
+  <app-scene-heading title="⚓ 為義受苦" subtitle="Suffering for Righteousness — 1 Peter 3:13-17" id="suffering-heading" />
+  <app-scene-verse text="「你們若是為義受苦，便是有福的」— 彼得前書 3:14" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="彼得前書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 火煉的試驗  Fiery Trials
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-trials" aria-label="彼得前書 — 火煉的試驗">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="trials-glow" aria-hidden="true"></div>
 
+  <!-- Refining furnace with gold being purified -->
+  <svg id="trials-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="煉金爐火中提煉純金">
+    <defs>
+      <radialGradient id="trialsGlowG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(80,128,176,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="furnaceG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5080b0"/>
+        <stop offset="100%" stop-color="#284060"/>
+      </linearGradient>
+      <linearGradient id="furnaceFlameG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#306090"/>
+        <stop offset="40%" stop-color="#70a0d0"/>
+        <stop offset="100%" stop-color="#d0e0f0"/>
+      </linearGradient>
+      <linearGradient id="goldG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d4aa50"/>
+        <stop offset="100%" stop-color="#b08830"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="200" ry="150" fill="url(#trialsGlowG)"/>
+    <!-- Furnace body -->
+    <rect x="220" y="220" width="160" height="100" rx="8" fill="url(#furnaceG)" stroke="#5080b0" stroke-width="1.5"/>
+    <rect x="230" y="228" width="140" height="85" rx="5" fill="#1e3a55"/>
+    <!-- Furnace opening -->
+    <rect x="250" y="230" width="100" height="50" rx="4" fill="#122a40" stroke="#5080b0" stroke-width="1"/>
+    <!-- Glow inside furnace -->
+    <ellipse cx="300" cy="255" rx="40" ry="18" fill="rgba(112,160,208,.15)"/>
+    <!-- Gold nugget being purified -->
+    <ellipse cx="300" cy="260" rx="15" ry="10" fill="url(#goldG)" stroke="#c09838" stroke-width="1"/>
+    <ellipse cx="300" cy="258" rx="10" ry="6" fill="#e0c060" opacity=".6"/>
+    <!-- Rising flames from furnace -->
+    <path d="M300,225 Q285,185 300,130 Q315,185 300,225 Z" fill="url(#furnaceFlameG)" opacity=".7"/>
+    <path d="M275,228 Q265,195 278,155 Q288,195 285,228 Z" fill="url(#furnaceFlameG)" opacity=".5"/>
+    <path d="M325,228 Q320,192 328,150 Q338,192 335,228 Z" fill="url(#furnaceFlameG)" opacity=".5"/>
+    <path d="M255,230 Q250,205 260,175 Q268,205 265,230 Z" fill="url(#furnaceFlameG)" opacity=".35"/>
+    <path d="M345,230 Q342,202 348,170 Q356,202 352,230 Z" fill="url(#furnaceFlameG)" opacity=".35"/>
+    <!-- Sparks rising -->
+    <circle cx="290" cy="120" r="2.5" fill="rgba(208,180,80,.5)" style="animation: sparkRise 3s ease-in-out infinite;"/>
+    <circle cx="310" cy="105" r="2" fill="rgba(208,180,80,.4)" style="animation: sparkRise 4s ease-in-out 1s infinite;"/>
+    <circle cx="280" cy="140" r="1.5" fill="rgba(208,180,80,.35)" style="animation: sparkRise 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="320" cy="135" r="1.8" fill="rgba(208,180,80,.45)" style="animation: sparkRise 4.5s ease-in-out 2s infinite;"/>
+    <!-- Heat waves -->
+    <path d="M260,140 Q280,130 300,138 Q320,130 340,140" stroke="rgba(112,160,208,.12)" stroke-width="1.5" fill="none"/>
+    <path d="M265,120 Q285,110 305,118 Q325,110 345,120" stroke="rgba(112,160,208,.08)" stroke-width="1" fill="none"/>
+    <!-- Ascending light beam -->
+    <line x1="300" y1="130" x2="300" y2="40" stroke="rgba(208,224,240,.12)" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="300" y1="130" x2="260" y2="50" stroke="rgba(200,216,232,.06)" stroke-width="1.5"/>
+    <line x1="300" y1="130" x2="340" y2="50" stroke="rgba(200,216,232,.06)" stroke-width="1.5"/>
+    <!-- Light particles -->
+    <circle cx="250" cy="160" r="2" fill="rgba(112,160,208,.35)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="350" cy="155" r="1.5" fill="rgba(112,160,208,.3)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="80" r="2.5" fill="rgba(112,160,208,.4)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="365" rx="260" ry="22" fill="rgba(10,15,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🔥 火煉的試驗" subtitle="Fiery Trials — 1 Peter 4:12-13" id="trials-heading" />
+  <app-scene-verse text="「親愛的弟兄啊，有火煉的試驗臨到你們，不要以為奇怪」— 彼得前書 4:12" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="彼得前書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 謙卑交託  Humble Under God
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-humble" aria-label="彼得前書 — 謙卑交託">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="humble-glow" aria-hidden="true"></div>
+
+  <!-- Open hands releasing burdens upward toward light -->
+  <svg id="humble-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="敞開的手將憂慮交託向上的光">
+    <defs>
+      <radialGradient id="humbleGlowG" cx="50%" cy="30%" r="50%">
+        <stop offset="0%" stop-color="rgba(112,160,208,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="handG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#70a0d0"/>
+        <stop offset="100%" stop-color="#4070a0"/>
+      </linearGradient>
+      <linearGradient id="lightBeamG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="rgba(112,160,208,.02)"/>
+        <stop offset="100%" stop-color="rgba(208,224,240,.15)"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="150" rx="200" ry="130" fill="url(#humbleGlowG)"/>
+    <!-- Upward light beam / pillar -->
+    <polygon points="260,220 300,20 340,220" fill="url(#lightBeamG)"/>
+    <line x1="300" y1="220" x2="300" y2="30" stroke="rgba(208,224,240,.12)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="300" y1="220" x2="260" y2="40" stroke="rgba(200,216,232,.06)" stroke-width="1.5"/>
+    <line x1="300" y1="220" x2="340" y2="40" stroke="rgba(200,216,232,.06)" stroke-width="1.5"/>
+    <!-- Star / light source at top -->
+    <circle cx="300" cy="50" r="18" fill="rgba(208,224,240,.08)"/>
+    <circle cx="300" cy="50" r="10" fill="rgba(208,224,240,.12)"/>
+    <circle cx="300" cy="50" r="4" fill="rgba(255,255,255,.2)"/>
+    <!-- Left hand — open, palm up -->
+    <g transform="translate(180,240)">
+      <!-- Palm -->
+      <path d="M20,40 Q5,35 0,20 Q2,5 15,0 Q30,-2 45,5 Q55,15 55,30 Q50,42 35,45 Z"
+            fill="url(#handG)" stroke="#5080b0" stroke-width="1"/>
+      <!-- Fingers extended upward -->
+      <line x1="10" y1="15" x2="5" y2="-5" stroke="#70a0d0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="20" y1="8" x2="18" y2="-12" stroke="#70a0d0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="30" y1="5" x2="30" y2="-15" stroke="#70a0d0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="40" y1="8" x2="42" y2="-10" stroke="#70a0d0" stroke-width="3" stroke-linecap="round"/>
+      <!-- Wrist -->
+      <rect x="15" y="42" width="25" height="20" rx="3" fill="#4070a0"/>
+    </g>
+    <!-- Right hand — open, palm up -->
+    <g transform="translate(365,240)">
+      <!-- Palm -->
+      <path d="M35,40 Q50,35 55,20 Q53,5 40,0 Q25,-2 10,5 Q0,15 0,30 Q5,42 20,45 Z"
+            fill="url(#handG)" stroke="#5080b0" stroke-width="1"/>
+      <!-- Fingers extended upward -->
+      <line x1="45" y1="15" x2="50" y2="-5" stroke="#70a0d0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="35" y1="8" x2="37" y2="-12" stroke="#70a0d0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="25" y1="5" x2="25" y2="-15" stroke="#70a0d0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="15" y1="8" x2="13" y2="-10" stroke="#70a0d0" stroke-width="3" stroke-linecap="round"/>
+      <!-- Wrist -->
+      <rect x="15" y="42" width="25" height="20" rx="3" fill="#4070a0"/>
+    </g>
+    <!-- Burdens releasing — small circles floating upward -->
+    <circle cx="270" cy="210" r="5" fill="rgba(80,128,176,.2)" stroke="rgba(112,160,208,.3)" stroke-width="1"/>
+    <circle cx="300" cy="190" r="6" fill="rgba(80,128,176,.15)" stroke="rgba(112,160,208,.25)" stroke-width="1"/>
+    <circle cx="330" cy="205" r="4.5" fill="rgba(80,128,176,.18)" stroke="rgba(112,160,208,.28)" stroke-width="1"/>
+    <circle cx="285" cy="170" r="4" fill="rgba(80,128,176,.12)" stroke="rgba(112,160,208,.2)" stroke-width="1"/>
+    <circle cx="315" cy="160" r="3.5" fill="rgba(80,128,176,.1)" stroke="rgba(112,160,208,.15)" stroke-width="1"/>
+    <circle cx="300" cy="130" r="3" fill="rgba(80,128,176,.08)" stroke="rgba(112,160,208,.12)" stroke-width="1"/>
+    <circle cx="295" cy="100" r="2.5" fill="rgba(80,128,176,.06)" stroke="rgba(112,160,208,.1)" stroke-width="1"/>
+    <!-- Light particles -->
+    <circle cx="250" cy="140" r="2" fill="rgba(112,160,208,.35)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="350" cy="135" r="1.5" fill="rgba(112,160,208,.3)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="60" r="2.5" fill="rgba(208,224,240,.45)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="220" cy="200" r="1.2" fill="rgba(80,128,176,.25)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="380" cy="195" r="1.8" fill="rgba(80,128,176,.3)" style="animation: blueEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground plane -->
+    <ellipse cx="300" cy="370" rx="260" ry="25" fill="rgba(10,15,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🙏 謙卑交託" subtitle="Humble Under God — 1 Peter 5:6-7" id="humble-heading" />
+  <app-scene-verse text="「你們要將一切的憂慮卸給神，因為他顧念你們」— 彼得前書 5:7" />
 </section>

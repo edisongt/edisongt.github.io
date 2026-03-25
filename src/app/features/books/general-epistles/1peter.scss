@@ -1,49 +1,285 @@
 :host { display: block; }
 
 .scene {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  scroll-snap-align: start;
-}
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
 
 @keyframes fadeUpIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
 
 @keyframes shimmer {
-  0%,100% { filter: brightness(1);   }
-  50%      { filter: brightness(1.35); }
-}
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
 
-#scene-1 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #16163a 50%, #0a0a2e 100%);
-}
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── 1 Peter-specific keyframes ── */
+
+@keyframes blueEmber {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+@keyframes anchorFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);   }
+      50%      { transform: translateX(-50%) translateY(-10px); }
+    }
+
+@keyframes waveRoll {
+      0%,100% { transform: translateX(-50%) rotate(-1deg);  }
+      50%      { transform: translateX(-50%) rotate(1deg);   }
+    }
+
+@keyframes stoneRise {
+      0%,100% { opacity: .6; transform: scale(1) translateY(0);    }
+      50%      { opacity: 1;  transform: scale(1.02) translateY(-6px); }
+    }
+
+@keyframes stormSway {
+      0%,100% { transform: translateX(-50%) translateY(0);    }
+      50%      { transform: translateX(-50%) translateY(-8px); }
+    }
+
+@keyframes furnaceGlow {
+      0%,100% { opacity: .5; transform: scaleY(1);    }
+      50%      { opacity: .9; transform: scaleY(1.08); }
+    }
+
+@keyframes sparkRise {
+      0%   { transform: translateY(0) scale(1); opacity: .5; }
+      50%  { transform: translateY(-30px) scale(.8); opacity: .3; }
+      100% { transform: translateY(-60px) scale(.5); opacity: 0; }
+    }
+
+@keyframes burdenRelease {
+      0%,100% { opacity: .4; }
+      50%      { opacity: .75; }
+    }
+
+@keyframes handsLift {
+      0%,100% { transform: translateX(-50%) translateY(0);    }
+      50%      { transform: translateX(-50%) translateY(-14px); }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #0a0e20 0%, #101a2e 40%, #14203a 70%, #0a0e20 100%);
+    }
+
+#intro-ocean-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(80,128,176,.12) 0%, rgba(48,96,144,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: blueEmber 4s ease-in-out infinite;
+    }
 
 #intro-title {
-  position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
-  text-align: center; z-index: 10; white-space: nowrap;
-}
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
 
 #intro-title h1 {
-  font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
-  background: linear-gradient(120deg, #5080b0 0%, #70a0d0 45%, #306090 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
-}
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg, #5080b0 0%, #70a0d0 45%, #306090 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
 
 #intro-title p {
-  font-size: clamp(.9rem,2vw,1.2rem);
-  color: rgba(255,255,255,.5); margin-top: .6rem; letter-spacing: .18em;
-  animation: fadeUpIn 2s ease-out .5s both;
-}
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(112,160,208,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
 
-#scene-2, #scene-3, #scene-4, #scene-5, #scene-6 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #12122a 50%, #0a0a2e 100%);
-}
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(112,160,208,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-anchor-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,12vw,160px);
+      animation: anchorFloat 5s ease-in-out infinite;
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — HOPE  活潑的盼望
+    ══════════════════════════════════════════════ */
+
+#scene-hope {
+      background: linear-gradient(180deg, #080e1e 0%, #0e1830 40%, #142040 70%, #080e1e 100%);
+    }
+
+#hope-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(80,128,176,.15) 0%, rgba(48,96,144,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#hope-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#hope-heading h2 {
+      color: #70a0d0;
+      text-shadow: 0 0 22px rgba(80,128,176,.5);
+    }
+
+#hope-heading p { color: rgba(112,160,208,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — STONES  活石聖殿
+    ══════════════════════════════════════════════ */
+
+#scene-stones {
+      background: linear-gradient(180deg, #060c1a 0%, #0c1628 40%, #121e35 70%, #080e1e 100%);
+    }
+
+#stones-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 55vw; height: 45vh;
+      background: radial-gradient(ellipse, rgba(48,96,144,.12) 0%, rgba(36,72,108,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4.5s ease-in-out infinite;
+    }
+
+#stones-scene-svg {
+      position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: stoneRise 8s ease-in-out infinite;
+    }
+
+#stones-heading h2 {
+      color: #5888b8;
+      text-shadow: 0 0 22px rgba(48,96,144,.5);
+    }
+
+#stones-heading p { color: rgba(88,136,184,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — SUFFERING  為義受苦
+    ══════════════════════════════════════════════ */
+
+#scene-suffering {
+      background: linear-gradient(180deg, #080c1e 0%, #101a38 35%, #162248 60%, #142050 85%, #101a38 100%);
+    }
+
+#suffering-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 65%;
+      background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(112,160,208,.1) 0%, rgba(80,128,176,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#suffering-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#suffering-heading h2 {
+      background: linear-gradient(120deg, #70a0d0 0%, #a0c8e8 50%, #5080b0 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#suffering-heading p { color: rgba(112,160,208,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — TRIALS  火煉的試驗
+    ══════════════════════════════════════════════ */
+
+#scene-trials {
+      background: linear-gradient(180deg, #080a1e 0%, #0e1435 40%, #141c4a 70%, #0c0e28 100%);
+    }
+
+#trials-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(112,160,208,.14) 0%, rgba(80,128,176,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#trials-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,45vw,650px);
+      animation: furnaceGlow 4s ease-in-out infinite;
+    }
+
+#trials-heading h2 {
+      color: #90b8d8;
+      text-shadow: 0 0 22px rgba(112,160,208,.5);
+    }
+
+#trials-heading p { color: rgba(144,184,216,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — HUMBLE  謙卑交託
+    ══════════════════════════════════════════════ */
+
+#scene-humble {
+      background: linear-gradient(180deg, #0a0e20 0%, #121e3a 40%, #1a284a 70%, #162040 100%);
+    }
+
+#humble-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(112,160,208,.08) 0%, rgba(80,128,176,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: burdenRelease 4s ease-in-out infinite;
+    }
+
+#humble-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,32vw,420px);
+      animation: handsLift 6s ease-in-out infinite;
+    }
+
+#humble-heading h2 {
+      background: linear-gradient(120deg, #70a0d0 0%, #a0c8e8 50%, #5080b0 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#humble-heading p { color: rgba(112,160,208,.5); }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-}
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }

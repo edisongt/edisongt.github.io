@@ -1,66 +1,477 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="希伯來書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="希伯來書 — 開場">
   <app-starfield />
+
+  <div id="intro-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>希伯來書</h1>
     <p>Epistle to the Hebrews</p>
+    <span class="sub">超越 · 大祭司 · 新約 · 信心 · 忍耐 · 更美</span>
   </div>
 
+  <!-- Golden throne / crown with emanating light rays -->
+  <svg id="intro-throne-svg" viewBox="0 0 200 240" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="金色寶座與發光冠冕">
+    <!-- Ethereal glow behind throne -->
+    <ellipse cx="100" cy="120" rx="80" ry="90" fill="rgba(176,112,64,.06)"/>
+    <!-- Light rays emanating upward -->
+    <line x1="100" y1="60" x2="100" y2="10" stroke="rgba(208,144,96,.2)" stroke-width="2"/>
+    <line x1="100" y1="60" x2="50" y2="15" stroke="rgba(208,144,96,.14)" stroke-width="1.5"/>
+    <line x1="100" y1="60" x2="150" y2="15" stroke="rgba(208,144,96,.14)" stroke-width="1.5"/>
+    <line x1="100" y1="60" x2="20" y2="40" stroke="rgba(208,144,96,.1)" stroke-width="1.5"/>
+    <line x1="100" y1="60" x2="180" y2="40" stroke="rgba(208,144,96,.1)" stroke-width="1.5"/>
+    <!-- Throne base -->
+    <rect x="60" y="130" width="80" height="60" rx="4" fill="#904e20" stroke="#b07040" stroke-width="1.5"/>
+    <rect x="55" y="125" width="90" height="12" rx="3" fill="#b07040" stroke="#904e20" stroke-width="1"/>
+    <!-- Throne back -->
+    <rect x="68" y="80" width="64" height="50" rx="6" fill="#904e20" stroke="#b07040" stroke-width="1.5"/>
+    <rect x="72" y="85" width="56" height="40" rx="4" fill="#7a3e15"/>
+    <!-- Armrests -->
+    <rect x="52" y="115" width="16" height="50" rx="4" fill="#b07040"/>
+    <rect x="132" y="115" width="16" height="50" rx="4" fill="#b07040"/>
+    <!-- Crown atop throne -->
+    <polygon points="80,78 85,60 95,52 100,48 105,52 115,60 120,78" fill="#d09060" stroke="#b07040" stroke-width="1.2"/>
+    <circle cx="100" cy="58" r="4" fill="#e0a070"/>
+    <circle cx="90" cy="64" r="2.5" fill="#e0a070"/>
+    <circle cx="110" cy="64" r="2.5" fill="#e0a070"/>
+    <!-- Crown jewel glow -->
+    <circle cx="100" cy="58" r="10" fill="rgba(224,160,112,.12)"/>
+    <!-- Throne decorative lines -->
+    <line x1="80" y1="145" x2="120" y2="145" stroke="rgba(208,144,96,.35)" stroke-width="1.5"/>
+    <line x1="85" y1="155" x2="115" y2="155" stroke="rgba(208,144,96,.25)" stroke-width="1.5"/>
+    <line x1="80" y1="165" x2="120" y2="165" stroke="rgba(208,144,96,.2)" stroke-width="1.5"/>
+    <!-- Sparkle effects -->
+    <circle cx="65" cy="90" r="1.5" fill="rgba(208,144,96,.45)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="140" cy="88" r="1.2" fill="rgba(208,144,96,.4)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="100" cy="38" r="1.8" fill="rgba(208,144,96,.5)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="160" cy="110" r="1" fill="rgba(208,144,96,.3)" style="animation: amberEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground shadow -->
+    <ellipse cx="100" cy="200" rx="70" ry="10" fill="rgba(10,8,5,.4)"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="horizonH1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a1208"/>
+        <stop offset="100%" stop-color="#0e0a06"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,175 240,190 Q360,165 480,185 Q600,155 720,178
+             Q840,150 960,172 Q1080,158 1200,182 Q1320,165 1440,192
+             L1440,300 L0,300 Z"
+          fill="url(#horizonH1)"/>
+    <circle cx="300" cy="180" r="2" fill="rgba(176,112,64,.3)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="168" r="1.5" fill="rgba(176,112,64,.25)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="174" r="1.8" fill="rgba(176,112,64,.2)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="182" r="2" fill="rgba(176,112,64,.3)" style="animation: amberEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「神既在古時藉著眾先知多次多方地曉諭列祖，就在這末世藉著他兒子曉諭我們」— 希伯來書 1:1-2" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="希伯來書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 神子的超越  The Supremacy of the Son
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-son" aria-label="希伯來書 — 神子的超越">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="son-glow" aria-hidden="true"></div>
 
+  <!-- Crown with radiating beams over angels below -->
+  <svg id="son-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="冠冕發光超越天使">
+    <defs>
+      <radialGradient id="sonGlowG" cx="50%" cy="30%" r="45%">
+        <stop offset="0%" stop-color="rgba(176,112,64,.18)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="crownG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d09060"/>
+        <stop offset="100%" stop-color="#904e20"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="140" rx="220" ry="130" fill="url(#sonGlowG)"/>
+    <!-- Radiating beams from crown -->
+    <line x1="300" y1="100" x2="300" y2="20" stroke="rgba(208,144,96,.3)" stroke-width="2.5"/>
+    <line x1="300" y1="100" x2="200" y2="30" stroke="rgba(208,144,96,.2)" stroke-width="2"/>
+    <line x1="300" y1="100" x2="400" y2="30" stroke="rgba(208,144,96,.2)" stroke-width="2"/>
+    <line x1="300" y1="100" x2="130" y2="60" stroke="rgba(208,144,96,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="100" x2="470" y2="60" stroke="rgba(208,144,96,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="100" x2="100" y2="100" stroke="rgba(208,144,96,.08)" stroke-width="1.5"/>
+    <line x1="300" y1="100" x2="500" y2="100" stroke="rgba(208,144,96,.08)" stroke-width="1.5"/>
+    <!-- Crown -->
+    <polygon points="260,120 270,90 285,80 300,70 315,80 330,90 340,120"
+             fill="url(#crownG)" stroke="#b07040" stroke-width="1.5"/>
+    <circle cx="300" cy="85" r="6" fill="#e0a070" stroke="#d09060" stroke-width="1"/>
+    <circle cx="280" cy="95" r="4" fill="#e0a070"/>
+    <circle cx="320" cy="95" r="4" fill="#e0a070"/>
+    <!-- Crown base band -->
+    <rect x="262" y="115" width="76" height="10" rx="3" fill="#b07040" stroke="#904e20" stroke-width="1"/>
+    <!-- Jewel glow -->
+    <circle cx="300" cy="85" r="16" fill="rgba(224,160,112,.1)"/>
+    <!-- Angels below — left -->
+    <ellipse cx="180" cy="290" rx="8" ry="8" fill="rgba(208,144,96,.3)"/>
+    <path d="M170,300 Q180,280 190,300 L185,340 Q180,345 175,340 Z" fill="rgba(176,112,64,.2)"/>
+    <path d="M165,295 Q175,285 170,300" fill="none" stroke="rgba(208,144,96,.2)" stroke-width="1.5"/>
+    <path d="M190,300 Q185,285 195,295" fill="none" stroke="rgba(208,144,96,.2)" stroke-width="1.5"/>
+    <!-- Angels below — center-left -->
+    <ellipse cx="240" cy="300" rx="8" ry="8" fill="rgba(208,144,96,.25)"/>
+    <path d="M230,310 Q240,290 250,310 L245,350 Q240,355 235,350 Z" fill="rgba(176,112,64,.15)"/>
+    <!-- Angels below — center-right -->
+    <ellipse cx="360" cy="300" rx="8" ry="8" fill="rgba(208,144,96,.25)"/>
+    <path d="M350,310 Q360,290 370,310 L365,350 Q360,355 355,350 Z" fill="rgba(176,112,64,.15)"/>
+    <!-- Angels below — right -->
+    <ellipse cx="420" cy="290" rx="8" ry="8" fill="rgba(208,144,96,.3)"/>
+    <path d="M410,300 Q420,280 430,300 L425,340 Q420,345 415,340 Z" fill="rgba(176,112,64,.2)"/>
+    <path d="M405,295 Q415,285 410,300" fill="none" stroke="rgba(208,144,96,.2)" stroke-width="1.5"/>
+    <path d="M430,300 Q425,285 435,295" fill="none" stroke="rgba(208,144,96,.2)" stroke-width="1.5"/>
+    <!-- Light particles -->
+    <circle cx="250" cy="70" r="2.5" fill="rgba(208,144,96,.4)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="350" cy="55" r="2" fill="rgba(208,144,96,.35)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="40" r="3" fill="rgba(224,160,112,.45)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="440" cy="100" r="1.5" fill="rgba(176,112,64,.3)" style="animation: amberEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="365" rx="250" ry="20" fill="rgba(10,8,5,.4)"/>
+  </svg>
+
+  <app-scene-heading title="👑 神子的超越" subtitle="The Supremacy of the Son — Hebrews 1:1-4" id="son-heading" />
+  <app-scene-verse text="「他是神榮耀所發的光輝，是神本體的真像」— 希伯來書 1:3" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="希伯來書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 大祭司  The Great High Priest
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-priest" aria-label="希伯來書 — 大祭司">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="priest-glow" aria-hidden="true"></div>
 
+  <!-- High priest garments with incense altar -->
+  <svg id="priest-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="大祭司聖衣與香壇">
+    <defs>
+      <radialGradient id="priestGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(176,112,64,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="robeG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d09060"/>
+        <stop offset="100%" stop-color="#7a3e15"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="200" ry="150" fill="url(#priestGlowG)"/>
+    <!-- Priest figure — head -->
+    <circle cx="240" cy="100" r="22" fill="rgba(208,144,96,.4)"/>
+    <!-- Turban / mitre -->
+    <path d="M218,95 Q230,70 240,65 Q250,70 262,95" fill="#d09060" stroke="#b07040" stroke-width="1"/>
+    <rect x="222" y="88" width="36" height="8" rx="2" fill="#b07040"/>
+    <!-- Gold plate on turban -->
+    <rect x="230" y="82" width="20" height="7" rx="2" fill="#e0a070" stroke="#d09060" stroke-width=".8"/>
+    <!-- Body / robe -->
+    <path d="M218,120 Q210,140 205,200 Q200,280 195,340 L285,340 Q280,280 275,200 Q270,140 262,120 Z"
+          fill="url(#robeG)" stroke="#b07040" stroke-width="1.2"/>
+    <!-- Ephod / breastplate -->
+    <rect x="225" y="135" width="30" height="35" rx="3" fill="#b07040" stroke="#d09060" stroke-width="1.5"/>
+    <!-- Twelve stones on breastplate (3x4 grid) -->
+    <circle cx="233" cy="144" r="3" fill="#e0a070"/>
+    <circle cx="240" cy="144" r="3" fill="#c08050"/>
+    <circle cx="247" cy="144" r="3" fill="#e0a070"/>
+    <circle cx="233" cy="152" r="3" fill="#c08050"/>
+    <circle cx="240" cy="152" r="3" fill="#e0a070"/>
+    <circle cx="247" cy="152" r="3" fill="#c08050"/>
+    <circle cx="233" cy="160" r="3" fill="#e0a070"/>
+    <circle cx="240" cy="160" r="3" fill="#c08050"/>
+    <circle cx="247" cy="160" r="3" fill="#e0a070"/>
+    <!-- Sash / girdle -->
+    <rect x="215" y="175" width="50" height="6" rx="2" fill="#d09060"/>
+    <!-- Arms stretched -->
+    <path d="M218,130 L190,180 L195,185 L220,145" fill="rgba(176,112,64,.35)"/>
+    <path d="M262,130 L290,180 L285,185 L260,145" fill="rgba(176,112,64,.35)"/>
+    <!-- Incense altar — right side -->
+    <rect x="370" y="200" width="70" height="90" rx="4" fill="#904e20" stroke="#b07040" stroke-width="1.5"/>
+    <rect x="365" y="195" width="80" height="12" rx="3" fill="#b07040" stroke="#904e20" stroke-width="1"/>
+    <!-- Horns of altar -->
+    <rect x="365" y="188" width="10" height="12" rx="2" fill="#b07040"/>
+    <rect x="435" y="188" width="10" height="12" rx="2" fill="#b07040"/>
+    <!-- Fire / coals on altar -->
+    <ellipse cx="405" cy="198" rx="28" ry="6" fill="#d09060"/>
+    <circle cx="395" cy="195" r="4" fill="rgba(224,160,112,.6)"/>
+    <circle cx="410" cy="193" r="3.5" fill="rgba(224,160,112,.5)"/>
+    <circle cx="402" cy="196" r="3" fill="rgba(224,160,112,.7)"/>
+    <!-- Rising incense smoke -->
+    <ellipse cx="400" cy="170" rx="12" ry="8" fill="rgba(208,144,96,.12)" style="animation: incenseRise 4s ease-in-out infinite;"/>
+    <ellipse cx="408" cy="150" rx="15" ry="10" fill="rgba(208,144,96,.08)" style="animation: incenseRise 4s ease-in-out 1s infinite;"/>
+    <ellipse cx="395" cy="130" rx="18" ry="12" fill="rgba(208,144,96,.05)" style="animation: incenseRise 4s ease-in-out 2s infinite;"/>
+    <!-- Sparkles -->
+    <circle cx="405" cy="175" r="2" fill="rgba(224,160,112,.4)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="240" cy="80" r="1.5" fill="rgba(208,144,96,.35)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="390" cy="140" r="1.8" fill="rgba(208,144,96,.3)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="250" ry="20" fill="rgba(10,8,5,.4)"/>
+  </svg>
+
+  <app-scene-heading title="⛪ 大祭司" subtitle="The Great High Priest — Hebrews 4:14-16" id="priest-heading" />
+  <app-scene-verse text="「因我們的大祭司並非不能體恤我們的軟弱，他也曾凡事受過試探，與我們一樣」— 希伯來書 4:15" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="希伯來書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 更美之約  The Better Covenant
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-covenant" aria-label="希伯來書 — 更美之約">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="covenant-glow" aria-hidden="true"></div>
 
+  <!-- Two stone tablets (old) vs a glowing scroll (new covenant) -->
+  <svg id="covenant-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="石版舊約與發光新約書卷">
+    <defs>
+      <radialGradient id="covGlowG" cx="60%" cy="40%" r="40%">
+        <stop offset="0%" stop-color="rgba(208,144,96,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="tabletG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5a4030"/>
+        <stop offset="100%" stop-color="#3a2818"/>
+      </linearGradient>
+      <linearGradient id="scrollNewG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d09060"/>
+        <stop offset="100%" stop-color="#b07040"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow on new covenant side -->
+    <ellipse cx="400" cy="180" rx="160" ry="140" fill="url(#covGlowG)"/>
+    <!-- Arrow / transition indicator -->
+    <line x1="270" y1="200" x2="320" y2="200" stroke="rgba(208,144,96,.3)" stroke-width="2"/>
+    <polygon points="320,192 340,200 320,208" fill="rgba(208,144,96,.3)"/>
+    <!-- OLD COVENANT — Left: Two stone tablets -->
+    <!-- Tablet 1 -->
+    <rect x="100" y="130" width="65" height="90" rx="8" fill="url(#tabletG)" stroke="#5a4030" stroke-width="1.5"/>
+    <path d="M100,138 Q132,120 165,138" fill="url(#tabletG)" stroke="#5a4030" stroke-width="1.2"/>
+    <!-- Text lines on tablet 1 -->
+    <line x1="112" y1="155" x2="153" y2="155" stroke="rgba(255,255,255,.15)" stroke-width="1.2"/>
+    <line x1="112" y1="165" x2="148" y2="165" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+    <line x1="112" y1="175" x2="150" y2="175" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+    <line x1="112" y1="185" x2="145" y2="185" stroke="rgba(255,255,255,.1)" stroke-width="1.2"/>
+    <line x1="112" y1="195" x2="148" y2="195" stroke="rgba(255,255,255,.1)" stroke-width="1.2"/>
+    <!-- Tablet 2 -->
+    <rect x="175" y="130" width="65" height="90" rx="8" fill="url(#tabletG)" stroke="#5a4030" stroke-width="1.5"/>
+    <path d="M175,138 Q207,120 240,138" fill="url(#tabletG)" stroke="#5a4030" stroke-width="1.2"/>
+    <!-- Text lines on tablet 2 -->
+    <line x1="187" y1="155" x2="228" y2="155" stroke="rgba(255,255,255,.15)" stroke-width="1.2"/>
+    <line x1="187" y1="165" x2="223" y2="165" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+    <line x1="187" y1="175" x2="225" y2="175" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+    <line x1="187" y1="185" x2="220" y2="185" stroke="rgba(255,255,255,.1)" stroke-width="1.2"/>
+    <line x1="187" y1="195" x2="223" y2="195" stroke="rgba(255,255,255,.1)" stroke-width="1.2"/>
+    <!-- Crack lines on tablets (aged / fading) -->
+    <line x1="130" y1="135" x2="140" y2="210" stroke="rgba(90,64,48,.4)" stroke-width="1"/>
+    <line x1="200" y1="140" x2="210" y2="205" stroke="rgba(90,64,48,.4)" stroke-width="1"/>
+    <!-- NEW COVENANT — Right: Glowing scroll -->
+    <rect x="375" y="120" width="90" height="120" rx="4" fill="url(#scrollNewG)" stroke="#d09060" stroke-width="1.5"/>
+    <rect x="370" y="115" width="100" height="14" rx="7" fill="#d09060" stroke="#b07040" stroke-width="1"/>
+    <rect x="370" y="235" width="100" height="14" rx="7" fill="#d09060" stroke="#b07040" stroke-width="1"/>
+    <!-- Text lines on new scroll -->
+    <line x1="388" y1="142" x2="452" y2="142" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
+    <line x1="388" y1="154" x2="445" y2="154" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+    <line x1="388" y1="166" x2="450" y2="166" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+    <line x1="388" y1="178" x2="440" y2="178" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+    <line x1="388" y1="190" x2="448" y2="190" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+    <line x1="388" y1="202" x2="435" y2="202" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+    <line x1="388" y1="214" x2="442" y2="214" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+    <!-- Glow around new scroll -->
+    <rect x="365" y="110" width="110" height="150" rx="8" fill="none" stroke="rgba(224,160,112,.15)" stroke-width="2"/>
+    <rect x="358" y="103" width="124" height="164" rx="12" fill="none" stroke="rgba(224,160,112,.08)" stroke-width="1.5"/>
+    <!-- Seal on new scroll -->
+    <circle cx="420" cy="225" r="8" fill="#e0a070" stroke="#d09060" stroke-width="1"/>
+    <circle cx="420" cy="225" r="4" fill="#f0c090"/>
+    <!-- Sparkles around new covenant -->
+    <circle cx="360" cy="130" r="2" fill="rgba(224,160,112,.4)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="470" cy="140" r="1.8" fill="rgba(208,144,96,.35)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="420" cy="95" r="2.5" fill="rgba(224,160,112,.45)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="480" cy="200" r="1.5" fill="rgba(176,112,64,.3)" style="animation: amberEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="250" ry="20" fill="rgba(10,8,5,.4)"/>
+  </svg>
+
+  <app-scene-heading title="📜 更美之約" subtitle="The Better Covenant — Hebrews 8:6-13" id="covenant-heading" />
+  <app-scene-verse text="「如今耶穌所得的職任是更美的，正如他作更美之約的中保」— 希伯來書 8:6" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="希伯來書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 信心偉人  Heroes of Faith
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-faith" aria-label="希伯來書 — 信心偉人">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="faith-glow" aria-hidden="true"></div>
 
+  <!-- Multiple figures walking forward in a procession (cloud of witnesses) -->
+  <svg id="faith-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="信心偉人行列如同雲彩般的見證人">
+    <defs>
+      <radialGradient id="faithGlowG" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(176,112,64,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="220" rx="260" ry="160" fill="url(#faithGlowG)"/>
+    <!-- Cloud of witnesses — ethereal cloud above -->
+    <ellipse cx="300" cy="60" rx="200" ry="40" fill="rgba(208,144,96,.06)"/>
+    <ellipse cx="250" cy="55" rx="80" ry="25" fill="rgba(208,144,96,.04)"/>
+    <ellipse cx="370" cy="50" rx="90" ry="28" fill="rgba(208,144,96,.05)"/>
+    <!-- Figure 1 — far back left (smallest, most faded) -->
+    <circle cx="140" cy="200" r="7" fill="rgba(176,112,64,.2)"/>
+    <path d="M133,210 Q140,195 147,210 L144,250 Q140,253 136,250 Z" fill="rgba(176,112,64,.15)"/>
+    <!-- Figure 2 — back left -->
+    <circle cx="200" cy="190" r="9" fill="rgba(176,112,64,.25)"/>
+    <path d="M191,202 Q200,185 209,202 L206,250 Q200,254 194,250 Z" fill="rgba(176,112,64,.2)"/>
+    <line x1="194" y1="215" x2="185" y2="230" stroke="rgba(176,112,64,.15)" stroke-width="1.5"/>
+    <line x1="206" y1="215" x2="215" y2="230" stroke="rgba(176,112,64,.15)" stroke-width="1.5"/>
+    <!-- Figure 3 — center-left (prominent) -->
+    <circle cx="260" cy="180" r="12" fill="rgba(208,144,96,.35)"/>
+    <path d="M248,195 Q260,175 272,195 L268,260 Q260,265 252,260 Z" fill="rgba(208,144,96,.25)"/>
+    <line x1="252" y1="210" x2="240" y2="230" stroke="rgba(208,144,96,.2)" stroke-width="2"/>
+    <line x1="268" y1="210" x2="280" y2="230" stroke="rgba(208,144,96,.2)" stroke-width="2"/>
+    <!-- Staff in hand -->
+    <line x1="240" y1="225" x2="235" y2="280" stroke="rgba(176,112,64,.3)" stroke-width="2"/>
+    <!-- Figure 4 — center (largest, most prominent) -->
+    <circle cx="320" cy="170" r="14" fill="rgba(208,144,96,.45)"/>
+    <path d="M306,188 Q320,165 334,188 L330,270 Q320,276 310,270 Z" fill="rgba(208,144,96,.35)"/>
+    <line x1="310" y1="205" x2="295" y2="228" stroke="rgba(208,144,96,.25)" stroke-width="2"/>
+    <line x1="330" y1="205" x2="345" y2="228" stroke="rgba(208,144,96,.25)" stroke-width="2"/>
+    <!-- Shield -->
+    <ellipse cx="345" cy="225" rx="10" ry="14" fill="rgba(176,112,64,.2)" stroke="rgba(208,144,96,.3)" stroke-width="1"/>
+    <!-- Figure 5 — center-right -->
+    <circle cx="380" cy="185" r="11" fill="rgba(208,144,96,.3)"/>
+    <path d="M369,198 Q380,180 391,198 L388,258 Q380,262 372,258 Z" fill="rgba(208,144,96,.22)"/>
+    <line x1="372" y1="212" x2="362" y2="230" stroke="rgba(208,144,96,.18)" stroke-width="1.8"/>
+    <line x1="388" y1="212" x2="398" y2="230" stroke="rgba(208,144,96,.18)" stroke-width="1.8"/>
+    <!-- Figure 6 — back right -->
+    <circle cx="430" cy="195" r="8" fill="rgba(176,112,64,.22)"/>
+    <path d="M422,206 Q430,192 438,206 L435,248 Q430,252 425,248 Z" fill="rgba(176,112,64,.16)"/>
+    <!-- Figure 7 — far back right -->
+    <circle cx="470" cy="205" r="6" fill="rgba(176,112,64,.18)"/>
+    <path d="M464,213 Q470,202 476,213 L474,245 Q470,248 466,245 Z" fill="rgba(176,112,64,.12)"/>
+    <!-- Light path they walk on -->
+    <path d="M100,290 Q200,275 300,280 Q400,275 500,290" fill="none" stroke="rgba(208,144,96,.15)" stroke-width="2"/>
+    <path d="M120,300 Q220,285 320,290 Q420,285 520,300" fill="none" stroke="rgba(208,144,96,.1)" stroke-width="1.5"/>
+    <!-- Sparkles among the procession -->
+    <circle cx="180" cy="180" r="1.5" fill="rgba(208,144,96,.35)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="300" cy="150" r="2" fill="rgba(224,160,112,.4)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="420" cy="175" r="1.8" fill="rgba(208,144,96,.3)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="250" cy="100" r="2.5" fill="rgba(176,112,64,.25)" style="animation: amberEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="350" cy="90" r="2" fill="rgba(176,112,64,.2)" style="animation: amberEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="260" ry="22" fill="rgba(10,8,5,.35)"/>
+  </svg>
+
+  <app-scene-heading title="🏆 信心偉人" subtitle="Heroes of Faith — Hebrews 11:1-40" id="faith-heading" />
+  <app-scene-verse text="「信就是所望之事的實底，是未見之事的確據」— 希伯來書 11:1" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="希伯來書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 奔跑賽程  Running the Race
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-race" aria-label="希伯來書 — 奔跑賽程">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="race-glow" aria-hidden="true"></div>
+
+  <!-- Running track toward a finish line with crowds watching -->
+  <svg id="race-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="奔向終點的賽道與觀眾">
+    <defs>
+      <radialGradient id="raceGlowG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(208,144,96,.1)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="trackG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="rgba(144,78,32,.15)"/>
+        <stop offset="100%" stop-color="rgba(176,112,64,.25)"/>
+      </linearGradient>
+      <linearGradient id="finishG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d09060"/>
+        <stop offset="100%" stop-color="#b07040"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="200" rx="250" ry="170" fill="url(#raceGlowG)"/>
+    <!-- Track / path converging to finish -->
+    <path d="M50,350 Q200,320 350,280 Q450,250 530,220" fill="none" stroke="rgba(176,112,64,.2)" stroke-width="40"/>
+    <path d="M50,350 Q200,320 350,280 Q450,250 530,220" fill="none" stroke="rgba(208,144,96,.1)" stroke-width="60"/>
+    <!-- Lane lines -->
+    <path d="M40,340 Q190,310 340,270 Q440,240 520,210" fill="none" stroke="rgba(208,144,96,.12)" stroke-width="1.5"/>
+    <path d="M60,360 Q210,330 360,290 Q460,260 540,230" fill="none" stroke="rgba(208,144,96,.12)" stroke-width="1.5"/>
+    <!-- Finish line -->
+    <rect x="510" y="185" width="8" height="80" rx="2" fill="url(#finishG)"/>
+    <rect x="545" y="185" width="8" height="80" rx="2" fill="url(#finishG)"/>
+    <!-- Finish banner -->
+    <rect x="510" y="183" width="43" height="10" rx="2" fill="#d09060" stroke="#b07040" stroke-width="1"/>
+    <!-- Checkered pattern on banner -->
+    <rect x="514" y="185" width="5" height="5" fill="#904e20"/>
+    <rect x="524" y="185" width="5" height="5" fill="#904e20"/>
+    <rect x="534" y="185" width="5" height="5" fill="#904e20"/>
+    <rect x="519" y="189" width="5" height="3" fill="#904e20"/>
+    <rect x="529" y="189" width="5" height="3" fill="#904e20"/>
+    <rect x="539" y="189" width="5" height="3" fill="#904e20"/>
+    <!-- Runner figure (main) -->
+    <circle cx="300" cy="240" r="12" fill="rgba(208,144,96,.5)"/>
+    <path d="M290,255 Q300,245 310,255 L307,300 Q300,305 293,300 Z" fill="rgba(208,144,96,.4)"/>
+    <!-- Running legs -->
+    <line x1="295" y1="295" x2="280" y2="320" stroke="rgba(208,144,96,.35)" stroke-width="2.5"/>
+    <line x1="305" y1="295" x2="320" y2="315" stroke="rgba(208,144,96,.35)" stroke-width="2.5"/>
+    <!-- Arms swinging -->
+    <line x1="293" y1="265" x2="275" y2="255" stroke="rgba(208,144,96,.3)" stroke-width="2"/>
+    <line x1="307" y1="265" x2="325" y2="275" stroke="rgba(208,144,96,.3)" stroke-width="2"/>
+    <!-- Motion lines behind runner -->
+    <line x1="270" y1="260" x2="250" y2="262" stroke="rgba(176,112,64,.15)" stroke-width="1.5"/>
+    <line x1="268" y1="270" x2="245" y2="273" stroke="rgba(176,112,64,.12)" stroke-width="1.5"/>
+    <line x1="272" y1="280" x2="252" y2="283" stroke="rgba(176,112,64,.1)" stroke-width="1.5"/>
+    <!-- Crowd / witnesses on sides — left stands -->
+    <circle cx="80" cy="180" r="5" fill="rgba(176,112,64,.18)"/>
+    <circle cx="95" cy="175" r="5" fill="rgba(176,112,64,.15)"/>
+    <circle cx="110" cy="172" r="5" fill="rgba(176,112,64,.18)"/>
+    <circle cx="85" cy="165" r="4" fill="rgba(176,112,64,.12)"/>
+    <circle cx="100" cy="160" r="4" fill="rgba(176,112,64,.14)"/>
+    <circle cx="115" cy="158" r="4" fill="rgba(176,112,64,.12)"/>
+    <circle cx="90" cy="150" r="3.5" fill="rgba(176,112,64,.1)"/>
+    <circle cx="105" cy="148" r="3.5" fill="rgba(176,112,64,.1)"/>
+    <!-- Crowd — right stands -->
+    <circle cx="480" cy="160" r="5" fill="rgba(176,112,64,.18)"/>
+    <circle cx="495" cy="155" r="5" fill="rgba(176,112,64,.15)"/>
+    <circle cx="465" cy="158" r="5" fill="rgba(176,112,64,.18)"/>
+    <circle cx="475" cy="145" r="4" fill="rgba(176,112,64,.12)"/>
+    <circle cx="490" cy="142" r="4" fill="rgba(176,112,64,.14)"/>
+    <circle cx="460" cy="148" r="4" fill="rgba(176,112,64,.12)"/>
+    <circle cx="482" cy="132" r="3.5" fill="rgba(176,112,64,.1)"/>
+    <circle cx="470" cy="135" r="3.5" fill="rgba(176,112,64,.1)"/>
+    <!-- Glow at finish line -->
+    <ellipse cx="530" cy="225" rx="30" ry="50" fill="rgba(224,160,112,.08)"/>
+    <!-- Sparkles -->
+    <circle cx="530" cy="180" r="2.5" fill="rgba(224,160,112,.45)" style="animation: amberEmber 3s ease-in-out infinite;"/>
+    <circle cx="350" cy="240" r="2" fill="rgba(208,144,96,.35)" style="animation: amberEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="200" cy="300" r="1.5" fill="rgba(176,112,64,.25)" style="animation: amberEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="200" r="1.8" fill="rgba(208,144,96,.3)" style="animation: amberEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="18" fill="rgba(10,8,5,.35)"/>
+  </svg>
+
+  <app-scene-heading title="🏃 奔跑賽程" subtitle="Running the Race — Hebrews 12:1-2" id="race-heading" />
+  <app-scene-verse text="「我們既有這許多的見證人，如同雲彩圍著我們，就當放下各樣的重擔，奔那擺在我們前頭的路程」— 希伯來書 12:1" />
 </section>

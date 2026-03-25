@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class Jude {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-contend', label: '為真道爭辯' },
+    { id: 'scene-warning', label: '假教師的警告' },
+    { id: 'scene-history', label: '歷史的鑑戒' },
+    { id: 'scene-build', label: '在至聖的真道上' },
+    { id: 'scene-doxology', label: '頌讚歸主' },
   ];
 }

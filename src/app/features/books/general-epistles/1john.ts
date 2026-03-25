@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class FirstJohn {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-light', label: '神就是光' },
+    { id: 'scene-children', label: '神的兒女' },
+    { id: 'scene-love', label: '彼此相愛' },
+    { id: 'scene-godlove', label: '神就是愛' },
+    { id: 'scene-life', label: '永生的確據' },
   ];
 }

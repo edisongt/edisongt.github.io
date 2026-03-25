@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class ThirdJohn {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-gaius', label: '該猶的忠心' },
+    { id: 'scene-hospitality', label: '接待弟兄' },
+    { id: 'scene-diotrephes', label: '丟特腓的傲慢' },
+    { id: 'scene-demetrius', label: '低米丟的見證' },
+    { id: 'scene-good', label: '行善效法神' },
   ];
 }

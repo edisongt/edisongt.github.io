@@ -1,66 +1,443 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="彼得後書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="彼得後書 — 開場">
   <app-starfield />
+
+  <div id="intro-royal-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>彼得後書</h1>
     <p>Second Epistle of Peter</p>
+    <span class="sub">品性 · 預言 · 真知識 · 警戒 · 主的日子 · 恩典</span>
   </div>
 
+  <!-- Mountain peak with shining light (Transfiguration reference) -->
+  <svg id="intro-mountain-svg" viewBox="0 0 160 200" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="山頂發出的榮耀之光">
+    <!-- Ethereal glow behind mountain -->
+    <ellipse cx="80" cy="100" rx="65" ry="75" fill="rgba(64,112,160,.06)"/>
+    <!-- Light rays emanating from peak -->
+    <line x1="80" y1="55" x2="80" y2="5" stroke="rgba(96,144,192,.18)" stroke-width="2"/>
+    <line x1="80" y1="55" x2="35" y2="15" stroke="rgba(96,144,192,.12)" stroke-width="1.5"/>
+    <line x1="80" y1="55" x2="125" y2="15" stroke="rgba(96,144,192,.12)" stroke-width="1.5"/>
+    <line x1="80" y1="55" x2="10" y2="35" stroke="rgba(96,144,192,.08)" stroke-width="1.5"/>
+    <line x1="80" y1="55" x2="150" y2="35" stroke="rgba(96,144,192,.08)" stroke-width="1.5"/>
+    <!-- Mountain body -->
+    <polygon points="80,55 20,160 140,160" fill="#205080" stroke="#4070a0" stroke-width="1.5"/>
+    <polygon points="80,55 35,160 125,160" fill="#2a5a8a"/>
+    <!-- Snow cap -->
+    <polygon points="80,55 65,85 95,85" fill="#6090c0" opacity=".6"/>
+    <!-- Foothills -->
+    <polygon points="20,160 0,190 55,190" fill="#1a4060" opacity=".5"/>
+    <polygon points="140,160 160,190 105,190" fill="#1a4060" opacity=".5"/>
+    <!-- Ground -->
+    <rect x="0" y="160" width="160" height="40" fill="#0e2a40" opacity=".4"/>
+    <!-- Light burst at peak -->
+    <circle cx="80" cy="55" r="12" fill="rgba(96,144,192,.15)"/>
+    <circle cx="80" cy="55" r="6" fill="rgba(128,176,224,.2)"/>
+    <!-- Sparkle effects -->
+    <circle cx="45" cy="70" r="1.5" fill="rgba(96,144,192,.4)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="115" cy="68" r="1.2" fill="rgba(96,144,192,.35)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="80" cy="30" r="1.8" fill="rgba(96,144,192,.45)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="130" cy="95" r="1" fill="rgba(96,144,192,.3)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="horizonG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#101a2e"/>
+        <stop offset="100%" stop-color="#0a1020"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,175 240,190 Q360,165 480,185 Q600,155 720,178
+             Q840,150 960,172 Q1080,158 1200,182 Q1320,165 1440,192
+             L1440,300 L0,300 Z"
+          fill="url(#horizonG1)"/>
+    <circle cx="300" cy="180" r="2" fill="rgba(64,112,160,.3)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="168" r="1.5" fill="rgba(64,112,160,.25)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="174" r="1.8" fill="rgba(64,112,160,.2)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="182" r="2" fill="rgba(64,112,160,.3)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「神的神能已將一切關乎生命和虔敬的事賜給我們」— 彼得後書 1:3" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="彼得後書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 神聖品性  The Divine Nature
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-nature" aria-label="彼得後書 — 神聖品性">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="nature-glow" aria-hidden="true"></div>
 
+  <!-- Ladder / stairway of virtues ascending -->
+  <svg id="nature-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="美德的階梯向上攀升">
+    <defs>
+      <radialGradient id="natureGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(64,112,160,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="ladderG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#6090c0"/>
+        <stop offset="100%" stop-color="#4070a0"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="220" ry="150" fill="url(#natureGlowG)"/>
+    <!-- Ladder rails -->
+    <line x1="220" y1="350" x2="290" y2="50" stroke="url(#ladderG)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="310" y1="350" x2="380" y2="50" stroke="url(#ladderG)" stroke-width="4" stroke-linecap="round"/>
+    <!-- Rungs with virtue labels -->
+    <line x1="228" y1="320" x2="318" y2="320" stroke="#6090c0" stroke-width="3" stroke-linecap="round"/>
+    <text x="338" y="325" font-size="13" fill="rgba(96,144,192,.7)">信心</text>
+    <line x1="238" y1="280" x2="328" y2="280" stroke="#6090c0" stroke-width="3" stroke-linecap="round"/>
+    <text x="348" y="285" font-size="13" fill="rgba(96,144,192,.65)">德行</text>
+    <line x1="248" y1="240" x2="338" y2="240" stroke="#6090c0" stroke-width="3" stroke-linecap="round"/>
+    <text x="358" y="245" font-size="13" fill="rgba(96,144,192,.6)">知識</text>
+    <line x1="256" y1="200" x2="346" y2="200" stroke="#6090c0" stroke-width="3" stroke-linecap="round"/>
+    <text x="366" y="205" font-size="13" fill="rgba(96,144,192,.6)">節制</text>
+    <line x1="264" y1="160" x2="354" y2="160" stroke="#6090c0" stroke-width="3" stroke-linecap="round"/>
+    <text x="374" y="165" font-size="13" fill="rgba(96,144,192,.55)">忍耐</text>
+    <line x1="272" y1="120" x2="362" y2="120" stroke="#6090c0" stroke-width="3" stroke-linecap="round"/>
+    <text x="382" y="125" font-size="13" fill="rgba(96,144,192,.55)">虔敬</text>
+    <line x1="280" y1="80" x2="370" y2="80" stroke="#6090c0" stroke-width="3" stroke-linecap="round"/>
+    <text x="390" y="85" font-size="13" fill="rgba(96,144,192,.5)">愛弟兄</text>
+    <!-- Top: Love — glowing crown -->
+    <circle cx="335" cy="45" r="18" fill="rgba(96,144,192,.08)"/>
+    <circle cx="335" cy="45" r="10" fill="rgba(128,176,224,.12)"/>
+    <text x="335" y="50" text-anchor="middle" font-size="14" fill="#80b0e0" font-weight="bold">愛</text>
+    <!-- Light burst at top -->
+    <line x1="335" y1="25" x2="335" y2="5" stroke="rgba(128,176,224,.2)" stroke-width="1.5"/>
+    <line x1="335" y1="30" x2="310" y2="10" stroke="rgba(128,176,224,.12)" stroke-width="1"/>
+    <line x1="335" y1="30" x2="360" y2="10" stroke="rgba(128,176,224,.12)" stroke-width="1"/>
+    <!-- Sparkles -->
+    <circle cx="335" cy="20" r="2" fill="rgba(128,176,224,.4)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="250" cy="150" r="1.5" fill="rgba(96,144,192,.3)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="380" cy="100" r="1.8" fill="rgba(96,144,192,.35)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="300" r="1.2" fill="rgba(64,112,160,.25)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="250" ry="22" fill="rgba(10,15,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="✨ 神聖品性" subtitle="The Divine Nature — 2 Peter 1:3-8" id="nature-heading" />
+  <app-scene-verse text="「正因這緣故，你們要分外地殷勤；有了信心，又要加上德行」— 彼得後書 1:5" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="彼得後書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 確定的預言  The Prophetic Word
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-prophecy" aria-label="彼得後書 — 確定的預言">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="prophecy-glow" aria-hidden="true"></div>
 
+  <!-- Lamp shining in dark place / morning star rising -->
+  <svg id="prophecy-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="燈照在暗處與晨星升起">
+    <defs>
+      <radialGradient id="prophecyGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(64,112,160,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="lampG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6090c0"/>
+        <stop offset="100%" stop-color="#4070a0"/>
+      </linearGradient>
+      <radialGradient id="lampLightG" cx="50%" cy="30%" r="50%">
+        <stop offset="0%" stop-color="rgba(128,176,224,.25)"/>
+        <stop offset="60%" stop-color="rgba(96,144,192,.08)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="160" rx="200" ry="130" fill="url(#prophecyGlowG)"/>
+    <!-- Light emanation from lamp -->
+    <ellipse cx="300" cy="140" rx="160" ry="120" fill="url(#lampLightG)"/>
+    <!-- Light rays from lamp flame -->
+    <line x1="300" y1="140" x2="300" y2="30" stroke="rgba(128,176,224,.2)" stroke-width="2"/>
+    <line x1="300" y1="140" x2="200" y2="60" stroke="rgba(96,144,192,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="140" x2="400" y2="60" stroke="rgba(96,144,192,.12)" stroke-width="1.5"/>
+    <line x1="300" y1="140" x2="150" y2="100" stroke="rgba(96,144,192,.08)" stroke-width="1"/>
+    <line x1="300" y1="140" x2="450" y2="100" stroke="rgba(96,144,192,.08)" stroke-width="1"/>
+    <!-- Lamp base -->
+    <ellipse cx="300" cy="260" rx="28" ry="6" fill="#4070a0" stroke="#6090c0" stroke-width="1"/>
+    <rect x="285" y="240" width="30" height="20" rx="3" fill="url(#lampG)"/>
+    <!-- Lamp body -->
+    <path d="M275,240 Q270,220 275,200 Q285,185 300,180 Q315,185 325,200 Q330,220 325,240 Z"
+          fill="url(#lampG)" stroke="#6090c0" stroke-width="1.5"/>
+    <!-- Lamp handle -->
+    <path d="M275,210 Q260,200 265,185 Q270,175 280,180" stroke="#6090c0" stroke-width="2" fill="none"/>
+    <!-- Flame -->
+    <path d="M300,178 Q293,160 300,140 Q307,160 300,178 Z" fill="#80b0e0" opacity=".8"/>
+    <path d="M300,175 Q296,162 300,148 Q304,162 300,175 Z" fill="#a0d0f0" opacity=".6"/>
+    <!-- Morning star in upper right -->
+    <polygon points="480,60 483,70 493,73 485,78 487,88 480,82 473,88 475,78 467,73 477,70"
+             fill="#80b0e0" opacity=".6"/>
+    <circle cx="480" cy="73" r="15" fill="rgba(128,176,224,.06)"/>
+    <!-- Darkness surrounding — subtle dark patches -->
+    <rect x="60" y="80" width="100" height="200" rx="50" fill="rgba(5,10,20,.3)"/>
+    <rect x="440" y="90" width="100" height="190" rx="50" fill="rgba(5,10,20,.3)"/>
+    <!-- Sparkles -->
+    <circle cx="300" cy="120" r="2" fill="rgba(128,176,224,.4)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="250" cy="170" r="1.5" fill="rgba(96,144,192,.3)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="350" cy="165" r="1.8" fill="rgba(96,144,192,.35)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="480" cy="50" r="1.2" fill="rgba(128,176,224,.3)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="350" rx="250" ry="20" fill="rgba(10,15,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🌟 確定的預言" subtitle="The Prophetic Word — 2 Peter 1:19-21" id="prophecy-heading" />
+  <app-scene-verse text="「我們並有先知更確的預言，如同燈照在暗處」— 彼得後書 1:19" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="彼得後書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 假師傅  False Teachers
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-false" aria-label="彼得後書 — 假師傅">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="false-glow" aria-hidden="true"></div>
 
+  <!-- Wolves in sheep's clothing / cracked masks -->
+  <svg id="false-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="披著羊皮的狼與破裂的面具">
+    <defs>
+      <radialGradient id="falseGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(32,80,128,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="maskG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6090c0"/>
+        <stop offset="100%" stop-color="#3a5a80"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="170" rx="200" ry="140" fill="url(#falseGlowG)"/>
+    <!-- Left mask — cracked and falling -->
+    <g transform="translate(150,110)">
+      <!-- Mask face shape -->
+      <ellipse cx="60" cy="60" rx="45" ry="55" fill="url(#maskG)" stroke="#4070a0" stroke-width="1.5"/>
+      <ellipse cx="60" cy="60" rx="38" ry="48" fill="#4a7aa8"/>
+      <!-- Eyes — hollow -->
+      <ellipse cx="42" cy="48" rx="10" ry="7" fill="#0a1a2e"/>
+      <ellipse cx="78" cy="48" rx="10" ry="7" fill="#0a1a2e"/>
+      <!-- Smiling mouth -->
+      <path d="M40,78 Q60,92 80,78" stroke="#0a1a2e" stroke-width="2.5" fill="none"/>
+      <!-- Cracks across mask -->
+      <line x1="30" y1="35" x2="55" y2="65" stroke="rgba(10,20,30,.6)" stroke-width="1.5"/>
+      <line x1="55" y1="65" x2="48" y2="90" stroke="rgba(10,20,30,.6)" stroke-width="1.5"/>
+      <line x1="55" y1="65" x2="72" y2="82" stroke="rgba(10,20,30,.5)" stroke-width="1"/>
+      <!-- Fragment breaking off -->
+      <polygon points="25,30 38,28 40,45 28,42" fill="#3a5a80" opacity=".7" transform="rotate(-8,30,35)"/>
+    </g>
+    <!-- Right mask — darker, more intact but sinister -->
+    <g transform="translate(340,120)">
+      <ellipse cx="60" cy="55" rx="42" ry="52" fill="url(#maskG)" stroke="#4070a0" stroke-width="1.5"/>
+      <ellipse cx="60" cy="55" rx="35" ry="45" fill="#4a7aa8"/>
+      <!-- Eyes — narrow, menacing -->
+      <path d="M38,42 L52,38 L52,48 Z" fill="#0a1a2e"/>
+      <path d="M82,42 L68,38 L68,48 Z" fill="#0a1a2e"/>
+      <!-- Sinister grin -->
+      <path d="M38,72 Q50,82 60,78 Q70,82 82,72" stroke="#0a1a2e" stroke-width="2" fill="none"/>
+      <!-- Crack -->
+      <line x1="70" y1="30" x2="60" y2="60" stroke="rgba(10,20,30,.5)" stroke-width="1.5"/>
+      <line x1="60" y1="60" x2="65" y2="85" stroke="rgba(10,20,30,.4)" stroke-width="1"/>
+    </g>
+    <!-- Wolf shadow behind masks -->
+    <g transform="translate(240,200)" opacity=".3">
+      <!-- Pointed ears -->
+      <polygon points="20,30 30,0 40,25" fill="#1a3050"/>
+      <polygon points="80,30 90,0 100,25" fill="#1a3050"/>
+      <!-- Head shape -->
+      <ellipse cx="60" cy="50" rx="40" ry="30" fill="#1a3050"/>
+      <!-- Glowing eyes -->
+      <circle cx="45" cy="42" r="4" fill="rgba(96,144,192,.5)"/>
+      <circle cx="75" cy="42" r="4" fill="rgba(96,144,192,.5)"/>
+      <!-- Snout -->
+      <ellipse cx="60" cy="65" rx="15" ry="10" fill="#152840"/>
+    </g>
+    <!-- Sheep wool fragments scattered -->
+    <circle cx="180" cy="250" r="8" fill="rgba(200,210,220,.08)"/>
+    <circle cx="190" cy="260" r="6" fill="rgba(200,210,220,.06)"/>
+    <circle cx="400" cy="245" r="7" fill="rgba(200,210,220,.07)"/>
+    <circle cx="410" cy="255" r="5" fill="rgba(200,210,220,.05)"/>
+    <!-- Warning sparkles -->
+    <circle cx="220" cy="130" r="2" fill="rgba(96,144,192,.35)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="380" cy="140" r="1.5" fill="rgba(96,144,192,.3)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="100" r="1.8" fill="rgba(96,144,192,.25)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="250" ry="22" fill="rgba(10,15,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="⚠️ 假師傅" subtitle="False Teachers — 2 Peter 2:1-3" id="false-heading" />
+  <app-scene-verse text="「從前在百姓中有假先知起來，將來在你們中間也必有假師傅」— 彼得後書 2:1" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="彼得後書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 主的日子  The Day of the Lord
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-day" aria-label="彼得後書 — 主的日子">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="day-glow" aria-hidden="true"></div>
 
+  <!-- Elements dissolving with new heavens/earth appearing -->
+  <svg id="day-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="有形質的都要被烈火銷化與新天新地">
+    <defs>
+      <radialGradient id="dayGlowG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(64,112,160,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="dissolveG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#4070a0"/>
+        <stop offset="50%" stop-color="#6090c0"/>
+        <stop offset="100%" stop-color="#80b0e0"/>
+      </linearGradient>
+      <radialGradient id="newEarthG" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(96,144,192,.2)"/>
+        <stop offset="70%" stop-color="rgba(64,112,160,.08)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="200" rx="240" ry="170" fill="url(#dayGlowG)"/>
+    <!-- Old earth dissolving (left) -->
+    <g transform="translate(80,140)" opacity=".6">
+      <circle cx="80" cy="80" r="60" fill="#1a3050" stroke="#2a4a6a" stroke-width="1.5"/>
+      <circle cx="80" cy="80" r="55" fill="#15283f"/>
+      <!-- Continents fragmenting -->
+      <path d="M55,50 Q65,45 80,50 Q85,60 75,65 Z" fill="#2a4a6a" opacity=".6"/>
+      <path d="M90,70 Q100,65 105,75 Q100,85 90,82 Z" fill="#2a4a6a" opacity=".5"/>
+      <path d="M60,85 Q70,80 75,90 Q68,95 58,92 Z" fill="#2a4a6a" opacity=".4"/>
+      <!-- Dissolving particles rising -->
+      <circle cx="60" cy="30" r="3" fill="rgba(96,144,192,.3)"/>
+      <circle cx="95" cy="25" r="2.5" fill="rgba(96,144,192,.25)"/>
+      <circle cx="50" cy="40" r="2" fill="rgba(96,144,192,.2)"/>
+      <circle cx="110" cy="35" r="2" fill="rgba(96,144,192,.2)"/>
+    </g>
+    <!-- Arrow / transition between old and new -->
+    <path d="M250,200 Q300,180 350,200" stroke="rgba(128,176,224,.2)" stroke-width="2" fill="none"/>
+    <polygon points="345,195 355,200 345,205" fill="rgba(128,176,224,.25)"/>
+    <!-- New earth forming (right) — bright, glowing -->
+    <g transform="translate(340,130)">
+      <circle cx="80" cy="80" r="65" fill="url(#newEarthG)"/>
+      <circle cx="80" cy="80" r="60" fill="rgba(64,112,160,.12)" stroke="#6090c0" stroke-width="1.5"/>
+      <circle cx="80" cy="80" r="55" fill="rgba(96,144,192,.08)"/>
+      <!-- Pristine continents -->
+      <path d="M55,55 Q70,45 85,55 Q90,70 75,72 Q60,70 55,55 Z" fill="#4070a0" opacity=".4"/>
+      <path d="M85,80 Q100,75 108,88 Q100,98 88,95 Z" fill="#4070a0" opacity=".35"/>
+      <path d="M58,88 Q68,82 78,90 Q72,100 60,96 Z" fill="#4070a0" opacity=".3"/>
+      <!-- Light halo -->
+      <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(128,176,224,.1)" stroke-width="2"/>
+    </g>
+    <!-- Stars in new heavens -->
+    <circle cx="440" cy="60" r="2" fill="rgba(128,176,224,.5)"/>
+    <circle cx="480" cy="90" r="1.5" fill="rgba(128,176,224,.4)"/>
+    <circle cx="510" cy="50" r="1.8" fill="rgba(128,176,224,.35)"/>
+    <circle cx="460" cy="110" r="1.2" fill="rgba(128,176,224,.3)"/>
+    <!-- Dissolving flame effects -->
+    <path d="M180,120 Q175,100 180,80 Q185,100 180,120 Z" fill="url(#dissolveG)" opacity=".3"/>
+    <path d="M150,130 Q147,115 152,95 Q157,115 154,130 Z" fill="url(#dissolveG)" opacity=".25"/>
+    <path d="M210,125 Q207,108 212,88 Q217,108 214,125 Z" fill="url(#dissolveG)" opacity=".25"/>
+    <!-- Sparkles -->
+    <circle cx="420" cy="180" r="2" fill="rgba(128,176,224,.4)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="180" cy="110" r="1.5" fill="rgba(96,144,192,.35)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="160" r="2.5" fill="rgba(96,144,192,.3)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="130" r="1.2" fill="rgba(128,176,224,.25)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="22" fill="rgba(10,15,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🌍 主的日子" subtitle="The Day of the Lord — 2 Peter 3:8-10" id="day-heading" />
+  <app-scene-verse text="「主看一日如千年，千年如一日」— 彼得後書 3:8" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="彼得後書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 長進恩典  Growing in Grace
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-grow" aria-label="彼得後書 — 長進恩典">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="grow-glow" aria-hidden="true"></div>
+
+  <!-- Tree growing toward light, branching upward -->
+  <svg id="grow-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="向光生長的大樹">
+    <defs>
+      <radialGradient id="growGlowG" cx="50%" cy="30%" r="50%">
+        <stop offset="0%" stop-color="rgba(96,144,192,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="trunkG" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#2a4a6a"/>
+        <stop offset="100%" stop-color="#4070a0"/>
+      </linearGradient>
+      <radialGradient id="canopyG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(96,144,192,.2)"/>
+        <stop offset="70%" stop-color="rgba(64,112,160,.08)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="150" rx="220" ry="140" fill="url(#growGlowG)"/>
+    <!-- Light source above tree -->
+    <circle cx="300" cy="20" r="30" fill="rgba(128,176,224,.08)"/>
+    <circle cx="300" cy="20" r="15" fill="rgba(128,176,224,.12)"/>
+    <line x1="300" y1="50" x2="300" y2="80" stroke="rgba(128,176,224,.15)" stroke-width="2"/>
+    <line x1="280" y1="55" x2="260" y2="75" stroke="rgba(128,176,224,.1)" stroke-width="1.5"/>
+    <line x1="320" y1="55" x2="340" y2="75" stroke="rgba(128,176,224,.1)" stroke-width="1.5"/>
+    <!-- Tree trunk -->
+    <path d="M290,350 Q288,300 285,260 Q283,230 290,200 Q295,180 300,160
+             Q305,180 310,200 Q317,230 315,260 Q312,300 310,350 Z"
+          fill="url(#trunkG)" stroke="#4070a0" stroke-width="1"/>
+    <!-- Main branches -->
+    <path d="M295,200 Q260,170 220,140" stroke="#4070a0" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M305,200 Q340,170 380,140" stroke="#4070a0" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M292,230 Q250,210 210,195" stroke="#4070a0" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M308,230 Q350,210 390,195" stroke="#4070a0" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Smaller branches -->
+    <path d="M240,155 Q225,130 215,110" stroke="#4070a0" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M360,155 Q375,130 385,110" stroke="#4070a0" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M220,140 Q200,125 185,115" stroke="#4070a0" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M380,140 Q400,125 415,115" stroke="#4070a0" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <!-- Canopy / foliage glow -->
+    <ellipse cx="300" cy="130" rx="130" ry="80" fill="url(#canopyG)"/>
+    <!-- Leaf clusters -->
+    <circle cx="220" cy="135" r="22" fill="rgba(64,112,160,.12)"/>
+    <circle cx="260" cy="110" r="25" fill="rgba(64,112,160,.14)"/>
+    <circle cx="300" cy="95" r="28" fill="rgba(64,112,160,.16)"/>
+    <circle cx="340" cy="110" r="25" fill="rgba(64,112,160,.14)"/>
+    <circle cx="380" cy="135" r="22" fill="rgba(64,112,160,.12)"/>
+    <circle cx="215" cy="110" r="18" fill="rgba(96,144,192,.08)"/>
+    <circle cx="385" cy="110" r="18" fill="rgba(96,144,192,.08)"/>
+    <!-- Roots -->
+    <path d="M290,350 Q270,360 240,365" stroke="#2a4a6a" stroke-width="2.5" fill="none"/>
+    <path d="M310,350 Q330,360 360,365" stroke="#2a4a6a" stroke-width="2.5" fill="none"/>
+    <path d="M295,350 Q285,365 270,375" stroke="#2a4a6a" stroke-width="2" fill="none"/>
+    <path d="M305,350 Q315,365 330,375" stroke="#2a4a6a" stroke-width="2" fill="none"/>
+    <!-- Light particles descending onto tree -->
+    <circle cx="280" cy="80" r="2" fill="rgba(128,176,224,.4)" style="animation: blueEmber 3s ease-in-out infinite;"/>
+    <circle cx="320" cy="75" r="1.5" fill="rgba(128,176,224,.35)" style="animation: blueEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="40" r="2.5" fill="rgba(128,176,224,.45)" style="animation: blueEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="240" cy="100" r="1.2" fill="rgba(96,144,192,.3)" style="animation: blueEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="360" cy="95" r="1.8" fill="rgba(96,144,192,.3)" style="animation: blueEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="380" rx="260" ry="22" fill="rgba(10,15,30,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🌱 長進恩典" subtitle="Growing in Grace — 2 Peter 3:17-18" id="grow-heading" />
+  <app-scene-verse text="「你們卻要在我們主救主耶穌基督的恩典和知識上有長進」— 彼得後書 3:18" />
 </section>

@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class SecondJohn {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro', label: '開場' },
+    { id: 'scene-truth', label: '行在真理中' },
+    { id: 'scene-command', label: '愛的命令' },
+    { id: 'scene-deceivers', label: '迷惑人的' },
+    { id: 'scene-abide', label: '持守教訓' },
+    { id: 'scene-joy', label: '面對面的喜樂' },
   ];
 }
