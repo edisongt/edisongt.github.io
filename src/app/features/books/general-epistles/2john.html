@@ -1,66 +1,417 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="約翰二書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="約翰貳書 — 開場">
   <app-starfield />
+
+  <div id="intro-gold-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
-    <h1>約翰二書</h1>
+    <h1>約翰貳書</h1>
     <p>Second Epistle of John</p>
+    <span class="sub">真理 · 愛 · 命令 · 警戒 · 教訓 · 喜樂</span>
   </div>
 
+  <!-- Sealed letter / scroll with warm light -->
+  <svg id="intro-letter-svg" viewBox="0 0 160 200" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="書信卷軸與溫暖的光芒">
+    <!-- Warm glow behind letter -->
+    <ellipse cx="80" cy="100" rx="65" ry="75" fill="rgba(208,152,48,.06)"/>
+    <!-- Light rays emanating -->
+    <line x1="80" y1="50" x2="80" y2="5" stroke="rgba(232,184,80,.15)" stroke-width="2"/>
+    <line x1="80" y1="50" x2="35" y2="15" stroke="rgba(232,184,80,.1)" stroke-width="1.5"/>
+    <line x1="80" y1="50" x2="125" y2="15" stroke="rgba(232,184,80,.1)" stroke-width="1.5"/>
+    <line x1="80" y1="50" x2="15" y2="40" stroke="rgba(232,184,80,.08)" stroke-width="1.5"/>
+    <line x1="80" y1="50" x2="145" y2="40" stroke="rgba(232,184,80,.08)" stroke-width="1.5"/>
+    <!-- Scroll body -->
+    <rect x="38" y="55" width="84" height="100" rx="4" fill="#b07810" stroke="#d09830" stroke-width="1.5"/>
+    <rect x="42" y="59" width="76" height="92" rx="3" fill="#c08820"/>
+    <!-- Scroll rollers -->
+    <rect x="32" y="50" width="96" height="12" rx="6" fill="#d09830" stroke="#b07810" stroke-width="1"/>
+    <rect x="32" y="148" width="96" height="12" rx="6" fill="#d09830" stroke="#b07810" stroke-width="1"/>
+    <!-- Text lines on scroll -->
+    <line x1="52" y1="75" x2="108" y2="75" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+    <line x1="52" y1="85" x2="100" y2="85" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+    <line x1="52" y1="95" x2="106" y2="95" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+    <line x1="52" y1="105" x2="95" y2="105" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+    <line x1="52" y1="115" x2="104" y2="115" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+    <line x1="52" y1="125" x2="90" y2="125" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+    <!-- Wax seal -->
+    <circle cx="80" cy="140" r="8" fill="#e8b850" stroke="#d09830" stroke-width="1"/>
+    <circle cx="80" cy="140" r="4" fill="#f0d070"/>
+    <!-- Sparkle effects -->
+    <circle cx="45" cy="65" r="1.5" fill="rgba(232,184,80,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="115" cy="62" r="1.2" fill="rgba(232,184,80,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="80" cy="35" r="1.8" fill="rgba(232,184,80,.45)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="130" cy="90" r="1" fill="rgba(232,184,80,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="horizonG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a1408"/>
+        <stop offset="100%" stop-color="#0e0a04"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,175 240,190 Q360,165 480,185 Q600,155 720,178
+             Q840,150 960,172 Q1080,158 1200,182 Q1320,165 1440,192
+             L1440,300 L0,300 Z"
+          fill="url(#horizonG1)"/>
+    <circle cx="300" cy="180" r="2" fill="rgba(208,152,48,.3)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="700" cy="168" r="1.5" fill="rgba(208,152,48,.25)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="174" r="1.8" fill="rgba(208,152,48,.2)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500" cy="182" r="2" fill="rgba(208,152,48,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「我愛你們是在真理裏」— 約翰貳書 1:1" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="約翰二書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 行在真理中  Walking in Truth
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-truth" aria-label="約翰貳書 — 行在真理中">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="truth-glow" aria-hidden="true"></div>
 
+  <!-- Footprints along an illuminated path -->
+  <svg id="truth-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="光照的道路上的腳步">
+    <defs>
+      <radialGradient id="truthGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(208,152,48,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="pathG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="rgba(208,152,48,.08)"/>
+        <stop offset="50%" stop-color="rgba(232,184,80,.15)"/>
+        <stop offset="100%" stop-color="rgba(208,152,48,.08)"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="220" ry="150" fill="url(#truthGlowG)"/>
+    <!-- Illuminated path -->
+    <path d="M100,350 Q180,300 250,280 Q320,260 380,240 Q440,220 500,180"
+          stroke="url(#pathG)" stroke-width="50" fill="none" stroke-linecap="round"/>
+    <!-- Path light core -->
+    <path d="M100,350 Q180,300 250,280 Q320,260 380,240 Q440,220 500,180"
+          stroke="rgba(232,184,80,.1)" stroke-width="25" fill="none" stroke-linecap="round"/>
+    <!-- Footprints along the path -->
+    <ellipse cx="160" cy="325" rx="8" ry="14" fill="rgba(208,152,48,.35)" transform="rotate(-20,160,325)"/>
+    <ellipse cx="185" cy="315" rx="7" ry="12" fill="rgba(208,152,48,.3)" transform="rotate(-15,185,315)"/>
+    <ellipse cx="230" cy="292" rx="8" ry="14" fill="rgba(208,152,48,.35)" transform="rotate(-18,230,292)"/>
+    <ellipse cx="258" cy="283" rx="7" ry="12" fill="rgba(208,152,48,.3)" transform="rotate(-12,258,283)"/>
+    <ellipse cx="310" cy="265" rx="8" ry="14" fill="rgba(232,184,80,.35)" transform="rotate(-15,310,265)"/>
+    <ellipse cx="340" cy="255" rx="7" ry="12" fill="rgba(232,184,80,.3)" transform="rotate(-10,340,255)"/>
+    <ellipse cx="390" cy="238" rx="8" ry="14" fill="rgba(232,184,80,.4)" transform="rotate(-12,390,238)"/>
+    <ellipse cx="420" cy="228" rx="7" ry="12" fill="rgba(232,184,80,.35)" transform="rotate(-8,420,228)"/>
+    <ellipse cx="465" cy="200" rx="8" ry="14" fill="rgba(240,200,90,.45)" transform="rotate(-10,465,200)"/>
+    <ellipse cx="490" cy="188" rx="7" ry="12" fill="rgba(240,200,90,.4)" transform="rotate(-5,490,188)"/>
+    <!-- Guiding light at end of path -->
+    <circle cx="510" cy="170" r="30" fill="rgba(232,184,80,.08)"/>
+    <circle cx="510" cy="170" r="15" fill="rgba(240,200,90,.12)"/>
+    <circle cx="510" cy="170" r="5" fill="rgba(255,220,120,.35)"/>
+    <!-- Light particles -->
+    <circle cx="200" cy="305" r="2" fill="rgba(232,184,80,.35)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="350" cy="250" r="1.5" fill="rgba(232,184,80,.4)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="480" cy="185" r="2.5" fill="rgba(240,200,90,.45)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="270" cy="278" r="1.2" fill="rgba(208,152,48,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="22" fill="rgba(10,10,6,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🚶 行在真理中" subtitle="Walking in Truth — 2 John 1:4" id="truth-heading" />
+  <app-scene-verse text="「我見你的兒女有照我們從父所受之命令遵行真理的，就甚歡喜」— 約翰貳書 1:4" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="約翰二書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 愛的命令  The Command to Love
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-command" aria-label="約翰貳書 — 愛的命令">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="command-glow" aria-hidden="true"></div>
 
+  <!-- Two hands clasped together with warm glow -->
+  <svg id="command-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="彼此握手與溫暖的光芒">
+    <defs>
+      <radialGradient id="commandGlowG" cx="50%" cy="40%" r="45%">
+        <stop offset="0%" stop-color="rgba(208,152,48,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="handG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e8b850"/>
+        <stop offset="100%" stop-color="#b07810"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="190" rx="200" ry="140" fill="url(#commandGlowG)"/>
+    <!-- Warm radiance around clasped hands -->
+    <circle cx="300" cy="200" r="90" fill="rgba(232,184,80,.04)"/>
+    <circle cx="300" cy="200" r="60" fill="rgba(232,184,80,.06)"/>
+    <circle cx="300" cy="200" r="35" fill="rgba(240,200,90,.08)"/>
+    <!-- Left hand -->
+    <path d="M200,220 Q220,200 250,195 Q270,190 290,200 Q295,205 295,215 Q290,225 270,230 Q250,235 230,230 Q210,225 200,220 Z"
+          fill="url(#handG)" stroke="#d09830" stroke-width="1.5"/>
+    <!-- Left fingers -->
+    <path d="M250,195 Q260,180 265,175 Q270,178 268,190" fill="#e0a830" stroke="#d09830" stroke-width="1"/>
+    <path d="M262,193 Q270,175 276,170 Q280,174 275,188" fill="#e0a830" stroke="#d09830" stroke-width="1"/>
+    <path d="M275,196 Q282,180 288,176 Q292,180 285,195" fill="#e0a830" stroke="#d09830" stroke-width="1"/>
+    <!-- Right hand -->
+    <path d="M400,220 Q380,200 350,195 Q330,190 310,200 Q305,205 305,215 Q310,225 330,230 Q350,235 370,230 Q390,225 400,220 Z"
+          fill="url(#handG)" stroke="#d09830" stroke-width="1.5"/>
+    <!-- Right fingers -->
+    <path d="M350,195 Q340,180 335,175 Q330,178 332,190" fill="#e0a830" stroke="#d09830" stroke-width="1"/>
+    <path d="M338,193 Q330,175 324,170 Q320,174 325,188" fill="#e0a830" stroke="#d09830" stroke-width="1"/>
+    <path d="M325,196 Q318,180 312,176 Q308,180 315,195" fill="#e0a830" stroke="#d09830" stroke-width="1"/>
+    <!-- Interlocking thumbs -->
+    <ellipse cx="295" cy="210" rx="8" ry="5" fill="#d8a030" transform="rotate(-10,295,210)"/>
+    <ellipse cx="305" cy="210" rx="8" ry="5" fill="#d8a030" transform="rotate(10,305,210)"/>
+    <!-- Warm light emanating from clasp -->
+    <line x1="300" y1="170" x2="300" y2="130" stroke="rgba(240,200,90,.2)" stroke-width="2"/>
+    <line x1="260" y1="175" x2="230" y2="145" stroke="rgba(232,184,80,.12)" stroke-width="1.5"/>
+    <line x1="340" y1="175" x2="370" y2="145" stroke="rgba(232,184,80,.12)" stroke-width="1.5"/>
+    <line x1="245" y1="200" x2="200" y2="185" stroke="rgba(232,184,80,.08)" stroke-width="1.5"/>
+    <line x1="355" y1="200" x2="400" y2="185" stroke="rgba(232,184,80,.08)" stroke-width="1.5"/>
+    <!-- Light particles -->
+    <circle cx="300" cy="140" r="2.5" fill="rgba(240,200,90,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="240" cy="155" r="1.5" fill="rgba(232,184,80,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="360" cy="155" r="1.8" fill="rgba(232,184,80,.3)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="300" cy="115" r="2" fill="rgba(240,200,90,.45)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="210" cy="180" r="1.2" fill="rgba(208,152,48,.25)" style="animation: goldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="360" rx="250" ry="22" fill="rgba(10,10,6,.5)"/>
+  </svg>
+
+  <app-scene-heading title="💛 愛的命令" subtitle="The Command to Love — 2 John 1:5-6" id="command-heading" />
+  <app-scene-verse text="「我們大家要彼此相愛。我們照他的命令行，這就是愛」— 約翰貳書 1:5-6" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="約翰二書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 迷惑人的  The Deceivers
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-deceivers" aria-label="約翰貳書 — 迷惑人的">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="deceivers-glow" aria-hidden="true"></div>
 
+  <!-- Masks / shadows hiding behind a bright facade -->
+  <svg id="deceivers-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="面具與陰影隱藏在光明背後">
+    <defs>
+      <radialGradient id="deceiversGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(176,120,16,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="facadeG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e8b850"/>
+        <stop offset="100%" stop-color="#d09830"/>
+      </linearGradient>
+      <linearGradient id="shadowG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a1a08"/>
+        <stop offset="100%" stop-color="#1a1005"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="170" rx="200" ry="140" fill="url(#deceiversGlowG)"/>
+    <!-- Bright facade wall -->
+    <rect x="200" y="100" width="200" height="200" rx="8" fill="url(#facadeG)" opacity=".2"
+          stroke="rgba(232,184,80,.25)" stroke-width="1.5"/>
+    <!-- Left mask — smiling but sinister -->
+    <g transform="translate(210,140)">
+      <ellipse cx="50" cy="45" rx="38" ry="45" fill="url(#shadowG)" stroke="#4a3a10" stroke-width="1.5"/>
+      <ellipse cx="35" cy="35" rx="8" ry="6" fill="none" stroke="rgba(208,152,48,.4)" stroke-width="1.5"/>
+      <ellipse cx="65" cy="35" rx="8" ry="6" fill="none" stroke="rgba(208,152,48,.4)" stroke-width="1.5"/>
+      <circle cx="35" cy="35" r="3" fill="rgba(208,152,48,.5)"/>
+      <circle cx="65" cy="35" r="3" fill="rgba(208,152,48,.5)"/>
+      <path d="M30,60 Q50,80 70,60" fill="none" stroke="rgba(208,152,48,.5)" stroke-width="2"/>
+      <!-- Shadow tendrils behind -->
+      <path d="M-10,20 Q-30,10 -40,30" stroke="rgba(30,20,5,.4)" stroke-width="3" fill="none"/>
+      <path d="M-5,50 Q-25,55 -35,70" stroke="rgba(30,20,5,.3)" stroke-width="2.5" fill="none"/>
+    </g>
+    <!-- Right mask — different expression -->
+    <g transform="translate(340,150)">
+      <ellipse cx="50" cy="42" rx="35" ry="42" fill="url(#shadowG)" stroke="#4a3a10" stroke-width="1.5"/>
+      <ellipse cx="36" cy="32" rx="7" ry="5" fill="none" stroke="rgba(208,152,48,.4)" stroke-width="1.5"/>
+      <ellipse cx="64" cy="32" rx="7" ry="5" fill="none" stroke="rgba(208,152,48,.4)" stroke-width="1.5"/>
+      <circle cx="36" cy="32" r="2.5" fill="rgba(208,152,48,.5)"/>
+      <circle cx="64" cy="32" r="2.5" fill="rgba(208,152,48,.5)"/>
+      <path d="M32,56 Q50,48 68,56" fill="none" stroke="rgba(208,152,48,.5)" stroke-width="2"/>
+      <!-- Shadow tendrils behind -->
+      <path d="M110,18 Q130,8 140,28" stroke="rgba(30,20,5,.4)" stroke-width="3" fill="none"/>
+      <path d="M105,48 Q125,52 135,68" stroke="rgba(30,20,5,.3)" stroke-width="2.5" fill="none"/>
+    </g>
+    <!-- Warning light between masks -->
+    <circle cx="300" cy="180" r="20" fill="rgba(232,184,80,.06)"/>
+    <circle cx="300" cy="180" r="10" fill="rgba(240,200,90,.1)"/>
+    <line x1="300" y1="155" x2="300" y2="120" stroke="rgba(240,200,90,.15)" stroke-width="2"/>
+    <line x1="300" y1="205" x2="300" y2="240" stroke="rgba(208,152,48,.1)" stroke-width="1.5"/>
+    <!-- Creeping shadow at bottom -->
+    <ellipse cx="300" cy="320" rx="180" ry="30" fill="rgba(20,15,5,.35)"/>
+    <!-- Light particles -->
+    <circle cx="250" cy="130" r="2" fill="rgba(232,184,80,.35)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="350" cy="125" r="1.5" fill="rgba(232,184,80,.3)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="105" r="2" fill="rgba(240,200,90,.4)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="170" r="1.2" fill="rgba(208,152,48,.25)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="400" cy="165" r="1.8" fill="rgba(208,152,48,.3)" style="animation: goldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="22" fill="rgba(10,10,6,.5)"/>
+  </svg>
+
+  <app-scene-heading title="⚠️ 迷惑人的" subtitle="The Deceivers — 2 John 1:7" id="deceivers-heading" />
+  <app-scene-verse text="「因為世上有許多迷惑人的出來，他們不認耶穌基督是成了肉身來的」— 約翰貳書 1:7" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="約翰二書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 持守教訓  Abide in the Teaching
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-abide" aria-label="約翰貳書 — 持守教訓">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="abide-glow" aria-hidden="true"></div>
 
+  <!-- A fortress wall standing firm with a scroll at center -->
+  <svg id="abide-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="堅固的城牆與卷軸">
+    <defs>
+      <radialGradient id="abideGlowG" cx="50%" cy="35%" r="50%">
+        <stop offset="0%" stop-color="rgba(208,152,48,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c08820"/>
+        <stop offset="100%" stop-color="#7a5010"/>
+      </linearGradient>
+      <linearGradient id="scrollG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e8b850"/>
+        <stop offset="100%" stop-color="#d09830"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="180" rx="220" ry="150" fill="url(#abideGlowG)"/>
+    <!-- Fortress wall base -->
+    <rect x="120" y="180" width="360" height="140" rx="4" fill="url(#wallG)" stroke="#b07810" stroke-width="1.5"/>
+    <!-- Stone texture -->
+    <line x1="130" y1="220" x2="470" y2="220" stroke="rgba(176,120,16,.3)" stroke-width="1"/>
+    <line x1="130" y1="260" x2="470" y2="260" stroke="rgba(176,120,16,.3)" stroke-width="1"/>
+    <line x1="130" y1="300" x2="470" y2="300" stroke="rgba(176,120,16,.25)" stroke-width="1"/>
+    <line x1="200" y1="180" x2="200" y2="220" stroke="rgba(176,120,16,.2)" stroke-width="1"/>
+    <line x1="300" y1="180" x2="300" y2="220" stroke="rgba(176,120,16,.2)" stroke-width="1"/>
+    <line x1="400" y1="180" x2="400" y2="220" stroke="rgba(176,120,16,.2)" stroke-width="1"/>
+    <line x1="250" y1="220" x2="250" y2="260" stroke="rgba(176,120,16,.2)" stroke-width="1"/>
+    <line x1="350" y1="220" x2="350" y2="260" stroke="rgba(176,120,16,.2)" stroke-width="1"/>
+    <!-- Battlements / crenellations -->
+    <rect x="120" y="165" width="50" height="20" rx="2" fill="url(#wallG)" stroke="#b07810" stroke-width="1"/>
+    <rect x="190" y="165" width="50" height="20" rx="2" fill="url(#wallG)" stroke="#b07810" stroke-width="1"/>
+    <rect x="260" y="165" width="80" height="20" rx="2" fill="url(#wallG)" stroke="#b07810" stroke-width="1"/>
+    <rect x="360" y="165" width="50" height="20" rx="2" fill="url(#wallG)" stroke="#b07810" stroke-width="1"/>
+    <rect x="430" y="165" width="50" height="20" rx="2" fill="url(#wallG)" stroke="#b07810" stroke-width="1"/>
+    <!-- Central scroll / book -->
+    <rect x="268" y="225" width="64" height="80" rx="4" fill="url(#scrollG)" stroke="#d09830" stroke-width="1.5"/>
+    <rect x="272" y="229" width="56" height="72" rx="3" fill="#d8a030"/>
+    <!-- Scroll text lines -->
+    <line x1="280" y1="245" x2="320" y2="245" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+    <line x1="280" y1="255" x2="315" y2="255" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+    <line x1="280" y1="265" x2="318" y2="265" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+    <line x1="280" y1="275" x2="310" y2="275" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+    <line x1="280" y1="285" x2="316" y2="285" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+    <!-- Light radiating from scroll -->
+    <circle cx="300" cy="265" r="50" fill="rgba(232,184,80,.06)"/>
+    <circle cx="300" cy="265" r="30" fill="rgba(240,200,90,.08)"/>
+    <line x1="300" y1="220" x2="300" y2="150" stroke="rgba(240,200,90,.15)" stroke-width="2"/>
+    <line x1="275" y1="225" x2="240" y2="155" stroke="rgba(232,184,80,.08)" stroke-width="1.5"/>
+    <line x1="325" y1="225" x2="360" y2="155" stroke="rgba(232,184,80,.08)" stroke-width="1.5"/>
+    <!-- Light particles -->
+    <circle cx="300" cy="140" r="2.5" fill="rgba(240,200,90,.4)" style="animation: goldEmber 3s ease-in-out infinite;"/>
+    <circle cx="250" cy="160" r="1.5" fill="rgba(232,184,80,.35)" style="animation: goldEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="350" cy="158" r="1.8" fill="rgba(232,184,80,.3)" style="animation: goldEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="200" cy="200" r="1.2" fill="rgba(208,152,48,.25)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="400" cy="195" r="2" fill="rgba(208,152,48,.3)" style="animation: goldEmber 3s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="22" fill="rgba(10,10,6,.5)"/>
+  </svg>
+
+  <app-scene-heading title="📜 持守教訓" subtitle="Abide in the Teaching — 2 John 1:9" id="abide-heading" />
+  <app-scene-verse text="「凡越過基督的教訓不常守著的，就沒有神」— 約翰貳書 1:9" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="約翰二書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 面對面的喜樂  Joy Face to Face
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-joy" aria-label="約翰貳書 — 面對面的喜樂">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="joy-glow" aria-hidden="true"></div>
+
+  <!-- Two figures meeting face-to-face with radiant joy/light between them -->
+  <svg id="joy-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="兩人面對面相見充滿喜樂的光">
+    <defs>
+      <radialGradient id="joyGlowG" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="rgba(232,184,80,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="joyLightG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(240,200,90,.3)"/>
+        <stop offset="50%" stop-color="rgba(232,184,80,.15)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </linearGradient>
+    </defs>
+    <!-- Background glow -->
+    <ellipse cx="300" cy="190" rx="220" ry="150" fill="url(#joyGlowG)"/>
+    <!-- Radiant light between figures -->
+    <circle cx="300" cy="200" r="80" fill="rgba(232,184,80,.04)"/>
+    <circle cx="300" cy="200" r="50" fill="rgba(240,200,90,.06)"/>
+    <circle cx="300" cy="200" r="25" fill="rgba(255,220,120,.1)"/>
+    <!-- Light rays between figures -->
+    <line x1="300" y1="140" x2="300" y2="100" stroke="rgba(240,200,90,.2)" stroke-width="2"/>
+    <line x1="280" y1="150" x2="250" y2="110" stroke="rgba(232,184,80,.12)" stroke-width="1.5"/>
+    <line x1="320" y1="150" x2="350" y2="110" stroke="rgba(232,184,80,.12)" stroke-width="1.5"/>
+    <line x1="265" y1="170" x2="220" y2="140" stroke="rgba(232,184,80,.08)" stroke-width="1.5"/>
+    <line x1="335" y1="170" x2="380" y2="140" stroke="rgba(232,184,80,.08)" stroke-width="1.5"/>
+    <!-- Left figure -->
+    <g transform="translate(150,180)">
+      <circle cx="30" cy="0" r="16" fill="#d8a838" stroke="#d09830" stroke-width="1"/>
+      <circle cx="26" cy="-3" r="2.5" fill="#8a6010"/>
+      <circle cx="34" cy="-3" r="2.5" fill="#8a6010"/>
+      <path d="M24,5 Q30,12 36,5" fill="none" stroke="#8a6010" stroke-width="1.5"/>
+      <path d="M15,18 Q12,55 15,90 Q22,96 30,98 Q38,96 45,90 Q48,55 45,18 Z" fill="#c08820"/>
+      <!-- Arm reaching toward center -->
+      <path d="M45,35 Q70,28 100,32" stroke="#c08820" stroke-width="5" fill="none" stroke-linecap="round"/>
+    </g>
+    <!-- Right figure -->
+    <g transform="translate(380,185)">
+      <circle cx="30" cy="0" r="15" fill="#d8a838" stroke="#d09830" stroke-width="1"/>
+      <circle cx="26" cy="-3" r="2.5" fill="#8a6010"/>
+      <circle cx="34" cy="-3" r="2.5" fill="#8a6010"/>
+      <path d="M24,5 Q30,12 36,5" fill="none" stroke="#8a6010" stroke-width="1.5"/>
+      <path d="M16,16 Q13,52 16,85 Q22,90 30,92 Q38,90 44,85 Q47,52 44,16 Z" fill="#b07810"/>
+      <!-- Arm reaching toward center -->
+      <path d="M16,32 Q-10,25 -40,30" stroke="#b07810" stroke-width="5" fill="none" stroke-linecap="round"/>
+    </g>
+    <!-- Joy sparkles between them -->
+    <circle cx="300" cy="180" r="3" fill="rgba(255,220,120,.5)" style="animation: goldEmber 2.5s ease-in-out infinite;"/>
+    <circle cx="280" cy="195" r="2" fill="rgba(240,200,90,.4)" style="animation: goldEmber 3s ease-in-out .5s infinite;"/>
+    <circle cx="320" cy="190" r="2.5" fill="rgba(240,200,90,.45)" style="animation: goldEmber 3.5s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="210" r="1.8" fill="rgba(232,184,80,.35)" style="animation: goldEmber 4s ease-in-out 1.5s infinite;"/>
+    <circle cx="265" cy="175" r="1.5" fill="rgba(232,184,80,.3)" style="animation: goldEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="335" cy="178" r="1.2" fill="rgba(232,184,80,.3)" style="animation: goldEmber 3s ease-in-out 2.5s infinite;"/>
+    <circle cx="300" cy="160" r="2" fill="rgba(255,220,120,.4)" style="animation: goldEmber 3.5s ease-in-out .3s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="370" rx="260" ry="22" fill="rgba(10,10,6,.5)"/>
+  </svg>
+
+  <app-scene-heading title="😊 面對面的喜樂" subtitle="Joy Face to Face — 2 John 1:12" id="joy-heading" />
+  <app-scene-verse text="「我盼望到你們那裏，與你們當面談論，使你們的喜樂滿足」— 約翰貳書 1:12" />
 </section>

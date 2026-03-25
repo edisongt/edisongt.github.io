@@ -13,13 +13,77 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes glowPulse {
+  0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+  50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+}
+
+@keyframes floatY {
+  0%,100% { transform: translateY(0);    }
+  50%      { transform: translateY(-12px); }
+}
+
 @keyframes shimmer {
   0%,100% { filter: brightness(1);   }
   50%      { filter: brightness(1.35); }
 }
 
-#scene-1 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #16163a 50%, #0a0a2e 100%);
+@keyframes gentleSway {
+  0%,100% { transform: rotate(-1deg) translateY(0);   }
+  50%      { transform: rotate(1deg)  translateY(-4px); }
+}
+
+@keyframes breathe {
+  0%,100% { opacity: .6; transform: scale(1);    }
+  50%      { opacity: 1;  transform: scale(1.04); }
+}
+
+/* ── 2 John-specific keyframes ── */
+
+@keyframes goldEmber {
+  0%,100% { opacity: .3; }
+  50%      { opacity: .6; }
+}
+
+@keyframes letterFloat {
+  0%,100% { transform: translateX(-50%) translateY(0);   }
+  50%      { transform: translateX(-50%) translateY(-10px); }
+}
+
+@keyframes pathGlow {
+  0%,100% { opacity: .6; transform: scale(1);    }
+  50%      { opacity: 1;  transform: scale(1.04); }
+}
+
+@keyframes wallStand {
+  0%,100% { transform: translateX(-50%) rotate(-0.5deg);  }
+  50%      { transform: translateX(-50%) rotate(0.5deg);   }
+}
+
+@keyframes joyPulse {
+  0%,100% { opacity: .5; transform: scaleY(1);    }
+  50%      { opacity: .9; transform: scaleY(1.08); }
+}
+
+@keyframes maskFlicker {
+  0%,100% { opacity: .4; }
+  50%      { opacity: .75; }
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 1 — INTRO / Title
+   ══════════════════════════════════════════════ */
+
+#scene-intro {
+  background: linear-gradient(180deg, #0e0a04 0%, #1a1408 40%, #201a0a 70%, #0e0a04 100%);
+}
+
+#intro-gold-glow {
+  position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+  width: 50vw; height: 30vh;
+  background: radial-gradient(ellipse, rgba(208,152,48,.12) 0%, rgba(176,120,16,.05) 45%, transparent 70%);
+  z-index: 3;
+  animation: goldEmber 4s ease-in-out infinite;
 }
 
 #intro-title {
@@ -36,13 +100,169 @@
 
 #intro-title p {
   font-size: clamp(.9rem,2vw,1.2rem);
-  color: rgba(255,255,255,.5); margin-top: .6rem; letter-spacing: .18em;
+  color: rgba(232,184,80,.7); margin-top: .6rem; letter-spacing: .18em;
   animation: fadeUpIn 2s ease-out .5s both;
 }
 
-#scene-2, #scene-3, #scene-4, #scene-5, #scene-6 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #12122a 50%, #0a0a2e 100%);
+#intro-title .sub {
+  font-size: clamp(.75rem,1.4vw,.95rem);
+  color: rgba(232,184,80,.5); margin-top: .4rem; letter-spacing: .12em;
+  animation: fadeUpIn 2s ease-out .9s both;
 }
+
+#intro-letter-svg {
+  position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(100px,12vw,160px);
+  animation: letterFloat 5s ease-in-out infinite;
+}
+
+#intro-horizon-svg {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 2 — TRUTH  行在真理中
+   ══════════════════════════════════════════════ */
+
+#scene-truth {
+  background: linear-gradient(180deg, #0a0804 0%, #141008 40%, #1a1408 70%, #0a0804 100%);
+}
+
+#truth-glow {
+  position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+  width: 50vw; height: 50vh;
+  background: radial-gradient(ellipse, rgba(208,152,48,.15) 0%, rgba(176,120,16,.06) 50%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+#truth-scene-svg {
+  position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(280px,50vw,700px);
+  animation: gentleSway 7s ease-in-out infinite;
+}
+
+#truth-heading h2 {
+  color: #e8b850;
+  text-shadow: 0 0 22px rgba(208,152,48,.5);
+}
+
+#truth-heading p { color: rgba(232,184,80,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 3 — COMMAND  愛的命令
+   ══════════════════════════════════════════════ */
+
+#scene-command {
+  background: linear-gradient(180deg, #080604 0%, #100e06 40%, #161208 70%, #0a0804 100%);
+}
+
+#command-glow {
+  position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+  width: 55vw; height: 45vh;
+  background: radial-gradient(ellipse, rgba(176,120,16,.12) 0%, rgba(140,90,10,.05) 50%, transparent 70%);
+  z-index: 3;
+  animation: breathe 4.5s ease-in-out infinite;
+}
+
+#command-scene-svg {
+  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(280px,50vw,700px);
+  animation: breathe 6s ease-in-out infinite;
+}
+
+#command-heading h2 {
+  color: #d8a838;
+  text-shadow: 0 0 22px rgba(176,120,16,.5);
+}
+
+#command-heading p { color: rgba(216,168,56,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 4 — DECEIVERS  迷惑人的
+   ══════════════════════════════════════════════ */
+
+#scene-deceivers {
+  background: linear-gradient(180deg, #0c0a06 0%, #161008 35%, #1e1a0c 60%, #201808 85%, #161008 100%);
+}
+
+#deceivers-glow {
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: clamp(180px,35vw,450px); height: 65%;
+  background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(208,152,48,.1) 0%, rgba(176,120,16,.04) 40%, transparent 70%);
+  z-index: 3;
+  animation: maskFlicker 4s ease-in-out infinite;
+}
+
+#deceivers-scene-svg {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+}
+
+#deceivers-heading h2 {
+  background: linear-gradient(120deg, #e8b850 0%, #f0d070 50%, #d09830 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+#deceivers-heading p { color: rgba(208,152,48,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 5 — ABIDE  持守教訓
+   ══════════════════════════════════════════════ */
+
+#scene-abide {
+  background: linear-gradient(180deg, #0a0a06 0%, #121008 40%, #181510 70%, #0e0c06 100%);
+}
+
+#abide-glow {
+  position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+  width: 50vw; height: 50vh;
+  background: radial-gradient(ellipse, rgba(208,152,48,.14) 0%, rgba(176,120,16,.05) 50%, transparent 70%);
+  z-index: 3;
+  animation: breathe 3.5s ease-in-out infinite;
+}
+
+#abide-scene-svg {
+  position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(280px,45vw,650px);
+  animation: wallStand 8s ease-in-out infinite;
+}
+
+#abide-heading h2 {
+  color: #e8c060;
+  text-shadow: 0 0 22px rgba(208,152,48,.5);
+}
+
+#abide-heading p { color: rgba(232,192,96,.55); }
+
+/* ══════════════════════════════════════════════
+     SCENE 6 — JOY  面對面的喜樂
+   ══════════════════════════════════════════════ */
+
+#scene-joy {
+  background: linear-gradient(180deg, #0e0a04 0%, #181408 40%, #201a10 70%, #1a1608 100%);
+}
+
+#joy-glow {
+  position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+  width: clamp(180px,35vw,450px); height: 70%;
+  background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(232,184,80,.08) 0%, rgba(208,152,48,.03) 40%, transparent 70%);
+  z-index: 3;
+  animation: goldEmber 4s ease-in-out infinite;
+}
+
+#joy-scene-svg {
+  position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(200px,32vw,420px);
+  animation: joyPulse 4s ease-in-out infinite;
+}
+
+#joy-heading h2 {
+  background: linear-gradient(120deg, #e8b850 0%, #f0d070 50%, #d09830 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+#joy-heading p { color: rgba(232,184,80,.5); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
