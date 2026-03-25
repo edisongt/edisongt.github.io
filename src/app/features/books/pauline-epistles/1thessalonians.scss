@@ -1,49 +1,280 @@
 :host { display: block; }
 
 .scene {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  scroll-snap-align: start;
-}
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
 
 @keyframes fadeUpIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowPulse {
+      0%,100% { opacity: .7;  transform: translateX(-50%) scale(1);   }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+@keyframes floatY {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-12px); }
+    }
 
 @keyframes shimmer {
-  0%,100% { filter: brightness(1);   }
-  50%      { filter: brightness(1.35); }
-}
+      0%,100% { filter: brightness(1);   }
+      50%      { filter: brightness(1.35); }
+    }
 
-#scene-1 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #16163a 50%, #0a0a2e 100%);
-}
+@keyframes gentleSway {
+      0%,100% { transform: rotate(-1deg) translateY(0);   }
+      50%      { transform: rotate(1deg)  translateY(-4px); }
+    }
+
+@keyframes breathe {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+/* ── 1 Thessalonians-specific keyframes ── */
+
+@keyframes steelEmber {
+      0%,100% { opacity: .3; }
+      50%      { opacity: .6; }
+    }
+
+@keyframes scrollFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);   }
+      50%      { transform: translateX(-50%) translateY(-10px); }
+    }
+
+@keyframes torchFlicker {
+      0%,100% { opacity: .6; transform: scale(1);    }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+
+@keyframes garmentSway {
+      0%,100% { transform: translateX(-50%) rotate(-1deg);  }
+      50%      { transform: translateX(-50%) rotate(1deg);   }
+    }
+
+@keyframes cloudDrift {
+      0%   { transform: translateY(0); opacity: .5; }
+      50%  { transform: translateY(25px); opacity: .3; }
+      100% { transform: translateY(50px); opacity: 0; }
+    }
+
+@keyframes watchFloat {
+      0%,100% { transform: translateX(-50%) translateY(0);    }
+      50%      { transform: translateX(-50%) translateY(-14px); }
+    }
+
+@keyframes sunriseGlow {
+      0%,100% { opacity: .5; transform: scaleY(1);    }
+      50%      { opacity: .9; transform: scaleY(1.08); }
+    }
+
+@keyframes praiseGlow {
+      0%,100% { opacity: .4; }
+      50%      { opacity: .75; }
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 1 — INTRO / Title
+    ══════════════════════════════════════════════ */
+
+#scene-intro {
+      background: linear-gradient(180deg, #0a1020 0%, #121a30 40%, #161e38 70%, #0a1020 100%);
+    }
+
+#intro-steel-glow {
+      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 30vh;
+      background: radial-gradient(ellipse, rgba(96,128,176,.12) 0%, rgba(64,96,144,.05) 45%, transparent 70%);
+      z-index: 3;
+      animation: steelEmber 4s ease-in-out infinite;
+    }
 
 #intro-title {
-  position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
-  text-align: center; z-index: 10; white-space: nowrap;
-}
+      position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center; z-index: 10; white-space: nowrap;
+    }
 
 #intro-title h1 {
-  font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
-  background: linear-gradient(120deg, #6080b0 0%, #80a0d0 45%, #406090 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
-}
+      font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
+      background: linear-gradient(120deg, #6080b0 0%, #80a0d0 45%, #406090 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+    }
 
 #intro-title p {
-  font-size: clamp(.9rem,2vw,1.2rem);
-  color: rgba(255,255,255,.5); margin-top: .6rem; letter-spacing: .18em;
-  animation: fadeUpIn 2s ease-out .5s both;
-}
+      font-size: clamp(.9rem,2vw,1.2rem);
+      color: rgba(128,160,208,.7); margin-top: .6rem; letter-spacing: .18em;
+      animation: fadeUpIn 2s ease-out .5s both;
+    }
 
-#scene-2, #scene-3, #scene-4, #scene-5, #scene-6 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #12122a 50%, #0a0a2e 100%);
-}
+#intro-title .sub {
+      font-size: clamp(.75rem,1.4vw,.95rem);
+      color: rgba(128,160,208,.5); margin-top: .4rem; letter-spacing: .12em;
+      animation: fadeUpIn 2s ease-out .9s both;
+    }
+
+#intro-scroll-svg {
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(100px,12vw,160px);
+      animation: scrollFloat 5s ease-in-out infinite;
+    }
+
+#intro-horizon-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 5;
+    }
+
+/* ══════════════════════════════════════════════
+       SCENE 2 — FAITH  信心的榜樣
+    ══════════════════════════════════════════════ */
+
+#scene-faith {
+      background: linear-gradient(180deg, #080e1e 0%, #101828 40%, #161e38 70%, #080e1e 100%);
+    }
+
+#faith-glow {
+      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(96,128,176,.15) 0%, rgba(64,96,144,.06) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#faith-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: gentleSway 7s ease-in-out infinite;
+    }
+
+#faith-heading h2 {
+      color: #80a0d0;
+      text-shadow: 0 0 22px rgba(96,128,176,.5);
+    }
+
+#faith-heading p { color: rgba(128,160,208,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 3 — SANCTIFY  成為聖潔
+    ══════════════════════════════════════════════ */
+
+#scene-sanctify {
+      background: linear-gradient(180deg, #060c18 0%, #0e1424 40%, #141c30 70%, #080e1e 100%);
+    }
+
+#sanctify-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 55vw; height: 45vh;
+      background: radial-gradient(ellipse, rgba(64,96,144,.12) 0%, rgba(48,72,112,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4.5s ease-in-out infinite;
+    }
+
+#sanctify-scene-svg {
+      position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,50vw,700px);
+      animation: garmentSway 8s ease-in-out infinite;
+    }
+
+#sanctify-heading h2 {
+      color: #7090c0;
+      text-shadow: 0 0 22px rgba(64,96,144,.5);
+    }
+
+#sanctify-heading p { color: rgba(112,144,192,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 4 — ENCOURAGE  彼此勸慰
+    ══════════════════════════════════════════════ */
+
+#scene-encourage {
+      background: linear-gradient(180deg, #0a0e20 0%, #141a38 35%, #1a2040 60%, #1c2248 85%, #141a38 100%);
+    }
+
+#encourage-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 65%;
+      background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(144,176,224,.1) 0%, rgba(96,128,176,.04) 40%, transparent 70%);
+      z-index: 3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+#encourage-scene-svg {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 5;
+    }
+
+#encourage-heading h2 {
+      background: linear-gradient(120deg, #80a0d0 0%, #b0c8e8 50%, #6080b0 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+#encourage-heading p { color: rgba(144,176,224,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 5 — RETURN  主必再來
+    ══════════════════════════════════════════════ */
+
+#scene-return {
+      background: linear-gradient(180deg, #080c1e 0%, #101630 40%, #141c40 70%, #0c1024 100%);
+    }
+
+#return-glow {
+      position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(144,176,224,.14) 0%, rgba(96,128,176,.05) 50%, transparent 70%);
+      z-index: 3;
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+
+#return-scene-svg {
+      position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(280px,45vw,650px);
+      animation: watchFloat 6s ease-in-out infinite;
+    }
+
+#return-heading h2 {
+      color: #a0c0e0;
+      text-shadow: 0 0 22px rgba(144,176,224,.5);
+    }
+
+#return-heading p { color: rgba(160,192,224,.55); }
+
+/* ══════════════════════════════════════════════
+       SCENE 6 — REJOICE  常常喜樂
+    ══════════════════════════════════════════════ */
+
+#scene-rejoice {
+      background: linear-gradient(180deg, #0c1020 0%, #141c38 40%, #1c2448 70%, #181e40 100%);
+    }
+
+#rejoice-glow {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: clamp(180px,35vw,450px); height: 70%;
+      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(128,160,208,.08) 0%, rgba(96,128,176,.03) 40%, transparent 70%);
+      z-index: 3;
+      animation: praiseGlow 4s ease-in-out infinite;
+    }
+
+#rejoice-scene-svg {
+      position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+      z-index: 8; width: clamp(200px,32vw,420px);
+      animation: sunriseGlow 4s ease-in-out infinite;
+    }
+
+#rejoice-heading h2 {
+      background: linear-gradient(120deg, #80a0d0 0%, #b0c8e8 50%, #6080b0 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+#rejoice-heading p { color: rgba(128,160,208,.5); }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-}
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
