@@ -8,18 +8,52 @@
   scroll-snap-align: start;
 }
 
+/* ── Keyframes ── */
+
 @keyframes fadeUpIn {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes shimmer {
-  0%,100% { filter: brightness(1);   }
-  50%      { filter: brightness(1.35); }
+  0%,100% { filter: brightness(1);    }
+  50%      { filter: brightness(1.38); }
 }
 
-#scene-1 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #16163a 50%, #0a0a2e 100%);
+@keyframes amberEmber {
+  0%,100% { opacity: .3; }
+  50%      { opacity: .75; }
+}
+
+@keyframes scrollFloat {
+  0%,100% { transform: translateX(-50%) translateY(0);    }
+  50%      { transform: translateX(-50%) translateY(-10px); }
+}
+
+@keyframes glowPulse {
+  0%,100% { opacity: .6; transform: translateX(-50%) scale(1);    }
+  50%      { opacity: 1;  transform: translateX(-50%) scale(1.12); }
+}
+
+@keyframes lampGlow {
+  0%,100% { opacity: .5; transform: translateX(-50%) scale(1);   }
+  50%      { opacity: .8; transform: translateX(-50%) scale(1.1); }
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 1 — INTRO
+   ══════════════════════════════════════════════ */
+
+#scene-intro {
+  background: linear-gradient(180deg, #0c0804 0%, #1a1006 45%, #221408 70%, #0c0804 100%);
+}
+
+#intro-glow {
+  position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+  width: 50vw; height: 30vh;
+  background: radial-gradient(ellipse, rgba(200,140,50,.12) 0%, rgba(140,90,20,.05) 50%, transparent 72%);
+  z-index: 3;
+  animation: glowPulse 4.5s ease-in-out infinite;
 }
 
 #intro-title {
@@ -36,12 +70,128 @@
 
 #intro-title p {
   font-size: clamp(.9rem,2vw,1.2rem);
-  color: rgba(255,255,255,.5); margin-top: .6rem; letter-spacing: .18em;
+  color: rgba(200,160,80,.65); margin-top: .6rem; letter-spacing: .18em;
   animation: fadeUpIn 2s ease-out .5s both;
 }
 
-#scene-2, #scene-3, #scene-4, #scene-5, #scene-6 {
-  background: linear-gradient(180deg, #0a0a2e 0%, #12122a 50%, #0a0a2e 100%);
+#intro-title .sub {
+  display: block; font-size: clamp(.7rem,1.3vw,.9rem);
+  color: rgba(200,150,60,.5); margin-top: .4rem; letter-spacing: .12em;
+  animation: fadeUpIn 2s ease-out .9s both;
+}
+
+#intro-scroll-svg {
+  position: absolute; bottom: 14%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(90px,10vw,140px);
+  animation: scrollFloat 5s ease-in-out infinite;
+}
+
+#intro-horizon-svg {
+  position: absolute; bottom: 0; left: 0; width: 100%; z-index: 5;
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 2 — 該猶的忠心
+   ══════════════════════════════════════════════ */
+
+#scene-gaius {
+  background: linear-gradient(180deg, #0c0a02 0%, #1a1404 50%, #221808 70%, #0c0a02 100%);
+}
+
+#gaius-glow {
+  position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+  width: 55vw; height: 35vh;
+  background: radial-gradient(ellipse, rgba(210,155,50,.1) 0%, rgba(150,100,20,.04) 50%, transparent 72%);
+  z-index: 3;
+  animation: lampGlow 5s ease-in-out infinite;
+}
+
+#gaius-scene-svg {
+  position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(280px,55vw,500px);
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 3 — 接待弟兄
+   ══════════════════════════════════════════════ */
+
+#scene-hospitality {
+  background: linear-gradient(180deg, #0e0a04 0%, #1c1206 45%, #261806 70%, #0e0a04 100%);
+}
+
+#hospitality-glow {
+  position: absolute; top: 40%; left: 30%; transform: translate(-50%,-50%);
+  width: 40vw; height: 50vh;
+  background: radial-gradient(ellipse, rgba(220,155,50,.12) 0%, rgba(160,100,20,.05) 60%, transparent 80%);
+  z-index: 3;
+  animation: glowPulse 5.5s ease-in-out infinite;
+}
+
+#hospitality-scene-svg {
+  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(300px,60vw,540px);
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 4 — 丟特腓的傲慢
+   ══════════════════════════════════════════════ */
+
+#scene-diotrephes {
+  background: linear-gradient(180deg, #080604 0%, #120a04 50%, #180c04 70%, #080604 100%);
+}
+
+#diotrephes-glow {
+  position: absolute; top: 45%; left: 50%; transform: translate(-50%,-50%);
+  width: 50vw; height: 40vh;
+  background: radial-gradient(ellipse, rgba(160,80,20,.08) 0%, rgba(100,50,10,.03) 60%, transparent 80%);
+  z-index: 3;
+}
+
+#diotrephes-scene-svg {
+  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(300px,60vw,540px);
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 5 — 低米丟的見證
+   ══════════════════════════════════════════════ */
+
+#scene-demetrius {
+  background: linear-gradient(180deg, #0a0a06 0%, #181408 50%, #201c0a 70%, #0a0a06 100%);
+}
+
+#demetrius-glow {
+  position: absolute; top: 40%; left: 50%; transform: translate(-50%,-50%);
+  width: 60vw; height: 50vh;
+  background: radial-gradient(ellipse, rgba(200,155,50,.12) 0%, rgba(140,100,20,.05) 60%, transparent 80%);
+  z-index: 3;
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+#demetrius-scene-svg {
+  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(300px,60vw,540px);
+}
+
+/* ══════════════════════════════════════════════
+     SCENE 6 — 行善效法神
+   ══════════════════════════════════════════════ */
+
+#scene-good {
+  background: linear-gradient(180deg, #080c04 0%, #121804 50%, #1a2006 70%, #080c04 100%);
+}
+
+#good-glow {
+  position: absolute; top: 35%; left: 50%; transform: translate(-50%,-50%);
+  width: 55vw; height: 50vh;
+  background: radial-gradient(ellipse, rgba(180,145,50,.12) 0%, rgba(120,95,20,.05) 60%, transparent 80%);
+  z-index: 3;
+  animation: glowPulse 5s ease-in-out infinite;
+}
+
+#good-scene-svg {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  z-index: 8; width: clamp(300px,60vw,560px);
 }
 
 @media (prefers-reduced-motion: reduce) {

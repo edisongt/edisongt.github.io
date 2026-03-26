@@ -1,66 +1,439 @@
 <app-back-button />
 <app-nav-dots [scenes]="scenes" />
 
-<section class="scene" id="scene-1" aria-label="猶大書 — 開場">
+<!-- ══════════════════════════════════════════════
+     SCENE 1 — INTRO  開場
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-intro" aria-label="猶大書 — 開場">
   <app-starfield />
+
+  <div id="intro-glow" aria-hidden="true"></div>
 
   <div id="intro-title">
     <h1>猶大書</h1>
     <p>Epistle of Jude</p>
+    <span class="sub">護衛真道 · 警惕謬誤 · 記念歷史 · 頌讚歸主</span>
   </div>
 
+  <!-- Shield with flame representing "contend for the faith" -->
+  <svg id="intro-shield-svg" viewBox="0 0 160 200" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="信仰之盾與聖火">
+    <!-- Soft glow behind shield -->
+    <ellipse cx="80" cy="105" rx="60" ry="70" fill="rgba(128,80,200,.07)"/>
+    <!-- Light rays -->
+    <line x1="80" y1="55" x2="80" y2="10"  stroke="rgba(160,100,220,.18)" stroke-width="2"/>
+    <line x1="80" y1="55" x2="38" y2="22"  stroke="rgba(160,100,220,.12)" stroke-width="1.5"/>
+    <line x1="80" y1="55" x2="122" y2="22" stroke="rgba(160,100,220,.12)" stroke-width="1.5"/>
+    <line x1="80" y1="55" x2="15" y2="45"  stroke="rgba(160,100,220,.08)" stroke-width="1.5"/>
+    <line x1="80" y1="55" x2="145" y2="45" stroke="rgba(160,100,220,.08)" stroke-width="1.5"/>
+    <!-- Shield body -->
+    <path d="M35,60 L80,55 L125,60 L125,115 Q125,152 80,172 Q35,152 35,115 Z"
+          fill="#5a3090" stroke="#8060b0" stroke-width="2"/>
+    <!-- Shield inner -->
+    <path d="M43,66 L80,62 L117,66 L117,113 Q117,146 80,163 Q43,146 43,113 Z"
+          fill="#4a2878" stroke="#7050a8" stroke-width="1"/>
+    <!-- Cross on shield -->
+    <line x1="80" y1="75"  x2="80" y2="150" stroke="rgba(200,160,255,.55)" stroke-width="4"/>
+    <line x1="52" y1="102" x2="108" y2="102" stroke="rgba(200,160,255,.55)" stroke-width="4"/>
+    <circle cx="80" cy="102" r="5" fill="rgba(200,160,255,.6)"/>
+    <circle cx="80" cy="102" r="3" fill="rgba(230,200,255,.8)"/>
+    <!-- Flame above shield -->
+    <path d="M72,60 Q68,44 75,32 Q78,24 80,18 Q82,24 85,32 Q92,44 88,60"
+          fill="rgba(220,160,80,.5)"/>
+    <path d="M74,60 Q72,48 77,38 Q79,32 80,27 Q81,32 83,38 Q88,48 86,60"
+          fill="rgba(240,200,100,.5)"/>
+    <path d="M77,60 Q76,52 80,44 Q80,38 80,35 Q80,38 80,44 Q84,52 83,60"
+          fill="rgba(255,240,180,.45)"/>
+    <!-- Sparkle particles -->
+    <circle cx="40" cy="72" r="1.5" fill="rgba(180,120,255,.5)" style="animation: purpleEmber 3.2s ease-in-out infinite;"/>
+    <circle cx="122" cy="68" r="1.2" fill="rgba(180,120,255,.45)" style="animation: purpleEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="80"  cy="35" r="1.8" fill="rgba(220,180,255,.55)" style="animation: purpleEmber 3.7s ease-in-out .5s infinite;"/>
+    <circle cx="138" cy="95" r="1"   fill="rgba(160,100,220,.35)" style="animation: purpleEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground shadow -->
+    <ellipse cx="80" cy="188" rx="50" ry="7" fill="rgba(0,0,0,.35)"/>
+  </svg>
+
+  <!-- Horizon silhouette -->
+  <svg id="intro-horizon-svg" viewBox="0 0 1440 300" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="judeHorizonG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#12081e"/>
+        <stop offset="100%" stop-color="#0a0412"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,200 Q120,175 240,190 Q360,165 480,185 Q600,155 720,178
+             Q840,150 960,172 Q1080,158 1200,182 Q1320,165 1440,192
+             L1440,300 L0,300 Z"
+          fill="url(#judeHorizonG)"/>
+    <circle cx="300"  cy="180" r="2"   fill="rgba(160,100,220,.3)"  style="animation: purpleEmber 3s ease-in-out infinite;"/>
+    <circle cx="700"  cy="168" r="1.5" fill="rgba(160,100,220,.25)" style="animation: purpleEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="1100" cy="174" r="1.8" fill="rgba(160,100,220,.2)"  style="animation: purpleEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="500"  cy="182" r="2"   fill="rgba(160,100,220,.3)"  style="animation: purpleEmber 4.5s ease-in-out 2s infinite;"/>
+  </svg>
+
+  <app-scene-verse text="「親愛的弟兄啊，我竭力地寫信給你們，勸你們要為從前一次交付聖徒的真道竭力地爭辯」— 猶大書 1:3" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-2" aria-label="猶大書 — 第二幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 2 — 為真道爭辯  Contend for the Faith
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-contend" aria-label="猶大書 — 為真道爭辯">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-2-heading">
-    <h2>第二幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="contend-glow" aria-hidden="true"></div>
 
+  <!-- Warrior shield and sword — full armor of God -->
+  <svg id="contend-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="身穿全副武裝的勇士">
+    <defs>
+      <radialGradient id="contendGlowG" cx="50%" cy="35%" r="45%">
+        <stop offset="0%" stop-color="rgba(120,80,200,.14)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="swordG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e0d0f8"/>
+        <stop offset="100%" stop-color="#8060b0"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="190" rx="220" ry="150" fill="url(#contendGlowG)"/>
+    <!-- Large shield centered -->
+    <path d="M195,80 L300,68 L405,80 L405,205 Q405,298 300,338 Q195,298 195,205 Z"
+          fill="#4a2878" stroke="#8060b0" stroke-width="2.5"/>
+    <path d="M209,93 L300,82 L391,93 L391,202 Q391,286 300,323 Q209,286 209,202 Z"
+          fill="#3a1a68" stroke="#7050a0" stroke-width="1.5"/>
+    <!-- Shield cross -->
+    <line x1="300" y1="102" x2="300" y2="312" stroke="rgba(190,150,255,.45)" stroke-width="6"/>
+    <line x1="240" y1="185" x2="360" y2="185" stroke="rgba(190,150,255,.45)" stroke-width="6"/>
+    <line x1="300" y1="102" x2="300" y2="312" stroke="rgba(220,190,255,.2)"  stroke-width="3"/>
+    <line x1="240" y1="185" x2="360" y2="185" stroke="rgba(220,190,255,.2)"  stroke-width="3"/>
+    <circle cx="300" cy="185" r="8" fill="rgba(190,150,255,.7)"/>
+    <circle cx="300" cy="185" r="5" fill="rgba(230,210,255,.85)"/>
+    <!-- Sword — right of shield -->
+    <rect x="372" y="50" width="8" height="165" rx="2" fill="url(#swordG)" stroke="#a080d0" stroke-width="1"/>
+    <rect x="352" y="113" width="48" height="10" rx="3" fill="#8060b0" stroke="#a080d0" stroke-width="1.2"/>
+    <rect x="374" y="215" width="4" height="40"  rx="2" fill="#6040a0" stroke="#8060b0" stroke-width="1"/>
+    <circle cx="376" cy="260" r="6" fill="#8060b0" stroke="#a080d0" stroke-width="1"/>
+    <!-- Sword gleam -->
+    <line x1="377" y1="55" x2="377" y2="125" stroke="rgba(240,230,255,.6)" stroke-width="1.5"/>
+    <!-- Helmet above shield -->
+    <path d="M248,44 Q300,20 352,44 L360,82 Q330,72 300,70 Q270,72 240,82 Z"
+          fill="#5a3090" stroke="#8060b0" stroke-width="1.5"/>
+    <path d="M255,52 Q300,32 345,52" stroke="#a080c0" stroke-width="1.2" fill="none"/>
+    <path d="M268,70 Q300,74 332,70" stroke="rgba(180,140,250,.4)" stroke-width="2.5" fill="none"/>
+    <!-- Plume -->
+    <path d="M295,22 Q290,10 300,5 Q310,10 305,22" fill="rgba(180,120,255,.55)"/>
+    <!-- Light particles -->
+    <circle cx="218" cy="98"  r="2.5" fill="rgba(180,120,255,.4)"  style="animation: purpleEmber 3.2s ease-in-out infinite;"/>
+    <circle cx="392" cy="92"  r="2"   fill="rgba(180,120,255,.35)" style="animation: purpleEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="48"  r="3"   fill="rgba(210,180,255,.45)" style="animation: purpleEmber 3.6s ease-in-out .5s infinite;"/>
+    <circle cx="350" cy="345" r="1.5" fill="rgba(160,100,220,.3)"  style="animation: purpleEmber 4.5s ease-in-out 2s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="368" rx="205" ry="15" fill="rgba(10,4,20,.45)"/>
+  </svg>
+
+  <app-scene-heading title="⚔️ 為真道爭辯" subtitle="Contend Earnestly for the Faith — Jude 1:3" />
+  <app-scene-verse text="「要為從前一次交付聖徒的真道竭力地爭辯」— 猶大書 1:3" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-3" aria-label="猶大書 — 第三幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 3 — 假教師的警告  Warning Against False Teachers
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-warning" aria-label="猶大書 — 假教師的警告">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-3-heading">
-    <h2>第三幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="warning-glow" aria-hidden="true"></div>
 
+  <!-- Dark storm clouds with ominous silhouettes of false teachers -->
+  <svg id="warning-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="披著羊皮的假教師與無水雲彩">
+    <defs>
+      <radialGradient id="warningGlowG" cx="50%" cy="30%" r="50%">
+        <stop offset="0%" stop-color="rgba(80,30,120,.12)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="300" cy="150" rx="250" ry="140" fill="url(#warningGlowG)"/>
+    <!-- Storm clouds -->
+    <ellipse cx="180" cy="100" rx="120" ry="55" fill="rgba(38,18,65,.8)"/>
+    <ellipse cx="300" cy="78"  rx="140" ry="60" fill="rgba(48,22,80,.8)"/>
+    <ellipse cx="420" cy="105" rx="110" ry="50" fill="rgba(38,18,65,.8)"/>
+    <ellipse cx="148" cy="120" rx="80"  ry="40" fill="rgba(28,12,55,.85)"/>
+    <ellipse cx="462" cy="115" rx="90"  ry="45" fill="rgba(28,12,55,.85)"/>
+    <!-- Cloud underbellies -->
+    <ellipse cx="220" cy="140" rx="100" ry="35" fill="rgba(18,8,38,.75)"/>
+    <ellipse cx="380" cy="135" rx="100" ry="35" fill="rgba(18,8,38,.75)"/>
+    <!-- Wind lines — "waterless clouds driven by wind" -->
+    <path d="M75,148  Q115,143 158,148" stroke="rgba(120,80,180,.22)" stroke-width="1.5" fill="none"/>
+    <path d="M422,143 Q462,138 510,148" stroke="rgba(120,80,180,.22)" stroke-width="1.5" fill="none"/>
+    <!-- Silhouettes of false teachers below clouds -->
+    <!-- Figure 1 — left -->
+    <circle cx="168" cy="268" r="16" fill="rgba(55,25,95,.65)"/>
+    <path d="M156,283 Q168,293 180,283 L183,348 Q168,356 153,348 Z" fill="rgba(45,20,80,.65)"/>
+    <path d="M153,293 Q143,283 138,268" fill="none" stroke="rgba(80,50,130,.4)" stroke-width="2"/>
+    <path d="M183,293 Q193,283 198,268" fill="none" stroke="rgba(80,50,130,.4)" stroke-width="2"/>
+    <!-- Figure 2 — center-left -->
+    <circle cx="238" cy="298" r="14" fill="rgba(60,28,100,.6)"/>
+    <path d="M226,311 Q238,320 250,311 L253,350 Q238,357 223,350 Z" fill="rgba(50,23,88,.6)"/>
+    <!-- Figure 3 — center (preaching) -->
+    <circle cx="300" cy="253" r="18" fill="rgba(68,32,108,.72)"/>
+    <path d="M286,270 Q300,278 314,270 L317,358 Q300,366 283,358 Z" fill="rgba(58,27,98,.72)"/>
+    <path d="M314,273 Q330,263 340,248" fill="none" stroke="rgba(100,60,150,.5)" stroke-width="2"/>
+    <!-- Figure 4 — center-right -->
+    <circle cx="362" cy="298" r="14" fill="rgba(60,28,100,.6)"/>
+    <path d="M350,311 Q362,320 374,311 L377,350 Q362,357 347,350 Z" fill="rgba(50,23,88,.6)"/>
+    <!-- Figure 5 — right -->
+    <circle cx="432" cy="268" r="16" fill="rgba(55,25,95,.65)"/>
+    <path d="M420,283 Q432,293 444,283 L447,348 Q432,356 417,348 Z" fill="rgba(45,20,80,.65)"/>
+    <path d="M447,293 Q457,283 462,268" fill="none" stroke="rgba(80,50,130,.4)" stroke-width="2"/>
+    <!-- Red eyes — wolf-like -->
+    <circle cx="162" cy="265" r="2.5" fill="rgba(200,50,50,.65)"/>
+    <circle cx="176" cy="265" r="2.5" fill="rgba(200,50,50,.65)"/>
+    <circle cx="294" cy="250" r="3"   fill="rgba(200,50,50,.7)"/>
+    <circle cx="307" cy="250" r="3"   fill="rgba(200,50,50,.7)"/>
+    <circle cx="426" cy="265" r="2.5" fill="rgba(200,50,50,.65)"/>
+    <circle cx="440" cy="265" r="2.5" fill="rgba(200,50,50,.65)"/>
+    <!-- Storm flickers -->
+    <circle cx="210" cy="112" r="2"   fill="rgba(200,80,80,.45)"  style="animation: purpleEmber 2.8s ease-in-out infinite;"/>
+    <circle cx="380" cy="92"  r="1.8" fill="rgba(200,80,80,.4)"   style="animation: purpleEmber 3.5s ease-in-out .8s infinite;"/>
+    <circle cx="300" cy="102" r="2.5" fill="rgba(160,80,200,.5)"  style="animation: purpleEmber 4s ease-in-out .4s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="375" rx="255" ry="14" fill="rgba(10,4,20,.5)"/>
+  </svg>
+
+  <app-scene-heading title="🌩️ 假教師的警告" subtitle="Warning Against False Teachers — Jude 1:4,12" />
+  <app-scene-verse text="「他們是無水的雲彩，被風飄蕩；是秋天沒有果子、死而又死、拔出根來的樹」— 猶大書 1:12" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-4" aria-label="猶大書 — 第四幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 4 — 歷史的鑑戒  Historical Examples of Judgment
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-history" aria-label="猶大書 — 歷史的鑑戒">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-4-heading">
-    <h2>第四幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="history-glow" aria-hidden="true"></div>
 
+  <!-- Ruins of Sodom — fallen pillars, fire and smoke -->
+  <svg id="history-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="所多瑪蛾摩拉的毀滅廢墟">
+    <defs>
+      <radialGradient id="historyFireG" cx="50%" cy="62%" r="50%">
+        <stop offset="0%" stop-color="rgba(180,80,20,.2)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="300" cy="260" rx="240" ry="150" fill="url(#historyFireG)"/>
+    <!-- Background fire glow -->
+    <ellipse cx="300" cy="325" rx="200" ry="60" fill="rgba(150,50,10,.18)"/>
+    <ellipse cx="300" cy="325" rx="120" ry="35" fill="rgba(180,80,20,.2)"/>
+    <!-- Fallen pillar (toppled, horizontal) -->
+    <rect x="310" y="282" width="115" height="22" rx="4"
+          fill="rgba(78,58,38,.72)" transform="rotate(-9,310,290)"/>
+    <!-- Pillar 1 — left, cracked -->
+    <rect x="95"  y="185" width="30" height="120" rx="4" fill="rgba(80,60,40,.68)"/>
+    <rect x="90"  y="180" width="40" height="12"  rx="3" fill="rgba(100,75,50,.68)"/>
+    <path d="M107,210 L112,232 L105,258" stroke="rgba(55,38,20,.85)" stroke-width="2.2" fill="none"/>
+    <!-- Pillar 2 — center-left -->
+    <rect x="200" y="202" width="28" height="102" rx="4" fill="rgba(78,58,38,.62)"/>
+    <rect x="196" y="197" width="38" height="10"  rx="3" fill="rgba(98,73,48,.62)"/>
+    <!-- Pillar 3 — right -->
+    <rect x="445" y="192" width="28" height="110" rx="4" fill="rgba(78,58,38,.65)"/>
+    <rect x="441" y="187" width="38" height="10"  rx="3" fill="rgba(98,73,48,.65)"/>
+    <!-- Debris / rubble -->
+    <ellipse cx="152" cy="302" rx="32" ry="10" fill="rgba(78,58,38,.52)"/>
+    <ellipse cx="385" cy="312" rx="36" ry="12" fill="rgba(78,58,38,.48)"/>
+    <ellipse cx="482" cy="308" rx="26" ry="9"  fill="rgba(78,58,38,.48)"/>
+    <!-- Flame A — left pillar -->
+    <path d="M106,183 Q102,162 110,142 Q114,130 112,120 Q116,132 120,142 Q128,162 124,183"
+          fill="rgba(200,100,20,.52)"/>
+    <path d="M109,183 Q107,165 114,150 Q116,140 116,133 Q118,143 122,150 Q127,165 125,183"
+          fill="rgba(230,150,50,.47)"/>
+    <path d="M112,183 Q111,168 116,155 Q117,148 116,144 Q117,150 118,155 Q122,168 121,183"
+          fill="rgba(255,220,120,.38)"/>
+    <!-- Flame B — center -->
+    <path d="M276,202 Q270,174 280,153 Q286,138 285,126 Q290,140 294,153 Q304,174 298,202"
+          fill="rgba(200,100,20,.48)"/>
+    <path d="M279,202 Q276,178 284,160 Q287,148 286,140 Q289,150 292,160 Q300,178 298,202"
+          fill="rgba(230,150,50,.43)"/>
+    <path d="M282,202 Q281,183 286,168 Q287,160 287,156 Q287,162 288,168 Q293,183 292,202"
+          fill="rgba(255,220,120,.32)"/>
+    <!-- Flame C — right pillar -->
+    <path d="M446,189 Q442,166 450,147 Q454,135 453,124 Q457,137 461,147 Q469,166 465,189"
+          fill="rgba(200,100,20,.52)"/>
+    <path d="M449,189 Q447,170 454,153 Q456,143 455,136 Q458,146 461,153 Q468,170 466,189"
+          fill="rgba(230,150,50,.47)"/>
+    <!-- Smoke rising -->
+    <path d="M112,120 Q105,100 115,80 Q122,64 109,48 Q119,60 125,76 Q132,92 122,110"
+          fill="rgba(115,95,75,.32)"/>
+    <path d="M286,126 Q279,105 289,84 Q296,67 283,50 Q293,63 299,80 Q306,97 296,115"
+          fill="rgba(115,95,75,.28)"/>
+    <!-- Sulfur sparks -->
+    <circle cx="198" cy="152" r="2"   fill="rgba(220,160,50,.42)" style="animation: purpleEmber 3s ease-in-out infinite;"/>
+    <circle cx="380" cy="132" r="1.8" fill="rgba(220,160,50,.37)" style="animation: purpleEmber 3.8s ease-in-out .6s infinite;"/>
+    <circle cx="138" cy="112" r="1.5" fill="rgba(200,120,40,.47)" style="animation: purpleEmber 4.2s ease-in-out 1.2s infinite;"/>
+    <circle cx="462" cy="148" r="1.8" fill="rgba(220,160,50,.42)" style="animation: purpleEmber 3.5s ease-in-out .3s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="372" rx="262" ry="15" fill="rgba(20,10,5,.55)"/>
+  </svg>
+
+  <app-scene-heading title="🔥 歷史的鑑戒" subtitle="Historical Examples of God's Judgment — Jude 1:5-7" />
+  <app-scene-verse text="「就如所多瑪、蛾摩拉和周圍城邑的人，也照他們一味地行淫，隨從逆性的情慾，就受永火的刑罰，作為鑑戒」— 猶大書 1:7" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-5" aria-label="猶大書 — 第五幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 5 — 在至聖的真道上  Build Yourselves Up
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-build" aria-label="猶大書 — 在至聖的真道上">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-5-heading">
-    <h2>第五幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="build-glow" aria-hidden="true"></div>
 
+  <!-- Foundation stones rising up to radiant light -->
+  <svg id="build-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="在真道上建造自己">
+    <defs>
+      <radialGradient id="buildGlowG" cx="50%" cy="22%" r="50%">
+        <stop offset="0%" stop-color="rgba(120,80,200,.18)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="stoneG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7050a8"/>
+        <stop offset="100%" stop-color="#4a2878"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="160" rx="220" ry="165" fill="url(#buildGlowG)"/>
+    <!-- Radiant light from top -->
+    <line x1="300" y1="78" x2="300" y2="18"  stroke="rgba(180,130,255,.32)" stroke-width="3"/>
+    <line x1="300" y1="78" x2="218" y2="22"  stroke="rgba(180,130,255,.22)" stroke-width="2"/>
+    <line x1="300" y1="78" x2="382" y2="22"  stroke="rgba(180,130,255,.22)" stroke-width="2"/>
+    <line x1="300" y1="78" x2="138" y2="50"  stroke="rgba(180,130,255,.13)" stroke-width="2"/>
+    <line x1="300" y1="78" x2="462" y2="50"  stroke="rgba(180,130,255,.13)" stroke-width="2"/>
+    <line x1="300" y1="78" x2="78"  y2="90"  stroke="rgba(180,130,255,.08)" stroke-width="1.5"/>
+    <line x1="300" y1="78" x2="522" y2="90"  stroke="rgba(180,130,255,.08)" stroke-width="1.5"/>
+    <!-- Top cornerstone — glowing -->
+    <rect x="264" y="70" width="72" height="40" rx="5" fill="#8060c0" stroke="#a080d8" stroke-width="2.2"/>
+    <rect x="272" y="77" width="56" height="26" rx="3" fill="#7050b0"/>
+    <text x="300" y="93" text-anchor="middle" font-size="9" fill="rgba(220,190,255,.85)" font-family="serif">真道</text>
+    <rect x="257" y="63" width="86" height="52" rx="9" fill="rgba(160,120,255,.07)"/>
+    <!-- Second row -->
+    <rect x="214" y="112" width="80" height="36" rx="4" fill="url(#stoneG)" stroke="#7050a8" stroke-width="1.5"/>
+    <rect x="298" y="112" width="80" height="36" rx="4" fill="url(#stoneG)" stroke="#7050a8" stroke-width="1.5"/>
+    <text x="254" y="133" text-anchor="middle" font-size="8.5" fill="rgba(200,170,255,.75)" font-family="serif">信心</text>
+    <text x="338" y="133" text-anchor="middle" font-size="8.5" fill="rgba(200,170,255,.75)" font-family="serif">禱告</text>
+    <!-- Third row -->
+    <rect x="162" y="150" width="76" height="34" rx="4" fill="#5a3898" stroke="#7050a8" stroke-width="1.5"/>
+    <rect x="242" y="150" width="76" height="34" rx="4" fill="#5a3898" stroke="#7050a8" stroke-width="1.5"/>
+    <rect x="322" y="150" width="76" height="34" rx="4" fill="#5a3898" stroke="#7050a8" stroke-width="1.5"/>
+    <rect x="402" y="150" width="40" height="34" rx="4" fill="#5a3898" stroke="#7050a8" stroke-width="1.5"/>
+    <text x="200" y="170" text-anchor="middle" font-size="8.5" fill="rgba(180,150,240,.75)" font-family="serif">愛心</text>
+    <text x="280" y="170" text-anchor="middle" font-size="8.5" fill="rgba(180,150,240,.75)" font-family="serif">聖靈</text>
+    <text x="360" y="170" text-anchor="middle" font-size="8.5" fill="rgba(180,150,240,.75)" font-family="serif">盼望</text>
+    <!-- Fourth row -->
+    <rect x="126" y="186" width="72" height="32" rx="4" fill="#4a2878" stroke="#6040a0" stroke-width="1.5"/>
+    <rect x="202" y="186" width="72" height="32" rx="4" fill="#4a2878" stroke="#6040a0" stroke-width="1.5"/>
+    <rect x="278" y="186" width="72" height="32" rx="4" fill="#4a2878" stroke="#6040a0" stroke-width="1.5"/>
+    <rect x="354" y="186" width="72" height="32" rx="4" fill="#4a2878" stroke="#6040a0" stroke-width="1.5"/>
+    <rect x="430" y="186" width="48" height="32" rx="4" fill="#4a2878" stroke="#6040a0" stroke-width="1.5"/>
+    <!-- Base / foundation -->
+    <rect x="96"  y="220" width="408" height="28" rx="6" fill="#3a1a68" stroke="#5a3090" stroke-width="2"/>
+    <rect x="86"  y="248" width="428" height="20" rx="5" fill="#2e1255" stroke="#4a2080" stroke-width="1.5"/>
+    <text x="300" y="263" text-anchor="middle" font-size="8.5" fill="rgba(180,140,255,.62)" font-family="serif">至聖真道的根基</text>
+    <!-- Light particles -->
+    <circle cx="270" cy="60" r="2.5" fill="rgba(200,160,255,.52)" style="animation: purpleEmber 3s ease-in-out infinite;"/>
+    <circle cx="332" cy="56" r="2"   fill="rgba(200,160,255,.47)" style="animation: purpleEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="40" r="3"   fill="rgba(220,190,255,.57)" style="animation: purpleEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="382" cy="70" r="1.5" fill="rgba(160,120,220,.37)" style="animation: purpleEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="218" cy="66" r="2"   fill="rgba(180,140,240,.42)" style="animation: purpleEmber 3.8s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="375" rx="222" ry="12" fill="rgba(10,4,20,.45)"/>
+  </svg>
+
+  <app-scene-heading title="🏗️ 在至聖的真道上造就自己" subtitle="Build Yourselves Up in Faith — Jude 1:20-21" />
+  <app-scene-verse text="「親愛的弟兄啊，你們卻要在至聖的真道上造就自己，在聖靈裏禱告，保守自己常在神的愛中」— 猶大書 1:20-21" />
   <app-scroll-hint />
 </section>
 
-<section class="scene" id="scene-6" aria-label="猶大書 — 第六幕">
+<!-- ══════════════════════════════════════════════
+     SCENE 6 — 頌讚歸主  Doxology
+     ══════════════════════════════════════════════ -->
+<section class="scene" id="scene-doxology" aria-label="猶大書 — 頌讚歸主">
   <app-starfield />
 
-  <app-scene-heading headingId="scene-6-heading">
-    <h2>第六幕</h2>
-    <p>待實做</p>
-  </app-scene-heading>
+  <div id="doxology-glow" aria-hidden="true"></div>
+
+  <!-- Radiant glory burst ascending — worshippers below -->
+  <svg id="doxology-scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg" role="img" aria-label="榮耀頌讚歸於獨一的神">
+    <defs>
+      <radialGradient id="doxGlowG" cx="50%" cy="38%" r="58%">
+        <stop offset="0%" stop-color="rgba(160,110,255,.22)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="300" cy="200" rx="255" ry="200" fill="url(#doxGlowG)"/>
+    <!-- Radiant rays from centre-top -->
+    <line x1="300" y1="138" x2="300" y2="10"   stroke="rgba(200,160,255,.42)"  stroke-width="3.5"/>
+    <line x1="300" y1="138" x2="238" y2="12"   stroke="rgba(200,160,255,.32)"  stroke-width="3"/>
+    <line x1="300" y1="138" x2="362" y2="12"   stroke="rgba(200,160,255,.32)"  stroke-width="3"/>
+    <line x1="300" y1="138" x2="168" y2="22"   stroke="rgba(180,130,240,.23)"  stroke-width="2"/>
+    <line x1="300" y1="138" x2="432" y2="22"   stroke="rgba(180,130,240,.23)"  stroke-width="2"/>
+    <line x1="300" y1="138" x2="98"  y2="52"   stroke="rgba(160,110,220,.15)"  stroke-width="2"/>
+    <line x1="300" y1="138" x2="502" y2="52"   stroke="rgba(160,110,220,.15)"  stroke-width="2"/>
+    <line x1="300" y1="138" x2="48"  y2="102"  stroke="rgba(140,90,200,.1)"    stroke-width="1.5"/>
+    <line x1="300" y1="138" x2="552" y2="102"  stroke="rgba(140,90,200,.1)"    stroke-width="1.5"/>
+    <line x1="300" y1="138" x2="18"  y2="162"  stroke="rgba(120,70,180,.07)"   stroke-width="1.5"/>
+    <line x1="300" y1="138" x2="582" y2="162"  stroke="rgba(120,70,180,.07)"   stroke-width="1.5"/>
+    <!-- Glory rings -->
+    <circle cx="300" cy="138" r="82" fill="rgba(160,110,255,.04)"/>
+    <circle cx="300" cy="138" r="56" fill="rgba(180,130,255,.07)"/>
+    <circle cx="300" cy="138" r="33" fill="rgba(200,160,255,.09)"/>
+    <circle cx="300" cy="138" r="15" fill="rgba(220,190,255,.13)"/>
+    <circle cx="300" cy="138" r="6"  fill="rgba(240,220,255,.42)"/>
+    <!-- Crown of glory -->
+    <polygon points="268,200 280,177 292,169 300,164 308,169 320,177 332,200"
+             fill="#8060c0" stroke="#a080d8" stroke-width="2"/>
+    <circle cx="300" cy="180" r="7" fill="#c0a0e0" stroke="#e0c0ff" stroke-width="1"/>
+    <circle cx="281" cy="183" r="5" fill="#b090d0"/>
+    <circle cx="319" cy="183" r="5" fill="#b090d0"/>
+    <rect x="269" y="196" width="62" height="8" rx="4" fill="#a080c8" stroke="#8060b0" stroke-width="1"/>
+    <ellipse cx="300" cy="192" rx="50" ry="26" fill="rgba(180,130,255,.09)"/>
+    <!-- Worshippers below — raised hands -->
+    <!-- Person 1 -->
+    <circle cx="175" cy="310" r="10" fill="rgba(100,60,160,.52)"/>
+    <path d="M165,320 Q175,328 185,320 L183,360 Q175,365 167,360 Z" fill="rgba(80,45,130,.52)"/>
+    <path d="M163,322 L150,307" stroke="rgba(120,80,180,.42)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M187,322 L200,307" stroke="rgba(120,80,180,.42)" stroke-width="2" stroke-linecap="round"/>
+    <!-- Person 2 -->
+    <circle cx="255" cy="305" r="10" fill="rgba(100,60,160,.52)"/>
+    <path d="M245,315 Q255,323 265,315 L263,357 Q255,362 247,357 Z" fill="rgba(80,45,130,.52)"/>
+    <!-- Person 3 — centre, arms raised highest -->
+    <circle cx="300" cy="298" r="13" fill="rgba(122,76,192,.65)"/>
+    <path d="M287,311 Q300,319 313,311 L311,362 Q300,367 289,362 Z" fill="rgba(100,60,165,.65)"/>
+    <path d="M285,313 L267,293" stroke="rgba(155,105,225,.55)" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M315,313 L333,293" stroke="rgba(155,105,225,.55)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Person 4 -->
+    <circle cx="345" cy="305" r="10" fill="rgba(100,60,160,.52)"/>
+    <path d="M335,315 Q345,323 355,315 L353,357 Q345,362 337,357 Z" fill="rgba(80,45,130,.52)"/>
+    <!-- Person 5 -->
+    <circle cx="425" cy="310" r="10" fill="rgba(100,60,160,.52)"/>
+    <path d="M415,320 Q425,328 435,320 L433,360 Q425,365 417,360 Z" fill="rgba(80,45,130,.52)"/>
+    <path d="M413,322 L400,307" stroke="rgba(120,80,180,.42)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M437,322 L450,307" stroke="rgba(120,80,180,.42)" stroke-width="2" stroke-linecap="round"/>
+    <!-- Light particles -->
+    <circle cx="238" cy="78"  r="2.5" fill="rgba(200,160,255,.52)" style="animation: purpleEmber 3s ease-in-out infinite;"/>
+    <circle cx="362" cy="62"  r="2.2" fill="rgba(200,160,255,.47)" style="animation: purpleEmber 4s ease-in-out 1s infinite;"/>
+    <circle cx="300" cy="42"  r="3"   fill="rgba(230,200,255,.57)" style="animation: purpleEmber 3.5s ease-in-out .5s infinite;"/>
+    <circle cx="452" cy="108" r="1.8" fill="rgba(180,130,240,.37)" style="animation: purpleEmber 4.5s ease-in-out 2s infinite;"/>
+    <circle cx="148" cy="104" r="2"   fill="rgba(180,130,240,.32)" style="animation: purpleEmber 4s ease-in-out 1.5s infinite;"/>
+    <!-- Ground -->
+    <ellipse cx="300" cy="376" rx="242" ry="13" fill="rgba(10,4,20,.45)"/>
+  </svg>
+
+  <app-scene-heading title="🌟 頌讚歸主" subtitle="Doxology — Jude 1:24-25" />
+  <app-scene-verse text="「願榮耀、威嚴、能力、權柄，因我們的主耶穌基督，歸於那獨一的神、我們的救主，從萬古以前、並現今、直到永永遠遠」— 猶大書 1:25" />
+  <app-scroll-hint />
 </section>
