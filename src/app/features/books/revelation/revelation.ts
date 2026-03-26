@@ -15,11 +15,11 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 })
 export class Revelation {
   readonly scenes = [
-    { id: 'scene-1', label: '開場' },
-    { id: 'scene-2', label: '第二幕' },
-    { id: 'scene-3', label: '第三幕' },
-    { id: 'scene-4', label: '第四幕' },
-    { id: 'scene-5', label: '第五幕' },
-    { id: 'scene-6', label: '第六幕' },
+    { id: 'scene-intro',     label: '開場' },
+    { id: 'scene-throne',   label: '天上的寶座' },
+    { id: 'scene-seals',    label: '七封印' },
+    { id: 'scene-dragon',   label: '龍與獸' },
+    { id: 'scene-bowls',    label: '七碗審判' },
+    { id: 'scene-jerusalem', label: '新耶路撒冷' },
   ];
 }
