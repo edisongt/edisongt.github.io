@@ -19,7 +19,7 @@ export class Joel {
     { id: 'scene-locusts', label: '蝗蟲之災' },
     { id: 'scene-repentance', label: '哀哭悔改' },
     { id: 'scene-dayoflord', label: '耶和華的日子' },
-    { id: 'scene-spirit', label: '聖靈澆灌' },
+    { id: 'scene-spirit', label: '靈的澆灌' },
     { id: 'scene-restoration', label: '萬物復興' },
   ];
 }

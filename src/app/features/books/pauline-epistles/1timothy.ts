@@ -16,7 +16,7 @@ import { SceneVerse } from '../../../shared/components/scene-verse/scene-verse';
 export class FirstTimothy {
   readonly scenes = [
     { id: 'scene-intro', label: '開場' },
-    { id: 'scene-order', label: '教會的秩序' },
+    { id: 'scene-order', label: '召會的秩序' },
     { id: 'scene-prayer', label: '代禱的呼召' },
     { id: 'scene-leader', label: '長老與執事' },
     { id: 'scene-godly', label: '敬虔的操練' },

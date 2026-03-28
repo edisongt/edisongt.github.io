@@ -19,7 +19,7 @@ export class Romans {
     { id: 'scene-gospel', label: '福音的大能' },
     { id: 'scene-sin', label: '罪與稱義' },
     { id: 'scene-grace', label: '恩典與盼望' },
-    { id: 'scene-spirit', label: '聖靈的生命' },
+    { id: 'scene-spirit', label: '靈的生命' },
     { id: 'scene-mercy', label: '活祭與憐憫' },
   ];
 }

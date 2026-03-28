@@ -18,8 +18,8 @@ export class Ephesians {
     { id: 'scene-intro', label: '開場' },
     { id: 'scene-blessing', label: '屬靈的福氣' },
     { id: 'scene-grace', label: '本乎恩因著信' },
-    { id: 'scene-unity', label: '聖靈裏的合一' },
-    { id: 'scene-church', label: '基督與教會' },
+    { id: 'scene-unity', label: '靈裏的合一' },
+    { id: 'scene-church', label: '基督與召會' },
     { id: 'scene-armor', label: '神的全副軍裝' },
   ];
 }
