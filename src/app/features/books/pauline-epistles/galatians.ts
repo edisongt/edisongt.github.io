@@ -19,7 +19,7 @@ export class Galatians {
     { id: 'scene-gospel', label: '獨一的福音' },
     { id: 'scene-faith', label: '因信稱義' },
     { id: 'scene-freedom', label: '基督釋放的自由' },
-    { id: 'scene-fruit', label: '聖靈的果子' },
+    { id: 'scene-fruit', label: '靈的果子' },
     { id: 'scene-new', label: '新造的人' },
   ];
 }

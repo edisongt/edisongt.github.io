@@ -17,7 +17,7 @@ export class Acts {
   readonly scenes = [
     { id: 'scene-intro', label: '開場' },
     { id: 'scene-pentecost', label: '五旬節' },
-    { id: 'scene-church', label: '初代教會' },
+    { id: 'scene-church', label: '初代召會' },
     { id: 'scene-stephen', label: '司提反殉道' },
     { id: 'scene-conversion', label: '保羅歸信' },
     { id: 'scene-mission', label: '福音廣傳' },
