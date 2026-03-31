@@ -5,7 +5,6 @@ import { Component, ChangeDetectionStrategy, input } from '@angular/core';
   template: `
     <div class="scene-heading">
       <h2>{{ title() }}</h2>
-      <p>{{ subtitle() }}</p>
     </div>
   `,
   styleUrl: './scene-heading.scss',
@@ -13,5 +12,4 @@ import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 })
 export class SceneHeading {
   title = input('');
-  subtitle = input('');
 }
