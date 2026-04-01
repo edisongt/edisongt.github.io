@@ -8,6 +8,8 @@
   scroll-snap-align: start;
 }
 
+/* ── Keyframes ── */
+
 @keyframes fadeUpIn {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -55,10 +57,95 @@
   50%      { opacity: .8; }
 }
 
-/* ── Scene backgrounds ── */
+@keyframes glowPulse {
+  0%,100% { opacity: .6; transform: translate(-50%,-50%) scale(1);   }
+  50%      { opacity: 1;  transform: translate(-50%,-50%) scale(1.12); }
+}
+
+@keyframes breathe {
+  0%,100% { opacity: .4; transform: scale(1); }
+  50%      { opacity: .75; transform: scale(1.05); }
+}
+
+@keyframes driftLeft {
+  0%   { transform: translateX(0); opacity: .15; }
+  50%  { opacity: .25; }
+  100% { transform: translateX(-60px); opacity: .1; }
+}
+
+@keyframes driftRight {
+  0%   { transform: translateX(0); opacity: .15; }
+  50%  { opacity: .25; }
+  100% { transform: translateX(60px); opacity: .1; }
+}
+
+@keyframes lightShaft {
+  0%,100% { opacity: .06; }
+  50%      { opacity: .18; }
+}
+
+@keyframes sealGlow {
+  0%,100% { filter: drop-shadow(0 0 3px rgba(255,60,60,.3)); }
+  50%      { filter: drop-shadow(0 0 10px rgba(255,60,60,.7)); }
+}
+
+@keyframes fireFlicker {
+  0%   { opacity: .6; transform: scaleY(1) translateY(0); }
+  25%  { opacity: .9; transform: scaleY(1.12) translateY(-2px); }
+  50%  { opacity: .5; transform: scaleY(.88) translateY(1px); }
+  75%  { opacity: .85; transform: scaleY(1.08) translateY(-1px); }
+  100% { opacity: .6; transform: scaleY(1) translateY(0); }
+}
+
+@keyframes bloodMoonPulse {
+  0%,100% { box-shadow: 0 0 30px rgba(180,20,20,.3), 0 0 80px rgba(120,0,0,.15); }
+  50%      { box-shadow: 0 0 50px rgba(180,20,20,.5), 0 0 120px rgba(120,0,0,.25); }
+}
+
+@keyframes lightningFlash {
+  0%,90%,100% { opacity: 0; }
+  92%  { opacity: .6; }
+  94%  { opacity: .1; }
+  96%  { opacity: .4; }
+}
+
+@keyframes cityDescend {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+@keyframes gemShimmer {
+  0%,100% { opacity: .25; }
+  33%      { opacity: .55; }
+  66%      { opacity: .35; }
+}
+
+@keyframes auroraShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes emberRise {
+  0%   { opacity: .7; transform: translateY(0) scale(1); }
+  100% { opacity: 0;  transform: translateY(-80px) scale(.4); }
+}
+
+@keyframes waveRipple {
+  from { transform: translateX(0);   }
+  to   { transform: translateX(-50%); }
+}
+
+/* ══════════════════════════════════════════════
+   SCENE 1 — INTRO  開場：約翰的異象
+   ══════════════════════════════════════════════ */
 
 #scene-intro {
-  background: linear-gradient(180deg, #050510 0%, #0f0828 50%, #050510 100%);
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 30%, rgba(100,30,60,.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 30% 70%, rgba(60,20,80,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 70% 70%, rgba(60,20,80,.12) 0%, transparent 60%),
+    linear-gradient(180deg, #050510 0%, #0f0828 50%, #050510 100%);
 }
 
 #intro-title {
@@ -68,9 +155,12 @@
 
 #intro-title h1 {
   font-size: clamp(2.5rem,7vw,5.5rem); font-weight: 900; letter-spacing: .14em;
-  background: linear-gradient(120deg, #a03060 0%, #c05080 45%, #e08090 70%, #801040 100%);
+  background: linear-gradient(120deg, #a03060 0%, #c05080 30%, #e8a0b0 50%, #c05080 70%, #801040 100%);
+  background-size: 200% 100%;
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   animation: shimmer 4s ease-in-out infinite, fadeUpIn 2s ease-out both;
+  text-shadow: none;
+  filter: drop-shadow(0 0 24px rgba(192,80,128,.35));
 }
 
 #intro-title p {
@@ -88,98 +178,386 @@
 #intro-lampstands-svg {
   position: absolute; bottom: 8vh; left: 50%; transform: translateX(-50%);
   width: min(480px, 90vw); height: auto; z-index: 5;
+  filter: drop-shadow(0 0 18px rgba(255,180,80,.15));
 }
 
 #intro-glow {
   position: absolute; top: 30%; left: 50%; transform: translate(-50%,-50%);
-  width: 500px; height: 280px;
-  background: radial-gradient(ellipse, rgba(160,48,90,.18) 0%, transparent 70%);
+  width: 600px; height: 350px;
+  background: radial-gradient(ellipse, rgba(160,48,90,.22) 0%, rgba(80,20,60,.08) 50%, transparent 75%);
+  pointer-events: none;
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+/* Intro atmospheric mist at bottom */
+#intro-mist {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 35%; z-index: 3;
+  background: linear-gradient(180deg, transparent 0%, rgba(15,8,40,.6) 50%, rgba(5,5,16,.9) 100%);
   pointer-events: none;
 }
 
-/* Scene 2 — Throne */
+#intro-mist::before {
+  content: '';
+  position: absolute; bottom: 10%; left: 10%; width: 35%; height: 40%;
+  background: radial-gradient(ellipse, rgba(120,60,100,.12) 0%, transparent 70%);
+  animation: driftLeft 12s ease-in-out infinite alternate;
+}
+
+#intro-mist::after {
+  content: '';
+  position: absolute; bottom: 15%; right: 10%; width: 30%; height: 35%;
+  background: radial-gradient(ellipse, rgba(100,40,80,.1) 0%, transparent 70%);
+  animation: driftRight 14s ease-in-out infinite alternate;
+}
+
+/* Intro light rays from Christ figure */
+#intro-rays {
+  position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+  width: 300px; height: 400px; z-index: 4; pointer-events: none;
+  background:
+    linear-gradient(170deg, transparent 42%, rgba(255,200,120,.04) 45%, transparent 48%),
+    linear-gradient(190deg, transparent 42%, rgba(255,200,120,.04) 45%, transparent 48%),
+    linear-gradient(180deg, transparent 40%, rgba(255,220,160,.03) 45%, transparent 50%);
+  animation: lightShaft 8s ease-in-out infinite;
+}
+
+
+/* ══════════════════════════════════════════════
+   SCENE 2 — 天上的寶座  The Throne in Heaven
+   ══════════════════════════════════════════════ */
+
 #scene-throne {
-  background: linear-gradient(180deg, #06040f 0%, #140a2a 50%, #06040f 100%);
+  background:
+    radial-gradient(ellipse 50% 35% at 50% 25%, rgba(120,50,200,.15) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 40% at 25% 60%, rgba(80,30,160,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 40% at 75% 60%, rgba(80,30,160,.08) 0%, transparent 60%),
+    linear-gradient(180deg, #06040f 0%, #140a2a 50%, #06040f 100%);
 }
 
 #throne-glow {
-  position: absolute; top: 30%; left: 50%; transform: translate(-50%,-50%);
-  width: 500px; height: 280px;
-  background: radial-gradient(ellipse, rgba(100,50,180,.2) 0%, transparent 70%);
+  position: absolute; top: 28%; left: 50%; transform: translate(-50%,-50%);
+  width: 600px; height: 340px;
+  background:
+    radial-gradient(ellipse 50% 50%, rgba(140,60,220,.2) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 35%, rgba(100,50,180,.1) 0%, transparent 70%);
   pointer-events: none;
+  animation: glowPulse 7s ease-in-out infinite;
 }
 
 #throne-scene-svg {
   position: absolute; bottom: 6vh; left: 50%; transform: translateX(-50%);
   width: min(640px, 95vw); height: auto; z-index: 5;
+  filter: drop-shadow(0 0 20px rgba(160,80,220,.12));
 }
 
-/* Scene 3 — Seals */
+/* Throne aurora effect at top */
+#throne-aurora {
+  position: absolute; top: 0; left: 0; width: 100%; height: 30%; z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    rgba(200,80,255,.04), rgba(100,150,255,.06), rgba(80,200,180,.04),
+    rgba(200,80,255,.04), rgba(100,150,255,.06));
+  background-size: 300% 100%;
+  animation: auroraShift 18s ease-in-out infinite;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.6) 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.6) 0%, transparent 100%);
+}
+
+/* Throne mist at bottom */
+#throne-mist {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 25%; z-index: 3;
+  background: linear-gradient(180deg, transparent, rgba(6,4,15,.7) 60%, rgba(6,4,15,.95) 100%);
+  pointer-events: none;
+}
+
+
+/* ══════════════════════════════════════════════
+   SCENE 3 — 七封印  The Seven Seals
+   ══════════════════════════════════════════════ */
+
 #scene-seals {
-  background: linear-gradient(180deg, #0a0306 0%, #200810 50%, #0a0306 100%);
+  background:
+    radial-gradient(ellipse 45% 35% at 50% 40%, rgba(150,30,30,.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 30% 25%, rgba(100,20,20,.08) 0%, transparent 60%),
+    linear-gradient(180deg, #0a0306 0%, #200810 50%, #0a0306 100%);
 }
 
 #seals-glow {
   position: absolute; top: 30%; left: 50%; transform: translate(-50%,-50%);
-  width: 500px; height: 280px;
-  background: radial-gradient(ellipse, rgba(180,40,40,.18) 0%, transparent 70%);
+  width: 580px; height: 320px;
+  background:
+    radial-gradient(ellipse 50% 50%, rgba(200,50,50,.18) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 40%, rgba(140,30,30,.1) 0%, transparent 70%);
   pointer-events: none;
+  animation: glowPulse 6s ease-in-out infinite;
 }
 
 #seals-scene-svg {
   position: absolute; bottom: 6vh; left: 50%; transform: translateX(-50%);
   width: min(640px, 95vw); height: auto; z-index: 5;
+  filter: drop-shadow(0 0 14px rgba(200,60,60,.1));
 }
 
-/* Scene 4 — Dragon */
+/* Embers rising in seals scene */
+#seals-embers {
+  position: absolute; bottom: 12%; left: 0; width: 100%; height: 50%; z-index: 6;
+  pointer-events: none;
+}
+
+#seals-embers::before {
+  content: '';
+  position: absolute; bottom: 0; left: 25%;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,120,40,.6);
+  box-shadow:
+    25vw 10vh 3px rgba(255,100,30,.5),
+    50vw 5vh 2px rgba(255,140,50,.4),
+    70vw 15vh 3px rgba(255,80,20,.5),
+    15vw 20vh 2px rgba(255,120,40,.4),
+    40vw 25vh 2px rgba(255,100,30,.3),
+    60vw 8vh 3px rgba(255,140,50,.45),
+    80vw 18vh 2px rgba(255,80,20,.35);
+  animation: emberRise 4s ease-out infinite;
+}
+
+#seals-embers::after {
+  content: '';
+  position: absolute; bottom: 0; left: 35%;
+  width: 3px; height: 3px; border-radius: 50%;
+  background: rgba(255,140,60,.5);
+  box-shadow:
+    20vw 8vh 2px rgba(255,100,30,.4),
+    45vw 12vh 3px rgba(255,120,40,.5),
+    65vw 3vh 2px rgba(255,100,30,.35),
+    10vw 15vh 3px rgba(255,140,50,.45),
+    55vw 20vh 2px rgba(255,80,20,.3);
+  animation: emberRise 5s ease-out 1.5s infinite;
+}
+
+/* Seals vignette */
+#seals-vignette {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: radial-gradient(ellipse 70% 65% at 50% 50%, transparent 40%, rgba(10,3,6,.5) 100%);
+}
+
+
+/* ══════════════════════════════════════════════
+   SCENE 4 — 龍與獸  The Dragon and the Beast
+   ══════════════════════════════════════════════ */
+
 #scene-dragon {
-  background: linear-gradient(180deg, #080202 0%, #1a0404 50%, #080202 100%);
+  background:
+    radial-gradient(ellipse 40% 30% at 25% 30%, rgba(180,20,20,.14) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 30% at 70% 50%, rgba(40,80,40,.1) 0%, transparent 70%),
+    linear-gradient(180deg, #080202 0%, #1a0404 50%, #080202 100%);
 }
 
 #dragon-glow {
   position: absolute; top: 25%; left: 30%; transform: translate(-50%,-50%);
-  width: 400px; height: 250px;
-  background: radial-gradient(ellipse, rgba(180,20,20,.2) 0%, transparent 70%);
+  width: 450px; height: 300px;
+  background:
+    radial-gradient(ellipse 55% 55%, rgba(200,20,20,.2) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 40%, rgba(140,10,10,.1) 0%, transparent 70%);
   pointer-events: none;
+  animation: glowPulse 5s ease-in-out infinite;
 }
 
 #dragon-scene-svg {
   position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
   width: min(640px, 95vw); height: auto; z-index: 5;
+  filter: drop-shadow(0 0 16px rgba(180,20,20,.1));
 }
 
-/* Scene 5 — Bowls */
+/* Blood moon */
+#dragon-blood-moon {
+  position: absolute; top: 8%; right: 12%;
+  width: clamp(40px,6vw,70px); height: clamp(40px,6vw,70px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #c83030, #801818 55%, #500a0a);
+  box-shadow: 0 0 30px rgba(180,20,20,.3), 0 0 80px rgba(120,0,0,.15);
+  z-index: 4;
+  animation: bloodMoonPulse 5s ease-in-out infinite;
+}
+
+/* Lightning flash overlay */
+#dragon-lightning {
+  position: absolute; inset: 0; z-index: 8; pointer-events: none;
+  background: rgba(255,255,200,.04);
+  animation: lightningFlash 8s ease-in-out infinite;
+}
+
+/* Storm clouds at top */
+#dragon-clouds {
+  position: absolute; top: 0; left: 0; width: 100%; height: 28%; z-index: 3;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 45% 70% at 20% 40%, rgba(30,5,5,.7) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 65% at 55% 30%, rgba(40,8,8,.6) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 60% at 80% 45%, rgba(25,5,5,.65) 0%, transparent 70%);
+}
+
+/* Dragon fire embers */
+#dragon-fire {
+  position: absolute; bottom: 30%; left: 5%; width: 30%; height: 30%; z-index: 6;
+  pointer-events: none;
+}
+
+#dragon-fire::before {
+  content: '';
+  position: absolute; bottom: 0; left: 30%;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,80,0,.6);
+  box-shadow:
+    5vw -2vh 3px rgba(255,100,0,.5),
+    8vw -5vh 2px rgba(255,60,0,.4),
+    3vw -8vh 3px rgba(255,120,20,.5),
+    10vw -3vh 2px rgba(255,80,0,.4);
+  animation: emberRise 3s ease-out infinite;
+}
+
+
+/* ══════════════════════════════════════════════
+   SCENE 5 — 七碗審判  The Seven Bowls of Wrath
+   ══════════════════════════════════════════════ */
+
 #scene-bowls {
-  background: linear-gradient(180deg, #060402 0%, #180c04 50%, #060402 100%);
+  background:
+    radial-gradient(ellipse 50% 35% at 50% 35%, rgba(200,100,20,.1) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 30% at 30% 70%, rgba(120,50,10,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 30% at 70% 70%, rgba(120,50,10,.08) 0%, transparent 60%),
+    linear-gradient(180deg, #060402 0%, #180c04 50%, #060402 100%);
 }
 
 #bowls-glow {
   position: absolute; top: 30%; left: 50%; transform: translate(-50%,-50%);
-  width: 500px; height: 280px;
-  background: radial-gradient(ellipse, rgba(200,100,20,.16) 0%, transparent 70%);
+  width: 580px; height: 320px;
+  background:
+    radial-gradient(ellipse 50% 50%, rgba(220,100,20,.16) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 40%, rgba(180,80,10,.08) 0%, transparent 70%);
   pointer-events: none;
+  animation: glowPulse 6s ease-in-out infinite;
 }
 
 #bowls-scene-svg {
   position: absolute; bottom: 4vh; left: 50%; transform: translateX(-50%);
   width: min(640px, 95vw); height: auto; z-index: 5;
+  filter: drop-shadow(0 0 14px rgba(220,100,20,.1));
 }
 
-/* Scene 6 — New Jerusalem */
+/* Volcanic glow from bottom */
+#bowls-lava-glow {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 20%; z-index: 3;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 100%, rgba(200,60,10,.12) 0%, transparent 60%),
+    linear-gradient(180deg, transparent 0%, rgba(120,40,5,.08) 100%);
+  animation: breathe 6s ease-in-out infinite;
+}
+
+/* Smoke layers */
+#bowls-smoke {
+  position: absolute; top: 5%; left: 0; width: 100%; height: 30%; z-index: 2;
+  pointer-events: none;
+}
+
+#bowls-smoke::before {
+  content: '';
+  position: absolute; top: 0; left: 15%; width: 40%; height: 80%;
+  background: radial-gradient(ellipse, rgba(80,60,30,.1) 0%, transparent 70%);
+  animation: driftLeft 18s ease-in-out infinite alternate;
+}
+
+#bowls-smoke::after {
+  content: '';
+  position: absolute; top: 10%; right: 15%; width: 35%; height: 70%;
+  background: radial-gradient(ellipse, rgba(80,60,30,.08) 0%, transparent 70%);
+  animation: driftRight 16s ease-in-out infinite alternate;
+}
+
+
+/* ══════════════════════════════════════════════
+   SCENE 6 — 新耶路撒冷  The New Jerusalem
+   ══════════════════════════════════════════════ */
+
 #scene-jerusalem {
-  background: linear-gradient(180deg, #020510 0%, #081530 50%, #020510 100%);
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 40%, rgba(80,140,220,.12) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 50% at 25% 30%, rgba(60,100,180,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 50% at 75% 30%, rgba(60,100,180,.06) 0%, transparent 60%),
+    linear-gradient(180deg, #020510 0%, #081530 50%, #020510 100%);
 }
 
 #jerusalem-glow {
   position: absolute; top: 35%; left: 50%; transform: translate(-50%,-50%);
-  width: 600px; height: 340px;
-  background: radial-gradient(ellipse, rgba(80,140,220,.2) 0%, transparent 70%);
+  width: 700px; height: 400px;
+  background:
+    radial-gradient(ellipse 45% 45%, rgba(100,180,255,.2) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 35%, rgba(60,120,200,.1) 0%, transparent 70%);
   pointer-events: none;
+  animation: glowPulse 8s ease-in-out infinite;
 }
 
 #jerusalem-scene-svg {
   position: absolute; bottom: 3vh; left: 50%; transform: translateX(-50%);
   width: min(640px, 95vw); height: auto; z-index: 5;
+  filter: drop-shadow(0 0 22px rgba(120,180,255,.12));
+  animation: cityDescend 10s ease-in-out infinite;
+}
+
+/* Holy city golden aurora at top */
+#jerusalem-aurora {
+  position: absolute; top: 0; left: 0; width: 100%; height: 25%; z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    rgba(200,220,255,.03), rgba(180,200,255,.06), rgba(220,240,255,.04),
+    rgba(180,200,255,.06), rgba(200,220,255,.03));
+  background-size: 300% 100%;
+  animation: auroraShift 20s ease-in-out infinite;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.5) 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.5) 0%, transparent 100%);
+}
+
+/* Divine light shaft from above */
+#jerusalem-light-shaft {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 160px; height: 55%; z-index: 3; pointer-events: none;
+  background: linear-gradient(180deg,
+    rgba(200,230,255,.1) 0%, rgba(200,230,255,.04) 40%, transparent 100%);
+  animation: lightShaft 7s ease-in-out infinite;
+}
+
+/* Gem reflections at base */
+#jerusalem-gems {
+  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+  width: 80%; height: 8%; z-index: 6; pointer-events: none;
+}
+
+#jerusalem-gems::before {
+  content: '';
+  position: absolute; bottom: 0; left: 5%; width: 90%; height: 100%;
+  background:
+    radial-gradient(circle at 10%, rgba(255,80,80,.1) 0%, transparent 15%),
+    radial-gradient(circle at 25%, rgba(80,80,255,.1) 0%, transparent 15%),
+    radial-gradient(circle at 40%, rgba(80,200,80,.1) 0%, transparent 15%),
+    radial-gradient(circle at 55%, rgba(255,200,80,.1) 0%, transparent 15%),
+    radial-gradient(circle at 70%, rgba(180,80,255,.1) 0%, transparent 15%),
+    radial-gradient(circle at 85%, rgba(80,200,200,.1) 0%, transparent 15%);
+  animation: gemShimmer 6s ease-in-out infinite;
+}
+
+/* River glow running down */
+#jerusalem-river-glow {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 30%; height: 30%; z-index: 4; pointer-events: none;
+  background: radial-gradient(ellipse 40% 60% at 50% 20%, rgba(100,200,255,.08) 0%, transparent 70%);
+  animation: breathe 5s ease-in-out infinite;
+}
+
+/* Peaceful mist at bottom */
+#jerusalem-mist {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 20%; z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(2,5,16,.5) 60%, rgba(2,5,16,.85) 100%);
 }
 
 @media (prefers-reduced-motion: reduce) {

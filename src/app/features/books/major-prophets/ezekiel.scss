@@ -8,6 +8,39 @@
       scroll-snap-align: start;
     }
 
+/* ── Atmospheric vignette ── */
+.scene::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, rgba(0,0,0,.45) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+/* ── Floating emerald motes ── */
+.scene::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      top: 20%; left: 10%;
+      border-radius: 50%;
+      background: rgba(100,200,160,.5);
+      box-shadow:
+        8vw -4vh 0 0 rgba(80,220,150,.25),
+        22vw 8vh 0 0 rgba(100,200,160,.3),
+        35vw -10vh 0 0 rgba(120,230,180,.2),
+        48vw 5vh 0 0 rgba(80,220,150,.35),
+        60vw -7vh 0 0 rgba(100,200,160,.25),
+        72vw 3vh 0 0 rgba(120,230,180,.3),
+        85vw -5vh 0 0 rgba(80,220,150,.2),
+        15vw 18vh 0 0 rgba(100,200,160,.15),
+        40vw 14vh 0 0 rgba(120,230,180,.2),
+        55vw 16vh 0 0 rgba(80,220,150,.25);
+      z-index: 3;
+      pointer-events: none;
+      animation: particleDrift 18s ease-in-out infinite;
+    }
+
 @keyframes fadeUpIn {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -77,6 +110,19 @@
       50%      { filter: drop-shadow(0 0 24px rgba(255,220,100,.9)); transform: scale(1.06); }
     }
 
+@keyframes particleDrift {
+      0%,100% { transform: translateY(0) translateX(0); opacity: .4; }
+      25%      { transform: translateY(-20px) translateX(10px); opacity: .7; }
+      50%      { transform: translateY(-8px) translateX(-5px); opacity: .5; }
+      75%      { transform: translateY(-25px) translateX(14px); opacity: .8; }
+    }
+
+@keyframes fogDrift {
+      0%   { transform: translateX(-5%) scaleX(1); opacity: .3; }
+      50%  { transform: translateX(5%) scaleX(1.08); opacity: .18; }
+      100% { transform: translateX(-5%) scaleX(1); opacity: .3; }
+    }
+
 /* ══════════════════════════════════════════════
        SCENE 1 — INTRO / Title
     ══════════════════════════════════════════════ */
@@ -90,14 +136,24 @@
       width: clamp(60px,10vw,120px); height: clamp(60px,10vw,120px);
       border-radius: 50%;
       background: radial-gradient(circle at 40% 40%, #e0ffe8, #7ae8a8 40%, #3aaa7a 75%, #1a5040);
-      box-shadow: 0 0 55px rgba(58,170,122,.6), 0 0 110px rgba(40,120,80,.3);
+      box-shadow:
+        0 0 55px rgba(58,170,122,.6), 0 0 110px rgba(40,120,80,.3),
+        0 0 180px rgba(58,170,122,.15), 0 0 260px rgba(40,120,80,.08);
       z-index: 4;
       animation: introGlow 4s ease-in-out infinite;
+    }
+
+#intro-orb::after {
+      content: '';
+      position: absolute; inset: -40%; border-radius: 50%;
+      background: radial-gradient(circle, rgba(58,170,122,.12) 0%, transparent 70%);
+      animation: breathe 5s ease-in-out infinite;
     }
 
 #intro-title {
       position: absolute; top: 32%; left: 50%; transform: translate(-50%,-50%);
       text-align: center; z-index: 10; white-space: nowrap;
+      filter: drop-shadow(0 0 40px rgba(58,170,122,.5)) drop-shadow(0 2px 8px rgba(0,0,0,.3));
     }
 
 #intro-title h1 {
@@ -144,7 +200,7 @@
 #creatures-glow {
       position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%);
       width: 40vw; height: 18vw; border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(255,200,80,.2) 0%, rgba(200,160,40,.08) 50%, transparent 72%);
+      background: radial-gradient(ellipse, rgba(255,200,80,.25) 0%, rgba(200,160,40,.1) 40%, rgba(255,180,60,.04) 60%, transparent 80%);
       z-index: 6;
       animation: glowPulse 3s ease-in-out infinite;
     }
@@ -199,7 +255,7 @@
 #bones-shadow {
       position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
       width: clamp(200px,50vw,600px); height: 40vh;
-      background: radial-gradient(ellipse at 50% 50%, rgba(58,170,122,.1) 0%, rgba(40,100,70,.04) 45%, transparent 70%);
+      background: radial-gradient(ellipse at 50% 50%, rgba(58,170,122,.12) 0%, rgba(40,100,70,.05) 35%, rgba(30,80,50,.02) 55%, transparent 75%);
       z-index: 3;
       animation: breathe 3s ease-in-out infinite;
     }

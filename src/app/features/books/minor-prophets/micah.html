@@ -4,12 +4,29 @@
 <section class="scene" id="scene-intro" aria-label="彌迦書 — 開場">
   <app-starfield />
 
+  <div class="scene-particles" aria-hidden="true">
+    <span style="left:8%;top:25%;width:3px;height:3px;background:rgba(106,154,106,.25);animation-duration:9s"></span>
+    <span style="left:32%;top:55%;width:2px;height:2px;background:rgba(106,154,106,.18);animation-duration:13s;animation-delay:2s"></span>
+    <span style="left:58%;top:35%;width:4px;height:4px;background:rgba(106,154,106,.2);animation-duration:11s;animation-delay:4s"></span>
+    <span style="left:78%;top:68%;width:2px;height:2px;background:rgba(106,154,106,.22);animation-duration:10s;animation-delay:1s"></span>
+    <span style="left:18%;top:78%;width:3px;height:3px;background:rgba(106,154,106,.15);animation-duration:12s;animation-delay:3s"></span>
+    <span style="left:48%;top:18%;width:2px;height:2px;background:rgba(106,154,106,.2);animation-duration:14s;animation-delay:5s"></span>
+    <span style="left:88%;top:42%;width:3px;height:3px;background:rgba(106,154,106,.18);animation-duration:8s;animation-delay:6s"></span>
+  </div>
+
   <div id="intro-sage-glow" aria-hidden="true"></div>
   
     <div id="intro-title">
       <h1>彌迦書</h1>
       <p>小先知書 · 彌迦書</p>
       <span class="sub">公義 · 謙卑 · 伯利恆 · 赦免 · 盼望</span>
+      <svg class="intro-ornament" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="10" y1="10" x2="82" y2="10" stroke="rgba(106,154,106,.3)" stroke-width="1"/>
+        <circle cx="92" cy="10" r="2" fill="rgba(106,154,106,.35)"/>
+        <circle cx="100" cy="10" r="3" fill="rgba(106,154,106,.55)"/>
+        <circle cx="108" cy="10" r="2" fill="rgba(106,154,106,.35)"/>
+        <line x1="118" y1="10" x2="190" y2="10" stroke="rgba(106,154,106,.3)" stroke-width="1"/>
+      </svg>
     </div>
   
     <!-- Scales of justice icon -->
@@ -467,6 +484,7 @@
       <ellipse cx="300" cy="180" rx="250" ry="15" fill="rgba(140,200,140,.06)"/>
     </svg>
 
+  <div class="scene-mist" aria-hidden="true"></div>
   <app-scene-heading title="🌊 赦免與憐憫" id="mercy-heading" />
   <app-scene-verse text="「神啊，有何神像你，赦免罪孽？」— 彌迦書 7:18" />
 </section>

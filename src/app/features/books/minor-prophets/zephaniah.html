@@ -4,12 +4,29 @@
 <section class="scene" id="scene-intro" aria-label="西番雅書 — 開場">
   <app-starfield />
 
+  <div class="scene-particles" aria-hidden="true">
+    <span style="left:8%;top:25%;width:3px;height:3px;background:rgba(160,82,45,.25);animation-duration:9s"></span>
+    <span style="left:32%;top:55%;width:2px;height:2px;background:rgba(160,82,45,.18);animation-duration:13s;animation-delay:2s"></span>
+    <span style="left:58%;top:35%;width:4px;height:4px;background:rgba(160,82,45,.2);animation-duration:11s;animation-delay:4s"></span>
+    <span style="left:78%;top:68%;width:2px;height:2px;background:rgba(160,82,45,.22);animation-duration:10s;animation-delay:1s"></span>
+    <span style="left:18%;top:78%;width:3px;height:3px;background:rgba(160,82,45,.15);animation-duration:12s;animation-delay:3s"></span>
+    <span style="left:48%;top:18%;width:2px;height:2px;background:rgba(160,82,45,.2);animation-duration:14s;animation-delay:5s"></span>
+    <span style="left:88%;top:42%;width:3px;height:3px;background:rgba(160,82,45,.18);animation-duration:8s;animation-delay:6s"></span>
+  </div>
+
   <div id="intro-ember-glow" aria-hidden="true"></div>
   
     <div id="intro-title">
       <h1>西番雅書</h1>
       <p>小先知書 · 西番雅書</p>
       <span class="sub">審判 · 烈怒 · 餘民 · 歡喜 · 復興</span>
+      <svg class="intro-ornament" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="10" y1="10" x2="82" y2="10" stroke="rgba(160,82,45,.3)" stroke-width="1"/>
+        <circle cx="92" cy="10" r="2" fill="rgba(160,82,45,.35)"/>
+        <circle cx="100" cy="10" r="3" fill="rgba(160,82,45,.55)"/>
+        <circle cx="108" cy="10" r="2" fill="rgba(160,82,45,.35)"/>
+        <line x1="118" y1="10" x2="190" y2="10" stroke="rgba(160,82,45,.3)" stroke-width="1"/>
+      </svg>
     </div>
   
     <!-- Trumpet silhouette -->
@@ -405,6 +422,7 @@
       </circle>
     </svg>
 
+  <div class="scene-mist" aria-hidden="true"></div>
   <app-scene-heading title="🎶 神的歡喜歌唱" id="joy-heading" />
   <app-scene-verse text="「他必因你歡欣喜樂，默然愛你，且因你喜樂而歡呼」— 西番雅書 3:17" />
 </section>

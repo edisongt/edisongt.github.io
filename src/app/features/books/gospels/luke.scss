@@ -7,7 +7,26 @@
       overflow: hidden;
       scroll-snap-align: start;
     }
+    .scene::before {
+      content: '';
+      position: absolute; bottom: 0; left: -50%;
+      width: 200%; height: 22%;
+      background: linear-gradient(90deg,
+        transparent 8%, rgba(90,154,170,.025) 22%, transparent 38%,
+        rgba(90,154,170,.04) 55%, transparent 68%, rgba(90,154,170,.02) 85%, transparent 95%);
+      filter: blur(30px);
+      animation: driftMist 42s linear infinite;
+      z-index: 4; pointer-events: none;
+    }
 
+    .scene::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 75% 65% at 50% 50%, transparent 35%, rgba(4,8,10,.5) 100%),
+        repeating-conic-gradient(rgba(90,154,170,.006) 0% 25%, transparent 0% 50%) 0 0 / 3px 3px;
+      z-index: 2; pointer-events: none;
+    }
 @keyframes fadeUpIn {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -82,6 +101,21 @@
       75%     { opacity: .85; transform: scaleY(1.05) scaleX(.97); }
     }
 
+@keyframes driftMist {
+      from { transform: translateX(0); }
+      to   { transform: translateX(25%); }
+    }
+
+@keyframes driftGlow {
+      0%,100% { opacity: .6; transform: translateX(-50%) translateY(0); }
+      50%     { opacity: 1;  transform: translateX(-48%) translateY(-8px); }
+    }
+
+@keyframes softPulse {
+      0%,100% { opacity: .08; transform: scale(1); }
+      50%     { opacity: .18; transform: scale(1.06); }
+    }
+
 @keyframes walkCycle {
       0%,100% { transform: translateX(-50%) translateY(0); }
       25%     { transform: translateX(-50%) translateY(-3px); }
@@ -94,15 +128,22 @@
     ══════════════════════════════════════════════ */
 
 #scene-intro {
-      background: linear-gradient(180deg, #101820 0%, #142028 40%, #1a2830 70%, #101820 100%);
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 18%, rgba(90,154,170,.04) 0%, transparent 70%),
+        radial-gradient(ellipse 55% 40% at 35% 80%, rgba(60,120,140,.03) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 30% at 65% 55%, rgba(80,140,160,.02) 0%, transparent 50%),
+        linear-gradient(180deg, #101820 0%, #121e26 20%, #142028 40%, #1a2830 65%, #162430 85%, #101820 100%);
+      box-shadow: inset 0 0 120px rgba(90,154,170,.05);
     }
 
 #intro-teal-glow {
-      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
-      width: 50vw; height: 30vh;
-      background: radial-gradient(ellipse, rgba(90,154,170,.12) 0%, rgba(60,120,140,.05) 45%, transparent 70%);
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 35vh;
+      background:
+        radial-gradient(ellipse 45% 35% at 50% 50%, rgba(140,200,220,.05) 0%, transparent 60%),
+        radial-gradient(ellipse, rgba(90,154,170,.14) 0%, rgba(60,120,140,.06) 40%, transparent 70%);
       z-index: 3;
-      animation: mangerGlow 4s ease-in-out infinite;
+      animation: driftGlow 6s ease-in-out infinite;
     }
 
 #intro-title {
@@ -144,13 +185,19 @@
     ══════════════════════════════════════════════ */
 
 #scene-nativity {
-      background: linear-gradient(180deg, #0e1418 0%, #101820 40%, #182838 70%, #0e1418 100%);
+      background:
+        radial-gradient(ellipse 65% 45% at 50% 20%, rgba(200,220,255,.03) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 35% at 55% 75%, rgba(90,154,170,.025) 0%, transparent 55%),
+        linear-gradient(180deg, #0e1418 0%, #10181e 20%, #101820 40%, #182838 65%, #141e2e 85%, #0e1418 100%);
+      box-shadow: inset 0 0 100px rgba(90,154,170,.04);
     }
 
 #nativity-glow {
-      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
-      width: 50vw; height: 50vh;
-      background: radial-gradient(ellipse, rgba(90,154,170,.15) 0%, rgba(50,100,120,.06) 50%, transparent 70%);
+      position: absolute; top: 28%; left: 50%; transform: translateX(-50%);
+      width: 55vw; height: 55vh;
+      background:
+        radial-gradient(ellipse 40% 30% at 50% 35%, rgba(200,220,255,.06) 0%, transparent 55%),
+        radial-gradient(ellipse, rgba(90,154,170,.16) 0%, rgba(50,100,120,.07) 45%, transparent 70%);
       z-index: 3;
       animation: breathe 4s ease-in-out infinite;
     }
@@ -173,13 +220,19 @@
     ══════════════════════════════════════════════ */
 
 #scene-mercy {
-      background: linear-gradient(180deg, #121a20 0%, #1a2830 40%, #223040 70%, #182028 100%);
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 45%, rgba(90,154,170,.035) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 30% at 40% 25%, rgba(80,140,160,.02) 0%, transparent 50%),
+        linear-gradient(180deg, #121a20 0%, #161e28 18%, #1a2830 40%, #223040 65%, #1e2838 85%, #182028 100%);
+      box-shadow: inset 0 0 100px rgba(90,154,170,.04);
     }
 
 #mercy-glow {
-      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
-      width: 60vw; height: 40vh;
-      background: radial-gradient(ellipse, rgba(90,154,170,.18) 0%, rgba(60,120,140,.07) 45%, transparent 70%);
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      width: 65vw; height: 45vh;
+      background:
+        radial-gradient(ellipse 40% 30% at 50% 50%, rgba(140,200,220,.06) 0%, transparent 55%),
+        radial-gradient(ellipse, rgba(90,154,170,.2) 0%, rgba(60,120,140,.08) 40%, transparent 70%);
       z-index: 3;
       animation: healPulse 3.5s ease-in-out infinite;
     }
@@ -202,7 +255,11 @@
     ══════════════════════════════════════════════ */
 
 #scene-prayer {
-      background: linear-gradient(180deg, #14101a 0%, #1a1828 40%, #22203a 70%, #1a182a 100%);
+      background:
+        radial-gradient(ellipse 55% 45% at 50% 30%, rgba(180,220,240,.03) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 50% 70%, rgba(90,154,170,.025) 0%, transparent 50%),
+        linear-gradient(180deg, #14101a 0%, #181420 18%, #1a1828 40%, #22203a 65%, #1e1c30 85%, #1a182a 100%);
+      box-shadow: inset 0 0 140px rgba(90,154,170,.04);
     }
 
 #prayer-light-beam {
@@ -231,13 +288,19 @@
     ══════════════════════════════════════════════ */
 
 #scene-prodigal {
-      background: linear-gradient(180deg, #141018 0%, #1e1828 35%, #2a2438 60%, #3a3048 85%, #2a2438 100%);
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 55%, rgba(90,154,170,.03) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 35% at 55% 25%, rgba(200,160,80,.02) 0%, transparent 55%),
+        linear-gradient(180deg, #141018 0%, #181422 18%, #1e1828 35%, #2a2438 55%, #3a3048 75%, #2e2840 88%, #2a2438 100%);
+      box-shadow: inset 0 0 120px rgba(90,154,170,.05);
     }
 
 #prodigal-glow {
-      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
-      width: 70vw; height: 35vh;
-      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(90,154,170,.15) 0%, rgba(70,130,150,.06) 50%, transparent 75%);
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      width: 75vw; height: 40vh;
+      background:
+        radial-gradient(ellipse 40% 25% at 50% 70%, rgba(200,160,80,.05) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 80%, rgba(90,154,170,.16) 0%, rgba(70,130,150,.07) 45%, transparent 75%);
       z-index: 3;
       animation: embraceGlow 4s ease-in-out infinite;
     }
@@ -261,13 +324,19 @@
     ══════════════════════════════════════════════ */
 
 #scene-emmaus {
-      background: linear-gradient(180deg, #1a1820 0%, #2a2028 40%, #3a2830 70%, #44303a 100%);
+      background:
+        radial-gradient(ellipse 65% 45% at 50% 20%, rgba(200,140,80,.03) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 35% at 50% 70%, rgba(90,154,170,.025) 0%, transparent 55%),
+        linear-gradient(180deg, #1a1820 0%, #221c24 18%, #2a2028 40%, #3a2830 65%, #44303a 80%, #3c2c36 92%, #44303a 100%);
+      box-shadow: inset 0 0 120px rgba(200,140,80,.04);
     }
 
 #emmaus-sunset-glow {
-      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
-      width: clamp(180px,35vw,450px); height: 70%;
-      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(200,140,80,.08) 0%, rgba(90,154,170,.05) 40%, transparent 70%);
+      position: absolute; top: 12%; left: 50%; transform: translateX(-50%);
+      width: clamp(220px,40vw,520px); height: 75%;
+      background:
+        radial-gradient(ellipse 35% 25% at 50% 30%, rgba(220,160,80,.05) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 50% 40%, rgba(200,140,80,.1) 0%, rgba(90,154,170,.06) 38%, transparent 70%);
       z-index: 3;
       animation: breathe 4s ease-in-out infinite;
     }

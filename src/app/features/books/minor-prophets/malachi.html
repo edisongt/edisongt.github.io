@@ -4,12 +4,29 @@
 <section class="scene" id="scene-intro" aria-label="瑪拉基書 — 開場">
   <app-starfield />
 
+  <div class="scene-particles" aria-hidden="true">
+    <span style="left:8%;top:25%;width:3px;height:3px;background:rgba(160,64,128,.25);animation-duration:9s"></span>
+    <span style="left:32%;top:55%;width:2px;height:2px;background:rgba(160,64,128,.18);animation-duration:13s;animation-delay:2s"></span>
+    <span style="left:58%;top:35%;width:4px;height:4px;background:rgba(160,64,128,.2);animation-duration:11s;animation-delay:4s"></span>
+    <span style="left:78%;top:68%;width:2px;height:2px;background:rgba(160,64,128,.22);animation-duration:10s;animation-delay:1s"></span>
+    <span style="left:18%;top:78%;width:3px;height:3px;background:rgba(160,64,128,.15);animation-duration:12s;animation-delay:3s"></span>
+    <span style="left:48%;top:18%;width:2px;height:2px;background:rgba(160,64,128,.2);animation-duration:14s;animation-delay:5s"></span>
+    <span style="left:88%;top:42%;width:3px;height:3px;background:rgba(160,64,128,.18);animation-duration:8s;animation-delay:6s"></span>
+  </div>
+
   <div id="intro-ember-glow" aria-hidden="true"></div>
   
     <div id="intro-title">
       <h1>瑪拉基書</h1>
       <p>小先知書 · 瑪拉基書</p>
       <span class="sub">愛 · 約 · 煉淨 · 十分之一 · 記念 · 公義日</span>
+      <svg class="intro-ornament" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="10" y1="10" x2="82" y2="10" stroke="rgba(160,64,128,.3)" stroke-width="1"/>
+        <circle cx="92" cy="10" r="2" fill="rgba(160,64,128,.35)"/>
+        <circle cx="100" cy="10" r="3" fill="rgba(160,64,128,.55)"/>
+        <circle cx="108" cy="10" r="2" fill="rgba(160,64,128,.35)"/>
+        <line x1="118" y1="10" x2="190" y2="10" stroke="rgba(160,64,128,.3)" stroke-width="1"/>
+      </svg>
     </div>
   
     <!-- Messenger with scroll -->
@@ -512,6 +529,7 @@
       <ellipse cx="200" cy="310" rx="100" ry="30" fill="rgba(160,64,128,.04)"/>
     </svg>
 
+  <div class="scene-mist" aria-hidden="true"></div>
   <app-scene-heading title="☀️ 公義的日頭" id="sun-heading" />
   <app-scene-verse text="「向你們敬畏我名的人，必有公義的日頭出現，其光線有醫治之能」— 瑪拉基書 4:2" />
 </section>

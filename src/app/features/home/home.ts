@@ -29,6 +29,13 @@ export class Home implements OnInit, OnDestroy {
   private starsCtx!: CanvasRenderingContext2D;
   private breezeCv!: HTMLCanvasElement;
   private breezeCtx!: CanvasRenderingContext2D;
+  private shootCv!: HTMLCanvasElement;
+  private shootCtx!: CanvasRenderingContext2D;
+  private shootingStars: {
+    x: number; y: number; vx: number; vy: number;
+    len: number; life: number; maxLife: number;
+  }[] = [];
+  private lastShootSpawn = 0;
   private readonly resizeHandler = () => this.onResize();
 
   private readonly DAY_NIGHT_CYCLE_MS = 90000;
@@ -54,6 +61,8 @@ export class Home implements OnInit, OnDestroy {
     this.starsCtx = this.starsCv.getContext('2d')!;
     this.breezeCv = root.querySelector('#breeze') as HTMLCanvasElement;
     this.breezeCtx = this.breezeCv.getContext('2d')!;
+    this.shootCv = root.querySelector('#shootingStars') as HTMLCanvasElement;
+    this.shootCtx = this.shootCv.getContext('2d')!;
 
     this.resizeCanvases();
     this.initStars();
@@ -83,6 +92,8 @@ export class Home implements OnInit, OnDestroy {
     this.starsCv.height = window.innerHeight;
     this.breezeCv.width = window.innerWidth;
     this.breezeCv.height = window.innerHeight;
+    this.shootCv.width = window.innerWidth;
+    this.shootCv.height = window.innerHeight;
   }
 
   /* ── Stars ── */
@@ -225,6 +236,7 @@ export class Home implements OnInit, OnDestroy {
 
     /* Sun */
     const sp = this.celestialPos(t, this.DAWN_T, 1 - this.DAWN_T);
+    const sunRaysEl = root.querySelector('#sun-rays') as HTMLElement;
     if (sp) {
       sunEl.style.display = 'block';
       sunEl.style.left = sp.x + 'px';
@@ -237,8 +249,15 @@ export class Home implements OnInit, OnDestroy {
       sunEl.style.boxShadow = low
         ? '0 0 45px 18px rgba(255,155,55,.75)'
         : '0 0 65px 28px rgba(255,210,0,.65)';
+      /* Sun rays follow the sun */
+      sunRaysEl.style.display = 'block';
+      sunRaysEl.style.left = sp.x + 'px';
+      sunRaysEl.style.top = sp.y + 'px';
+      const rayOpacity = low ? 0.35 : 0.65;
+      sunRaysEl.style.opacity = String(rayOpacity);
     } else {
       sunEl.style.display = 'none';
+      sunRaysEl.style.display = 'none';
     }
 
     /* Moon */

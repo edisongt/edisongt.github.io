@@ -7,7 +7,26 @@
       overflow: hidden;
       scroll-snap-align: start;
     }
+    .scene::before {
+      content: '';
+      position: absolute; bottom: 0; left: -50%;
+      width: 200%; height: 22%;
+      background: linear-gradient(90deg,
+        transparent 8%, rgba(224,168,64,.025) 22%, transparent 38%,
+        rgba(224,168,64,.04) 55%, transparent 68%, rgba(224,168,64,.02) 85%, transparent 95%);
+      filter: blur(30px);
+      animation: driftMist 36s linear infinite;
+      z-index: 4; pointer-events: none;
+    }
 
+    .scene::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 75% 65% at 50% 50%, transparent 35%, rgba(6,4,8,.5) 100%),
+        repeating-conic-gradient(rgba(224,168,64,.006) 0% 25%, transparent 0% 50%) 0 0 / 3px 3px;
+      z-index: 2; pointer-events: none;
+    }
 @keyframes fadeUpIn {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -82,6 +101,21 @@
       50%      { opacity: .6; }
     }
 
+@keyframes driftMist {
+      from { transform: translateX(0); }
+      to   { transform: translateX(25%); }
+    }
+
+@keyframes driftGlow {
+      0%,100% { opacity: .6; transform: translateX(-50%) translateY(0); }
+      50%     { opacity: 1;  transform: translateX(-48%) translateY(-8px); }
+    }
+
+@keyframes softPulse {
+      0%,100% { opacity: .08; transform: scale(1); }
+      50%     { opacity: .18; transform: scale(1.06); }
+    }
+
 @keyframes ripple {
       0%,100% { transform: scaleX(1); opacity: .4; }
       50%      { transform: scaleX(1.12); opacity: .7; }
@@ -97,15 +131,22 @@
     ══════════════════════════════════════════════ */
 
 #scene-intro {
-      background: linear-gradient(180deg, #141018 0%, #1c1818 40%, #24201a 70%, #141018 100%);
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 18%, rgba(224,168,64,.04) 0%, transparent 70%),
+        radial-gradient(ellipse 55% 40% at 30% 80%, rgba(180,130,40,.03) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 30% at 70% 55%, rgba(200,150,50,.02) 0%, transparent 50%),
+        linear-gradient(180deg, #141018 0%, #181416 20%, #1c1818 40%, #24201a 65%, #201c18 85%, #141018 100%);
+      box-shadow: inset 0 0 120px rgba(224,168,64,.06);
     }
 
 #intro-golden-glow {
-      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
-      width: 50vw; height: 30vh;
-      background: radial-gradient(ellipse, rgba(224,168,64,.12) 0%, rgba(180,130,40,.05) 45%, transparent 70%);
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 35vh;
+      background:
+        radial-gradient(ellipse 45% 35% at 50% 50%, rgba(255,230,120,.05) 0%, transparent 60%),
+        radial-gradient(ellipse, rgba(224,168,64,.14) 0%, rgba(180,130,40,.06) 40%, transparent 70%);
       z-index: 3;
-      animation: radiate 4s ease-in-out infinite;
+      animation: driftGlow 6s ease-in-out infinite;
     }
 
 #intro-title {
@@ -147,13 +188,19 @@
     ══════════════════════════════════════════════ */
 
 #scene-word {
-      background: linear-gradient(180deg, #0e0a10 0%, #141018 40%, #1c1818 70%, #0e0a10 100%);
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 20%, rgba(224,168,64,.04) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 50% 75%, rgba(180,130,40,.025) 0%, transparent 55%),
+        linear-gradient(180deg, #0e0a10 0%, #100e14 18%, #141018 40%, #1c1818 65%, #181416 85%, #0e0a10 100%);
+      box-shadow: inset 0 0 100px rgba(224,168,64,.05);
     }
 
 #word-glow {
-      position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
-      width: 50vw; height: 50vh;
-      background: radial-gradient(ellipse, rgba(224,168,64,.15) 0%, rgba(180,130,40,.06) 50%, transparent 70%);
+      position: absolute; top: 28%; left: 50%; transform: translateX(-50%);
+      width: 55vw; height: 55vh;
+      background:
+        radial-gradient(ellipse 40% 30% at 50% 35%, rgba(255,240,160,.06) 0%, transparent 55%),
+        radial-gradient(ellipse, rgba(224,168,64,.18) 0%, rgba(180,130,40,.07) 45%, transparent 70%);
       z-index: 3;
       animation: breathe 4s ease-in-out infinite;
     }
@@ -176,13 +223,19 @@
     ══════════════════════════════════════════════ */
 
 #scene-water {
-      background: linear-gradient(180deg, #10101a 0%, #181820 40%, #1a1828 70%, #121218 100%);
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 45%, rgba(100,180,220,.03) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 30% at 55% 20%, rgba(224,168,64,.02) 0%, transparent 50%),
+        linear-gradient(180deg, #10101a 0%, #141418 18%, #181820 40%, #1a1828 65%, #161420 85%, #121218 100%);
+      box-shadow: inset 0 0 100px rgba(100,180,220,.04);
     }
 
 #water-glow {
-      position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%);
-      width: 60vw; height: 40vh;
-      background: radial-gradient(ellipse, rgba(100,180,220,.12) 0%, rgba(224,168,64,.08) 45%, transparent 70%);
+      position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+      width: 65vw; height: 45vh;
+      background:
+        radial-gradient(ellipse 40% 30% at 50% 50%, rgba(140,220,250,.06) 0%, transparent 55%),
+        radial-gradient(ellipse, rgba(100,180,220,.14) 0%, rgba(224,168,64,.09) 40%, transparent 70%);
       z-index: 3;
       animation: breathe 4s ease-in-out infinite;
     }
@@ -203,7 +256,11 @@
     ══════════════════════════════════════════════ */
 
 #scene-light {
-      background: linear-gradient(180deg, #0e0a0e 0%, #1a1418 40%, #22181c 70%, #141010 100%);
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 35%, rgba(255,240,160,.04) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 50% 65%, rgba(224,168,64,.03) 0%, transparent 50%),
+        linear-gradient(180deg, #0e0a0e 0%, #121012 18%, #1a1418 40%, #22181c 65%, #1c1418 85%, #141010 100%);
+      box-shadow: inset 0 0 140px rgba(224,168,64,.05);
     }
 
 #light-beam {
@@ -232,13 +289,19 @@
     ══════════════════════════════════════════════ */
 
 #scene-shepherd {
-      background: linear-gradient(180deg, #141018 0%, #1e1828 35%, #242030 60%, #1a1820 100%);
+      background:
+        radial-gradient(ellipse 55% 40% at 50% 55%, rgba(224,168,64,.03) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 45% 25%, rgba(180,130,40,.02) 0%, transparent 50%),
+        linear-gradient(180deg, #141018 0%, #181420 18%, #1e1828 35%, #242030 55%, #201c28 75%, #1a1820 88%, #1a1820 100%);
+      box-shadow: inset 0 0 120px rgba(224,168,64,.04);
     }
 
 #shepherd-glow {
-      position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
-      width: 70vw; height: 35vh;
-      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(224,168,64,.12) 0%, rgba(180,130,40,.05) 50%, transparent 75%);
+      position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      width: 75vw; height: 40vh;
+      background:
+        radial-gradient(ellipse 40% 25% at 50% 70%, rgba(255,230,120,.05) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 80%, rgba(224,168,64,.14) 0%, rgba(180,130,40,.06) 45%, transparent 75%);
       z-index: 3;
       animation: breathe 4s ease-in-out infinite;
     }
@@ -260,7 +323,11 @@
     ══════════════════════════════════════════════ */
 
 #scene-resurrection {
-      background: linear-gradient(180deg, #1a1420 0%, #241c28 40%, #2e2430 70%, #3a2c38 100%);
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 25%, rgba(255,240,160,.04) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 40% at 50% 70%, rgba(224,168,64,.03) 0%, transparent 55%),
+        linear-gradient(180deg, #1a1420 0%, #201824 18%, #241c28 40%, #2e2430 65%, #3a2c38 80%, #342838 92%, #3a2c38 100%);
+      box-shadow: inset 0 0 120px rgba(224,168,64,.06);
     }
 
 #resurrection-light {
@@ -272,9 +339,11 @@
     }
 
 #resurrection-glow {
-      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
-      width: clamp(180px,35vw,450px); height: 70%;
-      background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(224,168,64,.08) 0%, rgba(180,130,40,.03) 40%, transparent 70%);
+      position: absolute; top: 12%; left: 50%; transform: translateX(-50%);
+      width: clamp(220px,40vw,520px); height: 75%;
+      background:
+        radial-gradient(ellipse 35% 25% at 50% 30%, rgba(255,240,160,.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 50% 40%, rgba(224,168,64,.1) 0%, rgba(180,130,40,.04) 40%, transparent 70%);
       z-index: 3;
       animation: breathe 4s ease-in-out infinite;
     }

@@ -273,6 +273,41 @@
 
 #life-heading p { color: rgba(224,168,64,.5); }
 
+/* ── Atmospheric depth ── */
+
+.scene::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(10,6,2,.5) 100%),
+    radial-gradient(ellipse 50% 30% at 12% 82%, rgba(224,168,64,.07), transparent),
+    radial-gradient(ellipse 45% 25% at 88% 78%, rgba(192,136,32,.05), transparent),
+    radial-gradient(ellipse 90% 12% at 50% 100%, rgba(160,112,24,.12), transparent);
+}
+
+.scene::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  background-size: 200px; opacity: .4; mix-blend-mode: overlay;
+}
+
+.ambient-orb {
+  position: absolute; border-radius: 50%; pointer-events: none; z-index: 6;
+  width: var(--sz, 4px); height: var(--sz, 4px);
+  background: var(--c, rgba(240,200,96,.35));
+  box-shadow: 0 0 var(--g, 6px) var(--c, rgba(240,200,96,.2));
+  filter: blur(var(--bl, 1px));
+  animation: driftUp var(--d, 12s) ease-in-out var(--t, 0s) infinite;
+}
+
+@keyframes driftUp {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateY(var(--dy, -15vh)) translateX(var(--dx, 10px)); opacity: 0; }
+}
+
 /* ── Reduced motion ── */
 
 @media (prefers-reduced-motion: reduce) {

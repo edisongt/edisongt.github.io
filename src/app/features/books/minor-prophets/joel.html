@@ -4,12 +4,29 @@
 <section class="scene" id="scene-intro" aria-label="約珥書 — 開場">
   <app-starfield />
 
+  <div class="scene-particles" aria-hidden="true">
+    <span style="left:8%;top:25%;width:3px;height:3px;background:rgba(68,136,204,.25);animation-duration:9s"></span>
+    <span style="left:32%;top:55%;width:2px;height:2px;background:rgba(68,136,204,.18);animation-duration:13s;animation-delay:2s"></span>
+    <span style="left:58%;top:35%;width:4px;height:4px;background:rgba(68,136,204,.2);animation-duration:11s;animation-delay:4s"></span>
+    <span style="left:78%;top:68%;width:2px;height:2px;background:rgba(68,136,204,.22);animation-duration:10s;animation-delay:1s"></span>
+    <span style="left:18%;top:78%;width:3px;height:3px;background:rgba(68,136,204,.15);animation-duration:12s;animation-delay:3s"></span>
+    <span style="left:48%;top:18%;width:2px;height:2px;background:rgba(68,136,204,.2);animation-duration:14s;animation-delay:5s"></span>
+    <span style="left:88%;top:42%;width:3px;height:3px;background:rgba(68,136,204,.18);animation-duration:8s;animation-delay:6s"></span>
+  </div>
+
   <div id="intro-storm-glow" aria-hidden="true"></div>
   
     <div id="intro-title">
       <h1>約珥書</h1>
       <p>小先知書 · 約珥書</p>
       <span class="sub">蝗蟲 · 審判 · 悔改 · 靈 · 復興</span>
+      <svg class="intro-ornament" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="10" y1="10" x2="82" y2="10" stroke="rgba(68,136,204,.3)" stroke-width="1"/>
+        <circle cx="92" cy="10" r="2" fill="rgba(68,136,204,.35)"/>
+        <circle cx="100" cy="10" r="3" fill="rgba(68,136,204,.55)"/>
+        <circle cx="108" cy="10" r="2" fill="rgba(68,136,204,.35)"/>
+        <line x1="118" y1="10" x2="190" y2="10" stroke="rgba(68,136,204,.3)" stroke-width="1"/>
+      </svg>
     </div>
   
     <!-- Single locust silhouette as motif -->
@@ -502,6 +519,7 @@
       <circle cx="1050" cy="255" r="1" fill="rgba(80,180,100,.25)" style="animation: floatY 4.5s ease-in-out .5s infinite;"/>
     </svg>
 
+  <div class="scene-mist" aria-hidden="true"></div>
   <app-scene-heading title="🌿 萬物復興" id="restoration-heading" />
   <app-scene-verse text="「我打發到你們中間的大軍隊所吃的，我要補還你們」— 約珥書 2:25" />
 </section>

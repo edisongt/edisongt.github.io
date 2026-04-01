@@ -166,11 +166,15 @@
     }
 
 @keyframes birdFly {
-      0%   { transform: translate(0,0); }
-      25%  { transform: translate(4vw,-1vh); }
-      50%  { transform: translate(8vw,0); }
-      75%  { transform: translate(4vw,1vh); }
-      100% { transform: translate(0,0); }
+      0%   { transform: translate(0,0) scaleY(1); }
+      12%  { transform: translate(2vw,-.8vh) scaleY(.88); }
+      25%  { transform: translate(4vw,-1.2vh) scaleY(1.06); }
+      37%  { transform: translate(6vw,-.5vh) scaleY(.85); }
+      50%  { transform: translate(8vw,.2vh) scaleY(1.08); }
+      62%  { transform: translate(6.5vw,.8vh) scaleY(.87); }
+      75%  { transform: translate(4vw,1.2vh) scaleY(1.05); }
+      87%  { transform: translate(2vw,.5vh) scaleY(.9); }
+      100% { transform: translate(0,0) scaleY(1); }
     }
 
 /* ══════════════════════════════════════════════
@@ -283,8 +287,11 @@
 #fall-heading p { color: rgba(255,140,120,.55); }
 
 @keyframes snakeSlither {
-      0%,100% { transform: translateX(-50%) rotate(-1deg); }
-      50%      { transform: translateX(-50%) rotate(1deg);  }
+      0%   { transform: translateX(-50%) rotate(-1deg) translateY(0); }
+      25%  { transform: translateX(-50%) rotate(.5deg)  translateY(-1px); }
+      50%  { transform: translateX(-50%) rotate(1deg)   translateY(0); }
+      75%  { transform: translateX(-50%) rotate(-.5deg) translateY(1px); }
+      100% { transform: translateX(-50%) rotate(-1deg) translateY(0); }
     }
 
 /* ══════════════════════════════════════════════
@@ -323,8 +330,11 @@
     }
 
 @keyframes arkBob {
-      0%,100% { transform: translateX(-50%) translateY(0)    rotate(-.5deg); }
-      50%      { transform: translateX(-50%) translateY(-8px) rotate(.5deg);  }
+      0%,100% { transform: translateX(-50%) translateY(0) rotate(-.5deg); }
+      20%     { transform: translateX(-50%) translateY(-3px) rotate(-.1deg); }
+      40%     { transform: translateX(-50%) translateY(-7px) rotate(.3deg); }
+      60%     { transform: translateX(-50%) translateY(-9px) rotate(.6deg); }
+      80%     { transform: translateX(-50%) translateY(-4px) rotate(.2deg); }
     }
 
 .raindrop {
@@ -359,9 +369,13 @@
     }
 
 @keyframes doveFloat {
-      0%,100% { transform: translateY(0) translateX(0);    }
-      30%      { transform: translateY(-10px) translateX(8px); }
-      70%      { transform: translateY(-5px) translateX(-5px); }
+      0%,100% { transform: translateY(0) translateX(0) rotate(0deg); }
+      15%     { transform: translateY(-6px) translateX(5px) rotate(-2deg); }
+      30%     { transform: translateY(-12px) translateX(10px) rotate(1deg); }
+      45%     { transform: translateY(-8px) translateX(6px) rotate(-1deg); }
+      60%     { transform: translateY(-4px) translateX(-3px) rotate(2deg); }
+      75%     { transform: translateY(-6px) translateX(-6px) rotate(-1deg); }
+      90%     { transform: translateY(-2px) translateX(-2px) rotate(.5deg); }
     }
 
 #noah-heading h2 {
@@ -421,6 +435,304 @@
     }
 
 #babel-heading p { color: rgba(255,210,120,.55); }
+
+/* ══════════════════════════════════════════════
+       ENHANCED PARTICLE & ATMOSPHERE SYSTEMS
+    ══════════════════════════════════════════════ */
+
+@keyframes coronaPulse {
+      0%,100% { transform: scale(1); opacity: .45; }
+      50%     { transform: scale(1.18); opacity: .85; }
+    }
+
+@keyframes coronaSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+@keyframes orbOrbit {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+@keyframes fireflyField {
+      0%,100% { opacity: .15; transform: translateY(0); }
+      25%     { opacity: .7;  transform: translateY(-5px); }
+      50%     { opacity: .35; transform: translateY(-10px); }
+      75%     { opacity: .8;  transform: translateY(-4px); }
+    }
+
+@keyframes lightningFlash {
+      0%,88%,100% { opacity: 0; }
+      90%         { opacity: .45; }
+      91%         { opacity: .06; }
+      92%         { opacity: .55; }
+      94%         { opacity: 0; }
+    }
+
+@keyframes windStreak {
+      0%   { transform: translateX(-100%); opacity: 0; }
+      18%  { opacity: .28; }
+      82%  { opacity: .2; }
+      100% { transform: translateX(100vw); opacity: 0; }
+    }
+
+@keyframes mistFloat {
+      0%   { transform: translateX(0) scale(1); opacity: .05; }
+      50%  { transform: translateX(-3%) scale(1.04); opacity: .12; }
+      100% { transform: translateX(0) scale(1); opacity: .05; }
+    }
+
+@keyframes shootingStar {
+      0%,84%,100% { opacity: 0; transform: translate(0,0); }
+      86%  { opacity: .85; }
+      91%  { opacity: .35; transform: translate(70px,55px); }
+      93%  { opacity: 0;   transform: translate(90px,70px); }
+    }
+
+@keyframes leafDrift {
+      0%   { transform: translate(0, -10px) rotate(0deg); opacity: 0; }
+      6%   { opacity: .5; }
+      35%  { transform: translate(14px, 28vh) rotate(135deg); opacity: .4; }
+      65%  { transform: translate(-6px, 58vh) rotate(250deg); opacity: .25; }
+      90%  { opacity: .1; }
+      100% { transform: translate(5px, 88vh) rotate(360deg); opacity: 0; }
+    }
+
+@keyframes emberDescend {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0; }
+      6%   { opacity: .7; }
+      35%  { transform: translate(5px, 28vh) scale(.75); opacity: .45; filter: brightness(1.3); }
+      65%  { transform: translate(-3px, 58vh) scale(.45); opacity: .25; }
+      100% { transform: translate(2px, 88vh) scale(.15); opacity: 0; }
+    }
+
+@keyframes splashUp {
+      0%,100% { transform: translateY(0) scale(1); opacity: 0; }
+      18%     { transform: translateY(-10px) scale(1.4); opacity: .5; }
+      38%     { transform: translateY(-22px) scale(.85); opacity: .25; }
+      55%     { transform: translateY(-12px) scale(.5); opacity: .08; }
+    }
+
+@keyframes dustRise {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0; }
+      12%  { opacity: .3; }
+      50%  { transform: translate(5px, -20vh) scale(1.5); opacity: .18; }
+      100% { transform: translate(-3px, -38vh) scale(2); opacity: 0; }
+    }
+
+/* — Intro Orb Orbiting Particles — */
+#intro-orb::before {
+      content: '';
+      position: absolute; width: 220%; height: 220%; top: -60%; left: -60%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255,255,200,.5) 0%, transparent 3%),
+        radial-gradient(circle at 85% 20%, rgba(255,240,180,.4) 0%, transparent 2.5%),
+        radial-gradient(circle at 50% 90%, rgba(255,220,100,.45) 0%, transparent 3%),
+        radial-gradient(circle at 10% 75%, rgba(255,255,220,.35) 0%, transparent 2%),
+        radial-gradient(circle at 90% 80%, rgba(255,255,200,.4) 0%, transparent 2.5%);
+      animation: orbOrbit 12s linear infinite;
+    }
+
+#intro-orb::after {
+      content: '';
+      position: absolute; inset: -45%;
+      border-radius: 50%;
+      background: radial-gradient(circle, transparent 28%, rgba(255,230,100,.06) 52%, transparent 72%);
+      animation: coronaPulse 4s ease-in-out infinite;
+    }
+
+/* — Intro Void Tendrils — */
+#intro-void::before {
+      content: '';
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 55%; height: 100%;
+      background: radial-gradient(ellipse 45% 75% at 50% 100%, rgba(5,0,20,.65) 0%, transparent 55%);
+      animation: coronaPulse 7s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+/* — Creation Sun Corona — */
+#creation-sun::before {
+      content: '';
+      position: absolute; inset: -40%;
+      border-radius: 50%;
+      background: radial-gradient(circle, transparent 30%, rgba(255,200,50,.1) 52%, transparent 70%);
+      animation: coronaPulse 3.5s ease-in-out infinite;
+    }
+
+#creation-sun::after {
+      content: '';
+      position: absolute; inset: -70%;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg,
+        transparent, rgba(255,220,80,.05), transparent, rgba(255,200,50,.07),
+        transparent, rgba(255,220,80,.04), transparent, rgba(255,200,50,.06), transparent);
+      animation: coronaSpin 22s linear infinite;
+    }
+
+/* — Creation Water Depth — */
+#creation-waters::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 45%;
+      background: radial-gradient(ellipse 85% 50% at 50% 100%, rgba(0,15,50,.45) 0%, transparent 65%);
+      animation: coronaPulse 6s ease-in-out infinite;
+    }
+
+/* — Creation Shooting Stars — */
+.shooting-star {
+      position: absolute; z-index: 7;
+      width: 2px; height: 2px;
+      background: #fff; border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255,255,255,.6);
+      animation: shootingStar var(--dur, 4s) ease-in var(--delay, 0s) infinite;
+    }
+
+/* — Eden Fireflies — */
+#eden-ground::after {
+      content: '';
+      position: absolute; top: -85%; left: 0; width: 100%; height: 100%;
+      background:
+        radial-gradient(circle at 8% 22%, rgba(200,255,100,.7) 0%, transparent 1.2%),
+        radial-gradient(circle at 25% 52%, rgba(180,255,80,.6) 0%, transparent 1%),
+        radial-gradient(circle at 48% 15%, rgba(220,255,120,.65) 0%, transparent 1.1%),
+        radial-gradient(circle at 68% 45%, rgba(200,255,100,.55) 0%, transparent 1.3%),
+        radial-gradient(circle at 88% 28%, rgba(180,255,80,.6) 0%, transparent 1%),
+        radial-gradient(circle at 15% 68%, rgba(220,255,120,.5) 0%, transparent 1.2%),
+        radial-gradient(circle at 58% 62%, rgba(200,255,100,.6) 0%, transparent 1%),
+        radial-gradient(circle at 38% 35%, rgba(255,255,150,.55) 0%, transparent 1.1%);
+      animation: fireflyField 7s ease-in-out infinite;
+      pointer-events: none; z-index: 6;
+    }
+
+/* — Eden Leaves — */
+.eden-leaf {
+      position: absolute; top: 8%; z-index: 10;
+      width: 7px; height: 12px;
+      background: #2a8838;
+      border-radius: 0 50% 50% 50%;
+      animation: leafDrift var(--dur, 9s) ease-in-out var(--delay, 0s) infinite;
+    }
+
+/* — Eden Mist — */
+.eden-mist {
+      position: absolute; bottom: 28%; left: 0; width: 100%; height: 14%;
+      background: linear-gradient(180deg, transparent 0%, rgba(180,240,200,.05) 35%, rgba(160,220,180,.08) 65%, transparent 100%);
+      z-index: 7; pointer-events: none;
+      animation: mistFloat 10s ease-in-out infinite;
+    }
+
+/* — Fall Lightning Flash — */
+#fall-darkness::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background: rgba(200,50,0,.12);
+      animation: lightningFlash 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+/* — Fall Ominous Particles — */
+#fall-darkness::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        radial-gradient(circle at 18% 28%, rgba(160,0,0,.12) 0%, transparent 10%),
+        radial-gradient(circle at 68% 48%, rgba(120,0,40,.1) 0%, transparent 8%),
+        radial-gradient(circle at 38% 68%, rgba(150,0,20,.08) 0%, transparent 12%),
+        radial-gradient(circle at 82% 22%, rgba(140,0,30,.1) 0%, transparent 9%);
+      animation: mistFloat 9s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+/* — Fall Fruit Glow Ring — */
+#fruit-glow::before {
+      content: '';
+      position: absolute; inset: 12%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,60,0,.18);
+      animation: coronaPulse 2.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+/* — Fall Embers — */
+.fall-ember {
+      position: absolute; top: 5%; z-index: 6;
+      width: 3px; height: 3px;
+      background: rgba(255,100,20,.7);
+      border-radius: 50%;
+      box-shadow: 0 0 4px rgba(255,60,0,.5);
+      animation: emberDescend var(--dur, 5s) ease-in var(--delay, 0s) infinite;
+    }
+
+/* — Noah Wind Streaks — */
+#noah-stormsky::before {
+      content: '';
+      position: absolute; top: 22%; left: 0; width: 45%; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(180,200,230,.18), rgba(200,220,245,.28), rgba(180,200,230,.18), transparent);
+      animation: windStreak 4s linear infinite;
+      z-index: 1;
+    }
+
+#noah-stormsky::after {
+      content: '';
+      position: absolute; top: 40%; left: 0; width: 35%; height: 1.5px;
+      background: linear-gradient(90deg, transparent, rgba(160,180,210,.12), rgba(180,200,225,.2), rgba(160,180,210,.12), transparent);
+      animation: windStreak 6s linear 2s infinite;
+      z-index: 1;
+    }
+
+/* — Noah Water Depth — */
+#noah-water::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; width: 200%; height: 5px;
+      background: repeating-linear-gradient(90deg,
+        transparent, transparent 48px,
+        rgba(80,160,240,.1) 48px, rgba(80,160,240,.1) 96px);
+      animation: waveRipple 5s linear 1.2s infinite;
+      z-index: 1;
+    }
+
+/* — Noah Splash — */
+.noah-splash {
+      position: absolute; bottom: 38%; z-index: 6;
+      width: 4px; height: 4px;
+      background: rgba(150,200,255,.35);
+      border-radius: 50%;
+      animation: splashUp var(--dur, 3s) ease-out var(--delay, 0s) infinite;
+    }
+
+/* — Babel Dust Rising — */
+#babel-ground::after {
+      content: '';
+      position: absolute; top: -55%; left: 0; width: 100%; height: 70%;
+      background:
+        radial-gradient(circle at 10% 72%, rgba(180,140,80,.18) 0%, transparent 6%),
+        radial-gradient(circle at 35% 52%, rgba(160,120,60,.14) 0%, transparent 5%),
+        radial-gradient(circle at 58% 65%, rgba(180,140,80,.16) 0%, transparent 5%),
+        radial-gradient(circle at 82% 78%, rgba(160,120,60,.12) 0%, transparent 4%);
+      animation: mistFloat 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+/* — Babel Divine Light Ring — */
+#babel-divine-light::before {
+      content: '';
+      position: absolute; top: -5%; left: 50%; transform: translateX(-50%);
+      width: 250%; height: 100%;
+      background: radial-gradient(ellipse 22% 12% at 50% 0%, rgba(255,240,160,.18) 0%, transparent 55%);
+      animation: coronaPulse 2.2s ease-in-out .5s infinite;
+      pointer-events: none;
+    }
+
+/* — Babel Dust Particles — */
+.babel-dust {
+      position: absolute; bottom: 18%; z-index: 6;
+      width: 4px; height: 4px;
+      background: rgba(160,120,60,.28);
+      border-radius: 50%;
+      animation: dustRise var(--dur, 5s) ease-out var(--delay, 0s) infinite;
+    }
 
 @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }

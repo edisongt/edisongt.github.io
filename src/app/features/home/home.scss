@@ -40,6 +40,92 @@
 /* ── Scene container ── */
 #scene { position: fixed; inset: 0; z-index: 10; }
 
+/* ── Sun rays ── */
+#sun-rays {
+  position: fixed; z-index: 4; pointer-events: none;
+  transform: translate(-50%, -50%); border-radius: 50%;
+  width: clamp(260px, 40vw, 520px); height: clamp(260px, 40vw, 520px);
+  background: conic-gradient(
+    from 0deg,
+    rgba(255,240,180,0.08) 0deg,   transparent 18deg,
+    rgba(255,240,180,0.06) 36deg,   transparent 54deg,
+    rgba(255,240,180,0.09) 72deg,   transparent 90deg,
+    rgba(255,240,180,0.05) 108deg,  transparent 126deg,
+    rgba(255,240,180,0.08) 144deg,  transparent 162deg,
+    rgba(255,240,180,0.07) 180deg,  transparent 198deg,
+    rgba(255,240,180,0.06) 216deg,  transparent 234deg,
+    rgba(255,240,180,0.09) 252deg,  transparent 270deg,
+    rgba(255,240,180,0.05) 288deg,  transparent 306deg,
+    rgba(255,240,180,0.08) 324deg,  transparent 342deg,
+    rgba(255,240,180,0.08) 360deg
+  );
+  animation: sunRaysSpin 60s linear infinite;
+  display: none;
+}
+
+@keyframes sunRaysSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ── Floating clouds ── */
+#clouds {
+  position: absolute; inset: 0;
+  z-index: 3; pointer-events: none;
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.08));
+  opacity: 0;
+}
+
+.cloud-1 {
+  top: 8%; width: clamp(120px, 18vw, 260px);
+  animation: cloudDrift1 48s linear infinite;
+}
+.cloud-2 {
+  top: 16%; width: clamp(100px, 14vw, 200px);
+  animation: cloudDrift2 62s linear infinite;
+}
+.cloud-3 {
+  top: 5%; width: clamp(90px, 12vw, 170px);
+  animation: cloudDrift3 55s linear infinite;
+}
+.cloud-4 {
+  top: 22%; width: clamp(80px, 11vw, 150px);
+  animation: cloudDrift4 70s linear infinite;
+}
+
+@keyframes cloudDrift1 {
+  0%   { left: -20%; opacity: 0; }
+  5%   { opacity: .65; }
+  90%  { opacity: .65; }
+  100% { left: 110%; opacity: 0; }
+}
+@keyframes cloudDrift2 {
+  0%   { left: 115%; opacity: 0; }
+  5%   { opacity: .55; }
+  90%  { opacity: .55; }
+  100% { left: -18%; opacity: 0; }
+}
+@keyframes cloudDrift3 {
+  0%   { left: -15%; opacity: 0; }
+  5%   { opacity: .5; }
+  90%  { opacity: .5; }
+  100% { left: 112%; opacity: 0; }
+}
+@keyframes cloudDrift4 {
+  0%   { left: 120%; opacity: 0; }
+  5%   { opacity: .45; }
+  90%  { opacity: .45; }
+  100% { left: -15%; opacity: 0; }
+}
+
+/* ── Distant mountains ── */
+#mountains-far { position: absolute; bottom: 0; left: 0; width: 100%; height: 52%; z-index: 0; }
+
 /* ── Background mountains ── */
 #mountains { position: absolute; bottom: 0; left: 0; width: 100%; height: 45%; z-index: 1; }
 
@@ -212,6 +298,69 @@
 
 #river-main { animation: riverShimmer 5s ease-in-out infinite; }
 
+/* ── River mist ── */
+#river-mist {
+  position: absolute; bottom: 22%; left: 0; width: 100%; height: 10%;
+  z-index: 2; pointer-events: none;
+  animation: mistDrift 8s ease-in-out infinite;
+  opacity: .7;
+}
+
+@keyframes mistDrift {
+  0%, 100% { transform: translateX(0); opacity: .6; }
+  50%      { transform: translateX(1.5%); opacity: .85; }
+}
+
+/* ── Butterflies ── */
+.butterfly-wrap {
+  position: absolute; z-index: 6; pointer-events: none;
+  width: clamp(22px, 3.5vw, 44px);
+}
+
+.butterfly-wrap svg { width: 100%; height: auto; }
+
+#butterfly-1 {
+  bottom: 40%; left: 34%;
+  animation: bflyPath1 12s ease-in-out infinite;
+}
+#butterfly-2 {
+  bottom: 50%; left: 60%;
+  animation: bflyPath2 15s ease-in-out infinite;
+}
+#butterfly-3 {
+  bottom: 36%; left: 46%;
+  animation: bflyPath3 18s ease-in-out infinite;
+}
+
+@keyframes bflyPath1 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(30px, -20px) rotate(5deg); }
+  50%  { transform: translate(-15px, -35px) rotate(-5deg); }
+  75%  { transform: translate(20px, -10px) rotate(3deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+@keyframes bflyPath2 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(-25px, -15px) rotate(-4deg); }
+  50%  { transform: translate(20px, -30px) rotate(6deg); }
+  75%  { transform: translate(-10px, -8px) rotate(-2deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+@keyframes bflyPath3 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  33%  { transform: translate(18px, -25px) rotate(4deg); }
+  66%  { transform: translate(-22px, -18px) rotate(-6deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.bfly-left  { animation: bflyFlap .35s ease-in-out infinite; transform-origin: 100% 50%; }
+.bfly-right { animation: bflyFlap .35s ease-in-out infinite reverse; transform-origin: 0% 50%; }
+
+@keyframes bflyFlap {
+  0%, 100% { transform: scaleX(1) rotateY(0deg); }
+  50%      { transform: scaleX(.4) rotateY(50deg); }
+}
+
 /* ── Fireflies ── */
 .ff {
   position: absolute; width: 5px; height: 5px;
@@ -295,5 +444,6 @@
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
-  .sway-l, .sway-r, .ff, .animal-wrap, #eagle-wrap, #dove-wrap { animation: none !important; }
+  .sway-l, .sway-r, .ff, .animal-wrap, #eagle-wrap, #dove-wrap,
+  .cloud, .butterfly-wrap, #river-mist, #sun-rays { animation: none !important; }
 }
