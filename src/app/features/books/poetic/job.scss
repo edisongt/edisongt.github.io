@@ -158,7 +158,10 @@
     ══════════════════════════════════════════════ */
 
 #scene-prosperity {
-      background: linear-gradient(180deg, #7ec8b0 0%, #c8d880 35%, #e8d880 65%, #88c070 100%);
+      background:
+        radial-gradient(ellipse 65% 50% at 50% 25%, rgba(200,240,120,.12) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 35% at 25% 60%, rgba(104,168,88,.08) 0%, transparent 50%),
+        linear-gradient(180deg, #7ec8b0 0%, #90c898 18%, #b8d078 35%, #c8d880 50%, #d8d880 65%, #b8c878 80%, #88c070 100%);
     }
 
 #prosperity-ground {
@@ -201,7 +204,10 @@
     ══════════════════════════════════════════════ */
 
 #scene-suffering {
-      background: linear-gradient(180deg, #8a7aa0 0%, #7a6878 35%, #5a6878 65%, #3a5868 100%);
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(200,100,60,.1) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 35% at 70% 60%, rgba(90,104,120,.06) 0%, transparent 50%),
+        linear-gradient(180deg, #8a7aa0 0%, #807088 18%, #7a6878 35%, #6a6878 50%, #5a6878 65%, #4a6070 82%, #3a5868 100%);
     }
 
 #suffering-sky { position: absolute; top: 0; left: 0; width: 100%; height: 55%; z-index: 2; }
@@ -231,7 +237,10 @@
     ══════════════════════════════════════════════ */
 
 #scene-friends {
-      background: linear-gradient(180deg, #c0b898 0%, #d8c8a0 35%, #c8b080 65%, #a89870 100%);
+      background:
+        radial-gradient(ellipse 60% 45% at 50% 28%, rgba(216,200,160,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 35% at 30% 65%, rgba(168,152,112,.06) 0%, transparent 50%),
+        linear-gradient(180deg, #c0b898 0%, #ccbc98 18%, #d8c8a0 35%, #d4c090 52%, #c8b080 68%, #b8a878 82%, #a89870 100%);
     }
 
 #friends-ground {

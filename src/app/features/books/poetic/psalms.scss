@@ -164,7 +164,10 @@
     ══════════════════════════════════════════════ */
 
 #scene-praise {
-      background: linear-gradient(180deg, #5588cc 0%, #7799dd 45%, #ccaa66 100%);
+      background:
+        radial-gradient(ellipse 65% 50% at 50% 20%, rgba(204,170,102,.14) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 35% at 25% 55%, rgba(123,104,238,.08) 0%, transparent 50%),
+        linear-gradient(180deg, #5588cc 0%, #6694d4 22%, #7799dd 45%, #99aacc 65%, #bbaa77 82%, #ccaa66 100%);
     }
 
 #praise-glow {
@@ -194,7 +197,10 @@
     ══════════════════════════════════════════════ */
 
 #scene-shepherd {
-      background: linear-gradient(180deg, #88aadd 0%, #aaddcc 30%, #88bb88 65%, #558866 100%);
+      background:
+        radial-gradient(ellipse 65% 50% at 50% 25%, rgba(136,200,136,.12) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 35% at 30% 60%, rgba(170,221,204,.06) 0%, transparent 50%),
+        linear-gradient(180deg, #88aadd 0%, #90b8cc 15%, #aaddcc 30%, #a0c8a8 50%, #88bb88 65%, #70a878 82%, #558866 100%);
     }
 
 #shepherd-scene-svg {
@@ -219,7 +225,10 @@
     ══════════════════════════════════════════════ */
 
 #scene-cry {
-      background: linear-gradient(180deg, #556688 0%, #667799 50%, #8888aa 100%);
+      background:
+        radial-gradient(ellipse 50% 40% at 50% 30%, rgba(80,90,120,.12) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 30% at 30% 70%, rgba(100,110,140,.06) 0%, transparent 50%),
+        linear-gradient(180deg, #556688 0%, #5e6e90 25%, #667799 50%, #7888a0 75%, #8888aa 100%);
     }
 
 #cry-storm {

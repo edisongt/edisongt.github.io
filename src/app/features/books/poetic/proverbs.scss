@@ -38,12 +38,72 @@
       50%      { opacity: 1;  transform: scale(1.04); }
     }
 
+@keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50%      { opacity: 1; transform: scale(1); }
+    }
+
+@keyframes driftParticles {
+      0%, 100% { transform: translate(0, 0); }
+      25%      { transform: translate(12px, -10px); }
+      50%      { transform: translate(-8px, -5px); }
+      75%      { transform: translate(6px, -14px); }
+    }
+
+@keyframes softPulse {
+      0%, 100% { opacity: .3; transform: scale(1); }
+      50%      { opacity: .55; transform: scale(1.08); }
+    }
+
+@keyframes leafDrift {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25%      { transform: translateY(-6px) rotate(3deg); }
+      50%      { transform: translateY(-2px) rotate(-2deg); }
+      75%      { transform: translateY(-8px) rotate(1deg); }
+    }
+
+/* ── Atmospheric vignette ── */
+.scene::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 72% 62% at 50% 50%, transparent 0%, rgba(20,40,15,.18) 100%);
+      pointer-events: none;
+      z-index: 15;
+    }
+
+/* ── Luminous floating particles (emerald-gold) ── */
+.scene::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 8% 22%, rgba(80,200,120,.3) 50%, transparent 51%),
+        radial-gradient(2.5px 2.5px at 22% 50%, rgba(160,220,140,.24) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 38% 72%, rgba(200,240,180,.18) 50%, transparent 51%),
+        radial-gradient(3px 3px at 55% 12%, rgba(255,240,180,.16) 50%, transparent 51%),
+        radial-gradient(2px 2px at 62% 55%, rgba(80,200,120,.28) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 78% 32%, rgba(160,220,140,.2) 50%, transparent 51%),
+        radial-gradient(2.5px 2.5px at 88% 65%, rgba(200,240,180,.16) 50%, transparent 51%),
+        radial-gradient(2px 2px at 90% 8%, rgba(255,240,180,.14) 50%, transparent 51%),
+        radial-gradient(3px 3px at 5% 88%, rgba(80,200,120,.22) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 30% 92%, rgba(160,220,140,.18) 50%, transparent 51%),
+        radial-gradient(1px 1px at 15% 58%, rgba(255,255,255,.18) 50%, transparent 51%),
+        radial-gradient(1px 1px at 52% 28%, rgba(255,255,255,.14) 50%, transparent 51%),
+        radial-gradient(1px 1px at 85% 80%, rgba(255,255,255,.1) 50%, transparent 51%);
+      pointer-events: none;
+      z-index: 2;
+      animation: driftParticles 22s ease-in-out infinite;
+    }
+
 /* ══════════════════════════════════════════════
        SCENE 1 — INTRO / Title
     ══════════════════════════════════════════════ */
 
 #scene-intro {
-      background: linear-gradient(180deg, #4a9878 0%, #68b888 40%, #c8c090 100%);
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 25%, rgba(80,200,120,.14) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 20% 65%, rgba(42,138,80,.08) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 35% at 82% 52%, rgba(160,220,140,.06) 0%, transparent 55%),
+        linear-gradient(180deg, #4a9878 0%, #58a884 20%, #68b888 40%, #88c898 60%, #a8c894 75%, #c8c090 100%);
     }
 
 #intro-orb {
@@ -98,7 +158,10 @@
     ══════════════════════════════════════════════ */
 
 #scene-wisdom {
-      background: linear-gradient(180deg, #c8a868 0%, #e0c880 40%, #d8c898 100%);
+      background:
+        radial-gradient(ellipse 60% 45% at 50% 20%, rgba(255,240,180,.15) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 35% at 75% 55%, rgba(255,220,120,.08) 0%, transparent 50%),
+        linear-gradient(180deg, #c8a868 0%, #d8b878 20%, #e0c880 40%, #dcc88c 60%, #d8c898 100%);
     }
 
 #wisdom-glow {
@@ -130,7 +193,10 @@
     ══════════════════════════════════════════════ */
 
 #scene-paths {
-      background: linear-gradient(180deg, #78c8a0 0%, #a0d8b8 40%, #e0d8b0 100%);
+      background:
+        radial-gradient(ellipse 70% 45% at 50% 20%, rgba(120,200,160,.12) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 35% at 30% 70%, rgba(160,216,184,.06) 0%, transparent 50%),
+        linear-gradient(180deg, #78c8a0 0%, #90d4b0 20%, #a0d8b8 40%, #c0d8c0 60%, #e0d8b0 100%);
     }
 
 #paths-sun {
@@ -158,7 +224,10 @@
     ══════════════════════════════════════════════ */
 
 #scene-instruction {
-      background: linear-gradient(180deg, #c8a060 0%, #e0c880 45%, #d8c490 100%);
+      background:
+        radial-gradient(ellipse 55% 45% at 50% 30%, rgba(255,220,120,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 35% at 25% 70%, rgba(200,160,80,.06) 0%, transparent 50%),
+        linear-gradient(180deg, #c8a060 0%, #d4b070 22%, #e0c880 45%, #dcc88a 68%, #d8c490 100%);
     }
 
 #instruction-lamp-glow {
@@ -188,7 +257,10 @@
     ══════════════════════════════════════════════ */
 
 #scene-ant {
-      background: linear-gradient(180deg, #88c880 0%, #b0d890 40%, #e8d898 100%);
+      background:
+        radial-gradient(ellipse 65% 50% at 60% 20%, rgba(200,240,120,.12) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 35% at 20% 60%, rgba(136,200,128,.08) 0%, transparent 50%),
+        linear-gradient(180deg, #88c880 0%, #98d088 20%, #b0d890 40%, #c8d890 60%, #e8d898 100%);
     }
 
 #ant-sunshine {
@@ -222,7 +294,11 @@
     ══════════════════════════════════════════════ */
 
 #scene-virtuous {
-      background: linear-gradient(180deg, #d0a860 0%, #78c890 50%, #e0a8a0 100%);
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 18%, rgba(255,220,140,.15) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 35% at 30% 65%, rgba(120,200,144,.08) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 30% at 75% 50%, rgba(224,168,160,.06) 0%, transparent 50%),
+        linear-gradient(180deg, #d0a860 0%, #c0b870 25%, #78c890 50%, #b0b890 75%, #e0a8a0 100%);
     }
 
 #virtuous-sunrise {
