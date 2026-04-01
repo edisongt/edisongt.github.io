@@ -289,6 +289,142 @@
 
 #farewell-heading p { color: rgba(160,220,170,.5); }
 
+
+/* — Crossing Water Spray — */
+.crossing-spray {
+      position: absolute; bottom: 32%; z-index: 8;
+      width: 4px; height: 4px;
+      background: rgba(150,210,255,.4);
+      border-radius: 50%;
+      animation: splashUp var(--dur,3s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes splashUp {
+      0%,100% { transform: translateY(0) scale(1); opacity: 0; }
+      18% { transform: translateY(-14px) scale(1.5); opacity: .5; }
+      40% { transform: translateY(-28px) scale(.8); opacity: .2; }
+      55% { transform: translateY(-18px) scale(.4); opacity: 0; }
+    }
+
+/* — Jericho Dust — */
+.jericho-dust {
+      position: absolute; bottom: 22%; z-index: 8;
+      width: 5px; height: 5px;
+      background: rgba(180,140,80,.35);
+      border-radius: 50%;
+      animation: dustRise var(--dur,5s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes dustRise {
+      0% { transform: translate(0,0) scale(1); opacity: 0; }
+      12% { opacity: .35; }
+      50% { transform: translate(8px,-22vh) scale(1.6); opacity: .15; }
+      100% { transform: translate(-4px,-40vh) scale(2.2); opacity: 0; }
+    }
+
+/* — Conquest Embers — */
+.conquest-ember {
+      position: absolute; top: 5%; z-index: 8;
+      width: 3px; height: 3px;
+      background: rgba(255,120,20,.65);
+      border-radius: 50%;
+      box-shadow: 0 0 4px rgba(255,60,0,.4);
+      animation: emberDrift var(--dur,6s) ease-in var(--delay,0s) infinite;
+    }
+
+@keyframes emberDrift {
+      0% { transform: translate(0,0) scale(1); opacity: 0; }
+      8% { opacity: .65; }
+      40% { transform: translate(6px,30vh) scale(.7); opacity: .35; filter: brightness(1.3); }
+      100% { transform: translate(-2px,85vh) scale(.1); opacity: 0; }
+    }
+
+/* — Division Golden Mote — */
+.division-mote {
+      position: absolute; z-index: 8;
+      width: 3px; height: 3px;
+      background: rgba(255,215,80,.5);
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(255,200,50,.3);
+      animation: moteFloat var(--dur,7s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes moteFloat {
+      0%,100% { transform: translate(0,0); opacity: 0; }
+      15% { opacity: .45; }
+      50% { transform: translate(var(--dx,12px), var(--dy,-18px)); opacity: .35; }
+      85% { opacity: .1; }
+    }
+
+/* — Farewell Spark — */
+.farewell-spark {
+      position: absolute; bottom: 35%; z-index: 8;
+      width: 2px; height: 2px;
+      background: rgba(255,200,80,.6);
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(255,180,40,.4);
+      animation: sparkRise var(--dur,4s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes sparkRise {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      10% { opacity: .6; }
+      50% { transform: translateY(-18vh) scale(.6); opacity: .3; }
+      100% { transform: translateY(-35vh) scale(.2); opacity: 0; }
+    }
+
+/* — Crossing River Shimmer — */
+#crossing-water::after {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 200%; height: 6px;
+      background: repeating-linear-gradient(90deg,
+        transparent, transparent 40px,
+        rgba(100,180,255,.12) 40px, rgba(100,180,255,.12) 80px);
+      animation: waveRipple 4s linear infinite;
+    }
+
+@keyframes waveRipple {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+/* — Jericho Shake — */
+@keyframes wallShake {
+      0%,100% { transform: translate(0,0); }
+      10% { transform: translate(-2px,1px); }
+      20% { transform: translate(3px,-1px); }
+      30% { transform: translate(-1px,2px); }
+      40% { transform: translate(2px,-2px); }
+      50% { transform: translate(-3px,1px); }
+      60% { transform: translate(1px,-1px); }
+      70% { transform: translate(-2px,2px); }
+      80% { transform: translate(3px,0); }
+      90% { transform: translate(-1px,-1px); }
+    }
+
+#jericho-walls {
+      animation: wallShake 0.6s ease-in-out infinite;
+    }
+
+/* — Conquest Ground Smoke — */
+#conquest-ground::after {
+      content: '';
+      position: absolute; top: -50%; left: 0; width: 100%; height: 60%;
+      background:
+        radial-gradient(circle at 15% 65%, rgba(160,100,40,.14) 0%, transparent 8%),
+        radial-gradient(circle at 45% 55%, rgba(140,80,30,.12) 0%, transparent 7%),
+        radial-gradient(circle at 75% 70%, rgba(160,100,40,.1) 0%, transparent 9%);
+      animation: smokeFloat 9s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+@keyframes smokeFloat {
+      0% { transform: translateX(0) scale(1); opacity: .06; }
+      50% { transform: translateX(-2%) scale(1.05); opacity: .14; }
+      100% { transform: translateX(0) scale(1); opacity: .06; }
+    }
+
+
 @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }

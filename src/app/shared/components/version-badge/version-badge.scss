@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+.version-badge {
+  position: fixed;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  z-index: 9999;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: 0.03em;
+}

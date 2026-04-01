@@ -246,6 +246,84 @@
 
 #exile-heading p { color: rgba(220,160,120,.55); }
 
+
+/* — Dedication Cloud Particle — */
+.glory-cloud {
+      position: absolute; z-index: 7;
+      width: clamp(12px,2.5vw,24px); height: clamp(8px,1.5vw,16px);
+      border-radius: 50%;
+      background: rgba(255,245,220,.12);
+      animation: cloudDrift var(--dur,8s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes cloudDrift {
+      0%,100% { transform: translate(0,0) scale(1); opacity: .08; }
+      30% { transform: translate(10px,-8px) scale(1.2); opacity: .2; }
+      60% { transform: translate(-6px,-16px) scale(1.1); opacity: .12; }
+    }
+
+/* — Battle Trumpet Blast — */
+.trumpet-wave {
+      position: absolute; z-index: 7;
+      border: 1.5px solid rgba(255,200,60,.15);
+      border-radius: 50%;
+      animation: trumpetExpand var(--dur,3.5s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes trumpetExpand {
+      0% { transform: scale(.3); opacity: .5; }
+      40% { transform: scale(1.4); opacity: .2; }
+      100% { transform: scale(2.8); opacity: 0; }
+    }
+
+/* — Repair Hammer Particle — */
+.repair-spark {
+      position: absolute; z-index: 8;
+      width: 2px; height: 2px;
+      background: rgba(200,180,140,.6);
+      border-radius: 50%;
+      animation: hammerSpark var(--dur,2s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes hammerSpark {
+      0% { transform: translate(0,0) scale(1); opacity: 0; }
+      10% { opacity: .7; }
+      40% { transform: translate(var(--dx,12px),var(--dy,-10px)) scale(.5); opacity: .3; }
+      100% { transform: translate(calc(var(--dx,12px)*2),calc(var(--dy,-10px)*2)) scale(.1); opacity: 0; }
+    }
+
+/* — Revival Fire Spark — */
+.revival-spark {
+      position: absolute; bottom: 25%; z-index: 8;
+      width: 2px; height: 2px;
+      background: rgba(255,140,40,.6);
+      border-radius: 50%;
+      box-shadow: 0 0 4px rgba(255,100,0,.4);
+      animation: revivalRise var(--dur,4s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes revivalRise {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      10% { opacity: .6; }
+      50% { transform: translateY(-22vh) scale(.5); opacity: .25; }
+      100% { transform: translateY(-42vh) scale(.15); opacity: 0; }
+    }
+
+/* — Exile Chain Particle — */
+.exile-chain {
+      position: absolute; z-index: 7;
+      width: clamp(4px,.8vw,8px); height: clamp(4px,.8vw,8px);
+      border: 1.5px solid rgba(120,100,80,.3);
+      border-radius: 50%;
+      animation: chainDangle var(--dur,3s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes chainDangle {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(4px) rotate(8deg); }
+    }
+
+
 @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }

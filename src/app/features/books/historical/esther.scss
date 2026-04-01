@@ -251,6 +251,82 @@
 
 #purim-heading p { color: rgba(230,200,160,.55); }
 
+
+/* — Palace Sparkle — */
+.palace-sparkle {
+      position: absolute; z-index: 8;
+      width: 2px; height: 2px;
+      background: rgba(255,215,0,.6);
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(255,200,0,.4);
+      animation: palaceGlint var(--dur,3s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes palaceGlint {
+      0%,100% { opacity: 0; transform: scale(.5); }
+      50% { opacity: .75; transform: scale(1.4); }
+    }
+
+/* — Plot Shadow Mist — */
+.shadow-mist {
+      position: absolute; z-index: 6;
+      width: clamp(16px,3vw,32px); height: clamp(12px,2vw,22px);
+      border-radius: 50%;
+      background: rgba(30,10,40,.2);
+      animation: shadowDrift var(--dur,7s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes shadowDrift {
+      0%,100% { transform: translate(0,0) scale(1); opacity: .1; }
+      30% { transform: translate(8px,6px) scale(1.3); opacity: .25; }
+      70% { transform: translate(-6px,-4px) scale(1.1); opacity: .15; }
+    }
+
+/* — Courage Golden Aura Ring — */
+.courage-ring {
+      position: absolute; z-index: 7;
+      border: 1.5px solid rgba(255,215,0,.15);
+      border-radius: 50%;
+      animation: courageExpand var(--dur,4s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes courageExpand {
+      0% { transform: scale(.4); opacity: .5; }
+      50% { transform: scale(1.5); opacity: .15; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+
+/* — Reversal Confetti — */
+.reversal-confetti {
+      position: absolute; top: 5%; z-index: 9;
+      width: 4px; height: 5px;
+      border-radius: 1px;
+      animation: confettiCelebrate var(--dur,5s) ease-in var(--delay,0s) infinite;
+    }
+
+@keyframes confettiCelebrate {
+      0% { transform: translate(0,0) rotate(0deg); opacity: 0; }
+      5% { opacity: .65; }
+      35% { transform: translate(12px,32vh) rotate(180deg); opacity: .4; }
+      100% { transform: translate(-8px,88vh) rotate(450deg); opacity: 0; }
+    }
+
+/* — Purim Celebration Spark — */
+.purim-spark {
+      position: absolute; z-index: 9;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      animation: purimBurst var(--dur,3s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes purimBurst {
+      0% { transform: translate(0,0) scale(1); opacity: 0; }
+      10% { opacity: .7; }
+      40% { transform: translate(var(--dx,15px),var(--dy,-20px)) scale(.5); opacity: .3; }
+      100% { transform: translate(calc(var(--dx,15px)*2),calc(var(--dy,-20px)*2)) scale(.1); opacity: 0; }
+    }
+
+
 @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }

@@ -253,6 +253,86 @@
 
 #reform-heading p { color: rgba(176,196,222,.5); }
 
+
+/* — Decree Scroll Particle — */
+.decree-mote {
+      position: absolute; z-index: 8;
+      width: 3px; height: 3px;
+      background: rgba(255,220,100,.5);
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(255,200,60,.3);
+      animation: decreeFloat var(--dur,6s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes decreeFloat {
+      0%,100% { transform: translate(0,0); opacity: .1; }
+      20% { opacity: .5; }
+      50% { transform: translate(var(--dx,8px),var(--dy,-15px)); opacity: .35; }
+      80% { opacity: .1; }
+    }
+
+/* — Return Dust Trail — */
+.return-dust {
+      position: absolute; bottom: 20%; z-index: 7;
+      width: 4px; height: 4px;
+      background: rgba(180,150,100,.3);
+      border-radius: 50%;
+      animation: trailDust var(--dur,5s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes trailDust {
+      0% { transform: translate(0,0) scale(1); opacity: 0; }
+      10% { opacity: .3; }
+      50% { transform: translate(-8px,-18vh) scale(1.5); opacity: .12; }
+      100% { transform: translate(4px,-32vh) scale(2); opacity: 0; }
+    }
+
+/* — Foundation Sparkle — */
+.foundation-sparkle {
+      position: absolute; z-index: 8;
+      width: 2px; height: 2px;
+      background: rgba(255,215,0,.65);
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(255,200,0,.4);
+      animation: foundationGlint var(--dur,3s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes foundationGlint {
+      0%,100% { opacity: 0; transform: scale(.4); }
+      50% { opacity: .8; transform: scale(1.5); }
+    }
+
+/* — Temple Complete Glory — */
+.complete-glory {
+      position: absolute; z-index: 7;
+      border: 1.5px solid rgba(255,230,120,.15);
+      border-radius: 50%;
+      animation: gloryExpand var(--dur,5s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes gloryExpand {
+      0% { transform: scale(.3); opacity: .4; }
+      50% { transform: scale(1.6); opacity: .12; }
+      100% { transform: scale(2.8); opacity: 0; }
+    }
+
+/* — Reform Tear Particle — */
+.reform-tear {
+      position: absolute; top: 25%; z-index: 8;
+      width: 2px; height: 4px;
+      background: rgba(140,170,220,.35);
+      border-radius: 0 0 50% 50%;
+      animation: tearFall var(--dur,4s) ease-in var(--delay,0s) infinite;
+    }
+
+@keyframes tearFall {
+      0% { transform: translateY(0); opacity: 0; }
+      8% { opacity: .4; }
+      60% { transform: translateY(45vh); opacity: .15; }
+      100% { transform: translateY(70vh); opacity: 0; }
+    }
+
+
 @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }

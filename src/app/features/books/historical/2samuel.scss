@@ -335,6 +335,81 @@
 
 #covenant-heading p { color: rgba(218,190,140,.5); }
 
+
+/* — Coronation Confetti — */
+.coronation-confetti {
+      position: absolute; top: 5%; z-index: 8;
+      width: 4px; height: 6px;
+      border-radius: 1px;
+      animation: confettiFall var(--dur,5s) ease-in var(--delay,0s) infinite;
+    }
+
+@keyframes confettiFall {
+      0% { transform: translate(0,0) rotate(0deg); opacity: 0; }
+      6% { opacity: .6; }
+      40% { transform: translate(10px,35vh) rotate(200deg); opacity: .4; }
+      100% { transform: translate(-6px,90vh) rotate(500deg); opacity: 0; }
+    }
+
+/* — Ark Procession Glow — */
+.procession-glow {
+      position: absolute; z-index: 7;
+      width: clamp(10px,2vw,20px); height: clamp(10px,2vw,20px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,80,.4) 0%, transparent 70%);
+      animation: processionPulse var(--dur,3s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes processionPulse {
+      0%,100% { transform: scale(.8); opacity: .3; }
+      50% { transform: scale(1.4); opacity: .6; }
+    }
+
+/* — Bathsheba Rain — */
+.night-rain {
+      position: absolute; top: 0; z-index: 6;
+      width: 1px; height: clamp(12px,2vh,22px);
+      background: rgba(140,160,200,.2);
+      animation: rainFall var(--spd,1s) linear var(--delay,0s) infinite;
+    }
+
+@keyframes rainFall {
+      0% { transform: translateY(-10px); opacity: 0; }
+      10% { opacity: .3; }
+      90% { opacity: .15; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+/* — Absalom Wind Streak — */
+.wind-streak {
+      position: absolute; z-index: 6;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, rgba(180,200,230,.15), rgba(200,220,245,.25), rgba(180,200,230,.15), transparent);
+      animation: windStreak var(--dur,4s) linear var(--delay,0s) infinite;
+    }
+
+@keyframes windStreak {
+      0% { transform: translateX(-100%); opacity: 0; }
+      20% { opacity: .3; }
+      80% { opacity: .2; }
+      100% { transform: translateX(100vw); opacity: 0; }
+    }
+
+/* — Covenant Divine Light Ring — */
+.covenant-ring {
+      position: absolute; z-index: 7;
+      border: 1.5px solid rgba(255,230,120,.15);
+      border-radius: 50%;
+      animation: divineRing var(--dur,4s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes divineRing {
+      0% { transform: scale(.4); opacity: .5; }
+      50% { transform: scale(1.6); opacity: .15; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+
+
 @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }

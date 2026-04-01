@@ -264,6 +264,88 @@
 
 #carmel-heading p { color: rgba(255,180,120,.5); }
 
+
+/* — Wisdom Golden Mote — */
+.wisdom-mote {
+      position: absolute; z-index: 8;
+      width: 3px; height: 3px;
+      background: rgba(255,215,80,.55);
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(255,200,50,.3);
+      animation: moteFloat var(--dur,6s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes moteFloat {
+      0%,100% { transform: translate(0,0); opacity: .1; }
+      20% { opacity: .5; }
+      50% { transform: translate(var(--dx,10px),var(--dy,-15px)); opacity: .35; }
+      80% { opacity: .1; }
+    }
+
+/* — Temple Sparkle — */
+.temple-sparkle {
+      position: absolute; z-index: 8;
+      width: 2px; height: 2px;
+      background: rgba(255,220,100,.7);
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(255,215,0,.4);
+      animation: sparkleGlint var(--dur,3s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes sparkleGlint {
+      0%,100% { opacity: 0; transform: scale(.5); }
+      50% { opacity: .8; transform: scale(1.5); }
+    }
+
+/* — Sheba Incense — */
+.incense-particle {
+      position: absolute; bottom: 30%; z-index: 7;
+      width: 4px; height: 4px;
+      background: rgba(200,180,220,.25);
+      border-radius: 50%;
+      animation: incenseRise var(--dur,6s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes incenseRise {
+      0% { transform: translate(0,0) scale(1); opacity: 0; }
+      10% { opacity: .3; }
+      50% { transform: translate(6px,-25vh) scale(1.8); opacity: .15; }
+      100% { transform: translate(-4px,-45vh) scale(2.5); opacity: 0; }
+    }
+
+/* — Division Crack Effect — */
+#division-crack::after {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, transparent 0%, rgba(180,60,20,.2) 30%, rgba(200,80,30,.35) 50%, rgba(180,60,20,.2) 70%, transparent 100%);
+      animation: crackGlow 2.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+@keyframes crackGlow {
+      0%,100% { opacity: .3; }
+      50% { opacity: .7; }
+    }
+
+/* — Carmel Fire Spark — */
+.carmel-spark {
+      position: absolute; z-index: 9;
+      width: 3px; height: 3px;
+      background: rgba(255,140,20,.7);
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(255,80,0,.5);
+      animation: sparkRise var(--dur,3.5s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes sparkRise {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      10% { opacity: .7; }
+      45% { transform: translateY(-20vh) scale(.5); opacity: .3; }
+      100% { transform: translateY(-40vh) scale(.15); opacity: 0; }
+    }
+
+
 @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }

@@ -246,6 +246,83 @@
 
 #prayer-heading p { color: rgba(200,170,120,.5); }
 
+
+/* — Genealogy Connecting Lines — */
+.genealogy-line {
+      position: absolute; z-index: 6;
+      width: 1px;
+      background: rgba(200,180,120,.15);
+      animation: lineAppear var(--dur,5s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes lineAppear {
+      0%,100% { opacity: 0; height: 0; }
+      20% { opacity: .3; height: var(--h,40px); }
+      80% { opacity: .3; height: var(--h,40px); }
+    }
+
+/* — King Crown Glow — */
+.crown-glow {
+      position: absolute; z-index: 8;
+      width: clamp(8px,1.5vw,16px); height: clamp(8px,1.5vw,16px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,0,.5) 0%, transparent 70%);
+      animation: crownPulse var(--dur,3s) ease-in-out var(--delay,0s) infinite alternate;
+    }
+
+@keyframes crownPulse {
+      0% { transform: scale(.8); opacity: .3; }
+      100% { transform: scale(1.4); opacity: .6; }
+    }
+
+/* — Ark Glory Spirit — */
+.ark-spirit {
+      position: absolute; z-index: 8;
+      width: 3px; height: 3px;
+      background: rgba(255,230,120,.5);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(255,215,60,.3);
+      animation: spiritDance var(--dur,6s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes spiritDance {
+      0%,100% { transform: translate(0,0); opacity: .15; }
+      25% { transform: translate(8px,-14px); opacity: .5; }
+      50% { transform: translate(-6px,-22px); opacity: .35; }
+      75% { transform: translate(10px,-10px); opacity: .2; }
+    }
+
+/* — Prepare Material Sparkle — */
+.material-sparkle {
+      position: absolute; z-index: 8;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      animation: materialGlint var(--dur,4s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes materialGlint {
+      0%,100% { opacity: 0; transform: scale(.4); }
+      50% { opacity: .7; transform: scale(1.4); }
+    }
+
+/* — Prayer Ascending Light — */
+.prayer-light {
+      position: absolute; z-index: 7;
+      width: 2px; height: 2px;
+      background: rgba(255,240,180,.5);
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(255,220,100,.3);
+      animation: lightAscend var(--dur,5s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes lightAscend {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      10% { opacity: .5; }
+      50% { transform: translateY(-25vh) scale(.6); opacity: .25; }
+      100% { transform: translateY(-50vh) scale(.2); opacity: 0; }
+    }
+
+
 @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }

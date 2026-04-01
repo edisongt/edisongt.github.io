@@ -279,6 +279,103 @@
 
 #lineage-heading p { color: rgba(232,192,96,.5); }
 
+
+/* — Wheat Particle — */
+.wheat-mote {
+      position: absolute; z-index: 8;
+      width: 2px; height: 5px;
+      background: rgba(220,180,80,.5);
+      border-radius: 0 0 2px 2px;
+      animation: wheatDrift var(--dur,7s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes wheatDrift {
+      0% { transform: translate(0,-10px) rotate(0deg); opacity: 0; }
+      8% { opacity: .45; }
+      35% { transform: translate(16px,30vh) rotate(120deg); opacity: .35; }
+      65% { transform: translate(-8px,55vh) rotate(240deg); opacity: .2; }
+      100% { transform: translate(6px,85vh) rotate(360deg); opacity: 0; }
+    }
+
+/* — Gleaning Sunbeam — */
+.sunbeam {
+      position: absolute; top: 0; z-index: 6;
+      width: 2px; height: 35vh;
+      background: linear-gradient(180deg, rgba(255,230,120,.25) 0%, rgba(255,210,80,.08) 60%, transparent 100%);
+      transform-origin: top center;
+      animation: sunbeamSway var(--dur,8s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes sunbeamSway {
+      0%,100% { transform: rotate(var(--rot,-2deg)); opacity: .3; }
+      50% { transform: rotate(calc(var(--rot,-2deg) + 4deg)); opacity: .5; }
+    }
+
+/* — Threshing Chaff — */
+.chaff {
+      position: absolute; bottom: 30%; z-index: 8;
+      width: 3px; height: 2px;
+      background: rgba(200,170,100,.45);
+      border-radius: 50%;
+      animation: chaffFloat var(--dur,5s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes chaffFloat {
+      0% { transform: translate(0,0) scale(1); opacity: 0; }
+      10% { opacity: .5; }
+      50% { transform: translate(var(--dx,20px),-15vh) scale(.7); opacity: .25; }
+      100% { transform: translate(calc(var(--dx,20px)*2),-28vh) scale(.3); opacity: 0; }
+    }
+
+/* — Redemption Golden Ring — */
+.redemption-ring {
+      position: absolute; z-index: 7;
+      width: clamp(30px,6vw,60px); height: clamp(30px,6vw,60px);
+      border: 2px solid rgba(255,215,0,.2);
+      border-radius: 50%;
+      animation: ringExpand var(--dur,4s) ease-out var(--delay,0s) infinite;
+    }
+
+@keyframes ringExpand {
+      0% { transform: scale(.5); opacity: .5; }
+      60% { transform: scale(1.8); opacity: .15; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+
+/* — Lineage Star Twinkle — */
+.lineage-star {
+      position: absolute; z-index: 8;
+      width: 2px; height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 4px rgba(255,255,255,.6);
+      animation: starTwinkle var(--dur,3s) ease-in-out var(--delay,0s) infinite;
+    }
+
+@keyframes starTwinkle {
+      0%,100% { opacity: .2; transform: scale(.8); }
+      50% { opacity: .9; transform: scale(1.3); }
+    }
+
+/* — Gleaning Firefly — */
+#gleaning-ground::after {
+      content: '';
+      position: absolute; top: -70%; left: 0; width: 100%; height: 80%;
+      background:
+        radial-gradient(circle at 12% 30%, rgba(255,220,80,.5) 0%, transparent 1.2%),
+        radial-gradient(circle at 35% 55%, rgba(255,200,60,.4) 0%, transparent 1%),
+        radial-gradient(circle at 60% 25%, rgba(255,230,100,.45) 0%, transparent 1.1%),
+        radial-gradient(circle at 80% 50%, rgba(255,210,70,.35) 0%, transparent 1.3%);
+      animation: fireflyField 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+@keyframes fireflyField {
+      0%,100% { opacity: .4; transform: scale(1); }
+      50% { opacity: .7; transform: scale(1.02); }
+    }
+
+
 @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }

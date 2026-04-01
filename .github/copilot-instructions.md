@@ -11,9 +11,17 @@ The Angular build output in `dist/` must be copied to the root after every build
 npm run deploy
 ```
 
-This executes `ng build && cp -a dist/. .` — building for production and copying the output to the repo root so GitHub Pages serves the latest version.
+This executes `node scripts/bump-version.js && ng build && cp -a dist/. .` — bumping the version, building for production, and copying the output to the repo root so GitHub Pages serves the latest version.
 
 **Never skip this step.** If you modified any file under `src/`, you must run `npm run deploy` before the session ends.
+
+### Version numbering
+
+Every deploy auto-increments the version badge displayed on every page.
+- Source of truth: `src/version.ts` — exports `APP_VERSION` string
+- Format: `Ver.YYYY.MM.DD.N` (N resets to 1 on each new day, increments within the same day)
+- `scripts/bump-version.js` updates `src/version.ts` before each build
+- The `<app-version-badge>` component (in `src/app/shared/components/version-badge/`) reads this value and renders it fixed to the bottom-right of every page via `app.ts`
 
 ## Tech Stack
 
